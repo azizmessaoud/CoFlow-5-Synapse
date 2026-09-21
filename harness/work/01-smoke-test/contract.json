@@ -1,0 +1,23 @@
+{
+  "id": "01-smoke-test",
+  "kind": "control",
+  "persona_or_hmw": "P6 Yuki; course prototype",
+  "stage": "prototype",
+  "must_pass": [
+    "python 3.11 interpreter is recorded",
+    "one pinned SUMO version is recorded",
+    "one headless scenario exits 0",
+    "throughput, memory, and artifact size are written to the pack"
+  ],
+  "tests": [
+    "python -c \"import sys; assert sys.version_info[:2]==(3,11)\"",
+    "sumo --version"
+  ],
+  "artifacts": [
+    "toolchain.json",
+    "throughput.json"
+  ],
+  "imports_forbidden": [
+    "synapse -> traci"
+  ]
+}

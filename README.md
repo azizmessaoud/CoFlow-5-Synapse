@@ -18,6 +18,10 @@ The course requires **Design Thinking**. Stages 1–3 are complete. Prototype an
 
 Kiro record of those steps: [`.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`](.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md).
 
+Agents read [`AGENT_GUIDE.md`](AGENT_GUIDE.md) first. Harness: [`docs/harness/how-it-works.md`](docs/harness/how-it-works.md). Queue: [`harness/queue.tsv`](harness/queue.tsv).
+
+Pattern: [harness-engineering-playbook](https://github.com/flyrank-bih/harness-engineering-playbook). Output style: [i-have-adhd](https://github.com/ayghri/i-have-adhd).
+
 ## Course brief
 
 Source: `SUMO_forStudents.docx`, transcribed in [`docs/source/course-brief.md`](docs/source/course-brief.md).
@@ -79,6 +83,8 @@ Ask Kiro to enhance the final specs from this baseline **without dropping Design
 5. Prefer stronger acceptance criteria and smaller tasks over new frameworks.
 
 Copy this prompt into Kiro: [`.kiro/prompts/enhance-specs-trajectory.md`](.kiro/prompts/enhance-specs-trajectory.md).
+
+Kiro must follow the harness (queue, contracts, `gate.json`, exit codes) and the i-have-adhd output rules in `.kiro/steering/output-style.md`.
 
 ## Document map
 

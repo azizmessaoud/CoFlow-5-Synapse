@@ -1,203 +1,100 @@
-# Kiro prompt — spec enhancement trajectory
+# Kiro prompt — harness + spec trajectory
 
-Copy everything below the line into Kiro after opening this repository.
+Copy everything below the line into Kiro.
+
+Output style: https://github.com/ayghri/i-have-adhd  
+Harness pattern: https://github.com/flyrank-bih/harness-engineering-playbook  
+Do not copy the Shopify theme. Lift router, queue, evidence pack, gate, and exit rules only.
 
 ---
 
-You are enhancing CoFlow-5 Synapse specifications, not rewriting the product.
+Read `AGENT_GUIDE.md` first.
 
-This is a university Design Thinking + Data Science project on Eclipse SUMO. The course brief is `SUMO_forStudents.docx`, transcribed in `docs/source/course-brief.md`.
-
-Challenge:
-
-> How might we use data and intelligent agents to make urban traffic more efficient, adaptive, and sustainable?
-
-Required course outcomes: a working prototype, experiments under different traffic conditions, comparison with an appropriate baseline, and data-driven strengths and limitations. Evidence matters more than technological complexity.
-
-## Read these files first, in this order
+Then read, in order:
 
 1. `docs/source/course-brief.md`
 2. `.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`
-3. `.kiro/steering/product.md`
-4. `CONTEXT.md`
-5. `docs/adr/0001-reliable-ai-platform-boundary.md`
-6. `.kiro/specs/coflow5-reliable-agentic-platform/requirements.md`
-7. `.kiro/specs/coflow5-reliable-agentic-platform/design.md`
-8. `.kiro/specs/coflow5-reliable-agentic-platform/tasks.md`
-9. `CoFlow-5_System_Requirements_Book.md`
-10. `coflow5-empathize-pack.md`
-11. `coflow5-define-ideate.md`
-12. `.scratch/coflow5-reliable-ai-platform/spec.md`
-13. `docs/architecture/coflow5-synapse-portfolio-design.md`
+3. `docs/adr/0001-reliable-ai-platform-boundary.md`
+4. `docs/harness/how-it-works.md`
+5. `docs/harness/loop-and-exit.md`
+6. `docs/harness/contract-and-evidence.md`
+7. `.kiro/steering/product.md`
+8. `.kiro/steering/harness.md`
+9. `.kiro/steering/output-style.md`
+10. `CONTEXT.md`
+11. `.kiro/specs/coflow5-reliable-agentic-platform/requirements.md`
+12. `.kiro/specs/coflow5-reliable-agentic-platform/design.md`
+13. `.kiro/specs/coflow5-reliable-agentic-platform/tasks.md`
+14. `harness/queue.tsv`
+15. `CoFlow-5_System_Requirements_Book.md`
+16. `coflow5-empathize-pack.md`
+17. `coflow5-define-ideate.md`
+18. `.scratch/coflow5-reliable-ai-platform/spec.md`
 
-Do not invent a new Empathize roster. Do not mark Prototype or Test complete.
+Do not invent User Personas. Do not mark Prototype or Test complete. Do not make DQN required. Do not put an LLM in the Control plane.
 
-## What is already decided
+## Job
 
-Keep these decisions. Improve precision. Do not reopen them unless you find a contradiction that would break the course brief.
+Enhance the existing specs so Kiro and later workers can execute CoFlow-5 through a harness, not a long chat.
 
-- Product: Reliable AI decision platform for urban traffic simulation.
-- Design Thinking Stages 1–3 are done. Stages 4–5 are next.
+Fill gaps. Stage the stack. Prevent integration failures. Keep Design Thinking 1–3.
+
+## Locked product
+
+- Course HMW from `SUMO_forStudents.docx`.
 - Eight User Personas: Amara, David, Chidi, Rosa, Marcus, Yuki, Maria, Omar.
-- Five domain agents cooperate. Only A1 Flow writes traffic signals.
-- A2 Emergency, A3 Multimodal, A4 Situation, A5 Sustainability only request, forecast, alert, or advise.
-- Synapse retrieves evidence and explains immutable decisions. It never actuates SUMO.
-- Required A1 method: cooperative Max-Pressure behind a deterministic safety mask.
-- Required recovery: Max-Pressure → actuated → fixed-time.
-- Required baselines: fixed-time and actuated, paired seeds, honest null results.
-- Reinforcement learning is optional and cannot block delivery.
-- A1–A5 are typed Python modules with an in-process message board. LangGraph is only for Synapse later.
-- Retrieval starts local. PostgreSQL/pgvector is earned. Pinecone is not default.
-- Hosted LLM is allowed only behind a provider-neutral interface plus a template fallback.
-- First scientific world: controlled 4×4 SUMO grid. Tunis OSM + official TRANSTU GTFS is a later showcase with synthetic/calibrated road demand labelled as such.
-- Team: 12 weeks, three dependable contributors. Optional students cannot own the critical path.
-- Claim flags: no lives saved, no measured air quality, no best-episode headline, personas are research-informed not interview-validated.
+- Five agents. Only A1 writes signals.
+- Required A1: cooperative Max-Pressure.
+- Recovery: Max-Pressure → actuated → fixed-time.
+- Synapse never reaches TraCI.
+- Join key: `run_id`.
+- Evidence bundle is product truth. `gate.json` is harness truth. They must agree.
 
-## Your job
+## Work method
 
-Produce the best next trajectory that:
+Treat this Kiro session as **CAPTURE for the harness**, not BUILD of SUMO yet.
 
-1. fills remaining spec and integration gaps;
-2. uses a smart methodology rather than more frameworks;
-3. chooses the smallest stack that still looks production-grade;
-4. prevents future integration problems.
+1. Gap table: gap, persona/HMW, severity, spec vs harness vs product, cheapest fix. Show five highest first.
+2. Seal or correct `harness/queue.tsv`. One row = one worker. Optional DQN stays `blocked`.
+3. Write or tighten `harness/work/<id>/contract.json` for rows 01–09 at minimum.
+4. Specify `gate.json` checks, forbidden imports, and tests per row.
+5. Patch `.kiro/specs/.../requirements.md`, `design.md`, `tasks.md` so each product requirement names its queue row and join keys.
+6. Add an integration contract: allowed imports, message envelope, run manifest fields, `run_id` joins.
+7. Add a cut-ladder. Cut from the bottom of the queue. Never cut rows 01–09.
+8. Add contradiction log if older files fight ADR-0001.
+9. Keep requirement IDs stable. WHEN/THEN/THE SYSTEM SHALL.
+10. Restate every turn: which queue row, which phase, what gate is red.
 
-Work in this sequence.
+## Stack staging the harness must enforce
 
-### A. Gap analysis
+Month 1 only after row 01 gates: Python 3.11, pinned SUMO, TraCI, measured libsumo, Pydantic, pytest, Hypothesis, Parquet, DuckDB, Max-Pressure, in-process bus.
 
-Compare the course brief, Design Thinking record, system requirements book, Kiro requirements, design, and tasks.
+Month 2 only after rows 01–09 gate: LightGBM, FastAPI, local embeddings, template Synapse, hosted LLM adapter, pgvector if provenance now needs SQL, Phoenix after golden set.
 
-Make a table with: gap, why it matters, which User Persona or How-might-we it serves, severity, whether it is a spec gap or an implementation gap, and the cheapest valid fix.
+Month 3 only after 01–12 gate: React over precomputed runs, LangGraph for Synapse approval only, Docker after native Windows works, Tunis showcase, optional DQN.
 
-Look especially for:
+Rejected in contracts: LLM signal write, LangGraph for A1–A5, Pinecone, Kafka, Kubernetes, microservice per agent, RoadwayVR tutorial as runtime.
 
-- missing message schemas, reason codes, and TTL rules;
-- missing safety-mask invariants;
-- missing run-evidence-bundle fields;
-- missing KPI definitions per persona;
-- missing frozen scenario/seed plan;
-- missing owner seams between Control, Data/Eval, and API/Synapse;
-- stack items named before their interface exists;
-- contradictions between older requirements books and ADR-0001;
-- anything that would make SUMO, agents, API, RAG, and UI unable to join on one run_id.
+## Integration risks that must become gates
 
-### B. Best trajectory
+- two writers to one signal
+- Synapse or A2–A5 calling TraCI
+- UI KPIs not in the evidence bundle
+- RAG answer without `event_id` and citation
+- A4 future-row leakage
+- SUMO version drift
+- schema drift between agents, API, Parquet
+- DQN changing the required recovery ladder
+- Docker required before the native smoke test
 
-Recommend one vertical-slice path. Do not recommend building all five learned models, a city-scale network, and a polished dashboard in parallel.
+## Stop conditions for this Kiro run
 
-Required order:
+Exit 0: requirements, design, tasks, queue, and contracts 01–09 are consistent; a professor can see DT 1–3 plus a path that still ships if rows 10–15 never start.
 
-1. Pin SUMO + Python 3.11 and measure throughput.
-2. One junction, then corridor, then frozen 4×4 grid.
-3. Run evidence bundle as the single integration seam.
-4. Safety mask + signal executor with one writer.
-5. Fixed-time and actuated baselines.
-6. Cooperative Max-Pressure A1.
-7. Typed message board.
-8. A2 and A3 rule-based requests.
-9. Failure-injection tests.
-10. Evaluation harness and ablations.
-11. A4 forecast/incident ladder.
-12. A5 advisory weights.
-13. FastAPI over the evidence bundle.
-14. Local retrieval + template explanations.
-15. Hosted LLM adapter, golden evals, Phoenix.
-16. React view over precomputed runs.
-17. Tunis OSM/GTFS showcase.
-18. Optional DQN only after feature freeze.
+Exit 3: write `harness/BLOCKED` if a human must choose.
 
-If schedule slips, cut from the bottom, never from safety, authority, baselines, evidence bundle, or recovery.
+Do not start SUMO implementation in this run unless row 01 contract cannot be written without a measured command.
 
-### C. Methodology
+## Output
 
-Keep Design Thinking visible in the spec: Empathize → Define → Ideate → Prototype → Test.
-
-Inside Prototype/Test, use the Data Science loop: Problem, Success criteria, Data, EDA, Preparation, Baseline, Model, Evaluation, Error analysis, Iteration, Deployment, Monitoring.
-
-For software, use contract-first integration:
-
-- one run evidence bundle is the highest test seam;
-- Pydantic schemas are the module boundaries;
-- agents never import TraCI except through the SUMO adapter;
-- Synapse never receives the signal-executor capability;
-- every feature has an on/off ablation or is labelled unproven;
-- every optional library is added only after a typed interface already works without it.
-
-### D. Best stack, staged
-
-Do not dump the full stack into week 1.
-
-Month 1, required:
-
-- Python 3.11, pinned SUMO, TraCI, measured libsumo
-- Pydantic v2, pytest, Hypothesis, Ruff, Pyright
-- NumPy, PyArrow, Parquet, DuckDB
-- cooperative Max-Pressure, fixed-time, actuated
-- in-process message board
-
-Month 2, earned:
-
-- LightGBM, scikit-learn
-- FastAPI
-- sentence-transformers and exact local retrieval
-- hosted LLM adapter + template fallback
-- PostgreSQL/pgvector only if provenance/filtering is now needed
-- Phoenix after a golden question set exists
-
-Month 3, earned:
-
-- React + Vite + TypeScript
-- LangGraph only for Synapse approval/resume
-- Docker Compose after native Windows execution works
-- Tunis showcase
-- optional PyTorch DQN
-
-Rejected defaults:
-
-- LLM controlling lights
-- LangGraph for A1–A5
-- Redis/Kafka/Kubernetes on the critical path
-- Pinecone
-- LlamaIndex as the foundation
-- both Phoenix and LangSmith
-- RoadwayVR tutorial as a runtime dependency
-- microservice per agent
-
-### E. Integration-risk controls
-
-Add or strengthen spec items that prevent these failures:
-
-- two writers to the same signal;
-- Synapse or A2–A5 reaching TraCI;
-- UI inventing KPIs not present in the evidence bundle;
-- RAG answering without an event id and citation;
-- training/eval seed leakage;
-- future rows leaking into A4;
-- SUMO version drift;
-- schema drift between agents, API, and Parquet;
-- optional DQN changing the required recovery path;
-- Docker/WSL becoming a blocker before native smoke tests pass.
-
-For each risk, specify: interface, owner workstream, test, and fallback.
-
-### F. Edit the spec files
-
-Update, do not fork:
-
-- `.kiro/specs/coflow5-reliable-agentic-platform/requirements.md`
-- `.kiro/specs/coflow5-reliable-agentic-platform/design.md`
-- `.kiro/specs/coflow5-reliable-agentic-platform/tasks.md`
-- `.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md` only if a Design Thinking fact was missing
-
-Add:
-
-- a short integration contract: module names, allowed imports, event/message/run schemas, and join keys;
-- a cut-ladder if compute or people slip;
-- a contradiction log if older files disagree with ADR-0001.
-
-Keep requirement IDs stable where possible. Use the glossary in `CONTEXT.md`. Write acceptance criteria in WHEN/THEN/THE SYSTEM SHALL form.
-
-## Done when
-
-A professor can see Design Thinking Stages 1–3, the chosen architecture, and a 12-week path that produces a testable SUMO prototype even if RL, Tunis, React, LangGraph, and pgvector are never added.
+Lead with the next file to edit. Number steps. Cap lists to five per group. End with one next action.

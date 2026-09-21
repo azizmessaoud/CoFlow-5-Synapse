@@ -1,5 +1,17 @@
 # Agent notes
 
+Read `AGENT_GUIDE.md` first. That file is the router.
+
+## Harness
+
+Pattern: https://github.com/flyrank-bih/harness-engineering-playbook  
+Output style: https://github.com/ayghri/i-have-adhd
+
+- Queue: `harness/queue.tsv`
+- Packs: `harness/work/<id>/`
+- Loop/exits: `docs/harness/loop-and-exit.md`
+- Notebook: `LEARNINGS.md`
+
 ## Agent skills
 
 ### Issue tracker

@@ -82,3 +82,5 @@ Canonical spec files:
 When enhancing specs, keep ADR-0001. Do not move the LLM into the Control plane. Do not make DQN required. Prefer stronger acceptance tests, clearer interfaces, and smaller implementation tasks over new agents or frameworks.
 
 Copy-paste prompt for this work: `.kiro/prompts/enhance-specs-trajectory.md`.
+
+Harness router: `AGENT_GUIDE.md`. Output style: `.kiro/steering/output-style.md`.

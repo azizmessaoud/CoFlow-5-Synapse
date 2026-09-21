@@ -10,6 +10,17 @@ Design Thinking Stages 1–3 are already done. Do not re-invent User Personas or
 - [ ] Keep `design-thinking.md` linked from the README and from reports.
 - [ ] Map each implemented feature to a User Persona or How-might-we.
 - [ ] Keep rejected ideas rejected: LLM signal control, five chatbots, required RL.
+- [ ] Keep `AGENT_GUIDE.md` as the router. Execute work from `harness/queue.tsv`, not from chat memory.
+- [ ] Gate each row with `harness/work/<id>/gate.json`. Do not self-assess done.
+
+## 0. Harness
+
+- [ ] Seal `harness/queue.tsv`.
+- [ ] Write `contract.json` before product code for that row.
+- [ ] Stop on `harness/BLOCKED`, stuck loops, or context blow-up.
+- [ ] Join product artifacts on `run_id`.
+- [ ] Follow https://github.com/flyrank-bih/harness-engineering-playbook as pattern, not as Shopify code.
+- [ ] Follow https://github.com/ayghri/i-have-adhd for operator-facing answers.
 
 ## 1. Toolchain and smoke test
 
