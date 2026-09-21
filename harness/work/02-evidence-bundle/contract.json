@@ -1,0 +1,45 @@
+{
+  "contract_version": 1,
+  "id": "02-evidence-bundle",
+  "kind": "integration",
+  "persona_or_hmw": "P4 Rosa; P6 Yuki; course evidence outcome",
+  "stage": "prototype",
+  "requirement_ids": ["1", "2", "11", "14"],
+  "depends_on": ["01-smoke-test"],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "message_id"],
+  "must_pass": [
+    "one canonical immutable run manifest records run_id, scenario_hash, configuration hash, versions, seeds, status, timings, and artifact references",
+    "state, message, decision, fault, trip, and KPI schemas carry run_id and scenario_hash",
+    "decision, fault, and transition rows have unique event_id values within a run",
+    "message and disposition rows have immutable message_id values and same-run references",
+    "DuckDB joins every Parquet row to exactly one valid manifest and rejects orphan or cross-scenario identifiers",
+    "incomplete or corrupt artifacts invalidate the run instead of entering evaluation"
+  ],
+  "tests": [
+    "python -m pytest tests/acceptance/test_evidence_bundle.py -q",
+    "python -m pytest tests/contracts/test_evidence_joins.py -q",
+    "python -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/run_manifest.json",
+    "artifacts/state.parquet",
+    "artifacts/messages.parquet",
+    "artifacts/decision_events.parquet",
+    "artifacts/trips.parquet",
+    "artifacts/run_kpis.parquet",
+    "artifacts/join-audit.json"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "schema and join tests exit 0",
+    "all required artifacts exist and parse",
+    "join-audit reports zero missing, duplicate, or cross-scenario run_id/event_id/message_id references",
+    "manifest status and artifact hashes are immutable after finalization",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "evidence|evaluation -> signal actuation",
+    "mlflow -> canonical run identity",
+    "api|ui -> private simulator state"
+  ]
+}

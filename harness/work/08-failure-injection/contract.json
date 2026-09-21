@@ -1,0 +1,45 @@
+{
+  "contract_version": 1,
+  "id": "08-failure-injection",
+  "kind": "eval",
+  "persona_or_hmw": "P5 Marcus; P6 Yuki; P8 Omar; HMW-9",
+  "stage": "prototype-test",
+  "requirement_ids": ["6", "9", "10"],
+  "depends_on": ["07-a2-a3"],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "message_id"],
+  "must_pass": [
+    "message absence, loss, delay, duplication, expiry, malformed payload, contradiction, and adviser silence leave A1 in legal local control",
+    "Max-Pressure failure transitions to actuated and then fixed-time with immutable transition event_id, trigger, time, and health evidence",
+    "optional DQN, if ever enabled, fails into Max-Pressure before the required ladder and cannot alter that ladder",
+    "killing Synapse, retrieval, or a hosted provider cannot alter the action sequence for identical Control plane inputs",
+    "failure and recovery artifacts remain joined to run_id/scenario_hash and message faults retain message_id"
+  ],
+  "tests": [
+    "python -m pytest tests/acceptance/test_failure_injection.py -q",
+    "python -m pytest tests/acceptance/test_recovery_ladder.py -q",
+    "python -m pytest tests/contracts/test_synapse_non_actuation.py -q",
+    "python -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/run_manifest.json",
+    "artifacts/faults.parquet",
+    "artifacts/messages.parquet",
+    "artifacts/decision_events.parquet",
+    "artifacts/recovery-audit.json",
+    "artifacts/action-sequence-comparison.json"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named tests exit 0 for every contracted fault class",
+    "recovery audit shows only cooperative Max-Pressure -> actuated -> fixed-time for the required path",
+    "transition and fault rows resolve by run_id, scenario_hash, event_id, and applicable message_id",
+    "Synapse-on and Synapse-killed action sequence hashes are equal",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "synapse|retrieval|provider -> traci|libsumo|signal executor",
+    "a2|a3|a4|a5 -> traci|libsumo|signal executor",
+    "dqn -> replacement of required recovery ladder",
+    "exception swallowing -> hidden failed run"
+  ]
+}

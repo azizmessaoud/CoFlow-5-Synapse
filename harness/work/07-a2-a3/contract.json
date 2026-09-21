@@ -1,0 +1,43 @@
+{
+  "contract_version": 1,
+  "id": "07-a2-a3",
+  "kind": "control",
+  "persona_or_hmw": "P1 Amara; P3 Chidi; P4 Rosa; P5 Marcus",
+  "stage": "prototype-test",
+  "requirement_ids": ["4", "6", "7"],
+  "depends_on": ["06-message-board"],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "message_id"],
+  "must_pass": [
+    "A2 publishes expiring emergency requests with route/next junctions, ETA, urgency, benefit, and civilian externality without actuation capability",
+    "A3 publishes active crossing state and remaining clearance plus bounded pedestrian-deadline or evidence-based late-transit requests without actuation capability",
+    "an in-crossing pedestrian outranks an emergency request and an early/on-time bus cannot request priority solely because it is transit",
+    "A1 deterministically accepts or rejects each request with one decision event_id and referenced message_id plus reason code",
+    "emergency travel effects, civilian delay, pedestrian waits/clearance, and transit regularity are reported separately"
+  ],
+  "tests": [
+    "python -m pytest tests/acceptance/test_a2_emergency.py -q",
+    "python -m pytest tests/acceptance/test_a3_multimodal.py -q",
+    "python -m pytest tests/contracts/test_request_reply_joins.py -q",
+    "python -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/run_manifest.json",
+    "artifacts/messages.parquet",
+    "artifacts/decision_events.parquet",
+    "artifacts/trips.parquet",
+    "artifacts/cooperation-kpis.parquet"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named tests exit 0 for crossing/emergency conflict, two emergencies, late bus, and early bus",
+    "all request/reply/decision references resolve by run_id, scenario_hash, message_id, and event_id",
+    "zero clearance truncations and zero specialist signal writes are observed",
+    "KPI evidence separates benefit from civilian and multimodal externalities without lives-saved claims",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "a2|a3 -> traci|libsumo|signal executor",
+    "a2|a3 -> hosted LLM|langgraph",
+    "specialist request -> bypass safety mask"
+  ]
+}

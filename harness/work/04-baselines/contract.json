@@ -1,0 +1,41 @@
+{
+  "contract_version": 1,
+  "id": "04-baselines",
+  "kind": "eval",
+  "persona_or_hmw": "P2 David; P6 Yuki; course baseline comparison",
+  "stage": "prototype-test",
+  "requirement_ids": ["1", "10", "15"],
+  "depends_on": ["03-safety-mask"],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "message_id"],
+  "must_pass": [
+    "fixed-time and actuated controllers run through the same safety and evidence interfaces",
+    "both controllers use matched scenario_hash values and common evaluation seeds",
+    "comparison includes unfinished trips, teleports, standstills, completion, and mean plus tail metrics",
+    "failed and invalid runs remain visible and are not silently excluded",
+    "no learned-controller or specialist claim precedes this baseline evidence"
+  ],
+  "tests": [
+    "python -m pytest tests/acceptance/test_baseline_controllers.py -q",
+    "python -m pytest tests/contracts/test_paired_baseline_evidence.py -q",
+    "python -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/fixed-time-run_manifest.json",
+    "artifacts/actuated-run_manifest.json",
+    "artifacts/run_kpis.parquet",
+    "artifacts/baseline-comparison.json"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named tests exit 0",
+    "comparison has both controller labels for every included scenario_hash and seed cell",
+    "KPI rows resolve to manifests by run_id and scenario_hash",
+    "unfinished and failed counts reconcile with trip and manifest evidence",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "baseline controllers -> raw trafficlight.set*",
+    "evaluation -> signal actuation",
+    "dqn|torch -> required baseline path"
+  ]
+}

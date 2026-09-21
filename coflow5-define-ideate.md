@@ -2,6 +2,9 @@
 
 Framework: Interaction Design Foundation (Empathize → Define → Ideate). Stage 1 (Empathize) is complete — see *CoFlow-5: User Personas, User Journeys & Possible Solutions (v2)* with its 33-row verified evidence trail. This document synthesizes those findings into a human-centered problem definition, then runs the ideation techniques the framework names (Brainstorm/Brainwrite, Worst Possible Idea, SCAMPER, morphological chart, weighted decision matrix) and converges on the chosen architecture.
 
+> [!IMPORTANT]
+> **Historical/superseded architecture note (ADR-0001):** This document preserves the Stage 2–3 evidence of ideas considered; it is not the current implementation boundary. References below to “F1→A1 core,” “Rules own safety; RL owns efficiency,” shared-policy MARL, or a generic `policy → Max-Pressure → actuated → fixed-time` ladder are historical Ideate candidates superseded by [`docs/adr/0001-reliable-ai-platform-boundary.md`](docs/adr/0001-reliable-ai-platform-boundary.md). The required A1 controller is cooperative Max-Pressure, with recovery `Max-Pressure → actuated → fixed-time`. DQN is optional row 15 work after the cooperative core freezes. LLM-controller alternatives remain rejected; Synapse is non-actuating and cannot reach TraCI. Personas remain research-informed, not interview-validated; the planned expert interviews were not completed.
+
 ---
 
 # STAGE 2 — DEFINE
@@ -10,7 +13,7 @@ Framework: Interaction Design Foundation (Empathize → Define → Ideate). Stag
 
 - **8 evidence-based personas:** Amara (74, pedestrian with cane), David (41, delivery driver), Chidi (27, bus commuter), Rosa (52, depot controller), Marcus (34, paramedic), Yuki (47, traffic engineer), Maria (38, parent near an arterial), Omar (55, duty officer).
 - **Verified evidence trail (33 rows):** 2× perceived pedestrian wait (Vallyon 2009); 30 s compliance cliff (TfL/NZTA); assistive walking speeds 0.6–0.8 m/s; wait valued ≈2× in-vehicle (DfT TAG); −7%/min ALS survival (*PLOS One* 2022); +20–30 s arterial cost of closely spaced preemption (Nelson & Bullock 2000); reliability ratio 0.4 (DfT TAG A1.3); SCATS ships override + audit trails as product features; SCOOT degrades under congestion; 6.4M US children ≤250 m of major roads (Kingsley 2014); incidents = 25–30% of congestion (FHWA).
-- **Method note carried forward:** personas are research-informed artifacts, not interview-validated profiles; the five planned expert interviews replace placeholders with real quotes.
+- **Method note carried forward:** personas are research-informed artifacts, not interview-validated profiles; five expert interviews were planned as future validation but were not completed, and no interview quotes are claimed as Evidence.
 
 ## 2.2 POV statements (User + Need + Insight)
 

@@ -1,0 +1,43 @@
+{
+  "contract_version": 1,
+  "id": "06-message-board",
+  "kind": "integration",
+  "persona_or_hmw": "P4 Rosa; P6 Yuki; P8 Omar",
+  "stage": "prototype",
+  "requirement_ids": ["4", "5", "9", "14"],
+  "depends_on": ["05-max-pressure"],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "message_id"],
+  "must_pass": [
+    "the in-process transport implements a typed envelope with run_id, scenario_hash, message_id, correlation, source, topic, simulation and creation time, expiry/TTL, priority, confidence, schema version, payload type, payload, and provenance",
+    "duplicate message_id values are idempotent and cannot consume arbitration budget twice",
+    "expired, malformed, unsupported, contradictory, and out-of-order messages receive explicit dispositions",
+    "A1 continues local Max-Pressure when the board is empty or unavailable",
+    "transport remains behind an interface and Redis is not required"
+  ],
+  "tests": [
+    "python -m pytest tests/contracts/test_message_envelope.py -q",
+    "python -m pytest tests/properties/test_message_board.py -q",
+    "python -m pytest tests/acceptance/test_empty_board_control.py -q",
+    "python -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/run_manifest.json",
+    "artifacts/messages.parquet",
+    "artifacts/decision_events.parquet",
+    "artifacts/message-audit.json"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named tests exit 0 across duplicate, expiry, malformed, missing, and ordering cases",
+    "every message and disposition resolves by run_id, scenario_hash, and message_id",
+    "decision considered_message_ids resolve in the same run and scenario",
+    "empty-board run emits legal decision event_ids without deadlock",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "message board -> traci|libsumo|signal executor",
+    "a2|a3|a4|a5 -> traci|libsumo",
+    "redis -> required in-process path",
+    "kafka -> any core path"
+  ]
+}

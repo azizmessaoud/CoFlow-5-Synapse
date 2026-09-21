@@ -6,6 +6,9 @@
 **Study setting:** Urban corridor (Tunis centre as the working city in persona sheets)  
 **Related artifacts:** [coflow5-empathize-pack.md](coflow5-empathize-pack.md), [docs/presentation/system-design-for-professor.md](docs/presentation/system-design-for-professor.md), [docs/presentation/personas-canvas.html](docs/presentation/personas-canvas.html)
 
+> [!IMPORTANT]
+> **Historical/superseded architecture note (ADR-0001):** Requirement IDs in this legacy SRS remain stable, but ADR-0001 governs their current interpretation. Any “learned policy → Max-Pressure” wording in FR-S4 describes only an optional DQN branch; the required controller and recovery path are `cooperative Max-Pressure → actuated → fixed-time`. Reinforcement learning is not required. Only A1 may write signals, and Synapse/LLM components remain outside the Control plane with no TraCI capability. Personas remain research-informed, not interview-validated.
+
 **Process note:** Stages follow the Interaction Design Foundation Design Thinking model (Empathize, Define, Ideate; Prototype and Test are planned next). Problem statements are written from **users’ needs**, not from “we need a five-agent demo.”
 
 **Honesty note:** User Personas are **research-informed design artifacts**, not interview-validated field profiles. Numeric targets are **proposed acceptance criteria** to test against baselines, not results already achieved.

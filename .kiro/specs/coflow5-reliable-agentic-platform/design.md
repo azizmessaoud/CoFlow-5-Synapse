@@ -17,6 +17,47 @@ Reinforcement learning is optional and enters only after the required cooperativ
 
 This design is the Ideate result of Design Thinking Stages 1–3. The Empathize pack, POV statements, How-might-we questions, rejected ideas, and chosen architecture are recorded in `design-thinking.md`. Prototype and Test have not started.
 
+## Harness integration contract
+
+### Identity and referential integrity
+
+All product evidence carries `run_id` and `scenario_hash`. `event_id` is immutable and unique within a run for decisions, faults, controller transitions, and explanation targets. `message_id` is immutable and globally unique for an advisory publication; dispositions and decisions reference it rather than copying a second identity.
+
+| Record | Required identity fields | Referential rule |
+|---|---|---|
+| Run manifest | `run_id`, `scenario_hash` | One canonical manifest per run; configuration and seed remain manifest attributes. |
+| Message/disposition | `run_id`, `scenario_hash`, `message_id` | A disposition resolves to exactly one message in the same run and scenario. |
+| Decision/fault/transition event | `run_id`, `scenario_hash`, `event_id` | Considered messages are an array of existing `message_id` values from the same run. |
+| KPI/evaluation row | `run_id`, `scenario_hash` | The row resolves to one valid manifest and retains failed/unfinished outcomes. |
+| Explanation/citation | `run_id`, `scenario_hash`, `event_id` | Event facts resolve to immutable evidence; policy claims resolve to an allow-listed chunk. |
+
+`MessageEnvelope` therefore includes `run_id`, `scenario_hash`, and `message_id`. `DecisionEvent` includes `run_id`, `scenario_hash`, `event_id`, and `considered_message_ids`. No API, Parquet, trace, RAG, or UI layer may mint a replacement run, event, or message identity.
+
+### Capability and import boundaries
+
+| Module family | May import/use | Must not import/use |
+|---|---|---|
+| `sumo_adapter` observation side | TraCI/libsumo read APIs and typed observations | policy, Synapse, API, or UI code |
+| A1 signal executor | typed command, safety mask, the sole traffic-light write capability | Synapse or hosted-model adapters |
+| A1 controller | observations, message-board read interface, safety/executor interfaces | raw traffic-light write APIs |
+| A2–A5 | observations, domain schemas, message-board publish/read interfaces | TraCI/libsumo or signal executor |
+| Evidence/evaluation | immutable artifacts and schemas | signal actuation |
+| Synapse/retrieval/API/UI | read-only evidence/retrieval interfaces | TraCI/libsumo, A1 executor, active-state mutation |
+
+Architecture tests reject `synapse -> traci`, `api -> traci`, `ui -> traci`, `a2|a3|a4|a5 -> traci`, any non-executor traffic-light setter, and LangGraph imports from A1–A5. Runtime capability tests additionally prove that killing Synapse cannot change action sequences.
+
+### Machine gate contract
+
+Every row gate retains the documented fields `id`, `pass`, `openDeltas`, `contractHash`, `testsRun`, `artifactsPresent`, and `decidedBy`. It also records `joinChecks`, `forbiddenImportChecks`, and `schemaChecks`. A pass requires the contract hash to match, every named test to exit zero, every required artifact to exist, all applicable `run_id`/`scenario_hash`/`event_id`/`message_id` joins to resolve, no forbidden import, `openDeltas` equal to zero, and `decidedBy` equal to `tests-and-files`.
+
+### Stack entry gates and cut ladder
+
+- Month 1 libraries enter only after row 01 gates: Python 3.11, one exact SUMO release, TraCI/measured libsumo, Pydantic, pytest/Hypothesis, Parquet/DuckDB, cooperative Max-Pressure, and the in-process board.
+- Month 2 work enters only after rows 01–09 gate: A4/LightGBM, FastAPI, local retrieval, template Synapse, hosted adapter, and only then pgvector/Phoenix when their typed contracts justify them.
+- Month 3 work enters only after rows 01–12 gate: React over precomputed evidence, Synapse-only LangGraph approval, Docker after native Windows, Tunis, and optional DQN.
+- Scope cuts proceed from the queue bottom: 15, 14, 13, 12, 11, then 10. Rows 01–09 are never cut.
+- Rejected runtime defaults remain LLM signal writes, LangGraph for A1–A5, Pinecone, Kafka, Kubernetes, one microservice per agent, and RoadwayVR as a dependency.
+
 ## Architecture
 
 ```mermaid
@@ -176,6 +217,8 @@ The first implementation is in process and transport independent.
 
 ```text
 MessageEnvelope
+  run_id
+  scenario_hash
   message_id
   correlation_id
   source_agent

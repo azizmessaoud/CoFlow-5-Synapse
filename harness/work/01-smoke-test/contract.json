@@ -1,23 +1,43 @@
 {
+  "contract_version": 1,
   "id": "01-smoke-test",
   "kind": "control",
-  "persona_or_hmw": "P6 Yuki; course prototype",
+  "persona_or_hmw": "P6 Yuki; course working-prototype outcome",
   "stage": "prototype",
+  "requirement_ids": ["1", "2", "15"],
+  "depends_on": [],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "message_id"],
   "must_pass": [
-    "python 3.11 interpreter is recorded",
-    "one pinned SUMO version is recorded",
-    "one headless scenario exits 0",
-    "throughput, memory, and artifact size are written to the pack"
+    "native Windows Python reports major.minor 3.11",
+    "toolchain evidence records one exact SUMO release, SUMO_HOME, package versions, source revision when available, and traci.__file__",
+    "a frozen minimal native headless scenario exits 0 and emits run_id plus scenario_hash",
+    "one sumo-gui diagnosis is documented without making GUI execution a batch dependency",
+    "TraCI and libsumo throughput, peak memory, and artifact bytes are measured on the same scenario and team hardware",
+    "Docker and WSL are not required for the native smoke-test command"
   ],
   "tests": [
-    "python -c \"import sys; assert sys.version_info[:2]==(3,11)\"",
-    "sumo --version"
+    "python -m pytest tests/acceptance/test_native_windows_smoke.py -q",
+    "python -m pytest tests/architecture/test_forbidden_imports.py -q"
   ],
   "artifacts": [
-    "toolchain.json",
-    "throughput.json"
+    "artifacts/toolchain.json",
+    "artifacts/run_manifest.json",
+    "artifacts/throughput.json",
+    "artifacts/headless.log",
+    "artifacts/gui-diagnosis.md"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "all named tests exit 0",
+    "all required artifacts exist and parse",
+    "run_manifest.run_id is non-empty and run_manifest.scenario_hash matches the frozen scenario bytes",
+    "throughput has comparable traci and libsumo measurements with units",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
   ],
   "imports_forbidden": [
-    "synapse -> traci"
+    "synapse -> traci|libsumo",
+    "api|ui|a2|a3|a4|a5 -> traci|libsumo",
+    "docker -> required smoke-test path",
+    "roadwayvr -> runtime dependency"
   ]
 }

@@ -6,6 +6,9 @@
 **Date:** 20 September 2026  
 **Companions:** persona canvases [`docs/presentation/personas-canvas.html`](docs/presentation/personas-canvas.html); short architecture note [`docs/presentation/system-design-for-professor.md`](docs/presentation/system-design-for-professor.md); Empathize pack [`coflow5-empathize-pack.md`](coflow5-empathize-pack.md)
 
+> [!IMPORTANT]
+> **Historical/superseded architecture note (ADR-0001):** This book remains evidence for Design Thinking Stages 1–3 and keeps its requirement IDs unchanged. Later ADR-0001 supersedes passages that label shared-policy MARL as “Core A1” or place an unspecified policy before Max-Pressure. The required A1 controller is cooperative Max-Pressure; required recovery is `Max-Pressure → actuated → fixed-time`; optional DQN may precede Max-Pressure only after the cooperative core freezes. LLM-controller alternatives remain rejected, and Synapse cannot actuate or reach TraCI. Personas are research-informed, not interview-validated.
+
 **One-sentence summary:** CoFlow-5 Empathizes with eight people and a verified evidence trail; Defines human-centred needs (not “cut vehicle delay”); Ideates a five-agent hybrid where only A1 writes lights, others ask over a message bus, and an LLM may explain the log but never control SUMO.
 
 ---

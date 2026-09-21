@@ -1,0 +1,46 @@
+{
+  "contract_version": 1,
+  "id": "09-eval-harness",
+  "kind": "eval",
+  "persona_or_hmw": "All eight User Personas; course experiment and limitations outcomes",
+  "stage": "test",
+  "requirement_ids": ["1", "6", "7", "8", "10", "11", "14"],
+  "depends_on": ["08-failure-injection"],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "message_id"],
+  "must_pass": [
+    "fixed-time, actuated, and cooperative Max-Pressure use matched scenario_hash and common evaluation seeds",
+    "agent on/off ablations and contracted communication/controller/Synapse faults are represented as experiment cells",
+    "safety, efficiency, emergency, pedestrian, transit, sustainability-proxy, robustness, and reproducibility metrics retain failed runs, unfinished trips, teleports, standstills, and tails",
+    "all KPI and report claims resolve to canonical manifests by run_id/scenario_hash and to event_id/message_id evidence where causal events or messages are cited",
+    "null and negative results are retained; no best episode is the headline; HBEFA is labelled an emission proxy; simulated emergency time is never translated into lives saved"
+  ],
+  "tests": [
+    "python -m pytest tests/acceptance/test_evaluation_harness.py -q",
+    "python -m pytest tests/contracts/test_paired_cells.py -q",
+    "python -m pytest tests/contracts/test_report_honesty.py -q",
+    "python -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/experiment-cells.parquet",
+    "artifacts/run_kpis.parquet",
+    "artifacts/evaluation-report.json",
+    "artifacts/join-audit.json",
+    "artifacts/limitations.md"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named tests exit 0",
+    "every required controller has the same scenario_hash/seed cells or a reason-coded visible failure",
+    "join audit reports zero orphan run_id, scenario_hash, event_id, or message_id references",
+    "report includes ablations, fault cells, confidence inputs, unfinished/failed outcomes, null results, and limitations",
+    "claim scan finds no lives-saved, measured-air-quality, or best-episode headline",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "evaluation|reporting -> signal actuation",
+    "ui KPI -> source outside evidence bundle",
+    "best episode -> headline result",
+    "HBEFA -> measured air quality",
+    "simulated emergency time -> lives saved"
+  ]
+}

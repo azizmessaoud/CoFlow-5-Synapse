@@ -1,0 +1,41 @@
+{
+  "contract_version": 1,
+  "id": "05-max-pressure",
+  "kind": "control",
+  "persona_or_hmw": "P2 David; P4 Rosa; P6 Yuki; refined HMW",
+  "stage": "prototype",
+  "requirement_ids": ["4", "9", "15"],
+  "depends_on": ["04-baselines"],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "message_id"],
+  "must_pass": [
+    "cooperative Max-Pressure is the required A1 controller and operates without reinforcement learning",
+    "A1 scores legal actions from local pressure, phase timing, downstream capacity, and valid advisory requests",
+    "A1 remains legal and live when the message board is empty",
+    "accepted action, rejected alternatives, constraints, reason code, and considered message_id values are recorded under one event_id",
+    "A1 remains the sole signal writer and the first recovery target for optional DQN"
+  ],
+  "tests": [
+    "python -m pytest tests/acceptance/test_max_pressure.py -q",
+    "python -m pytest tests/contracts/test_a1_decision_events.py -q",
+    "python -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/run_manifest.json",
+    "artifacts/decision_events.parquet",
+    "artifacts/controller-audit.json"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named tests exit 0 with and without advisory messages",
+    "all decision events resolve by run_id, scenario_hash, and event_id",
+    "every considered message_id resolves in the same run or the list is empty",
+    "controller audit identifies cooperative Max-Pressure and no DQN dependency",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "a1 controller -> raw trafficlight.set*",
+    "a1 -> hosted LLM|langgraph",
+    "dqn|torch -> required Max-Pressure path",
+    "a2|a3|a4|a5|synapse -> signal executor"
+  ]
+}

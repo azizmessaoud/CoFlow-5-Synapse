@@ -15,12 +15,32 @@ Design Thinking Stages 1–3 are already done. Do not re-invent User Personas or
 
 ## 0. Harness
 
-- [ ] Seal `harness/queue.tsv`.
-- [ ] Write `contract.json` before product code for that row.
-- [ ] Stop on `harness/BLOCKED`, stuck loops, or context blow-up.
-- [ ] Join product artifacts on `run_id`.
+- [ ] Seal `harness/queue.tsv`; one worker advances only the first unfinished row.
+- [ ] Write and hash-bind `harness/work/<id>/contract.json` before product code for that row.
+- [ ] For rows 01–09, require named tests, required artifacts, join checks, forbidden-import checks, and explicit machine gate checks.
+- [ ] Stop on `harness/BLOCKED`, stuck loops, budget limits, provider failure, or context blow-up using documented exit codes 3–8.
+- [ ] Join all product evidence on `run_id` and `scenario_hash`; use immutable `event_id` and `message_id` wherever decisions/faults/explanations or messages/dispositions are represented.
+- [ ] A row is done only when `gate.json` hash-matches its contract, has `pass: true`, `openDeltas: 0`, and `decidedBy: tests-and-files`.
 - [ ] Follow https://github.com/flyrank-bih/harness-engineering-playbook as pattern, not as Shopify code.
 - [ ] Follow https://github.com/ayghri/i-have-adhd for operator-facing answers.
+
+### Sealed queue-to-task map
+
+| Queue row | Prototype/Test task | Entry/exit boundary |
+|---|---|---|
+| 01 | Toolchain and native smoke test | No Docker/WSL requirement; exact SUMO/Python evidence gates entry to later libraries. |
+| 02 | Run evidence bundle | Manifest and Parquet/DuckDB joins establish product truth. |
+| 03 | SUMO adapter and safety mask | One writer and illegal-action rejection gate every controller. |
+| 04 | Fixed-time and actuated baselines | Matched scenario/seed evidence exists before claims. |
+| 05 | Cooperative A1 Max-Pressure | Required controller works with an empty board. |
+| 06 | Typed message board | TTL, idempotency, schema, and disposition behavior gate specialists. |
+| 07 | A2 emergency plus A3 multimodal | Requests only; pedestrian clearance and externalities are preserved. |
+| 08 | Failure injection and recovery | `Max-Pressure -> actuated -> fixed-time`; Synapse loss cannot alter actions. |
+| 09 | Evaluation harness | Paired seeds, ablations, failures, unfinished trips, and honest null results. |
+| 10–14 | A4/A5, API, template Synapse, UI, Tunis | Start only after rows 01–09 gate; cut from row 14 downward if needed. |
+| 15 | Optional DQN | Remains blocked until rows 01–12 gate and the cooperative core freezes. |
+
+Rows 01–09 are never cut. If schedule contracts, cut in order 15, 14, 13, 12, 11, then 10. Prototype and Test remain incomplete until their product gates produce evidence; CAPTURE does not mark them complete.
 
 ## 1. Toolchain and smoke test
 
@@ -96,7 +116,7 @@ _Check:_ emergency on/off ablation reports emergency travel and civilian delay s
 
 _Check:_ A3 cannot truncate an active crossing and cannot preempt for an early bus.
 
-## 9. A4 situation awareness
+## Queue row 10 — A4 situation awareness
 
 - [ ] Build chronological train, validation, and test splits.
 - [ ] Compare persistence and a simple tree baseline before LightGBM.
@@ -106,7 +126,7 @@ _Check:_ A3 cannot truncate an active crossing and cannot preempt for an early b
 
 _Check:_ forecast leakage tests fail if future rows enter training.
 
-## 10. A5 sustainability advice
+## Queue row 10 — A5 sustainability advice
 
 - [ ] Compute advisory hot-spot or weight messages from SUMO/HBEFA proxies.
 - [ ] Label outputs as emission proxies.
@@ -115,7 +135,7 @@ _Check:_ forecast leakage tests fail if future rows enter training.
 
 _Check:_ A5 cannot override safety, pedestrian clearance, or emergency recovery.
 
-## 11. Evaluation harness
+## Queue row 09 — Evaluation harness
 
 - [ ] Create matched experiment cells for controller, demand, incident, communication fault, and seed.
 - [ ] Support agent on/off ablations.
@@ -125,7 +145,7 @@ _Check:_ A5 cannot override safety, pedestrian clearance, or emergency recovery.
 
 _Check:_ a professor can read one evaluation report and see strengths, limitations, and failure classes.
 
-## 12. Failure recovery
+## Queue row 08 — Failure recovery
 
 - [ ] Implement `Max-Pressure -> actuated -> fixed-time`.
 - [ ] Record controller transitions and health evidence.
@@ -134,7 +154,7 @@ _Check:_ a professor can read one evaluation report and see strengths, limitatio
 
 _Check:_ the scripted reliability demo passes without a learned controller.
 
-## 13. Retrieval corpus
+## Queue row 12 — Retrieval corpus
 
 - [ ] Allow-list SUMO docs, course brief, requirements, reason codes, and operator playbooks.
 - [ ] Store source identity, content hash, parser version, and stable chunk IDs.
@@ -143,7 +163,7 @@ _Check:_ the scripted reliability demo passes without a learned controller.
 
 _Check:_ re-ingestion keeps stable chunk identity for unchanged content.
 
-## 14. Synapse explanations
+## Queue row 12 — Synapse explanations
 
 - [ ] Implement classify, fetch event, retrieve policy, draft, verify, answer or abstain.
 - [ ] Add a deterministic template fallback.
@@ -153,7 +173,7 @@ _Check:_ re-ingestion keeps stable chunk identity for unchanged content.
 
 _Check:_ killing Synapse does not change traffic actions for the same control inputs.
 
-## 15. API and operator view
+## Queue rows 11 and 13 — API and operator view
 
 - [ ] Expose typed run, evidence, cancellation, explanation, and approval operations.
 - [ ] Add idempotency keys, bounded queues, and structured errors.
@@ -162,7 +182,7 @@ _Check:_ killing Synapse does not change traffic actions for the same control in
 
 _Check:_ the required prototype remains usable without a hosted LLM.
 
-## 16. Observability and golden evals
+## Queue row 12 — Observability and golden evals
 
 - [ ] Trace retrieval, generation, verification, fallback, latency, and cost.
 - [ ] Join traces to run, event, scenario, and seed identifiers.
@@ -171,7 +191,7 @@ _Check:_ the required prototype remains usable without a hosted LLM.
 
 _Check:_ changing a prompt produces a visible regression report.
 
-## 17. Tunis showcase, after the grid is frozen
+## Queue row 14 — Tunis showcase, after the grid is frozen
 
 - [ ] Import a bounded OSM subnetwork.
 - [ ] Import official TRANSTU scheduled GTFS and record source version.
@@ -180,7 +200,7 @@ _Check:_ changing a prompt produces a visible regression report.
 
 _Check:_ reports distinguish scheduled transit data from synthetic road demand.
 
-## 18. Optional DQN experiment, after feature freeze
+## Queue row 15 — Optional DQN experiment, after feature freeze
 
 - [ ] Implement the same controller interface, safety mask, scenarios, and seeds.
 - [ ] Use replay, target network, action masking, and separate train/eval seeds.

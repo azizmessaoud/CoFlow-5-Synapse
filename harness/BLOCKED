@@ -1,0 +1,2 @@
+01-smoke-test BLOCKED: native Windows SUMO 1.27.1 is available, but native Windows Python 3.11 is absent and the pinned Python 3.11.9 installer was canceled with exit code 1602.
+Unblock: install native Windows Python 3.11.9, confirm `py -3.11 --version`, then resume row 01; WSL Python cannot satisfy this sealed contract.

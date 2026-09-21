@@ -2,6 +2,9 @@
 
 Micro (one junction, one decision cycle) and macro (whole network, whole system) points of view, grounded in the verified evidence trail. This folds into the Design Thinking "Ideate → Prototype" stages: the micro table is your fidelity-ladder test checklist, the macro table is your decision-matrix justification.
 
+> [!IMPORTANT]
+> **Historical/superseded architecture note (ADR-0001):** The pattern inventory preserves alternatives considered during Ideate. P-6 shared-policy MARL is now optional DQN research in row 15, not the A1 core. For P-8, the required path starts at cooperative Max-Pressure and recovers `Max-Pressure → actuated → fixed-time`; an optional DQN may precede it only after feature freeze. P-10 remains non-actuating: Synapse/LLM code cannot reach TraCI, and only A1 writes signals.
+
 ---
 
 ## 1. The pattern inventory — what CoFlow-5 actually uses

@@ -17,6 +17,31 @@ The required project is an agentic system because five domain agents observe, de
 
 The course requires Design Thinking. Empathize, Define, and Ideate are complete. Prototype and Test remain planned. Spec enhancement shall keep the eight User Personas, the human-centred How-might-we, the chosen five-agent idea, and the rejected LLM-as-controller idea.
 
+## Harness traceability
+
+This table binds every stable requirement ID to sealed queue work and the identifiers its acceptance evidence must carry. `run_id` and `scenario_hash` identify the run context; `event_id` identifies immutable decisions, faults, transitions, and explanation targets; `message_id` identifies advisory messages and dispositions. A dash means the key is not created by that requirement, not that downstream evidence may omit its run context.
+
+| Requirement | Queue row(s) | Required join keys in acceptance evidence |
+|---|---|---|
+| 0 Design Thinking | 01–09 | `run_id`, `scenario_hash` |
+| 1 Course outcome | 01, 02, 04, 09 | `run_id`, `scenario_hash` |
+| 2 Reproducible runs | 01, 02 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 3 Authority and safety | 03 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 4 Cooperative A1 | 05, 06, 07 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 5 Communication | 06 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 6 Emergency | 07, 08, 09 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 7 Pedestrian/transit | 07, 09 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 8 Situation/sustainability | 09, 10 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 9 Recovery | 03, 05, 06, 08 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 10 Evaluation | 04, 08, 09 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 11 Data lifecycle | 02, 09, 10, 14 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 12 Synapse | 12 | `run_id`, `scenario_hash`, `event_id` |
+| 13 API/UI | 11, 13 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 14 Observability/security | 02, 06, 09, 11, 12 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+| 15 Delivery | 01–09; optional 15 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+
+Rows 01–09 are the uncuttable course/reliability spine. Rows 10–15 may remain unstarted without changing the completion meaning of Prototype/Test for the minimum course slice; optional DQN remains blocked until rows 01–12 gate.
+
 ## Requirement 0: Design Thinking traceability
 
 **User story:** As a professor, I want to see Empathize, Define, Ideate, Prototype, and Test in order, so that the technical design is justified by stakeholder needs rather than by a preferred algorithm.

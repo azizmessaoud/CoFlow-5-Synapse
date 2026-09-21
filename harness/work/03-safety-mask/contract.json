@@ -1,0 +1,41 @@
+{
+  "contract_version": 1,
+  "id": "03-safety-mask",
+  "kind": "control",
+  "persona_or_hmw": "P1 Amara; P6 Yuki",
+  "stage": "prototype",
+  "requirement_ids": ["3", "9"],
+  "depends_on": ["02-evidence-bundle"],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "message_id"],
+  "must_pass": [
+    "exactly one A1 signal executor owns each traffic-light write capability",
+    "every proposed action passes the legal-transition, minimum-green, yellow/all-red, conflict, and pedestrian-clearance mask",
+    "conflicting or clearance-truncating proposals are rejected and never appear as executed commands",
+    "every accepted command and rejected proposal emits one immutable reason-coded event_id joined to run_id and scenario_hash",
+    "human override uses the same safety mask"
+  ],
+  "tests": [
+    "python -m pytest tests/contracts/test_safety_mask.py -q",
+    "python -m pytest tests/properties/test_signal_safety.py -q",
+    "python -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/run_manifest.json",
+    "artifacts/decision_events.parquet",
+    "artifacts/executed_commands.parquet",
+    "artifacts/safety-audit.json"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named tests exit 0 including generated timing boundaries",
+    "safety-audit reports one writer per signal and zero illegal executed actions",
+    "every command and rejection resolves by run_id, scenario_hash, and event_id",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "a2|a3|a4|a5|synapse|api|ui -> traci|libsumo",
+    "a2|a3|a4|a5|synapse|api|ui -> signal executor",
+    "a1 controller -> raw trafficlight.set*",
+    "any non-executor module -> trafficlight.set*"
+  ]
+}

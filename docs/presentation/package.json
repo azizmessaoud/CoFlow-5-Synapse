@@ -1,0 +1,12 @@
+{
+  "name": "coflow5-dt-presentation",
+  "private": true,
+  "version": "1.0.0",
+  "description": "ESPRIT 4DS Design Thinking deck builder for CoFlow-5-Synapse",
+  "scripts": {
+    "build": "node build-dt-pptx.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
+  }
+}

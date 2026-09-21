@@ -6,6 +6,9 @@
 
 **Companions (this project's saved artifacts):** verified design document; personas, journeys & evidence v2; multi-agent design-patterns analysis; project context README (CoFlow-5 × SUMO-Synapse). Local files: `docs/presentation/personas-canvas.html`, `docs/presentation/system-design-for-professor.md`, `coflow5-empathize-pack.md`, `CoFlow-5_System_Requirements.md`.
 
+> [!IMPORTANT]
+> **Historical/superseded architecture note (ADR-0001):** This preserved narrative records Design Thinking Stages 1–3; it is not the current controller specification. References to shared-policy MARL as Core A1 or to a generic `policy → Max-Pressure → actuated → fixed-time` ladder are superseded. Cooperative Max-Pressure is required, with recovery `Max-Pressure → actuated → fixed-time`; DQN is optional after the cooperative core freezes. Only A1 writes signals. Synapse is non-actuating and cannot reach TraCI. Personas are research-informed, not interview-validated, and no requirement IDs are changed by this note.
+
 **One-sentence summary:** CoFlow-5 Empathizes with eight people and a verified evidence trail; Defines human-centred needs (not "cut vehicle delay"); Ideates a five-agent hybrid where only A1 writes lights, others ask over a message bus, and an LLM may explain the log but never control SUMO.
 
 ---
