@@ -78,6 +78,8 @@ Ask Kiro to enhance the final specs from this baseline **without dropping Design
 4. Keep Claim flags: no lives saved, no measured air quality, no best-episode headlines.
 5. Prefer stronger acceptance criteria and smaller tasks over new frameworks.
 
+Copy this prompt into Kiro: [`.kiro/prompts/enhance-specs-trajectory.md`](.kiro/prompts/enhance-specs-trajectory.md).
+
 ## Document map
 
 | Need | File |
