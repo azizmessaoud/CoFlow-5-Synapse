@@ -4,7 +4,8 @@
 **Workflow:** Requirements-first  
 **Source authority:** `SUMO_forStudents.docx` and `docs/source/course-brief.md`  
 **Decision authority:** `docs/adr/0001-reliable-ai-platform-boundary.md`  
-**Detailed source:** `.scratch/coflow5-reliable-ai-platform/spec.md`
+**Detailed source:** `.scratch/coflow5-reliable-ai-platform/spec.md`  
+**Design Thinking record:** `.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`
 
 ## Project intent
 
@@ -13,6 +14,22 @@ CoFlow-5 Synapse answers the course challenge:
 > How might we use data and intelligent agents to make urban traffic more efficient, adaptive, and sustainable?
 
 The required project is an agentic system because five domain agents observe, decide, communicate, and cooperate under explicit authority. Reinforcement learning is not required. Cooperation, one-writer authority, evaluation, and failure recovery are the core.
+
+The course requires Design Thinking. Empathize, Define, and Ideate are complete. Prototype and Test remain planned. Spec enhancement shall keep the eight User Personas, the human-centred How-might-we, the chosen five-agent idea, and the rejected LLM-as-controller idea.
+
+## Requirement 0: Design Thinking traceability
+
+**User story:** As a professor, I want to see Empathize, Define, Ideate, Prototype, and Test in order, so that the technical design is justified by stakeholder needs rather than by a preferred algorithm.
+
+### Acceptance criteria
+
+1. THE specification SHALL record Design Thinking Stages 1–3 as completed work, with links to the Empathize pack and the Define/Ideate document.
+2. THE specification SHALL keep the eight User Personas Amara, David, Chidi, Rosa, Marcus, Yuki, Maria, and Omar.
+3. THE specification SHALL keep the refined How-might-we: serve every person on the network, not only the average car.
+4. THE specification SHALL keep the chosen Ideate result: one-writer A1, advisory A2–A5, deterministic safety, and non-actuating Synapse.
+5. THE specification SHALL keep rejected ideas rejected, including LLM signal control and five conversational LLM agents.
+6. THE Prototype and Test stages SHALL remain incomplete until a SUMO evidence bundle and paired baseline comparison exist.
+7. WHEN a requirement is added, THE specification SHALL name the User Persona or How-might-we it serves, or mark it as infrastructure.
 
 ## Requirement 1: Course outcome and evidence
 

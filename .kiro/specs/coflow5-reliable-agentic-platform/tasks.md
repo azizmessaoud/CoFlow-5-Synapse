@@ -5,6 +5,12 @@
 
 Mark a task complete only when its acceptance checks pass. Keep a working baseline throughout.
 
+Design Thinking Stages 1–3 are already done. Do not re-invent User Personas or replace the chosen architecture. These tasks are Stage 4 Prototype and Stage 5 Test.
+
+- [ ] Keep `design-thinking.md` linked from the README and from reports.
+- [ ] Map each implemented feature to a User Persona or How-might-we.
+- [ ] Keep rejected ideas rejected: LLM signal control, five chatbots, required RL.
+
 ## 1. Toolchain and smoke test
 
 - [ ] Pin Python 3.11 and one exact SUMO release.

@@ -15,6 +15,8 @@ The design optimizes for:
 
 Reinforcement learning is optional and enters only after the required cooperative evidence slice is frozen.
 
+This design is the Ideate result of Design Thinking Stages 1–3. The Empathize pack, POV statements, How-might-we questions, rejected ideas, and chosen architecture are recorded in `design-thinking.md`. Prototype and Test have not started.
+
 ## Architecture
 
 ```mermaid

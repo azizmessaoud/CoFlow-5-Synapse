@@ -16,6 +16,16 @@ Challenge:
 
 Required outcomes: a working prototype, experiments under different traffic conditions, a baseline comparison, and data-driven strengths and limitations. Evidence matters more than technological complexity.
 
+Design Thinking is mandatory. Stages 1–3 are already done and must remain in the spec:
+
+1. Empathize — User Personas, User Journeys, Evidence, Possible Solution
+2. Define — POV statements, How-might-we, human-centred problem
+3. Ideate — rejected ideas and the chosen five-agent design
+
+Canonical record: `.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`.
+
+Prototype and Test are next. Do not mark them complete. Do not invent a new Empathize roster.
+
 ## Product identity
 
 CoFlow-5 Synapse is a Reliable AI decision platform for urban traffic simulation.

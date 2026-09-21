@@ -6,6 +6,18 @@ Five domain agents cooperate in Eclipse SUMO. Only **A1 Flow** can change traffi
 
 This repository holds the **settled specifications** for Kiro enhancement and later implementation. It is not yet a running simulator.
 
+The course requires **Design Thinking**. Stages 1–3 are complete. Prototype and Test are specified, not executed.
+
+| Stage | Status | Start here |
+|---|---|---|
+| 1 Empathize | Done | [`coflow5-empathize-pack.md`](coflow5-empathize-pack.md) |
+| 2 Define | Done | [`coflow5-define-ideate.md`](coflow5-define-ideate.md) |
+| 3 Ideate | Done | [`coflow5-define-ideate.md`](coflow5-define-ideate.md) |
+| 4 Prototype | Planned | [`.kiro/specs/coflow5-reliable-agentic-platform/tasks.md`](.kiro/specs/coflow5-reliable-agentic-platform/tasks.md) |
+| 5 Test | Planned | evaluation contract in the Kiro requirements |
+
+Kiro record of those steps: [`.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`](.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md).
+
 ## Course brief
 
 Source: `SUMO_forStudents.docx`, transcribed in [`docs/source/course-brief.md`](docs/source/course-brief.md).
@@ -45,6 +57,7 @@ Open this repository in Kiro and use the spec at:
 
 ```text
 .kiro/specs/coflow5-reliable-agentic-platform/
+  design-thinking.md
   requirements.md
   design.md
   tasks.md
@@ -57,7 +70,7 @@ Steering:
 CONTEXT.md
 ```
 
-Ask Kiro to enhance the final specs from this baseline. Keep these constraints:
+Ask Kiro to enhance the final specs from this baseline **without dropping Design Thinking Stages 1–3**. Keep these constraints:
 
 1. Do not put an LLM in the Control plane.
 2. Do not make reinforcement learning required.
@@ -70,6 +83,10 @@ Ask Kiro to enhance the final specs from this baseline. Keep these constraints:
 | Need | File |
 |---|---|
 | Course brief | [`docs/source/course-brief.md`](docs/source/course-brief.md) |
+| Design Thinking steps we did | [`.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`](.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md) |
+| Empathize pack | [`coflow5-empathize-pack.md`](coflow5-empathize-pack.md) |
+| Define and Ideate | [`coflow5-define-ideate.md`](coflow5-define-ideate.md) |
+| Full Stage 1–3 book | [`CoFlow-5_System_Requirements_Book.md`](CoFlow-5_System_Requirements_Book.md) |
 | Glossary | [`CONTEXT.md`](CONTEXT.md) |
 | Architecture decision | [`docs/adr/0001-reliable-ai-platform-boundary.md`](docs/adr/0001-reliable-ai-platform-boundary.md) |
 | Kiro requirements | [`.kiro/specs/coflow5-reliable-agentic-platform/requirements.md`](.kiro/specs/coflow5-reliable-agentic-platform/requirements.md) |
@@ -77,7 +94,6 @@ Ask Kiro to enhance the final specs from this baseline. Keep these constraints:
 | Kiro tasks | [`.kiro/specs/coflow5-reliable-agentic-platform/tasks.md`](.kiro/specs/coflow5-reliable-agentic-platform/tasks.md) |
 | Long-form spec | [`.scratch/coflow5-reliable-ai-platform/spec.md`](.scratch/coflow5-reliable-ai-platform/spec.md) |
 | Portfolio / stack | [`docs/architecture/coflow5-synapse-portfolio-design.md`](docs/architecture/coflow5-synapse-portfolio-design.md) |
-| Empathize pack | [`coflow5-empathize-pack.md`](coflow5-empathize-pack.md) |
 | Project context | [`coflow5-project-context.md`](coflow5-project-context.md) |
 
 ## Implementation status
