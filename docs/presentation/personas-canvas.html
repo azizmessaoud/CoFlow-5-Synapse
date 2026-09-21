@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CoFlow-5 — Persona sheets (supervisor presentation)</title>
+  <style>
+    @page { size: A4 landscape; margin: 10mm; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #e8e8e8;
+      margin: 0;
+      color: #111;
+    }
+    .brief {
+      max-width: 1100px;
+      margin: 16px auto;
+      background: #fff;
+      border: 2px solid #1a4a8a;
+      padding: 16px 20px;
+    }
+    .brief h1 { margin: 0 0 8px; font-size: 22px; }
+    .brief p, .brief li { font-size: 15px; line-height: 1.4; }
+    .sheet {
+      width: 277mm;
+      min-height: 180mm;
+      margin: 12px auto;
+      background: #fff;
+      border: 3px solid #1a5aa8;
+      display: grid;
+      grid-template-columns: 160px 1fr 1fr;
+      grid-template-rows: 48px auto auto auto;
+      gap: 8px;
+      padding: 8px;
+      page-break-after: always;
+    }
+    .nom {
+      grid-column: 1 / -1;
+      background: #f08a1a;
+      color: #111;
+      font-size: 28px;
+      font-weight: 800;
+      padding: 8px 14px;
+      border: 2px solid #1a5aa8;
+    }
+    .box {
+      border: 2px solid #333;
+      padding: 8px 10px;
+      min-height: 90px;
+    }
+    .box h2 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+    .box p, .meta { margin: 0; font-size: 14px; line-height: 1.35; }
+    .avatar {
+      grid-row: 2;
+      border: 2px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #d7eaf7;
+      font-size: 64px;
+    }
+    .frust { grid-column: 2; grid-row: 2; }
+    .perso { grid-column: 3; grid-row: 2; }
+    .cite { grid-column: 1; grid-row: 3; min-height: 110px; }
+    .besoin { grid-column: 2; grid-row: 3; }
+    .tech { grid-column: 3; grid-row: 3; }
+    .meta-box { grid-column: 1; grid-row: 4; }
+    .bio { grid-column: 2; grid-row: 4; }
+    .neveut { grid-column: 3; grid-row: 4; }
+    .meta div { margin-bottom: 4px; }
+    .label { font-weight: 800; }
+    @media print {
+      .brief { page-break-after: always; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <section class="brief">
+    <h1>CoFlow-5 — what we have reached (simple words)</h1>
+    <p><strong>Say this to the supervisor:</strong> we are in the <em>Empathize</em> stage of Design Thinking. We know <em>who</em> we design for. We have not programmed the traffic lights in SUMO yet.</p>
+    <ul>
+      <li><strong>8 people</strong> (sheets below — same canvas as the course).</li>
+      <li><strong>Their day:</strong> where it hurts (waiting, late buses, blocked ambulance, pollution by the school).</li>
+      <li><strong>Evidence:</strong> papers and guides (e.g. a wait <em>feels</em> about twice as long; irregular buses hurt more than slightly slower buses).</li>
+      <li><strong>Ideas:</strong> one boss of the lights; other agents only ask (pedestrian, bus, ambulance, pollution, incidents). A talking AI never presses a light.</li>
+      <li><strong>Numbers</strong> (40 seconds, −25%…) = <em>targets to test</em>, not results we already measured.</li>
+    </ul>
+    <p>Architecture for the professor (agents, messages, build order): print the next pages, or see <code>system-design-for-professor.md</code>.</p>
+  </section>
+
+  <section class="brief" style="page-break-after: always;">
+    <h1>How many agents? (five + one explainer)</h1>
+    <p>CoFlow-5 = <strong>5 agents</strong>. Only <strong>A1</strong> may change a light. A2–A5 only ask. The LLM is <strong>not</strong> a sixth traffic agent.</p>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;">
+      <tr><th style="text-align:left;border-bottom:1px solid #333;">Agent</th><th style="text-align:left;border-bottom:1px solid #333;">Job</th><th style="text-align:left;border-bottom:1px solid #333;">Writes lights?</th></tr>
+      <tr><td>A1 Flow</td><td>Boss of the lights — picks the phase and who wins</td><td><strong>Yes — only A1</strong></td></tr>
+      <tr><td>A2 Emergency</td><td>Ambulance corridor — asks to clear the queue ahead</td><td>No</td></tr>
+      <tr><td>A3 Multimodal</td><td>Slow walkers + late buses (not every bus)</td><td>No</td></tr>
+      <tr><td>A4 Situation</td><td>Forecast + “this does not match the forecast”</td><td>No</td></tr>
+      <tr><td>A5 Sustainability</td><td>Care about emission hot-spots when delay allows</td><td>No</td></tr>
+      <tr><td>Synapse (LLM)</td><td>Explains the decision log in words</td><td><strong>Never</strong></td></tr>
+    </table>
+    <p><strong>Three rules:</strong> (1) Safety first — no fighting greens; a person already crossing finishes. (2) The boss is boss. (3) Backup: if messages die, A1 still runs; if the learned policy dies → Max-Pressure → actuated → fixed-time.</p>
+  </section>
+
+  <section class="brief" style="page-break-after: always;">
+    <h1>How they communicate</h1>
+    <p><strong>Noticeboard (pub/sub):</strong> agents post and read. Topics: <code>state/</code> (queues, data age), <code>forecast/</code> (A4), <code>alerts/</code> (incidents, stale data), <code>eco/</code> (A5 weights). Every message has an expiry. Silent A4 ≠ frozen lights.</p>
+    <p><strong>Formal ask (one round, 5–10 s):</strong> A2/A3 send a request → A1 accept or reject + a <em>reason code</em> Rosa can read. Priority above the auction: safety / person on crossing → ambulance → pedestrian deadline → late bus → general flow → eco.</p>
+    <p><strong>Tech to start:</strong> asyncio pub/sub in one process. Redis only if we split machines. Kafka is too heavy for this prototype.</p>
+    <p>If the board is empty or old, A1 still acts. We will later <em>drop messages on purpose</em> to prove that.</p>
+  </section>
+
+  <section class="brief" style="page-break-after: always;">
+    <h1>Best way to build (please verify this plan)</h1>
+    <ol>
+      <li><strong>Spine:</strong> pin SUMO, 4×4 grid, fixed-time + actuated baselines. No “AI” required yet.</li>
+      <li><strong>Tier 0 (MVP):</strong> A1 vs those baselines <em>and</em> Max-Pressure. Safety mask. Honest stats (no best-episode tables). This alone can satisfy the brief.</li>
+      <li><strong>Tier 1:</strong> bus + A2, A3, A5. Turn agents off (ablation) to show each one earns its keep.</li>
+      <li><strong>Tier 2:</strong> A4 + incident flags + communication-loss tests. Bigger map only after the grid is solid.</li>
+      <li><strong>LLM (optional, parallel):</strong> explain the log. If time is short, cut the LLM, not the evaluation.</li>
+    </ol>
+    <p><strong>Reject us if we:</strong> let the LLM set a phase; report the best training episode as the result; turn simulated ambulance seconds into “lives saved”; call HBEFA “air quality”; add A2–A5 before A1 vs Max-Pressure runs.</p>
+  </section>
+
+  <article class="sheet">
+    <div class="nom">Name: Amara</div>
+    <div class="avatar" aria-hidden="true">👵</div>
+    <div class="box frust">
+      <h2>Frustrations and fears:</h2>
+      <p>She is afraid she will still be on the crossing when cars get a green. Waiting makes her tired. If the green is too short, she feels unsafe. She fears the light is designed only for young, fast walkers.</p>
+    </div>
+    <div class="box perso">
+      <h2>Personality:</h2>
+      <p>Careful, knows her neighbourhood, slow but determined. She does not want to “break traffic”. She just wants to cross safely.</p>
+    </div>
+    <div class="box cite">
+      <h2>Quote:</h2>
+      <p>“I need enough time to cross, even when the street is busy.”</p>
+    </div>
+    <div class="box besoin">
+      <h2>Needs and expectations:</h2>
+      <p>A button or detector she understands. A clear sign that her request was received. Enough green time (she walks at about 0.8 m/s with a cane). Not waiting too long (after about 30 seconds many people cross on red — that is a design problem, not her fault).</p>
+    </div>
+    <div class="box tech">
+      <h2>Technologies used:</h2>
+      <p>Push-button at the crossing. No smartphone required. Simple sound or light feedback. No app.</p>
+    </div>
+    <div class="box meta-box">
+      <div class="meta">
+        <div><span class="label">Age:</span> 74</div>
+        <div><span class="label">Profession:</span> Retired</div>
+        <div><span class="label">Situation:</span> Walks with a cane; shops + bus twice a day</div>
+        <div><span class="label">City:</span> Tunis (busy centre street)</div>
+      </div>
+    </div>
+    <div class="box bio">
+      <h2>Bio:</h2>
+      <p>Amara crosses the main street twice a day for shops and the bus. She is not “anti-car”. She needs a system built for a slow walker, not for the average person.</p>
+    </div>
+    <div class="box neveut">
+      <h2>What she does not want:</h2>
+      <p>A green that is too short. Having to download an app. Cutting the pedestrian green for an ambulance while she is already on the road. Presenting “40 seconds max” as a proven result — it is a target to test.</p>
+    </div>
+  </article>
+
+  <article class="sheet">
+    <div class="nom">Name: David</div>
+    <div class="avatar">🚚</div>
+    <div class="box frust">
+      <h2>Frustrations and fears:</h2>
+      <p>He can accept a longer trip. He cannot accept not knowing if it will take 20 or 50 minutes. Small delays stack up and he misses delivery windows. He fears “average speed” that hides the worst days.</p>
+    </div>
+    <div class="box perso">
+      <h2>Personality:</h2>
+      <p>Organised, driven by the schedule, practical. He plans his round; uncertainty breaks his job.</p>
+    </div>
+    <div class="box cite">
+      <h2>Quote:</h2>
+      <p>“I can plan around a longer trip if I know how long it will actually take.”</p>
+    </div>
+    <div class="box besoin">
+      <h2>Needs and expectations:</h2>
+      <p>More stable travel times (especially the bad days: the slow tail, not only the average). Fewer useless stops at lights. The system should see jams and incidents, not only one junction on its own.</p>
+    </div>
+    <div class="box tech">
+      <h2>Technologies used:</h2>
+      <p>GPS / Waze-style app, work phone, delivery-round app.</p>
+    </div>
+    <div class="box meta-box">
+      <div class="meta">
+        <div><span class="label">Age:</span> 41</div>
+        <div><span class="label">Profession:</span> Delivery driver</div>
+        <div><span class="label">Situation:</span> 60+ timed stops per day</div>
+        <div><span class="label">City:</span> Tunis (main roads and side streets)</div>
+      </div>
+    </div>
+    <div class="box bio">
+      <h2>Bio:</h2>
+      <p>David delivers all day. A “smart” junction that improves the average but makes the worst trips worse still fails him. In our tests, an unfinished trip must count as a failure, not hidden time.</p>
+    </div>
+    <div class="box neveut">
+      <h2>What he does not want:</h2>
+      <p>Boasting about a faster average while his worst rounds get worse. Ignoring unfinished deliveries in the statistics.</p>
+    </div>
+  </article>
+
+  <article class="sheet">
+    <div class="nom">Name: Chidi</div>
+    <div class="avatar">🚌</div>
+    <div class="box frust">
+      <h2>Frustrations and fears:</h2>
+      <p>He waits a long time, then three buses arrive together. He misses his connection. He fears “bus priority” only means “faster buses” when he needs <em>regular</em> buses.</p>
+    </div>
+    <div class="box perso">
+      <h2>Personality:</h2>
+      <p>Daily rider, no fixed timetable: regularity <em>is</em> the service. Impatient when waiting is unpredictable.</p>
+    </div>
+    <div class="box cite">
+      <h2>Quote:</h2>
+      <p>“Buses should arrive regularly — not three at once after a long wait.”</p>
+    </div>
+    <div class="box besoin">
+      <h2>Needs and expectations:</h2>
+      <p>Priority mainly for the late bus / the one after a big gap, not for every bus. Less bunching. Waiting at the stop matters more than a few minutes on the bus (research often values wait about 2× in-vehicle time).</p>
+    </div>
+    <div class="box tech">
+      <h2>Technologies used:</h2>
+      <p>Bus GPS / timetable apps if they exist. Otherwise: watching the street. No work tools.</p>
+    </div>
+    <div class="box meta-box">
+      <div class="meta">
+        <div><span class="label">Age:</span> 27</div>
+        <div><span class="label">Profession:</span> Employee, frequent bus user</div>
+        <div><span class="label">Situation:</span> High-frequency line, no real timetable</div>
+        <div><span class="label">City:</span> Tunis (centre bus corridor)</div>
+      </div>
+    </div>
+    <div class="box bio">
+      <h2>Bio:</h2>
+      <p>Chidi takes the bus every day. On a frequent line you do not “catch a timetable”: you wait for the next one. If gaps explode, his day breaks.</p>
+    </div>
+    <div class="box neveut">
+      <h2>What he does not want:</h2>
+      <p>Bus priority that cuts pedestrians (Amara) short. Measuring only bus travel time and not passenger waiting. A made-up “X% of riders quit the bus” number (we do not have that figure).</p>
+    </div>
+  </article>
+
+  <article class="sheet">
+    <div class="nom">Name: Rosa</div>
+    <div class="avatar">🖥️</div>
+    <div class="box frust">
+      <h2>Frustrations and fears:</h2>
+      <p>She cannot see why a bus got (or did not get) priority. With no history she cannot explain an incident. She fears a “black box” she will be asked to defend.</p>
+    </div>
+    <div class="box perso">
+      <h2>Personality:</h2>
+      <p>Responsible, calm under pressure, needs proof. She wants to command, not only watch a pretty screen.</p>
+    </div>
+    <div class="box cite">
+      <h2>Quote:</h2>
+      <p>“Show me why a bus got — or was denied — priority, and let me act before the service breaks.”</p>
+    </div>
+    <div class="box besoin">
+      <h2>Needs and expectations:</h2>
+      <p>A simple screen: positions, gaps, priority yes/no. A <em>reason code</em> (“pedestrian still on the crossing”, “queue blocked behind”). Ability to request priority without breaking light safety. A time-stamped log.</p>
+    </div>
+    <div class="box tech">
+      <h2>Technologies used:</h2>
+      <p>Depot / bus-location tools, radio, spreadsheet, maybe an operations dashboard.</p>
+    </div>
+    <div class="box meta-box">
+      <div class="meta">
+        <div><span class="label">Age:</span> 52</div>
+        <div><span class="label">Profession:</span> Bus depot controller</div>
+        <div><span class="label">Situation:</span> Handles line disruptions</div>
+        <div><span class="label">City:</span> Tunis (operations desk)</div>
+      </div>
+    </div>
+    <div class="box bio">
+      <h2>Bio:</h2>
+      <p>Rosa watches bus service. Real systems (e.g. SCATS) already sell manual takeover and audit trails: that is the job, not a luxury.</p>
+    </div>
+    <div class="box neveut">
+      <h2>What she does not want:</h2>
+      <p>Magic “5-minute warnings” sold as already proven. An AI that decides for her with no readable reason. A fake “X% of engineers distrust AI” statistic (no solid survey).</p>
+    </div>
+  </article>
+
+  <article class="sheet">
+    <div class="nom">Name: Marcus</div>
+    <div class="avatar">🚑</div>
+    <div class="box frust">
+      <h2>Frustrations and fears:</h2>
+      <p>A green light is useless if the queue has nowhere to go. He fears jumping from junction to junction and leaving chaos behind (cars, buses, pedestrians). He does not want a simulation turned into “lives saved”.</p>
+    </div>
+    <div class="box perso">
+      <h2>Personality:</h2>
+      <p>Urgent, precise, fair: he knows other people exist. The job is to arrive <em>and</em> let the network recover.</p>
+    </div>
+    <div class="box cite">
+      <h2>Quote:</h2>
+      <p>“Get us through safely, and make sure traffic recovers after we pass.”</p>
+    </div>
+    <div class="box besoin">
+      <h2>Needs and expectations:</h2>
+      <p>The system knows an ambulance is coming (trusted request). Clear a bit of the queue <em>ahead</em>, not only the light under the bumper. Pedestrians already on the crossing finish. After the pass: a gentle return, not a shock.</p>
+    </div>
+    <div class="box tech">
+      <h2>Technologies used:</h2>
+      <p>Radio, dispatch tablet, GPS, lights and siren. No public app.</p>
+    </div>
+    <div class="box meta-box">
+      <div class="meta">
+        <div><span class="label">Age:</span> 34</div>
+        <div><span class="label">Profession:</span> Ambulance crew (paramedic)</div>
+        <div><span class="label">Situation:</span> Urban calls in peak hours</div>
+        <div><span class="label">City:</span> Tunis (central hospital → dense streets)</div>
+      </div>
+    </div>
+    <div class="box bio">
+      <h2>Bio:</h2>
+      <p>Minutes matter in medical literature (survival tends to fall when advanced care arrives later). But <em>our</em> simulation must never say “we saved X lives”. We measure ambulance time <em>and</em> delay for everyone else.</p>
+    </div>
+    <div class="box neveut">
+      <h2>What he does not want:</h2>
+      <p>Cutting off a pedestrian already on the road. A made-up “flashover in 3–5 minutes” claim. Hiding the cost for cars and buses. A single green that only moves the jam to the next junction.</p>
+    </div>
+  </article>
+
+  <article class="sheet">
+    <div class="nom">Name: Yuki</div>
+    <div class="avatar">🚦</div>
+    <div class="box frust">
+      <h2>Frustrations and fears:</h2>
+      <p>She is still responsible if the system does something stupid. She fears stale data that looks normal. She does not want “smart” mode with no way to take back control — but takeover must never turn on two greens that conflict.</p>
+    </div>
+    <div class="box perso">
+      <h2>Personality:</h2>
+      <p>Careful, process-driven, accountable. She prefers a simple fallback (fixed plan) to an AI she cannot explain.</p>
+    </div>
+    <div class="box cite">
+      <h2>Quote:</h2>
+      <p>“Automation should support my decisions — not leave me responsible for a system I cannot control.”</p>
+    </div>
+    <div class="box besoin">
+      <h2>Needs and expectations:</h2>
+      <p>See: current mode, how fresh the data is, faults. A history: what the system saw, decided, and why. If it breaks: a backup ladder (learned policy → Max-Pressure → actuated lights → fixed plan). Manual takeover <em>under safety rules</em>.</p>
+    </div>
+    <div class="box tech">
+      <h2>Technologies used:</h2>
+      <p>Signal supervisor, logs, sensor status, SCATS-like tools. Maybe Python / GIS on the side. The need is the same: she must explain what happened.</p>
+    </div>
+    <div class="box meta-box">
+      <div class="meta">
+        <div><span class="label">Age:</span> 47</div>
+        <div><span class="label">Profession:</span> Traffic engineer / operations</div>
+        <div><span class="label">Situation:</span> Accountable for network safety</div>
+        <div><span class="label">City:</span> Tunis (control room)</div>
+      </div>
+    </div>
+    <div class="box bio">
+      <h2>Bio:</h2>
+      <p>Yuki needs to sleep at night: if a sensor dies, the system must say so and fall back to a known mode. Adaptive control can lose its benefits in heavy congestion: fallback is not optional.</p>
+    </div>
+    <div class="box neveut">
+      <h2>What she does not want:</h2>
+      <p>An AI in the 1-second control loop (too slow, too fragile). Manual takeover that creates conflicting greens. Presenting the LLM as the boss of the lights.</p>
+    </div>
+  </article>
+
+  <article class="sheet">
+    <div class="nom">Name: Maria</div>
+    <div class="avatar">🏫</div>
+    <div class="box frust">
+      <h2>Frustrations and fears:</h2>
+      <p>She fears “cleaning” the main road by dumping queues and exhaust onto her street, by the school. A city-wide percentage means nothing to her. SUMO/HBEFA numbers are <em>not</em> the air she breathes: they are estimates.</p>
+    </div>
+    <div class="box perso">
+      <h2>Personality:</h2>
+      <p>Protective, local, sceptical of averages. She judges the street corner, not the whole network.</p>
+    </div>
+    <div class="box cite">
+      <h2>Quote:</h2>
+      <p>“Cleaner traffic on the main road must not mean more exhaust outside our homes.”</p>
+    </div>
+    <div class="box besoin">
+      <h2>Needs and expectations:</h2>
+      <p>Measure residential streets and the school, not only the corridor. A before/after map: where it got better, where it got worse. A rule written <em>before</em> the test: we do not accept shifting pollution to the school.</p>
+    </div>
+    <div class="box tech">
+      <h2>Technologies used:</h2>
+      <p>Almost none. Walking, watching. No personal sensor. She will see our maps, not TraCI.</p>
+    </div>
+    <div class="box meta-box">
+      <div class="meta">
+        <div><span class="label">Age:</span> 38</div>
+        <div><span class="label">Profession:</span> Parent (walks child to school)</div>
+        <div><span class="label">Situation:</span> Lives near a busy arterial</div>
+        <div><span class="label">City:</span> Tunis (school street next to a main road)</div>
+      </div>
+    </div>
+    <div class="box bio">
+      <h2>Bio:</h2>
+      <p>Maria walks her child to school. Many schools in the literature sit too close to major roads. Our duty: do not hide shifted queues or emissions.</p>
+    </div>
+    <div class="box neveut">
+      <h2>What she does not want:</h2>
+      <p>Talking about “air quality” when we only have emission estimates. A network “win” that makes her street worse. Ignoring queues left after an ambulance.</p>
+    </div>
+  </article>
+
+  <article class="sheet">
+    <div class="nom">Name: Omar</div>
+    <div class="avatar">📡</div>
+    <div class="box frust">
+      <h2>Frustrations and fears:</h2>
+      <p>Too many false alarms and he stops listening. An alert with no “why” does not help. A frozen screen can hide a failure. He fears we compare our detection to a “world average delay” that does not exist.</p>
+    </div>
+    <div class="box perso">
+      <h2>Personality:</h2>
+      <p>Sceptical, methodical, operational. He wants to sort: real incident, ordinary jam, or dead sensor.</p>
+    </div>
+    <div class="box cite">
+      <h2>Quote:</h2>
+      <p>“Tell me what is wrong, why you think so, and whether I can still trust the data.”</p>
+    </div>
+    <div class="box besoin">
+      <h2>Needs and expectations:</h2>
+      <p>Grouped alerts with level and clues. Mark data that is too old. Separate “nothing found” from “we do not know”. Track recovery <em>after</em> the blockage is cleared. Incidents are a large share of congestion (about 25–30% in FHWA-type sources) — that is why we care, not a magic threshold.</p>
+    </div>
+    <div class="box tech">
+      <h2>Technologies used:</h2>
+      <p>Radio, cameras / video wall, phone, incident tools. Not necessarily visible machine learning.</p>
+    </div>
+    <div class="box meta-box">
+      <div class="meta">
+        <div><span class="label">Age:</span> 55</div>
+        <div><span class="label">Profession:</span> Duty officer (incidents)</div>
+        <div><span class="label">Situation:</span> Coordinates the operational response</div>
+        <div><span class="label">City:</span> Tunis (incident desk)</div>
+      </div>
+    </div>
+    <div class="box bio">
+      <h2>Bio:</h2>
+      <p>Omar lives with queues that might be a crash, demand, or a broken sensor. Our proposed method: compare reality to a simple forecast, then alert — thresholds come after a small pilot, not from a number nobody published.</p>
+    </div>
+    <div class="box neveut">
+      <h2>What he does not want:</h2>
+      <p>One fake “average detection delay” for the whole world. Alerts with no confidence. Pretending an anomaly already tells us the cause.</p>
+    </div>
+  </article>
+</body>
+</html>

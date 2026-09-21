@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoFlow-5 — Professor Showcase</title>
+<style>
+  :root{--bg:#0d1117;--panel:#161b26;--panel2:#1c2333;--ink:#e8edf6;--dim:#9aa7ba;--acc:#4fc3f7;--acc2:#ffd54f;--ok:#66bb6a;--warn:#ef5350;--line:#2a3247}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;height:100vh;overflow:hidden}
+  .slide{display:none;position:absolute;inset:0;padding:38px 60px 76px;flex-direction:column}
+  .slide.active{display:flex}
+  h1{font-size:52px;color:var(--acc);margin-bottom:6px}
+  h2{font-size:27px;color:var(--acc);border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:16px}
+  h3{font-size:17px;color:var(--acc2);margin:8px 0 4px}
+  p,li{font-size:15.5px;line-height:1.5}
+  .dim{color:var(--dim)}.small{font-size:13px}
+  ul{margin-left:20px}li{margin:3px 0}
+  table{border-collapse:collapse;width:100%;margin:8px 0;font-size:13px}
+  th{background:var(--panel2);color:var(--acc);text-align:left;padding:6px 8px;border:1px solid var(--line);font-size:12px}
+  td{padding:5px 8px;border:1px solid var(--line);vertical-align:top}
+  .cols{display:flex;gap:22px;flex:1;min-height:0}.col{flex:1;min-width:0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:6px 0}
+  .ok{color:var(--ok)}.warn{color:var(--warn)}
+  .kicker{color:var(--acc2);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+  .footer{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:10px 24px;background:rgba(13,17,23,.92);border-top:1px solid var(--line);font-size:13px;color:var(--dim);z-index:10}
+  .navbtn{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 16px;cursor:pointer}
+  .navbtn:hover{border-color:var(--acc);color:var(--acc)}
+  .big{font-size:22px;color:var(--acc2);font-weight:600}
+  .center{align-items:center;justify-content:center;text-align:center}
+  .pill{border-radius:20px;padding:4px 13px;font-size:13px;display:inline-block;margin:3px}
+  .p-safety{background:#3a1f24;color:#ff8a80;border:1px solid #6d3a42}
+  .p-flow{background:#12324a;color:#4fc3f7;border:1px solid #1e4a6b}
+  .p-req{background:#3a3514;color:#ffd54f;border:1px solid #5c5420}
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--acc);z-index:20;transition:width .2s}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:6px}
+  .pcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 10px;text-align:center;position:relative}
+  .pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--pc,#4fc3f7);border-radius:14px 14px 0 0}
+  .pav{width:70px;height:70px;border-radius:50%;margin:4px auto 8px;display:flex;align-items:center;justify-content:center;font-size:34px;background:var(--pc,#4fc3f7);box-shadow:0 4px 12px rgba(0,0,0,.45);border:3px solid rgba(255,255,255,.2)}
+  .pname{font-weight:700;font-size:15px}.prole{font-size:11.5px;color:var(--dim);margin:2px 0 7px}
+  .pneed{font-size:12.5px;line-height:1.35;font-style:italic}
+  .pstat{margin-top:7px;background:rgba(0,0,0,.28);border-radius:8px;padding:4px 5px}
+  .pstat .v{font-size:16px;font-weight:700;color:var(--acc2)}
+  .pstat .l{font-size:10px;color:var(--dim);line-height:1.25}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;margin:8px 0}
+  .ladder{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+  .rung{display:flex;align-items:center;gap:10px;border-radius:8px;padding:8px 12px;font-size:13.5px;border:1px solid var(--line)}
+  .rung .rn{font-weight:800;width:22px}
+  .r1{background:linear-gradient(90deg,#4a1520,#3a1f24);border-color:#8a4a55}
+  .r2{background:linear-gradient(90deg,#3a2a12,#33240f);border-color:#7a6230}
+  .r3{background:linear-gradient(90deg,#14324a,#122a3d);border-color:#2a5a7d}
+  .r4{background:linear-gradient(90deg,#123a2a,#0f3022);border-color:#2f7a52}
+  .r5{background:linear-gradient(90deg,#2a2a3a,#232330);border-color:#4a4a6a}
+  .r6{background:linear-gradient(90deg,#26303a,#202a33);border-color:#3e5060;opacity:.85}
+  .rwho{margin-left:auto;font-size:11.5px;color:var(--dim)}
+  .steps{display:flex;margin-top:14px}
+  .step{flex:1;text-align:center;position:relative;padding:0 5px}
+  .step .dot{width:44px;height:44px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;background:var(--panel2);border:3px solid var(--acc);color:var(--acc)}
+  .step.t0 .dot{border-color:#9aa7ba;color:#9aa7ba}
+  .step.tadv .dot{border-color:#8a6bd8;color:#8a6bd8;border-style:dashed}
+  .step::after{content:'';position:absolute;top:22px;left:calc(50% + 25px);right:calc(-50% + 25px);height:3px;background:var(--line)}
+  .step:last-child::after{display:none}
+  .step h4{color:var(--acc);font-size:13.5px;margin:8px 0 3px}
+  .step p{font-size:11.5px;color:var(--dim);line-height:1.35}
+  .step .verify{margin-top:5px;font-size:11px;color:#8ce99a}
+  .statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:4px}
+  .statbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+  .statbox .v{font-size:28px;font-weight:800;color:var(--acc2)}
+  .statbox .l{font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.3}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+
+<!-- 1 TITLE -->
+<section class="slide center active">
+  <div class="kicker">Design Thinking · Stages 1–3 complete · Prototype/Test planned</div>
+  <h1>CoFlow-5</h1>
+  <p class="big">Five cooperative agents for urban traffic management</p>
+  <p class="dim" style="max-width:840px;margin-top:12px;font-size:17px">
+    How might we use data and intelligent agents to make urban traffic more <b style="color:var(--acc2)">efficient, adaptive, and sustainable</b> — for <b style="color:var(--acc2)">every person on the network</b>, not just the average driver?
+  </p>
+  <div class="svgwrap" style="width:820px;margin-top:18px">
+    <svg viewBox="0 0 820 120" width="100%">
+      <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#4fc3f7"/></marker></defs>
+      <g font-family="Segoe UI" font-size="12" fill="#e8edf6">
+        <rect x="15" y="35" width="140" height="48" rx="10" fill="#1c2333" stroke="#2a3247"/>
+        <text x="85" y="55" text-anchor="middle" fill="#9aa7ba" font-size="11">EIGHT PERSONAS</text><text x="85" y="72" text-anchor="middle" fill="#4fc3f7" font-size="11">who suffer</text>
+        <rect x="195" y="35" width="150" height="48" rx="10" fill="#1c2333" stroke="#2a3247"/>
+        <text x="270" y="55" text-anchor="middle" fill="#9aa7ba" font-size="11">FIVE AGENTS</text><text x="270" y="72" text-anchor="middle" fill="#4fc3f7" font-size="11">A1–A5, one writer</text>
+        <rect x="385" y="35" width="150" height="48" rx="10" fill="#1c2333" stroke="#2a3247"/>
+        <text x="460" y="55" text-anchor="middle" fill="#9aa7ba" font-size="11">MESSAGE BUS</text><text x="460" y="72" text-anchor="middle" fill="#4fc3f7" font-size="11">pub/sub · TTL</text>
+        <rect x="575" y="35" width="140" height="48" rx="10" fill="#3a1f24" stroke="#8a4a55"/>
+        <text x="645" y="55" text-anchor="middle" fill="#9aa7ba" font-size="11">SAFETY LAYER</text><text x="645" y="72" text-anchor="middle" fill="#ff8a80" font-size="11">interlocks</text>
+        <line x1="155" y1="59" x2="191" y2="59" stroke="#4fc3f7" stroke-width="2" marker-end="url(#a1)"/>
+        <line x1="345" y1="59" x2="381" y2="59" stroke="#4fc3f7" stroke-width="2" marker-end="url(#a1)"/>
+        <line x1="535" y1="59" x2="571" y2="59" stroke="#4fc3f7" stroke-width="2" marker-end="url(#a1)"/>
+        <line x1="715" y1="59" x2="755" y2="59" stroke="#66bb6a" stroke-width="2" marker-end="url(#a1)"/>
+        <text x="787" y="63" text-anchor="middle" font-size="13" fill="#66bb6a" font-weight="bold">SUMO</text>
+        <text x="787" y="79" text-anchor="middle" font-size="10" fill="#66bb6a">only A1 writes</text>
+      </g>
+    </svg>
+  </div>
+  <div style="margin-top:12px">
+    <span class="pill p-flow">Eclipse SUMO · libsumo/TraCI</span>
+    <span class="pill p-flow">MARL + rules hybrid</span>
+    <span class="pill p-req">Verified evidence trail</span>
+    <span class="pill p-safety">Safety-first architecture</span>
+  </div>
+  <p class="small dim" style="margin-top:16px">Status: requirements baseline verified against primary sources — not yet implemented · 20 September 2026</p>
+</section>
+
+<!-- 2 PERSONAS -->
+<section class="slide">
+  <div class="kicker">Stage 1 · Empathize</div>
+  <h2>Who suffers from traffic congestion? — the eight personas</h2>
+  <div class="pgrid">
+    <div class="pcard" style="--pc:#f48fb1"><div class="pav">🚶‍♀️</div><div class="pname">Amara, 74</div><div class="prole">Pedestrian with a cane · 0.8 m/s</div><div class="pneed">"Enough crossing time, even when busy."</div><div class="pstat"><div class="v">2×</div><div class="l">perceived wait vs actual<br>(Vallyon, ATRF 2009)</div></div></div>
+    <div class="pcard" style="--pc:#4fc3f7"><div class="pav">🚚</div><div class="pname">David, 41</div><div class="prole">Delivery driver · 60+ stops/day</div><div class="pneed">"Tell me how long the trip will take."</div><div class="pstat"><div class="v">0.4</div><div class="l">reliability ratio — variability costs ~half the mean (DfT TAG)</div></div></div>
+    <div class="pcard" style="--pc:#ba68c8"><div class="pav">🚌</div><div class="pname">Chidi, 27</div><div class="prole">High-frequency bus rider</div><div class="pneed">"Regular buses — not three at once."</div><div class="pstat"><div class="v">2×</div><div class="l">waiting valued vs in-vehicle (DfT TAG; Wardman n=138)</div></div></div>
+    <div class="pcard" style="--pc:#ffb74d"><div class="pav">📋</div><div class="pname">Rosa, 52</div><div class="prole">Bus depot controller</div><div class="pneed">"Show me why priority was given or refused."</div><div class="pstat"><div class="v">100%</div><div class="l">of decisions need reason codes (SCATS audit trails, 2022)</div></div></div>
+    <div class="pcard" style="--pc:#ef5350"><div class="pav">🚑</div><div class="pname">Marcus, 34</div><div class="prole">Paramedic, urban ambulance</div><div class="pneed">"Get us through safely — and clear the jam after."</div><div class="pstat"><div class="v">−7%</div><div class="l">survival per minute of ALS delay (PLOS One 2022)</div></div></div>
+    <div class="pcard" style="--pc:#4db6ac"><div class="pav">🚦</div><div class="pname">Yuki, 47</div><div class="prole">City traffic engineer</div><div class="pneed">"I stay in command — even when it fails."</div><div class="pstat"><div class="v">↓</div><div class="l">adaptive control degrades silently (SCOOT, 1986)</div></div></div>
+    <div class="pcard" style="--pc:#aed581"><div class="pav">🏫</div><div class="pname">Maria, 38</div><div class="prole">Parent, lives by an arterial</div><div class="pneed">"Don't move the pollution onto my street."</div><div class="pstat"><div class="v">6.4M</div><div class="l">US children in school ≤250 m of a major road (Kingsley 2014)</div></div></div>
+    <div class="pcard" style="--pc:#64b5f6"><div class="pav">📡</div><div class="pname">Omar, 55</div><div class="prole">Network duty officer</div><div class="pneed">"Tell me what's wrong, why, and how sure you are."</div><div class="pstat"><div class="v">25–30%</div><div class="l">of congestion from incidents (FHWA)</div></div></div>
+  </div>
+  <p class="small dim" style="margin-top:10px">Research-informed design personas from a 33-row verified evidence trail — <b>not</b> interview-validated profiles; the report says so. IMATM names map 1:1 onto these roles (not 14 people).</p>
+</section>
+
+<!-- 3 EVIDENCE -->
+<section class="slide">
+  <div class="kicker">Empathize · verified against primary sources</div>
+  <h2>The evidence that puts each persona in the book</h2>
+  <div class="statrow">
+    <div class="statbox"><div class="v">2×</div><div class="l">perceived wait = 2× actual — the 1.5× folklore is wrong (Vallyon, ATRF 2009)</div></div>
+    <div class="statbox"><div class="v">−7%/min</div><div class="l">cardiac-arrest survival lost per minute of ALS delay (PLOS One 2022)</div></div>
+    <div class="statbox"><div class="v">+20–30 s</div><div class="l">arterial cost imposed by closely spaced preemption (Nelson &amp; Bullock, TRR 1727)</div></div>
+    <div class="statbox"><div class="v">25–30%</div><div class="l">of metro congestion caused by incidents (FHWA)</div></div>
+  </div>
+  <div class="cols" style="margin-top:10px">
+    <div class="col">
+      <table>
+        <tr><th>Need</th><th>Verified evidence</th></tr>
+        <tr><td>🚶 Amara</td><td>2× perceived wait; compliance collapses after <b>30 s</b> (TfL/NZTA); clearance built for 1.07–1.2 m/s walkers — she walks 0.8 (MUTCD 2009; LaPlante &amp; Kaese)</td></tr>
+        <tr><td>🚚 David</td><td><b>0.4 reliability ratio</b> — the tail costs ~half the mean trip (DfT TAG A1.3)</td></tr>
+        <tr><td>🚌 Chidi</td><td>Wait ≈ 2× in-vehicle value; bunching self-reinforcing (Newell &amp; Potts 1964 → 2024); SCOOT TSP −39% (Southampton)</td></tr>
+        <tr><td>📋 Rosa</td><td>SCATS ships <b>override + audit trail</b> as product features (2022)</td></tr>
+      </table>
+    </div>
+    <div class="col">
+      <table>
+        <tr><th>Need</th><th>Verified evidence</th></tr>
+        <tr><td>🚑 Marcus</td><td>−7%/min survival; EVP field −14–23%; preemption externality +20–30 s (TRR 1727)</td></tr>
+        <tr><td>🚦 Yuki</td><td>SCOOT loses benefits under congestion (1986); Surtrac falls back on sensor failure (CMU)</td></tr>
+        <tr><td>🏫 Maria</td><td><b>6.4M US children</b> ≤250 m of a major road; majority-Black schools 18% more likely (Kingsley 2014)</td></tr>
+        <tr><td>📡 Omar</td><td>Incidents 25–30% of congestion; no universal detection-delay benchmark exists — ours becomes one</td></tr>
+      </table>
+      <div class="card" style="border-color:#6d3a42">
+        <h3 style="margin-top:0;color:#ff8a80">Claim flags — never written as facts</h3>
+        <p class="small">"1.5× perceived wait" · "X% distrust AI" · rider-abandonment % · HBEFA as air quality · sim EV time as lives saved · best-episode reporting · P95 without unfinished trips</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 DEFINE -->
+<section class="slide">
+  <div class="kicker">Stage 2 · Define</div>
+  <h2>The problem, stated human-centred</h2>
+  <div class="grid2">
+    <div class="card" style="border-color:#6d3a42">
+      <h3 style="margin-top:0;color:#ff8a80">✗ Wrong (company-centric)</h3>
+      <p>"We need to reduce average vehicle delay by 15% with five AI agents."</p>
+      <p class="small dim">A team wish — exactly the framing Design Thinking warns against.</p>
+    </div>
+    <div class="card" style="border-color:#2f5d3a">
+      <h3 style="margin-top:0;color:#8ce99a">✓ Right (human-centric)</h3>
+      <p>Urban traffic control is broken when it optimises vehicle throughput and treats people as interchangeable delay. Eight people need a system that <b>sees them, protects them, and explains itself</b> — and stays correct for one second if the radio or the LLM dies.</p>
+    </div>
+  </div>
+  <h3>POV statements — user · need · because</h3>
+  <table>
+    <tr><th>POV</th><th>Statement</th></tr>
+    <tr><td>1</td><td><b>Amara</b> needs enough <i>and</i> tolerable wait, because lights are built for faster walkers.</td></tr>
+    <tr><td>2</td><td><b>David</b> needs tails, because averages lie.</td></tr>
+    <tr><td>3</td><td><b>Chidi</b> needs headways, because speed ≠ service.</td></tr>
+    <tr><td>4</td><td><b>Rosa</b> needs a readable reason, because she is accountable.</td></tr>
+    <tr><td>5</td><td><b>Marcus</b> needs space ahead and recovery, because a green into a full link fails.</td></tr>
+    <tr><td>6</td><td><b>Yuki</b> needs known modes and safe takeover.</td></tr>
+    <tr><td>7</td><td><b>Maria</b> needs local checks — city-wide % explains nothing at her gate.</td></tr>
+    <tr><td>8</td><td><b>Omar</b> needs cause vs data-death separated.</td></tr>
+  </table>
+</section>
+
+<!-- 5 WORST IDEAS -->
+<section class="slide">
+  <div class="kicker">Stage 3 · Ideate — Worst Possible Idea, inverted into requirements</div>
+  <h2>Seven terrible designs that became our shall-requirements</h2>
+  <table>
+    <tr><th>Worst Possible Idea</th><th>What it reveals</th><th>Becomes</th></tr>
+    <tr><td>One central AI owns every light</td><td>Single point of failure</td><td>Decentralised fallback ladder (FR-S4)</td></tr>
+    <tr><td>Prioritise every bus, always</td><td>Starves cross traffic; worsens bunching</td><td>Conditional TSP (FR-A2)</td></tr>
+    <tr><td>Ignore pedestrians when traffic is heavy</td><td>Unsafe by design</td><td>Hard clearance interlock (FR-S1)</td></tr>
+    <tr><td>Optimise average delay only</td><td>Hides starvation in the tails</td><td>P95 / max-wait KPIs (NFR-5)</td></tr>
+    <tr><td>Trust all sensor data equally</td><td>Stale data looks like a crash</td><td>TTL + heartbeats + health (CR-2)</td></tr>
+    <tr><td>Let agents hide costs on others</td><td>Displacement without a record</td><td>Reason codes + civilian-delay log (FR-A3)</td></tr>
+    <tr><td>LLM presses the buttons</td><td>Latency &amp; reliability unfit for 1 s control</td><td>LLM shall not write TraCI (FR-O4)</td></tr>
+  </table>
+  <div class="card">
+    <h3 style="margin-top:0">SCAMPER highlights on the classic traffic light</h3>
+    <p class="small"><b>Substitute:</b> fixed-time as fallback · <b>Combine:</b> pedestrians + transit in one specialist (A3) · <b>Adapt:</b> Max-Pressure as watchdog · <b>Modify:</b> rewards count eco proxies · <b>Put to other use:</b> reason codes for trust · <b>Eliminate:</b> unlimited priority — every request bounded · <b>Reverse:</b> the person already on the crossing outranks the ambulance — <b class="ok">yes</b> (FR-A4)</p>
+  </div>
+</section>
+
+<!-- 6 ARCHITECTURE SVG -->
+<section class="slide">
+  <div class="kicker">The chosen design · role-decomposed hierarchy</div>
+  <h2>System architecture — personas to actuation</h2>
+  <div class="svgwrap" style="flex:1;display:flex;align-items:center;justify-content:center">
+    <svg viewBox="0 0 1100 500" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#4fc3f7"/></marker>
+        <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#66bb6a"/></marker>
+      </defs>
+      <g font-family="Segoe UI" font-size="13" fill="#e8edf6">
+        <!-- personas -->
+        <text x="30" y="24" fill="#9aa7ba" font-size="11" letter-spacing="2">PERSONAS</text>
+        <rect x="30" y="34" width="140" height="46" rx="10" fill="#f48fb133" stroke="#f48fb1"/><text x="100" y="62" text-anchor="middle">🚶 Amara</text>
+        <rect x="185" y="34" width="140" height="46" rx="10" fill="#4fc3f733" stroke="#4fc3f7"/><text x="255" y="62" text-anchor="middle">🚚 David</text>
+        <rect x="340" y="34" width="140" height="46" rx="10" fill="#ba68c833" stroke="#ba68c8"/><text x="410" y="62" text-anchor="middle">🚌 Chidi</text>
+        <rect x="495" y="34" width="140" height="46" rx="10" fill="#ef535033" stroke="#ef5350"/><text x="565" y="62" text-anchor="middle">🚑 Marcus</text>
+        <rect x="650" y="34" width="140" height="46" rx="10" fill="#ffb74d33" stroke="#ffb74d"/><text x="720" y="62" text-anchor="middle">📋 Rosa · 🚦 Yuki</text>
+        <rect x="805" y="34" width="140" height="46" rx="10" fill="#aed58133" stroke="#aed581"/><text x="920" y="62" text-anchor="middle" font-size="12">🏫 Maria · 📡 Omar</text>
+        <!-- agents -->
+        <text x="30" y="126" fill="#9aa7ba" font-size="11" letter-spacing="2">AGENTS (control plane)</text>
+        <rect x="30" y="136" width="195" height="58" rx="12" fill="#1c2333" stroke="#4fc3f7" stroke-width="2"/>
+        <text x="127" y="160" text-anchor="middle" font-weight="bold" fill="#4fc3f7">A1 · Coordinator</text><text x="127" y="178" text-anchor="middle" font-size="11" fill="#9aa7ba">sole actuator · arbitration</text>
+        <rect x="245" y="136" width="185" height="58" rx="12" fill="#1c2333" stroke="#ef5350"/>
+        <text x="337" y="160" text-anchor="middle" font-weight="bold" fill="#ef5350">A2 · Emergency</text><text x="337" y="178" text-anchor="middle" font-size="11" fill="#9aa7ba">corridor ask · pre-clear</text>
+        <rect x="450" y="136" width="195" height="58" rx="12" fill="#1c2333" stroke="#ba68c8"/>
+        <text x="547" y="160" text-anchor="middle" font-weight="bold" fill="#ba68c8">A3 · Ped &amp; Transit</text><text x="547" y="178" text-anchor="middle" font-size="11" fill="#9aa7ba">crossing · conditional bus</text>
+        <rect x="665" y="136" width="185" height="58" rx="12" fill="#1c2333" stroke="#64b5f6"/>
+        <text x="757" y="160" text-anchor="middle" font-weight="bold" fill="#64b5f6">A4 · Lookout</text><text x="757" y="178" text-anchor="middle" font-size="11" fill="#9aa7ba">forecast · alerts · health</text>
+        <rect x="870" y="136" width="185" height="58" rx="12" fill="#1c2333" stroke="#aed581"/>
+        <text x="962" y="160" text-anchor="middle" font-weight="bold" fill="#aed581">A5 · Green Guardian</text><text x="962" y="178" text-anchor="middle" font-size="11" fill="#9aa7ba">eco weights · displacement</text>
+        <!-- arrows agents to bus -->
+        <line x1="127" y1="194" x2="127" y2="234" stroke="#4fc3f7" stroke-width="2" marker-end="url(#ar)"/>
+        <line x1="337" y1="194" x2="337" y2="234" stroke="#ef5350" stroke-width="2" marker-end="url(#ar)"/>
+        <line x1="547" y1="194" x2="547" y2="234" stroke="#ba68c8" stroke-width="2" marker-end="url(#ar)"/>
+        <line x1="757" y1="194" x2="757" y2="234" stroke="#64b5f6" stroke-width="2" marker-end="url(#ar)"/>
+        <line x1="962" y1="194" x2="962" y2="234" stroke="#aed581" stroke-width="2" marker-end="url(#ar)"/>
+        <!-- bus -->
+        <rect x="30" y="240" width="1025" height="52" rx="12" fill="#12324a" stroke="#1e4a6b"/>
+        <text x="540" y="262" text-anchor="middle" font-weight="bold" fill="#4fc3f7">MESSAGE BUS — pub/sub · request/reply · heartbeats · TTL</text>
+        <text x="540" y="280" text-anchor="middle" font-size="11" fill="#9aa7ba">topics: state/ · forecast/ · alerts/ · eco/   |   channel emulator drops &amp; delays messages</text>
+        <line x1="540" y1="292" x2="540" y2="324" stroke="#4fc3f7" stroke-width="2" marker-end="url(#ar)"/>
+        <!-- safety -->
+        <rect x="240" y="330" width="600" height="52" rx="12" fill="#3a1f24" stroke="#8a4a55" stroke-width="2"/>
+        <text x="330" y="352" text-anchor="middle" font-weight="bold" fill="#ff8a80">SAFETY LAYER</text>
+        <text x="330" y="370" text-anchor="middle" font-size="11" fill="#e8b0b0">interlocks · clearance · masked override</text>
+        <text x="720" y="352" text-anchor="middle" font-size="11" fill="#e8b0b0">watchdog ladder:</text>
+        <text x="720" y="370" text-anchor="middle" font-size="11" fill="#e8b0b0">policy → Max-Pressure → actuated → fixed-time</text>
+        <line x1="540" y1="382" x2="540" y2="410" stroke="#66bb6a" stroke-width="2.5" marker-end="url(#ag)"/>
+        <!-- SUMO -->
+        <rect x="390" y="414" width="300" height="50" rx="12" fill="#0f3022" stroke="#2f7a52" stroke-width="2"/>
+        <text x="540" y="436" text-anchor="middle" font-weight="bold" fill="#66bb6a">SUMO (TraCI / libsumo)</text>
+        <text x="540" y="454" text-anchor="middle" font-size="11" fill="#9dd">★ only A1 writes ★</text>
+        <!-- LLM side note -->
+        <rect x="30" y="330" width="240" height="74" rx="12" fill="#1c2333" stroke="#8a6bd8" stroke-dasharray="5 4"/>
+        <text x="150" y="354" text-anchor="middle" font-weight="bold" fill="#8a6bd8">Synapse LLM (dashed)</text>
+        <text x="150" y="372" text-anchor="middle" font-size="10.5" fill="#9aa7ba">RAG + explains the log</text>
+        <text x="150" y="372" text-anchor="middle" font-size="11" fill="#c9a" opacity="0">.</text>
+        <text x="150" y="372" text-anchor="middle" font-size="10" fill="#9aa7ba" opacity="0">.</text>
+        <text x="150" y="392" text-anchor="middle" font-size="11" fill="#ff8a80">never writes TraCI (FR-O4)</text>
+      </g>
+    </svg>
+  </div>
+  <p class="small dim">Three rules: ① safety first — an in-crossing person finishes · ② boss is boss — only A1 pushes TraCI · ③ backup plans — dead radio → local A1; dead policy → ladder.</p>
+</section>
+
+<!-- 7 AGENTS + TIERS -->
+<section class="slide">
+  <div class="kicker">The chosen design</div>
+  <h2>Five specialists. One set of hands on the lights.</h2>
+  <div class="cols">
+    <div class="col" style="flex:1.3">
+      <table>
+        <tr><th>Agent</th><th>Role</th><th>Serves</th><th>Authority</th></tr>
+        <tr><td><b>A1</b> Coordinator — "Light Boss"</td><td>Sole actuator; arbitration; safety</td><td>David, Rosa, Yuki</td><td class="ok"><b>Only A1 writes</b></td></tr>
+        <tr><td><b>A2</b> Emergency — "Siren Helper"</td><td>Authenticated EV request; pre-clearance; recovery</td><td>Marcus</td><td>Asks</td></tr>
+        <tr><td><b>A3</b> Ped/Transit — "Bus &amp; Walker Buddy"</td><td>Crossing guarantees; conditional bus bids</td><td>Amara, Chidi</td><td>Bids</td></tr>
+        <tr><td><b>A4</b> Lookout</td><td>Forecasts; anomaly alerts; data health</td><td>Omar, Yuki</td><td>Alerts + confidence</td></tr>
+        <tr><td><b>A5</b> Green Guardian</td><td>Eco weights; displacement watch (labelled proxies)</td><td>Maria</td><td>Weights</td></tr>
+      </table>
+      <div class="card" style="border-color:#1e4a6b">
+        <h3 style="margin-top:0">Synapse (LLM) — never a sixth writer</h3>
+        <p class="small">RAG-grounded explanations from the reason-coded decision log; AgentSUMO-style what-if stays advisory. <b class="warn">FR-O4:</b> LLM shall not write TraCI · <b>FR-O5:</b> absent LLM ⇒ control unchanged.</p>
+      </div>
+    </div>
+    <div class="col">
+      <h3>Governing priority tiers (FR-A4)</h3>
+      <div class="ladder">
+        <div class="rung r1"><span class="rn">①</span><span class="rlabel">In-crossing pedestrian / safety</span><span class="rwho">Amara — hard interlock</span></div>
+        <div class="rung r2"><span class="rn">②</span><span class="rlabel">Emergency vehicle</span><span class="rwho">Marcus</span></div>
+        <div class="rung r3"><span class="rn">③</span><span class="rlabel">Pedestrian max-wait deadline</span><span class="rwho">Amara</span></div>
+        <div class="rung r4"><span class="rn">④</span><span class="rlabel">Conditional transit</span><span class="rwho">Chidi</span></div>
+        <div class="rung r5"><span class="rn">⑤</span><span class="rlabel">Flow</span><span class="rwho">David</span></div>
+        <div class="rung r6"><span class="rn">⑥</span><span class="rlabel">Eco (soft preference)</span><span class="rwho">Maria</span></div>
+      </div>
+      <p class="small dim" style="margin-top:8px">Within a tier: net-benefit bids; stale/low-confidence discounted; ties go to the older request. <b>The person on the crossing outranks the ambulance</b> — the SCAMPER "Reverse" result.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 REQUIREMENTS + TRACEABILITY -->
+<section class="slide">
+  <div class="kicker">Shall = required · must-not = forbidden</div>
+  <h2>Requirements &amp; traceability — every feature earns its place</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Key shalls</h3>
+      <ul class="small">
+        <li><b>FR-S1</b> No conflicting greens; clearance never truncated</li>
+        <li><b>FR-S2/S3</b> Only A1 commands SUMO; deterministic mask on every action</li>
+        <li><b>FR-S4</b> Watchdog ladder · <b>FR-S5</b> override inside the mask</li>
+        <li><b>FR-A3</b> One-round accept/reject + reason code</li>
+        <li><b>FR-O4/O5</b> LLM never writes TraCI; absent LLM ⇒ control unchanged</li>
+        <li><b>CR-1…6</b> Topics, TTL+heartbeat, board-empty survival, drop tests</li>
+        <li><b>NFR-3</b> Baselines: fixed-time, actuated, Max-Pressure</li>
+        <li><b>NFR-4/5</b> Paired/CRN stats; unfinished trips count as failures in P95</li>
+        <li><b>NFR-6/7</b> HBEFA labelled proxy; git hash + SUMO version per run</li>
+      </ul>
+      <div class="card" style="border-color:#6d3a42;margin-top:8px">
+        <h3 style="margin-top:0;color:#ff8a80">Must-nots</h3>
+        <p class="small">LLM writes TraCI · A2–A5 before Tier 0 · lives-saved claims · "air quality" from HBEFA</p>
+      </div>
+    </div>
+    <div class="col">
+      <table>
+        <tr><th>Need</th><th>Evidence</th><th>Solution</th><th>Req</th><th>Agent</th><th>Test</th></tr>
+        <tr><td>Amara crosses</td><td>2×; 0.8 m/s; 30 s</td><td>Wait-aware + mask</td><td>FR-S1, FR-A2, FR-A4</td><td>A3/A1</td><td>Truncations, waits</td></tr>
+        <tr><td>David P95</td><td>TAG 0.4</td><td>Coordination</td><td>NFR-5</td><td>A1</td><td>P95, stops</td></tr>
+        <tr><td>Chidi regular</td><td>Bunching; 2×</td><td>Conditional TSP</td><td>FR-A2</td><td>A3</td><td>Headway var</td></tr>
+        <tr><td>Rosa why</td><td>SCATS audit</td><td>Reason codes</td><td>FR-A3, FR-U1</td><td>A1</td><td>Coverage</td></tr>
+        <tr><td>Marcus passes</td><td>EVP + externality</td><td>Pre-clear + recover</td><td>FR-A1, FR-A6</td><td>A2</td><td>EV + civilian</td></tr>
+        <tr><td>Yuki controls</td><td>SCOOT/Surtrac</td><td>Ladder + interlock</td><td>FR-S4, FR-S5</td><td>A1</td><td>Fault inject</td></tr>
+        <tr><td>Maria local</td><td>Kingsley; proxy</td><td>Displacement rule</td><td>FR-O2, NFR-6</td><td>A5</td><td>Link map</td></tr>
+        <tr><td>Omar trusts</td><td>FHWA 25–30%</td><td>Residuals + stale</td><td>FR-O1, FR-U3, CR-6</td><td>A4</td><td>FAR by severity</td></tr>
+        <tr><td>Survives death</td><td>Latency lit.</td><td>Board optional</td><td>FR-O5, CR-3</td><td>A1</td><td>Drop messages</td></tr>
+      </table>
+      <p class="small dim">Numeric targets are <b>proposed acceptance criteria</b> tested against baselines — not achieved results.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 BUILD ORDER -->
+<section class="slide">
+  <div class="kicker">Stages 4–5 · Prototype &amp; Test — planned, not yet executed</div>
+  <h2>Build order — what the professor verifies at each step</h2>
+  <div class="steps">
+    <div class="step t0"><div class="dot">0</div><h4>Pin SUMO ≥ 1.24</h4><p>Small net; fixed-time + actuated</p><div class="verify">✓ runs with no learned agent</div></div>
+    <div class="step"><div class="dot">1</div><h4>Tier 0 · wk 6</h4><p>A1 + mask + watchdog <b>vs Max-Pressure</b></p><div class="verify">✓ honest result, incl. negative</div></div>
+    <div class="step"><div class="dot">2</div><h4>Tier 1 · wk 10</h4><p>Bus + A2 A3 A5 + reason codes</p><div class="verify">✓ ablations (leave-one-agent-out)</div></div>
+    <div class="step"><div class="dot">3</div><h4>Tier 2 · wk 12</h4><p>A4 forecasting + message-loss harness</p><div class="verify">✓ degrades, never deadlocks</div></div>
+    <div class="step tadv"><div class="dot">4</div><h4>Optional · Synapse LLM</h4><p>Explainer from the audit log</p><div class="verify">✓ kill LLM → lights unchanged</div></div>
+  </div>
+  <div class="card" style="margin-top:16px;border-color:#2f5d3a">
+    <p class="big" style="font-size:19px;color:#8ce99a">Cut LLM before cutting statistics. Cut features before cutting rigor.</p>
+  </div>
+  <div class="grid2" style="margin-top:8px">
+    <div class="card"><h3 style="margin-top:0">Prototype journeys</h3><ul class="small"><li>① Amara + David + Chidi — everyday corridor</li><li>② Marcus — passage <i>and</i> recovery</li><li>③ Omar/Yuki/Maria — incident or radio loss</li></ul></div>
+    <div class="card"><h3 style="margin-top:0">Evaluation honesty</h3><ul class="small"><li>Pre-registered H1–H8, Holm correction</li><li>Common random numbers; paired stats</li><li>Teleports/standstills = failures; warm-up excluded</li><li>Simulation ≠ deployment evidence</li></ul></div>
+  </div>
+</section>
+
+<!-- 10 CLOSE -->
+<section class="slide center">
+  <div class="kicker">Report-ready close</div>
+  <h2 style="border:none">Stages 1–3, in one breath</h2>
+  <div class="grid2" style="max-width:1050px;grid-template-columns:1fr 1fr 1fr">
+    <div class="card"><h3>① Empathize</h3><p class="small">Eight personas; 33-row verified evidence trail (wait 2×, TAG 0.4, −7%/min ALS, TRR 1727 externality, SCATS audit, school exposure, incident share); claim flags block folklore numbers.</p></div>
+    <div class="card"><h3>② Define</h3><p class="small">Not "cut delay 15%." POV: control that only sees cars fails people. HMW: agents and data for every person — and for the second the radio dies.</p></div>
+    <div class="card"><h3>③ Ideate</h3><p class="small">Brainstorm → Worst Possible Idea → SCAMPER → six architectures. Chosen: five agents + message bus + safety layer + LLM explainer only.</p></div>
+  </div>
+  <p class="dim" style="margin-top:22px;max-width:860px">Next: <b style="color:var(--acc2)">Prototype &amp; Test</b> — Step 0 pins SUMO and runs the classical baselines with no learned agent. Tier 0 answers the first falsifiable question: can a learned A1 honestly beat Max-Pressure? If the answer is no, that negative result is a finding, not a failure.</p>
+  <p class="small dim" style="margin-top:16px">Full document set: System Requirements Book · verified design doc · personas &amp; evidence v2 · design-patterns analysis · project context README</p>
+</section>
+
+<div class="footer">
+  <span>CoFlow-5 · Design Thinking Stages 1–3 · professor showcase</span>
+  <span id="counter">1 / 9</span>
+  <span><button class="navbtn" onclick="go(-1)">◀ Prev</button> <button class="navbtn" onclick="go(1)">Next ▶</button></span>
+</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];let i=0;
+  function show(){slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    document.getElementById('counter').textContent=(i+1)+' / '+slides.length;
+    document.getElementById('prog').style.width=((i+1)/slides.length*100)+'%';}
+  function go(d){i=Math.min(slides.length-1,Math.max(0,i+d));show();}
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')go(1);
+    if(e.key==='ArrowLeft'||e.key==='PageUp')go(-1);
+    if(e.key==='Home'){i=0;show()} if(e.key==='End'){i=slides.length-1;show()}});
+  show();
+</script>
+</body>
+</html>

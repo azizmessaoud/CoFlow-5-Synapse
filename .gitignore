@@ -1,0 +1,33 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+.env
+.env.*
+!.env.example
+
+.DS_Store
+Thumbs.db
+*.log
+
+.superdesign/tmp/
+.scratch/**/_extract/
+*.print.html
+* — Supervisor Presentation_files/
+
+node_modules/
+dist/
+.vite/
+
+# Local installers and large generated binaries
+*.msi
+*.exe
+CoFlow-5_Traffic_Orchestration.pdf
+CoFlow-5_System_Requirements_Book.pdf
+coflow5-personas-journeys (1).md
