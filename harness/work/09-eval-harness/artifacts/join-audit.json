@@ -1,0 +1,30 @@
+{
+  "canonical_artifact_files_scanned": 22,
+  "canonical_manifest_count": 6,
+  "generated_at": "2026-09-22T14:28:35.842905+00:00",
+  "join_keys": [
+    "run_id",
+    "scenario_hash",
+    "event_id",
+    "message_id"
+  ],
+  "orphan_event_references": 0,
+  "orphan_message_references": 0,
+  "orphan_run_references": 0,
+  "orphan_scenario_references": 0,
+  "orphans": {
+    "event_id": [],
+    "message_id": [],
+    "run_id": [],
+    "scenario_hash": []
+  },
+  "pass": true,
+  "references_checked": {
+    "event_id": 165,
+    "message_id": 66,
+    "records": 115,
+    "run_id": 115,
+    "scenario_hash": 115
+  },
+  "schema_version": 1
+}

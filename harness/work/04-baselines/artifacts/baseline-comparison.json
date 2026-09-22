@@ -1,0 +1,143 @@
+{
+  "all_cells_paired": true,
+  "artifact_references": [
+    {
+      "bytes": 8818,
+      "path": "run_kpis.parquet",
+      "rows": 2,
+      "schema_name": "paired_baseline_run_kpi",
+      "schema_version": 1,
+      "sha256": "sha256:7ec2068dcb758bb1bcbc280f669f8bc8356635cf784b0db2d49271d8fcc3d350"
+    },
+    {
+      "bytes": 8958,
+      "path": "baseline_trips.parquet",
+      "rows": 168,
+      "schema_name": "baseline_trip_evidence",
+      "schema_version": 1,
+      "sha256": "sha256:a04c61d554b8ae14c42c285acfe37178fa5fad229df1f65cb9b2a2e066fc7750"
+    },
+    {
+      "bytes": 6182,
+      "path": "safety_events.parquet",
+      "rows": 43,
+      "schema_name": "baseline_safety_event",
+      "schema_version": 1,
+      "sha256": "sha256:53209813f9a470601deba9d33d03ab0e9cec4d0b363113109c32760c1875d3a2"
+    },
+    {
+      "bytes": 5604,
+      "path": "executed_commands.parquet",
+      "rows": 43,
+      "schema_name": "baseline_executed_command",
+      "schema_version": 1,
+      "sha256": "sha256:c23c6ddcad7513b642cf550496f5d2e1015b8758d2d34d8d662d041d42f316e9"
+    },
+    {
+      "bytes": 3794,
+      "path": "baseline-audit.json",
+      "rows": 2,
+      "schema_name": "baseline_reconciliation_audit",
+      "schema_version": 1,
+      "sha256": "sha256:629f3e3c8f0bfdb1af9405f258a793cd6c6dff8a5abdcd25e50f75239397ca05"
+    }
+  ],
+  "claim_boundary": "No learned-controller or specialist value claim is made by this artifact.",
+  "common_evaluation_seeds": [
+    37
+  ],
+  "comparison_scope": "fixed-time-versus-actuated-only",
+  "controller_labels": [
+    "fixed-time",
+    "actuated"
+  ],
+  "failed_run_count": 0,
+  "generated_at": "2026-09-22T14:25:47.858488+00:00",
+  "invalid_run_count": 0,
+  "kpi_artifact": {
+    "bytes": 8818,
+    "path": "run_kpis.parquet",
+    "rows": 2,
+    "schema_name": "paired_baseline_run_kpi",
+    "schema_version": 1,
+    "sha256": "sha256:7ec2068dcb758bb1bcbc280f669f8bc8356635cf784b0db2d49271d8fcc3d350"
+  },
+  "manifest_run_ids": [
+    "e12a7484-3324-496a-98ee-f5044987b82f",
+    "3a03a48e-a0f5-4a0c-8b48-512073a69dba"
+  ],
+  "matched_scenario_hashes": [
+    "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+  ],
+  "metric_definitions": {
+    "completion": "completed trips divided by all 84 planned flow IDs",
+    "failed_invalid": "both labels stay visible; non-completed cells are explicitly excluded from deltas",
+    "standstill": "sum of trip-level seconds with speed below 0.1 m/s",
+    "tail": "P95 and maximum over completed-trip raw duration and waiting-time rows",
+    "teleports": "SUMO starting-teleport events; zero remains visible",
+    "unfinished": "active-at-horizon plus not-departed trip rows"
+  },
+  "metric_deltas": [
+    {
+      "actuated_minus_fixed": {
+        "completion_rate": 0.15476190476190477,
+        "mean_duration_s": -0.9193494299128062,
+        "mean_waiting_time_s": -2.823775989268947,
+        "p95_duration_s": -14.650000000000006,
+        "p95_waiting_time_s": -17.0,
+        "standstill_vehicle_seconds": -356.0,
+        "teleport_events": 0.0,
+        "unfinished_trips": -13.0
+      },
+      "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+      "seed": 37
+    }
+  ],
+  "pair_cells": [
+    {
+      "complete_pair": true,
+      "controller_labels": [
+        "actuated",
+        "fixed-time"
+      ],
+      "exclusion_reason": null,
+      "included_in_metric_comparison": true,
+      "missing_controller_labels": [],
+      "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+      "seed": 37
+    }
+  ],
+  "pairing_keys": [
+    "scenario_hash",
+    "seed"
+  ],
+  "schema_version": 1,
+  "status_counts": {
+    "completed": 2,
+    "failed": 0,
+    "invalid": 0
+  },
+  "unfinished_trip_count": 13,
+  "visible_runs": [
+    {
+      "completion_rate": 0.8452380952380952,
+      "controller": "fixed-time",
+      "failure_reason": null,
+      "run_id": "e12a7484-3324-496a-98ee-f5044987b82f",
+      "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+      "seed": 37,
+      "status": "completed",
+      "unfinished_trips": 13
+    },
+    {
+      "completion_rate": 1.0,
+      "controller": "actuated",
+      "failure_reason": null,
+      "run_id": "3a03a48e-a0f5-4a0c-8b48-512073a69dba",
+      "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+      "seed": 37,
+      "status": "completed",
+      "unfinished_trips": 0
+    }
+  ]
+}

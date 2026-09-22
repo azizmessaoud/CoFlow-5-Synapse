@@ -1,0 +1,83 @@
+{
+  "artifact_references": [
+    {
+      "bytes": 6642,
+      "path": "state.parquet",
+      "rows": 102,
+      "schema_name": "state",
+      "schema_version": 1,
+      "sha256": "sha256:ab42d22ac20a8da8d37d6295248e266ca38f1f11762b7a72f25fc1f7b163f18c"
+    },
+    {
+      "bytes": 4754,
+      "path": "messages.parquet",
+      "rows": 2,
+      "schema_name": "message",
+      "schema_version": 1,
+      "sha256": "sha256:b038628b23828750c428bab3322414035e3c7d698f9b3e28c63de7da37908cf9"
+    },
+    {
+      "bytes": 5439,
+      "path": "decision_events.parquet",
+      "rows": 2,
+      "schema_name": "event",
+      "schema_version": 1,
+      "sha256": "sha256:ab16a025ad1df62dba11bb7d986b3864581e1d799e129549266544b6ac94d507"
+    },
+    {
+      "bytes": 4680,
+      "path": "trips.parquet",
+      "rows": 20,
+      "schema_name": "trip",
+      "schema_version": 1,
+      "sha256": "sha256:66cdc106fe55c83390a69e65e85652e9ad9d11021b2750da9c52dce7f2cb9904"
+    },
+    {
+      "bytes": 4829,
+      "path": "run_kpis.parquet",
+      "rows": 1,
+      "schema_name": "run_kpi",
+      "schema_version": 1,
+      "sha256": "sha256:4f4191c94887cbabd55ba61df699f0d4813de71e051ebdc75a642793e5fe316e"
+    }
+  ],
+  "backend": "traci",
+  "configuration_hash": "sha256:a86d854526c95cac6c167eae52b5266215c314a8a7e8a9b0158c6827a7eb974e",
+  "controller": "scenario-defined-no-actuation",
+  "finalized_at": "2026-09-22T14:25:51.144427+00:00",
+  "immutable": true,
+  "native_command": [
+    "C:\\Users\\dell\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "C:\\Users\\dell\\Downloads\\sumo\\scripts\\generate_evidence_bundle.py"
+  ],
+  "run_id": "d8da5018-7767-4072-8638-99ee6f5cfcc8",
+  "scenario_files": [
+    "scenarios/smoke/smoke.net.xml",
+    "scenarios/smoke/smoke.rou.xml",
+    "scenarios/smoke/smoke.sumocfg"
+  ],
+  "scenario_hash": "sha256:31a2ac8002cd809067f8cf2aef5092fe802df464a601af1dcd4e97a84f125349",
+  "schema_version": 1,
+  "seeds": {
+    "sumo": 20260922
+  },
+  "source_revision": "bcc9d0b57d6cbc05b7b0c95af0835e49285cdb03",
+  "status": "completed",
+  "timings": {
+    "finished_at": "2026-09-22T14:25:51.057705+00:00",
+    "simulation_begin": 0.0,
+    "simulation_end": 102.0,
+    "simulation_steps": 102,
+    "started_at": "2026-09-22T14:25:50.120928+00:00",
+    "wall_seconds": 0.9364946999994572
+  },
+  "versions": {
+    "coflow5": "0.1.0",
+    "duckdb": "1.3.2",
+    "pyarrow": "21.0.0",
+    "pydantic": "2.11.7",
+    "python": "3.11.9",
+    "sumo": "1.27.1",
+    "traci": "1.27.1"
+  }
+}

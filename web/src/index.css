@@ -1,0 +1,33 @@
+body {
+  font-family: Georgia, serif;
+  margin: 0;
+  background: #111;
+  color: #f4f1ea;
+}
+
+main {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.flag {
+  background: #3b2f1a;
+  border: 1px solid #c4a35a;
+  padding: 0.75rem 1rem;
+}
+
+.error {
+  color: #ffb4b4;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+pre {
+  overflow: auto;
+  background: #1c1c1c;
+  padding: 1rem;
+}

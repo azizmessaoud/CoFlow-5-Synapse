@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+  <vType id="passenger" accel="2.6" decel="4.5" sigma="0" length="5" minGap="2.5" maxSpeed="13.9"/>
+  <route id="north-south" edges="N_in S_out"/>
+  <route id="south-north" edges="S_in N_out"/>
+  <route id="east-west" edges="E_in W_out"/>
+  <route id="west-east" edges="W_in E_out"/>
+  <flow id="north-demand" type="passenger" route="north-south" begin="0" end="60" number="30" departLane="best" departSpeed="max"/>
+  <flow id="south-demand" type="passenger" route="south-north" begin="0.5" end="60.5" number="30" departLane="best" departSpeed="max"/>
+  <flow id="east-demand" type="passenger" route="east-west" begin="1" end="61" number="12" departLane="best" departSpeed="max"/>
+  <flow id="west-demand" type="passenger" route="west-east" begin="1.5" end="61.5" number="12" departLane="best" departSpeed="max"/>
+</routes>

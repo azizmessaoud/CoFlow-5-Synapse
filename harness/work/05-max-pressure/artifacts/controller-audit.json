@@ -1,0 +1,97 @@
+{
+  "accepted_command_count": 120,
+  "action_join_errors": 0,
+  "actual_traci_execution": true,
+  "backend": "traci",
+  "claim_boundary": "No RL result, lives-saved claim, or measured-air-quality claim is made.",
+  "considered_message_ids": [
+    "row05-advisory-0001"
+  ],
+  "controller": "cooperative-max-pressure",
+  "controller_required": true,
+  "decision_count": 120,
+  "dqn_dependency": false,
+  "duplicate_event_ids": 0,
+  "event_sets_match": true,
+  "executor_readback_verified": true,
+  "first_recovery_target_for_optional_dqn": "cooperative-max-pressure",
+  "identity_errors": 0,
+  "maximum_advisory_bonus": 3.0,
+  "message_catalog": [
+    {
+      "expires_at": 12.0,
+      "message_id": "row05-advisory-0001",
+      "requested_phase_id": "NS_YELLOW",
+      "run_id": "9c24bd59-54f7-4ce1-8269-aa58388bc473",
+      "signal_id": "J0",
+      "source": "A2_EMERGENCY",
+      "valid_from": 6.0,
+      "weight": 1.0
+    }
+  ],
+  "observation_count": 120,
+  "observation_join_errors": 0,
+  "one_writer_per_signal": true,
+  "python_version": "3.11.9",
+  "reason_codes": [
+    "MAX_PRESSURE_LOCAL_ONLY",
+    "MAX_PRESSURE_WITH_ADVISORY"
+  ],
+  "recovery_ladder": [
+    "cooperative-max-pressure",
+    "actuated",
+    "fixed-time"
+  ],
+  "reinforcement_learning_required": false,
+  "run_id": "9c24bd59-54f7-4ce1-8269-aa58388bc473",
+  "runs_with_advisory_messages": true,
+  "runs_without_advisory_messages": true,
+  "safety_event_count": 120,
+  "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+  "schema_version": 1,
+  "score_inputs": [
+    "local_upstream_queue",
+    "local_downstream_queue",
+    "current_phase_timing",
+    "downstream_capacity",
+    "bounded_valid_advisory_requests"
+  ],
+  "signal_owner": "A1_FLOW",
+  "source_hashes": {
+    "scripts/generate_max_pressure_artifacts.py": "sha256:87a06a026602be1b06c2e5963a0cc816c7a869503ab8e0a9dd00d13479858c19",
+    "src/coflow5/control/a1_controller.py": "sha256:54eaac80d2469756a8107140202912a24a613c6fd3f0f7d4be370af7f7268aca",
+    "src/coflow5/control/max_pressure.py": "sha256:82cfc293364be510f600a8cbf6edcf80f43efdcbedc0d7c6b5fe0c39116a8ded",
+    "src/coflow5/control/safety.py": "sha256:3cdb3a2a93cf21610afb46318ff84f354bc41f4600c3d1542b8f30a2389188fb",
+    "src/coflow5/evidence/max_pressure_artifacts.py": "sha256:eb514d5954378a22ff6d6d3e52a67f6757fe2aa2d99f82645b3cee4612504201",
+    "src/coflow5/evidence/schemas.py": "sha256:631438994f1cf80be4d25b1d8c4ea90d78b39e3a23f70f3d59f5de81ac0343e3",
+    "src/coflow5/sumo_adapter/max_pressure_runner.py": "sha256:d7a292e786d1e7ca68c43b7388cafb76dc67a08129015f868c7501773abe41ae"
+  },
+  "submission_path": [
+    "CooperativeMaxPressureController",
+    "A1FlowController",
+    "DeterministicSafetyMask",
+    "SignalExecutor"
+  ],
+  "sumo_command": [
+    "C:\\Program Files (x86)\\Eclipse\\Sumo\\bin\\sumo.EXE",
+    "-c",
+    "C:\\Users\\dell\\Downloads\\sumo\\scenarios\\max-pressure\\max-pressure.sumocfg",
+    "--seed",
+    "37",
+    "--no-step-log",
+    "true",
+    "--duration-log.disable",
+    "true",
+    "--time-to-teleport",
+    "-1"
+  ],
+  "sumo_version": "1.27.1",
+  "torch_dependency": false,
+  "traci_version": "SUMO 1.27.1",
+  "unresolved_message_ids": [],
+  "valid": true,
+  "writer_count_by_signal": {
+    "J0": 1
+  },
+  "wrong_run_message_ids": []
+}

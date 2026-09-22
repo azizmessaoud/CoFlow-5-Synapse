@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+  <vType id="civilian" accel="2.6" decel="4.5" sigma="0" length="5" minGap="2.5" maxSpeed="13.9"/>
+  <vType id="emergency" vClass="emergency" guiShape="emergency" color="1,0,0" accel="3.0" decel="5.0" sigma="0" length="5" minGap="2.5" maxSpeed="13.9"/>
+  <vType id="transit" vClass="bus" guiShape="bus" color="0,0,1" accel="2.0" decel="4.5" sigma="0" length="10" minGap="3" maxSpeed="13.9"/>
+  <route id="north-south" edges="N_in S_out"/>
+  <route id="south-north" edges="S_in N_out"/>
+  <route id="east-west" edges="E_in W_out"/>
+  <route id="west-east" edges="W_in E_out"/>
+  <flow id="civilian-north" type="civilian" route="north-south" begin="0" end="60" number="12" departSpeed="max"/>
+  <flow id="civilian-south" type="civilian" route="south-north" begin="0.5" end="60.5" number="12" departSpeed="max"/>
+  <flow id="civilian-east" type="civilian" route="east-west" begin="1" end="61" number="8" departSpeed="max"/>
+  <flow id="civilian-west" type="civilian" route="west-east" begin="1.5" end="61.5" number="8" departSpeed="max"/>
+  <vehicle id="bus-early" type="transit" route="west-east" depart="2" departSpeed="max"/>
+  <vehicle id="emergency-conflict" type="emergency" route="east-west" depart="4" departSpeed="max"/>
+  <vehicle id="emergency-alpha" type="emergency" route="north-south" depart="6" departSpeed="max"/>
+  <vehicle id="emergency-beta" type="emergency" route="north-south" depart="7" departSpeed="max"/>
+  <vehicle id="bus-late" type="transit" route="east-west" depart="16" departSpeed="max"/>
+  <vehicle id="bus-following" type="transit" route="east-west" depart="36" departSpeed="max"/>
+</routes>

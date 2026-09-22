@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<additional>
+  <tlLogic id="J0" type="static" programID="a1-baseline" offset="0">
+    <phase duration="10000" state="GrGr"/>
+  </tlLogic>
+</additional>

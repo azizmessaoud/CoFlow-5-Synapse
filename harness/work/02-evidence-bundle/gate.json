@@ -1,0 +1,54 @@
+{
+  "id": "02-evidence-bundle",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:e61d1842a96acf60f6022d1a5d9f08a77675402d6bc4210c4911226bf53c3fea",
+  "testsRun": [
+    {
+      "command": "python -m pytest tests/acceptance/test_evidence_bundle.py -q",
+      "exitCode": 0,
+      "output": "4 passed in 3.14s"
+    },
+    {
+      "command": "python -m pytest tests/contracts/test_evidence_joins.py -q",
+      "exitCode": 0,
+      "output": "6 passed in 1.14s"
+    },
+    {
+      "command": "python -m pytest tests/architecture/test_forbidden_imports.py -q",
+      "exitCode": 0,
+      "output": "5 passed in 0.21s"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/run_manifest.json",
+    "artifacts/state.parquet",
+    "artifacts/messages.parquet",
+    "artifacts/decision_events.parquet",
+    "artifacts/trips.parquet",
+    "artifacts/run_kpis.parquet",
+    "artifacts/join-audit.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "joinChecks": {
+    "pass": true,
+    "missing": 0,
+    "duplicate": 0,
+    "crossScenario": 0,
+    "orphan": 0
+  },
+  "forbiddenImportChecks": {
+    "pass": true,
+    "violations": 0,
+    "libsumoImportedAtModuleLoad": false,
+    "evidenceSignalActuationImports": 0,
+    "mlflowCanonicalIdentityImports": 0
+  },
+  "schemaChecks": {
+    "pass": true,
+    "parquetSchemasChecked": 5,
+    "schemaErrors": 0,
+    "artifactMissing": 0,
+    "artifactCorrupt": 0
+  }
+}

@@ -18,6 +18,8 @@ Full narrative with requirements IDs: `CoFlow-5_System_Requirements_Book.md`.
 
 Kiro must keep this sequence. Do not skip Empathize/Define/Ideate when enhancing specs. Do not treat Prototype as already complete.
 
+**Proxy validation:** a team or professor walkthrough of research-informed User Personas is not an interview. 23 September 2026 is labelled proxy validation.
+
 ---
 
 ## Stage 1 — Empathize

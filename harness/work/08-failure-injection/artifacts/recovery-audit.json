@@ -1,0 +1,48 @@
+{
+  "action_sequence_hashes_equal": true,
+  "all_fault_classes_exercised": true,
+  "all_fault_transition_event_ids_unique": true,
+  "fault_classes": [
+    "message_absence",
+    "message_loss_drop",
+    "message_delay",
+    "message_duplication",
+    "message_expiry",
+    "malformed_payload",
+    "message_contradiction",
+    "adviser_silence"
+  ],
+  "fault_event_ids_unique": true,
+  "hidden_exception_swallowing": false,
+  "illegal_decision_count": 0,
+  "join_errors": 0,
+  "legal_local_decision_count": 8,
+  "message_faults_retain_message_id": true,
+  "message_id_not_applicable_classes": [
+    "message_absence",
+    "adviser_silence"
+  ],
+  "observed_required_transitions": [
+    [
+      "COOPERATIVE_MAX_PRESSURE",
+      "ACTUATED"
+    ],
+    [
+      "ACTUATED",
+      "FIXED_TIME"
+    ]
+  ],
+  "optional_dqn_dependency": false,
+  "required_recovery_ladder": [
+    "COOPERATIVE_MAX_PRESSURE",
+    "ACTUATED",
+    "FIXED_TIME"
+  ],
+  "run_id": "92427055-50cc-4c86-8786-cbc512cd4a1a",
+  "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f",
+  "schema_version": 1,
+  "transition_event_ids_unique": true,
+  "unexpected_transitions": [],
+  "valid": true,
+  "visible_failures": true
+}

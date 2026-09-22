@@ -1,13 +1,13 @@
 id	kind	status	contract
-01-smoke-test	control	todo	Pin SUMO and Python 3.11; measure throughput
-02-evidence-bundle	integration	todo	Run manifest + Parquet + DuckDB join on run_id
-03-safety-mask	control	todo	One writer; illegal actions rejected
-04-baselines	eval	todo	Fixed-time and actuated on matched seeds
-05-max-pressure	control	todo	Cooperative A1 required controller
-06-message-board	integration	todo	TTL, idempotency, A1 continues if empty
-07-a2-a3	control	todo	Rule-based emergency and multimodal requests
-08-failure-injection	eval	todo	Drop messages; fail controller; kill Synapse
-09-eval-harness	eval	todo	Ablations, unfinished trips, no best episode
+01-smoke-test	control	blocked	Pin SUMO and Python 3.11; measure throughput
+02-evidence-bundle	integration	gated	Run manifest + Parquet + DuckDB join on run_id
+03-safety-mask	control	gated	One writer; illegal actions rejected
+04-baselines	eval	gated	Fixed-time and actuated on matched seeds
+05-max-pressure	control	gated	Cooperative A1 required controller
+06-message-board	integration	gated	TTL, idempotency, A1 continues if empty
+07-a2-a3	control	gated	Rule-based emergency and multimodal requests
+08-failure-injection	eval	gated	Drop messages; fail controller; kill Synapse
+09-eval-harness	eval	gated	Ablations, unfinished trips, no best episode
 10-a4-a5	control	todo	Forecast ladder then eco advice
 11-api	product	todo	FastAPI over evidence bundle
 12-synapse-template	product	todo	Retrieve + template explain; no TraCI

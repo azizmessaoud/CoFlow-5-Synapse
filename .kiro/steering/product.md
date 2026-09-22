@@ -65,6 +65,7 @@ Optional DQN, if enabled later, fails into Max-Pressure first.
 ## Honesty rules
 
 - Personas are research-informed, not interview-validated.
+- A team walkthrough is **proxy validation**, not a stakeholder interview.
 - Simulation is not deployment evidence.
 - HBEFA outputs are emission proxies, not measured air quality.
 - Simulated emergency time is not lives saved.
@@ -82,5 +83,7 @@ Canonical spec files:
 When enhancing specs, keep ADR-0001. Do not move the LLM into the Control plane. Do not make DQN required. Prefer stronger acceptance tests, clearer interfaces, and smaller implementation tasks over new agents or frameworks.
 
 Copy-paste prompt for this work: `.kiro/prompts/enhance-specs-trajectory.md`.
+
+Later software deploy is a read-only FastAPI/UI over frozen evidence. Docker is not the native smoke-test path. MLflow may index the run manifest later; it must not mint a second `run_id`. See `docs/adr/0003-cicd-devops-mlops.md`.
 
 Harness router: `AGENT_GUIDE.md`. Output style: `.kiro/steering/output-style.md`.

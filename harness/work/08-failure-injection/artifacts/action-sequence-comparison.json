@@ -1,0 +1,294 @@
+{
+  "control_inputs_hash": "sha256:21687b77e72ca218d66a39e8d94074fb9c08231f39437d2cbecb0f2eb261c169",
+  "hashes_equal": true,
+  "observer_failures_visible": true,
+  "run_id": "92427055-50cc-4c86-8786-cbc512cd4a1a",
+  "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f",
+  "schema_version": 1,
+  "variants": {
+    "hosted_provider_unavailable": {
+      "action_sequence": [
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN"
+      ],
+      "action_sequence_hash": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
+      "observation_receipts": [
+        {
+          "event_id": "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
+          "explanation_status": "failed-visible",
+          "failure_detail": "hosted provider unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "30c71f37-cf6b-56d9-8676-7ba25db11abf",
+          "explanation_status": "failed-visible",
+          "failure_detail": "hosted provider unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "141f33a8-414c-5b76-b480-ed872f27cf5e",
+          "explanation_status": "failed-visible",
+          "failure_detail": "hosted provider unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a",
+          "explanation_status": "failed-visible",
+          "failure_detail": "hosted provider unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "7a222957-6ae3-5228-a227-ddfc0465375e",
+          "explanation_status": "failed-visible",
+          "failure_detail": "hosted provider unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
+          "explanation_status": "failed-visible",
+          "failure_detail": "hosted provider unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
+          "explanation_status": "failed-visible",
+          "failure_detail": "hosted provider unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "22e29911-c7fc-5ba9-be63-26ead98987bd",
+          "explanation_status": "failed-visible",
+          "failure_detail": "hosted provider unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        }
+      ]
+    },
+    "retrieval_unavailable": {
+      "action_sequence": [
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN"
+      ],
+      "action_sequence_hash": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
+      "observation_receipts": [
+        {
+          "event_id": "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
+          "explanation_status": "failed-visible",
+          "failure_detail": "retrieval unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "30c71f37-cf6b-56d9-8676-7ba25db11abf",
+          "explanation_status": "failed-visible",
+          "failure_detail": "retrieval unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "141f33a8-414c-5b76-b480-ed872f27cf5e",
+          "explanation_status": "failed-visible",
+          "failure_detail": "retrieval unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a",
+          "explanation_status": "failed-visible",
+          "failure_detail": "retrieval unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "7a222957-6ae3-5228-a227-ddfc0465375e",
+          "explanation_status": "failed-visible",
+          "failure_detail": "retrieval unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
+          "explanation_status": "failed-visible",
+          "failure_detail": "retrieval unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
+          "explanation_status": "failed-visible",
+          "failure_detail": "retrieval unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        },
+        {
+          "event_id": "22e29911-c7fc-5ba9-be63-26ead98987bd",
+          "explanation_status": "failed-visible",
+          "failure_detail": "retrieval unavailable",
+          "failure_type": "RuntimeError",
+          "observer_available": false
+        }
+      ]
+    },
+    "synapse_available": {
+      "action_sequence": [
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN"
+      ],
+      "action_sequence_hash": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
+      "observation_receipts": [
+        {
+          "event_id": "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
+          "explanation_status": "template-explanation-recorded",
+          "failure_detail": null,
+          "failure_type": null,
+          "observer_available": true
+        },
+        {
+          "event_id": "30c71f37-cf6b-56d9-8676-7ba25db11abf",
+          "explanation_status": "template-explanation-recorded",
+          "failure_detail": null,
+          "failure_type": null,
+          "observer_available": true
+        },
+        {
+          "event_id": "141f33a8-414c-5b76-b480-ed872f27cf5e",
+          "explanation_status": "template-explanation-recorded",
+          "failure_detail": null,
+          "failure_type": null,
+          "observer_available": true
+        },
+        {
+          "event_id": "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a",
+          "explanation_status": "template-explanation-recorded",
+          "failure_detail": null,
+          "failure_type": null,
+          "observer_available": true
+        },
+        {
+          "event_id": "7a222957-6ae3-5228-a227-ddfc0465375e",
+          "explanation_status": "template-explanation-recorded",
+          "failure_detail": null,
+          "failure_type": null,
+          "observer_available": true
+        },
+        {
+          "event_id": "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
+          "explanation_status": "template-explanation-recorded",
+          "failure_detail": null,
+          "failure_type": null,
+          "observer_available": true
+        },
+        {
+          "event_id": "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
+          "explanation_status": "template-explanation-recorded",
+          "failure_detail": null,
+          "failure_type": null,
+          "observer_available": true
+        },
+        {
+          "event_id": "22e29911-c7fc-5ba9-be63-26ead98987bd",
+          "explanation_status": "template-explanation-recorded",
+          "failure_detail": null,
+          "failure_type": null,
+          "observer_available": true
+        }
+      ]
+    },
+    "synapse_killed": {
+      "action_sequence": [
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN",
+        "NS_GREEN"
+      ],
+      "action_sequence_hash": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
+      "observation_receipts": [
+        {
+          "event_id": "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
+          "explanation_status": "unavailable",
+          "failure_detail": "Synapse observer is killed or not configured",
+          "failure_type": "ObserverUnavailable",
+          "observer_available": false
+        },
+        {
+          "event_id": "30c71f37-cf6b-56d9-8676-7ba25db11abf",
+          "explanation_status": "unavailable",
+          "failure_detail": "Synapse observer is killed or not configured",
+          "failure_type": "ObserverUnavailable",
+          "observer_available": false
+        },
+        {
+          "event_id": "141f33a8-414c-5b76-b480-ed872f27cf5e",
+          "explanation_status": "unavailable",
+          "failure_detail": "Synapse observer is killed or not configured",
+          "failure_type": "ObserverUnavailable",
+          "observer_available": false
+        },
+        {
+          "event_id": "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a",
+          "explanation_status": "unavailable",
+          "failure_detail": "Synapse observer is killed or not configured",
+          "failure_type": "ObserverUnavailable",
+          "observer_available": false
+        },
+        {
+          "event_id": "7a222957-6ae3-5228-a227-ddfc0465375e",
+          "explanation_status": "unavailable",
+          "failure_detail": "Synapse observer is killed or not configured",
+          "failure_type": "ObserverUnavailable",
+          "observer_available": false
+        },
+        {
+          "event_id": "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
+          "explanation_status": "unavailable",
+          "failure_detail": "Synapse observer is killed or not configured",
+          "failure_type": "ObserverUnavailable",
+          "observer_available": false
+        },
+        {
+          "event_id": "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
+          "explanation_status": "unavailable",
+          "failure_detail": "Synapse observer is killed or not configured",
+          "failure_type": "ObserverUnavailable",
+          "observer_available": false
+        },
+        {
+          "event_id": "22e29911-c7fc-5ba9-be63-26ead98987bd",
+          "explanation_status": "unavailable",
+          "failure_detail": "Synapse observer is killed or not configured",
+          "failure_type": "ObserverUnavailable",
+          "observer_available": false
+        }
+      ]
+    }
+  }
+}

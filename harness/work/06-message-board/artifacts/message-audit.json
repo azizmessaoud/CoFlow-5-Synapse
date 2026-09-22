@@ -1,0 +1,66 @@
+{
+  "a1_signal_owner": "A1_FLOW",
+  "capacity": 16,
+  "claim_boundary": "No lives-saved or measured-air-quality claim is made.",
+  "considered_message_ids": [
+    "row06-request-accepted"
+  ],
+  "controller": "cooperative-max-pressure",
+  "decision_count": 120,
+  "disposition_counts": {
+    "accepted": 2,
+    "contradictory": 1,
+    "duplicate": 1,
+    "empty": 1,
+    "expired": 1,
+    "malformed": 1,
+    "out_of_order": 2,
+    "unavailable": 1,
+    "unsupported": 1
+  },
+  "duplicate_arbitration_count": 0,
+  "empty_board_legal_decision_count": 113,
+  "empty_board_read_disposition": "empty",
+  "external_broker_required": false,
+  "final_storage_size": 1,
+  "future_publication_rejected_as_out_of_order": true,
+  "identity_errors": 0,
+  "kafka_required": false,
+  "message_row_count": 15,
+  "metadata_bounded": true,
+  "metadata_capacity": 64,
+  "metadata_sizes": {
+    "correlations": 1,
+    "exact_id_fingerprints": 6,
+    "latest_stream_times": 1
+  },
+  "one_writer_per_signal": true,
+  "publication_count": 7,
+  "recovery_ladder": [
+    "cooperative-max-pressure",
+    "actuated",
+    "fixed-time"
+  ],
+  "redis_required": false,
+  "required_dispositions": [
+    "duplicate",
+    "expired",
+    "malformed",
+    "unsupported",
+    "contradictory",
+    "out_of_order",
+    "unavailable",
+    "empty"
+  ],
+  "run_id": "cef7f070-a25c-48e7-9261-64bd9372705d",
+  "scenario_hash": "sha256:cc12cbd9544d36085d72fc7fd44a2f353f22a87f6908d965419eb6cd1882f85f",
+  "schema_version": 1,
+  "transport": "in-process",
+  "transport_interface": "MessageTransport",
+  "unavailable_board_continues_local_max_pressure": true,
+  "unavailable_board_read_disposition": "unavailable",
+  "unique_arbitration_message_ids": 1,
+  "unresolved_considered_message_ids": [],
+  "unresolved_disposition_message_ids": [],
+  "valid": true
+}

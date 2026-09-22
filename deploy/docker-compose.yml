@@ -1,0 +1,19 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/api.Dockerfile
+    environment:
+      EVIDENCE_ROOT: /evidence
+    volumes:
+      - ./evidence:/evidence:ro
+    ports:
+      - "8000:8000"
+  ui:
+    build:
+      context: ..
+      dockerfile: deploy/ui.Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - api

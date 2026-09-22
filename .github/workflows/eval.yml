@@ -1,0 +1,27 @@
+name: SUMO evaluation
+
+# Named eval/fault tests after rows 08–09. Needs a runner that can import libsumo.
+# Set repository variable SUMO_RUNNER=true to enable the nightly job.
+# Set SUMO_RUNS_ON to a self-hosted Windows label when one exists.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"
+
+jobs:
+  eval:
+    if: github.event_name == 'workflow_dispatch' || vars.SUMO_RUNNER == 'true'
+    runs-on: ${{ vars.SUMO_RUNS_ON || 'windows-latest' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Require native libsumo
+        run: python scripts/require_libsumo.py
+      - name: Install smoke extras
+        run: python -m pip install -r requirements-smoke.txt
+      - name: Run named row-01 tests when unblocked
+        run: python -m pytest tests/acceptance/test_native_windows_smoke.py tests/architecture -q
+      - name: Fail if best-episode headline appears
+        run: python scripts/check_eval_claim_flags.py

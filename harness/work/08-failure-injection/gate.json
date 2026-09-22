@@ -1,0 +1,53 @@
+{
+  "id": "08-failure-injection",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_failure_injection.py -q",
+      "exitCode": 0,
+      "output": "4 passed in 0.77s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_recovery_ladder.py -q",
+      "exitCode": 0,
+      "output": "3 passed in 0.90s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_synapse_non_actuation.py -q",
+      "exitCode": 0,
+      "output": "3 passed in 1.00s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q",
+      "exitCode": 0,
+      "output": "8 passed in 0.91s"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/run_manifest.json",
+    "artifacts/faults.parquet",
+    "artifacts/messages.parquet",
+    "artifacts/decision_events.parquet",
+    "artifacts/recovery-audit.json",
+    "artifacts/action-sequence-comparison.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "recoveryChecks": {
+    "pass": true,
+    "requiredLadder": [
+      "COOPERATIVE_MAX_PRESSURE",
+      "ACTUATED",
+      "FIXED_TIME"
+    ],
+    "unexpectedTransitions": 0,
+    "illegalDecisions": 0,
+    "hiddenExceptionSwallowing": false
+  },
+  "synapseChecks": {
+    "pass": true,
+    "actionSequenceHashesEqual": true,
+    "observerFailuresVisible": true
+  }
+}

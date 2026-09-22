@@ -1,0 +1,31 @@
+{
+  "artifact_checks": {
+    "corrupt": 0,
+    "missing": 0
+  },
+  "audited_at": "2026-09-22T14:25:51.269116+00:00",
+  "bundle": ".",
+  "errors": [],
+  "join_checks": {
+    "cross_scenario": 0,
+    "duplicate": 0,
+    "missing": 0,
+    "orphan": 0
+  },
+  "manifest_status": "completed",
+  "row_counts": {
+    "decision_events.parquet": 2,
+    "messages.parquet": 2,
+    "run_kpis.parquet": 1,
+    "state.parquet": 102,
+    "trips.parquet": 20
+  },
+  "run_id": "d8da5018-7767-4072-8638-99ee6f5cfcc8",
+  "scenario_hash": "sha256:31a2ac8002cd809067f8cf2aef5092fe802df464a601af1dcd4e97a84f125349",
+  "schema_checks": {
+    "checked": 5,
+    "errors": 0
+  },
+  "schema_version": 1,
+  "valid": true
+}

@@ -1,0 +1,88 @@
+{
+  "id": "03-safety-mask",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:ecd4be71e18dd2402dc383bd93489dfe27525edb1463fddc7d0d57e6f2a08485",
+  "testsRun": [
+    {
+      "command": "python -m pytest tests/contracts/test_safety_mask.py -q",
+      "exitCode": 0,
+      "output": "10 passed in 1.79s"
+    },
+    {
+      "command": "python -m pytest tests/properties/test_signal_safety.py -q",
+      "exitCode": 0,
+      "output": "8 passed in 5.15s"
+    },
+    {
+      "command": "python -m pytest tests/architecture/test_forbidden_imports.py -q",
+      "exitCode": 0,
+      "output": "8 passed in 1.95s"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/run_manifest.json",
+    "artifacts/decision_events.parquet",
+    "artifacts/executed_commands.parquet",
+    "artifacts/safety-audit.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "safetyAudit": {
+    "pass": true,
+    "actualTraCIExecution": true,
+    "signalCount": 1,
+    "writersPerSignal": {"J0": 1},
+    "constructibleWriterExposed": false,
+    "duplicateProposalWrites": 0,
+    "controlledLinkMappingValidated": true,
+    "physicalFoePairs": 4,
+    "proposalCount": 14,
+    "eventCount": 14,
+    "acceptedCount": 6,
+    "rejectedCount": 8,
+    "executedCommandCount": 6,
+    "illegalExecutedActions": 0,
+    "physicallyConflictingExecutedActions": 0,
+    "rejectedExecutedActions": 0
+  },
+  "joinChecks": {
+    "pass": true,
+    "missingIdentity": 0,
+    "duplicateEventIds": 0,
+    "acceptedWithoutCommand": 0,
+    "commandWithoutAcceptedEvent": 0,
+    "crossScenario": 0
+  },
+  "forbiddenImportChecks": {
+    "pass": true,
+    "violations": 0,
+    "rawSignalWriteSites": 1,
+    "rawSignalWriteSitesOutsideExecutor": 0,
+    "libsumoImportedAtModuleLoad": false
+  },
+  "schemaChecks": {
+    "pass": true,
+    "parquetSchemasChecked": 2,
+    "schemaErrors": 0,
+    "artifactMissing": 0,
+    "artifactCorrupt": 0
+  },
+  "propertyChecks": {
+    "pass": true,
+    "hypothesisVersion": "6.138.4",
+    "minimumGreenBoundaryCovered": true,
+    "yellowBoundaryCovered": true,
+    "allRedBoundaryCovered": true,
+    "pedestrianClearanceBoundaryCovered": true,
+    "conflictingGreenInvariantCovered": true,
+    "nonFiniteInputsFailClosed": true
+  },
+  "runtimeChecks": {
+    "python": "3.11.9",
+    "sumo": "1.27.1",
+    "traci": "1.27.1",
+    "backend": "traci",
+    "run_id": "4ea4b16d-7452-4eb7-b6c8-09594827cb26",
+    "scenario_hash": "sha256:561b4f09271cdbc6164e33d0e20bd393909469a621f1b7800c9cad3f4fac497a"
+  }
+}

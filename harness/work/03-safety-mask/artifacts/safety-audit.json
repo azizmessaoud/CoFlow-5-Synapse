@@ -1,0 +1,85 @@
+{
+  "accepted_count": 6,
+  "accepted_without_command": 0,
+  "actual_traci_execution": true,
+  "backend": "traci",
+  "command_without_accepted_event": 0,
+  "conflicting_link_pairs": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "controlled_link_mapping_validated": true,
+  "controlled_links": [
+    [
+      "N_in_0",
+      "S_out_0",
+      ":J0_0_0"
+    ],
+    [
+      "E_in_0",
+      "W_out_0",
+      ":J0_1_0"
+    ],
+    [
+      "S_in_0",
+      "N_out_0",
+      ":J0_2_0"
+    ],
+    [
+      "W_in_0",
+      "E_out_0",
+      ":J0_3_0"
+    ]
+  ],
+  "duplicate_event_ids": 0,
+  "event_count": 14,
+  "executed_command_count": 6,
+  "final_signal_state": "GrGr",
+  "human_override_events": 3,
+  "identity_errors": 0,
+  "illegal_executed_actions": 0,
+  "initial_signal_state": "GrGr",
+  "one_writer_per_signal": true,
+  "physical_conflict_details": [],
+  "physically_conflicting_executed_actions": 0,
+  "proposal_count": 14,
+  "python_version": "3.11.9",
+  "reason_codes": [
+    "ACCEPTED",
+    "REJECTED_ALL_RED_MINIMUM",
+    "REJECTED_CONFLICTING_GREENS",
+    "REJECTED_MINIMUM_GREEN",
+    "REJECTED_PEDESTRIAN_CLEARANCE",
+    "REJECTED_YELLOW_MINIMUM",
+    "REJECTED_YELLOW_REQUIRED"
+  ],
+  "rejected_count": 8,
+  "rejected_executed_event_ids": [],
+  "run_id": "4ea4b16d-7452-4eb7-b6c8-09594827cb26",
+  "scenario_hash": "sha256:561b4f09271cdbc6164e33d0e20bd393909469a621f1b7800c9cad3f4fac497a",
+  "schema_version": 1,
+  "signal_ids": [
+    "J0"
+  ],
+  "sole_writer_component": "A1-owned adapter SignalExecutor",
+  "sumo_version": "1.27.1",
+  "traci_version": "SUMO 1.27.1",
+  "valid": true,
+  "writer_count_by_signal": {
+    "J0": 1
+  }
+}

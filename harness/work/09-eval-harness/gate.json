@@ -1,0 +1,64 @@
+{
+  "id": "09-eval-harness",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:39b108242c2ad9fe28c1c124e0adfe0402504130b6f3ad728643925f2206c353",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_evaluation_harness.py -q",
+      "exitCode": 0,
+      "output": "4 passed in 0.84s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_paired_cells.py -q",
+      "exitCode": 0,
+      "output": "3 passed in 1.09s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_report_honesty.py -q",
+      "exitCode": 0,
+      "output": "3 passed in 1.07s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q",
+      "exitCode": 0,
+      "output": "8 passed in 1.27s"
+    },
+    {
+      "command": "py -3.11 scripts/check_eval_claim_flags.py",
+      "exitCode": 0,
+      "output": "No best-episode headline in harness/work; Row 09 claim boundaries pass"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/experiment-cells.parquet",
+    "artifacts/run_kpis.parquet",
+    "artifacts/evaluation-report.json",
+    "artifacts/join-audit.json",
+    "artifacts/limitations.md"
+  ],
+  "decidedBy": "tests-and-files",
+  "cellChecks": {
+    "pass": true,
+    "cellCount": 31,
+    "requiredControllers": ["fixed-time", "actuated", "cooperative-max-pressure"],
+    "commonEvaluationSeeds": [37],
+    "visibleInvalidOrFailedCells": 9
+  },
+  "joinChecks": {
+    "pass": true,
+    "recordsChecked": 111,
+    "orphanRunIds": 0,
+    "orphanScenarioHashes": 0,
+    "orphanEventIds": 0,
+    "orphanMessageIds": 0
+  },
+  "honestyChecks": {
+    "pass": true,
+    "nullResultsRetained": true,
+    "negativeResultsRetained": true,
+    "bestEpisodeHeadline": false,
+    "hbefaLabel": "emission proxy",
+    "livesSavedClaim": false
+  }
+}

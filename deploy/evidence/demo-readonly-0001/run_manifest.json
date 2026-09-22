@@ -1,0 +1,7 @@
+{
+  "run_id": "demo-readonly-0001",
+  "status": "fixture",
+  "scenario_hash": "sha256:not-a-measured-run",
+  "controller_name": "none",
+  "note": "Placeholder for hosted read-only demo. Not a SUMO evaluation result. Replace this file with a tagged evidence bundle after rows 02 and 09 exist."
+}

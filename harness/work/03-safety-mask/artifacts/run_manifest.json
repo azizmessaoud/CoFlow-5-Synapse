@@ -1,0 +1,71 @@
+{
+  "artifact_references": [
+    {
+      "bytes": 5486,
+      "path": "decision_events.parquet",
+      "rows": 14,
+      "schema_name": "safety_decision_event",
+      "schema_version": 1,
+      "sha256": "sha256:017ae44707cdf204249c02532b9122dc6dc18a5e1cee3bc2e45a1bed795f048b"
+    },
+    {
+      "bytes": 4429,
+      "path": "executed_commands.parquet",
+      "rows": 6,
+      "schema_name": "executed_signal_command",
+      "schema_version": 1,
+      "sha256": "sha256:945cc6b2f9ba7e4fe362b5c8e93cc89f11e37eaea01dd5ae81209bf82a358167"
+    },
+    {
+      "bytes": 1803,
+      "path": "safety-audit.json",
+      "rows": 1,
+      "schema_name": "safety_audit",
+      "schema_version": 1,
+      "sha256": "sha256:96abd9eafdb36c01da6a11c5bfbe7f521acaa307f62ddd115dd56f7eabb38579"
+    }
+  ],
+  "backend": "traci",
+  "configuration_hash": "sha256:efc802b91f50843de7563e403f2f059b437dc4ef2476bf37c432824d3292d459",
+  "controller": "a1-deterministic-safety-mask",
+  "finalized_at": "2026-09-22T13:32:07.616774+00:00",
+  "immutable": true,
+  "native_command": [
+    "C:\\Users\\dell\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "C:\\Users\\dell\\Downloads\\sumo\\scripts\\generate_safety_artifacts.py"
+  ],
+  "run_id": "4ea4b16d-7452-4eb7-b6c8-09594827cb26",
+  "scenario_files": [
+    "scenarios/safety-mask/safety.nod.xml",
+    "scenarios/safety-mask/safety.edg.xml",
+    "scenarios/safety-mask/safety.con.xml",
+    "scenarios/safety-mask/safety.net.xml",
+    "scenarios/safety-mask/safety.tls.xml",
+    "scenarios/safety-mask/safety.rou.xml",
+    "scenarios/safety-mask/safety.sumocfg"
+  ],
+  "scenario_hash": "sha256:561b4f09271cdbc6164e33d0e20bd393909469a621f1b7800c9cad3f4fac497a",
+  "schema_version": 1,
+  "seeds": {
+    "sumo": 37
+  },
+  "source_revision": "bcc9d0b57d6cbc05b7b0c95af0835e49285cdb03",
+  "status": "completed",
+  "timings": {
+    "finished_at": "2026-09-22T13:32:07.455764+00:00",
+    "simulation_begin": 0.0,
+    "simulation_end": 20.0,
+    "simulation_steps": 20,
+    "started_at": "2026-09-22T13:32:06.451804+00:00",
+    "wall_seconds": 1.0553085999999894
+  },
+  "versions": {
+    "coflow5": "0.1.0",
+    "duckdb": "1.3.2",
+    "pyarrow": "21.0.0",
+    "pydantic": "2.11.7",
+    "python": "3.11.9",
+    "sumo": "1.27.1",
+    "traci": "1.27.1"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "artifact_references": [
+    "toolchain.json",
+    "throughput.json",
+    "headless.log",
+    "headless-tripinfo.xml",
+    "gui-diagnosis.md"
+  ],
+  "configuration_hash": "sha256:4c17c6558c043c6df767114a77759053c83dbc3b9f8e192a3d6528c477cc0e73",
+  "docker_required": false,
+  "finished_at": "2026-09-22T14:25:55.294599+00:00",
+  "native_command": [
+    "C:\\Users\\dell\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "C:\\Users\\dell\\Downloads\\sumo\\scripts\\run_native_smoke.py"
+  ],
+  "run_id": "33eee5d6-6ff9-41e1-b9c3-af086eb2f8e5",
+  "scenario_files": [
+    "scenarios/smoke/smoke.net.xml",
+    "scenarios/smoke/smoke.rou.xml",
+    "scenarios/smoke/smoke.sumocfg"
+  ],
+  "scenario_hash": "sha256:31a2ac8002cd809067f8cf2aef5092fe802df464a601af1dcd4e97a84f125349",
+  "scenario_hash_algorithm": "sha256 over ordered relative path, NUL, file bytes, NUL",
+  "seed": 20260922,
+  "source_revision": "bcc9d0b57d6cbc05b7b0c95af0835e49285cdb03",
+  "started_at": "2026-09-22T14:25:53.810622+00:00",
+  "status": "blocked-libsumo",
+  "sumo_command": [
+    "C:\\Program Files (x86)\\Eclipse\\Sumo\\bin\\sumo.EXE",
+    "-c",
+    "C:\\Users\\dell\\Downloads\\sumo\\scenarios\\smoke\\smoke.sumocfg",
+    "--seed",
+    "20260922",
+    "--no-step-log",
+    "true",
+    "--duration-log.statistics",
+    "true",
+    "--tripinfo-output",
+    "C:\\Users\\dell\\Downloads\\sumo\\harness\\work\\01-smoke-test\\artifacts\\headless-tripinfo.xml"
+  ],
+  "sumo_version": "1.27.1",
+  "wsl_required": false
+}

@@ -1,0 +1,89 @@
+{
+  "artifact_references": [
+    {
+      "bytes": 8661,
+      "path": "messages.parquet",
+      "rows": 15,
+      "schema_name": "message_envelope_and_disposition",
+      "schema_version": 1,
+      "sha256": "sha256:cf2d17225325dea1268a2d740f15030ab6544556cca46e5c8ec8e85fad3b5cef"
+    },
+    {
+      "bytes": 14587,
+      "path": "decision_events.parquet",
+      "rows": 120,
+      "schema_name": "max_pressure_decision_event",
+      "schema_version": 1,
+      "sha256": "sha256:44f3ad2380de0cb084208f69035a68831ef6a94180aa736931266e13e704e562"
+    },
+    {
+      "bytes": 1880,
+      "path": "message-audit.json",
+      "rows": 1,
+      "schema_name": "message_board_audit",
+      "schema_version": 1,
+      "sha256": "sha256:9dcfbecafbfc0a7d1981f0f54133780f6e7e73d5a17aa62b6f9641328d0b3d4b"
+    }
+  ],
+  "backend": "traci",
+  "configuration_hash": "sha256:020a92b0363b05a9a5b05676013928bf005b0a549d410ae6a26e751a345b6e61",
+  "controller": "cooperative-max-pressure",
+  "finalized_at": "2026-09-22T14:13:16.227366+00:00",
+  "immutable": true,
+  "native_command": [
+    "C:\\Users\\dell\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "C:\\Users\\dell\\Downloads\\sumo\\scripts\\generate_message_board_artifacts.py"
+  ],
+  "run_id": "cef7f070-a25c-48e7-9261-64bd9372705d",
+  "scenario_files": [
+    "scenarios/safety-mask/safety.net.xml",
+    "scenarios/baselines/baselines.rou.xml",
+    "scenarios/baselines/baselines.tls.xml",
+    "scenarios/baselines/baselines.sumocfg"
+  ],
+  "scenario_hash": "sha256:cc12cbd9544d36085d72fc7fd44a2f353f22a87f6908d965419eb6cd1882f85f",
+  "schema_version": 1,
+  "seeds": {
+    "evaluation": 41,
+    "sumo": 41
+  },
+  "source_hashes": {
+    "scripts/generate_message_board_artifacts.py": "sha256:00e714c93c71b49442fbcb3f0e8c968aa9572ec058e89e3474896884ae4cc941",
+    "src/coflow5/evidence/message_board_artifacts.py": "sha256:cc969015f586e827e035a9e28039896d429cb73ba6fc593d98398895fc6adb20",
+    "src/coflow5/messaging/a1_advisories.py": "sha256:f234d86165f9a6bf2a5da3efa6d6c2c9780bca40aa79de59d0810c834a73d121",
+    "src/coflow5/messaging/board.py": "sha256:10b663aa21f175bc76dbcc5cf86ff103f365f36b0e4ef7a238ceb1f1a5a5c9c8",
+    "src/coflow5/messaging/envelope.py": "sha256:d5ad28de409f2b148d380ad019aa8a358f7fdce5b71745edc674a152e5475652"
+  },
+  "source_revision": "bcc9d0b57d6cbc05b7b0c95af0835e49285cdb03",
+  "status": "completed",
+  "sumo_command": [
+    "C:\\Program Files (x86)\\Eclipse\\Sumo\\bin\\sumo.EXE",
+    "-c",
+    "C:\\Users\\dell\\Downloads\\sumo\\scenarios\\baselines\\baselines.sumocfg",
+    "--seed",
+    "41",
+    "--no-step-log",
+    "true",
+    "--duration-log.disable",
+    "true",
+    "--time-to-teleport",
+    "-1"
+  ],
+  "timings": {
+    "finished_at": "2026-09-22T14:13:16.151511+00:00",
+    "simulation_begin": 0.0,
+    "simulation_end": 120.0,
+    "simulation_steps": 120,
+    "started_at": "2026-09-22T14:13:15.297466+00:00",
+    "wall_seconds": 0.8948737000027904
+  },
+  "versions": {
+    "coflow5": "0.1.0",
+    "duckdb": "1.3.2",
+    "pyarrow": "21.0.0",
+    "pydantic": "2.11.7",
+    "python": "3.11.9",
+    "sumo": "1.27.1",
+    "traci": "1.27.1"
+  }
+}

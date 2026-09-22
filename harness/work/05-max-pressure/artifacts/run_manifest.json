@@ -1,0 +1,99 @@
+{
+  "artifact_references": [
+    {
+      "bytes": 14472,
+      "path": "decision_events.parquet",
+      "rows": 120,
+      "schema_name": "max_pressure_decision_event",
+      "schema_version": 1,
+      "sha256": "sha256:b9946af822f7ec67cfe59f3285408d23a0cbe412724d13d9a2b7ef2613fdea4e"
+    },
+    {
+      "bytes": 10982,
+      "path": "observations.parquet",
+      "rows": 120,
+      "schema_name": "max_pressure_observation",
+      "schema_version": 1,
+      "sha256": "sha256:d9d02cd558e7890fbfa6e7c0a2754cb2c35512762198c33e0277103da2b67795"
+    },
+    {
+      "bytes": 7687,
+      "path": "executed_commands.parquet",
+      "rows": 120,
+      "schema_name": "executed_signal_command",
+      "schema_version": 1,
+      "sha256": "sha256:6ff671531a73e4f5a0bd3e52e30adb06350ba4cf1923de3281010b432877aa42"
+    },
+    {
+      "bytes": 3414,
+      "path": "controller-audit.json",
+      "rows": 1,
+      "schema_name": "max_pressure_controller_audit",
+      "schema_version": 1,
+      "sha256": "sha256:447eb5322a3b9b0de2b1556e1fc2d2dbcb0d9cf223af2e516452d5c7277251a2"
+    }
+  ],
+  "backend": "traci",
+  "configuration_hash": "sha256:b77c5a94a3aba074a380fdf377d4445a73604f8f73a6ea57610993d51a9bf2e8",
+  "controller": "cooperative-max-pressure",
+  "finalized_at": "2026-09-22T14:25:53.204658+00:00",
+  "immutable": true,
+  "native_command": [
+    "C:\\Users\\dell\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "C:\\Users\\dell\\Downloads\\sumo\\scripts\\generate_max_pressure_artifacts.py"
+  ],
+  "run_id": "9c24bd59-54f7-4ce1-8269-aa58388bc473",
+  "scenario_files": [
+    "scenarios/safety-mask/safety.net.xml",
+    "scenarios/baselines/baselines.rou.xml",
+    "scenarios/max-pressure/max-pressure.tls.xml",
+    "scenarios/max-pressure/max-pressure.sumocfg"
+  ],
+  "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+  "schema_version": 1,
+  "seeds": {
+    "evaluation": 37,
+    "sumo": 37
+  },
+  "source_hashes": {
+    "scripts/generate_max_pressure_artifacts.py": "sha256:87a06a026602be1b06c2e5963a0cc816c7a869503ab8e0a9dd00d13479858c19",
+    "src/coflow5/control/a1_controller.py": "sha256:54eaac80d2469756a8107140202912a24a613c6fd3f0f7d4be370af7f7268aca",
+    "src/coflow5/control/max_pressure.py": "sha256:82cfc293364be510f600a8cbf6edcf80f43efdcbedc0d7c6b5fe0c39116a8ded",
+    "src/coflow5/control/safety.py": "sha256:3cdb3a2a93cf21610afb46318ff84f354bc41f4600c3d1542b8f30a2389188fb",
+    "src/coflow5/evidence/max_pressure_artifacts.py": "sha256:eb514d5954378a22ff6d6d3e52a67f6757fe2aa2d99f82645b3cee4612504201",
+    "src/coflow5/evidence/schemas.py": "sha256:631438994f1cf80be4d25b1d8c4ea90d78b39e3a23f70f3d59f5de81ac0343e3",
+    "src/coflow5/sumo_adapter/max_pressure_runner.py": "sha256:d7a292e786d1e7ca68c43b7388cafb76dc67a08129015f868c7501773abe41ae"
+  },
+  "source_revision": "bcc9d0b57d6cbc05b7b0c95af0835e49285cdb03",
+  "status": "completed",
+  "sumo_command": [
+    "C:\\Program Files (x86)\\Eclipse\\Sumo\\bin\\sumo.EXE",
+    "-c",
+    "C:\\Users\\dell\\Downloads\\sumo\\scenarios\\max-pressure\\max-pressure.sumocfg",
+    "--seed",
+    "37",
+    "--no-step-log",
+    "true",
+    "--duration-log.disable",
+    "true",
+    "--time-to-teleport",
+    "-1"
+  ],
+  "timings": {
+    "finished_at": "2026-09-22T14:25:53.100169+00:00",
+    "simulation_begin": 0.0,
+    "simulation_end": 120.0,
+    "simulation_steps": 120,
+    "started_at": "2026-09-22T14:25:52.213125+00:00",
+    "wall_seconds": 0.9416927999991458
+  },
+  "versions": {
+    "coflow5": "0.1.0",
+    "duckdb": "1.3.2",
+    "pyarrow": "21.0.0",
+    "pydantic": "2.11.7",
+    "python": "3.11.9",
+    "sumo": "1.27.1",
+    "traci": "1.27.1"
+  }
+}

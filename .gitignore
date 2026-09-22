@@ -3,10 +3,12 @@ venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.hypothesis/
 .mypy_cache/
 .ruff_cache/
 .coverage
 htmlcov/
+*.egg-info/
 
 .env
 .env.*
@@ -16,6 +18,7 @@ htmlcov/
 Thumbs.db
 ~$*
 *.log
+!harness/work/**/artifacts/*.log
 
 .superdesign/tmp/
 .scratch/**/_extract/

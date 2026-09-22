@@ -22,11 +22,12 @@ If older text puts an LLM in the Control plane or makes DQN required, ADR-0001 w
 1. `docs/source/course-brief.md`
 2. `.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`
 3. `docs/adr/0001-reliable-ai-platform-boundary.md`
-4. `docs/harness/how-it-works.md`
-5. `docs/harness/loop-and-exit.md`
-6. `docs/harness/contract-and-evidence.md`
-7. `.kiro/steering/product.md`
-8. `CONTEXT.md`
+4. `docs/adr/0003-cicd-devops-mlops.md` when the task is CI/CD or hosting (not a substitute for row 01)
+5. `docs/harness/how-it-works.md`
+6. `docs/harness/loop-and-exit.md`
+7. `docs/harness/contract-and-evidence.md`
+8. `.kiro/steering/product.md`
+9. `CONTEXT.md`
 
 ## Read on demand
 
@@ -40,6 +41,7 @@ If older text puts an LLM in the Control plane or makes DQN required, ADR-0001 w
 | Prototype/Test tasks | `.kiro/specs/coflow5-reliable-agentic-platform/tasks.md` |
 | Stack / portfolio | `docs/architecture/coflow5-synapse-portfolio-design.md` |
 | SUMO / TraCI | official Eclipse SUMO docs first, not the RoadwayVR tutorial as a dependency |
+| How to run SUMO | `docs/how-to-run-sumo.md` |
 | Output style | `.kiro/steering/output-style.md` |
 
 ## Workflow

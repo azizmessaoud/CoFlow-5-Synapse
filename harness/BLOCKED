@@ -1,2 +1,1 @@
-01-smoke-test BLOCKED: native Windows SUMO 1.27.1 is available, but native Windows Python 3.11 is absent and the pinned Python 3.11.9 installer was canceled with exit code 1602.
-Unblock: install native Windows Python 3.11.9, confirm `py -3.11 --version`, then resume row 01; WSL Python cannot satisfy this sealed contract.
+BLOCKED: Windows Code Integrity policy {0283ac0f-fff1-49ae-ada1-8a933130cad6} blocks SUMO 1.27.1 libsumo dependencies geos_c.dll and jupedsim.dll (events 3033/3077). TraCI from SUMO_HOME\tools works on native Windows. Ask the Windows administrator to allow those Eclipse SUMO DLLs, then run: py -3.11 -c "import libsumo; print(libsumo.__file__)"

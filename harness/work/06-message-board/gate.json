@@ -1,0 +1,48 @@
+{
+  "id": "06-message-board",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:7800afcdfcb4cb5e04388592576dcfaed8e0d1397bc3e42681303bf7800c5b95",
+  "testsRun": [
+    {"command": "python -m pytest tests/contracts/test_message_envelope.py -q", "exitCode": 0, "output": "4 passed in 0.53s"},
+    {"command": "python -m pytest tests/properties/test_message_board.py -q", "exitCode": 0, "output": "6 passed in 0.67s"},
+    {"command": "python -m pytest tests/acceptance/test_empty_board_control.py -q", "exitCode": 0, "output": "3 passed in 1.76s"},
+    {"command": "python -m pytest tests/architecture/test_forbidden_imports.py -q", "exitCode": 0, "output": "8 passed in 0.60s"}
+  ],
+  "artifactsPresent": [
+    "artifacts/run_manifest.json", "artifacts/messages.parquet",
+    "artifacts/decision_events.parquet", "artifacts/message-audit.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "joinChecks": {
+    "pass": true, "messageRows": 15, "decisionRows": 120,
+    "identityErrors": 0, "unresolvedDispositionMessageIds": 0,
+    "unresolvedConsideredMessageIds": 0, "duplicateArbitrationCount": 0,
+    "artifactHashErrors": 0
+  },
+  "forbiddenImportChecks": {
+    "pass": true, "violations": 0, "messagingImportsSumoBindings": false,
+    "messagingImportsSignalExecutor": false, "redisRequired": false, "kafkaRequired": false
+  },
+  "schemaChecks": {
+    "pass": true, "parquetSchemasChecked": 2, "manifestModelsChecked": 1,
+    "schemaErrors": 0, "artifactMissing": 0, "artifactCorrupt": 0
+  },
+  "messageChecks": {
+    "pass": true, "canonicalEnvelopeDeeplyImmutable": true,
+    "boardOwnsValidatedEnvelopeCopy": true, "expiryBoundaryInclusive": true,
+    "duplicateRejectedAfterStoragePressure": true, "metadataBounded": true,
+    "requiredDispositions": ["duplicate", "expired", "malformed", "unsupported", "contradictory", "out_of_order", "unavailable", "empty"]
+  },
+  "emptyBoardChecks": {
+    "pass": true, "legalDecisionEvents": 113,
+    "unavailableBoardContinuesLocalMaxPressure": true,
+    "controller": "cooperative-max-pressure", "a1SignalOwner": "A1_FLOW"
+  },
+  "runtimeChecks": {
+    "python": "3.11.9", "sumo": "1.27.1", "traci": "1.27.1",
+    "backend": "traci", "run_id": "cef7f070-a25c-48e7-9261-64bd9372705d",
+    "scenario_hash": "sha256:cc12cbd9544d36085d72fc7fd44a2f353f22a87f6908d965419eb6cd1882f85f",
+    "acceptanceFixtureCanonicalMutation": false
+  }
+}

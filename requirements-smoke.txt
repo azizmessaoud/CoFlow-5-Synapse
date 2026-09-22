@@ -1,0 +1,6 @@
+libsumo==1.27.1
+psutil==7.0.0
+pytest==8.4.2
+sumo-data==1.27.1
+sumolib==1.27.1
+traci==1.27.1

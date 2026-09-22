@@ -1,0 +1,24 @@
+name: PR architecture
+
+# SUMO-free merge gate. Native smoke stays on Windows (ADR-0003).
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  architecture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install API extras only
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[api]" pytest==8.4.2
+      - name: Byte-compile
+        run: python -m compileall -q src tests
+      - name: Architecture and read-only API tests
+        run: python -m pytest tests/architecture tests/api -q

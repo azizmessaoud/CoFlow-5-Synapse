@@ -18,7 +18,7 @@ Micro (one junction, one decision cycle) and macro (whole network, whole system)
 | P-5 | **Bid-based arbitration (auction)** | Requests valued by net benefit = benefit − externality; best feasible bid wins within a priority tier | A1's arbitration layer (§8 of design doc) |
 | P-6 | **Shared-policy parameter sharing (MARL)** | One policy network, N per-junction executors; spatially discounted neighbor rewards | A1's per-junction DQN/MAPPO |
 | P-7 | **Hierarchical temporal decomposition** | Fast local control (seconds) under slow advisory control (minutes) | A1 vs A2–A5 timescale split |
-| P-8 | **Watchdog fallback ladder** | On invalid inputs/timeout, revert deterministically: policy → Max-Pressure → actuated → fixed-time | A1's Layer 4; Rule 3, "Backup plans" |
+| P-8 | **Watchdog fallback ladder** | On invalid inputs/timeout, revert deterministically: cooperative Max-Pressure → actuated → fixed-time | A1 recovery; optional DQN fails into Max-Pressure first |
 | P-9 | **Blackboard status + heartbeat (health supervision)** | Liveness TTLs, staleness discounts, degraded-mode flags | Channel emulator + degradation alerts |
 | P-10 | **LLM as explainer (not controller)** | LLM reads decision logs and produces natural-language accounts; never acts | Optional explain panel [ADV] |
 
@@ -82,7 +82,7 @@ At a single junction in a single epoch, A1 must: observe noisy local state, rece
 |---|---|---|---|---|
 | Fully centralized brain | Highest in principle | Worst — joint action space explodes exponentially | Zero (single point of failure) | Rejected; upper-bound comparator only, ≤4 junctions |
 | Fully independent (B3) | Low — no network effects, non-stationarity from the neighbours' drift | Best | Best (nothing to lose) | Baseline, RESCO shows it's embarrassingly competitive |
-| **Shared-policy CTDE (chosen for A1)** | Moderate | Linear-ish in junctions | Medium — shared-weight failure is correlated | **Core** |
+| **Shared-policy CTDE (optional DQN, not Core A1)** | Moderate | Linear-ish in junctions | Medium — shared-weight failure is correlated | **Optional row 15** after Max-Pressure core freezes |
 | Hierarchical regional (T-REX's FMA2C) | Moderate-high | Medium | Highest under incidents | [ADV] — T-REX found it steadiest under incident shift but needed ~1,400 episodes vs ~100 |
 
 **The central macro trade-off: coordination benefit vs coordination cost.** Communication is the cheapest thing to add and the hardest thing to trust. CoLight-style communication helped at large scale but was *less stable on small networks*; RESCO showed extended sensing (MPLight*) was *not* beneficial in most cases; Finkelberg (IEEE T-ITS 2022) showed state-of-the-art controllers are highly sensitive to delay and packet loss. So every message your bus carries is a hypothesis that must pay its own way in the ablations (none / neighbor-only / +priority / +forecast).

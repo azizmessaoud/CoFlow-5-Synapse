@@ -12,6 +12,10 @@ _Avoid_: spec, README, implementation plan, design-patterns paper
 A research-informed stakeholder profile in the Empathize pack, not an interview-validated person.
 _Avoid_: user, role, actor (when meaning this profile)
 
+**Proxy validation**:
+A walkthrough by the student team or professor of research-informed User Personas, User Journeys, and Possible Solutions. It is not an interview with the person a User Persona describes.
+_Avoid_: stakeholder interview, interview-validated Empathize, user testing (when meaning this walkthrough)
+
 **User Journey**:
 The staged experience of one User Persona from pain to a Possible Solution.
 _Avoid_: flow, story, scenario (when meaning this staged experience)

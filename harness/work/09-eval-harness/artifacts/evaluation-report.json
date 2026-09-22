@@ -1,0 +1,365 @@
+{
+  "claim_boundaries": {
+    "emergency": "Emergency metrics are simulated travel-time effects only and have no casualty interpretation.",
+    "emissions": "SUMO/HBEFA values are emission proxies only; no ambient sensor observations exist here.",
+    "scope": "Row 07 domain KPIs and row 08 fault outcomes are deterministic fixtures, not deployment estimates.",
+    "selection": "The headline uses the sole matched seed and does not select an extreme training outcome."
+  },
+  "claims": [
+    {
+      "claim_id": "paired-mixed-baseline-result",
+      "classification": "requirement",
+      "evidence_refs": [
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "e12a7484-3324-496a-98ee-f5044987b82f",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        },
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "3a03a48e-a0f5-4a0c-8b48-512073a69dba",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        }
+      ],
+      "result": "mixed",
+      "text": "On the one matched seed, actuated completed 84/84 trips versus fixed-time 71/84; actuated mean wait was lower, while total time loss was higher."
+    },
+    {
+      "claim_id": "max-pressure-kpi-gap",
+      "classification": "requirement",
+      "evidence_refs": [
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "9c24bd59-54f7-4ce1-8269-aa58388bc473",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        }
+      ],
+      "result": "not-established",
+      "text": "Cooperative Max-Pressure has matched native control evidence, but no canonical trip KPI artifact; its traffic-outcome cell is invalid rather than imputed."
+    },
+    {
+      "claim_id": "active-crossing-priority",
+      "classification": "requirement",
+      "evidence_refs": [
+        {
+          "event_ids": [
+            "evt-87dab0e455ac51460ae5c58d",
+            "evt-9108240422807307bfad9889"
+          ],
+          "message_ids": [
+            "crossing-active-001",
+            "emergency-conflict-001"
+          ],
+          "run_id": "4fa7a89a-baa2-4c2c-bdb9-b2e79c18dea7",
+          "scenario_hash": "sha256:41603ecf9459d692a46f87056b141b63335978f54da00775eb0211257112e604"
+        }
+      ],
+      "result": "supported-fixture",
+      "text": "In the deterministic row 07 fixture, active crossing clearance was accepted and the conflicting emergency request was rejected with an explicit reason."
+    },
+    {
+      "claim_id": "fault-local-control",
+      "classification": "requirement",
+      "evidence_refs": [
+        {
+          "event_ids": [
+            "141f33a8-414c-5b76-b480-ed872f27cf5e",
+            "22e29911-c7fc-5ba9-be63-26ead98987bd",
+            "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
+            "2dc01d89-6b5f-5456-8b9c-b0a9bd21ddf5",
+            "30c71f37-cf6b-56d9-8676-7ba25db11abf",
+            "5daaca62-3637-51a2-b306-3a5d1ba991c2",
+            "69548180-a241-5e83-8b40-5300cb9e8047",
+            "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
+            "7a222957-6ae3-5228-a227-ddfc0465375e",
+            "80624a12-5982-57be-979f-2d04264fe9e8",
+            "9f55eadf-acd1-598a-8b62-28fc20637aac",
+            "ab3ad269-75a4-5b38-800b-bad5389adca1",
+            "bb49c866-55e3-5a7a-a450-282ee0907f76",
+            "cfee98e5-8a4e-5214-bdef-c21ca4f636d6",
+            "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
+            "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a"
+          ],
+          "message_ids": [
+            "contradiction-001",
+            "delay-001",
+            "duplicate-001",
+            "expired-001",
+            "loss-001",
+            "malformed-001"
+          ],
+          "run_id": "92427055-50cc-4c86-8786-cbc512cd4a1a",
+          "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f"
+        }
+      ],
+      "result": "supported-fixture",
+      "text": "All eight contracted communication fault cases retained legal local control in the row 08 deterministic fixture."
+    },
+    {
+      "claim_id": "synapse-isolation",
+      "classification": "requirement",
+      "evidence_refs": [
+        {
+          "event_ids": [
+            "141f33a8-414c-5b76-b480-ed872f27cf5e",
+            "22e29911-c7fc-5ba9-be63-26ead98987bd",
+            "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
+            "2dc01d89-6b5f-5456-8b9c-b0a9bd21ddf5",
+            "30c71f37-cf6b-56d9-8676-7ba25db11abf",
+            "5daaca62-3637-51a2-b306-3a5d1ba991c2",
+            "69548180-a241-5e83-8b40-5300cb9e8047",
+            "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
+            "7a222957-6ae3-5228-a227-ddfc0465375e",
+            "80624a12-5982-57be-979f-2d04264fe9e8",
+            "9f55eadf-acd1-598a-8b62-28fc20637aac",
+            "ab3ad269-75a4-5b38-800b-bad5389adca1",
+            "bb49c866-55e3-5a7a-a450-282ee0907f76",
+            "cfee98e5-8a4e-5214-bdef-c21ca4f636d6",
+            "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
+            "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a"
+          ],
+          "message_ids": [
+            "contradiction-001",
+            "delay-001",
+            "duplicate-001",
+            "expired-001",
+            "loss-001",
+            "malformed-001"
+          ],
+          "run_id": "92427055-50cc-4c86-8786-cbc512cd4a1a",
+          "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f"
+        }
+      ],
+      "result": "null-control-effect",
+      "text": "Control action hashes were identical across available, killed, retrieval-unavailable, and provider-unavailable Synapse states."
+    },
+    {
+      "claim_id": "teleport-null",
+      "classification": "exploratory",
+      "evidence_refs": [
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "e12a7484-3324-496a-98ee-f5044987b82f",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        },
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "3a03a48e-a0f5-4a0c-8b48-512073a69dba",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        }
+      ],
+      "result": "null",
+      "text": "Both completed baseline runs recorded zero teleport events; this is a retained null result, not proof for other scenarios."
+    },
+    {
+      "claim_id": "sustainability-unmeasured",
+      "classification": "directional",
+      "evidence_refs": [
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "9c24bd59-54f7-4ce1-8269-aa58388bc473",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        }
+      ],
+      "result": "not-established",
+      "text": "Residential-link emissions were not measured in rows 04\u201308; the report keeps an explicit null-valued SUMO/HBEFA emission proxy metric."
+    }
+  ],
+  "confidence_inputs": {
+    "common_seed_count": 1,
+    "common_seeds": [
+      37
+    ],
+    "method": "descriptive paired evidence; no confidence interval with one common seed",
+    "multiple_testing": "no inferential hypothesis tests; exploratory metrics are labelled",
+    "paired_completed_baseline_runs": 2,
+    "required_controller_cells": 3
+  },
+  "experiment_summary": {
+    "cell_count": 33,
+    "dimensions": [
+      "controller",
+      "scenario",
+      "demand_regime",
+      "incident",
+      "communication_fault",
+      "adviser_agent_enabled",
+      "controller_fault",
+      "recovery_mode",
+      "synapse_fault",
+      "seed"
+    ],
+    "invalid_or_failed_cell_count": 10,
+    "invalid_or_failed_reason_counts": {
+      "ABLATION_COUNTERFACTUAL_NOT_EXECUTED": 5,
+      "AGENT_ABLATION_NOT_EXECUTED": 4,
+      "MISSING_REQUIRED_TRAFFIC_KPIS": 1
+    }
+  },
+  "generated_at": "2026-09-22T14:28:35.762037+00:00",
+  "headline": {
+    "basis": "paired/matched canonical evidence only",
+    "claim_id": "paired-mixed-baseline-result",
+    "common_evaluation_seeds": [
+      37
+    ],
+    "controller_cells": [
+      "fixed-time",
+      "actuated",
+      "cooperative-max-pressure"
+    ],
+    "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+    "summary": "On the one matched seed, actuated completed 84/84 trips versus fixed-time 71/84; actuated mean wait was lower, while total time loss was higher."
+  },
+  "limitations_artifact": "limitations.md",
+  "metric_summary": {
+    "category_counts": {
+      "efficiency": 39,
+      "emergency": 3,
+      "pedestrian": 5,
+      "recovery": 1,
+      "reproducibility": 2,
+      "robustness": 11,
+      "safety": 8,
+      "sustainability-proxy": 1,
+      "transit": 3
+    },
+    "row_count": 73
+  },
+  "negative_or_mixed_results": [
+    {
+      "claim_id": "paired-mixed-baseline-result",
+      "classification": "requirement",
+      "evidence_refs": [
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "e12a7484-3324-496a-98ee-f5044987b82f",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        },
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "3a03a48e-a0f5-4a0c-8b48-512073a69dba",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        }
+      ],
+      "result": "mixed",
+      "text": "On the one matched seed, actuated completed 84/84 trips versus fixed-time 71/84; actuated mean wait was lower, while total time loss was higher."
+    },
+    {
+      "claim_id": "max-pressure-kpi-gap",
+      "classification": "requirement",
+      "evidence_refs": [
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "9c24bd59-54f7-4ce1-8269-aa58388bc473",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        }
+      ],
+      "result": "not-established",
+      "text": "Cooperative Max-Pressure has matched native control evidence, but no canonical trip KPI artifact; its traffic-outcome cell is invalid rather than imputed."
+    },
+    {
+      "claim_id": "sustainability-unmeasured",
+      "classification": "directional",
+      "evidence_refs": [
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "9c24bd59-54f7-4ce1-8269-aa58388bc473",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        }
+      ],
+      "result": "not-established",
+      "text": "Residential-link emissions were not measured in rows 04\u201308; the report keeps an explicit null-valued SUMO/HBEFA emission proxy metric."
+    }
+  ],
+  "null_results": [
+    {
+      "claim_id": "synapse-isolation",
+      "classification": "requirement",
+      "evidence_refs": [
+        {
+          "event_ids": [
+            "141f33a8-414c-5b76-b480-ed872f27cf5e",
+            "22e29911-c7fc-5ba9-be63-26ead98987bd",
+            "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
+            "2dc01d89-6b5f-5456-8b9c-b0a9bd21ddf5",
+            "30c71f37-cf6b-56d9-8676-7ba25db11abf",
+            "5daaca62-3637-51a2-b306-3a5d1ba991c2",
+            "69548180-a241-5e83-8b40-5300cb9e8047",
+            "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
+            "7a222957-6ae3-5228-a227-ddfc0465375e",
+            "80624a12-5982-57be-979f-2d04264fe9e8",
+            "9f55eadf-acd1-598a-8b62-28fc20637aac",
+            "ab3ad269-75a4-5b38-800b-bad5389adca1",
+            "bb49c866-55e3-5a7a-a450-282ee0907f76",
+            "cfee98e5-8a4e-5214-bdef-c21ca4f636d6",
+            "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
+            "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a"
+          ],
+          "message_ids": [
+            "contradiction-001",
+            "delay-001",
+            "duplicate-001",
+            "expired-001",
+            "loss-001",
+            "malformed-001"
+          ],
+          "run_id": "92427055-50cc-4c86-8786-cbc512cd4a1a",
+          "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f"
+        }
+      ],
+      "result": "null-control-effect",
+      "text": "Control action hashes were identical across available, killed, retrieval-unavailable, and provider-unavailable Synapse states."
+    },
+    {
+      "claim_id": "teleport-null",
+      "classification": "exploratory",
+      "evidence_refs": [
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "e12a7484-3324-496a-98ee-f5044987b82f",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        },
+        {
+          "event_ids": [],
+          "message_ids": [],
+          "run_id": "3a03a48e-a0f5-4a0c-8b48-512073a69dba",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+        }
+      ],
+      "result": "null",
+      "text": "Both completed baseline runs recorded zero teleport events; this is a retained null result, not proof for other scenarios."
+    }
+  ],
+  "predeclared_metric_classifications": {
+    "allowed": [
+      "directional",
+      "exploratory",
+      "requirement"
+    ],
+    "directional": "direction declared before comparison; descriptive at one seed",
+    "exploratory": "reported without confirmatory inference",
+    "requirement": "contract invariant or required stakeholder KPI"
+  },
+  "schema_version": 1,
+  "source_manifest_ids": [
+    "3a03a48e-a0f5-4a0c-8b48-512073a69dba",
+    "4fa7a89a-baa2-4c2c-bdb9-b2e79c18dea7",
+    "92427055-50cc-4c86-8786-cbc512cd4a1a",
+    "9c24bd59-54f7-4ce1-8269-aa58388bc473",
+    "cef7f070-a25c-48e7-9261-64bd9372705d",
+    "e12a7484-3324-496a-98ee-f5044987b82f"
+  ],
+  "title": "CoFlow-5 matched evaluation evidence report"
+}

@@ -1,0 +1,49 @@
+{
+  "id": "04-baselines",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:97e3b07e117abc3ad3aecb573bec7850614fb460af4cd0268761dba18bc99d8b",
+  "testsRun": [
+    {"command": "python -m pytest tests/acceptance/test_baseline_controllers.py -q", "exitCode": 0, "output": "5 passed in 7.40s"},
+    {"command": "python -m pytest tests/contracts/test_paired_baseline_evidence.py -q", "exitCode": 0, "output": "6 passed in 1.15s"},
+    {"command": "python -m pytest tests/architecture/test_forbidden_imports.py -q", "exitCode": 0, "output": "8 passed in 1.16s"}
+  ],
+  "artifactsPresent": [
+    "artifacts/fixed-time-run_manifest.json", "artifacts/actuated-run_manifest.json",
+    "artifacts/run_kpis.parquet", "artifacts/baseline-comparison.json",
+    "artifacts/baseline_trips.parquet", "artifacts/safety_events.parquet",
+    "artifacts/executed_commands.parquet", "artifacts/baseline-audit.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "lifecycleChecks": {
+    "pass": true, "failedAndInvalidVisible": true, "failureReasonRequired": true,
+    "staleSuccessRemovedAtomically": true, "nonCompletedExplicitlyExcluded": true
+  },
+  "joinChecks": {
+    "pass": true, "manifestCount": 2, "kpiRows": 2, "tripRows": 168,
+    "identityErrors": 0, "tripReconciliationErrors": 0,
+    "acceptedWithoutCommand": 0, "commandWithoutAcceptedEvent": 0,
+    "duplicateEventIds": 0, "artifactHashErrors": 0
+  },
+  "forbiddenImportChecks": {
+    "pass": true, "violations": 0, "baselineRawSignalWrites": 0,
+    "dqnOrTorchOnRequiredPath": false
+  },
+  "schemaChecks": {
+    "pass": true, "parquetSchemasChecked": 4, "manifestModelsChecked": 2,
+    "schemaErrors": 0, "artifactMissing": 0, "artifactCorrupt": 0,
+    "artifactReferenceHashErrors": 0
+  },
+  "pairingChecks": {
+    "pass": true, "controllerLabels": ["fixed-time", "actuated"],
+    "evaluationSeeds": [37],
+    "scenarioHash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+    "allCellsPaired": true
+  },
+  "runtimeChecks": {
+    "python": "3.11.9", "sumo": "1.27.1", "traci": "1.27.1", "backend": "traci",
+    "fixedTimeRunId": "6f257dd6-d1a7-4968-a1f1-cac4a58020ba",
+    "actuatedRunId": "9c236927-7998-4e70-bb82-b379bbb255bf",
+    "fixedTimeStatus": "completed", "actuatedStatus": "completed"
+  }
+}

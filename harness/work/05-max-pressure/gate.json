@@ -1,0 +1,71 @@
+{
+  "id": "05-max-pressure",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:59f1fed8b3cb1dfc3629d9c3df666c3041712fbd4cde496a7eaa1f6e041b8f89",
+  "testsRun": [
+    {"command": "python -m pytest tests/acceptance/test_max_pressure.py -q", "exitCode": 0, "output": "6 passed in 3.93s"},
+    {"command": "python -m pytest tests/contracts/test_a1_decision_events.py -q", "exitCode": 0, "output": "5 passed in 1.88s"},
+    {"command": "python -m pytest tests/architecture/test_forbidden_imports.py -q", "exitCode": 0, "output": "8 passed in 2.26s"}
+  ],
+  "artifactsPresent": [
+    "artifacts/run_manifest.json",
+    "artifacts/decision_events.parquet",
+    "artifacts/controller-audit.json",
+    "artifacts/observations.parquet",
+    "artifacts/executed_commands.parquet"
+  ],
+  "decidedBy": "tests-and-files",
+  "joinChecks": {
+    "pass": true,
+    "decisionRows": 120,
+    "observationRows": 120,
+    "executedCommandRows": 120,
+    "uniqueEventIds": 120,
+    "identityErrors": 0,
+    "observationJoinErrors": 0,
+    "actionJoinErrors": 0,
+    "unresolvedMessageIds": 0,
+    "artifactHashErrors": 0
+  },
+  "forbiddenImportChecks": {
+    "pass": true,
+    "violations": 0,
+    "rawSignalWriteSitesOutsideExecutor": 0,
+    "dqnOrTorchDependency": false,
+    "hostedLlmOrLangGraphDependency": false
+  },
+  "schemaChecks": {
+    "pass": true,
+    "parquetSchemasChecked": 3,
+    "manifestModelsChecked": 1,
+    "jsonArtifactsChecked": 2,
+    "schemaErrors": 0,
+    "artifactMissing": 0,
+    "artifactCorrupt": 0
+  },
+  "controllerChecks": {
+    "pass": true,
+    "requiredController": "cooperative-max-pressure",
+    "actualTraCIExecution": true,
+    "scoresLocalPressure": true,
+    "scoresPhaseTiming": true,
+    "hardMasksBlockedDownstream": true,
+    "scoresBoundedValidAdvisories": true,
+    "duplicateMessagesIdempotent": true,
+    "conflictingDuplicateMessagesRejected": true,
+    "emptyBoardRemainsLive": true,
+    "oneWriterPerSignal": true,
+    "acceptedCommandCount": 120,
+    "safetyRejectedSelections": 0,
+    "firstRecoveryTargetForOptionalDqn": "cooperative-max-pressure"
+  },
+  "runtimeChecks": {
+    "python": "3.11.9",
+    "sumo": "1.27.1",
+    "traci": "1.27.1",
+    "backend": "traci",
+    "run_id": "55b09124-2be2-4d08-add7-5086edd50d8b",
+    "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce"
+  }
+}
