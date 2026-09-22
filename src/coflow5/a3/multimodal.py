@@ -192,6 +192,14 @@ class A3MultimodalAgent:
         expected_benefit_seconds: float,
         civilian_delay_externality_seconds: float,
     ) -> PublishResult | None:
+        numeric_evidence = (
+            wait_age_seconds,
+            deadline_seconds,
+            expected_benefit_seconds,
+            civilian_delay_externality_seconds,
+        )
+        if not all(math.isfinite(value) for value in numeric_evidence):
+            raise ValueError("pedestrian deadline evidence must be finite")
         if not self.minimum_deadline_seconds <= deadline_seconds <= self.maximum_deadline_seconds:
             raise ValueError("pedestrian deadline is outside configured bounds")
         seconds_to_deadline = deadline_seconds - wait_age_seconds
