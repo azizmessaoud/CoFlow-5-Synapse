@@ -252,6 +252,15 @@ class A3MultimodalAgent:
         expected_benefit_seconds: float,
         other_traffic_externality_seconds: float,
     ) -> PublishResult | None:
+        numeric_evidence = (
+            schedule_deviation_seconds,
+            observed_headway_seconds,
+            target_headway_seconds,
+            expected_benefit_seconds,
+            other_traffic_externality_seconds,
+        )
+        if not all(math.isfinite(value) for value in numeric_evidence):
+            raise ValueError("transit evidence must be finite")
         headway_gap = observed_headway_seconds - target_headway_seconds
         evidence: list[str] = []
         if schedule_deviation_seconds >= self.minimum_transit_lateness_seconds:
