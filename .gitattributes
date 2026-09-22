@@ -1,0 +1,8 @@
+# GitHub's language bar counts the default branch. These files are decks
+# and a local PDF helper, not the control-plane language.
+coflow5-professor-deck.html linguist-generated
+*Supervisor Presentation.html linguist-generated
+docs/presentation/** linguist-generated
+*.pptx linguist-generated
+tools/** linguist-documentation
+*.parquet linguist-generated

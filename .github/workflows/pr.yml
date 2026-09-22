@@ -1,10 +1,20 @@
 name: PR architecture
 
 # SUMO-free merge gate. Native smoke stays on Windows (ADR-0003).
+# The Python project lives on prototype/coflow5-scaffold. main has no pyproject.toml.
 on:
   pull_request:
   push:
-    branches: [main]
+    branches:
+      - main
+      - prototype/coflow5-scaffold
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-architecture-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   architecture:
@@ -14,6 +24,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pyproject.toml
       - name: Install API extras only
         run: |
           python -m pip install --upgrade pip
