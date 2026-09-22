@@ -15,7 +15,7 @@ CoFlow-5 Synapse answers the course challenge:
 
 The required project is an agentic system because five domain agents observe, decide, communicate, and cooperate under explicit authority. Reinforcement learning is not required. Cooperation, one-writer authority, evaluation, and failure recovery are the core.
 
-The course requires Design Thinking. Empathize, Define, and Ideate are complete. Prototype and Test remain planned. Spec enhancement shall keep the eight User Personas, the human-centred How-might-we, the chosen five-agent idea, and the rejected LLM-as-controller idea.
+The course requires Design Thinking. Empathize, Define, and Ideate are complete. A working controlled Prototype and partial technical Test evidence now exist through gated Row 10c. Multi-seed inference, realistic A4/A5 value ablations, stakeholder validation, Synapse, API/UI, and Tunis remain incomplete. Spec enhancement shall keep the eight User Personas, the human-centred How-might-we, the chosen five-agent idea, and the rejected LLM-as-controller idea.
 
 ## Harness traceability
 
@@ -40,7 +40,7 @@ This table binds every stable requirement ID to sealed queue work and the identi
 | 14 Observability/security | 02, 06, 09, 11, 12 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
 | 15 Delivery | 01–09; optional 15 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
 
-Rows 01–09 are the uncuttable course/reliability spine. Rows 10–15 may remain unstarted without changing the completion meaning of Prototype/Test for the minimum course slice; optional DQN remains blocked until rows 01–12 gate.
+Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains transparently blocked on native libsumo policy. Remaining product rows 12, 11, 13, and 14 do not erase the completed controlled evidence slice. Optional DQN remains blocked and cannot change the completion meaning of the required prototype.
 
 ## Requirement 0: Design Thinking traceability
 

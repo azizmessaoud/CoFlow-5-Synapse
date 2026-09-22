@@ -137,4 +137,4 @@ Press Play. That window is the map, not live A1. Headless A1: `py -3.11 scripts\
 
 ## Implementation status
 
-Row 01 is still ungated (`libsumo` blocked). Rows **02–09** are gated on TraCI. Rows 10–14 are todo. Row 15 stays blocked. Do not use `scripts\run_native_smoke.py` as the daily demo until an admin allows `libsumo`.
+Row 01 is still ungated (`libsumo` blocked). Rows **02–10c** are gated on TraCI or deterministic evidence. The next approved row is **12 Synapse agents**, followed by **11 API -> 13 React -> 14 Tunis**. Row 15 stays blocked. Current matched evidence is one seed with mixed/negative Max-Pressure outcomes; no winner or superiority is claimed. Do not use `scripts\run_native_smoke.py` as the daily demo until an admin allows `libsumo`.

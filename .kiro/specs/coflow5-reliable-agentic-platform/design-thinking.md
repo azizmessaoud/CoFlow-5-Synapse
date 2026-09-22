@@ -11,12 +11,12 @@
 | 1 Empathize | Done | `coflow5-empathize-pack.md` |
 | 2 Define | Done | `coflow5-define-ideate.md` Stage 2 |
 | 3 Ideate | Done | `coflow5-define-ideate.md` Stage 3 |
-| 4 Prototype | Planned, not built | `.kiro/specs/coflow5-reliable-agentic-platform/tasks.md` |
-| 5 Test | Planned, not run | evaluation contract in requirements and design |
+| 4 Prototype | Working controlled prototype; product expansion incomplete | Gated Rows 02–10c plus `.kiro/specs/coflow5-reliable-agentic-platform/tasks.md` |
+| 5 Test | Technical tests and one-seed matched evidence run; human and multi-seed validation incomplete | Gated evidence packs plus evaluation contract in requirements and design |
 
 Full narrative with requirements IDs: `CoFlow-5_System_Requirements_Book.md`.
 
-Kiro must keep this sequence. Do not skip Empathize/Define/Ideate when enhancing specs. Do not treat Prototype as already complete.
+Kiro must keep this sequence. Do not skip Empathize/Define/Ideate when enhancing specs. Do not treat the full portfolio, multi-seed inference, or stakeholder validation as complete.
 
 **Proxy validation:** a team or professor walkthrough of research-informed User Personas is not an interview. 23 September 2026 is labelled proxy validation.
 
@@ -115,7 +115,7 @@ A five-agent cooperative system:
 
 ## Stage 4 — Prototype
 
-Not built yet. The prototype is the SUMO system in `.kiro/specs/coflow5-reliable-agentic-platform/tasks.md`.
+A working controlled prototype now exists through gated Row 10c. It includes safe A1 control, specialist requests, failure recovery, A4/A5 fixtures, matched trip evidence, and a deterministic professor page. Synapse agents, API gating, React, Tunis, and optional DQN remain later work in `.kiro/specs/coflow5-reliable-agentic-platform/tasks.md`.
 
 Minimum prototype that still satisfies the course:
 
@@ -130,7 +130,7 @@ Minimum prototype that still satisfies the course:
 
 ## Stage 5 — Test
 
-Not run yet. Test follows the evaluation contract:
+Technical tests, failure injection, and a one-seed matched controller comparison have run. Test remains incomplete for multi-seed inference, realistic A4/A5 value ablations, and stakeholder validation. The continuing evaluation contract requires:
 
 - matched scenarios and seeds
 - stakeholder KPIs, not mean delay alone

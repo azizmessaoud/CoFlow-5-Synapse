@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<additional>
+  <tlLogic id="J0" type="static" programID="classroom-fixed-time" offset="0">
+    <phase duration="30" state="GgGgrrrr" name="North-South green"/>
+    <phase duration="4" state="yyyyrrrr" name="North-South yellow"/>
+    <phase duration="2" state="rrrrrrrr" name="All red"/>
+    <phase duration="30" state="rrrrGgGg" name="East-West green"/>
+    <phase duration="4" state="rrrryyyy" name="East-West yellow"/>
+    <phase duration="2" state="rrrrrrrr" name="All red"/>
+  </tlLogic>
+</additional>

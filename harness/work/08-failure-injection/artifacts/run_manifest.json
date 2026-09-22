@@ -1,28 +1,28 @@
 {
   "artifact_references": [
     {
-      "bytes": 6531,
+      "bytes": 6533,
       "path": "faults.parquet",
       "rows": 10,
       "schema_name": "fault_and_transition",
       "schema_version": 1,
-      "sha256": "sha256:ccb7a926aef7e66e2d0135591f79bc264d39971cc61e8d624e856d4ca8a95759"
+      "sha256": "sha256:4b3948a5801d8f41bad38a72718806b43016536dc6d1d0400363614f60fe67f8"
     },
     {
-      "bytes": 5148,
+      "bytes": 5153,
       "path": "messages.parquet",
       "rows": 8,
       "schema_name": "fault_message_disposition",
       "schema_version": 1,
-      "sha256": "sha256:f6f9883c6c1c4b8a718b7c0bd725c5b81bb5dc7c9ff313de5a7f9bedb59faef4"
+      "sha256": "sha256:a52c48b28a4e4f5936e9b22640cfd78289ea905c675e9ee75991f97bcc0a8ba4"
     },
     {
-      "bytes": 5913,
+      "bytes": 5918,
       "path": "decision_events.parquet",
       "rows": 8,
       "schema_name": "fault_control_decision",
       "schema_version": 1,
-      "sha256": "sha256:72d250c59f71b3ad6271522232e6cc0f3e50c21a97a0aa373d187984450cf664"
+      "sha256": "sha256:9dfe02a1ee4b9a380378378c7e5490555193bc3acf4f10e6d84fa195e35c7388"
     },
     {
       "bytes": 1272,
@@ -30,7 +30,7 @@
       "rows": 1,
       "schema_name": "recovery_audit",
       "schema_version": 1,
-      "sha256": "sha256:32faa4b980e84ac831b9b8f0bc9bc42024750f57141a6b3ce64d55a1b308a5d5"
+      "sha256": "sha256:9b6edd5791547c7a6cf40b588ef0f6bd44cde7b76c01c623ce8e1f9067fd6075"
     },
     {
       "bytes": 10806,
@@ -38,20 +38,20 @@
       "rows": 4,
       "schema_name": "action_sequence_comparison",
       "schema_version": 1,
-      "sha256": "sha256:3c2fcb7089170feb19c59a1c2bf333a32605043fe546cbfddf619eca0900c0a0"
+      "sha256": "sha256:49b2caf0d4567d37fc55a32b71b1820b1126f929c66fc24a03516dac121bd64c"
     }
   ],
   "backend": "traci",
   "configuration_hash": "sha256:89c80b174b0729644d56d0e66a8cb412a098a785b8a5108fa24f16a16655d697",
   "controller": "cooperative-max-pressure-with-recovery",
   "failure_reason": null,
-  "finalized_at": "2026-09-22T14:25:58.760101+00:00",
+  "finalized_at": "2026-09-22T16:24:01.381132+00:00",
   "immutable": true,
   "native_command": [
     "C:\\Users\\dell\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
     "C:\\Users\\dell\\Downloads\\sumo\\scripts\\generate_failure_injection_artifacts.py"
   ],
-  "run_id": "92427055-50cc-4c86-8786-cbc512cd4a1a",
+  "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
   "scenario_files": [
     "harness/work/08-failure-injection/contract.json"
   ],
@@ -61,15 +61,15 @@
     "evaluation": 47,
     "sumo": 47
   },
-  "source_revision": "bcc9d0b57d6cbc05b7b0c95af0835e49285cdb03",
+  "source_revision": "55d9b6f550bf523114f66e2451e0f2f88f36ebc7",
   "status": "completed",
   "timings": {
-    "finished_at": "2026-09-22T14:25:58.680207+00:00",
+    "finished_at": "2026-09-22T16:24:01.337586+00:00",
     "simulation_begin": 10.0,
     "simulation_end": 41.0,
     "simulation_steps": 10,
-    "started_at": "2026-09-22T14:25:58.640388+00:00",
-    "wall_seconds": 0.04580930000520311
+    "started_at": "2026-09-22T16:24:01.326205+00:00",
+    "wall_seconds": 0.016117000006488524
   },
   "versions": {
     "coflow5": "0.1.0",

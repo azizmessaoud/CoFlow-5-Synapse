@@ -40,6 +40,10 @@ _Avoid_: AI traffic demo, LLM traffic controller, five-chatbot system
 The safety-critical part that observes SUMO, selects legal traffic-signal actions, and falls back deterministically when learned control fails.
 _Avoid_: Synapse, LLM orchestrator
 
+**Domain agent**:
+A cooperating specialist in the Control plane, defined by its role, messages, and permissions. The professor's "intelligent autonomous agent" means this. It is not a language model.
+_Avoid_: chatbot, agentic AI, LLM agent
+
 **Synapse layer**:
-The non-actuating AI layer that retrieves evidence, explains logged decisions, evaluates explanation quality, and supports human-reviewed what-if analysis.
-_Avoid_: controller, light boss, control plane
+The non-actuating language-model layer. It retrieves evidence, explains logged decisions, evaluates explanation quality, and supports human-reviewed what-if analysis. In this project, this is what "agentic AI" refers to.
+_Avoid_: controller, light boss, control plane, domain agent

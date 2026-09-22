@@ -106,15 +106,24 @@ class A1RequestArbitrator:
         self._safety_mask = safety_mask
 
     def arbitrate(self, context: ArbitrationContext) -> ArbitrationRound:
-        read = self._transport.read(
-            Topic.REQUESTS.value,
-            valid_at=context.simulation_time,
-            run_id=context.run_id,
-            scenario_hash=context.scenario_hash,
+        reads = (
+            self._transport.read(
+                Topic.REQUESTS.value,
+                valid_at=context.simulation_time,
+                run_id=context.run_id,
+                scenario_hash=context.scenario_hash,
+            ),
+            self._transport.read(
+                Topic.ECO.value,
+                valid_at=context.simulation_time,
+                run_id=context.run_id,
+                scenario_hash=context.scenario_hash,
+            ),
         )
+        allowed_topics = {Topic.REQUESTS.value, Topic.ECO.value}
         requests = tuple(
-            message for message in read.messages
-            if message.destination_or_topic == Topic.REQUESTS.value
+            message for read in reads for message in read.messages
+            if message.destination_or_topic in allowed_topics
             and message.payload.get("signal_id") == context.signal_id
         )
         active_clearance = dict(context.pedestrian_remaining_clearance)
@@ -183,7 +192,7 @@ class A1RequestArbitrator:
                 reason_code=reason_code,
                 safety_reason_code=safety_reason,
                 constraints=(
-                    "priority=active_safety>emergency>pedestrian_deadline>late_transit>flow",
+                    "priority=active_safety>emergency>pedestrian_deadline>late_transit>flow>sustainability",
                     "same_tier=urgency_then_net_benefit_then_externality_then_eta_then_expiry_then_message_id",
                     "downstream-feasibility-required",
                     "accepted-action-still-requires-deterministic-safety-mask-and-A1-executor",
@@ -295,6 +304,7 @@ class A1RequestArbitrator:
             PriorityClass.EMERGENCY: "ACCEPTED_EMERGENCY_PRIORITY",
             PriorityClass.PEDESTRIAN_DEADLINE: "ACCEPTED_PEDESTRIAN_DEADLINE",
             PriorityClass.LATE_TRANSIT: "ACCEPTED_CONDITIONAL_LATE_TRANSIT",
+            PriorityClass.SUSTAINABILITY: "ACCEPTED_SUSTAINABILITY_ADVICE",
         }.get(priority, "ACCEPTED_BOUNDED_ADVISORY")
 
     @staticmethod

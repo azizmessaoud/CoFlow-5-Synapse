@@ -7,27 +7,22 @@
     {
       "command": "py -3.11 -m pytest tests/acceptance/test_evaluation_harness.py -q",
       "exitCode": 0,
-      "output": "4 passed in 0.84s"
+      "output": "4 passed in 1.14s"
     },
     {
       "command": "py -3.11 -m pytest tests/contracts/test_paired_cells.py -q",
       "exitCode": 0,
-      "output": "3 passed in 1.09s"
+      "output": "3 passed in 1.27s"
     },
     {
       "command": "py -3.11 -m pytest tests/contracts/test_report_honesty.py -q",
       "exitCode": 0,
-      "output": "3 passed in 1.07s"
+      "output": "3 passed in 0.81s"
     },
     {
       "command": "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q",
       "exitCode": 0,
-      "output": "8 passed in 1.27s"
-    },
-    {
-      "command": "py -3.11 scripts/check_eval_claim_flags.py",
-      "exitCode": 0,
-      "output": "No best-episode headline in harness/work; Row 09 claim boundaries pass"
+      "output": "9 passed in 1.04s"
     }
   ],
   "artifactsPresent": [
@@ -38,27 +33,74 @@
     "artifacts/limitations.md"
   ],
   "decidedBy": "tests-and-files",
+  "artifactChecks": {
+    "pass": true,
+    "exactArtifactCount": 5,
+    "cellSchemaMatches": true,
+    "kpiSchemaMatches": true,
+    "artifactHashes": {
+      "evaluation-report.json": "sha256:ac8aba80b9bb1d19f62521a45cc48ec1cd2a192343df644ace536f3545a42954",
+      "experiment-cells.parquet": "sha256:b505f7b2a79a018c48daab21edb884660a240d0550ed6939fec18d1b29c422a6",
+      "join-audit.json": "sha256:9eaa1a011ef914178f0a97672ab35b8ff5d51fe68ffbdc6b428a89a0e5da5ac7",
+      "limitations.md": "sha256:1d73676ef0d892f4676b4a101423bbfe1c851a06ad6bb34580006908d80de328",
+      "run_kpis.parquet": "sha256:44b254a227fc98934e6e46a93bfdaa1fed02a9422ec3529fd4c3634d5394a7d0"
+    }
+  },
   "cellChecks": {
     "pass": true,
-    "cellCount": 31,
-    "requiredControllers": ["fixed-time", "actuated", "cooperative-max-pressure"],
+    "cellCount": 33,
+    "requiredControllers": [
+      "fixed-time",
+      "actuated",
+      "cooperative-max-pressure"
+    ],
     "commonEvaluationSeeds": [37],
-    "visibleInvalidOrFailedCells": 9
+    "visibleInvalidOrFailedCells": 10,
+    "invalidOrFailedReasonCounts": {
+      "ABLATION_COUNTERFACTUAL_NOT_EXECUTED": 5,
+      "AGENT_ABLATION_NOT_EXECUTED": 4,
+      "MISSING_REQUIRED_TRAFFIC_KPIS": 1
+    }
+  },
+  "kpiChecks": {
+    "pass": true,
+    "rowCount": 73,
+    "requiredMetricCategoriesPresent": true,
+    "classifications": [
+      "requirement",
+      "directional",
+      "exploratory"
+    ],
+    "unavailableOutcomesRetainedAsNull": true
   },
   "joinChecks": {
     "pass": true,
-    "recordsChecked": 111,
+    "canonicalManifests": 6,
+    "recordsChecked": 115,
+    "eventReferencesChecked": 165,
+    "messageReferencesChecked": 66,
     "orphanRunIds": 0,
     "orphanScenarioHashes": 0,
     "orphanEventIds": 0,
     "orphanMessageIds": 0
   },
+  "inputChecks": {
+    "pass": true,
+    "verifiedRow08RunId": "7dd9f460-ca50-4c5a-9991-67944a897d35",
+    "staleRow08RunReferences": 0
+  },
   "honestyChecks": {
     "pass": true,
-    "nullResultsRetained": true,
-    "negativeResultsRetained": true,
+    "headlineResult": "mixed",
+    "nullResultsRetained": 2,
+    "negativeOrMixedResultsRetained": 3,
     "bestEpisodeHeadline": false,
     "hbefaLabel": "emission proxy",
-    "livesSavedClaim": false
+    "livesSavedClaim": false,
+    "oneSeedConfidenceLimitationExplicit": true
+  },
+  "boundaryChecks": {
+    "pass": true,
+    "forbiddenImportTests": 9
   }
 }

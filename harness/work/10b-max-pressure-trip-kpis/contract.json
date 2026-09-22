@@ -1,0 +1,65 @@
+{
+  "contract_version": 1,
+  "id": "10b-max-pressure-trip-kpis",
+  "kind": "eval",
+  "persona_or_hmw": "P2 David; P6 Yuki; matched controller evidence before explanation",
+  "stage": "prototype-test",
+  "requirement_ids": ["1", "4", "9", "10", "15"],
+  "depends_on": ["04-baselines", "05-max-pressure", "10-a4-a5"],
+  "join_keys": ["run_id", "scenario_hash", "trip_id"],
+  "parity": {
+    "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+    "seed": 37,
+    "configured_horizon_seconds": 120.0,
+    "planned_trip_count": 84,
+    "controllers": ["fixed-time", "actuated", "cooperative-max-pressure"]
+  },
+  "locked_inputs": {
+    "harness/work/04-baselines/artifacts/actuated-run_manifest.json": "sha256:aab6f04c30314687167b2d5c169353b81b20bf42e2086d02aae84f5bb63a604c",
+    "harness/work/04-baselines/artifacts/baseline_trips.parquet": "sha256:a04c61d554b8ae14c42c285acfe37178fa5fad229df1f65cb9b2a2e066fc7750",
+    "harness/work/04-baselines/artifacts/fixed-time-run_manifest.json": "sha256:298c2f171fd067797ed4bb91740fb9df5af13aa0e4208a5ee4f71509295bf0fe",
+    "harness/work/04-baselines/artifacts/run_kpis.parquet": "sha256:7ec2068dcb758bb1bcbc280f669f8bc8356635cf784b0db2d49271d8fcc3d350",
+    "harness/work/05-max-pressure/artifacts/controller-audit.json": "sha256:447eb5322a3b9b0de2b1556e1fc2d2dbcb0d9cf223af2e516452d5c7277251a2",
+    "harness/work/05-max-pressure/artifacts/run_manifest.json": "sha256:79d6e20b50ec5039dfaab88c63a648f7dcc0161443000056188459f3f2d0c795",
+    "scenarios/baselines/baselines.rou.xml": "sha256:2016d166bd8775011fb243a43d21bc6368d4c63a99502184530c04c875a15898",
+    "scenarios/max-pressure/max-pressure.sumocfg": "sha256:89ccbab7401eb17841350904b7b5fc967a0140e8c815e62f5ce4f117aa463ca2",
+    "scenarios/max-pressure/max-pressure.tls.xml": "sha256:62384aff292a3285c9a53e4aae5932b47495233e53814a18f03401d87d1ef86e",
+    "scenarios/safety-mask/safety.net.xml": "sha256:6656468162833f60b757261d55da2e4f7febca84d2c10a1b9c5805a1d0a5b6ac"
+  },
+  "must_pass": [
+    "a new native TraCI cooperative Max-Pressure run uses the same scenario_hash, seed 37, 84 planned trip IDs, configured 120-second horizon, network, and route demand as the locked fixed-time and actuated runs",
+    "trips.parquet contains exactly one row for every planned trip, preserving completed, active-at-horizon, and not-departed states without dropping unfinished trips",
+    "run_kpis.parquet contains one cooperative-Max-Pressure row whose completion, mean and P95 duration/wait, time loss, standstill, teleport, command, and safety values recompute from native evidence",
+    "matched-comparison.json joins locked fixed-time and actuated KPI rows with the new Max-Pressure row only when scenario and seed parity pass, and makes no winner or significance claim from one seed",
+    "only A1 writes signals; Max-Pressure remains deterministic and reinforcement-learning independent; every safety event and executed command reconciles",
+    "Rows 04 and 05 remain byte-for-byte unchanged; the known frozen Row 05 source-hash drift is reported, not repaired or hidden, and is limited to the approved default-empty SUMO launch-argument hook"
+  ],
+  "tests": [
+    "py -3.11 -m pytest tests/acceptance/test_max_pressure_trip_runner.py -q",
+    "py -3.11 -m pytest tests/contracts/test_max_pressure_trip_kpis.py -q",
+    "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/run_manifest.json",
+    "artifacts/trips.parquet",
+    "artifacts/run_kpis.parquet",
+    "artifacts/matched-comparison.json",
+    "artifacts/input-audit.json"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash and every locked input hash still matches",
+    "named tests exit 0 and all five required artifacts exist with exact schemas and manifest hashes",
+    "all 84 planned trip IDs appear exactly once and completed plus unfinished equals planned",
+    "trip-level values recompute every persisted aggregate including P95 with the declared interpolation rule",
+    "fixed-time, actuated, and cooperative-Max-Pressure rows share scenario_hash and seed 37 before comparison",
+    "native audit proves one J0 writer, zero rejected-or-conflicting executed commands, and complete safety/command joins",
+    "comparison preserves null, mixed, and negative results and states one seed is insufficient for a winner claim",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "evidence or evaluation -> signal actuation",
+    "a2|a3|a4|a5|synapse -> signal executor",
+    "dqn|torch|hosted LLM|langgraph -> required Max-Pressure trip path",
+    "Row 10b generator -> writes under harness/work/02 through 09"
+  ]
+}

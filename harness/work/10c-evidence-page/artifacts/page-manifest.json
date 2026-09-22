@@ -1,0 +1,42 @@
+{
+  "artifact_references": [
+    {
+      "bytes": 2988,
+      "path": "evidence-page.txt",
+      "schema_name": "professor_evidence_page_text",
+      "schema_version": 1,
+      "sha256": "sha256:40b45f9d11153367b49952798d90dbc5036b041664c19a82a97123d5c71380ac"
+    },
+    {
+      "bytes": 5850,
+      "path": "evidence-page.json",
+      "schema_name": "professor_evidence_page_model",
+      "schema_version": 1,
+      "sha256": "sha256:644838a019935b509678805fa90a9a07c08b02bc017178807b75a4c9ffb4cacf"
+    },
+    {
+      "bytes": 2817,
+      "path": "input-audit.json",
+      "schema_name": "professor_evidence_input_audit",
+      "schema_version": 1,
+      "sha256": "sha256:8f9a0aa71cf8ef07d34b746db5dda50fe2bb996f7a64a6bb7ea64f41171ea03b"
+    }
+  ],
+  "claim_boundary": "Separate immutable evidence slices; no cross-run causal claim and no generated prose.",
+  "contract_hash": "sha256:4a61e2d238daba16286368677a4bbb37c45937035bad9ecc5acdd8422600cdb3",
+  "generator": "deterministic-template",
+  "immutable": true,
+  "page_id": "f8981e00-da31-5b50-892c-7f57005b44f3",
+  "schema_version": 1,
+  "source_hashes": {
+    "scripts/generate_evidence_page.py": "sha256:ab4a1ca51d11c613509d2e2ae339192b7fbab8b56cf2964b2c7ecbf9b5ab1dae",
+    "scripts/show_evidence_page.py": "sha256:d5222aff6ec6d224882e57478a4b8541d3773beeb9887b5d365503d13fbc7050",
+    "src/coflow5/evidence/professor_page.py": "sha256:68b92281ca0fd0067109f030a645cf091a07f9fbb47d7d5a68cc5fd3d9feeccc"
+  },
+  "source_run_ids": [
+    "1333dbcd-d653-5e8e-b3d5-94de7967a7c8",
+    "693d914d-79c3-5120-8049-aaa77ceef7ff",
+    "7dd9f460-ca50-4c5a-9991-67944a897d35"
+  ],
+  "status": "completed"
+}

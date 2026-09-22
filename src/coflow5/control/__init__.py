@@ -37,3 +37,13 @@ __all__ += [
     "REQUIRED_RECOVERY_LADDER", "RecoveryExhaustedError", "RecoveryMode",
     "RecoverySupervisor", "RecoveryTransition",
 ]
+
+
+from coflow5.control.situation_aware import (
+    A1SituationAwareMaxPressureController,
+    SituationAwareMaxPressureResult,
+)
+
+__all__ += [
+    "A1SituationAwareMaxPressureController", "SituationAwareMaxPressureResult",
+]

@@ -1,0 +1,155 @@
+{
+  "claim_flags": [
+    "No lives saved.",
+    "No measured air quality.",
+    "No deployment claim.",
+    "No winner announced.",
+    "No best-episode headline."
+  ],
+  "limitations": [
+    "One matched seed is insufficient for a winner or significance claim.",
+    "Max-Pressure reproduces the bounded Row 05 advisory fixture; baselines have no specialist request.",
+    "Same-run accepted/rejected request details were not persisted in the Row 10b traffic KPI run.",
+    "A4/A5 outcomes are a separate deterministic fixture, not measured traffic or ambient air quality.",
+    "Recovery outcomes are a separate failure-injection fixture, not the matched traffic KPI run."
+  ],
+  "one_seed_only": true,
+  "page_id": "f8981e00-da31-5b50-892c-7f57005b44f3",
+  "schema_version": 1,
+  "sections": {
+    "advice_fixture": {
+      "accepted_requests": 1,
+      "classifications": [
+        "congestion",
+        "detected_anomaly",
+        "insufficient_data",
+        "likely_incident",
+        "normal",
+        "stale_data"
+      ],
+      "fixture_label": "deterministic A4/A5 advice fixture \u2014 not the traffic KPI run",
+      "lightgbm_status": "not_available_not_accepted",
+      "persistence_validation_mae": 2.0,
+      "proxy_label": "SUMO/HBEFA emission proxy \u2014 not measured air quality",
+      "reason_codes": [
+        "ACCEPTED_SUSTAINABILITY_ADVICE",
+        "REJECTED_DOWNSTREAM_BLOCKED",
+        "REJECTED_HIGHER_PRIORITY_REQUEST"
+      ],
+      "rejected_requests": 2,
+      "run_id": "693d914d-79c3-5120-8049-aaa77ceef7ff",
+      "scenario_hash": "sha256:e261da0cc5134ab9fc85b6d5b9459e81788d80e249230553a626603e0367a5f0",
+      "selected_forecast_model": "simple_autoregression",
+      "selected_validation_mae": 0.0,
+      "source_row": "10-a4-a5",
+      "specialist_signal_writes": 0,
+      "sustainability_outcomes": [
+        "improved",
+        "worsened"
+      ]
+    },
+    "recovery_fixture": {
+      "action_sequences_unchanged_when_synapse_fails": true,
+      "fixture_label": "failure-injection recovery fixture \u2014 not the traffic KPI run",
+      "illegal_decisions": 0,
+      "legal_local_decisions": 8,
+      "observed_transitions": [
+        [
+          "COOPERATIVE_MAX_PRESSURE",
+          "ACTUATED"
+        ],
+        [
+          "ACTUATED",
+          "FIXED_TIME"
+        ]
+      ],
+      "required_ladder": [
+        "COOPERATIVE_MAX_PRESSURE",
+        "ACTUATED",
+        "FIXED_TIME"
+      ],
+      "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
+      "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f",
+      "source_row": "08-failure-injection",
+      "unexpected_transitions": []
+    },
+    "traffic": {
+      "accepted_commands": 120,
+      "advisory_message_count": 1,
+      "comparison": [
+        {
+          "completed_trips": 71,
+          "controller": "fixed-time",
+          "mean_waiting_seconds": 13.169014084507042,
+          "p95_waiting_seconds": 33.0,
+          "planned_trips": 84,
+          "run_id": "e12a7484-3324-496a-98ee-f5044987b82f",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+          "seed": 37,
+          "standstill_vehicle_seconds": 1225,
+          "teleport_events": 0,
+          "total_time_loss_seconds": 1227.5770888369252,
+          "unfinished_trips": 13
+        },
+        {
+          "completed_trips": 84,
+          "controller": "actuated",
+          "mean_waiting_seconds": 10.345238095238095,
+          "p95_waiting_seconds": 16.0,
+          "planned_trips": 84,
+          "run_id": "3a03a48e-a0f5-4a0c-8b48-512073a69dba",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+          "seed": 37,
+          "standstill_vehicle_seconds": 869,
+          "teleport_events": 0,
+          "total_time_loss_seconds": 1370.0640985320779,
+          "unfinished_trips": 0
+        },
+        {
+          "completed_trips": 70,
+          "controller": "cooperative-max-pressure",
+          "mean_waiting_seconds": 14.214285714285714,
+          "p95_waiting_seconds": 25.0,
+          "planned_trips": 84,
+          "run_id": "1333dbcd-d653-5e8e-b3d5-94de7967a7c8",
+          "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+          "seed": 37,
+          "standstill_vehicle_seconds": 1255,
+          "teleport_events": 0,
+          "total_time_loss_seconds": 1480.4722754376853,
+          "unfinished_trips": 14
+        }
+      ],
+      "completed_trips": 70,
+      "configured_horizon_seconds": 120.0,
+      "controller": "cooperative-max-pressure",
+      "decisions": 120,
+      "illegal_or_conflicting_executed_commands": 0,
+      "mean_waiting_seconds": 14.214285714285714,
+      "p95_waiting_seconds": 25.0,
+      "planned_trips": 84,
+      "run_id": "1333dbcd-d653-5e8e-b3d5-94de7967a7c8",
+      "safety_events": 120,
+      "same_run_accepted_requests": "not in this run",
+      "same_run_reason_codes": "not in this run",
+      "same_run_rejected_requests": "not in this run",
+      "same_run_request_detail": {
+        "accepted_requests": "not in this run",
+        "reason_codes": "not in this run",
+        "rejected_requests": "not in this run"
+      },
+      "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+      "seed": 37,
+      "source_row": "10b-max-pressure-trip-kpis",
+      "standstill_vehicle_seconds": 1255,
+      "teleport_events": 0,
+      "total_time_loss_seconds": 1480.4722754376853,
+      "unfinished_trips": 14,
+      "writer_count_by_signal": {
+        "J0": 1
+      }
+    }
+  },
+  "significance_test_performed": false,
+  "winner_claim": null
+}

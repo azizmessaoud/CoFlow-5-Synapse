@@ -2,7 +2,7 @@
   "control_inputs_hash": "sha256:21687b77e72ca218d66a39e8d94074fb9c08231f39437d2cbecb0f2eb261c169",
   "hashes_equal": true,
   "observer_failures_visible": true,
-  "run_id": "92427055-50cc-4c86-8786-cbc512cd4a1a",
+  "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
   "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f",
   "schema_version": 1,
   "variants": {
@@ -20,56 +20,56 @@
       "action_sequence_hash": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
       "observation_receipts": [
         {
-          "event_id": "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
+          "event_id": "6231ace4-9e8b-52ab-ae5b-4fe17c5f5497",
           "explanation_status": "failed-visible",
           "failure_detail": "hosted provider unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "30c71f37-cf6b-56d9-8676-7ba25db11abf",
+          "event_id": "17111f42-9aba-5bd9-ba52-6962314fe160",
           "explanation_status": "failed-visible",
           "failure_detail": "hosted provider unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "141f33a8-414c-5b76-b480-ed872f27cf5e",
+          "event_id": "a692d691-0611-5b1e-bed3-c17f2354be03",
           "explanation_status": "failed-visible",
           "failure_detail": "hosted provider unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a",
+          "event_id": "d1b5b771-44f1-5788-930b-8e133fae44a4",
           "explanation_status": "failed-visible",
           "failure_detail": "hosted provider unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "7a222957-6ae3-5228-a227-ddfc0465375e",
+          "event_id": "38137ecc-46b0-565f-8e72-541d93904d82",
           "explanation_status": "failed-visible",
           "failure_detail": "hosted provider unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
+          "event_id": "49bd316e-0194-5b2a-bf00-5da38d6fa92f",
           "explanation_status": "failed-visible",
           "failure_detail": "hosted provider unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
+          "event_id": "0f1a6591-067c-5fd3-9b6c-5996b06447e2",
           "explanation_status": "failed-visible",
           "failure_detail": "hosted provider unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "22e29911-c7fc-5ba9-be63-26ead98987bd",
+          "event_id": "9c6d05be-902c-59ea-ab5c-8e452874d078",
           "explanation_status": "failed-visible",
           "failure_detail": "hosted provider unavailable",
           "failure_type": "RuntimeError",
@@ -91,56 +91,56 @@
       "action_sequence_hash": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
       "observation_receipts": [
         {
-          "event_id": "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
+          "event_id": "6231ace4-9e8b-52ab-ae5b-4fe17c5f5497",
           "explanation_status": "failed-visible",
           "failure_detail": "retrieval unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "30c71f37-cf6b-56d9-8676-7ba25db11abf",
+          "event_id": "17111f42-9aba-5bd9-ba52-6962314fe160",
           "explanation_status": "failed-visible",
           "failure_detail": "retrieval unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "141f33a8-414c-5b76-b480-ed872f27cf5e",
+          "event_id": "a692d691-0611-5b1e-bed3-c17f2354be03",
           "explanation_status": "failed-visible",
           "failure_detail": "retrieval unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a",
+          "event_id": "d1b5b771-44f1-5788-930b-8e133fae44a4",
           "explanation_status": "failed-visible",
           "failure_detail": "retrieval unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "7a222957-6ae3-5228-a227-ddfc0465375e",
+          "event_id": "38137ecc-46b0-565f-8e72-541d93904d82",
           "explanation_status": "failed-visible",
           "failure_detail": "retrieval unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
+          "event_id": "49bd316e-0194-5b2a-bf00-5da38d6fa92f",
           "explanation_status": "failed-visible",
           "failure_detail": "retrieval unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
+          "event_id": "0f1a6591-067c-5fd3-9b6c-5996b06447e2",
           "explanation_status": "failed-visible",
           "failure_detail": "retrieval unavailable",
           "failure_type": "RuntimeError",
           "observer_available": false
         },
         {
-          "event_id": "22e29911-c7fc-5ba9-be63-26ead98987bd",
+          "event_id": "9c6d05be-902c-59ea-ab5c-8e452874d078",
           "explanation_status": "failed-visible",
           "failure_detail": "retrieval unavailable",
           "failure_type": "RuntimeError",
@@ -162,56 +162,56 @@
       "action_sequence_hash": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
       "observation_receipts": [
         {
-          "event_id": "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
+          "event_id": "6231ace4-9e8b-52ab-ae5b-4fe17c5f5497",
           "explanation_status": "template-explanation-recorded",
           "failure_detail": null,
           "failure_type": null,
           "observer_available": true
         },
         {
-          "event_id": "30c71f37-cf6b-56d9-8676-7ba25db11abf",
+          "event_id": "17111f42-9aba-5bd9-ba52-6962314fe160",
           "explanation_status": "template-explanation-recorded",
           "failure_detail": null,
           "failure_type": null,
           "observer_available": true
         },
         {
-          "event_id": "141f33a8-414c-5b76-b480-ed872f27cf5e",
+          "event_id": "a692d691-0611-5b1e-bed3-c17f2354be03",
           "explanation_status": "template-explanation-recorded",
           "failure_detail": null,
           "failure_type": null,
           "observer_available": true
         },
         {
-          "event_id": "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a",
+          "event_id": "d1b5b771-44f1-5788-930b-8e133fae44a4",
           "explanation_status": "template-explanation-recorded",
           "failure_detail": null,
           "failure_type": null,
           "observer_available": true
         },
         {
-          "event_id": "7a222957-6ae3-5228-a227-ddfc0465375e",
+          "event_id": "38137ecc-46b0-565f-8e72-541d93904d82",
           "explanation_status": "template-explanation-recorded",
           "failure_detail": null,
           "failure_type": null,
           "observer_available": true
         },
         {
-          "event_id": "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
+          "event_id": "49bd316e-0194-5b2a-bf00-5da38d6fa92f",
           "explanation_status": "template-explanation-recorded",
           "failure_detail": null,
           "failure_type": null,
           "observer_available": true
         },
         {
-          "event_id": "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
+          "event_id": "0f1a6591-067c-5fd3-9b6c-5996b06447e2",
           "explanation_status": "template-explanation-recorded",
           "failure_detail": null,
           "failure_type": null,
           "observer_available": true
         },
         {
-          "event_id": "22e29911-c7fc-5ba9-be63-26ead98987bd",
+          "event_id": "9c6d05be-902c-59ea-ab5c-8e452874d078",
           "explanation_status": "template-explanation-recorded",
           "failure_detail": null,
           "failure_type": null,
@@ -233,56 +233,56 @@
       "action_sequence_hash": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
       "observation_receipts": [
         {
-          "event_id": "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
+          "event_id": "6231ace4-9e8b-52ab-ae5b-4fe17c5f5497",
           "explanation_status": "unavailable",
           "failure_detail": "Synapse observer is killed or not configured",
           "failure_type": "ObserverUnavailable",
           "observer_available": false
         },
         {
-          "event_id": "30c71f37-cf6b-56d9-8676-7ba25db11abf",
+          "event_id": "17111f42-9aba-5bd9-ba52-6962314fe160",
           "explanation_status": "unavailable",
           "failure_detail": "Synapse observer is killed or not configured",
           "failure_type": "ObserverUnavailable",
           "observer_available": false
         },
         {
-          "event_id": "141f33a8-414c-5b76-b480-ed872f27cf5e",
+          "event_id": "a692d691-0611-5b1e-bed3-c17f2354be03",
           "explanation_status": "unavailable",
           "failure_detail": "Synapse observer is killed or not configured",
           "failure_type": "ObserverUnavailable",
           "observer_available": false
         },
         {
-          "event_id": "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a",
+          "event_id": "d1b5b771-44f1-5788-930b-8e133fae44a4",
           "explanation_status": "unavailable",
           "failure_detail": "Synapse observer is killed or not configured",
           "failure_type": "ObserverUnavailable",
           "observer_available": false
         },
         {
-          "event_id": "7a222957-6ae3-5228-a227-ddfc0465375e",
+          "event_id": "38137ecc-46b0-565f-8e72-541d93904d82",
           "explanation_status": "unavailable",
           "failure_detail": "Synapse observer is killed or not configured",
           "failure_type": "ObserverUnavailable",
           "observer_available": false
         },
         {
-          "event_id": "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
+          "event_id": "49bd316e-0194-5b2a-bf00-5da38d6fa92f",
           "explanation_status": "unavailable",
           "failure_detail": "Synapse observer is killed or not configured",
           "failure_type": "ObserverUnavailable",
           "observer_available": false
         },
         {
-          "event_id": "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
+          "event_id": "0f1a6591-067c-5fd3-9b6c-5996b06447e2",
           "explanation_status": "unavailable",
           "failure_detail": "Synapse observer is killed or not configured",
           "failure_type": "ObserverUnavailable",
           "observer_available": false
         },
         {
-          "event_id": "22e29911-c7fc-5ba9-be63-26ead98987bd",
+          "event_id": "9c6d05be-902c-59ea-ab5c-8e452874d078",
           "explanation_status": "unavailable",
           "failure_detail": "Synapse observer is killed or not configured",
           "failure_type": "ObserverUnavailable",

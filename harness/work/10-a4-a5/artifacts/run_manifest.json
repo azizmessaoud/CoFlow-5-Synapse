@@ -1,0 +1,77 @@
+{
+  "artifact_references": [
+    {
+      "bytes": 8883,
+      "path": "messages.parquet",
+      "rows": 8,
+      "schema_name": "a4_a5_message",
+      "schema_version": 1,
+      "sha256": "sha256:93e3db6fe3e22921c4bf4d9e95ebd5b9cd6c26d3c99e8fa3c7bacab6c027f36f"
+    },
+    {
+      "bytes": 6069,
+      "path": "decision_events.parquet",
+      "rows": 3,
+      "schema_name": "a5_request_decision",
+      "schema_version": 1,
+      "sha256": "sha256:ba796b7b3c116544653454dfd504b6d7c6992dd612e92fb226bd0ad8d36907bf"
+    },
+    {
+      "bytes": 7106,
+      "path": "forecast-evaluation.parquet",
+      "rows": 16,
+      "schema_name": "a4_forecast_evaluation",
+      "schema_version": 1,
+      "sha256": "sha256:bbc1943e0085805d200ca1015bbb26fe323d82f77d9ebc89576093bb6e5eb14b"
+    },
+    {
+      "bytes": 6202,
+      "path": "sustainability-kpis.parquet",
+      "rows": 2,
+      "schema_name": "a5_link_displacement",
+      "schema_version": 1,
+      "sha256": "sha256:1b55ffcc80f3e47898fa339c40f81e67922ad45792a10d0055ed4d53906ae469"
+    }
+  ],
+  "backend": "deterministic-fixture",
+  "claim_boundaries": {
+    "authority": "A4/A5 advice only; A1 remains sole signal writer",
+    "forecast": "deterministic chronological fixture; not a deployed incident predictor",
+    "sustainability": "SUMO/HBEFA emission proxy \u2014 not measured air quality"
+  },
+  "configuration_hash": "sha256:e261da0cc5134ab9fc85b6d5b9459e81788d80e249230553a626603e0367a5f0",
+  "controller": "cooperative-max-pressure-with-a4-a5-advice",
+  "finalized_at": "2026-09-22T18:00:00+00:00",
+  "immutable": true,
+  "run_id": "693d914d-79c3-5120-8049-aaa77ceef7ff",
+  "scenario_files": [
+    "harness/work/10-a4-a5/contract.json"
+  ],
+  "scenario_hash": "sha256:e261da0cc5134ab9fc85b6d5b9459e81788d80e249230553a626603e0367a5f0",
+  "schema_version": 1,
+  "seeds": {
+    "evaluation": 53,
+    "sumo": 53
+  },
+  "source_hashes": {
+    "scripts/generate_a4_a5_artifacts.py": "sha256:4870fb9406c1628349d58f429dca5e58b43ec33ef263cbea11307720237559d6",
+    "src/coflow5/a4/situation.py": "sha256:13acc763de98a9f47df6860d8c6291f9ae3fe4a5fc06d5bd560fa7388c2f4d4d",
+    "src/coflow5/a5/sustainability.py": "sha256:8ac488ee6a517f6afda73029778b1f806765e5a70784e1937472027365d13f34",
+    "src/coflow5/control/a1_controller.py": "sha256:54eaac80d2469756a8107140202912a24a613c6fd3f0f7d4be370af7f7268aca",
+    "src/coflow5/control/fallback_probe.py": "sha256:06d19489a54acba1f1b319822fbfd37ff305a99cf40c124f51e146b1edc146e1",
+    "src/coflow5/control/max_pressure.py": "sha256:82cfc293364be510f600a8cbf6edcf80f43efdcbedc0d7c6b5fe0c39116a8ded",
+    "src/coflow5/control/request_arbitration.py": "sha256:ec8ea75654eb6ddcc454f17a210bac0c03c5164fa09268934f8413c0e5593307",
+    "src/coflow5/control/safety.py": "sha256:3cdb3a2a93cf21610afb46318ff84f354bc41f4600c3d1542b8f30a2389188fb",
+    "src/coflow5/control/situation_aware.py": "sha256:3e72cbdded56de0a0f7bb70280fcd2ac063191d3d9c0499862f47ffec0afba69",
+    "src/coflow5/evidence/a4_a5_artifacts.py": "sha256:50a6355ab8525b3c78c14adbbe66ce396b6d2edc6b0a86b46ad10cef95792de1",
+    "src/coflow5/messaging/a1_forecasts.py": "sha256:1da52e9264d4a3983774f362715ae3a79acb96e796130863a3d5e8cd3363308f"
+  },
+  "source_revision": null,
+  "status": "completed",
+  "versions": {
+    "coflow5": "0.1.0",
+    "pyarrow": "21.0.0",
+    "pydantic": "2.11.7",
+    "python": "3.11.9"
+  }
+}

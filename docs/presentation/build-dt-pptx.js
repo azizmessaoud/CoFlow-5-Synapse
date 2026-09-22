@@ -151,7 +151,7 @@ function honestyBar(slide, text) {
     fontFace: 'Calibri', isTextBox: true, margin: 0,
   });
 
-  s.addNotes('Cover. Do not claim a working prototype or experimental % gains. Empathize, Define, Ideate are complete. Prototype and Test are planned.');
+  s.addNotes('Cover. Empathize, Define and Ideate are complete. A controlled prototype and partial technical test evidence are gated through Row 10c. Do not claim stakeholder validation, deployment impact, multi-seed inference or controller superiority.');
 }
 
 // ════════════════════════════════════════

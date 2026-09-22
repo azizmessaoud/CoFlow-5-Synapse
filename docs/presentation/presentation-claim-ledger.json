@@ -1,0 +1,142 @@
+{
+  "ledger_version": 1,
+  "title": "CoFlow-5 professor presentation claim ledger",
+  "audit_date": "2026-09-22",
+  "evidence_register_label": "32-row mixed-source evidence register, audited by source type",
+  "rules": [
+    "Literature motivates stakeholder needs; it does not establish CoFlow-5 performance.",
+    "Persona statements are design synthesis, not interview quotations.",
+    "Decision-matrix numbers and acceptance thresholds are team judgements or proposed targets.",
+    "Simulation is not deployment evidence.",
+    "SUMO/HBEFA outputs are emission proxies, not ambient air-quality measurements.",
+    "Simulated emergency travel-time effects have no lives-saved interpretation."
+  ],
+  "claims": [
+    {
+      "id": "C01",
+      "classification": "course authority",
+      "safe_wording": "The course asks for a working prototype, different traffic conditions, an appropriate baseline comparison, and data-driven strengths and limitations.",
+      "source": "SUMO_forStudents.docx; transcribed at docs/source/course-brief.md"
+    },
+    {
+      "id": "C02",
+      "classification": "method",
+      "safe_wording": "The eight personas are research-informed design artifacts and were not validated through stakeholder interviews.",
+      "source": ".kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md"
+    },
+    {
+      "id": "C03",
+      "classification": "primary research, bounded sample",
+      "safe_wording": "In one New Zealand intersection study, mean perceived pedestrian delay was about twice mean observed delay.",
+      "source": "Vallyon, Turner and Hodgson, ATRF 2009",
+      "url": "https://australasiantransportresearchforum.org.au/wp-content/uploads/2022/03/2009_Vallyon_Turner_Hodgson.pdf"
+    },
+    {
+      "id": "C04",
+      "classification": "official guidance",
+      "safe_wording": "The MUTCD uses 3.5 ft/s (about 1.07 m/s) for pedestrian clearance and calls for slower values where slower users routinely cross.",
+      "source": "FHWA MUTCD 2009 section 4E.06 and 2023 edition",
+      "url": "https://mutcd.fhwa.dot.gov/htm/2009/part4/part4e.htm"
+    },
+    {
+      "id": "C05",
+      "classification": "official appraisal guidance",
+      "safe_wording": "DfT TAG uses a 0.4 reliability ratio for car/non-freight LGV journey-time variability and a 2x value-of-time multiplier for public-transport waiting.",
+      "source": "UK Department for Transport, TAG Unit A1.3",
+      "url": "https://assets.publishing.service.gov.uk/media/6a034015e71c4cdf4026baae/tag-unit-a1-3-user-and-provider-impacts.pdf"
+    },
+    {
+      "id": "C06",
+      "classification": "observational primary research",
+      "safe_wording": "In one retrospective Taipei OHCA cohort, each additional ALS-response minute was associated with 7% lower adjusted odds of survival to discharge (aOR 0.93, 95% CI 0.89-0.97).",
+      "source": "PLOS ONE 2022, 4,278 adult non-traumatic OHCA cases",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0266969"
+    },
+    {
+      "id": "C07",
+      "classification": "primary simulation study, case-specific",
+      "safe_wording": "Nelson and Bullock observed a worst case on the order of 20-30 seconds extra average arterial travel time under closely spaced preemptions in their studied network.",
+      "source": "Nelson and Bullock, Transportation Research Record 1727",
+      "url": "https://doi.org/10.3141/1727-01"
+    },
+    {
+      "id": "C08",
+      "classification": "official product documentation",
+      "safe_wording": "SCATS documentation describes monitoring, manual intervention, and audit trails; this motivates operator control and reason-coded records.",
+      "source": "Transport for NSW, SCATS Core brochure 2022",
+      "url": "https://www.transport.nsw.gov.au/system/files/media/documents/2022/SCATS-Core-brochure-Final-web-spreads.pdf"
+    },
+    {
+      "id": "C09",
+      "classification": "primary research, historical US scope",
+      "safe_wording": "For 2005-2006, 6.4 million students (12.5% of the studied US population) attended schools within 250 m of a major roadway.",
+      "source": "Kingsley et al., Journal of Exposure Science & Environmental Epidemiology",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4179205/"
+    },
+    {
+      "id": "C10",
+      "classification": "official agency estimate",
+      "safe_wording": "FHWA estimates incidents account for about 25% of congestion, with handbook estimates of 25-30% in many US metropolitan areas.",
+      "source": "US Federal Highway Administration",
+      "url": "https://ops.fhwa.dot.gov/freewaymgmt/publications/frwy_mgmt_handbook/chapter10.htm"
+    },
+    {
+      "id": "C11",
+      "classification": "benchmark research context",
+      "safe_wording": "In RESCO's tested realistic SUMO scenarios, several advanced RL methods were unstable and best-episode reporting differed materially from final performance.",
+      "source": "RESCO, NeurIPS Datasets and Benchmarks 2021",
+      "url": "https://datasets-benchmarks-proceedings.neurips.cc/paper_files/paper/2021/file/f0935e4cd5920aa6c7c996a5ee53a70f-Paper-round1.pdf"
+    },
+    {
+      "id": "C12",
+      "classification": "2025 preprint research context",
+      "safe_wording": "T-REX reports incident-distribution-shift degradation in tested simulation setups; its 1,400 versus 100 episode allocations are not a general cost ratio.",
+      "source": "T-REX preprint, arXiv:2506.13836",
+      "url": "https://arxiv.org/abs/2506.13836"
+    },
+    {
+      "id": "C13",
+      "classification": "2026 research context",
+      "safe_wording": "CoLLMLight decouples asynchronous cached cooperative reasoning from faster decisions; CoFlow-5's no-LLM-actuation rule remains an architectural safety choice.",
+      "source": "CoLLMLight, ICLR 2026 / arXiv:2503.11739",
+      "url": "https://arxiv.org/abs/2503.11739"
+    },
+    {
+      "id": "C14",
+      "classification": "primary communication simulation research",
+      "safe_wording": "Finkelberg et al. provide a quantified example showing communication impairment can materially change simulated traffic-control outcomes.",
+      "source": "Finkelberg et al., IEEE Transactions on Intelligent Transportation Systems 2022",
+      "url": "https://doi.org/10.1109/TITS.2022.3140767"
+    },
+    {
+      "id": "C15",
+      "classification": "official/open data source",
+      "safe_wording": "A future Tunis showcase may use OpenStreetMap geometry and official scheduled TRANSTU datasets; format must be verified and road demand remains synthetic or calibrated until observed data is sourced.",
+      "source": "Tunisia Ministry of Transport open-data portal and OpenStreetMap",
+      "url": "https://data.transport.tn/fr/"
+    },
+    {
+      "id": "C16",
+      "classification": "accepted project decision",
+      "safe_wording": "A1 alone writes signals using cooperative Max-Pressure; A2-A5 advise; Synapse never actuates; recovery is Max-Pressure to actuated to fixed-time; DQN is optional.",
+      "source": "docs/adr/0001-reliable-ai-platform-boundary.md"
+    },
+    {
+      "id": "C17",
+      "classification": "verified project evidence",
+      "safe_wording": "Rows 07 through 10c are gated evidence slices. On matched seed 37, fixed-time completed 71 of 84 trips, actuated 84 of 84, and cooperative Max-Pressure 70 of 84; the result is mixed and establishes no winner or superiority.",
+      "source": "harness/work/07-a2-a3/gate.json through harness/work/10c-evidence-page/gate.json; harness/work/10c-evidence-page/artifacts/evidence-page.json"
+    }
+  ],
+  "forbidden_patterns": [
+    "33-row verified evidence trail",
+    "13.5%",
+    "shared-policy DQN first",
+    "DQN is required",
+    "MARL is required",
+    "software is not built yet",
+    "Prototype and Test are planned",
+    "policy -> Max-Pressure -> actuated -> fixed-time",
+    "policy → Max-Pressure → actuated → fixed-time"
+  ]
+}

@@ -46,14 +46,14 @@
       "evidence_refs": [
         {
           "event_ids": [
-            "evt-87dab0e455ac51460ae5c58d",
-            "evt-9108240422807307bfad9889"
+            "evt-bcd7e45893531afeb5a7f3f4",
+            "evt-744bbc2f1b3241e514b436d5"
           ],
           "message_ids": [
             "crossing-active-001",
             "emergency-conflict-001"
           ],
-          "run_id": "4fa7a89a-baa2-4c2c-bdb9-b2e79c18dea7",
+          "run_id": "fef734cb-d035-42a9-ab69-5fb09a02bf8d",
           "scenario_hash": "sha256:41603ecf9459d692a46f87056b141b63335978f54da00775eb0211257112e604"
         }
       ],
@@ -66,22 +66,22 @@
       "evidence_refs": [
         {
           "event_ids": [
-            "141f33a8-414c-5b76-b480-ed872f27cf5e",
-            "22e29911-c7fc-5ba9-be63-26ead98987bd",
-            "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
-            "2dc01d89-6b5f-5456-8b9c-b0a9bd21ddf5",
-            "30c71f37-cf6b-56d9-8676-7ba25db11abf",
-            "5daaca62-3637-51a2-b306-3a5d1ba991c2",
-            "69548180-a241-5e83-8b40-5300cb9e8047",
-            "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
-            "7a222957-6ae3-5228-a227-ddfc0465375e",
-            "80624a12-5982-57be-979f-2d04264fe9e8",
-            "9f55eadf-acd1-598a-8b62-28fc20637aac",
-            "ab3ad269-75a4-5b38-800b-bad5389adca1",
-            "bb49c866-55e3-5a7a-a450-282ee0907f76",
-            "cfee98e5-8a4e-5214-bdef-c21ca4f636d6",
-            "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
-            "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a"
+            "0f1a6591-067c-5fd3-9b6c-5996b06447e2",
+            "17111f42-9aba-5bd9-ba52-6962314fe160",
+            "298203a0-a4e0-5fed-8b7c-ed41d88d8bf9",
+            "372b3a46-5080-5404-b2ff-76227ae5d045",
+            "38137ecc-46b0-565f-8e72-541d93904d82",
+            "3eed57bf-77c3-5c89-bbd2-6138531b1693",
+            "49bd316e-0194-5b2a-bf00-5da38d6fa92f",
+            "5b948a32-67ba-5aa6-a4bc-e5bbbe28a9de",
+            "6231ace4-9e8b-52ab-ae5b-4fe17c5f5497",
+            "6299cc6e-6d01-546a-82f8-c431b49084da",
+            "9c6d05be-902c-59ea-ab5c-8e452874d078",
+            "a692d691-0611-5b1e-bed3-c17f2354be03",
+            "ad069bdf-8476-5b76-a255-f3637b0f3db1",
+            "c5e6ce33-baaf-5238-89f6-ef0adfd5c29f",
+            "cadafd81-a697-56b4-89f7-0721a1664796",
+            "d1b5b771-44f1-5788-930b-8e133fae44a4"
           ],
           "message_ids": [
             "contradiction-001",
@@ -91,7 +91,7 @@
             "loss-001",
             "malformed-001"
           ],
-          "run_id": "92427055-50cc-4c86-8786-cbc512cd4a1a",
+          "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
           "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f"
         }
       ],
@@ -104,22 +104,22 @@
       "evidence_refs": [
         {
           "event_ids": [
-            "141f33a8-414c-5b76-b480-ed872f27cf5e",
-            "22e29911-c7fc-5ba9-be63-26ead98987bd",
-            "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
-            "2dc01d89-6b5f-5456-8b9c-b0a9bd21ddf5",
-            "30c71f37-cf6b-56d9-8676-7ba25db11abf",
-            "5daaca62-3637-51a2-b306-3a5d1ba991c2",
-            "69548180-a241-5e83-8b40-5300cb9e8047",
-            "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
-            "7a222957-6ae3-5228-a227-ddfc0465375e",
-            "80624a12-5982-57be-979f-2d04264fe9e8",
-            "9f55eadf-acd1-598a-8b62-28fc20637aac",
-            "ab3ad269-75a4-5b38-800b-bad5389adca1",
-            "bb49c866-55e3-5a7a-a450-282ee0907f76",
-            "cfee98e5-8a4e-5214-bdef-c21ca4f636d6",
-            "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
-            "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a"
+            "0f1a6591-067c-5fd3-9b6c-5996b06447e2",
+            "17111f42-9aba-5bd9-ba52-6962314fe160",
+            "298203a0-a4e0-5fed-8b7c-ed41d88d8bf9",
+            "372b3a46-5080-5404-b2ff-76227ae5d045",
+            "38137ecc-46b0-565f-8e72-541d93904d82",
+            "3eed57bf-77c3-5c89-bbd2-6138531b1693",
+            "49bd316e-0194-5b2a-bf00-5da38d6fa92f",
+            "5b948a32-67ba-5aa6-a4bc-e5bbbe28a9de",
+            "6231ace4-9e8b-52ab-ae5b-4fe17c5f5497",
+            "6299cc6e-6d01-546a-82f8-c431b49084da",
+            "9c6d05be-902c-59ea-ab5c-8e452874d078",
+            "a692d691-0611-5b1e-bed3-c17f2354be03",
+            "ad069bdf-8476-5b76-a255-f3637b0f3db1",
+            "c5e6ce33-baaf-5238-89f6-ef0adfd5c29f",
+            "cadafd81-a697-56b4-89f7-0721a1664796",
+            "d1b5b771-44f1-5788-930b-8e133fae44a4"
           ],
           "message_ids": [
             "contradiction-001",
@@ -129,7 +129,7 @@
             "loss-001",
             "malformed-001"
           ],
-          "run_id": "92427055-50cc-4c86-8786-cbc512cd4a1a",
+          "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
           "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f"
         }
       ],
@@ -202,7 +202,7 @@
       "MISSING_REQUIRED_TRAFFIC_KPIS": 1
     }
   },
-  "generated_at": "2026-09-22T14:28:35.762037+00:00",
+  "generated_at": "2026-09-22T16:56:29.819953+00:00",
   "headline": {
     "basis": "paired/matched canonical evidence only",
     "claim_id": "paired-mixed-baseline-result",
@@ -289,22 +289,22 @@
       "evidence_refs": [
         {
           "event_ids": [
-            "141f33a8-414c-5b76-b480-ed872f27cf5e",
-            "22e29911-c7fc-5ba9-be63-26ead98987bd",
-            "2b163c1a-da72-59fa-ae4a-d39a8c1802a9",
-            "2dc01d89-6b5f-5456-8b9c-b0a9bd21ddf5",
-            "30c71f37-cf6b-56d9-8676-7ba25db11abf",
-            "5daaca62-3637-51a2-b306-3a5d1ba991c2",
-            "69548180-a241-5e83-8b40-5300cb9e8047",
-            "6ce7014d-f572-5e12-8a9f-f47b0a5070c3",
-            "7a222957-6ae3-5228-a227-ddfc0465375e",
-            "80624a12-5982-57be-979f-2d04264fe9e8",
-            "9f55eadf-acd1-598a-8b62-28fc20637aac",
-            "ab3ad269-75a4-5b38-800b-bad5389adca1",
-            "bb49c866-55e3-5a7a-a450-282ee0907f76",
-            "cfee98e5-8a4e-5214-bdef-c21ca4f636d6",
-            "d9fa1433-b8b0-5d45-9ce1-b24fb597bd50",
-            "fdb142cf-3d43-56bf-b6e7-6c9d41e6554a"
+            "0f1a6591-067c-5fd3-9b6c-5996b06447e2",
+            "17111f42-9aba-5bd9-ba52-6962314fe160",
+            "298203a0-a4e0-5fed-8b7c-ed41d88d8bf9",
+            "372b3a46-5080-5404-b2ff-76227ae5d045",
+            "38137ecc-46b0-565f-8e72-541d93904d82",
+            "3eed57bf-77c3-5c89-bbd2-6138531b1693",
+            "49bd316e-0194-5b2a-bf00-5da38d6fa92f",
+            "5b948a32-67ba-5aa6-a4bc-e5bbbe28a9de",
+            "6231ace4-9e8b-52ab-ae5b-4fe17c5f5497",
+            "6299cc6e-6d01-546a-82f8-c431b49084da",
+            "9c6d05be-902c-59ea-ab5c-8e452874d078",
+            "a692d691-0611-5b1e-bed3-c17f2354be03",
+            "ad069bdf-8476-5b76-a255-f3637b0f3db1",
+            "c5e6ce33-baaf-5238-89f6-ef0adfd5c29f",
+            "cadafd81-a697-56b4-89f7-0721a1664796",
+            "d1b5b771-44f1-5788-930b-8e133fae44a4"
           ],
           "message_ids": [
             "contradiction-001",
@@ -314,7 +314,7 @@
             "loss-001",
             "malformed-001"
           ],
-          "run_id": "92427055-50cc-4c86-8786-cbc512cd4a1a",
+          "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
           "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f"
         }
       ],
@@ -355,11 +355,11 @@
   "schema_version": 1,
   "source_manifest_ids": [
     "3a03a48e-a0f5-4a0c-8b48-512073a69dba",
-    "4fa7a89a-baa2-4c2c-bdb9-b2e79c18dea7",
-    "92427055-50cc-4c86-8786-cbc512cd4a1a",
+    "7dd9f460-ca50-4c5a-9991-67944a897d35",
     "9c24bd59-54f7-4ce1-8269-aa58388bc473",
     "cef7f070-a25c-48e7-9261-64bd9372705d",
-    "e12a7484-3324-496a-98ee-f5044987b82f"
+    "e12a7484-3324-496a-98ee-f5044987b82f",
+    "fef734cb-d035-42a9-ab69-5fb09a02bf8d"
   ],
   "title": "CoFlow-5 matched evaluation evidence report"
 }

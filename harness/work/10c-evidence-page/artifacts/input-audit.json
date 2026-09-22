@@ -1,0 +1,44 @@
+{
+  "contract_hash": "sha256:4a61e2d238daba16286368677a4bbb37c45937035bad9ecc5acdd8422600cdb3",
+  "cross_run_merge_count": 0,
+  "generated_text_model": null,
+  "identity_errors": 0,
+  "locked_input_count": 12,
+  "locked_input_hash_mismatches": 0,
+  "locked_input_hashes": {
+    "harness/work/08-failure-injection/artifacts/recovery-audit.json": "sha256:9b6edd5791547c7a6cf40b588ef0f6bd44cde7b76c01c623ce8e1f9067fd6075",
+    "harness/work/08-failure-injection/artifacts/run_manifest.json": "sha256:2ad0cbe07d13dcc97738ccab5e93af5708fc8f0c96e7943f93d849c5adf59166",
+    "harness/work/08-failure-injection/gate.json": "sha256:88891d9ddf76c432dbfd42f97ecf5109ee5e3b492173c8352541cd4b5db5b57c",
+    "harness/work/10-a4-a5/artifacts/decision_events.parquet": "sha256:ba796b7b3c116544653454dfd504b6d7c6992dd612e92fb226bd0ad8d36907bf",
+    "harness/work/10-a4-a5/artifacts/forecast-evaluation.parquet": "sha256:bbc1943e0085805d200ca1015bbb26fe323d82f77d9ebc89576093bb6e5eb14b",
+    "harness/work/10-a4-a5/artifacts/run_manifest.json": "sha256:6828c170bb986b15717ab752fad862b821773fe0e01368b8b253b534e06c3a3c",
+    "harness/work/10-a4-a5/artifacts/sustainability-kpis.parquet": "sha256:1b55ffcc80f3e47898fa339c40f81e67922ad45792a10d0055ed4d53906ae469",
+    "harness/work/10-a4-a5/gate.json": "sha256:6436173a224e99f8d03b78dfea1fd26267f197e59d78b9b7f10106d7d24734d8",
+    "harness/work/10b-max-pressure-trip-kpis/artifacts/matched-comparison.json": "sha256:bfeffa10f8d14d7f0d36d1924d2c974f56190d0845e9479e1ca667793cb1e383",
+    "harness/work/10b-max-pressure-trip-kpis/artifacts/run_kpis.parquet": "sha256:656f52a4d1d54d69fe54953167c246d0a3aadffcd77d19dfb7f14851ade04386",
+    "harness/work/10b-max-pressure-trip-kpis/artifacts/run_manifest.json": "sha256:2949ac8d7bf36b5f876cc697a3927a38e12f9f1e6e9dd71cf8453f57e1d90c87",
+    "harness/work/10b-max-pressure-trip-kpis/gate.json": "sha256:539871d2912da765960e02e4fbca3da74951204bdd1b7fa31219df62194d39d7"
+  },
+  "manifest_artifact_hash_mismatches": 0,
+  "network_access": false,
+  "page_id": "f8981e00-da31-5b50-892c-7f57005b44f3",
+  "schema_version": 1,
+  "source_gates_green": 3,
+  "source_sections": [
+    {
+      "run_id": "1333dbcd-d653-5e8e-b3d5-94de7967a7c8",
+      "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+      "source_row": "10b-max-pressure-trip-kpis"
+    },
+    {
+      "run_id": "693d914d-79c3-5120-8049-aaa77ceef7ff",
+      "scenario_hash": "sha256:e261da0cc5134ab9fc85b6d5b9459e81788d80e249230553a626603e0367a5f0",
+      "source_row": "10-a4-a5"
+    },
+    {
+      "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
+      "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f",
+      "source_row": "08-failure-injection"
+    }
+  ]
+}

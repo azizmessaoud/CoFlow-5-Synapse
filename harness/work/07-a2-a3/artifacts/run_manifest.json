@@ -1,12 +1,12 @@
 {
   "artifact_references": [
     {
-      "bytes": 9629,
+      "bytes": 9663,
       "path": "messages.parquet",
       "rows": 14,
       "schema_name": "cooperation_message",
       "schema_version": 1,
-      "sha256": "sha256:e38a382eb572e9ae8196093c2d7deb92bf2ffa7a5035850c85b8a45b5110c1be"
+      "sha256": "sha256:6001256d220290da1dfcf16edaecbf0d53b2c4ccee01134a09abfcdbacaff4fe"
     },
     {
       "bytes": 7431,
@@ -14,7 +14,7 @@
       "rows": 7,
       "schema_name": "request_decision",
       "schema_version": 1,
-      "sha256": "sha256:f278277c0dd73a5a3f198c972621ae2bf54f65fb746dbff140374d5e1bd20b46"
+      "sha256": "sha256:8ccfa9916ae232a639a8ee957b8605ed3e7cd04985d8bd0a7401676e358db4f8"
     },
     {
       "bytes": 6374,
@@ -22,7 +22,7 @@
       "rows": 46,
       "schema_name": "paired_native_cooperation_trip",
       "schema_version": 1,
-      "sha256": "sha256:7bb6ba21bff05c8e9d60f8908639f8e8109898b695b2f0296c4c350a9b101d82"
+      "sha256": "sha256:565da3824160379ee6d95e93bd10bfa24e58270f098332c53697ce0e6bb4b122"
     },
     {
       "bytes": 4753,
@@ -30,19 +30,19 @@
       "rows": 13,
       "schema_name": "cooperation_kpi",
       "schema_version": 1,
-      "sha256": "sha256:81e783a0ced393d4a2a2e1303e82bdf40262c3b3933c6d803f122aa9c034109e"
+      "sha256": "sha256:69576363c5aef074abd5828db0962f850122673f70ae16b83e89eb0e2732dd59"
     }
   ],
   "backend": "traci",
   "configuration_hash": "sha256:4b8d7662c379baf477d325a5e9bbf1ef91fbf748ffb7a47134284438f2a52116",
   "controller": "cooperative-max-pressure",
-  "finalized_at": "2026-09-22T14:22:38.421787+00:00",
+  "finalized_at": "2026-09-22T14:30:13.500050+00:00",
   "immutable": true,
   "native_command": [
     "C:\\Users\\dell\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
     "C:\\Users\\dell\\Downloads\\sumo\\scripts\\generate_cooperation_artifacts.py"
   ],
-  "run_id": "4fa7a89a-baa2-4c2c-bdb9-b2e79c18dea7",
+  "run_id": "fef734cb-d035-42a9-ab69-5fb09a02bf8d",
   "scenario_files": [
     "scenarios/safety-mask/safety.net.xml",
     "scenarios/cooperation/cooperation.rou.xml",
@@ -59,7 +59,7 @@
   "source_hashes": {
     "scripts/generate_cooperation_artifacts.py": "sha256:3cbf95640e6de075d81443bc16ccd4b724f1a04b98b4d26b68850b124e9d91d3",
     "src/coflow5/a2/emergency.py": "sha256:2ee01e147e1484dbf8ca08526256338ef37b227bbe7ea21e2d9afbad9db6e26d",
-    "src/coflow5/a3/multimodal.py": "sha256:ac6ab09813bc205ce9faa909595c30ccf137903e98508b465e29a5af0f874f8d",
+    "src/coflow5/a3/multimodal.py": "sha256:d4328ff6385e0dfe33a708e589f729ab9743a9bedc74fb5f712a65161e2fc474",
     "src/coflow5/control/request_arbitration.py": "sha256:11927031eecbf489e03dd90d0bda643e08ee4a68ec4cce8b2a0f8dd5a87d9990",
     "src/coflow5/evidence/cooperation_artifacts.py": "sha256:ee65f3f766c700f1409a8fb977fa0ca2feb4c06d6ea5e6f8d99c723af98c4b2f",
     "src/coflow5/messaging/envelope.py": "sha256:dd23c251cc6ca423c885cb8f6326af89693f55d73aa2b6d6e934db6f37f3c295",
@@ -80,17 +80,17 @@
     "--time-to-teleport",
     "-1",
     "--tripinfo-output",
-    "C:\\Users\\dell\\Downloads\\sumo\\harness\\work\\07-a2-a3\\.artifacts.staging-f83801d7-0d22-428a-b314-613b8ddf4e24\\controlled-tripinfo.xml",
+    "C:\\Users\\dell\\Downloads\\sumo\\harness\\work\\07-a2-a3\\.artifacts.staging-90259629-5048-44f9-927e-be6110f1223a\\controlled-tripinfo.xml",
     "--tripinfo-output.write-unfinished",
     "true"
   ],
   "timings": {
-    "finished_at": "2026-09-22T14:22:38.418259+00:00",
+    "finished_at": "2026-09-22T14:30:13.495105+00:00",
     "simulation_begin": 0.0,
     "simulation_end": 97.0,
     "simulation_steps": 97,
-    "started_at": "2026-09-22T14:22:36.558667+00:00",
-    "wall_seconds": 1.8639840999967419
+    "started_at": "2026-09-22T14:30:11.715454+00:00",
+    "wall_seconds": 1.7844821000035154
   },
   "versions": {
     "coflow5": "0.1.0",

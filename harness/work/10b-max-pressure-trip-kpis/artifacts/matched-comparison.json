@@ -1,0 +1,89 @@
+{
+  "advisory_fixture": {
+    "expires_at": 12.0,
+    "limitation": "Max-Pressure reproduces the bounded Row 05 advisory fixture; baselines have no specialist request.",
+    "message_id": "row05-advisory-0001",
+    "source": "A2_EMERGENCY",
+    "valid_from": 6.0
+  },
+  "claim_boundary": "One matched seed is insufficient for a winner or significance claim; report observed differences only.",
+  "configured_horizon_seconds": 120.0,
+  "controller_rows": [
+    {
+      "completed_trips": 71,
+      "completion_rate": 0.8452380952380952,
+      "controller": "fixed-time",
+      "max_duration_s": 59.0,
+      "max_waiting_time_s": 36.0,
+      "mean_duration_s": 32.478873239436616,
+      "mean_waiting_time_s": 13.169014084507042,
+      "p95_duration_s": 55.5,
+      "p95_waiting_time_s": 33.0,
+      "planned_trips": 84,
+      "run_id": "e12a7484-3324-496a-98ee-f5044987b82f",
+      "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+      "seed": 37,
+      "standstill_vehicle_seconds": 1225,
+      "status": "completed",
+      "teleport_events": 0,
+      "total_time_loss_s": 1227.5770888369252,
+      "unfinished_trips": 13
+    },
+    {
+      "completed_trips": 84,
+      "completion_rate": 1.0,
+      "controller": "actuated",
+      "max_duration_s": 41.0,
+      "max_waiting_time_s": 20.0,
+      "mean_duration_s": 31.55952380952381,
+      "mean_waiting_time_s": 10.345238095238095,
+      "p95_duration_s": 40.849999999999994,
+      "p95_waiting_time_s": 16.0,
+      "planned_trips": 84,
+      "run_id": "3a03a48e-a0f5-4a0c-8b48-512073a69dba",
+      "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+      "seed": 37,
+      "standstill_vehicle_seconds": 869,
+      "status": "completed",
+      "teleport_events": 0,
+      "total_time_loss_s": 1370.0640985320779,
+      "unfinished_trips": 0
+    },
+    {
+      "completed_trips": 70,
+      "completion_rate": 0.8333333333333334,
+      "controller": "cooperative-max-pressure",
+      "max_duration_s": 52.0,
+      "max_waiting_time_s": 25.0,
+      "mean_duration_s": 36.32857142857143,
+      "mean_waiting_time_s": 14.214285714285714,
+      "p95_duration_s": 51.0,
+      "p95_waiting_time_s": 25.0,
+      "planned_trips": 84,
+      "run_id": "1333dbcd-d653-5e8e-b3d5-94de7967a7c8",
+      "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+      "seed": 37,
+      "standstill_vehicle_seconds": 1255,
+      "status": "completed",
+      "teleport_events": 0,
+      "total_time_loss_s": 1480.4722754376853,
+      "unfinished_trips": 14
+    }
+  ],
+  "metric_definitions": {
+    "completion": "completed divided by all 84 planned trips",
+    "tail": "linear P95 at rank (n - 1) * 0.95 over completed-trip values",
+    "time_loss": "sum over completed trips; unfinished trips remain visible separately"
+  },
+  "one_seed_only": true,
+  "pairing_keys": [
+    "scenario_hash",
+    "seed"
+  ],
+  "parity_pass": true,
+  "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+  "schema_version": 1,
+  "seed": 37,
+  "significance_test_performed": false,
+  "winner_claim": null
+}

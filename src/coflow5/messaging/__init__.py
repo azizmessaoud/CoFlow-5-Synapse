@@ -1,4 +1,5 @@
 from coflow5.messaging.a1_advisories import A1AdvisoryRead, read_a1_advisories
+from coflow5.messaging.a1_forecasts import A1ForecastRead, ForecastAdvisory, read_a1_forecasts
 from coflow5.messaging.board import (
     DispositionRecord,
     InProcessMessageBoard,
@@ -19,6 +20,8 @@ from coflow5.messaging.envelope import (
 
 __all__ = [
     "A1AdvisoryRead",
+    "A1ForecastRead",
+    "ForecastAdvisory",
     "Disposition",
     "DispositionRecord",
     "InProcessMessageBoard",
@@ -32,5 +35,6 @@ __all__ = [
     "Topic",
     "Transport",
     "read_a1_advisories",
+    "read_a1_forecasts",
     "thaw_json",
 ]

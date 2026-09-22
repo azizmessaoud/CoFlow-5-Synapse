@@ -37,10 +37,15 @@ Design Thinking Stages 1–3 are already done. Do not re-invent User Personas or
 | 07 | A2 emergency plus A3 multimodal | Requests only; pedestrian clearance and externalities are preserved. |
 | 08 | Failure injection and recovery | `Max-Pressure -> actuated -> fixed-time`; Synapse loss cannot alter actions. |
 | 09 | Evaluation harness | Paired seeds, ablations, failures, unfinished trips, and honest null results. |
-| 10–14 | A4/A5, API, template Synapse, UI, Tunis | Start only after rows 01–09 gate; cut from row 14 downward if needed. |
-| 15 | Optional DQN | Remains blocked until rows 01–12 gate and the cooperative core freezes. |
+| 10 | A4/A5 situation and sustainability | Gate tested forecasts, classifications, proxy-labelled advice, and A1 dispositions. |
+| 10b | Max-Pressure trip KPI follow-up | Add matched trip and run KPI evidence without changing the locked Row 05 pack. |
+| 10c | Deterministic evidence page | Render controller, seed, trip, wait, request, reason, safety, and limitation facts without an LLM. |
+| 12 | Three bounded Synapse agents | S1 plans and waits; S2 explains frozen evidence; S3 audits or abstains; none can reach TraCI. |
+| 11 | Read-only API | Start after Row 12; expose frozen evidence without active-control authority. |
+| 13–14 | React evidence view and Tunis showcase | Start in that order after the API; cut from the bottom if needed. |
+| 15 | Optional DQN | Remains blocked until the cooperative core and required evidence/product rows freeze. |
 
-Rows 01–09 are never cut. If schedule contracts, cut in order 15, 14, 13, 12, 11, then 10. Prototype and Test remain incomplete until their product gates produce evidence; CAPTURE does not mark them complete.
+Rows 01–09 and the matched 10b evidence follow-up are never rewritten or cut. The human-approved execution order is 10 -> 10b -> 10c -> 12 -> 11 -> 13 -> 14; Row 15 stays blocked. If schedule contracts, cut in order 15, 14, 13, then 11 while retaining the deterministic evidence page and honest limits. Prototype and Test remain incomplete until their gates produce evidence; CAPTURE does not mark them complete.
 
 ## 1. Toolchain and smoke test
 
@@ -135,6 +140,26 @@ _Check:_ forecast leakage tests fail if future rows enter training.
 
 _Check:_ A5 cannot override safety, pedestrian clearance, or emergency recovery.
 
+## Queue row 10b — Max-Pressure trip KPI follow-up
+
+- [ ] Seal a new contract and work pack; never edit canonical Row 05 evidence.
+- [ ] Run Max-Pressure on the same scenario hash, seed, demand, horizon, and trip definitions as fixed-time and actuated.
+- [ ] Write `trips.parquet` with completed and unfinished trips and `run_kpis.parquet` with completion, mean/P95 wait, time loss, teleports, and standstills.
+- [ ] Join every row on `run_id`, `scenario_hash`, controller identity, and seed.
+- [ ] Reject comparison if parity, schemas, hashes, or trip accounting fail.
+
+_Check:_ a reviewer can compare all three controllers on matched trip evidence without changing Row 05.
+
+## Queue row 10c — Deterministic real-run evidence page
+
+- [ ] Render only from completed, hash-bound evidence artifacts.
+- [ ] Show controller, seed, scenario, completed/planned trips, mean/P95 wait, accepted/rejected requests, reason codes, safety, recovery, and limitations.
+- [ ] Use explicit `not in this run` text for absent fields; never infer or embellish values.
+- [ ] Preserve the claim flags: no lives saved, no measured air quality, and no winner without matched evidence.
+- [ ] Keep the page template-based and usable with every LLM disabled.
+
+_Check:_ changing an evidence value changes the page, while missing or invalid evidence causes abstention rather than invented text.
+
 ## Queue row 09 — Evaluation harness
 
 - [ ] Create matched experiment cells for controller, demand, incident, communication fault, and seed.
@@ -158,22 +183,24 @@ _Check:_ the scripted reliability demo passes without a learned controller.
 
 - [ ] Allow-list SUMO docs, course brief, requirements, reason codes, and operator playbooks.
 - [ ] Store source identity, content hash, parser version, and stable chunk IDs.
-- [ ] Embed with a recorded sentence-transformer configuration.
-- [ ] Start with exact local cosine search.
+- [ ] Pin and record `sentence-transformers/all-MiniLM-L6-v2`, its revision, parser, chunking, and local cosine-search configuration.
+- [ ] Keep retrieval local and attach stable source citations to returned chunks.
 
 _Check:_ re-ingestion keeps stable chunk identity for unchanged content.
 
-## Queue row 12 — Synapse explanations
+## Queue row 12 — Three bounded Synapse agents
 
-- [ ] Implement classify, fetch event, retrieve policy, draft, verify, answer or abstain.
-- [ ] Add a deterministic template fallback.
-- [ ] Verify event facts against immutable fields.
-- [ ] Require citations for policy claims.
-- [ ] Keep Synapse unable to reach the signal executor.
+- [ ] Pin and record `Qwen/Qwen2.5-1.5B-Instruct`, its revision, prompts, CPU/memory limits, timeout, and deterministic fallback.
+- [ ] Implement S1 Scenario Planner to write a schema-valid proposal file and stop for explicit human approval; it cannot launch SUMO.
+- [ ] Implement S2 Decision Explainer to fetch one finished immutable event, retrieve policy, draft, verify facts, cite sources, and answer or abstain.
+- [ ] Implement S3 Evidence Auditor to compare every page claim with artifacts and either pass with references or abstain with failed checks.
+- [ ] Keep S1–S3 unable to import TraCI, call the signal executor, mutate evidence, or communicate with active A1 control.
 
-_Check:_ killing Synapse does not change traffic actions for the same control inputs.
+_Check:_ all three roles pass bounded golden tests, and killing Synapse leaves traffic actions unchanged for identical control inputs.
 
 ## Queue rows 11 and 13 — API and operator view
+
+Start Row 11 only after Row 12 gates; start Row 13 only after Row 11 gates.
 
 - [ ] Expose typed run, evidence, cancellation, explanation, and approval operations.
 - [ ] Add idempotency keys, bounded queues, and structured errors.

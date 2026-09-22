@@ -1,0 +1,63 @@
+{
+  "contract_version": 1,
+  "id": "10c-evidence-page",
+  "kind": "product",
+  "persona_or_hmw": "P4 Rosa; P6 Yuki; one auditable page of facts, trade-offs, and limits",
+  "stage": "prototype-test",
+  "requirement_ids": ["0", "1", "2", "3", "8", "9", "10", "12", "15"],
+  "depends_on": ["08-failure-injection", "10-a4-a5", "10b-max-pressure-trip-kpis"],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "message_id"],
+  "locked_inputs": {
+    "harness/work/10b-max-pressure-trip-kpis/gate.json": "sha256:539871d2912da765960e02e4fbca3da74951204bdd1b7fa31219df62194d39d7",
+    "harness/work/10b-max-pressure-trip-kpis/artifacts/run_manifest.json": "sha256:2949ac8d7bf36b5f876cc697a3927a38e12f9f1e6e9dd71cf8453f57e1d90c87",
+    "harness/work/10b-max-pressure-trip-kpis/artifacts/run_kpis.parquet": "sha256:656f52a4d1d54d69fe54953167c246d0a3aadffcd77d19dfb7f14851ade04386",
+    "harness/work/10b-max-pressure-trip-kpis/artifacts/matched-comparison.json": "sha256:bfeffa10f8d14d7f0d36d1924d2c974f56190d0845e9479e1ca667793cb1e383",
+    "harness/work/10-a4-a5/gate.json": "sha256:6436173a224e99f8d03b78dfea1fd26267f197e59d78b9b7f10106d7d24734d8",
+    "harness/work/10-a4-a5/artifacts/run_manifest.json": "sha256:6828c170bb986b15717ab752fad862b821773fe0e01368b8b253b534e06c3a3c",
+    "harness/work/10-a4-a5/artifacts/decision_events.parquet": "sha256:ba796b7b3c116544653454dfd504b6d7c6992dd612e92fb226bd0ad8d36907bf",
+    "harness/work/10-a4-a5/artifacts/forecast-evaluation.parquet": "sha256:bbc1943e0085805d200ca1015bbb26fe323d82f77d9ebc89576093bb6e5eb14b",
+    "harness/work/10-a4-a5/artifacts/sustainability-kpis.parquet": "sha256:1b55ffcc80f3e47898fa339c40f81e67922ad45792a10d0055ed4d53906ae469",
+    "harness/work/08-failure-injection/gate.json": "sha256:88891d9ddf76c432dbfd42f97ecf5109ee5e3b492173c8352541cd4b5db5b57c",
+    "harness/work/08-failure-injection/artifacts/run_manifest.json": "sha256:2ad0cbe07d13dcc97738ccab5e93af5708fc8f0c96e7943f93d849c5adf59166",
+    "harness/work/08-failure-injection/artifacts/recovery-audit.json": "sha256:9b6edd5791547c7a6cf40b588ef0f6bd44cde7b76c01c623ce8e1f9067fd6075"
+  },
+  "must_pass": [
+    "every source gate is green and every locked input, manifest artifact, and source identity is hash-verified before facts are rendered",
+    "traffic outcomes use only Row 10b run 1333dbcd-d653-5e8e-b3d5-94de7967a7c8 and show controller, seed, scenario, 70 of 84 completed, 14 unfinished, mean and P95 wait, time loss, safety, and the matched three-controller comparison",
+    "A4/A5 advice and reason codes use only the separately labelled Row 10 deterministic fixture run and never appear as same-run traffic outcomes",
+    "recovery facts use only the separately labelled Row 08 failure fixture and show Max-Pressure to actuated to fixed-time with no unexpected transition",
+    "same-run accepted and rejected request details that were not persisted in Row 10b are printed as not in this run rather than inferred from another run",
+    "the page preserves mixed and negative outcomes, one-seed and advisory-treatment limitations, no winner, no lives saved, no measured air quality, and no deployment claim",
+    "invalid, missing, red-gated, non-finite, or identity-mismatched evidence produces an explicit abstention and no partial factual page",
+    "JSON and English output are deterministic, contain no generated prose, and require no Qwen, LangGraph, TraCI, libsumo, API, or network access"
+  ],
+  "tests": [
+    "py -3.11 -m pytest tests/acceptance/test_evidence_page.py -q",
+    "py -3.11 -m pytest tests/contracts/test_evidence_page_artifacts.py -q",
+    "py -3.11 -m pytest tests/scripts/test_watch_sumo.py -q",
+    "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/evidence-page.txt",
+    "artifacts/evidence-page.json",
+    "artifacts/input-audit.json",
+    "artifacts/page-manifest.json"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash and all 12 locked input hashes remain exact",
+    "named tests exit 0 and all four required artifacts exist with manifest hashes",
+    "page source sections retain three distinct run_id and scenario_hash pairs without cross-run joins",
+    "traffic, request, forecast, sustainability, safety, and recovery values exactly match source artifacts",
+    "missing same-run fields use the exact not in this run marker and corrupt evidence abstains",
+    "repeated generation produces byte-identical page JSON and text",
+    "forbidden-import checks prove evidence page code cannot actuate or invoke an LLM",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "evidence page -> traci|libsumo|signal executor|SUMO runner",
+    "evidence page -> qwen|transformers|langgraph|hosted LLM|network client",
+    "Row 10c generator -> writes under harness/work/02 through 10b",
+    "separate source run IDs -> merged or replaced identity",
+    "missing evidence -> inferred value or fluent completion"
+  ]
+}

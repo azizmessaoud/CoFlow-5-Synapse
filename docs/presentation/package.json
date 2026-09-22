@@ -2,9 +2,14 @@
   "name": "coflow5-dt-presentation",
   "private": true,
   "version": "1.0.0",
-  "description": "ESPRIT 4DS Design Thinking deck builder for CoFlow-5-Synapse",
+  "description": "Audited ESPRIT 4DS professor deck builder for CoFlow-5-Synapse",
   "scripts": {
-    "build": "node build-dt-pptx.js"
+    "build:main": "node build-talk-v2-pptx.js && py -3.11 apply-subtle-transitions.py CoFlow-5-Synapse-TALK.pptx",
+    "build:personas": "node build-persona-cards.js && py -3.11 apply-subtle-transitions.py CoFlow-5-Persona-Cards.pptx",
+    "build": "npm run build:main && npm run build:personas",
+    "validate": "py -3.11 validate-short-decks.py",
+    "check": "npm run build && npm run validate",
+    "build:long": "node build-professor-pptx.js"
   },
   "dependencies": {
     "pptxgenjs": "^4.0.1"

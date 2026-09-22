@@ -1,7 +1,7 @@
 {
   "canonical_artifact_files_scanned": 22,
   "canonical_manifest_count": 6,
-  "generated_at": "2026-09-22T14:28:35.842905+00:00",
+  "generated_at": "2026-09-22T16:56:29.909939+00:00",
   "join_keys": [
     "run_id",
     "scenario_hash",

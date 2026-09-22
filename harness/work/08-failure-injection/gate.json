@@ -7,22 +7,22 @@
     {
       "command": "py -3.11 -m pytest tests/acceptance/test_failure_injection.py -q",
       "exitCode": 0,
-      "output": "4 passed in 0.77s"
+      "output": "4 passed in 0.72s"
     },
     {
       "command": "py -3.11 -m pytest tests/acceptance/test_recovery_ladder.py -q",
       "exitCode": 0,
-      "output": "3 passed in 0.90s"
+      "output": "3 passed in 0.53s"
     },
     {
       "command": "py -3.11 -m pytest tests/contracts/test_synapse_non_actuation.py -q",
       "exitCode": 0,
-      "output": "3 passed in 1.00s"
+      "output": "3 passed in 0.52s"
     },
     {
       "command": "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q",
       "exitCode": 0,
-      "output": "8 passed in 0.91s"
+      "output": "9 passed in 0.49s"
     }
   ],
   "artifactsPresent": [
@@ -34,6 +34,28 @@
     "artifacts/action-sequence-comparison.json"
   ],
   "decidedBy": "tests-and-files",
+  "artifactChecks": {
+    "pass": true,
+    "requiredArtifacts": 6,
+    "manifestArtifactHashesValid": 5,
+    "faultRows": 10,
+    "messageRows": 8,
+    "decisionRows": 8
+  },
+  "joinChecks": {
+    "pass": true,
+    "joinErrors": 0,
+    "faultEventIdsUnique": true,
+    "transitionEventIdsUnique": true,
+    "messageFaultsRetainMessageId": true
+  },
+  "faultChecks": {
+    "pass": true,
+    "faultClassesExercised": 8,
+    "legalLocalDecisions": 8,
+    "illegalDecisions": 0,
+    "visibleFailures": true
+  },
   "recoveryChecks": {
     "pass": true,
     "requiredLadder": [
@@ -42,12 +64,26 @@
       "FIXED_TIME"
     ],
     "unexpectedTransitions": 0,
-    "illegalDecisions": 0,
+    "optionalDqnDependency": false,
     "hiddenExceptionSwallowing": false
   },
   "synapseChecks": {
     "pass": true,
+    "variantsChecked": 4,
     "actionSequenceHashesEqual": true,
     "observerFailuresVisible": true
+  },
+  "boundaryChecks": {
+    "pass": true,
+    "forbiddenImportTests": 9
+  },
+  "runtimeChecks": {
+    "platform": "native-windows",
+    "python": "3.11.9",
+    "sumo": "1.27.1",
+    "traci": "1.27.1",
+    "backend": "traci",
+    "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
+    "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f"
   }
 }

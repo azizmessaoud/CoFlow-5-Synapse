@@ -1,0 +1,70 @@
+=== CoFlow-5 professor evidence page ===
+Page ID: f8981e00-da31-5b50-892c-7f57005b44f3
+
+TRAFFIC OUTCOME — native matched run
+Source: Row 10b-max-pressure-trip-kpis
+Run ID: 1333dbcd-d653-5e8e-b3d5-94de7967a7c8
+Scenario hash: sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce
+Controller: cooperative-max-pressure
+Seed: 37
+Configured simulation time: 0 to 120 seconds
+Trips completed / planned: 70 / 84
+Unfinished trips: 14
+Mean waiting seconds: 14.21
+P95 waiting seconds: 25.00
+Total time loss seconds: 1480.47
+Standstill vehicle-seconds: 1255
+Teleport events: 0
+
+Matched observed comparison — same scenario and seed
+- fixed-time: 71/84 completed; mean wait 13.17s; P95 wait 33.00s; time loss 1227.58s
+- actuated: 84/84 completed; mean wait 10.35s; P95 wait 16.00s; time loss 1370.06s
+- cooperative-max-pressure: 70/84 completed; mean wait 14.21s; P95 wait 25.00s; time loss 1480.47s
+
+Same-run specialist request detail
+Advisory messages observed: 1
+Accepted requests: not in this run
+Rejected requests: not in this run
+Reason codes: not in this run
+
+Safety in this traffic run
+A1 decisions / safety events / commands: 120 / 120 / 120
+Writer count: {'J0': 1}
+Illegal or conflicting executed commands: 0
+
+Related A4/A5 fixture — separate run
+Source: Row 10-a4-a5
+Run ID: 693d914d-79c3-5120-8049-aaa77ceef7ff
+Scenario hash: sha256:e261da0cc5134ab9fc85b6d5b9459e81788d80e249230553a626603e0367a5f0
+Accepted / rejected advice: 1 / 2
+Reason codes: ACCEPTED_SUSTAINABILITY_ADVICE, REJECTED_DOWNSTREAM_BLOCKED, REJECTED_HIGHER_PRIORITY_REQUEST
+Forecast model: simple_autoregression; validation MAE 0.00
+Persistence validation MAE: 2.00
+LightGBM: not_available_not_accepted
+Classifications: congestion, detected_anomaly, insufficient_data, likely_incident, normal, stale_data
+Sensitive-link outcomes: improved, worsened
+Proxy label: SUMO/HBEFA emission proxy — not measured air quality
+Specialist signal writes: 0
+
+Recovery fixture — separate run
+Source: Row 08-failure-injection
+Run ID: 7dd9f460-ca50-4c5a-9991-67944a897d35
+Scenario hash: sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f
+Required ladder: COOPERATIVE_MAX_PRESSURE -> ACTUATED -> FIXED_TIME
+Unexpected transitions: 0
+Legal / illegal local decisions: 8 / 0
+Synapse failure changed traffic actions: no
+
+Limitations
+- One matched seed is insufficient for a winner or significance claim.
+- Max-Pressure reproduces the bounded Row 05 advisory fixture; baselines have no specialist request.
+- Same-run accepted/rejected request details were not persisted in the Row 10b traffic KPI run.
+- A4/A5 outcomes are a separate deterministic fixture, not measured traffic or ambient air quality.
+- Recovery outcomes are a separate failure-injection fixture, not the matched traffic KPI run.
+
+Claim flags
+- No lives saved.
+- No measured air quality.
+- No deployment claim.
+- No winner announced.
+- No best-episode headline.

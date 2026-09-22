@@ -1,0 +1,116 @@
+{
+  "id": "10c-evidence-page",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:4a61e2d238daba16286368677a4bbb37c45937035bad9ecc5acdd8422600cdb3",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_evidence_page.py -q",
+      "exitCode": 0,
+      "output": "3 passed"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_evidence_page_artifacts.py -q",
+      "exitCode": 0,
+      "output": "5 passed"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/scripts/test_watch_sumo.py -q",
+      "exitCode": 0,
+      "output": "4 passed"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q",
+      "exitCode": 0,
+      "output": "9 passed"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/evidence-page.txt",
+    "artifacts/evidence-page.json",
+    "artifacts/input-audit.json",
+    "artifacts/page-manifest.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "artifactChecks": {
+    "pass": true,
+    "exactArtifactCount": 4,
+    "pageId": "f8981e00-da31-5b50-892c-7f57005b44f3",
+    "artifactHashes": {
+      "evidence-page.txt": "sha256:40b45f9d11153367b49952798d90dbc5036b041664c19a82a97123d5c71380ac",
+      "evidence-page.json": "sha256:644838a019935b509678805fa90a9a07c08b02bc017178807b75a4c9ffb4cacf",
+      "input-audit.json": "sha256:8f9a0aa71cf8ef07d34b746db5dda50fe2bb996f7a64a6bb7ea64f41171ea03b",
+      "page-manifest.json": "sha256:d4682a4eb9df6b001928481c2c36710333808e1d1ad779a1527b1773906f23df"
+    },
+    "deterministicByteMatches": 4,
+    "sourceHashesValid": 3
+  },
+  "inputChecks": {
+    "pass": true,
+    "lockedInputs": 12,
+    "lockedInputHashMismatches": 0,
+    "sourceGatesGreen": 3,
+    "manifestArtifactHashMismatches": 0,
+    "identityErrors": 0,
+    "crossRunMerges": 0
+  },
+  "trafficChecks": {
+    "pass": true,
+    "runId": "1333dbcd-d653-5e8e-b3d5-94de7967a7c8",
+    "seed": 37,
+    "completedTrips": 70,
+    "plannedTrips": 84,
+    "unfinishedTrips": 14,
+    "meanWaitingSeconds": 14.214285714285714,
+    "p95WaitingSeconds": 25.0,
+    "totalTimeLossSeconds": 1480.4722754376853,
+    "matchedCompletedTrips": [71, 84, 70]
+  },
+  "sameRunMissingChecks": {
+    "pass": true,
+    "acceptedRequests": "not in this run",
+    "rejectedRequests": "not in this run",
+    "reasonCodes": "not in this run"
+  },
+  "adviceFixtureChecks": {
+    "pass": true,
+    "runId": "693d914d-79c3-5120-8049-aaa77ceef7ff",
+    "acceptedRequests": 1,
+    "rejectedRequests": 2,
+    "requiredReasonCodesPresent": true,
+    "specialistSignalWrites": 0,
+    "proxyLabelOnly": true
+  },
+  "recoveryFixtureChecks": {
+    "pass": true,
+    "runId": "7dd9f460-ca50-4c5a-9991-67944a897d35",
+    "requiredLadder": ["COOPERATIVE_MAX_PRESSURE", "ACTUATED", "FIXED_TIME"],
+    "unexpectedTransitions": 0,
+    "synapseFailureChangedActions": false
+  },
+  "safetyChecks": {
+    "pass": true,
+    "a1Decisions": 120,
+    "safetyEvents": 120,
+    "acceptedCommands": 120,
+    "writerCountBySignal": {"J0": 1},
+    "illegalOrConflictingExecutedCommands": 0
+  },
+  "honestyChecks": {
+    "pass": true,
+    "oneSeedOnly": true,
+    "significanceTestPerformed": false,
+    "winnerClaim": null,
+    "sameRunMissingValuesExplicit": true,
+    "claimFlagsPresent": 5,
+    "generatedTextModel": null
+  },
+  "boundaryChecks": {
+    "pass": true,
+    "forbiddenImportTests": 9,
+    "frozenDestinationGuardCases": 20,
+    "arrivalZeroRegression": true,
+    "networkAccess": false,
+    "independentAudit": "PASS_READY_TO_GATE"
+  }
+}

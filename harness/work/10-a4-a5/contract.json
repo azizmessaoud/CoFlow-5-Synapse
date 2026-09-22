@@ -1,0 +1,46 @@
+{
+  "contract_version": 1,
+  "id": "10-a4-a5",
+  "kind": "control",
+  "persona_or_hmw": "P7 Maria; P8 Omar; HMW situation awareness and local sustainability",
+  "stage": "prototype-test",
+  "requirement_ids": ["4", "5", "8", "9", "10", "11"],
+  "depends_on": ["09-eval-harness"],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "message_id"],
+  "must_pass": [
+    "A4 prepares chronological train/validation/test splits without future leakage and compares persistence with a simple fitted baseline before any optional LightGBM candidate can be accepted",
+    "A4 publishes finite expiring forecasts with horizon, confidence, model version, source time, and explicit normal/anomaly/likely-incident/congestion/stale-data/insufficient-data classifications",
+    "A1 receives no usable forecast when A4 is silent, stale, malformed, or unavailable and continues local cooperative Max-Pressure control",
+    "A5 publishes finite expiring sustainability advice labelled SUMO/HBEFA emission proxy and never measured air quality, with link-level displacement evidence for selected residential or school-sensitive links",
+    "A1 rejects or defers A5 advice during downstream spillback or conflict with a higher-priority request, records one immutable reason-coded decision per advice message, and remains the only signal writer"
+  ],
+  "tests": [
+    "py -3.11 -m pytest tests/acceptance/test_a4_situation.py -q",
+    "py -3.11 -m pytest tests/acceptance/test_a5_sustainability.py -q",
+    "py -3.11 -m pytest tests/contracts/test_a4_a5_artifacts.py -q",
+    "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/run_manifest.json",
+    "artifacts/messages.parquet",
+    "artifacts/decision_events.parquet",
+    "artifacts/forecast-evaluation.parquet",
+    "artifacts/sustainability-kpis.parquet"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named tests exit 0 and all required artifacts exist with exact schemas and manifest hashes",
+    "forecast evaluation proves chronological non-overlapping splits and compares persistence with a train-only simple baseline without accepting an unavailable or worse optional LightGBM candidate",
+    "A4 stale/silent/unavailable evidence produces no forecast input and no signal write",
+    "A5 KPI rows are link-level, identify sensitive links, retain positive and negative displacement deltas, and label every value an emission proxy",
+    "eco spillback and higher-priority conflicts have reason-coded A1 decisions joined to the original message_id with zero specialist writes or orphan references",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "a4|a5 -> traci|libsumo|signal executor",
+    "a4|a5 -> hosted LLM|langgraph",
+    "forecast|eco advice -> bypass A1 arbitration or deterministic safety mask",
+    "SUMO/HBEFA proxy -> measured air quality claim",
+    "future validation/test rows -> A4 training fit"
+  ]
+}

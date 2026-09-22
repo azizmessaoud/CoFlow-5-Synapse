@@ -1,0 +1,91 @@
+{
+  "id": "10-a4-a5",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:e261da0cc5134ab9fc85b6d5b9459e81788d80e249230553a626603e0367a5f0",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_a4_situation.py -q",
+      "exitCode": 0,
+      "output": "12 passed in 0.41s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_a5_sustainability.py -q",
+      "exitCode": 0,
+      "output": "3 passed in 0.38s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_a4_a5_artifacts.py -q",
+      "exitCode": 0,
+      "output": "3 passed in 0.61s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q",
+      "exitCode": 0,
+      "output": "9 passed in 0.75s"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/run_manifest.json",
+    "artifacts/messages.parquet",
+    "artifacts/decision_events.parquet",
+    "artifacts/forecast-evaluation.parquet",
+    "artifacts/sustainability-kpis.parquet"
+  ],
+  "decidedBy": "tests-and-files",
+  "artifactChecks": {
+    "pass": true,
+    "exactArtifactCount": 5,
+    "runId": "693d914d-79c3-5120-8049-aaa77ceef7ff",
+    "manifestHash": "sha256:6828c170bb986b15717ab752fad862b821773fe0e01368b8b253b534e06c3a3c",
+    "artifactHashes": {
+      "messages.parquet": "sha256:93e3db6fe3e22921c4bf4d9e95ebd5b9cd6c26d3c99e8fa3c7bacab6c027f36f",
+      "decision_events.parquet": "sha256:ba796b7b3c116544653454dfd504b6d7c6992dd612e92fb226bd0ad8d36907bf",
+      "forecast-evaluation.parquet": "sha256:bbc1943e0085805d200ca1015bbb26fe323d82f77d9ebc89576093bb6e5eb14b",
+      "sustainability-kpis.parquet": "sha256:1b55ffcc80f3e47898fa339c40f81e67922ad45792a10d0055ed4d53906ae469"
+    },
+    "schemasExact": true,
+    "sourceHashesValid": 11,
+    "identityJoinErrors": 0
+  },
+  "forecastChecks": {
+    "pass": true,
+    "rowCount": 16,
+    "chronologicalSplitsNonOverlapping": true,
+    "selectedModel": "simple_autoregression",
+    "selectedValidationMae": 0.0,
+    "persistenceValidationMae": 2.0,
+    "lightgbmStatus": "not_available_not_accepted",
+    "classificationCount": 6
+  },
+  "fallbackChecks": {
+    "pass": true,
+    "cases": ["silent", "stale", "unavailable", "malformed"],
+    "allLocalMaxPressure": true,
+    "allSafetyAccepted": true,
+    "a1SignalWritesPerCase": 1,
+    "a4SignalWrites": 0
+  },
+  "sustainabilityChecks": {
+    "pass": true,
+    "sensitiveLinkRows": 2,
+    "improvedAndWorsenedVisible": true,
+    "proxyLabelOnly": true,
+    "measuredAirQualityClaim": false
+  },
+  "decisionChecks": {
+    "pass": true,
+    "ecoAdviceMessages": 3,
+    "a1Decisions": 3,
+    "a1Replies": 3,
+    "orphanReferences": 0,
+    "specialistSignalWrites": 0,
+    "requiredReasonCodesPresent": true
+  },
+  "boundaryChecks": {
+    "pass": true,
+    "forbiddenImportTests": 9,
+    "evidenceLayerActuation": false,
+    "independentAudit": "PASS_READY_TO_GATE"
+  }
+}

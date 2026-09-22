@@ -4,12 +4,12 @@
 **Team:** Aziz Messaoud, Eya Laourine, Fares Ben Kacem, Mohamed Aymen Hamzaoui, Oumayma Saddouri, Ranim Ben Salem (ESPRIT 4DS)  
 **Planned proxy-validation day:** Wednesday, 23 September 2026 (team ± professor; not stakeholder interviews)  
 **Delivery window:** 23 September–15 December 2026  
-**Status:** Design Thinking Stages 1–3 are complete as research-informed work; User Personas are not interview-validated; Prototype and Test are planned and not yet complete  
+**Status:** Design Thinking Stages 1–3 are complete as research-informed work; User Personas are not interview-validated; a working controlled Prototype and partial technical Test evidence are gated through Row 10c; multi-seed, stakeholder, and product-layer validation remain incomplete  
 **Product:** A reliable AI decision platform for urban traffic simulation  
 **Course challenge:** *How might we use data and intelligent agents to make urban traffic more efficient, adaptive, and sustainable?*
 
 > [!IMPORTANT]
-> This book is the professor-facing contract. Wednesday 23 September is **proxy validation**: the six builders walk User Personas, User Journeys, and Possible Solutions. It is not stakeholder interviews. It does not claim simulations, experiments, or performance improvements have already happened. Numeric targets are proposed acceptance criteria until valid evidence is produced.
+> This book is the professor-facing contract. Wednesday 23 September is **proxy validation**: the six builders walk User Personas, User Journeys, and Possible Solutions. It is not stakeholder interviews and does not establish deployment impact. Gated simulations now provide mixed one-seed evidence, not a performance-superiority claim. Numeric persona targets remain proposed acceptance criteria until their named evaluations and stakeholder validation are completed.
 
 > [!IMPORTANT]
 > ADR-0001, ADR-0002, and ADR-0003 govern implementation. Cooperative Max-Pressure is the required A1 controller. DQN is optional. Only A1 may write traffic signals. Synapse cannot access TraCI or actuate SUMO. Six people work as three pairs; only one sealed queue row is active. Course success is rows 01–09. Hosted API/UI is read-only over tagged evidence; Docker is not the native smoke test.
@@ -108,10 +108,10 @@ The requested “five Ws” are **Who, What, Where, When, and Why**. We add **Ho
 | Boundary | Required scope | What “done” means |
 |---|---|---|
 | **Course/reliability success** | Queue rows 01–09 | Reproducible scenario, evidence bundle, safety, baselines, Max-Pressure, A2/A3 requests, failure recovery, paired evaluation. |
-| **Full portfolio product** | Queue rows 01–14 | Adds A4/A5, FastAPI, Synapse, React view, and Tunis showcase. |
+| **Full portfolio product** | Queue rows 01–14 plus 10b/10c | Adds matched Max-Pressure trip KPIs, a deterministic evidence page, A4/A5, bounded Synapse agents, FastAPI, React view, and Tunis showcase. |
 | **Optional experiment** | Queue row 15 | DQN uses the same safety/evaluation contract after the cooperative core freezes. It may remain unbuilt. |
 
-Rows 01–09 are never cut. If time is lost, cut from the bottom of the queue: 15, 14, 13, 12, 11, then 10.
+Rows 01–09 and the new matched trip follow-up are never rewritten or cut. Approved order after Row 09: 10 -> 10b -> 10c -> 12 -> 11 -> 13 -> 14; Row 15 stays blocked. If time is lost, cut 15, 14, 13, then 11 before weakening deterministic evidence or control proof.
 
 ## 5.1 Chosen methodology spine
 
@@ -120,7 +120,7 @@ This is the **one** method CoFlow-5 uses. It is not a catalog of every multi-age
 | Layer | What it is | CoFlow-5 status |
 |---|---|---|
 | Design Thinking (IxDF) | Empathize → Define → Ideate → Prototype → Test | Stages 1–3 done as research-informed work. Stages 4–5 planned. |
-| Sealed harness queue | One row, one contract, machine `gate.json` | Prototype/Test execute as rows 01–09 (never cut), then 10–14, optional 15. |
+| Sealed harness queue | One row, one contract, machine `gate.json` | Prototype/Test execute as rows 01–09, then 10 -> 10b -> 10c -> 12 -> 11 -> 13 -> 14; optional 15 stays blocked. |
 | Data Science loop | Problem → success → data → EDA → prep → baseline → model → evaluation → error analysis → iteration → deployment → monitoring | Lives **inside** Prototype/Test, not instead of Design Thinking. |
 | Course outcomes (`SUMO_forStudents`) | Working prototype, experiments, baseline comparison, honest limits | Evidence over complexity. Native Windows smoke test before Docker/WSL. |
 
@@ -849,29 +849,27 @@ Capacity assumption to confirm tomorrow: **6–8 hours per person per week** out
 
 **Win:** the minimum course product is reproducible and professor-verifiable.
 
-### Week 10 — 25 November–1 December: complete intelligence and API
+### Week 10 — 25 November–1 December: complete advice and matched evidence
 
-**Sequential targets:** row 10, then row 11 only after row 10 gates.
+**Sequential targets:** row 10, then 10b, then 10c; each starts only after the prior gate passes.
 
-- Compare persistence and a simple tree baseline before accepting LightGBM for A4.
-- Add transparent EWMA/CUSUM residual detection and stale/silent behavior.
-- Implement deterministic A5 emission-proxy advice and displacement reporting.
-- Add bounded FastAPI run/status/evidence/cancellation operations.
-- Keep API access read-only toward active control capabilities.
+- Gate A4 persistence/simple-baseline forecasting, EWMA/CUSUM detection, and stale/silent behavior.
+- Gate deterministic A5 emission-proxy advice and displacement reporting.
+- Add matched Max-Pressure `trips.parquet` and `run_kpis.parquet` without changing locked Row 05.
+- Build the deterministic real-run English page with trip KPIs, requests, reason codes, safety, and limits.
 
-**Win:** situation/sustainability advice and a stable product boundary exist without weakening control.
+**Win:** advice and all three matched controllers have professor-verifiable evidence before explanation.
 
-### Week 11 — 2–8 December: explanations and operator view
+### Week 11 — 2–8 December: bounded explanations, then product views
 
-**Sequential targets:** row 12, then row 13 only after row 12 gates.
+**Sequential targets:** row 12, then row 11, then row 13; each starts only after the prior gate passes.
 
-- Build allow-listed ingestion, stable chunk IDs, provenance, and exact local retrieval.
-- Implement classify → fetch event → retrieve → draft/template → verify → answer/abstain.
-- Create a small golden operator-question set.
-- Add the React view over precomputed evidence.
-- Prove again that killing Synapse does not change traffic actions.
+- Build allow-listed retrieval with pinned `all-MiniLM-L6-v2`, stable chunks, provenance, and local search.
+- Bound shared `Qwen/Qwen2.5-1.5B-Instruct` roles: S1 plans and waits, S2 explains frozen evidence, and S3 audits or abstains.
+- Keep deterministic templates available and prove that killing Synapse cannot change traffic actions.
+- Add the read-only FastAPI over frozen evidence, then the React precomputed-evidence view.
 
-**Win:** a reviewer can inspect one event, its reason, supporting policy, comparison, and limitation.
+**Win:** a reviewer can inspect one event, its reason, supporting policy, comparison, and limitation without giving an LLM signal authority.
 
 ### Week 12 — 9–15 December: showcase and submission
 
@@ -964,7 +962,7 @@ Rows 01–09 pass their machine gates and demonstrate:
 
 ### Full portfolio target
 
-Rows 10–14 additionally provide bounded A4/A5 advice, FastAPI, verified/template Synapse, React evidence views, and a correctly labelled Tunis showcase.
+Rows 10, 10b, 10c, 12, 11, 13, and 14 additionally provide bounded A4/A5 advice, matched Max-Pressure trip KPIs, a deterministic evidence page, three bounded Synapse roles, FastAPI, React evidence views, and a correctly labelled Tunis showcase.
 
 ### Optional research
 

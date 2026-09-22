@@ -1,0 +1,132 @@
+{
+  "artifact_references": [
+    {
+      "bytes": 7820,
+      "path": "trips.parquet",
+      "rows": 84,
+      "schema_name": "max_pressure_trip_evidence",
+      "schema_version": 1,
+      "sha256": "sha256:997046bbfbee332847eedaccfc98f1981a9d4bafa3437ce2e7ca317d4d9fdddf"
+    },
+    {
+      "bytes": 8734,
+      "path": "run_kpis.parquet",
+      "rows": 1,
+      "schema_name": "max_pressure_run_kpi",
+      "schema_version": 1,
+      "sha256": "sha256:656f52a4d1d54d69fe54953167c246d0a3aadffcd77d19dfb7f14851ade04386"
+    },
+    {
+      "bytes": 3266,
+      "path": "matched-comparison.json",
+      "rows": 3,
+      "schema_name": "three_controller_matched_comparison",
+      "schema_version": 1,
+      "sha256": "sha256:bfeffa10f8d14d7f0d36d1924d2c974f56190d0845e9479e1ca667793cb1e383"
+    },
+    {
+      "bytes": 2515,
+      "path": "input-audit.json",
+      "rows": 10,
+      "schema_name": "locked_input_audit",
+      "schema_version": 1,
+      "sha256": "sha256:37a95e629b930a28842d8b88d05f7fb6d726127a59275833c163484ccf03eb15"
+    }
+  ],
+  "backend": "traci",
+  "claim_boundary": "One matched seed is insufficient for a winner or significance claim; report observed differences only.",
+  "configuration_hash": "sha256:f7748d3f7525a7cc77ce73990ee4f57a6d33f538409ac88980010312b992b174",
+  "configured_horizon_seconds": 120.0,
+  "contract_hash": "sha256:bed1b0a2a7f74c13412e234e9cf19f68d2c25549c2efd0087650f8c4be4882b0",
+  "controller": "cooperative-max-pressure",
+  "failure_reason": null,
+  "finalized_at": "2026-09-22T19:08:35.468613+00:00",
+  "immutable": true,
+  "locked_input_hashes": {
+    "harness/work/04-baselines/artifacts/actuated-run_manifest.json": "sha256:aab6f04c30314687167b2d5c169353b81b20bf42e2086d02aae84f5bb63a604c",
+    "harness/work/04-baselines/artifacts/baseline_trips.parquet": "sha256:a04c61d554b8ae14c42c285acfe37178fa5fad229df1f65cb9b2a2e066fc7750",
+    "harness/work/04-baselines/artifacts/fixed-time-run_manifest.json": "sha256:298c2f171fd067797ed4bb91740fb9df5af13aa0e4208a5ee4f71509295bf0fe",
+    "harness/work/04-baselines/artifacts/run_kpis.parquet": "sha256:7ec2068dcb758bb1bcbc280f669f8bc8356635cf784b0db2d49271d8fcc3d350",
+    "harness/work/05-max-pressure/artifacts/controller-audit.json": "sha256:447eb5322a3b9b0de2b1556e1fc2d2dbcb0d9cf223af2e516452d5c7277251a2",
+    "harness/work/05-max-pressure/artifacts/run_manifest.json": "sha256:79d6e20b50ec5039dfaab88c63a648f7dcc0161443000056188459f3f2d0c795",
+    "scenarios/baselines/baselines.rou.xml": "sha256:2016d166bd8775011fb243a43d21bc6368d4c63a99502184530c04c875a15898",
+    "scenarios/max-pressure/max-pressure.sumocfg": "sha256:89ccbab7401eb17841350904b7b5fc967a0140e8c815e62f5ce4f117aa463ca2",
+    "scenarios/max-pressure/max-pressure.tls.xml": "sha256:62384aff292a3285c9a53e4aae5932b47495233e53814a18f03401d87d1ef86e",
+    "scenarios/safety-mask/safety.net.xml": "sha256:6656468162833f60b757261d55da2e4f7febca84d2c10a1b9c5805a1d0a5b6ac"
+  },
+  "native_command": [
+    "C:\\Users\\dell\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "C:\\Users\\dell\\Downloads\\sumo\\scripts\\generate_max_pressure_trip_artifacts.py"
+  ],
+  "run_id": "1333dbcd-d653-5e8e-b3d5-94de7967a7c8",
+  "runtime_audit": {
+    "accepted_command_count": 120,
+    "actual_traci_execution": true,
+    "advisory_message_count": 1,
+    "completed_trips": 70,
+    "decision_count": 120,
+    "event_sets_match": true,
+    "planned_trips": 84,
+    "reinforcement_learning_required": false,
+    "rejected_or_conflicting_executed_commands": 0,
+    "safety_event_count": 120,
+    "unfinished_trips": 14,
+    "writer_count_by_signal": {
+      "J0": 1
+    }
+  },
+  "scenario_files": [
+    "scenarios/safety-mask/safety.net.xml",
+    "scenarios/baselines/baselines.rou.xml",
+    "scenarios/max-pressure/max-pressure.tls.xml",
+    "scenarios/max-pressure/max-pressure.sumocfg"
+  ],
+  "scenario_hash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+  "schema_version": 1,
+  "seeds": {
+    "evaluation": 37,
+    "sumo": 37
+  },
+  "source_hashes": {
+    "scripts/generate_max_pressure_trip_artifacts.py": "sha256:be67785cb834f58aba069d0a7278f7116ba14872ed3cc05b2d518af39aadd1eb",
+    "src/coflow5/control/a1_controller.py": "sha256:54eaac80d2469756a8107140202912a24a613c6fd3f0f7d4be370af7f7268aca",
+    "src/coflow5/control/max_pressure.py": "sha256:82cfc293364be510f600a8cbf6edcf80f43efdcbedc0d7c6b5fe0c39116a8ded",
+    "src/coflow5/control/safety.py": "sha256:3cdb3a2a93cf21610afb46318ff84f354bc41f4600c3d1542b8f30a2389188fb",
+    "src/coflow5/evidence/baseline_artifacts.py": "sha256:03eb577ff13b910932590c00d340d084e94922869cb102ff3989000bd766277b",
+    "src/coflow5/evidence/max_pressure_trip_artifacts.py": "sha256:afee4a6f0f00f5b46ee85cd8d30b54a206b03f20c847b1f9190525038a73aaf7",
+    "src/coflow5/sumo_adapter/max_pressure_trip_runner.py": "sha256:7ab282b040eb6873158c85eced00c9df0e8d6907fd512d73c04131258c57c5e8",
+    "src/coflow5/sumo_adapter/safety_runner.py": "sha256:40993d6b7c5b47eb45ebbe5f47b417a2eb8e232cc136dde45ea878099f34b4e8",
+    "src/coflow5/sumo_adapter/smoke_backends.py": "sha256:c4d5165dc4935815607248f166946c28cc5a0c4573e0a5d2bc1750efd9384353"
+  },
+  "source_revision": "55d9b6f550bf523114f66e2451e0f2f88f36ebc7",
+  "status": "completed",
+  "sumo_command": [
+    "C:\\Program Files (x86)\\Eclipse\\Sumo\\bin\\sumo.EXE",
+    "-c",
+    "C:\\Users\\dell\\Downloads\\sumo\\scenarios\\max-pressure\\max-pressure.sumocfg",
+    "--seed",
+    "37",
+    "--no-step-log",
+    "true",
+    "--duration-log.disable",
+    "true",
+    "--time-to-teleport",
+    "-1"
+  ],
+  "timings": {
+    "finished_at": "2026-09-22T19:08:35.284000+00:00",
+    "simulation_begin": 0.0,
+    "simulation_end": 120.0,
+    "simulation_steps": 120,
+    "started_at": "2026-09-22T19:08:33.266537+00:00",
+    "wall_seconds": 2.1454758000036236
+  },
+  "versions": {
+    "coflow5": "0.1.0",
+    "pyarrow": "21.0.0",
+    "pydantic": "2.11.7",
+    "python": "3.11.9",
+    "sumo": "1.27.1",
+    "traci": "1.27.1"
+  }
+}

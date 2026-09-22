@@ -74,6 +74,7 @@ def run_native_max_pressure_scenario(
     seed: int,
     advisories: Sequence[AdvisoryRequest] = (),
     horizon_seconds: float = 120.0,
+    sumo_extra_args: Sequence[str] = (),
 ) -> NativeMaxPressureResult:
     """Run cooperative Max-Pressure through the sole A1 TraCI write capability."""
     traci = load_traci()
@@ -90,6 +91,7 @@ def run_native_max_pressure_scenario(
         "true",
         "--time-to-teleport",
         "-1",
+        *tuple(sumo_extra_args),
     )
     traci.start(list(command), label=label, stdout=None)
     connection = traci.getConnection(label)

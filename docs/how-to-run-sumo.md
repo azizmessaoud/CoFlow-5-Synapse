@@ -4,7 +4,7 @@ Queue truth: [harness/queue.tsv](../harness/queue.tsv).
 
 - Row **01** is `blocked` (libsumo / Windows application control). TraCI still works.
 - Rows **02–09** are `gated` on native TraCI. That is the course Control-plane prototype.
-- Rows **10–14** are `todo`. Row **15** stays `blocked`.
+- Remaining order: **10 -> 10b Max-Pressure trip KPIs -> 10c deterministic evidence page -> 12 Synapse agents -> 11 API -> 13 React -> 14 Tunis**. Row **15** stays `blocked`.
 
 Two different run actions:
 

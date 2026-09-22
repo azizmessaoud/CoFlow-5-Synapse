@@ -1,0 +1,109 @@
+{
+  "id": "10b-max-pressure-trip-kpis",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:bed1b0a2a7f74c13412e234e9cf19f68d2c25549c2efd0087650f8c4be4882b0",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_max_pressure_trip_runner.py -q",
+      "exitCode": 0,
+      "output": "3 passed"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_max_pressure_trip_kpis.py -q",
+      "exitCode": 0,
+      "output": "4 passed"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q",
+      "exitCode": 0,
+      "output": "9 passed"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/run_manifest.json",
+    "artifacts/trips.parquet",
+    "artifacts/run_kpis.parquet",
+    "artifacts/matched-comparison.json",
+    "artifacts/input-audit.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "artifactChecks": {
+    "pass": true,
+    "exactArtifactCount": 5,
+    "runId": "1333dbcd-d653-5e8e-b3d5-94de7967a7c8",
+    "manifestHash": "sha256:2949ac8d7bf36b5f876cc697a3927a38e12f9f1e6e9dd71cf8453f57e1d90c87",
+    "artifactHashes": {
+      "trips.parquet": "sha256:997046bbfbee332847eedaccfc98f1981a9d4bafa3437ce2e7ca317d4d9fdddf",
+      "run_kpis.parquet": "sha256:656f52a4d1d54d69fe54953167c246d0a3aadffcd77d19dfb7f14851ade04386",
+      "matched-comparison.json": "sha256:bfeffa10f8d14d7f0d36d1924d2c974f56190d0845e9479e1ca667793cb1e383",
+      "input-audit.json": "sha256:37a95e629b930a28842d8b88d05f7fb6d726127a59275833c163484ccf03eb15"
+    },
+    "schemasExact": true,
+    "sourceHashesValid": 9,
+    "identityJoinErrors": 0
+  },
+  "inputChecks": {
+    "pass": true,
+    "lockedInputCount": 10,
+    "lockedInputHashMismatches": 0,
+    "lockedInputsChangedDuringGeneration": false,
+    "row05ArtifactsModified": false,
+    "row05FrozenSourceDriftCount": 1,
+    "row05DriftLimitedToApprovedDefaultEmptyLaunchHook": true
+  },
+  "parityChecks": {
+    "pass": true,
+    "scenarioHash": "sha256:152b75ac1da3e313b75a952d39e7ff1089d47f258d867b8932dd8a997130fdce",
+    "seed": 37,
+    "configuredHorizonSeconds": 120.0,
+    "plannedTripsPerController": 84,
+    "controllers": ["fixed-time", "actuated", "cooperative-max-pressure"]
+  },
+  "tripChecks": {
+    "pass": true,
+    "tripRows": 84,
+    "uniqueTripIds": 84,
+    "completedTrips": 70,
+    "activeAtHorizon": 14,
+    "notDeparted": 0,
+    "kpiRecomputationMismatches": 0,
+    "p95Rule": "linear rank (n - 1) * 0.95"
+  },
+  "maxPressureKpis": {
+    "completionRate": 0.8333333333333334,
+    "meanDurationSeconds": 36.32857142857143,
+    "p95DurationSeconds": 51.0,
+    "meanWaitingSeconds": 14.214285714285714,
+    "p95WaitingSeconds": 25.0,
+    "totalTimeLossSeconds": 1480.4722750000001,
+    "standstillVehicleSeconds": 1255,
+    "teleportEvents": 0
+  },
+  "nativeChecks": {
+    "pass": true,
+    "actualTraciExecution": true,
+    "decisions": 120,
+    "safetyEvents": 120,
+    "acceptedCommands": 120,
+    "writerCountBySignal": {"J0": 1},
+    "eventSetsMatch": true,
+    "rejectedOrConflictingExecutedCommands": 0,
+    "reinforcementLearningRequired": false
+  },
+  "honestyChecks": {
+    "pass": true,
+    "oneSeedOnly": true,
+    "significanceTestPerformed": false,
+    "winnerClaim": null,
+    "mixedAndNegativeResultsRetained": true,
+    "advisoryDifferenceDisclosed": true
+  },
+  "boundaryChecks": {
+    "pass": true,
+    "forbiddenImportTests": 9,
+    "evidenceLayerActuation": false,
+    "protectedDestinationGuardCases": 16,
+    "independentAudit": "PASS_READY_TO_GATE"
+  }
+}

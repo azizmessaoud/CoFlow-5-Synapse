@@ -4,134 +4,48 @@
   "openDeltas": 0,
   "contractHash": "sha256:0dbfcf78f3c7237020453c93a0e094257694ecc5374e8c942d2f1209b058ff19",
   "testsRun": [
-    {
-      "command": "python -m pytest tests/acceptance/test_a2_emergency.py -q",
-      "exitCode": 0,
-      "output": "3 passed"
-    },
-    {
-      "command": "python -m pytest tests/acceptance/test_a3_multimodal.py -q",
-      "exitCode": 0,
-      "output": "3 passed"
-    },
-    {
-      "command": "python -m pytest tests/contracts/test_request_reply_joins.py -q",
-      "exitCode": 0,
-      "output": "3 passed"
-    },
-    {
-      "command": "python -m pytest tests/architecture/test_forbidden_imports.py -q",
-      "exitCode": 0,
-      "output": "9 passed"
-    }
-  ],
-  "regressionTests": [
-    {
-      "command": "python -m pytest tests/contracts/test_message_envelope.py tests/properties/test_message_board.py -q",
-      "exitCode": 0,
-      "output": "10 passed"
-    }
+    {"command": "python -m pytest tests/acceptance/test_a2_emergency.py -q", "exitCode": 0, "output": "3 passed in 1.68s"},
+    {"command": "python -m pytest tests/acceptance/test_a3_multimodal.py -q", "exitCode": 0, "output": "6 passed in 1.69s"},
+    {"command": "python -m pytest tests/contracts/test_request_reply_joins.py -q", "exitCode": 0, "output": "3 passed in 4.54s"},
+    {"command": "python -m pytest tests/architecture/test_forbidden_imports.py -q", "exitCode": 0, "output": "9 passed in 0.99s"}
   ],
   "artifactsPresent": [
-    "artifacts/run_manifest.json",
-    "artifacts/messages.parquet",
-    "artifacts/decision_events.parquet",
-    "artifacts/trips.parquet",
+    "artifacts/run_manifest.json", "artifacts/messages.parquet",
+    "artifacts/decision_events.parquet", "artifacts/trips.parquet",
     "artifacts/cooperation-kpis.parquet"
   ],
   "decidedBy": "tests-and-files",
-  "canonicalEvidence": {
-    "runId": "4fa7a89a-baa2-4c2c-bdb9-b2e79c18dea7",
-    "scenarioHash": "sha256:41603ecf9459d692a46f87056b141b63335978f54da00775eb0211257112e604",
-    "artifactSetExact": true,
-    "artifactHashErrors": 0,
-    "sourceHashErrors": 0,
-    "scenarioHashMatchesAssets": true,
-    "testOutputsIsolatedFromCanonicalPack": true
-  },
   "joinChecks": {
-    "pass": true,
-    "joinKeys": [
-      "run_id",
-      "scenario_hash",
-      "message_id",
-      "event_id"
-    ],
-    "requestCount": 7,
-    "replyCount": 7,
-    "decisionCount": 7,
-    "orphanReferences": 0,
-    "identityErrors": 0,
-    "eventIdsUnique": true
+    "pass": true, "requestCount": 7, "replyCount": 7, "decisionCount": 7,
+    "tripRows": 46, "orphanReferences": 0, "identityErrors": 0,
+    "duplicateEventIds": 0, "artifactHashErrors": 0
   },
-  "reasonCodeChecks": {
-    "pass": true,
-    "activeCrossingOverEmergency": "REJECTED_PEDESTRIAN_CLEARANCE",
-    "selectedEmergency": "ACCEPTED_EMERGENCY_PRIORITY",
-    "conflictingEmergency": "REJECTED_SAME_TIER_TIEBREAK",
-    "blockedDownstream": "REJECTED_DOWNSTREAM_BLOCKED"
-  },
-  "authorityChecks": {
-    "pass": true,
-    "signalOwner": "A1_FLOW",
-    "specialistSignalWrites": 0,
-    "pedestrianClearanceTruncations": 0,
-    "earlyBusPriorityRequests": 0,
-    "postPassageRecoveryCompleted": true,
-    "requestActionsUseDeterministicSafetyMask": true,
-    "localFlowAfterRecoveryUsesCooperativeMaxPressure": true
-  },
-  "importChecks": {
-    "pass": true,
-    "violations": 0,
-    "a2A3Forbidden": [
-      "traci",
-      "libsumo",
-      "signal_executor",
-      "langgraph",
-      "openai",
-      "anthropic"
-    ],
+  "forbiddenImportChecks": {
+    "pass": true, "violations": 0, "specialistSignalWrites": 0,
+    "a2A3SumoBindingImports": 0, "hostedLlmOrLangGraphImports": 0,
     "specialistSafetyBypass": false
   },
   "schemaChecks": {
-    "pass": true,
-    "errors": 0,
-    "schemaVersion": 1,
-    "validated": [
-      "RunManifest",
-      "cooperation_message",
-      "request_decision",
-      "paired_native_cooperation_trip",
-      "cooperation_kpi"
-    ]
+    "pass": true, "parquetSchemasChecked": 4, "manifestModelsChecked": 1,
+    "schemaErrors": 0, "artifactMissing": 0, "artifactCorrupt": 0
   },
-  "runtimeChecks": {
-    "pass": true,
-    "platform": "native-windows",
-    "python": "3.11.9",
-    "sumo": "1.27.1",
-    "traci": "1.27.1",
-    "backend": "traci",
-    "simulationSteps": 97,
-    "nativeTripRows": 46,
-    "sumoCommandRecorded": true
+  "cooperationChecks": {
+    "pass": true, "activeCrossingOutranksEmergency": true,
+    "twoEmergencyArbitrationDeterministic": true, "blockedDownstreamRejected": true,
+    "postPassageRecoveryCompleted": true, "pedestrianDeadlineBounded": true,
+    "earlyOrOnTimeBusRequests": 0, "lateOrHeadwayTransitEvidenceRequired": true,
+    "nonFiniteA3EvidenceRejected": true, "pedestrianClearanceTruncations": 0
   },
   "evidenceChecks": {
-    "pass": true,
-    "allTrafficRowsFromPairedNativeTraCI": true,
-    "trafficActorTypes": [
-      "civilian",
-      "emergency",
-      "transit"
-    ],
-    "emergencyEffectsSeparate": true,
-    "civilianDelaySeparate": true,
-    "pedestrianWaitAndClearanceSeparate": true,
-    "transitRegularitySeparate": true,
-    "pedestrianEvidenceLabelledSimulatedNotRoadside": true,
-    "transitExternalityLabelledRequestEstimateNotCausal": true,
-    "noLivesSavedClaim": true,
-    "noMeasuredAirQualityClaim": true
+    "pass": true, "emergencyEffectsSeparate": true, "civilianDelaySeparate": true,
+    "pedestrianWaitAndClearanceSeparate": true, "transitRegularitySeparate": true,
+    "noLivesSavedClaim": true, "noMeasuredAirQualityClaim": true
+  },
+  "runtimeChecks": {
+    "platform": "native-windows", "python": "3.11.9", "sumo": "1.27.1",
+    "traci": "1.27.1", "backend": "traci", "simulationSteps": 97,
+    "run_id": "fef734cb-d035-42a9-ab69-5fb09a02bf8d",
+    "scenario_hash": "sha256:41603ecf9459d692a46f87056b141b63335978f54da00775eb0211257112e604",
+    "testOutputsIsolatedFromCanonicalPack": true
   }
 }

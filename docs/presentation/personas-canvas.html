@@ -61,7 +61,13 @@
       align-items: center;
       justify-content: center;
       background: #d7eaf7;
-      font-size: 64px;
+      overflow: hidden;
+      padding: 0;
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .frust { grid-column: 2; grid-row: 2; }
     .perso { grid-column: 3; grid-row: 2; }
@@ -130,7 +136,7 @@
 
   <article class="sheet">
     <div class="nom">Name: Amara</div>
-    <div class="avatar" aria-hidden="true">👵</div>
+    <div class="avatar"><img src="personas/p1-amara.png" alt="Illustrated portrait of Amara" /></div>
     <div class="box frust">
       <h2>Frustrations and fears:</h2>
       <p>She is afraid she will still be on the crossing when cars get a green. Waiting makes her tired. If the green is too short, she feels unsafe. She fears the light is designed only for young, fast walkers.</p>
@@ -171,7 +177,7 @@
 
   <article class="sheet">
     <div class="nom">Name: David</div>
-    <div class="avatar">🚚</div>
+    <div class="avatar"><img src="personas/p2-david.png" alt="Illustrated portrait of David" /></div>
     <div class="box frust">
       <h2>Frustrations and fears:</h2>
       <p>He can accept a longer trip. He cannot accept not knowing if it will take 20 or 50 minutes. Small delays stack up and he misses delivery windows. He fears “average speed” that hides the worst days.</p>
@@ -212,7 +218,7 @@
 
   <article class="sheet">
     <div class="nom">Name: Chidi</div>
-    <div class="avatar">🚌</div>
+    <div class="avatar"><img src="personas/p3-chidi.png" alt="Illustrated portrait of Chidi" /></div>
     <div class="box frust">
       <h2>Frustrations and fears:</h2>
       <p>He waits a long time, then three buses arrive together. He misses his connection. He fears “bus priority” only means “faster buses” when he needs <em>regular</em> buses.</p>
@@ -253,7 +259,7 @@
 
   <article class="sheet">
     <div class="nom">Name: Rosa</div>
-    <div class="avatar">🖥️</div>
+    <div class="avatar"><img src="personas/p4-rosa.png" alt="Illustrated portrait of Rosa" /></div>
     <div class="box frust">
       <h2>Frustrations and fears:</h2>
       <p>She cannot see why a bus got (or did not get) priority. With no history she cannot explain an incident. She fears a “black box” she will be asked to defend.</p>
@@ -294,7 +300,7 @@
 
   <article class="sheet">
     <div class="nom">Name: Marcus</div>
-    <div class="avatar">🚑</div>
+    <div class="avatar"><img src="personas/p5-marcus.png" alt="Illustrated portrait of Marcus" /></div>
     <div class="box frust">
       <h2>Frustrations and fears:</h2>
       <p>A green light is useless if the queue has nowhere to go. He fears jumping from junction to junction and leaving chaos behind (cars, buses, pedestrians). He does not want a simulation turned into “lives saved”.</p>
@@ -335,7 +341,7 @@
 
   <article class="sheet">
     <div class="nom">Name: Yuki</div>
-    <div class="avatar">🚦</div>
+    <div class="avatar"><img src="personas/p6-yuki.png" alt="Illustrated portrait of Yuki" /></div>
     <div class="box frust">
       <h2>Frustrations and fears:</h2>
       <p>She is still responsible if the system does something stupid. She fears stale data that looks normal. She does not want “smart” mode with no way to take back control — but takeover must never turn on two greens that conflict.</p>
@@ -376,7 +382,7 @@
 
   <article class="sheet">
     <div class="nom">Name: Maria</div>
-    <div class="avatar">🏫</div>
+    <div class="avatar"><img src="personas/p7-maria.png" alt="Illustrated portrait of Maria" /></div>
     <div class="box frust">
       <h2>Frustrations and fears:</h2>
       <p>She fears “cleaning” the main road by dumping queues and exhaust onto her street, by the school. A city-wide percentage means nothing to her. SUMO/HBEFA numbers are <em>not</em> the air she breathes: they are estimates.</p>
@@ -417,7 +423,7 @@
 
   <article class="sheet">
     <div class="nom">Name: Omar</div>
-    <div class="avatar">📡</div>
+    <div class="avatar"><img src="personas/p8-omar.png" alt="Illustrated portrait of Omar" /></div>
     <div class="box frust">
       <h2>Frustrations and fears:</h2>
       <p>Too many false alarms and he stops listening. An alert with no “why” does not help. A frozen screen can hide a failure. He fears we compare our detection to a “world average delay” that does not exist.</p>

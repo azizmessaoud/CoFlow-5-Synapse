@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <input>
+    <net-file value="watch.net.xml"/>
+    <route-files value="watch.rou.xml"/>
+    <additional-files value="watch.tls.xml"/>
+    <gui-settings-file value="watch.settings.xml"/>
+  </input>
+  <time>
+    <begin value="0"/>
+    <end value="120"/>
+    <step-length value="1"/>
+  </time>
+  <random_number>
+    <seed value="53"/>
+  </random_number>
+  <processing>
+    <time-to-teleport value="-1"/>
+  </processing>
+  <output>
+    <tripinfo-output value="watch-tripinfo.xml"/>
+    <tripinfo-output.write-unfinished value="true"/>
+  </output>
+  <report>
+    <no-step-log value="true"/>
+    <duration-log.disable value="true"/>
+  </report>
+</configuration>
