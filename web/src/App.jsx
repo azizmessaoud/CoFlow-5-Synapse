@@ -5,6 +5,7 @@ import {
   explanationRows,
   frameRows,
   limitationLines,
+  personaCards,
   reasonRows,
   recoveryState,
 } from "./evidence.js";
@@ -78,6 +79,14 @@ export default function App() {
   const explanations = page?.explanations.ok ? explanationRows(page.explanations.body) : [];
   const audits = page?.audits.ok ? auditRows(page.audits.body) : [];
   const limits = page?.limitations.ok ? limitationLines(page.limitations.body) : [];
+  const people = personaCards({
+    comparisons,
+    reasons,
+    frames,
+    explanations,
+    recovery: page?.events.ok ? recoveryState(page.events.body) : "",
+    opened: Boolean(page),
+  });
 
   return (
     <main>
@@ -94,6 +103,18 @@ export default function App() {
         <p>Loading API health…</p>
       )}
       {error ? <p className="error">{error}</p> : null}
+
+      <h2>People</h2>
+      <p>Each card reads the open run. A name is not an interview.</p>
+      <div className="people">
+        {people.map((person) => (
+          <article key={person.id}>
+            <h3>{person.name}</h3>
+            <p>{person.helps}</p>
+            <p>{person.text}</p>
+          </article>
+        ))}
+      </div>
 
       <h2>Runs</h2>
       {runs.length === 0 ? (

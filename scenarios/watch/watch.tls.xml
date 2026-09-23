@@ -2,10 +2,10 @@
 <additional>
   <!-- Link order in watch.net.xml is north, east, south, west, two vehicle lanes each. -->
   <tlLogic id="J0" type="static" programID="classroom-fixed-time" offset="0">
-    <phase duration="30" state="gGrrgGrr" name="North-South green"/>
+    <phase duration="30" state="GGrrGGrr" name="North-South green"/>
     <phase duration="4" state="yyrryyrr" name="North-South yellow"/>
     <phase duration="2" state="rrrrrrrr" name="All red"/>
-    <phase duration="30" state="rrgGrrgG" name="East-West green"/>
+    <phase duration="30" state="rrGGrrGG" name="East-West green"/>
     <phase duration="4" state="rryyrryy" name="East-West yellow"/>
     <phase duration="2" state="rrrrrrrr" name="All red"/>
   </tlLogic>

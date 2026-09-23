@@ -1,0 +1,41 @@
+{
+  "contract_version": 1,
+  "id": "10e-graph-growth-spec",
+  "kind": "spec",
+  "persona_or_hmw": "P2 David; P6 Yuki; P7 Omar primary, with bounded A2/A3/A5 and Synapse extensions — make growth behavior measurable and graph-aware without adding a signal writer",
+  "stage": "prototype-test-planning",
+  "depends_on": ["05-max-pressure", "09-eval-harness", "10b-max-pressure-trip-kpis", "10d-ideate-finalization"],
+  "must_pass": [
+    "state the measured limitation that current A1 controls one J0 and one 84-trip one-seed cell where superiority and growth robustness are not established",
+    "recommend a four-junction directed benchmark before any GNN, DQN, or city-scale claim",
+    "define immutable junction, movement, edge, neighbour-freshness, graph-frame, and demand-cell contracts",
+    "preserve cooperative Max-Pressure as A1 core, downstream blocking, deterministic safety, one writer per signal, and recovery Max-Pressure to actuated to fixed-time",
+    "specify paired fixed-time, actuated, local Max-Pressure, and graph-aware Max-Pressure comparisons across at least four demand levels and five seeds without requiring a winner",
+    "define correctness, liveness, robustness, tail, spillback, graph, agent, and performance metrics including unfinished trips",
+    "map graph-aware features to A1 through A5 and bounded Synapse without creating a new top-level agent or giving advice actuation authority",
+    "define a read-only operator graph frame and graphical layers that can feed optional SUMO GUI diagnosis and later React without UI to TraCI writes",
+    "identify exactly which RoadwayVR patterns are reusable and which direct phase, online RL, hard-coded, and evidence-free patterns are rejected",
+    "name 10f-graph-growth-benchmark as the next executable row with entry, exit, test, artifact, and stop conditions"
+  ],
+  "tests": ["py -3.11 -m pytest tests/acceptance/test_graph_growth_spec.py -q"],
+  "artifacts": [
+    ".scratch/coflow5-graph-growth/spec.md",
+    "harness/work/10e-graph-growth-spec/report.md"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named test exits zero and required artifacts exist",
+    "RoadwayVR is tutorial-only and not a dependency",
+    "graph observations fail stale or unavailable into local Max-Pressure rather than unsafe actuation",
+    "React and Synapse remain read-only over tagged evidence",
+    "10f is bounded to a four-junction benchmark and does not rewrite Rows 05 or 10b",
+    "gate.openDeltas is zero and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "RoadwayVR -> runtime dependency",
+    "Synapse|API|UI|A2|A3|A4|A5 -> TraCI signal write",
+    "graph coordinator -> second signal writer",
+    "GNN|DQN|online training -> required 10f path",
+    "growth pilot -> superiority, deployment, live Tunis, accident-prevention, lives-saved, or measured-air-quality claim"
+  ]
+}

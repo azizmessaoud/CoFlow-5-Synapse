@@ -7,6 +7,7 @@ import {
   explanationRows,
   frameRows,
   limitationLines,
+  personaCards,
   reasonRows,
   recoveryState,
 } from "./evidence.js";
@@ -91,4 +92,35 @@ test("explanations keep citations and abstentions", () => {
 test("limitations stay a list of source strings", () => {
   assert.deepEqual(limitationLines({ limitations: ["No lives saved."] }), ["No lives saved."]);
   assert.deepEqual(limitationLines({}), []);
+});
+
+test("persona cards name the seven people from the open record", () => {
+  const closed = personaCards({ opened: false });
+  assert.deepEqual(closed.map((person) => person.name), [
+    "Amara", "David", "Chidi", "Rosa", "Marcus", "Yuki", "Omar",
+  ]);
+  assert.equal(closed[0].text, "Open a run. This card reads that record.");
+
+  const cards = Object.fromEntries(personaCards({
+    opened: true,
+    comparisons: comparisonRows({
+      items: [{ controller: "graph-aware-cooperative-max-pressure", planned_trips: 20, completed_trips: 12, unfinished_trips: 8 }],
+    }),
+    reasons: reasonRows({
+      items: [{ event_id: "9fa9db22-b826-53cc-92eb-319b50688327", message_id: null, reason_code: "GRAPH_NEIGHBOUR_USED", downstream_blocked: false, run_id: "0db24e7b-133e-5b79-ba0c-171f1c0aaf34" }],
+    }),
+    frames: frameRows({ items: [{ simulation_time: 0, mode: "graph-aware-cooperative-max-pressure" }] }),
+    explanations: explanationRows({
+      items: [{ request_id: "golden-s2-abstain", status: "abstained", abstention_reason: "retrieval-miss", event_facts: { event_id: "9fa9db22-b826-53cc-92eb-319b50688327" }, citations: [] }],
+    }),
+    recovery: recoveryState({ items: [] }),
+  }).map((person) => [person.id, person.text]));
+
+  assert.equal(cards.amara, "No crossing record is in this run.");
+  assert.match(cards.david, /8 unfinished of 20 planned/);
+  assert.equal(cards.chidi, "No bus request is in this run.");
+  assert.match(cards.rosa, /golden-s2-abstain abstained: retrieval-miss/);
+  assert.match(cards.marcus, /exits were open/);
+  assert.match(cards.yuki, /No recovery transition/);
+  assert.match(cards.omar, /not a statement that the road is healthy/);
 });

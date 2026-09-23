@@ -1,0 +1,1100 @@
+{
+  "claim_boundary": "Deterministic fixture outcomes show behavior, not native SUMO superiority or deployment performance.",
+  "graph_completed_fewer_groups": 4,
+  "graph_completed_more_groups": 8,
+  "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+  "paired_group_count": 20,
+  "paired_groups": [
+    {
+      "controllers": [
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.5457142857142856,
+          "max_service_age_seconds": 40.014285714285705,
+          "p95_waiting_time_s": 17.903499999999998,
+          "planned_trips": 24,
+          "run_id": "c5752bdf-3b9e-5baf-a481-35b2996c2b11",
+          "unfinished_trips": 1
+        },
+        {
+          "completed_trips": 24,
+          "completion_rate": 1.0,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.4857142857142856,
+          "max_service_age_seconds": 36.71428571428571,
+          "p95_waiting_time_s": 15.384149999999998,
+          "planned_trips": 24,
+          "run_id": "c466a8ac-3b05-5177-9183-8ad02bd51364",
+          "unfinished_trips": 0
+        },
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.5057142857142856,
+          "max_service_age_seconds": 37.8142857142857,
+          "p95_waiting_time_s": 16.3664,
+          "planned_trips": 24,
+          "run_id": "8ec4badb-fbc6-59d5-9585-446b80e8891a",
+          "unfinished_trips": 1
+        },
+        {
+          "completed_trips": 22,
+          "completion_rate": 0.9166666666666666,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.4957142857142856,
+          "max_service_age_seconds": 37.264285714285705,
+          "p95_waiting_time_s": 15.466299999999999,
+          "planned_trips": 24,
+          "run_id": "b0f50769-defe-5736-8ba4-adecf1a9ab2c",
+          "unfinished_trips": 2
+        }
+      ],
+      "demand_scale": 0.75,
+      "seed": 11
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.5457142857142856,
+          "max_service_age_seconds": 40.014285714285705,
+          "p95_waiting_time_s": 18.3731,
+          "planned_trips": 24,
+          "run_id": "7685e74a-02d3-5e90-80ce-2d013482c782",
+          "unfinished_trips": 1
+        },
+        {
+          "completed_trips": 24,
+          "completion_rate": 1.0,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.4857142857142856,
+          "max_service_age_seconds": 36.71428571428571,
+          "p95_waiting_time_s": 15.367849999999999,
+          "planned_trips": 24,
+          "run_id": "33acdc51-381f-5147-beef-c7547e9f464a",
+          "unfinished_trips": 0
+        },
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.5057142857142856,
+          "max_service_age_seconds": 37.8142857142857,
+          "p95_waiting_time_s": 16.405,
+          "planned_trips": 24,
+          "run_id": "7d93288b-bae2-5d75-8f10-2ae615ba2494",
+          "unfinished_trips": 1
+        },
+        {
+          "completed_trips": 24,
+          "completion_rate": 1.0,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.4957142857142856,
+          "max_service_age_seconds": 37.264285714285705,
+          "p95_waiting_time_s": 15.902549999999998,
+          "planned_trips": 24,
+          "run_id": "74da8f67-9735-53a9-9cf3-2c8f04583a85",
+          "unfinished_trips": 0
+        }
+      ],
+      "demand_scale": 0.75,
+      "seed": 23
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.5457142857142856,
+          "max_service_age_seconds": 40.014285714285705,
+          "p95_waiting_time_s": 17.2776,
+          "planned_trips": 24,
+          "run_id": "c44517ab-c0e1-5721-bb52-4fd1bc0234db",
+          "unfinished_trips": 1
+        },
+        {
+          "completed_trips": 24,
+          "completion_rate": 1.0,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.4857142857142856,
+          "max_service_age_seconds": 36.71428571428571,
+          "p95_waiting_time_s": 13.79765,
+          "planned_trips": 24,
+          "run_id": "d7ccf71f-1509-595c-b26d-929b8ca9f884",
+          "unfinished_trips": 0
+        },
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.5057142857142856,
+          "max_service_age_seconds": 37.8142857142857,
+          "p95_waiting_time_s": 14.980599999999999,
+          "planned_trips": 24,
+          "run_id": "b3af6a7d-4401-5371-86b9-b9639bf7dbef",
+          "unfinished_trips": 1
+        },
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.4957142857142856,
+          "max_service_age_seconds": 37.264285714285705,
+          "p95_waiting_time_s": 14.7351,
+          "planned_trips": 24,
+          "run_id": "ae64168d-14d8-535f-b80d-479f86b2c3cb",
+          "unfinished_trips": 1
+        }
+      ],
+      "demand_scale": 0.75,
+      "seed": 37
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.5457142857142856,
+          "max_service_age_seconds": 40.014285714285705,
+          "p95_waiting_time_s": 17.8161,
+          "planned_trips": 24,
+          "run_id": "59a8c009-c9a0-5935-80c3-dbf262f8925c",
+          "unfinished_trips": 1
+        },
+        {
+          "completed_trips": 24,
+          "completion_rate": 1.0,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.4857142857142856,
+          "max_service_age_seconds": 36.71428571428571,
+          "p95_waiting_time_s": 15.117849999999999,
+          "planned_trips": 24,
+          "run_id": "9e8599a3-8190-51c3-9663-c26ea891cc8b",
+          "unfinished_trips": 0
+        },
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.5057142857142856,
+          "max_service_age_seconds": 37.8142857142857,
+          "p95_waiting_time_s": 16.606299999999997,
+          "planned_trips": 24,
+          "run_id": "47874f42-f0b0-5ff8-b9ea-8390e08e2239",
+          "unfinished_trips": 1
+        },
+        {
+          "completed_trips": 24,
+          "completion_rate": 1.0,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.4957142857142856,
+          "max_service_age_seconds": 37.264285714285705,
+          "p95_waiting_time_s": 14.9031,
+          "planned_trips": 24,
+          "run_id": "18d1590c-904a-57bf-bb47-9af191adef5c",
+          "unfinished_trips": 0
+        }
+      ],
+      "demand_scale": 0.75,
+      "seed": 53
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.5457142857142856,
+          "max_service_age_seconds": 40.014285714285705,
+          "p95_waiting_time_s": 18.1967,
+          "planned_trips": 24,
+          "run_id": "66bf8b58-5426-58bf-a7c8-9ce234b1b320",
+          "unfinished_trips": 1
+        },
+        {
+          "completed_trips": 24,
+          "completion_rate": 1.0,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.4857142857142856,
+          "max_service_age_seconds": 36.71428571428571,
+          "p95_waiting_time_s": 15.048,
+          "planned_trips": 24,
+          "run_id": "3f97d200-0a9f-55cc-9953-9ec397cfd93d",
+          "unfinished_trips": 0
+        },
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.5057142857142856,
+          "max_service_age_seconds": 37.8142857142857,
+          "p95_waiting_time_s": 16.2679,
+          "planned_trips": 24,
+          "run_id": "0e572c14-187b-592e-b41a-63e178ea6128",
+          "unfinished_trips": 1
+        },
+        {
+          "completed_trips": 23,
+          "completion_rate": 0.9583333333333334,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.4957142857142856,
+          "max_service_age_seconds": 37.264285714285705,
+          "p95_waiting_time_s": 15.936499999999999,
+          "planned_trips": 24,
+          "run_id": "c3989187-27a1-50c5-9a37-5152245704ea",
+          "unfinished_trips": 1
+        }
+      ],
+      "demand_scale": 0.75,
+      "seed": 71
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 28,
+          "completion_rate": 0.875,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6657142857142857,
+          "max_service_age_seconds": 46.614285714285714,
+          "p95_waiting_time_s": 19.470149999999997,
+          "planned_trips": 32,
+          "run_id": "4907683c-6e30-597b-8060-0fe39590c1af",
+          "unfinished_trips": 4
+        },
+        {
+          "completed_trips": 30,
+          "completion_rate": 0.9375,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6057142857142858,
+          "max_service_age_seconds": 43.31428571428572,
+          "p95_waiting_time_s": 17.327699999999997,
+          "planned_trips": 32,
+          "run_id": "de6fcc0a-777e-5592-a25f-f5df8387b183",
+          "unfinished_trips": 2
+        },
+        {
+          "completed_trips": 29,
+          "completion_rate": 0.90625,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6257142857142857,
+          "max_service_age_seconds": 44.41428571428571,
+          "p95_waiting_time_s": 17.2886,
+          "planned_trips": 32,
+          "run_id": "43ee3d8f-b396-5f79-8e24-39dff754d7ff",
+          "unfinished_trips": 3
+        },
+        {
+          "completed_trips": 28,
+          "completion_rate": 0.875,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6157142857142857,
+          "max_service_age_seconds": 43.864285714285714,
+          "p95_waiting_time_s": 17.442700000000002,
+          "planned_trips": 32,
+          "run_id": "c5c4a305-fc6d-58ad-8192-ad00be3709ea",
+          "unfinished_trips": 4
+        }
+      ],
+      "demand_scale": 1.0,
+      "seed": 11
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 28,
+          "completion_rate": 0.875,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6657142857142857,
+          "max_service_age_seconds": 46.614285714285714,
+          "p95_waiting_time_s": 20.23755,
+          "planned_trips": 32,
+          "run_id": "2361d49e-6b31-5e17-bb01-d9ace932b83b",
+          "unfinished_trips": 4
+        },
+        {
+          "completed_trips": 30,
+          "completion_rate": 0.9375,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6057142857142858,
+          "max_service_age_seconds": 43.31428571428572,
+          "p95_waiting_time_s": 16.82285,
+          "planned_trips": 32,
+          "run_id": "a00ec920-80a1-5bed-b8d7-688c7bafbd3f",
+          "unfinished_trips": 2
+        },
+        {
+          "completed_trips": 29,
+          "completion_rate": 0.90625,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6257142857142857,
+          "max_service_age_seconds": 44.41428571428571,
+          "p95_waiting_time_s": 18.1466,
+          "planned_trips": 32,
+          "run_id": "9fc331c2-bb16-5beb-a68c-3e653f215a89",
+          "unfinished_trips": 3
+        },
+        {
+          "completed_trips": 30,
+          "completion_rate": 0.9375,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6157142857142857,
+          "max_service_age_seconds": 43.864285714285714,
+          "p95_waiting_time_s": 18.02035,
+          "planned_trips": 32,
+          "run_id": "136046aa-f649-5043-a342-085cff110848",
+          "unfinished_trips": 2
+        }
+      ],
+      "demand_scale": 1.0,
+      "seed": 23
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 28,
+          "completion_rate": 0.875,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6657142857142857,
+          "max_service_age_seconds": 46.614285714285714,
+          "p95_waiting_time_s": 20.3496,
+          "planned_trips": 32,
+          "run_id": "96eff488-d5f5-550c-979b-cab1aedbe67a",
+          "unfinished_trips": 4
+        },
+        {
+          "completed_trips": 30,
+          "completion_rate": 0.9375,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6057142857142858,
+          "max_service_age_seconds": 43.31428571428572,
+          "p95_waiting_time_s": 16.426650000000002,
+          "planned_trips": 32,
+          "run_id": "b408b28d-6289-514d-9f09-ced071d1f057",
+          "unfinished_trips": 2
+        },
+        {
+          "completed_trips": 29,
+          "completion_rate": 0.90625,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6257142857142857,
+          "max_service_age_seconds": 44.41428571428571,
+          "p95_waiting_time_s": 18.5624,
+          "planned_trips": 32,
+          "run_id": "17f3e06b-b3c6-5bac-afdd-a87e0d143100",
+          "unfinished_trips": 3
+        },
+        {
+          "completed_trips": 29,
+          "completion_rate": 0.90625,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6157142857142857,
+          "max_service_age_seconds": 43.864285714285714,
+          "p95_waiting_time_s": 17.9466,
+          "planned_trips": 32,
+          "run_id": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+          "unfinished_trips": 3
+        }
+      ],
+      "demand_scale": 1.0,
+      "seed": 37
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 28,
+          "completion_rate": 0.875,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6657142857142857,
+          "max_service_age_seconds": 46.614285714285714,
+          "p95_waiting_time_s": 20.57075,
+          "planned_trips": 32,
+          "run_id": "92852e63-5307-570d-bcc1-6d402a23a135",
+          "unfinished_trips": 4
+        },
+        {
+          "completed_trips": 30,
+          "completion_rate": 0.9375,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6057142857142858,
+          "max_service_age_seconds": 43.31428571428572,
+          "p95_waiting_time_s": 17.21155,
+          "planned_trips": 32,
+          "run_id": "c979e39e-3000-5ab0-aee3-45549419338f",
+          "unfinished_trips": 2
+        },
+        {
+          "completed_trips": 29,
+          "completion_rate": 0.90625,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6257142857142857,
+          "max_service_age_seconds": 44.41428571428571,
+          "p95_waiting_time_s": 18.6696,
+          "planned_trips": 32,
+          "run_id": "f234b8d0-f193-5d48-b009-3e3f2a7917bf",
+          "unfinished_trips": 3
+        },
+        {
+          "completed_trips": 30,
+          "completion_rate": 0.9375,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6157142857142857,
+          "max_service_age_seconds": 43.864285714285714,
+          "p95_waiting_time_s": 17.6229,
+          "planned_trips": 32,
+          "run_id": "af7c1955-9f37-5bd4-b4ef-79416f089076",
+          "unfinished_trips": 2
+        }
+      ],
+      "demand_scale": 1.0,
+      "seed": 53
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 28,
+          "completion_rate": 0.875,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6657142857142857,
+          "max_service_age_seconds": 46.614285714285714,
+          "p95_waiting_time_s": 20.1188,
+          "planned_trips": 32,
+          "run_id": "d1e931fc-fe2e-5f0b-bad0-8c5d0a019a1d",
+          "unfinished_trips": 4
+        },
+        {
+          "completed_trips": 30,
+          "completion_rate": 0.9375,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6057142857142858,
+          "max_service_age_seconds": 43.31428571428572,
+          "p95_waiting_time_s": 17.48895,
+          "planned_trips": 32,
+          "run_id": "7f67a6d9-b5dd-53c5-8ccb-d8a65eb30135",
+          "unfinished_trips": 2
+        },
+        {
+          "completed_trips": 29,
+          "completion_rate": 0.90625,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6257142857142857,
+          "max_service_age_seconds": 44.41428571428571,
+          "p95_waiting_time_s": 18.897599999999997,
+          "planned_trips": 32,
+          "run_id": "a00e8de2-17b5-59b6-8c35-d7e34d437ee4",
+          "unfinished_trips": 3
+        },
+        {
+          "completed_trips": 29,
+          "completion_rate": 0.90625,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.6157142857142857,
+          "max_service_age_seconds": 43.864285714285714,
+          "p95_waiting_time_s": 18.1034,
+          "planned_trips": 32,
+          "run_id": "88509793-c08d-597f-b8f8-fcf8129f1e62",
+          "unfinished_trips": 3
+        }
+      ],
+      "demand_scale": 1.0,
+      "seed": 71
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 33,
+          "completion_rate": 0.825,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7857142857142856,
+          "max_service_age_seconds": 53.21428571428571,
+          "p95_waiting_time_s": 22.3746,
+          "planned_trips": 40,
+          "run_id": "cc1d5f7f-6895-5672-a44e-28e933b7398d",
+          "unfinished_trips": 7
+        },
+        {
+          "completed_trips": 35,
+          "completion_rate": 0.875,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7257142857142856,
+          "max_service_age_seconds": 49.91428571428571,
+          "p95_waiting_time_s": 18.7146,
+          "planned_trips": 40,
+          "run_id": "5f53c493-53d6-55e4-93b3-964419bf579b",
+          "unfinished_trips": 5
+        },
+        {
+          "completed_trips": 34,
+          "completion_rate": 0.85,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7457142857142856,
+          "max_service_age_seconds": 51.014285714285705,
+          "p95_waiting_time_s": 20.1109,
+          "planned_trips": 40,
+          "run_id": "75ebea0b-292b-508b-9364-0185721313b6",
+          "unfinished_trips": 6
+        },
+        {
+          "completed_trips": 33,
+          "completion_rate": 0.825,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7357142857142855,
+          "max_service_age_seconds": 50.46428571428571,
+          "p95_waiting_time_s": 20.5064,
+          "planned_trips": 40,
+          "run_id": "91a0887f-5fe3-55bd-b455-03c0d7f700cb",
+          "unfinished_trips": 7
+        }
+      ],
+      "demand_scale": 1.25,
+      "seed": 11
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 33,
+          "completion_rate": 0.825,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7857142857142856,
+          "max_service_age_seconds": 53.21428571428571,
+          "p95_waiting_time_s": 22.8506,
+          "planned_trips": 40,
+          "run_id": "a8fb571d-4a51-5a10-b2af-8302aed4cac4",
+          "unfinished_trips": 7
+        },
+        {
+          "completed_trips": 35,
+          "completion_rate": 0.875,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7257142857142856,
+          "max_service_age_seconds": 49.91428571428571,
+          "p95_waiting_time_s": 19.4144,
+          "planned_trips": 40,
+          "run_id": "91439b4e-45d8-59f4-b239-d42c57bc3fb5",
+          "unfinished_trips": 5
+        },
+        {
+          "completed_trips": 34,
+          "completion_rate": 0.85,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7457142857142856,
+          "max_service_age_seconds": 51.014285714285705,
+          "p95_waiting_time_s": 20.02045,
+          "planned_trips": 40,
+          "run_id": "a97f787e-a89a-5dcf-bfd7-7ff2d9d3ea1e",
+          "unfinished_trips": 6
+        },
+        {
+          "completed_trips": 35,
+          "completion_rate": 0.875,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7357142857142855,
+          "max_service_age_seconds": 50.46428571428571,
+          "p95_waiting_time_s": 20.5561,
+          "planned_trips": 40,
+          "run_id": "11567431-aca2-5d33-9f30-6374f04d22d2",
+          "unfinished_trips": 5
+        }
+      ],
+      "demand_scale": 1.25,
+      "seed": 23
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 33,
+          "completion_rate": 0.825,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7857142857142856,
+          "max_service_age_seconds": 53.21428571428571,
+          "p95_waiting_time_s": 22.2212,
+          "planned_trips": 40,
+          "run_id": "cf5a8909-c9d6-50ae-821f-3522c5a15828",
+          "unfinished_trips": 7
+        },
+        {
+          "completed_trips": 35,
+          "completion_rate": 0.875,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7257142857142856,
+          "max_service_age_seconds": 49.91428571428571,
+          "p95_waiting_time_s": 19.674599999999998,
+          "planned_trips": 40,
+          "run_id": "ba23184c-f682-5772-bc71-5ad2b9a880e5",
+          "unfinished_trips": 5
+        },
+        {
+          "completed_trips": 34,
+          "completion_rate": 0.85,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7457142857142856,
+          "max_service_age_seconds": 51.014285714285705,
+          "p95_waiting_time_s": 20.67725,
+          "planned_trips": 40,
+          "run_id": "cbd2739f-e562-5b39-9405-c08f0ca54eec",
+          "unfinished_trips": 6
+        },
+        {
+          "completed_trips": 34,
+          "completion_rate": 0.85,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7357142857142855,
+          "max_service_age_seconds": 50.46428571428571,
+          "p95_waiting_time_s": 20.3065,
+          "planned_trips": 40,
+          "run_id": "ad08ee8c-b6e4-5886-b8cc-03b13d5f35b5",
+          "unfinished_trips": 6
+        }
+      ],
+      "demand_scale": 1.25,
+      "seed": 37
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 33,
+          "completion_rate": 0.825,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7857142857142856,
+          "max_service_age_seconds": 53.21428571428571,
+          "p95_waiting_time_s": 22.6672,
+          "planned_trips": 40,
+          "run_id": "b0951d16-ec8d-50ac-a2bc-75c518d86cf6",
+          "unfinished_trips": 7
+        },
+        {
+          "completed_trips": 35,
+          "completion_rate": 0.875,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7257142857142856,
+          "max_service_age_seconds": 49.91428571428571,
+          "p95_waiting_time_s": 19.585299999999997,
+          "planned_trips": 40,
+          "run_id": "e92b6471-20d8-5efe-948b-3053b14054cd",
+          "unfinished_trips": 5
+        },
+        {
+          "completed_trips": 34,
+          "completion_rate": 0.85,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7457142857142856,
+          "max_service_age_seconds": 51.014285714285705,
+          "p95_waiting_time_s": 20.391949999999998,
+          "planned_trips": 40,
+          "run_id": "9c477560-701a-55e8-a83e-800ce7cbc2a2",
+          "unfinished_trips": 6
+        },
+        {
+          "completed_trips": 35,
+          "completion_rate": 0.875,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7357142857142855,
+          "max_service_age_seconds": 50.46428571428571,
+          "p95_waiting_time_s": 19.7347,
+          "planned_trips": 40,
+          "run_id": "f8dc33a0-8d6b-5d84-bf3b-2a57e6b50282",
+          "unfinished_trips": 5
+        }
+      ],
+      "demand_scale": 1.25,
+      "seed": 53
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 33,
+          "completion_rate": 0.825,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7857142857142856,
+          "max_service_age_seconds": 53.21428571428571,
+          "p95_waiting_time_s": 22.284,
+          "planned_trips": 40,
+          "run_id": "ec0eda64-47f0-52cb-9e12-edd1fbb3f22d",
+          "unfinished_trips": 7
+        },
+        {
+          "completed_trips": 35,
+          "completion_rate": 0.875,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7257142857142856,
+          "max_service_age_seconds": 49.91428571428571,
+          "p95_waiting_time_s": 19.722,
+          "planned_trips": 40,
+          "run_id": "b78c591c-5590-50fe-adc5-88493882e927",
+          "unfinished_trips": 5
+        },
+        {
+          "completed_trips": 34,
+          "completion_rate": 0.85,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7457142857142856,
+          "max_service_age_seconds": 51.014285714285705,
+          "p95_waiting_time_s": 20.324949999999998,
+          "planned_trips": 40,
+          "run_id": "aa289d29-8a8c-5e3a-b5e5-c1d061afe43b",
+          "unfinished_trips": 6
+        },
+        {
+          "completed_trips": 34,
+          "completion_rate": 0.85,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.7357142857142855,
+          "max_service_age_seconds": 50.46428571428571,
+          "p95_waiting_time_s": 20.0606,
+          "planned_trips": 40,
+          "run_id": "7dade13c-10bb-54cd-9389-2e6288dec319",
+          "unfinished_trips": 6
+        }
+      ],
+      "demand_scale": 1.25,
+      "seed": 71
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 36,
+          "completion_rate": 0.75,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.9057142857142857,
+          "max_service_age_seconds": 59.81428571428572,
+          "p95_waiting_time_s": 25.236250000000002,
+          "planned_trips": 48,
+          "run_id": "59e8e05e-d262-552b-bb2e-d1d5d8fe1f0f",
+          "unfinished_trips": 12
+        },
+        {
+          "completed_trips": 40,
+          "completion_rate": 0.8333333333333334,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8457142857142858,
+          "max_service_age_seconds": 56.51428571428572,
+          "p95_waiting_time_s": 20.8436,
+          "planned_trips": 48,
+          "run_id": "55775fa6-07dc-5f78-ae82-e7ed149de108",
+          "unfinished_trips": 8
+        },
+        {
+          "completed_trips": 38,
+          "completion_rate": 0.7916666666666666,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8657142857142857,
+          "max_service_age_seconds": 57.614285714285714,
+          "p95_waiting_time_s": 22.75785,
+          "planned_trips": 48,
+          "run_id": "c27228f5-71c3-5e0b-99d3-97192382e981",
+          "unfinished_trips": 10
+        },
+        {
+          "completed_trips": 37,
+          "completion_rate": 0.7708333333333334,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8557142857142856,
+          "max_service_age_seconds": 57.06428571428571,
+          "p95_waiting_time_s": 22.1576,
+          "planned_trips": 48,
+          "run_id": "7c07d4a2-c091-5786-807b-1e7fe82487ca",
+          "unfinished_trips": 11
+        }
+      ],
+      "demand_scale": 1.5,
+      "seed": 11
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 36,
+          "completion_rate": 0.75,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.9057142857142857,
+          "max_service_age_seconds": 59.81428571428572,
+          "p95_waiting_time_s": 25.133499999999998,
+          "planned_trips": 48,
+          "run_id": "533d5014-843b-51e3-ae18-a33705f5d370",
+          "unfinished_trips": 12
+        },
+        {
+          "completed_trips": 40,
+          "completion_rate": 0.8333333333333334,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8457142857142858,
+          "max_service_age_seconds": 56.51428571428572,
+          "p95_waiting_time_s": 22.208099999999998,
+          "planned_trips": 48,
+          "run_id": "b3de4969-a70e-5791-bb8f-b935ba4495d8",
+          "unfinished_trips": 8
+        },
+        {
+          "completed_trips": 38,
+          "completion_rate": 0.7916666666666666,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8657142857142857,
+          "max_service_age_seconds": 57.614285714285714,
+          "p95_waiting_time_s": 22.65195,
+          "planned_trips": 48,
+          "run_id": "fb6602b5-dfcd-5c54-be02-20e5c640c13d",
+          "unfinished_trips": 10
+        },
+        {
+          "completed_trips": 39,
+          "completion_rate": 0.8125,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8557142857142856,
+          "max_service_age_seconds": 57.06428571428571,
+          "p95_waiting_time_s": 22.3652,
+          "planned_trips": 48,
+          "run_id": "528b6e13-d45e-53b3-9980-c938f1fef488",
+          "unfinished_trips": 9
+        }
+      ],
+      "demand_scale": 1.5,
+      "seed": 23
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 36,
+          "completion_rate": 0.75,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.9057142857142857,
+          "max_service_age_seconds": 59.81428571428572,
+          "p95_waiting_time_s": 24.99925,
+          "planned_trips": 48,
+          "run_id": "4ea02872-c300-5c07-a8e5-da43064555fc",
+          "unfinished_trips": 12
+        },
+        {
+          "completed_trips": 40,
+          "completion_rate": 0.8333333333333334,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8457142857142858,
+          "max_service_age_seconds": 56.51428571428572,
+          "p95_waiting_time_s": 21.58405,
+          "planned_trips": 48,
+          "run_id": "0ea17ebf-bd2c-5735-a63e-41bc39d50c82",
+          "unfinished_trips": 8
+        },
+        {
+          "completed_trips": 38,
+          "completion_rate": 0.7916666666666666,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8657142857142857,
+          "max_service_age_seconds": 57.614285714285714,
+          "p95_waiting_time_s": 22.247149999999998,
+          "planned_trips": 48,
+          "run_id": "75341720-9cd6-51b0-a6b5-cb2443628fa4",
+          "unfinished_trips": 10
+        },
+        {
+          "completed_trips": 38,
+          "completion_rate": 0.7916666666666666,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8557142857142856,
+          "max_service_age_seconds": 57.06428571428571,
+          "p95_waiting_time_s": 21.98215,
+          "planned_trips": 48,
+          "run_id": "40f85d13-e821-521e-9af2-ffd22013e9f0",
+          "unfinished_trips": 10
+        }
+      ],
+      "demand_scale": 1.5,
+      "seed": 37
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 36,
+          "completion_rate": 0.75,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.9057142857142857,
+          "max_service_age_seconds": 59.81428571428572,
+          "p95_waiting_time_s": 24.74075,
+          "planned_trips": 48,
+          "run_id": "f0816c1a-413b-5fde-8f53-37aa3d407add",
+          "unfinished_trips": 12
+        },
+        {
+          "completed_trips": 40,
+          "completion_rate": 0.8333333333333334,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8457142857142858,
+          "max_service_age_seconds": 56.51428571428572,
+          "p95_waiting_time_s": 21.77655,
+          "planned_trips": 48,
+          "run_id": "07943ab0-7440-5001-ae97-83af5338b49e",
+          "unfinished_trips": 8
+        },
+        {
+          "completed_trips": 38,
+          "completion_rate": 0.7916666666666666,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8657142857142857,
+          "max_service_age_seconds": 57.614285714285714,
+          "p95_waiting_time_s": 22.546,
+          "planned_trips": 48,
+          "run_id": "d31516ab-ea35-5d84-84a4-afe7d7e109a3",
+          "unfinished_trips": 10
+        },
+        {
+          "completed_trips": 40,
+          "completion_rate": 0.8333333333333334,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8557142857142856,
+          "max_service_age_seconds": 57.06428571428571,
+          "p95_waiting_time_s": 21.838749999999997,
+          "planned_trips": 48,
+          "run_id": "5bc7f97b-19b5-5fba-bafb-a75187179bc9",
+          "unfinished_trips": 8
+        }
+      ],
+      "demand_scale": 1.5,
+      "seed": 53
+    },
+    {
+      "controllers": [
+        {
+          "completed_trips": 36,
+          "completion_rate": 0.75,
+          "controller": "fixed-time",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.9057142857142857,
+          "max_service_age_seconds": 59.81428571428572,
+          "p95_waiting_time_s": 25.328249999999997,
+          "planned_trips": 48,
+          "run_id": "006a70e9-e127-5917-bdeb-189a4b933d94",
+          "unfinished_trips": 12
+        },
+        {
+          "completed_trips": 40,
+          "completion_rate": 0.8333333333333334,
+          "controller": "actuated",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8457142857142858,
+          "max_service_age_seconds": 56.51428571428572,
+          "p95_waiting_time_s": 21.84845,
+          "planned_trips": 48,
+          "run_id": "901de478-5818-5def-9cd6-999294d1fc2f",
+          "unfinished_trips": 8
+        },
+        {
+          "completed_trips": 38,
+          "completion_rate": 0.7916666666666666,
+          "controller": "local-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8657142857142857,
+          "max_service_age_seconds": 57.614285714285714,
+          "p95_waiting_time_s": 22.508850000000002,
+          "planned_trips": 48,
+          "run_id": "8f9c18e0-3ab8-50b1-8c71-92d5cd22df34",
+          "unfinished_trips": 10
+        },
+        {
+          "completed_trips": 38,
+          "completion_rate": 0.7916666666666666,
+          "controller": "graph-aware-cooperative-max-pressure",
+          "gridlocked": false,
+          "max_queue_storage_ratio": 0.8557142857142856,
+          "max_service_age_seconds": 57.06428571428571,
+          "p95_waiting_time_s": 22.286649999999998,
+          "planned_trips": 48,
+          "run_id": "e0ca5e3f-d949-56d9-a95a-719f7b4d1ca1",
+          "unfinished_trips": 10
+        }
+      ],
+      "demand_scale": 1.5,
+      "seed": 71
+    }
+  ],
+  "pairing_keys": [
+    "scenario_hash",
+    "graph_hash",
+    "demand_scale",
+    "seed"
+  ],
+  "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+  "schema_version": 1,
+  "significance_test_performed": false,
+  "unfinished_and_gridlocked_retained": true,
+  "winner_claim": null
+}

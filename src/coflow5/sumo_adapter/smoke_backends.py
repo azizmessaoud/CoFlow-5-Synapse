@@ -127,8 +127,24 @@ def measure_traci(sumo_binary: str, config: Path, tripinfo: Path, seed: int) -> 
 
 def measure_libsumo(sumo_binary: str, config: Path, tripinfo: Path, seed: int) -> dict[str, Any]:
     command = _command(sumo_binary, config, tripinfo, seed)
+    import contextlib
+    import io
+    import warnings
+
+    arrow_warnings: list[str] = []
+    stderr_buffer = io.StringIO()
     try:
-        libsumo = load_libsumo()
+        with warnings.catch_warnings(record=True) as caught, contextlib.redirect_stderr(stderr_buffer):
+            warnings.simplefilter("always")
+            libsumo = load_libsumo()
+            arrow_warnings = [
+                str(item.message)
+                for item in caught
+                if "arrow" in str(item.message).lower() or "pyarrow" in str(item.message).lower()
+            ]
+        stderr_text = stderr_buffer.getvalue().strip()
+        if stderr_text and ("arrow" in stderr_text.lower() or "pyarrow" in stderr_text.lower()):
+            arrow_warnings.append(stderr_text)
     except Exception as exc:  # noqa: BLE001 — WDAC/DLL failures are the evidence
         return {
             "backend": "libsumo",
@@ -154,4 +170,5 @@ def measure_libsumo(sumo_binary: str, config: Path, tripinfo: Path, seed: int) -
     result["command"] = command
     result["backend"] = "libsumo"
     result["blocked"] = False
+    result["warnings"] = arrow_warnings
     return result

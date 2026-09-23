@@ -159,6 +159,16 @@ def run_smoke(root: Path) -> dict:
     )
     libsumo_blocked = bool(libsumo_measurement.get("blocked"))
     toolchain["libsumo_importable"] = not libsumo_blocked
+    toolchain["warnings"] = list(libsumo_measurement.get("warnings") or [])
+    pyarrow_version = None
+    try:
+        pyarrow_version = importlib.metadata.version("pyarrow")
+    except importlib.metadata.PackageNotFoundError:
+        pyarrow_version = None
+    if pyarrow_version == "21.0.0" and not libsumo_blocked:
+        toolchain["warnings"].append(
+            "pyarrow 21.0.0 may be incompatible with libsumo compiled against libarrow2300"
+        )
     _write_json(artifacts / "toolchain.json", toolchain)
 
     gui_version_proc = subprocess.run(
@@ -186,9 +196,9 @@ def run_smoke(root: Path) -> dict:
         encoding="utf-8",
     )
 
+    blocked_path = root / "harness" / "BLOCKED"
     if libsumo_blocked:
-        blocked = root / "harness" / "BLOCKED"
-        blocked.write_text(
+        blocked_path.write_text(
             "BLOCKED: Windows Code Integrity policy "
             "{0283ac0f-fff1-49ae-ada1-8a933130cad6} blocks SUMO 1.27.1 "
             "libsumo dependencies geos_c.dll and jupedsim.dll (events 3033/3077). "
@@ -197,6 +207,8 @@ def run_smoke(root: Path) -> dict:
             "py -3.11 -c \"import libsumo; print(libsumo.__file__)\"\n",
             encoding="utf-8",
         )
+    elif blocked_path.is_file():
+        blocked_path.unlink()
 
     throughput = {
         "run_id": run_id,

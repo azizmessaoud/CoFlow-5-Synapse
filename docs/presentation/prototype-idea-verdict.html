@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROTOTYPE — which idea survives</title>
+<style>
+  :root { --ink: #1c1915; --muted: #5c564c; --line: #e4ddd2; --paper: #f7f3ec; --card: #fffdf8; --accent: #8c3a2f; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 17px/1.45 Georgia, "Iowan Old Style", serif; color: var(--ink); background: var(--paper); }
+  main { max-width: 980px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { font-size: 28px; font-weight: 600; margin: 0 0 8px; }
+  h2 { font-size: 15px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 28px 0 10px; }
+  p { margin: 0 0 12px; }
+  .stamp { display: inline-block; border: 1px solid var(--accent); color: var(--accent); font: 12px/1 ui-sans-serif, sans-serif; letter-spacing: .08em; padding: 3px 8px; margin-bottom: 12px; }
+  .lede { color: var(--muted); max-width: 68ch; }
+  .panel { background: var(--card); border: 1px solid var(--line); padding: 16px 18px; }
+  .panel dl { display: grid; gap: 14px; margin: 0; }
+  .panel dt { color: var(--muted); font: 12px/1.2 ui-sans-serif, sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+  .panel dd { margin: 2px 0 0; max-width: 68ch; }
+  .changed { background: #f3e4d8; }
+  .status { font: 13px/1.2 ui-sans-serif, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+  .status.keep { color: #2f5d3a; }
+  .status.collect { color: #6a4b16; }
+  .status.problem { color: var(--accent); }
+  .status.refuse { color: var(--accent); }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; }
+  button { font: 14px/1.2 ui-sans-serif, sans-serif; background: var(--card); border: 1px solid var(--ink); color: var(--ink); padding: 8px 10px; cursor: pointer; }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  button.active { background: var(--ink); color: var(--paper); }
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .tabs button { border: 0; border-bottom: 2px solid transparent; background: transparent; }
+  .tabs button.active { border-bottom-color: var(--accent); background: transparent; color: var(--accent); }
+  .board { display: grid; gap: 6px; margin-top: 8px; }
+  .board button { text-align: left; }
+  .step { margin-top: 8px; }
+  .note { font: 14px/1.4 ui-sans-serif, sans-serif; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <div class="stamp">PROTOTYPE — NOT PROJECT EVIDENCE</div>
+  <h1>Which idea is allowed to stay</h1>
+  <p class="lede" id="question"></p>
+
+  <h2>Verdict for this person and this idea</h2>
+  <div class="panel" id="state"></div>
+
+  <h2>Person</h2>
+  <div class="row" id="people"></div>
+
+  <h2>Idea</h2>
+  <div class="row" id="ideas"></div>
+
+  <h2>The whole card for this person</h2>
+  <div class="board" id="board"></div>
+
+  <h2>Guided walkthroughs</h2>
+  <div class="tabs" id="tabs"></div>
+  <p id="scene"></p>
+  <div class="step" id="steps"></div>
+  <p class="note">Open this file in a browser. Nothing is saved. A keep is something the repository can already say. A collection is a table we still owe. A future problem is where the language-model page will invent a cause. A refusal is an idea that must not become a claim.</p>
+</main>
+<script>
+/* Pure idea-verdict module. No document access. */
+const QUESTION = "For each person, which idea is evidence we already have, which collection is still owed, and which future problem appears when a language model is asked to explain a gap the sensors never filled?";
+
+const PEOPLE = {
+  amara: { name: "Amara", role: "Pedestrian. Older people and people with disabilities are the verifiable group. She is not an interview." },
+  david: { name: "David", role: "Driver. Vehicle occupants carry most of the recorded health cost. The 60-stop day is a design reading." },
+  chidi: { name: "Chidi", role: "Bus rider. TRANSTU carried 187.4 million paying passengers in 2018. That is not today’s headway." },
+  rosa: { name: "Rosa", role: "The one reader of the incident report. She does not change the light." },
+  marcus: { name: "Marcus", role: "Paramedic. Civil Protection answers road emergencies. A minute saved here is not a life saved." },
+  school: { name: "School street", role: "A place, not a person. ANPE measures air at 30 stations. This project’s emission number is a proxy." },
+  omar: { name: "Omar", role: "Duty officer. He reads a class. The class does not name a crash or the weather." }
+};
+
+const IDEAS = {
+  anomaly: "Anomaly detection",
+  maps: "Maps and intersections",
+  accidents: "Accident records",
+  weather: "Weather",
+  gap: "Car distance",
+  heatmap: "Heatmap of weather and roads",
+  synapse: "Language-model page"
+};
+
+const STATUS = {
+  keep: "Keep. We can say this now.",
+  collect: "Collect later. The table does not exist yet.",
+  problem: "Future problem. The page will be tempted to fill this in.",
+  refuse: "Refuse. Do not turn this into a claim."
+};
+
+function row(status, evidence, metric, maySay, mustNot, future) {
+  return { status, evidence, metric, maySay, mustNot, future };
+}
+
+const VERDICTS = {
+  amara: {
+    anomaly: row("refuse", "A slow walk is her normal pace, about 0.8 m/s with a cane against a 1.07 m/s clearance assumption. It is not a residual spike.", "Clearance truncations. The safety fixture recorded zero.", "The crossing stayed protected for the people already on it.", "An anomaly means she is about to be hit.", "A detector that flags her pace will train Omar to ignore real residuals."),
+    maps: row("collect", "A map can give the length of one crossing. It cannot give her walking speed.", "Clearance seconds = crossing length / 0.8. Compare that with the 1.07 m/s assumption.", "This crossing is N metres. At 0.8 m/s she needs T seconds.", "The scraped junction is the crossing she uses.", "OpenStreetMap geometry will be narrated as a field survey of her street."),
+    accidents: row("refuse", "Pedestrians were 28% of the 2023 deaths in the WHO investment case. Unsafe crossing was 8.12% of 2024 crashes in the La Presse briefing of ONSR. Neither number is this junction.", "Zero conflicting greens while a crossing is occupied, inside the fixture only.", "Published totals name pedestrians as a large share of deaths. This run did not count Tunisian crashes.", "The signal prevented her crash.", "A national percentage will be pasted onto one simulated crossing."),
+    weather: row("collect", "Rain can slow a person with a cane. No station is joined to a crossing and a walking speed.", "No weather metric until that join exists.", "Weather was not observed on this crossing.", "Rain is why she needs more time.", "The explainer will add rain because the question asked for weather."),
+    gap: row("refuse", "The gap that protects her is time held red, not metres between cars.", "Clearance seconds and truncation count. Mean following distance is the wrong unit.", "She needs the walk interval to finish.", "A larger average gap between cars makes her safe.", "A spacing chart will replace the truncation count."),
+    heatmap: row("refuse", "A shaded rain map does not show whether she finished the crossing.", "None. There is no intersection-time-weather-crossing table.", "No heatmap for her.", "Dark cells are crossings where she would be hurt.", "The missing table will be drawn anyway."),
+    synapse: row("problem", "The only sentence the page may read is a reason code such as pedestrian clearance active.", "One retrieved decision, not the whole run. The small model cannot hold every signal change.", "The request was kept because a crossing was active.", "Amara told us, or a crash was prevented.", "The page will speak in her voice and invent an interview.")
+  },
+  david: {
+    anomaly: row("problem", "A surge is the congestion class, or ordinary demand. It is not automatically a crash.", "P95 waiting time and unfinished trips. One matched seed: Max-Pressure mean wait 14.21 s, P95 25 s, 14 of 84 unfinished.", "This series is congestion, not a named incident.", "The anomaly is the crash that made him late.", "Likely-incident will be read as his crash."),
+    maps: row("collect", "A later Tunis map can draw a corridor. Live speeds scraped from a consumer map are not a rerunnable file, and demand built from them must stay labelled synthetic.", "Trip time, stops, and unfinished trips on a named scenario hash.", "This corridor geometry is synthetic demand on an imported map.", "The scrape is today’s Tunis traffic.", "A pretty imported map will be presented as the evaluation."),
+    accidents: row("refuse", "FHWA’s incident share of congestion is a citation, about a quarter, not his route. Tunis crash totals are governorate counts.", "Completed trips over planned trips. Unfinished trips stay in the denominator.", "Incidents are a known share of congestion in the literature. They were not located on his stops.", "We scraped the crashes that delayed him.", "News pins will be joined to his 60 stops."),
+    weather: row("collect", "FHWA’s 15% is a national split of non-recurring congestion, not a sensor on his next stop.", "No weather feature in the forecast until a station, an hour, and a corridor are in one table.", "The forecast used the traffic series only.", "Rain explains the bad tail.", "Weather will be added as a feature because the citation exists."),
+    gap: row("problem", "Average metres between cars can look calm while he stops again and again. The closest pair is the tail, same lesson as mean wait versus P95.", "Waiting seconds, time loss, stops, P95. Minimum gap is not an evidence metric yet. SUMO’s minGap setting is a model input, not a measured safety result.", "Report the tail of trip time, and count unfinished trips as failures.", "Mean following distance shows the road is safe.", "The mean gap will be the headline and the closest pair will disappear."),
+    heatmap: row("refuse", "A delay picture of one seed is not a weather map of roads.", "One seed, one scenario hash, or nothing.", "One seed, not a city weather surface.", "Shaded roads are where rain causes his delays.", "One seed will be painted across a city."),
+    synapse: row("problem", "A scenario file can describe a surge. A person still approves it. The file is not a signal plan.", "P95 and unfinished count, copied from the evidence page.", "A surge scenario was proposed and not run until a person approved it.", "The assistant improved his reliability.", "The proposal will be executed because it looks finished.")
+  },
+  chidi: {
+    anomaly: row("refuse", "A long gap before the next bus is a headway rule, not an EWMA residual.", "Headway variance, passenger wait, bus journey time, extra car delay. The 3% car-delay budget is a proposed test, not a result.", "The bus after an unusual gap can be asked for priority. An early bus is not.", "The detector found an incident on his line.", "A residual class will replace the headway rule, and an early bus will be helped."),
+    maps: row("collect", "A GTFS file, with its year, can place stops. The 2018 TRANSTU report is 187.4 million paying passengers, not a live map.", "Observed headway at named stops. If the demand is built by us, label it synthetic.", "Stop locations come from a dated operator file.", "The map shows today’s bunching.", "A 2018 total will be spoken as current ridership."),
+    accidents: row("refuse", "Crash totals do not measure whether his buses arrive evenly.", "Headway, not deaths.", "Regularity is a service measure. It is not a crash prevented.", "Priority prevented bus crashes.", "A safety story will be bolted onto a regularity test."),
+    weather: row("collect", "Rain may bunch a high-frequency line. We have no weather-and-headway table.", "None yet.", "Weather was not an input to the priority rule.", "Rain is why three buses arrived together.", "The page will explain bunching with weather it never received."),
+    gap: row("refuse", "His gap is minutes between buses, not metres between cars.", "Headway variance. Extra car delay is the budget beside it.", "Buses should be spaced in time.", "A safer following distance fixes the bunch.", "Car distance will be reported as the transit result."),
+    heatmap: row("refuse", "A road shading needs observed headways at stops. We do not have them.", "None.", "No bunching map.", "Dark streets are where his bus fails.", "A corridor sketch will be called a headway heatmap."),
+    synapse: row("problem", "The log can say the bus was early and got nothing. The page must repeat that, not flip it.", "Reason code for that one bus.", "No priority, because the bus was early.", "The bus was late, so the light helped him.", "Early and late will be swapped because both sound like delay.")
+  },
+  rosa: {
+    anomaly: row("keep", "She can read a class only next to the residual, the sample count, and the freshness. A class alone is not a shift report.", "Reason code, fault class, and the fallback that actually ran.", "Class, residual, and whether the data were fresh.", "Anomaly, therefore a crash on her line.", "The class name will be detached from the numbers."),
+    maps: row("refuse", "A map does not explain a refusal.", "None for her. Her record is the decision.", "The refusal is in the reason code, not on a map.", "The junction picture is the audit.", "A screenshot will replace the log."),
+    accidents: row("problem", "Her incident report is a signal decision. ONSR’s crash record is a different file. The two death totals for 2023, 2,273 and 1,216, must both stay visible if either is mentioned.", "Accept, reject, reason, fault, fallback. Not a death count.", "This report is the signal decision. The national crash file is separate, and its two death totals disagree.", "Her shift log is the national accident database.", "The page will average 2,273 and 1,216 into one official number."),
+    weather: row("problem", "If the message has no weather field, the report says weather was not observed.", "A missing field, stated as missing.", "Weather was not in this decision.", "It was raining, so the request was refused.", "An empty weather field will be filled from the question, not the log."),
+    gap: row("refuse", "Metres between cars are not her record.", "Reason code and fallback ladder: Max-Pressure, then actuated, then fixed-time.", "The fallback that ran.", "Following distance explains the refusal.", "A spacing number will be dropped into the incident report."),
+    heatmap: row("refuse", "A shaded grid cannot be an audit trail.", "None.", "No heatmap on the incident report.", "The colours are the decision history.", "The audit will become a picture."),
+    synapse: row("problem", "This page is her future reader. It may paraphrase one retrieved reason code. It abstains when the citation is missing.", "One decision. Not 120 signal changes.", "Accepted or refused, with the reason that is in the log.", "A reason that is not in the log, or a claim that she changed the light.", "The model will invent ACCEPTED when the log says rejected, because a refusal sounds incomplete.")
+  },
+  marcus: {
+    anomaly: row("refuse", "A blocked exit is a capacity check on the request, not a residual he should wait for.", "Ambulance journey time and civilian delay, logged separately. Proposed time cuts are not results.", "The exit was blocked, so the request was refused.", "We waited for the anomaly score before moving him.", "Detection delay will be inserted in front of a known blocked exit."),
+    maps: row("collect", "A route can later be drawn from a map. The ETA in the request is an input, not a scraped accident.", "ETA error against the simulated passage, once a route file exists and is labelled.", "The route in the request, not a scraped crash path.", "The map shows the crashes his corridor avoids.", "A drawn route will be called a measured emergency corridor."),
+    accidents: row("refuse", "A published survival-per-minute figure is a citation. This simulation does not output lives.", "Ambulance time, civilian person-delay, conflicting greens. Zero illegal writes in the traffic run.", "Time and delay. No lives saved.", "The run saved lives in Tunis.", "A citation about survival will be multiplied by the simulated seconds."),
+    weather: row("refuse", "Weather is not part of the emergency request.", "None.", "Weather was not used.", "Rain changed his priority.", "A weather sentence will appear beside an ETA that had no weather."),
+    gap: row("keep", "The distance that matters is whether the downstream link has room, not the average gap on the approach.", "Downstream blocked, as a reason code. Mean spacing is not the metric.", "Refused because the exit could not take the queue.", "A larger average gap means the ambulance can go.", "Mean spacing will hide a blocked exit."),
+    heatmap: row("refuse", "A weather-and-road shading is not his passage log.", "None.", "No heatmap.", "Dark cells are seconds of survival.", "The survival citation will be drawn as a map."),
+    synapse: row("problem", "The page may say the request was refused because the exit was blocked, if that reason is in the log.", "Two numbers: his time, and everyone else’s delay.", "Refused, exit blocked. Civilian delay is separate.", "Lives saved, or a shorter yellow to help him.", "A scenario proposal will shorten the intergreen.")
+  },
+  school: {
+    anomaly: row("refuse", "A dirty queue near a school is not automatically an incident.", "Link emission proxy, and whether that link rose or fell. One fixture link improved and one worsened.", "This link’s proxy rose. That is displacement, not a detected crash.", "The anomaly is pollution at the gate.", "A residual class will be labelled as air quality."),
+    maps: row("collect", "A school and a road can be placed later. Kingsley’s 250 m finding is a United States citation, not a Tunis geocode we scraped.", "Proxy by link, with the sensitive link named before the run.", "A sensitive link was named in advance. The map is not a survey of Tunis schools.", "We scraped every school gate.", "An imported school point will be treated as a measured exposure."),
+    accidents: row("refuse", "Crashes and exhaust are different ledgers.", "Do not attach a death count to a proxy.", "The proxy is not a crash outcome.", "Cleaner signals prevented crashes at the gate.", "Two stories will be merged into one saved-child claim."),
+    weather: row("collect", "ANPE stations do record weather instruments beside air analysers. A 20 km meteorology grid does not sit on a school gate. Neither file is joined to this simulation.", "None from this project. ANPE is measured air. The simulation is a proxy.", "Station air and the signal proxy are different measurements.", "Rain plus the proxy equals the air at the gate.", "The proxy and the station will be plotted as one series."),
+    gap: row("problem", "Fewer stops can cut the proxy. The stop that disappears on the arterial can reappear on the side street.", "Stops and proxy per link, including the link that got worse.", "One link improved and one worsened.", "Mean gap shows the school street got cleaner.", "The worsened link will be left off the picture."),
+    heatmap: row("refuse", "A road heatmap that shows only the improved link is the failure mode.", "Both links, or no map.", "No weather heatmap. If a proxy picture is ever drawn, the worsened link stays on it.", "Green roads are cleaner air.", "The green cells will be called measured air and the red cell will be cropped."),
+    synapse: row("problem", "The page may quote the proxy label and the two link outcomes.", "Improved and worsened, side by side.", "SUMO/HBEFA proxy, not measured air. One link improved, one worsened.", "The school air was cleaned.", "The label “not measured air quality” will be dropped because it weakens the sentence.")
+  },
+  omar: {
+    anomaly: row("keep", "This is his card. The fixture already emitted normal, detected anomaly, likely incident, congestion, stale data, and insufficient data.", "Detection class plus residual, EWMA, CUSUM, speed ratio, occupancy, and age of the sample. False alarms and missed events are not measured yet. Thresholds are not set.", "The class, the residual, and that the cause is unnamed.", "Likely incident means a crash happened.", "The six class names will be spoken as six causes."),
+    maps: row("collect", "Neighbour junctions would help him separate an incident from demand. The watch scene is one junction.", "Class agreement across junctions, once more than one junction is in the same run and labelled.", "One junction. Neighbours are not in this evidence.", "The scraped city shows where the incidents are.", "A basemap will be read as spatial proof."),
+    accidents: row("problem", "He may be handed a national total and asked to confirm the residual. Those totals disagree on deaths: 2,273 and 1,216, same 5,796 crashes.", "Do not score the detector against a governorate total.", "The residual is not a row in the crash file.", "The anomaly matches the ONSR crash.", "He will be scored as right or wrong against a file that has no intersection time."),
+    weather: row("collect", "Weather may be his own hypothesis in a notebook. It is not a class the detector may output. FHWA’s 15% is not a feature.", "No weather class. A later table would need junction, time, and a station observation.", "Weather was not an input. A person may still guess.", "Detected anomaly: rain.", "Rain will become a seventh class."),
+    gap: row("problem", "Occupancy and speed ratio are the inputs he has. Metres between cars were not the sensor.", "Occupancy and speed ratio. Not mean gap.", "The detector saw occupancy and speed, not a measured spacing.", "The cars were 12 metres apart, so it is an incident.", "A distance will be invented from an occupancy fraction."),
+    heatmap: row("refuse", "There is no intersection-time-weather-crash table. A shaded page of invented cells is not evidence.", "None.", "No heatmap.", "The colours are the risk of a crash in the rain.", "The missing table will be generated so the picture can exist."),
+    synapse: row("problem", "The page may read the class name and must stop there. If the citation is missing, it abstains.", "Class string from the fixture, unchanged.", "Detected anomaly. Cause not in the evidence.", "Accident detected because of the weather.", "Likely-incident will be translated into accident detected.")
+  }
+};
+
+const WALKS = [
+  {
+    id: "omar",
+    title: "Omar’s anomaly is not the weather",
+    scene: "Start from the class he is allowed to read. Then ask for rain, a crash pin, and a heatmap. Watch the verdict change.",
+    steps: [
+      { label: "Open Omar on anomaly detection", action: { type: "reset", personaId: "omar", ideaId: "anomaly", note: "Walkthrough: Omar’s class." } },
+      { label: "Ask for weather", action: { type: "idea", ideaId: "weather" } },
+      { label: "Ask for the accident file", action: { type: "idea", ideaId: "accidents" } },
+      { label: "Ask for the heatmap", action: { type: "idea", ideaId: "heatmap" } },
+      { label: "Hand the class to the language-model page", action: { type: "idea", ideaId: "synapse" } }
+    ]
+  },
+  {
+    id: "amara",
+    title: "Amara’s seconds, not a crash prevented",
+    scene: "Her evidence is clearance time. Car distance, a national death share, and a rain map are the wrong objects.",
+    steps: [
+      { label: "Open Amara on maps", action: { type: "reset", personaId: "amara", ideaId: "maps", note: "Walkthrough: Amara’s crossing length." } },
+      { label: "Switch to car distance", action: { type: "idea", ideaId: "gap" } },
+      { label: "Switch to accident records", action: { type: "idea", ideaId: "accidents" } },
+      { label: "Ask the page to speak as her", action: { type: "idea", ideaId: "synapse" } }
+    ]
+  },
+  {
+    id: "david",
+    title: "David’s tail, and the mean gap that lies",
+    scene: "A calm average distance can hide repeated stops. The metric is the bad trip and the trip that never finishes.",
+    steps: [
+      { label: "Open David on car distance", action: { type: "reset", personaId: "david", ideaId: "gap", note: "Walkthrough: David’s gap." } },
+      { label: "Look at the anomaly class", action: { type: "idea", ideaId: "anomaly" } },
+      { label: "Ask for a weather feature", action: { type: "idea", ideaId: "weather" } },
+      { label: "Let a scenario file pretend to be a signal plan", action: { type: "idea", ideaId: "synapse" } }
+    ]
+  },
+  {
+    id: "chidi",
+    title: "Chidi’s gap is between buses",
+    scene: "Minutes between buses. An early bus is not a late bus, and a car-following distance is not his result.",
+    steps: [
+      { label: "Open Chidi on car distance", action: { type: "reset", personaId: "chidi", ideaId: "gap", note: "Walkthrough: Chidi’s unit." } },
+      { label: "Treat the gap as an anomaly", action: { type: "idea", ideaId: "anomaly" } },
+      { label: "Attach a crash total", action: { type: "idea", ideaId: "accidents" } },
+      { label: "Let the page flip early into late", action: { type: "idea", ideaId: "synapse" } }
+    ]
+  },
+  {
+    id: "rosa",
+    title: "Rosa’s report against an invented reason",
+    scene: "She reads one decision. An empty weather field stays empty. The two death totals are not her shift log.",
+    steps: [
+      { label: "Open Rosa on the language-model page", action: { type: "reset", personaId: "rosa", ideaId: "synapse", note: "Walkthrough: Rosa’s page." } },
+      { label: "Leave weather blank", action: { type: "idea", ideaId: "weather" } },
+      { label: "Drop in the national crash file", action: { type: "idea", ideaId: "accidents" } },
+      { label: "Replace the report with a map", action: { type: "idea", ideaId: "maps" } }
+    ]
+  },
+  {
+    id: "marcus",
+    title: "Marcus, the exit, and the lives we must not count",
+    scene: "Blocked downstream is a reason we can keep. A survival citation must not be multiplied by the simulated seconds.",
+    steps: [
+      { label: "Open Marcus on car distance", action: { type: "reset", personaId: "marcus", ideaId: "gap", note: "Walkthrough: Marcus’s exit." } },
+      { label: "Wait for an anomaly instead", action: { type: "idea", ideaId: "anomaly" } },
+      { label: "Attach the survival citation", action: { type: "idea", ideaId: "accidents" } },
+      { label: "Ask for a shorter yellow", action: { type: "idea", ideaId: "synapse" } }
+    ]
+  },
+  {
+    id: "school",
+    title: "The school street has to show the link that got worse",
+    scene: "A place, not a named parent. The proxy improved one link and worsened one. A green map that hides the second link is the failure.",
+    steps: [
+      { label: "Open the school street on car distance", action: { type: "reset", personaId: "school", ideaId: "gap", note: "Walkthrough: the worsened link." } },
+      { label: "Ask for a heatmap", action: { type: "idea", ideaId: "heatmap" } },
+      { label: "Mix the proxy with station air", action: { type: "idea", ideaId: "weather" } },
+      { label: "Let the page drop the proxy label", action: { type: "idea", ideaId: "synapse" } }
+    ]
+  }
+];
+
+function initialState() {
+  return { personaId: "omar", ideaId: "anomaly", lastChange: "Opened on Omar, because anomaly detection is his card." };
+}
+
+function reduce(state, action) {
+  if (action.type === "reset") {
+    return {
+      personaId: action.personaId,
+      ideaId: action.ideaId,
+      lastChange: action.note
+    };
+  }
+  if (action.type === "person") {
+    return { ...state, personaId: action.personaId, lastChange: "Person changed to " + PEOPLE[action.personaId].name + "." };
+  }
+  if (action.type === "idea") {
+    return { ...state, ideaId: action.ideaId, lastChange: "Idea changed to " + IDEAS[action.ideaId] + "." };
+  }
+  return state;
+}
+
+function viewModel(state) {
+  const person = PEOPLE[state.personaId];
+  const verdict = VERDICTS[state.personaId][state.ideaId];
+  const card = Object.keys(IDEAS).map(function (ideaId) {
+    return {
+      ideaId: ideaId,
+      label: IDEAS[ideaId],
+      status: VERDICTS[state.personaId][ideaId].status,
+      active: ideaId === state.ideaId
+    };
+  });
+  return {
+    question: QUESTION,
+    persona: person.name,
+    role: person.role,
+    idea: IDEAS[state.ideaId],
+    status: verdict.status,
+    statusLabel: STATUS[verdict.status],
+    evidence: verdict.evidence,
+    metric: verdict.metric,
+    maySay: verdict.maySay,
+    mustNot: verdict.mustNot,
+    future: verdict.future,
+    lastChange: state.lastChange,
+    card: card
+  };
+}
+
+let state = initialState();
+
+function render() {
+  const view = viewModel(state);
+  document.getElementById("question").textContent = view.question;
+  const fields = [
+    ["Person", view.persona],
+    ["Who they stand for", view.role],
+    ["Idea", view.idea],
+    ["Verdict", view.statusLabel],
+    ["Evidence", view.evidence],
+    ["Metric", view.metric],
+    ["The page may say", view.maySay],
+    ["The page must not say", view.mustNot],
+    ["Future problem", view.future],
+    ["What just changed", view.lastChange]
+  ];
+  document.getElementById("state").innerHTML = "<dl>" + fields.map(function (field, index) {
+    const mark = index === fields.length - 1 ? " class=\"changed\"" : "";
+    return "<dt>" + field[0] + "</dt><dd" + mark + ">" + field[1] + "</dd>";
+  }).join("") + "</dl>";
+
+  document.getElementById("people").innerHTML = Object.keys(PEOPLE).map(function (id) {
+    return "<button type=\"button\" data-person=\"" + id + "\"" + (id === state.personaId ? " class=\"active\"" : "") + ">" + PEOPLE[id].name + "</button>";
+  }).join("");
+  document.getElementById("ideas").innerHTML = Object.keys(IDEAS).map(function (id) {
+    return "<button type=\"button\" data-idea=\"" + id + "\"" + (id === state.ideaId ? " class=\"active\"" : "") + ">" + IDEAS[id] + "</button>";
+  }).join("");
+  document.getElementById("board").innerHTML = view.card.map(function (item) {
+    return "<button type=\"button\" data-idea=\"" + item.ideaId + "\"" + (item.active ? " class=\"active\"" : "") + "><span class=\"status " + item.status + "\">" + item.status + "</span> — " + item.label + "</button>";
+  }).join("");
+
+  document.getElementById("tabs").innerHTML = WALKS.map(function (walk) {
+    return "<button type=\"button\" data-walk=\"" + walk.id + "\">" + walk.title + "</button>";
+  }).join("");
+  const current = WALKS.find(function (walk) { return walk.id === window.__walk; }) || WALKS[0];
+  window.__walk = current.id;
+  document.querySelector("[data-walk=\"" + current.id + "\"]").classList.add("active");
+  document.getElementById("scene").textContent = current.scene;
+  document.getElementById("steps").innerHTML = current.steps.map(function (step, index) {
+    return "<button type=\"button\" data-step=\"" + index + "\">" + (index + 1) + ". " + step.label + "</button>";
+  }).join(" ");
+}
+
+document.getElementById("people").addEventListener("click", function (event) {
+  const id = event.target.getAttribute("data-person");
+  if (!id) return;
+  state = reduce(state, { type: "person", personaId: id });
+  render();
+});
+document.getElementById("ideas").addEventListener("click", function (event) {
+  const id = event.target.closest("button") && event.target.closest("button").getAttribute("data-idea");
+  if (!id) return;
+  state = reduce(state, { type: "idea", ideaId: id });
+  render();
+});
+document.getElementById("board").addEventListener("click", function (event) {
+  const button = event.target.closest("button");
+  const id = button && button.getAttribute("data-idea");
+  if (!id) return;
+  state = reduce(state, { type: "idea", ideaId: id });
+  render();
+});
+document.getElementById("tabs").addEventListener("click", function (event) {
+  const id = event.target.getAttribute("data-walk");
+  if (!id) return;
+  window.__walk = id;
+  render();
+});
+document.getElementById("steps").addEventListener("click", function (event) {
+  const button = event.target.closest("button");
+  if (!button) return;
+  const walk = WALKS.find(function (item) { return item.id === window.__walk; });
+  const step = walk.steps[Number(button.getAttribute("data-step"))];
+  state = reduce(state, step.action);
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

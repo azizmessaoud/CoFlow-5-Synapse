@@ -1,0 +1,21 @@
+{
+  "executed_proposal_count": 0,
+  "proposals": [
+    {
+      "agent_id": "S1",
+      "agent_version": "scenario-planner-v1",
+      "artifact_kind": "proposal-only",
+      "automatic_approval": false,
+      "demand_scale": 1.25,
+      "executed": false,
+      "horizon_seconds": 300,
+      "request_id": "golden-s1-wait",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "schema_version": 1,
+      "source_run_id": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+      "status": "awaiting-human-approval",
+      "title": "Bounded demand sensitivity proposal"
+    }
+  ],
+  "schema_version": 1
+}

@@ -25,11 +25,12 @@ def test_watch_scenario_is_long_readable_paced_and_detached(monkeypatch) -> None
         lanes = edge.findall("lane")
         vehicle_lanes = [lane for lane in lanes if "passenger" in (lane.get("allow") or "")]
         sidewalks = [lane for lane in lanes if lane.get("allow") == "pedestrian"]
-        assert len(vehicle_lanes) == (2 if edge.get("id", "").endswith("_in") else 1)
+        assert len(vehicle_lanes) == 2
         assert len(sidewalks) == 1
 
     connections = ET.parse(WATCH / "watch.con.xml").getroot().findall("connection")
     assert len(connections) == 8
+    assert all(connection.get("fromLane") == connection.get("toLane") for connection in connections)
     assert not any(connection.get("from", "").replace("_in", "") == connection.get("to", "").replace("_out", "") for connection in connections)
 
     tls = ET.parse(WATCH / "watch.tls.xml").getroot().find("tlLogic")

@@ -1,0 +1,176 @@
+{
+  "id": "10f-graph-growth-benchmark",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:a4eaa6f3ca3f4bcedd0f10a2b8201e73275988dab679a18055cba32072219183",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_junction_graph.py -q",
+      "exitCode": 0,
+      "output": "4 passed in 0.51s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_graph_growth_runner.py -q",
+      "exitCode": 0,
+      "output": "4 passed in 1.45s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_graph_growth_evidence.py -q",
+      "exitCode": 0,
+      "output": "5 passed in 0.99s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q",
+      "exitCode": 0,
+      "output": "10 passed in 1.02s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/scripts/test_watch_sumo.py -q",
+      "exitCode": 0,
+      "output": "5 passed in 0.31s"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/run_manifest.json",
+    "artifacts/graph.json",
+    "artifacts/demand_cells.json",
+    "artifacts/junction_states.parquet",
+    "artifacts/graph_frames.parquet",
+    "artifacts/decision_events.parquet",
+    "artifacts/trips.parquet",
+    "artifacts/run_kpis.parquet",
+    "artifacts/matched_growth_comparison.json",
+    "artifacts/growth_report.md",
+    "artifacts/native_smoke.json",
+    "artifacts/input_audit.json",
+    "report.md",
+    "deltas.md"
+  ],
+  "decidedBy": "tests-and-files",
+  "artifactHashes": {
+    "artifacts/run_manifest.json": "sha256:231a259979ee2d72aafd3ea8ebd7a550a8715bf3db44b71435c5dc68320cdb0b",
+    "artifacts/graph.json": "sha256:cfede06cfa6bed3abaf5ac8a9a81ddd2f6699e41f6b36074524a5ba8e66724ed",
+    "artifacts/demand_cells.json": "sha256:4b54d611a1d834f25cf0b9bca7052596a1dc4e426733987b7a14f4c0b8830a3f",
+    "artifacts/junction_states.parquet": "sha256:076fe61eddba2d31bfb6937675a4734384f6ff9d5933e181a0a2780c84b3d788",
+    "artifacts/graph_frames.parquet": "sha256:78d8c9da1d16e94b288314474bc759a2f2c0035cb153e4fab8a6da819799deb3",
+    "artifacts/decision_events.parquet": "sha256:8a7ece82a2135561414e10da4241aefbc970d42203ea4dd62bb3a3fbb1f61549",
+    "artifacts/trips.parquet": "sha256:17d7fecdd11d3d83f2877d77d157eaeea130db08f44501bbe1a6ceb0304a2fa6",
+    "artifacts/run_kpis.parquet": "sha256:32b30450e9bb2d885718518f534e1c6984bb76b4e8dccc6b897646d8ad8f1a6d",
+    "artifacts/matched_growth_comparison.json": "sha256:e3a1f04575879abbc534c7f18a74db2ab7fb50d1471f93a3b9b734c17ac62edc",
+    "artifacts/growth_report.md": "sha256:620f5589226ef439a53b47ef61af0d9b58d65f3da29af5dde647546ebfcc0cd5",
+    "artifacts/native_smoke.json": "sha256:aef3c8fbf027b39af7c4a74a2ccd1ce4c8a86f8d1196e7f05950a50c2cc97e4d",
+    "artifacts/input_audit.json": "sha256:efe37940d1c0e1000dc858f22611461265b106edb0a90f89965ff49acdb1f30e",
+    "report.md": "sha256:d2d726841a2f09bd4b49168f131d64c7d6dd5c27bbb2732a660f6e07132dd33f",
+    "deltas.md": "sha256:2d3874ff6f1c1ae677ab74c168bbe55562b11a134891ea5b78251a5af71aaa54"
+  },
+  "testHashes": {
+    "tests/contracts/test_junction_graph.py": "sha256:59fd51f83ba706e7b2a254eb4a2cafdfc4fe7d1366ed36525db518d1255a4ba9",
+    "tests/acceptance/test_graph_growth_runner.py": "sha256:b3f1ec5c1d17251026272cc01c968b3103bfbce33eee64992419b3f12cb1c6c0",
+    "tests/contracts/test_graph_growth_evidence.py": "sha256:66e102e8a2adc1e6d134c0ba6c4b967e050190bcd8eba5966e411261cde37daf",
+    "tests/architecture/test_forbidden_imports.py": "sha256:7ba6b03953a87762290a51ec7bf1835f8879701a3fd651dca49d793555b6d6d5",
+    "tests/scripts/test_watch_sumo.py": "sha256:54a6020bde845645d470e2e64504d7fb4ad9a05de13ec579c5aa65be974b5e13"
+  },
+  "sourceHashes": {
+    "src/coflow5/control/junction_graph.py": "sha256:35839dca130af8281afeba9608c557081233f81ef5981b88cf3170bddc7bf241",
+    "src/coflow5/control/graph_max_pressure.py": "sha256:2af4d83d5bb36c4be5bc191d1dad5709b8221fd01b0d5e310b380f6d4ee81cdd",
+    "src/coflow5/sumo_adapter/graph_growth_runner.py": "sha256:2a896e1a2830e72930b64167e30c246d5987d97a45c2d771aa547499a8d62632",
+    "src/coflow5/evidence/graph_growth_artifacts.py": "sha256:7a21f15e277598bc09d89b4fd534f45e1d774795ab77787890ef687a0895da38",
+    "scripts/generate_graph_growth_artifacts.py": "sha256:710a548d6caf78838df2f7dfaac797b591de59fa2eb2300c7607ee7776286be7",
+    "scripts/watch_sumo.py": "sha256:778ddfb55d90fce4d3e9ebacd40e611d39324bc75a71f651e202366d225724a6"
+  },
+  "scenarioHashes": {
+    "scenarios/graph-growth/graph-growth.nod.xml": "sha256:ede6d9d52a820a386fbd6b644f62e761bb473e899499aff8d4aca18ee2840609",
+    "scenarios/graph-growth/graph-growth.edg.xml": "sha256:abcf0cac0093c63e283297bb51a8a487b7e4f090a74ae2872dae5dcd5afccea5",
+    "scenarios/graph-growth/graph-growth.con.xml": "sha256:c36fad7ee7da8cf0faa38717d1b9b58c6712d0646b5a6bad6d5ae34737bd8bdf",
+    "scenarios/graph-growth/graph-growth.net.xml": "sha256:917ec52a9ebce6caed4ea4f61f4595c567cfe3e3a3107c5e91f036590b3706a1",
+    "scenarios/graph-growth/graph-growth.rou.xml": "sha256:6633970d7ec07cee1f1a026eb646b0bbef3fe98cf3f4c96ae04637b0ede73ad3",
+    "scenarios/graph-growth/graph-growth.tls.xml": "sha256:4f9fd1efbc02e1fa57b0e6478d47f23319f674fea84b9d0ea8b711c14cb298a2",
+    "scenarios/graph-growth/graph-growth.sumocfg": "sha256:ae0cc21c8dc84b19c13fccc2e4c0744962609ead326b12db172b87071829c5d1"
+  },
+  "graphChecks": {
+    "pass": true,
+    "signals": ["J0", "J1", "J2", "J3"],
+    "directedInternalEdges": 8,
+    "graphHash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+    "executorOwner": "A1",
+    "writersPerSignal": 1,
+    "rawSignalWriteSites": 1,
+    "readOnlyGraphFrames": true
+  },
+  "growthChecks": {
+    "pass": true,
+    "evidenceKind": "deterministic-fixture",
+    "demandScales": [0.75, 1.0, 1.25, 1.5],
+    "pairedSeeds": [11, 23, 37, 53, 71],
+    "controllerVariants": 4,
+    "cleanCells": 80,
+    "pairedGroups": 20,
+    "tripRows": 2880,
+    "kpiRows": 80,
+    "decisionRows": 6080,
+    "graphFrameRows": 1520,
+    "unfinishedTripsRetained": true,
+    "winnerRequired": false
+  },
+  "fallbackChecks": {
+    "pass": true,
+    "freshReason": "GRAPH_NEIGHBOUR_USED",
+    "staleReason": "GRAPH_NEIGHBOUR_STALE_LOCAL_ONLY",
+    "missingReason": "GRAPH_NEIGHBOUR_UNAVAILABLE_LOCAL_ONLY",
+    "identityMismatchReason": "GRAPH_IDENTITY_MISMATCH_LOCAL_ONLY",
+    "fallbackActionMatchesLocal": true,
+    "downstreamHardMaskAuthoritative": true,
+    "termBounds": {
+      "oneHopDischarge": 2.0,
+      "serviceAge": 2.0,
+      "switchPenalty": 1.0
+    }
+  },
+  "nativeSmokeChecks": {
+    "pass": true,
+    "status": "failed",
+    "actualTraciExecution": false,
+    "matrixMember": false,
+    "failureReason": "OSError WinError 4551: Windows application control blocked sumo.exe",
+    "fabricatedNativeResults": false,
+    "sealedFixtureFallbackUsed": true
+  },
+  "joinChecks": {
+    "pass": true,
+    "manifestRunIdentities": 80,
+    "orphanParquetRows": 0,
+    "duplicateEventIds": 0,
+    "unresolvedMessageIds": 0,
+    "scenarioHash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46"
+  },
+  "protectedInputChecks": {
+    "pass": true,
+    "row05ContractHash": "sha256:59f1fed8b3cb1dfc3629d9c3df666c3041712fbd4cde496a7eaa1f6e041b8f89",
+    "row05GateHash": "sha256:8d01e405301400506915e8b0c347818235364e5ec486bf9f340f1f8e3734e5ec",
+    "row10bContractHash": "sha256:ae1a6cdab0642d4b54c6ab8f1649d2abf25a497df587b04a70c123e807757c4c",
+    "row10bGateHash": "sha256:68e28b5aa5f25dc4c4efeee9446c3d4a3e3bcf66a9668773d5a6a9e584cbe9fa",
+    "hashMismatches": 0
+  },
+  "honestyChecks": {
+    "pass": true,
+    "nativeMatrixRunsClaimed": 0,
+    "graphCompletedMorePairedGroups": 8,
+    "graphCompletedFewerPairedGroups": 4,
+    "winnerClaim": null,
+    "significanceTestPerformed": false,
+    "deploymentClaim": false,
+    "livesSavedClaim": false,
+    "measuredAirQualityClaim": false,
+    "bestEpisodeClaim": false
+  },
+  "forbiddenDependencyChecks": {
+    "pass": true,
+    "networkx": false,
+    "gnn": false,
+    "dqn": false,
+    "react": false,
+    "websocket": false,
+    "roadwayVrRuntime": false,
+    "hostedLlm": false
+  }
+}

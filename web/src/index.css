@@ -54,6 +54,27 @@ dd {
   padding-left: 1.1rem;
 }
 
+.people {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.people article {
+  border: 1px solid #333;
+  padding: 0.75rem 0.9rem;
+}
+
+.people h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.people p {
+  margin: 0.35rem 0 0;
+}
+
 button[aria-pressed="true"] {
   background: #f4f1ea;
   color: #111;

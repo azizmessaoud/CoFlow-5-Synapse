@@ -1,0 +1,41 @@
+{
+  "id": "01-smoke-test",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:45122328cb4006a8b8193a0ff2f73a4fea3621b00132828f51517ad9daa37aad",
+  "decidedBy": "tests-and-files",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_native_windows_smoke.py tests/architecture/test_forbidden_imports.py -q",
+      "exitCode": 0,
+      "output": "16 passed in 9.31s"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/toolchain.json",
+    "artifacts/run_manifest.json",
+    "artifacts/throughput.json",
+    "artifacts/headless.log",
+    "artifacts/gui-diagnosis.md",
+    "report.md",
+    "deltas.md"
+  ],
+  "artifactHashes": {
+    "artifacts/toolchain.json": "sha256:e45eef7149a92f981cef83f4af057b75a4d2ab8d6f5a786ae5101c485e10f8aa",
+    "artifacts/run_manifest.json": "sha256:e1faff2bef0e0a556cc46c9a616f52498ba1e9fc4ed5aa458922ad465b01781d",
+    "artifacts/throughput.json": "sha256:3605b8273aa0f82fc84f4ad130ceab85808f08c23e5917aca752faecb2c29ebe",
+    "artifacts/headless.log": "sha256:8f1b63023cd06eaaa5ea4d1ff26146c674f89fd7f2d7c1db88a66c05895bb9f9",
+    "artifacts/gui-diagnosis.md": "sha256:0e621e5603d2acbdc4afc50a52fe201656f3eb5938f7d2cd98ac779109702f93",
+    "report.md": "sha256:2e9643fac2d59ba86a7a89064bbb7e989e85554e176974b4d9968910417dd266",
+    "deltas.md": "sha256:272e376eba6f5e165da8d20a9124df5ceb22905a85c79ed206cdb0986012078a"
+  },
+  "testHashes": {
+    "tests/acceptance/test_native_windows_smoke.py": "sha256:9f1c18902b0e7f712a3079627d8088f84199effa9537b65fa91b6fff27c84673",
+    "tests/architecture/test_forbidden_imports.py": "sha256:8c9354839ffddc66643b1ea7cd7392cc0a141700e0727f134b23aac170b9bed8"
+  },
+  "sourceHashes": {
+    "src/coflow5/smoke.py": "sha256:2032a7df14829117a5d957b9ee650c1764c80d37a5f886f89d2221e50eb8b356",
+    "src/coflow5/sumo_adapter/smoke_backends.py": "sha256:7364666d11255574d8938b7add5fadb2da6f7ccb90453b232e767d3c3fbfbdbd",
+    "scripts/run_native_smoke.py": "sha256:365e54166b2cd8c1e8fc187b859bdd5a192d07faa029e776197ac38f2b4ea8bd"
+  }
+}

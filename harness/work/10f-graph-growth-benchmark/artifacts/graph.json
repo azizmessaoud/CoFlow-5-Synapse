@@ -1,0 +1,318 @@
+{
+  "actuation_capability": null,
+  "adjacency": {
+    "J0": [
+      "J1",
+      "J2"
+    ],
+    "J1": [
+      "J0",
+      "J3"
+    ],
+    "J2": [
+      "J0",
+      "J3"
+    ],
+    "J3": [
+      "J1",
+      "J2"
+    ]
+  },
+  "edges": [
+    {
+      "connecting_lane_ids": [
+        "J0_J1_0"
+      ],
+      "edge_id": "J0_J1",
+      "free_flow_seconds": 6.158273,
+      "from_signal_id": "J0",
+      "storage_capacity_vehicles": 11.413333,
+      "to_signal_id": "J1"
+    },
+    {
+      "connecting_lane_ids": [
+        "J0_J2_0"
+      ],
+      "edge_id": "J0_J2",
+      "free_flow_seconds": 6.158273,
+      "from_signal_id": "J0",
+      "storage_capacity_vehicles": 11.413333,
+      "to_signal_id": "J2"
+    },
+    {
+      "connecting_lane_ids": [
+        "J1_J0_0"
+      ],
+      "edge_id": "J1_J0",
+      "free_flow_seconds": 6.158273,
+      "from_signal_id": "J1",
+      "storage_capacity_vehicles": 11.413333,
+      "to_signal_id": "J0"
+    },
+    {
+      "connecting_lane_ids": [
+        "J1_J3_0"
+      ],
+      "edge_id": "J1_J3",
+      "free_flow_seconds": 6.158273,
+      "from_signal_id": "J1",
+      "storage_capacity_vehicles": 11.413333,
+      "to_signal_id": "J3"
+    },
+    {
+      "connecting_lane_ids": [
+        "J2_J0_0"
+      ],
+      "edge_id": "J2_J0",
+      "free_flow_seconds": 6.158273,
+      "from_signal_id": "J2",
+      "storage_capacity_vehicles": 11.413333,
+      "to_signal_id": "J0"
+    },
+    {
+      "connecting_lane_ids": [
+        "J2_J3_0"
+      ],
+      "edge_id": "J2_J3",
+      "free_flow_seconds": 6.158273,
+      "from_signal_id": "J2",
+      "storage_capacity_vehicles": 11.413333,
+      "to_signal_id": "J3"
+    },
+    {
+      "connecting_lane_ids": [
+        "J3_J1_0"
+      ],
+      "edge_id": "J3_J1",
+      "free_flow_seconds": 6.158273,
+      "from_signal_id": "J3",
+      "storage_capacity_vehicles": 11.413333,
+      "to_signal_id": "J1"
+    },
+    {
+      "connecting_lane_ids": [
+        "J3_J2_0"
+      ],
+      "edge_id": "J3_J2",
+      "free_flow_seconds": 6.158273,
+      "from_signal_id": "J3",
+      "storage_capacity_vehicles": 11.413333,
+      "to_signal_id": "J2"
+    }
+  ],
+  "fallback_probes": [
+    {
+      "accepted_action": "NS_GREEN",
+      "case": "fresh",
+      "reason_code": "GRAPH_NEIGHBOUR_USED",
+      "scores": [
+        {
+          "downstream_available": true,
+          "local_pressure": 6.0,
+          "one_hop_discharge_bonus": 0.8,
+          "phase_id": "NS_GREEN",
+          "service_age_bonus": 0.6666666666666666,
+          "switch_penalty": 0.0,
+          "total": 7.466666666666667
+        },
+        {
+          "downstream_available": true,
+          "local_pressure": 4.0,
+          "one_hop_discharge_bonus": 0,
+          "phase_id": "EW_GREEN",
+          "service_age_bonus": 0.6666666666666666,
+          "switch_penalty": 1.0,
+          "total": 3.666666666666667
+        }
+      ],
+      "used_neighbour_ids": [
+        "J1"
+      ]
+    },
+    {
+      "accepted_action": "NS_GREEN",
+      "case": "stale",
+      "reason_code": "GRAPH_NEIGHBOUR_STALE_LOCAL_ONLY",
+      "scores": [
+        {
+          "downstream_available": true,
+          "local_pressure": 6.0,
+          "one_hop_discharge_bonus": 0.0,
+          "phase_id": "NS_GREEN",
+          "service_age_bonus": 0.0,
+          "switch_penalty": 0.0,
+          "total": 6.0
+        },
+        {
+          "downstream_available": true,
+          "local_pressure": 4.0,
+          "one_hop_discharge_bonus": 0.0,
+          "phase_id": "EW_GREEN",
+          "service_age_bonus": 0.0,
+          "switch_penalty": 0.0,
+          "total": 4.0
+        }
+      ],
+      "used_neighbour_ids": []
+    },
+    {
+      "accepted_action": "NS_GREEN",
+      "case": "missing",
+      "reason_code": "GRAPH_NEIGHBOUR_UNAVAILABLE_LOCAL_ONLY",
+      "scores": [
+        {
+          "downstream_available": true,
+          "local_pressure": 6.0,
+          "one_hop_discharge_bonus": 0.0,
+          "phase_id": "NS_GREEN",
+          "service_age_bonus": 0.0,
+          "switch_penalty": 0.0,
+          "total": 6.0
+        },
+        {
+          "downstream_available": true,
+          "local_pressure": 4.0,
+          "one_hop_discharge_bonus": 0.0,
+          "phase_id": "EW_GREEN",
+          "service_age_bonus": 0.0,
+          "switch_penalty": 0.0,
+          "total": 4.0
+        }
+      ],
+      "used_neighbour_ids": []
+    },
+    {
+      "accepted_action": "NS_GREEN",
+      "case": "identity-mismatch",
+      "reason_code": "GRAPH_IDENTITY_MISMATCH_LOCAL_ONLY",
+      "scores": [
+        {
+          "downstream_available": true,
+          "local_pressure": 6.0,
+          "one_hop_discharge_bonus": 0.0,
+          "phase_id": "NS_GREEN",
+          "service_age_bonus": 0.0,
+          "switch_penalty": 0.0,
+          "total": 6.0
+        },
+        {
+          "downstream_available": true,
+          "local_pressure": 4.0,
+          "one_hop_discharge_bonus": 0.0,
+          "phase_id": "EW_GREEN",
+          "service_age_bonus": 0.0,
+          "switch_penalty": 0.0,
+          "total": 4.0
+        }
+      ],
+      "used_neighbour_ids": []
+    }
+  ],
+  "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+  "network_sha256": "sha256:917ec52a9ebce6caed4ea4f61f4595c567cfe3e3a3107c5e91f036590b3706a1",
+  "nodes": [
+    {
+      "executor_owner": "A1",
+      "incoming_lane_ids": [
+        "J1_J0_0",
+        "J2_J0_0",
+        "S0_J0_0",
+        "W0_J0_0"
+      ],
+      "legal_phase_ids": [
+        "NS_GREEN",
+        "NS_YELLOW",
+        "ALL_RED_TO_EW",
+        "EW_GREEN",
+        "EW_YELLOW",
+        "ALL_RED_TO_NS"
+      ],
+      "outgoing_lane_ids": [
+        "J0_J1_0",
+        "J0_J2_0",
+        "J0_S0_0",
+        "J0_W0_0"
+      ],
+      "signal_id": "J0"
+    },
+    {
+      "executor_owner": "A1",
+      "incoming_lane_ids": [
+        "E0_J1_0",
+        "J0_J1_0",
+        "J3_J1_0",
+        "S1_J1_0"
+      ],
+      "legal_phase_ids": [
+        "NS_GREEN",
+        "NS_YELLOW",
+        "ALL_RED_TO_EW",
+        "EW_GREEN",
+        "EW_YELLOW",
+        "ALL_RED_TO_NS"
+      ],
+      "outgoing_lane_ids": [
+        "J1_E0_0",
+        "J1_J0_0",
+        "J1_J3_0",
+        "J1_S1_0"
+      ],
+      "signal_id": "J1"
+    },
+    {
+      "executor_owner": "A1",
+      "incoming_lane_ids": [
+        "J0_J2_0",
+        "J3_J2_0",
+        "N0_J2_0",
+        "W1_J2_0"
+      ],
+      "legal_phase_ids": [
+        "NS_GREEN",
+        "NS_YELLOW",
+        "ALL_RED_TO_EW",
+        "EW_GREEN",
+        "EW_YELLOW",
+        "ALL_RED_TO_NS"
+      ],
+      "outgoing_lane_ids": [
+        "J2_J0_0",
+        "J2_J3_0",
+        "J2_N0_0",
+        "J2_W1_0"
+      ],
+      "signal_id": "J2"
+    },
+    {
+      "executor_owner": "A1",
+      "incoming_lane_ids": [
+        "E1_J3_0",
+        "J1_J3_0",
+        "J2_J3_0",
+        "N1_J3_0"
+      ],
+      "legal_phase_ids": [
+        "NS_GREEN",
+        "NS_YELLOW",
+        "ALL_RED_TO_EW",
+        "EW_GREEN",
+        "EW_YELLOW",
+        "ALL_RED_TO_NS"
+      ],
+      "outgoing_lane_ids": [
+        "J3_E1_0",
+        "J3_J1_0",
+        "J3_J2_0",
+        "J3_N1_0"
+      ],
+      "signal_id": "J3"
+    }
+  ],
+  "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+  "schema_version": 1,
+  "term_bounds": {
+    "one_hop_discharge_bonus": 2.0,
+    "service_age_bonus": 2.0,
+    "switch_penalty": 1.0
+  }
+}
