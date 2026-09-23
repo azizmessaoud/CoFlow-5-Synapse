@@ -1,8 +1,8 @@
 # For the supervisor — where we are (simple English)
 
-**Project:** CoFlow-5 — how intelligent agents could help city traffic (SUMO simulation).
+**Project:** CoFlow-5 — how intelligent agents could help city traffic (**SUMO simulation** set in Grand Tunis practice).
 
-**Design Thinking stage now: Empathize** = understand people before we code.
+**Design Thinking stage now: Empathize** = understand people before we code — starting from **who already exists in Tunisia** (TRANSTU, signal owners, priority vehicles, residents), then using international ATC only as transfer patterns.
 
 We have **not** built the traffic-light software yet. We have decided **who** we design for, **what hurts them**, **what research says**, and **which ideas** to test next.
 
@@ -12,7 +12,7 @@ We have **not** built the traffic-light software yet. We have decided **who** we
 | Is the system built? | No. These are **ideas** to prototype in SUMO later |
 | Who controls the lights? | One “boss of the lights” (A1). Everyone else **asks**. The talking AI (LLM) **never** presses a light |
 | Numbers (40 s, −25%, …) | **Targets to test**, not results we already measured |
-| Did we invent evidence? | Literature claims are sourced (e.g. wait *feels* 2× longer). IMATM Tunis survey digits are **placeholders** — we do not present them as real |
+| Did we invent evidence? | **No for Tunisian institutions:** TRANSTU, Décret 2000-149, MEHAT signalisation, ANPE, CODATU–AFD, official GTFS. Transfer ATC (SCATS/Surtrac) is labelled as pattern, not Tunis field. IMATM survey digits stay **placeholders**. Wait *feels* 2× is sourced transfer literature. |
 
 **How many agents?** Five (A1–A5). Only A1 changes lights. A2–A5 ask. An LLM may explain the log; it is **not** a sixth controller.
 

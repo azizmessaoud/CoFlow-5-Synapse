@@ -4,6 +4,10 @@
 
 This is the **Empathize** deliverable for the presentation: four top-level sections only. User Personas are research-informed design artifacts, not interview-validated profiles. Numerical targets later in Possible Solution are **proposed acceptance criteria**, not achieved results.
 
+**Study setting (simulation):** Grand Tunis — street users and operators who already exist in Tunisian practice (TRANSTU, municipal / MEHAT signalisation, urgent-intervention vehicles, ANPE air-quality governance). CoFlow-5 is a **SUMO decision lab** on that setting (OSM + official scheduled TRANSTU GTFS + labelled synthetic/calibrated road demand). It is not a live Tunis cabinet deployment.
+
+**Evidence rule:** Tunisian law, agencies, open data, and operator practice come first. International ATC (SCATS, Surtrac, SCOOT, DfT, FHWA) is **transfer** Evidence for product needs — not a claim that Tunis already runs those systems. Detail: `.scratch/coflow5-empathize/research/tunisia-practice-evidence.md`.
+
 **Traceability spine:** need → Evidence → pain (User Journey) → Possible Solution → evaluation measure.
 
 | Design Thinking stage | Where it lives in this pack |
@@ -20,18 +24,20 @@ Roster is the v2 seed (eight User Personas, including operators). The IMATM repo
 
 ## USER PERSONAS
 
-| ID | User Persona | Profile | Need |
-|---|---|---|---|
-| P1 | **Amara, 74** | Walks with a cane (~0.8 m/s). Assistive-device speeds: cane 0.8, walker 0.6, wheelchair 1.1, amputee 0.7 m/s (LaPlante & Kaese, ITE). Crosses the high street twice daily to shops and transit. | *I need to know the crossing will give me enough time, even when traffic is busy.* |
-| P2 | **David, 41** | Delivery-van driver, 60+ time-sensitive stops per day. | *I can plan around a longer trip if I know how long it will actually take.* |
-| P3 | **Chidi, 27** | Rides a high-frequency corridor with no timetable — regularity is the service. | *Buses should arrive regularly — not three at once after a long wait.* |
-| P4 | **Rosa, 52** | Depot controller; supervises bus operations and disruption. | *Show me why a bus got — or was denied — priority, and let me respond before service breaks down.* |
-| P5 | **Marcus, 34** | Urban ambulance crew. | *Get us through safely, and make sure traffic recovers after we pass.* |
-| P6 | **Yuki, 47** | Traffic engineer; accountable for safe network performance. | *Automation should support my decisions — not leave me responsible for a system I cannot control.* |
-| P7 | **Maria, 38** | Lives near an arterial; walks her child to a nearby school. | *Cleaner traffic on the main road must not mean more exhaust outside our homes.* |
-| P8 | **Omar, 55** | Duty officer; monitors incidents and coordinates response. | *Tell me what's wrong, why you think so, and whether I can still trust the data.* |
+Profiles are Tunis-practice roles. Speeds and clearance figures that are not Tunisian statutes cite transfer standards (ITE / MUTCD / HCM) and stay labelled as such.
 
-**Not in this roster (do not silently merge):** IMATM P-1–P-6 (Amine, Karim, Nadia, Hichem, Emna, Leila) cover overlapping needs under different names and a Tunis study area. Map them, do not stack them.
+| ID | User Persona | Tunis practice profile | Need |
+|---|---|---|---|
+| P1 | **Amara, 74** | Older pedestrian with cane (~0.8 m/s assistive band — LaPlante & Kaese, ITE). Crosses a central Tunis avenue twice daily to market, pharmacy, and TRANSTU stops. App-only requests would exclude her. | *I need to know the crossing will give me enough time, even when traffic is busy.* |
+| P2 | **David, 41** | Delivery / peak-hour road user on a congested Grand Tunis corridor (CODATU–AFD: daily congestion after modal shift to cars). Plans around variance more than mean speed. | *I can plan around a longer trip if I know how long it will actually take.* |
+| P3 | **Chidi, 27** | TRANSTU bus (or métro feeder) rider on a high-frequency line. Official GTFS gives the *schedule*; lived service is regularity and bunching under congestion. | *Buses should arrive regularly — not three at once after a long wait.* |
+| P4 | **Rosa, 52** | TRANSTU dépôt / régulation controller — bus districts and depots are real operator units; she supervises headways and disruption, not the traffic-light cabinet. | *Show me why a bus got — or was denied — priority, and let me respond before service breaks down.* |
+| P5 | **Marcus, 34** | Ambulance / urgent-intervention crew. Tunisian law already lists priority vehicles and requires other road users to yield when special signals are used (Décret 2000-149; Code de la route). | *Get us through safely, and make sure traffic recovers after we pass.* |
+| P6 | **Yuki, 47** | Municipal / MEHAT-facing traffic engineer accountable for signalisation lumineuse and safe network performance. Plans may be old; permanent detectors are not assumed. | *Automation should support my decisions — not leave me responsible for a system I cannot control.* |
+| P7 | **Maria, 38** | Parent living near an arterial; walks a child to school. National AQ monitoring exists (ANPE); her street-front exposure is still often unmeasured. | *Cleaner traffic on the main road must not mean more exhaust outside our homes.* |
+| P8 | **Omar, 55** | Duty officer / incident desk coordinating peak disruption with police, TRANSTU, and the signal owner. | *Tell me what's wrong, why you think so, and whether I can still trust the data.* |
+
+**Not in this roster (do not silently merge):** IMATM P-1–P-6 (Amine, Karim, Nadia, Hichem, Emna, Leila) cover overlapping needs under Tunis colour names. Map them, do not stack them.
 
 ---
 
@@ -137,7 +143,7 @@ Design implication: distinguish “no problem detected” from “insufficient r
 
 ### Shared journey (one ambulance, one school, one crossing)
 
-Personas collide on the same network. Reference scenario: an ambulance passes Maria's school street while Amara is mid-crossing and Chidi's delayed bus approaches.
+Personas collide on the same Tunis-centre corridor in simulation. Reference scenario: an urgent-intervention vehicle (Marcus) passes Maria's school street while Amara is mid-crossing and Chidi's delayed TRANSTU bus approaches.
 
 | Moment | Stakeholders | Pain if unmanaged |
 |---|---|---|
@@ -158,30 +164,60 @@ Personas collide on the same network. Reference scenario: an ambulance passes Ma
 
 1. “Perceived wait is 1.5× actual” — measured figure is **2×** (Vallyon, Turner & Hodgson, ATRF 2009).
 2. “MUTCD 2023 allows 0.8 m/s” — unverified; MUTCD 2009 §4E uses 3.5 ft/s (1.07 m/s).
-3. Any “X% of engineers distrust AI control” — no quantitative survey; use SCATS/Surtrac product documentation.
+3. Any “X% of engineers distrust AI control” — no quantitative survey; use SCATS/Surtrac product documentation as *transfer* practice only.
 4. Rider-abandonment percentages — not found; bunching literature supports qualitative mode-shift risk only.
 5. Public opinion on AI infrastructure — vendor surveys only (EY); directional at best.
 6. A universal “average incident detection delay” — not found; measure our own.
 7. “Flashover in 3–5 minutes” — no primary source; do not use.
-8. SUMO/HBEFA outputs are **emission proxies**, not air-quality or exposure measurements. Simulated EV time savings must not be translated into predicted lives saved.
+8. SUMO/HBEFA outputs are **emission proxies**, not ANPE measurements or personal exposure. Simulated EV time savings must not be translated into predicted lives saved.
 9. Unfinished/teleported trips must count in P2 metrics, or congestion looks artificially good.
 10. IMATM interview counts, Table 9 digits marked ▲, and “assumed protocol” figures are **placeholders**, not Evidence.
 11. CoFlow-5 PDF slides (Gemini Notebook) are architecture statements, not cited Evidence.
+12. Official TRANSTU **GTFS is scheduled offer**, not confirmed live bus positions. Synthetic/calibrated Tunis road demand is not observed loop data.
+13. Do not claim Tunis already operates SCATS, Surtrac, or SCOOT because Rosa/Yuki exist as jobs.
 
-### Per-persona Evidence (motivates the need; does not set the target)
+### A. Tunisia practice (primary for this simulation)
 
-| User Persona | Finding |
-|---|---|
-| Amara | Perceived wait ≈ **2×** actual (Vallyon, Turner & Hodgson, ATRF 2009). Frustration grows after **20–30 s**; 2/3 cross on red beyond it (NZTA RR440 2009; TfL; DfT LTN 2/95: max preset normally 40 s, up to 60 s). MUTCD 2009 clearance 1.07 m/s; HCM 1.0 m/s if >20% users 65+. Blind pedestrians: completion difficulties (Bentzen et al., *JVIB* 2005). |
-| David | Reliability ratio **0.4** (DfT TAG A1.3). Incidents ~**25%** of congestion (FHWA). Avoided HDV stop ≤**0.32 kg CO2 / 1.8 g NOx** (Deschle et al., *Energies* 2022). |
-| Chidi | Wait valued ≈ **2×** in-vehicle (DfT TAG A1.3; Wardman mean 1.80, n=138). Bunching is self-reinforcing (Newell & Potts 1964; Daganzo 2009; 2024 review). SCOOT bus priority: bus times **−39%** Southampton (Hounsell & McDonald 1986). |
-| Rosa | SCATS ships manual override and full audit trails (SCATS Core brochure, Transport NSW 2022). |
-| Marcus | Each minute of ALS delay ≈ **−7%** survival-to-discharge (aOR 0.93, n=4,278; *PLOS One* 2022). EVP field −14.2% (Cary) to −18–23% (Houston). Closely spaced preemption: arterial **+20–30 s**, side-street **+7.6%** (Nelson & Bullock, TRR 1727). |
-| Yuki | SCATS intervention + audit (2022). SCOOT loses benefits under congestion (Hounsell & McDonald 1986). Surtrac falls back to default durations on sensor/network failure (Smith et al., CMU). |
-| Maria | 6.4M US children (13.5%) attend school within 250 m of a major road (Kingsley et al., *IJERPH* 2014). HBEFA/SUMO figures are proxies. |
-| Omar | Incidents **25–30%** of metro congestion (FHWA; Puget Sound 2006). No universal detection-delay benchmark. |
+| Topic | Finding | Source |
+|---|---|---|
+| Public operator | TRANSTU operates Grand Tunis bus, métro léger, and TGM; publishes fleet/availability and passenger traffic. | TRANSTU “Parc et Trafic”; Ministère des Transports open-data org page |
+| Depots / régulation | Bus districts and multiple **dépôts**; metro traffic/exploitation services — Rosa’s job class is institutional, not imported. | TRANSTU organisational reporting (dépôts / trafic) |
+| Scheduled data for sim | Official TRANSTU GTFS and stop référentiel on `catalogue-data.transport.tn` — usable as scheduled truth in SUMO. | Ministère des Transports CKAN |
+| Congestion context | Urban agglomerations face daily congestion, air pollution, and road-safety stress after car-oriented growth and strained collective transport. | CODATU / AFD *Vers une mobilité urbaine durable en Tunisie* |
+| Priority vehicles | Law lists priority / urgent-intervention vehicles and equipment rules; other users must yield when special signals are used. | Décret n° 2000-149 (2000); Code de la route sanction tables (Décret 2010-262) |
+| Signal ownership | MEHAT UGOSMREPSL follows luminous signalling on the classified network; municipalities operate local junctions — Yuki’s accountability exists. | MEHAT Ponts et chaussées org pages |
+| Air quality governance | ANPE runs the national ambient network (incl. traffic-type stations); Loi 2007-34; NT 106.04. Street-gate exposure ≠ city monitor. | ANPE RNSQA; Loi 2007-34 |
+| Local SUMO practice | Tunisian intersection studies already compare static vs adaptive lights in SUMO+Python for queues, energy, emissions. | Othmani et al. (ICAIGE / Logistiqua Tunisian case studies) |
 
-### Evidence trail (verified sources)
+### B. Per-persona Evidence (Tunis practice → transfer; motivates need, does not set target)
+
+| User Persona | Tunisia practice | Transfer (not Tunis field proof) |
+|---|---|---|
+| Amara | Central Tunis crossings serve mixed ages; slow walkers are excluded if clearance assumes “young legs.” | Perceived wait ≈ **2×** (Vallyon et al., ATRF 2009); 20–30 s compliance cliff (NZTA RR440; TfL; DfT LTN 2/95); MUTCD/HCM clearance 1.07→1.0 m/s for older shares. |
+| David | CODATU–AFD: daily Grand Tunis congestion — variance is the lived cost. | Reliability ratio **0.4** (DfT TAG A1.3); incidents ~**25%** of congestion (FHWA). |
+| Chidi | TRANSTU schedules exist in GTFS; peak congestion and unstable collective service make regularity the rider need. | Wait ≈ **2×** in-vehicle (DfT TAG; Wardman); bunching loop (Newell & Potts; Daganzo); SCOOT bus priority feasibility −39% Southampton. |
+| Rosa | TRANSTU dépôt / régulation must manage disruption without owning the signal cabinet. | SCATS ships override + audit as product features (Transport NSW 2022) — what her Possible Solution must look like. |
+| Marcus | Priority vehicle status is legal (2000-149); siren does not create downstream space. | ALS delay–survival literature; US EVP benefits **and** arterial/side-street costs of dense preemption (Nelson & Bullock). |
+| Yuki | Local signal owners exist (municipal / MEHAT); adaptive black boxes without explainability will be switched off. | SCATS intervention; Surtrac fallback on sensor/network failure; SCOOT loss of benefit under congestion. |
+| Maria | Congestion–pollution link is a stated Tunisian urban issue; ANPE monitors ambient AQ, not every school street. | Near-road school exposure literature (Kingsley); stop-linked emission proxies (Deschle); HBEFA/SUMO = proxy. |
+| Omar | Peak incidents and recovery are part of congestion reality (CODATU context); no Tunisian universal detection-delay KPI found. | FHWA TIM share 25–30%; clearance / secondary-crash metrics — define our own FAR and miss rates. |
+
+### C. Evidence trail (verified sources)
+
+#### Tunisia / simulation setting
+
+| Topic | Finding | Figure | Source |
+|---|---|---|---|
+| Operator | TRANSTU bus + métro + TGM; publishes parc and trafic | — | transtu.tn Parc et Trafic |
+| Open data | Scheduled TRANSTU GTFS + stop référentiel | scheduled, not live | catalogue-data.transport.tn |
+| Mobility stress | Daily congestion, AQ, road safety after car growth / strained TC | — | CODATU–AFD Tunis valorisation |
+| EV / priority law | Priority and urgent-intervention vehicle list + signal rules | — | Décret 2000-149 |
+| Yield duty | Failure to free the way for announced priority vehicles is sanctioned | — | Code de la route / Décret 2010-262 |
+| Signalisation | UGOSMREPSL: lighting + luminous signalling on classified network | — | MEHAT |
+| Ambient AQ | National monitoring network; traffic station type exists | — | ANPE RNSQA; Loi 2007-34 |
+| Local method | Tunisian intersections in SUMO: adaptive vs static for energy/emissions/queues | — | Othmani et al. Tunisian case studies |
+
+#### Transfer practice (international)
 
 | Topic | Finding | Figure | Source |
 |---|---|---|---|
@@ -191,29 +227,21 @@ Personas collide on the same network. Reference scenario: an ambulance passes Ma
 | Pedestrian wait | Ped-actuated max preset normally 40 s, up to 60 s | 40–60 s | DfT LTN 2/95 (1995) |
 | Pedestrian wait | Tolerable wait 20 s (light)–120 s (heavy); avoid cycles >90 s | — | Austroads Part 7 (1994) via NZTA RR440 |
 | Accessibility | LPI: NYC −28% ped crashes; PA −58.7%; FHWA CMF 0.87 | — | FHWA-HRT-18-060 (2018) |
-| Accessibility | City-scale LPI: collisions −5.45%, ped injuries −14.7% | — | Sze, CUNY (2019); *Nature Cities* (2025) |
 | Accessibility | Assistive speeds: cane 0.8, walker 0.6, wheelchair 1.1, amputee 0.7 m/s | — | LaPlante & Kaese (ITE) |
 | Accessibility | Clearance 3.5 ft/s (1.07 m/s); 1.0 m/s if >20% users 65+ | — | MUTCD 2009 §4E; FHWA HCM Ch.13 (1998) |
 | Accessibility | Blind pedestrians: locating, aligning, onset, completion difficulties | — | Bentzen et al., *JVIB* (2005) |
 | Transit value | Wait valued 2× in-vehicle (mean 1.80, n=138) | 2× | DfT TAG A1.3; Wardman meta-analysis |
-| Transit value | US walking/waiting 2–5× in-vehicle | — | Pratt (1999) via TCRP/Litman |
 | Bus bunching | Longer waits, overcrowding, trust loss; self-reinforcing | — | TR Part C (2024); Newell & Potts (1964); Daganzo (2009) |
-| Holding | Headway-based holding best under disruption | — | van der Werff, van Oort, Cats & Hoogendoorn |
 | Transit priority | SCOOT bus priority: bus times −39% | −39% | Hounsell & McDonald (1986) |
-| EMS benchmarks | NFPA 1710 turnout/travel/alarm times | — | NFPA 1710 (2020); IAFF (2022) |
-| EMS benchmarks | NHS Cat 1 / Cat 2 response standards | — | NHS England / Nuffield Trust |
 | EMS survival | Each min ALS delay: survival −7% (aOR 0.93) | −7%/min | *PLOS One* (2022) |
-| EMS survival | −6%/min; <8 min → 2.1× survival | −6%/min | BMC (2025) |
 | EVP benefit | Cary −14.2%; Houston −18–23% | — | USFA; USDOT ITS JRS |
 | EVP cost | Closely spaced preemptions: arterial +20–30 s; side-street +7.6% | — | Nelson & Bullock, TRR 1727 (2000) |
 | Engineer tooling | SCATS: manual intervention + audit + incident corridors | — | SCATS Core brochure, Transport NSW (2022) |
 | Engineer tooling | SCOOT loses benefits under congestion | — | Hounsell & McDonald (1986) |
 | Engineer tooling | Surtrac fallback to default durations | — | Smith et al., CMU Surtrac pilot |
 | Exposure | 6.4M US children (13.5%) ≤250 m of a major road | — | Kingsley et al., *IJERPH* (2014) |
-| Exposure | ~33% of US public schools ≤400 m; 12% ≤100 m | — | Appatova et al. (2008) |
 | Emissions | Avoided HDV stop ≤0.32 kg CO2, 1.8 g NOx | — | Deschle et al., *Energies* 15:1242 (2022) |
 | Driver value | Reliability ratio 0.4 (cars/LGV) | 0.4 | DfT TAG A1.3 §6.3.4 |
-| Non-recurring congestion | Incidents 25%, weather 15%, work zones 10% | 25% | FHWA |
 | Incident share | 25–30% of metro congestion delay | — | FHWA Freeway Mgmt Handbook; Puget Sound (2006) |
 | TIM metrics | Roadway/incident clearance; secondary crashes | — | FHWA-JPO-13-062; FHWA-HOP-15-028 |
 | Public opinion | Vendor survey only — directional | — | EY *(Claim flag: not Evidence)* |
@@ -274,14 +302,14 @@ Principle: cooperation with explicit safeguards — no specialist hides costs im
 
 | # | User Persona | Specific | Measurable | Achievable | Relevant (Evidence) | Time-bound |
 |---|---|---|---|---|---|---|
-| P1 | Amara | Cut wait; guarantee completion | Mean ≤20 s; P95 ≤40 s (tail); hard cap 40 s under stated assumptions; zero truncations | Rule-based A3 escalation first | 2× perceived wait; 30 s cliff; 0.6–0.8 m/s | Tier 0 week 6; every episode |
-| P2 | David | Predictable, not just faster | P95 and stops/vehicle; unfinished counted; P95 −5% vs MP under surge | P95 from recorded trips | Reliability ratio 0.4 | S1–S10; headline week 11 |
-| P3 | Chidi | Regular headways | Headway variance −15% vs no priority at ≤3% extra car delay | Conditional TSP | Wait ≈ 2× in-vehicle; bunching | A3 week 8; H3 on S6 week 11 |
-| P4 | Rosa | Understandable, intervenable | 100% reason codes; authorised intervention; warnings with FAR | Logging, not ML | SCATS override + audit | Log from Tier 0; G3 week 10 |
-| P5 | Marcus | Faster passage, honest cost | EV −25% / −10%; civilian delay ≤5%; per-mission log | SUMO preemption feasible | −7%/min; +20–30 s externality | A2 week 7; H2 on S4 week 11 |
-| P6 | Yuki | Command at all times | 100% logged; latency <100 ms; fallback time; override + interlocks | Watchdog proven in SCATS/Surtrac | SCOOT degradation | Watchdog from Tier 0 |
-| P7 | Maria | Cut near school, no displacement | CO2/NOx per link; proxy labelled; pre-registered displacement rule | λ_eco + HBEFA + per-link diff | 6.4M children ≤250 m | A5 week 9; H5 week 11 |
-| P8 | Omar | Trustworthy alerts | Delay/FAR/miss/recovery per severity; comms-loss alerting | EWMA/CUSUM first | Incidents 25–30%; no inherited threshold | A4 week 6; H4/H6 week 11 |
+| P1 | Amara | Cut wait; guarantee completion | Mean ≤20 s; P95 ≤40 s (tail); hard cap 40 s under stated assumptions; zero truncations | Rule-based A3 escalation first | Tunis mixed-age crossings; transfer 2× wait / 30 s cliff / 0.6–0.8 m/s | Tier 0 week 6; every episode |
+| P2 | David | Predictable, not just faster | P95 and stops/vehicle; unfinished counted; P95 −5% vs MP under surge | P95 from recorded trips | CODATU congestion context; transfer reliability ratio 0.4 | S1–S10; headline week 11 |
+| P3 | Chidi | Regular headways | Headway variance −15% vs no priority at ≤3% extra car delay | Conditional TSP | TRANSTU scheduled GTFS + peak irregularity; transfer wait 2× / bunching | A3 week 8; H3 on S6 week 11 |
+| P4 | Rosa | Understandable, intervenable | 100% reason codes; authorised intervention; warnings with FAR | Logging, not ML | TRANSTU dépôt/régulation job; transfer SCATS audit pattern | Log from Tier 0; G3 week 10 |
+| P5 | Marcus | Faster passage, honest cost | EV −25% / −10%; civilian delay ≤5%; per-mission log | SUMO preemption feasible | Décret 2000-149 priority status; transfer EVP cost literature | A2 week 7; H2 on S4 week 11 |
+| P6 | Yuki | Command at all times | 100% logged; latency <100 ms; fallback time; override + interlocks | Watchdog proven in transfer ATC | MEHAT/municipal signal owner; transfer Surtrac/SCATS fallback | Watchdog from Tier 0 |
+| P7 | Maria | Cut near school, no displacement | CO2/NOx per link; proxy labelled; pre-registered displacement rule | λ_eco + HBEFA + per-link diff | Tunis AQ stress + ANPE ≠ street gate; HBEFA proxy | A5 week 9; H5 week 11 |
+| P8 | Omar | Trustworthy alerts | Delay/FAR/miss/recovery per severity; comms-loss alerting | EWMA/CUSUM first | Local incident coordination; transfer FHWA 25–30% share | A4 week 6; H4/H6 week 11 |
 
 ### Accountable agent (evaluation, not actuation by LLM)
 
@@ -312,13 +340,13 @@ For each: Before → Intervention → User experience → Trade-offs (who pays) 
 |---|---|---|
 | Accessible crossing walkthrough | Older pedestrians, mobility-aid users | Acknowledgement, waiting, crossing information |
 | Journey interview/diary | Delivery drivers, bus passengers | Where unpredictability hurts |
-| Dashboard task test | Bus controllers, traffic engineers | Explain a decision, identify a fault, choose a response |
-| Emergency-response walkthrough | Emergency-service representatives | Request → passage → recovery |
-| Neighbourhood map review | Parents, residents, school reps | Locations/times for environmental checks |
+| Dashboard task test | TRANSTU régulation, municipal traffic engineers | Explain a decision, identify a fault, choose a response |
+| Emergency-response walkthrough | Urgent-intervention / SAMU representatives | Request → passage → recovery under 2000-149 rules |
+| Neighbourhood map review | Parents, residents, school reps | Locations/times for environmental checks vs ANPE monitors |
 | Incident tabletop | Duty officers | Alerts support investigation without overload |
 
-If stakeholder access is limited, run labelled **proxy walkthroughs** and say so in the report.
+If stakeholder access is limited, run labelled **proxy walkthroughs** and say so in the report. Do not upgrade IMATM placeholders into interview Evidence.
 
 ### Presentation close
 
-Traffic management cannot be judged by vehicle throughput alone. Amara needs accessible crossing time; David needs predictable journeys; Chidi needs regular buses; Rosa needs understandable decisions; Marcus needs passage *and* recovery; Yuki needs operational control; Maria needs environmental improvement without displacement; Omar needs trustworthy alerts. Evidence motivates the design. Simulation and stakeholder validation decide whether Possible Solutions meet the needs.
+Empathize for this simulation starts in **Tunisian practice**: TRANSTU riders and dépôt staff, priority vehicles under Tunisian law, municipal/MEHAT signal owners, and residents who live the Congestion–AQ trade-off. Amara needs accessible crossing time; David needs predictable journeys; Chidi needs regular TRANSTU service; Rosa needs understandable priority decisions; Marcus needs passage *and* recovery; Yuki needs operational control; Maria needs local improvement without displacement; Omar needs trustworthy alerts. International ATC citations transfer product patterns. SUMO tests Possible Solutions — it does not prove Tunis field performance.

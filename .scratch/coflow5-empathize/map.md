@@ -18,6 +18,7 @@ One canonical Empathize pack with four top-level sections — User Personas, Use
 
 - [Binary sources](issues/04-binary-sources.md): Unique Empathize claims live in the IMATM report (six Tunis User Personas, S-1–S-10); the PDF is architecture slides; `SUMO_forStudents.docx` is a brief with no roster. Notes: [binary-sources.md](research/binary-sources.md).
 - Empathize pack filename: [`coflow5-empathize-pack.md`](../../coflow5-empathize-pack.md) — four top-level sections (User Personas, User Journeys, Evidence, Possible Solution). v2 eight User Personas including operators. IMATM names are an alternate roster, not extra people.
+- [Tunisia practice Evidence](research/tunisia-practice-evidence.md): Empathize leads with TRANSTU, Décret 2000-149, MEHAT signalisation, ANPE, CODATU–AFD, official GTFS; SCATS/Surtrac/SCOOT are transfer-only; simulation honesty flags kept.
 
 ## Not yet specified
 
