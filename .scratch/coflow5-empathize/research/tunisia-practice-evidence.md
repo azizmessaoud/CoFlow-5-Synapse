@@ -18,8 +18,8 @@ Purpose: ground User Personas in **real Tunisian institutions and practice** for
 2. **Open data (Ministère des Transports)** — `catalogue-data.transport.tn`: official **TRANSTU GTFS** (scheduled bus/métro/TGM) and national stop référentiel. Simulation may ingest scheduled GTFS; it is **not** live AVL or observed road demand.
 3. **Priority vehicles** — Décret n° **2000-149** (24 Jan 2000) lists priority / urgent-intervention vehicles and signal equipment rules; Code de la route enforcement (e.g. Décret 2010-262 tables) requires yielding to announced priority vehicles. Empathize: Marcus’s legal priority exists; corridor pre-clearance remains a design gap, not automatic signal integration.
 4. **Signalisation lumineuse** — Ministère de l’Équipement (MEHAT) UGOSMREPSL follows public lighting and luminous signalling on the classified road network; municipalities operate local junctions. Empathize: Yuki’s role exists; adaptive ATC with permanent detection is **not** evidenced as the Tunis default.
-5. **Air quality** — Loi **2007-34**; **ANPE** RNSQA ambient network (urban / traffic station types) and NT 106.04. Empathize: Maria’s concern is legitimate nationally; street-front exposure at a school gate is **not** the same as a city monitor — SUMO/HBEFA stays a proxy.
-6. **Mobility context** — CODATU / AFD *Vers une mobilité urbaine durable en Tunisie* (valorisation Tunis): daily congestion, air pollution and road safety linked to modal shift toward cars and unstable collective transport after demand outgrew capacity; TRANSTU dominant public operator in Grand Tunis. Empathize: David/Chidi/Maria pains are structural, not invented for the course.
+5. **Air quality** — Loi **2007-34**; **ANPE** RNSQA ambient network (urban / traffic station types) and NT 106.04. Ambient AQ governance exists; it does **not** justify a parent/school-street Empathize persona (professor: not evident). SUMO/HBEFA stays an optional **proxy** KPI.
+6. **Mobility context** — CODATU / AFD *Vers une mobilité urbaine durable en Tunisie* (valorisation Tunis): daily congestion, air pollution and road safety linked to modal shift toward cars and unstable collective transport after demand outgrew capacity; TRANSTU dominant public operator in Grand Tunis. Empathize: David/Chidi pains are structural; parent/Maria removed.
 7. **Tunisian simulation practice** — Othmani, Boubaker, Rehimi, El Alimi and follow-on Logistiqua work: Tunisian intersections studied in **SUMO + Python**, comparing static vs adaptive lights for queues, energy, emissions. Empathize: local academic practice already uses SUMO as a **decision lab**, matching this project’s simulation posture.
 
 ## Simulation honesty (ADR-aligned)
@@ -39,5 +39,5 @@ Purpose: ground User Personas in **real Tunisian institutions and practice** for
 | Rosa | TRANSTU ops / dépôt régulation (not named in IMATM six) |
 | Marcus | Karim — ambulance / urgent intervention |
 | Yuki | Emna — municipal traffic / signal operator |
-| Maria | Leila — resident / near-junction exposure |
+| *(removed)* | Leila/Maria — parent persona not evident (professor) |
 | Omar | Incident / network awareness (Emna+Karim overlap in IMATM S-9) |

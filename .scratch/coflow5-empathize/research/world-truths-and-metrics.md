@@ -107,7 +107,7 @@ Thresholds are **agency-set**; CoFlow reports exploratory benchmarks by severity
 | Data freshness / comms loss alerts | Stale vs healthy |
 | Override count + interlock integrity | Human authority without conflicting greens |
 
-### H. Environment (Maria) — proxies in sim
+### H. Environment — optional proxies in sim (no Empathize persona)
 
 | Metric | Definition |
 |---|---|
@@ -126,7 +126,7 @@ Thresholds are **agency-set**; CoFlow reports exploratory benchmarks by severity
 | Rosa | Request/grant/deny + reason codes, task time | Audit/override practice |
 | Marcus | EV TT vs baselines, civilian delay, recovery, zero safety breaches | EVP externality |
 | Yuki | Log completeness, latency, fallback time, freshness | Operable ATC |
-| Maria | Link CO₂/NOx proxy, stops, displacement rule | Spatial equity |
+| *(deferred)* | Link CO₂/NOx proxy, stops/vehicle | Optional system KPI — not parent persona |
 | Omar | Detect/FAR/miss, clearance, recovery by severity | TIM; no universal detect KPI |
 
 ## Claim flags for metrics

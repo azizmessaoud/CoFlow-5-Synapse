@@ -9,8 +9,8 @@ The canonical four-section document this map is finding its way to.
 _Avoid_: spec, README, implementation plan, design-patterns paper
 
 **User Persona**:
-A research-informed stakeholder profile in the Empathize pack, not an interview-validated person.
-_Avoid_: user, role, actor (when meaning this profile)
+A research-informed stakeholder profile in the Empathize pack, not an interview-validated person. Roster is **seven** (Amara, David, Chidi, Rosa, Marcus, Yuki, Omar). Parent/Maria removed — professor: not evident.
+_Avoid_: user, role, actor (when meaning this profile); Maria/Leila parent persona
 
 **Proxy validation**:
 A walkthrough by the student team or professor of research-informed User Personas, User Journeys, and Possible Solutions. It is not an interview with the person a User Persona describes.

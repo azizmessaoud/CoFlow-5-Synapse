@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent
 MAIN = ROOT / 'CoFlow-5-Synapse-TALK.pptx'
 PERSONAS = ROOT / 'CoFlow-5-Persona-Cards.pptx'
 LEDGER = ROOT / 'presentation-claim-ledger.json'
-NAMES = ('Amara', 'David', 'Chidi', 'Rosa', 'Marcus', 'Yuki', 'Maria', 'Omar')
+NAMES = ('Amara', 'David', 'Chidi', 'Rosa', 'Marcus', 'Yuki', 'Omar')
 
 
 def text(data: bytes) -> str:

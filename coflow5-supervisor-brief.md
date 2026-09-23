@@ -8,7 +8,7 @@ We have **not** built the traffic-light software yet. We have decided **who** we
 
 | Supervisor question | Short answer |
 |---|---|
-| What did we deliver? | 8 persona sheets (same canvas as the course), journeys, evidence, solution ideas |
+| What did we deliver? | 7 persona sheets (parent/Maria removed — professor: not evident), journeys, evidence, solution ideas |
 | Is the system built? | No. These are **ideas** to prototype in SUMO later |
 | Who controls the lights? | One “boss of the lights” (A1). Everyone else **asks**. The talking AI (LLM) **never** presses a light |
 | Numbers (40 s, −25%, …) | **Targets to test**, not results we already measured |

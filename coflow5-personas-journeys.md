@@ -2,6 +2,8 @@
 
 **Version 2 — consolidated.** Merges the verified evidence trail with the external review's corrections: targets are now labelled as *proposed acceptance criteria*, SMART wording tightened, traceability given one primary accountable agent per persona, and validation activities added.
 
+**Roster:** seven personas — **Maria (parent) removed (professor: not evident).** Omar is P7.
+
 **Tunis simulation setting:** Empathize roles are people who already exist in Grand Tunis practice (TRANSTU, municipal/MEHAT signalisation, urgent-intervention vehicles, ANPE AQ governance). Primary Evidence is Tunisian law/agencies/open data/operator practice; SCATS/Surtrac/SCOOT/DfT/FHWA are **transfer** patterns for Possible Solutions. SUMO uses OSM + official scheduled TRANSTU GTFS + labelled synthetic/calibrated road demand — not a live cabinet. Detail: `.scratch/coflow5-empathize/research/tunisia-practice-evidence.md` and `coflow5-empathize-pack.md` Evidence §A–B.
 
 **Claims note (use this wording in the report):** *The personas are research-informed design artifacts, not profiles validated through interviews. Tunisian institutional Evidence grounds who the personas are; transfer literature motivates product needs. Neither establishes exact numerical targets. SMART objectives combine those needs with proposed engineering acceptance criteria; simulation tests them against baselines and does not claim Tunis field performance, measured air quality, or lives saved.*
@@ -124,23 +126,8 @@ Each persona follows: **need → journey (pain → solution) → evidence → de
 **Design implication:** "intelligent" control must include predictable failure behaviour; un-diagnosable optimisation is useless to an operator.
 **What to test:** decision-log completeness, control latency (<100 ms target), fallback activation time, recovery under sensor/comms failure — plus a usability task: can she identify the fault and select the correct mode?
 
-### P7 — Maria, 38: the parent who does not want pollution displaced
-**Profile:** lives near a Grand Tunis arterial; walks her child to a nearby school (CODATU: congestion linked to air pollution stress).
-**Need:** "Cleaner traffic on the main road must not mean more exhaust outside our homes."
 
-| Journey stage | Experience & pain point | Possible CoFlow-5 response |
-|---|---|---|
-| Leaves home | Queuing vehicles create local exhaust and noise | Residential links included in monitoring, not just the corridor |
-| Walks to school | Frequent acceleration and idling | Coordination adjusted to cut unnecessary stops where safe |
-| At the school gate | Network gains may hide local deterioration | Emissions reported separately for school-adjacent links and periods |
-| After a system change | A smoother arterial may mean longer side-street queues | Link-by-link displacement check vs baseline |
-| Looks for evidence | A city-wide percentage explains nothing locally | Before/after map: where emissions fell, rose, or stayed |
-
-**Evidence (Tunis → transfer):** Loi 2007-34 / ANPE RNSQA monitor ambient AQ (including traffic-type stations); that is not the same as measuring her school-gate street. Transfer: 6.4M US children (13.5%) attend school within 250 m of a major road (Kingsley et al., *IJERPH* 2014); avoided HDV stop saves ≤0.32 kg CO2 / 1.8 g NOx (Deschle 2022). **SUMO/HBEFA = proxy, not ANPE.**
-**Design implication:** evaluate *where* benefits and burdens land, not just totals. **SUMO/HBEFA outputs are emission estimates and proxies, not air-quality or exposure measurements** — any exposure-weighted indicator is labelled as a proxy with documented weights.
-**What to test:** CO2/NOx per link, changes near sensitive locations, stops per vehicle, additional person-delay. **A displacement acceptance rule is defined before testing** (proposed rule: no statistically significant increase in mean NOx proxy on any residential link adjacent to a school, at α=0.05 with Holm correction — the rule is pre-registered, then applied).
-
-### P8 — Omar, 55: the duty officer who needs trustworthy alerts
+### P7 — Omar, 55: the duty officer who needs trustworthy alerts
 **Profile:** monitors incidents and coordinates the operational response.
 **Need:** "Tell me what's wrong, why you think so, and whether I can still trust the data."
 
@@ -170,8 +157,8 @@ Full table: `.scratch/coflow5-empathize/research/world-truths-and-metrics.md`. E
 | I-3 | EVP constrained by downstream space | EV TT; stops; downstream occ.; recovery | Marcus |
 | I-4 | Wait, clearance, completion separate | Wait P95; truncations; completion | Amara |
 | I-5 | Person-weighted bus delay + bunching | Headway CV; passenger wait; bus TT | Chidi, Rosa |
-| I-6 | Local greed → spillback / residential burden | Spillback; residential delay/flow | David, Maria, Yuki |
-| I-7 | Stop-and-go emissions lever | Stops near receptors + emissions proxy | Maria |
+| I-6 | Local greed → spillback / neighbouring burden | Spillback; neighbouring delay/flow | David, Yuki |
+| I-7 | Stop-and-go emissions proxy (optional system KPI) | Stops/vehicle; CO₂/NOx proxy if A5 runs | *(deferred — no persona)* |
 | I-8 | Observability for accountability | KPI availability; log completeness | Yuki, Rosa |
 | I-9 | Explainability / override / adoption | Explanation task; override; interlocks | Yuki, Rosa |
 | I-10 | Incident-dominated delay tail (US share scoped) | Detect/miss/FAR; recovery; incident P95 | Omar |
@@ -192,8 +179,7 @@ Appraisal anchors only: DfT reliability ratio **0.4** (UK); transit wait ≈**2�
 | P4 | Rosa | Understandable, intervenable priority decisions | 100% reason-code coverage; authorised intervention within safety constraints; predictive warnings evaluated on lead time ≥5 min *with* missed-event and false-alarm rates | Reason codes are a logging feature, not ML | SCATS ships override + audit trail as product features | Logging from Tier 0; instrumentation-readiness review week 5; audit at gate G3 (week 10) |
 | P5 | Marcus | Faster passage with the cost billed honestly | Proposed: EV time −25% vs none, −10% vs conventional preemption, civilian person-delay ≤5% increase, per-mission log | Corridor preemption buildable in SUMO; EMVLight achieved −42.6% in simulation (feasibility, not a guarantee) | −7%/min survival; +20–30 s cost of poor spacing | A2 live week 7; H2 on S4 by week 11 |
 | P6 | Yuki | Command of the network at all times | 100% decisions logged; per-decision latency <100 ms; fallback ladder activation time measured; **override precedence always subject to mandatory safety interlocks** | Watchdog + audit discipline proven in SCATS/Surtrac | Adaptive degradation under congestion (SCOOT 1986) | Watchdog live from Tier 0; usability task at G2/G3 |
-| P7 | Maria | Emissions cut near her school, without displacement | CO2/NOx per link reported; exposure indicator labelled as proxy with documented weights; **pre-registered displacement acceptance rule**; proposed: measurable exposure-weighted gain at ≤3% delay cost | λ_eco update + HBEFA KPIs implementable; displacement check is a per-link diff | 6.4M US children ≤250 m of major roads; ≤0.32 kg CO2 per avoided stop | A5 live week 9; H5 Pareto sweep by week 11 |
-| P8 | Omar | Trustworthy alerts and visible degradation | Detection delay, FAR, missed-incident rate, recovery time **reported per severity class**; degradation alerting on comms loss. **Exploratory benchmarking objective** — thresholds set after the week-3 pilot | EWMA/CUSUM first; benchmark is ours to define | Incidents = 25–30% of congestion; no universal detection benchmark exists | A4 alerts week 6; H4/H6 sweeps (S3/S7) by week 11 |
+| P7 | Omar | Trustworthy alerts and visible degradation | Detection delay, FAR, missed-incident rate, recovery time **reported per severity class**; degradation alerting on comms loss. **Exploratory benchmarking objective** — thresholds set after the week-3 pilot | EWMA/CUSUM first; benchmark is ours to define | Incidents = 25–30% of congestion; no universal detection benchmark exists | A4 alerts week 6; H4/H6 sweeps (S3/S7) by week 11 |
 
 **Schedule note (fix applied):** reason-code instrumentation readiness is reviewed at **week 5**; full auditability is audited at **gate G3 (week 10)** — consistent with Tier 0 completing in week 6.
 
@@ -211,8 +197,7 @@ Cross-cutting objectives are appropriate for a multi-agent system; what matters 
 | P4 — Rosa | A1 (arbitration/audit) | Auditability test: complete reason-coded decision records + operator task success | Dashboard (A3 views); G3 audit |
 | P5 — Marcus | A2 (emergency priority) | H2: EV time vs two baselines at bounded civilian delay | A4 predicted times; recovery KPI on S9 |
 | P6 — Yuki | A1 (fallback & safety layer) | Robustness tests: fallback activation, log completeness, latency | H6 sweeps (S7); override-with-interlocks test |
-| P7 — Maria | A5 (sustainability) | H5: exposure-weighted reduction with pre-registered displacement rule | A1 delay budget; link-level equity map |
-| P8 — Omar | A4 (situation awareness) | Incident benchmarking (S3): delay/FAR/missed rate/recovery | H4 forecast-quality ablation; H6 degradation alerts |
+| P7 — Omar | A4 (situation awareness) | Incident benchmarking (S3): delay/FAR/missed rate/recovery | H4 forecast-quality ablation; H6 degradation alerts |
 
 *(If a persona's "M" cannot be tied to a falsifiable claim, it is a wish, not a target — all eight pass with this table.)*
 
@@ -220,7 +205,7 @@ Cross-cutting objectives are appropriate for a multi-agent system; what matters 
 
 ## 4. The shared journey — one ambulance, one school, one crossing
 
-Personas interact on the same network; a solution for one can cost another. Reference scenario for S9: an ambulance passes Maria's school street while Amara is mid-crossing and Chidi's delayed bus approaches.
+Personas interact on the same network; a solution for one can cost another. Reference scenario for S9: an ambulance passes a congested arterial while Amara is mid-crossing and Chidi's delayed bus approaches.
 
 | Moment | Stakeholders affected | Proposed system response |
 |---|---|---|
@@ -228,7 +213,7 @@ Personas interact on the same network; a solution for one can cost another. Refe
 | Crossing occupied | Amara, Marcus | Pedestrian clearance preserved before conflicting traffic is released |
 | Passage prepared | Marcus, David, Chidi | Coordinated queue pre-clearance; competing priority deferred |
 | Bus priority temporarily denied | Chidi, Rosa | Reason recorded; Rosa sees emergency precedence |
-| Queues build nearby | David, Maria | Spillback and link-level emissions monitored; no prolonged recovery queues at the school gate |
+| Queues build nearby | David, Yuki | Spillback and repeated stops on neighbouring approaches |
 | Communications fail at one junction | Yuki, Omar | Degraded operation announced; junction switched to safe local fallback |
 | Ambulance leaves | All | Gradual re-coordination; pedestrian waits, headways and queues reassessed |
 | Event reviewed | Rosa, Yuki, Omar | Shared timeline of decisions, benefits, costs, failures |
@@ -247,7 +232,6 @@ Personas interact on the same network; a solution for one can cost another. Refe
 | Rosa | Understandable decisions | Dashboard, reason codes, authorised intervention | Complete records; successful operator tasks |
 | Marcus | Safe passage + recovery | Authenticated corridor priority; pre-clearance; controlled recovery | Faster EV trips at bounded civilian delay |
 | Yuki | Reliable control | Health monitoring; safety-constrained override; fallback ladder | Correct fallback behaviour; timely diagnosis |
-| Maria | Fair distribution | Link-level emissions; displacement checks | Gains near sensitive locations, no hidden deterioration |
 | Omar | Trustworthy awareness | Anomaly detection with uncertainty; stale-data warnings | Acceptable FAR with clear degradation alerting |
 
 ---
@@ -271,7 +255,7 @@ If stakeholder access is limited, run clearly labelled **proxy walkthroughs** an
 
 1. **Everyday accessibility & reliability:** Amara requests a crossing while David and Chidi traverse a busy corridor. Tests pedestrian protection, bus regularity and general-traffic delay together.
 2. **Emergency passage & recovery:** Marcus receives corridor priority; Rosa and Yuki inspect decisions; the prototype measures disruption and recovery for everyone else.
-3. **Incident or communication failure:** Omar gets an alert while Yuki checks health and activates fallback. Tests whether the system distinguishes congestion, suspected incident and missing data — with Maria's neighbourhood in the evaluation to catch displaced queues or emissions.
+3. **Incident or communication failure:** Omar gets an alert while Yuki checks health and activates fallback. Tests whether the system distinguishes congestion, suspected incident and missing data — with neighbouring approaches monitored for spillback.
 
 For each: **Before** (baseline situation) → **Intervention** (what agents know and decide) → **User experience** → **Trade-offs** (who pays) → **Evidence** (simulation, logs, usability feedback) → **Limitations** (where it fails).
 
@@ -281,7 +265,7 @@ For each: **Before** (baseline situation) → **Intervention** (what agents know
 
 ## 8. Report-ready conclusion
 
-CoFlow-5's personas show traffic management cannot be judged by vehicle throughput alone: Amara needs accessible crossing time; David needs predictable journeys; Chidi needs regular buses; Rosa needs understandable decisions; Marcus needs safe passage *and* recovery; Yuki needs operational control; Maria needs environmental improvement without displacement; Omar needs trustworthy alerts. The supplied evidence motivates the design; simulation and stakeholder validation establish whether the solutions meet the needs. Success means demonstrating benefits, exposing trade-offs, and staying safe and transparent when conditions deteriorate.
+CoFlow-5's personas show traffic management cannot be judged by vehicle throughput alone: Amara needs accessible crossing time; David needs predictable journeys; Chidi needs regular buses; Rosa needs understandable decisions; Marcus needs safe passage *and* recovery; Yuki needs operational control; Omar needs trustworthy alerts. **Parent/Maria persona removed (professor: not evident).** The supplied evidence motivates the design; simulation and stakeholder validation establish whether the solutions meet the needs. Success means demonstrating benefits, exposing trade-offs, and staying safe and transparent when conditions deteriorate.
 
 ---
 
@@ -326,9 +310,9 @@ CoFlow-5's personas show traffic management cannot be judged by vehicle throughp
 - **Evidence vs targets separated** throughout: every numerical target is now a *proposed acceptance criterion* tested against baselines (e.g., EMVLight's −42.6% is cited as feasibility evidence, not a guarantee CoFlow-5 will match it).
 - **P1 fixed:** P95 ≤40 s is explicitly a tail target, with the 40 s hard cap stated separately and clearance truncation given an operational definition (conflicting traffic released while a detected pedestrian remains on the crossing).
 - **P2 fixed:** P95 computed from recorded trips with unfinished/teleported trips counted as failures, so congested scenarios can't look artificially good.
-- **P4/P8 reframed:** the "≥5 min warning" is now a proposed feature evaluated *with* missed-event and false-alarm rates; P8's metrics are explicitly labelled an exploratory benchmarking objective (thresholds set after the week-3 pilot).
+- **P4/P7 reframed:** the "≥5 min warning" is now a proposed feature evaluated *with* missed-event and false-alarm rates; Omar/P7 metrics are explicitly labelled an exploratory benchmarking objective (thresholds set after the week-3 pilot).
 - **P6 fixed:** operator override takes precedence *subject to mandatory signal-safety interlocks* — override can never enable conflicting greens.
-- **P7 fixed:** the displacement acceptance rule is pre-registered (no significant NOx-proxy increase on residential links adjacent to receptors, α=0.05, Holm), and the exposure indicator is labelled a proxy throughout.
+- **P7 (Omar):** exploratory incident benchmarks; no universal detection-delay KPI. Maria/parent persona removed.
 - **Traceability corrected:** one primary accountable agent + one main falsifiable evaluation per persona, with supporting agents in a separate column — replacing the false "exactly one hypothesis each" claim.
 - **Schedule fixed:** week 5 is now an instrumentation-readiness review; full audit at G3 (week 10), consistent with Tier 0 at week 6.
 
@@ -336,15 +320,15 @@ All three Empathize deliverables now live in the two saved artifacts (verified d
 
 **Saved deliverables (two artifacts):**
 1. **Verified design document** — the full CoFlow-5 design with 16 literature claims checked against primary sources (four corrected: SURTRAC figures, CityLight deployment claim, rliable repo, the 29× pollution figure), the gap section rewritten on evidence, and corrected references with arXiv IDs/DOIs.
-2. **Personas, journeys & solutions (v2)** — the final Empathize deliverable: eight personas with journey maps, possible solutions, the corrected SMART table, single-primary-agent traceability, the shared ambulance/school/crossing journey, the validation plan, and the full 33-row evidence trail.
+2. **Personas, journeys & solutions (v2)** — Empathize deliverable: **seven** personas (parent/Maria removed), journeys, Possible Solutions, SMART table, agent traceability, shared corridor journey, validation plan, evidence trail.
 
 **Key corrections carried into the final version**, each traceable in the report:
 - Evidence vs targets separated — all numeric targets are proposed acceptance criteria, not literature-established thresholds.
 - P1: P95 ≤40 s as a tail target, 40 s hard cap separate, clearance truncation operationally defined.
 - P2: unfinished/teleported trips counted as failures in P95.
 - P6: override precedence subject to mandatory signal-safety interlocks.
-- P7: pre-registered displacement acceptance rule; exposure metrics labelled as proxies.
-- P8: exploratory benchmarking objective until the week-3 pilot sets thresholds.
+- Parent/Maria removed; I-7 deferred as optional proxy KPI without persona owner.
+- P7 Omar: exploratory benchmarking objective until the week-3 pilot sets thresholds.
 - Schedule: week 5 = instrumentation-readiness review, full audit at G3.
 
 **Next step when you're ready:** week 1's build work — pin SUMO, get Max-Pressure and fixed-time running on a 4×4 grid, and measure simulation speed to set your seed budget. That requires remote compute, and this session's budget is currently $0.00, so nothing runs until a budget is granted. Say the word when you want to start, and I'll propose the exact smoke-test setup with costs before spending anything.

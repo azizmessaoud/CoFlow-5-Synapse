@@ -13,7 +13,7 @@
 | Nadia | Amara |
 | Hichem | Chidi (+ Rosa ops) |
 | Emna | Yuki (+ Rosa transit audit) |
-| Leila | Maria |
+| Leila | *(removed — professor: parent not evident)* |
 | (incident desk) | Omar |
 
 ---
@@ -91,23 +91,23 @@
 | **Tunis practice** | Dense centre + school/residential frontage (CODATU context). Displacement is a **design risk**, not an established Tunisian measured %. |
 | **Transfer Evidence** | ATSPM/ASCT queue & oversaturation MOEs; downstream-aware control literature (e.g. Max-Pressure). |
 | **Not Evidence** | IMATM ▲ +11%/+34%/+26%. |
-| **Owner** | David (surge reliability); Maria (displacement); Yuki (network mode). |
+| **Owner** | David (surge reliability); Yuki (network mode). *(Maria removed)* |
 | **Metric** | Spillback/blocked events; residential delay/flow; P95 under surge. |
 | **Solution seed** | Downstream-aware arbitration. |
 | **SMART note** | Report residential/link burden with reliability KPIs. |
 
-## I-7 — Stop-and-go as actionable emissions lever
+## I-7 — Stop-and-go as optional emissions proxy KPI (no Empathize persona)
 
 | Field | Detail |
 |---|---|
-| **Insight** | Stop-and-go operation is an actionable signal-control lever associated with avoidable emissions; traffic **volume alone** is too coarse to specify the intervention. (**Partial reject:** “congestion volume causes the problem.”) |
-| **Tunis practice** | CODATU congestion–pollution link; ANPE ambient ≠ school-gate exposure. |
-| **Transfer Evidence** | Deschle et al. *Energies* 2022 (HDV × signalised intersections); Kingsley near-road schools (US context); HBEFA/SUMO = **proxy**. Supports mechanism, not “stops always dominate everywhere.” |
-| **Not Evidence** | IMATM ▲ r=0.81; measured Tunis street AQ from SUMO. |
-| **Owner** | Maria. |
-| **Metric** | Stops near receptors; CO₂/NOx **proxy** per link; displacement rule. |
-| **Solution seed** | Link-level reporting; eco weight with delay budget. |
-| **SMART note** | Proxy labelled; displacement pre-registered. |
+| **Insight** | Stop-and-go can be an actionable emissions **proxy** lever; volume alone is too coarse. |
+| **Tunis practice** | CODATU notes congestion–pollution stress; ANPE ambient monitoring exists — **not** sufficient Empathize Evidence for a parent/school-street persona (professor: not evident). |
+| **Transfer Evidence** | Deschle et al. *Energies* 2022 (HDV × signals); HBEFA/SUMO = **proxy** only. Kingsley US school proximity is **not** used to justify a Tunis parent persona. |
+| **Not Evidence** | Parent/Maria persona; IMATM ▲ r=0.81; measured Tunis street AQ from SUMO. |
+| **Owner** | *(deferred — no Empathize persona)*; optional A5 system KPI. |
+| **Metric** | Stops/vehicle; CO₂/NOx proxy if A5 runs. |
+| **Solution seed** | Optional eco weights — not Empathize-required. |
+| **SMART note** | No Maria SMART; do not reintroduce parent persona. |
 
 ## I-8 — Observability for improvement and accountability
 
@@ -159,8 +159,8 @@
 | EV corridor obstruction (I-3) | EV TT, stops, downstream occupancy, recovery |
 | Pedestrian exclusion (I-4) | Completion, truncations, wait P95 |
 | Transit irregularity (I-5) | Headway CV, passenger wait, bus TT |
-| Downstream displacement (I-6) | Spillback, blocked junctions, residential delay/flow |
-| Stop-start externality (I-7) | Stops near receptors + emissions **proxy** |
+| Downstream spillback (I-6) | Spillback, blocked junctions, neighbouring delay/flow |
+| Stop-start proxy (I-7, deferred) | Stops/vehicle + emissions **proxy** (optional) |
 | Lack of observability (I-8) | KPI availability, log completeness, reason codes |
 | Lack of explainability (I-9) | Explanation task, override records, interlock compliance |
 | Incident-tail (I-10) | Detection delay, miss, recovery, incident P95 |

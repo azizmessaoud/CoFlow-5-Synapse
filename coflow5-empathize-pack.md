@@ -18,7 +18,7 @@ This is the **Empathize** deliverable for the presentation: four top-level secti
 | Prototype | Three end-to-end journeys under Possible Solution |
 | Test | Validation plan under Possible Solution (proposed, not completed) |
 
-Roster is the v2 seed (eight User Personas, including operators). The IMATM report’s six Tunis names are an **alternate roster**, not extra people to append. IMATM Table 9 digits and interview counts are self-labelled placeholders and are **not** Evidence.
+Roster is **seven** User Personas (professor: parent persona not evident — Maria removed). The IMATM report’s six Tunis names are an **alternate roster**, not extra people; **Leila maps to removed Maria — do not reintroduce**. IMATM Table 9 digits and interview counts are self-labelled placeholders and are **not** Evidence.
 
 ---
 
@@ -34,10 +34,9 @@ Profiles are Tunis-practice roles. Speeds and clearance figures that are not Tun
 | P4 | **Rosa, 52** | TRANSTU dépôt / régulation controller — bus districts and depots are real operator units; she supervises headways and disruption, not the traffic-light cabinet. | *Show me why a bus got — or was denied — priority, and let me respond before service breaks down.* |
 | P5 | **Marcus, 34** | Ambulance / urgent-intervention crew. Tunisian law already lists priority vehicles and requires other road users to yield when special signals are used (Décret 2000-149; Code de la route). | *Get us through safely, and make sure traffic recovers after we pass.* |
 | P6 | **Yuki, 47** | Municipal / MEHAT-facing traffic engineer accountable for signalisation lumineuse and safe network performance. Plans may be old; permanent detectors are not assumed. | *Automation should support my decisions — not leave me responsible for a system I cannot control.* |
-| P7 | **Maria, 38** | Parent living near an arterial; walks a child to school. National AQ monitoring exists (ANPE); her street-front exposure is still often unmeasured. | *Cleaner traffic on the main road must not mean more exhaust outside our homes.* |
-| P8 | **Omar, 55** | Duty officer / incident desk coordinating peak disruption with police, TRANSTU, and the signal owner. | *Tell me what's wrong, why you think so, and whether I can still trust the data.* |
+| P7 | **Omar, 55** | Duty officer / incident desk coordinating peak disruption with police, TRANSTU, and the signal owner. | *Tell me what's wrong, why you think so, and whether I can still trust the data.* |
 
-**Not in this roster (do not silently merge):** IMATM P-1–P-6 (Amine, Karim, Nadia, Hichem, Emna, Leila) cover overlapping needs under Tunis colour names. Map them, do not stack them.
+**Not in this roster:** IMATM Amine→David, Karim→Marcus, Nadia→Amara, Hichem→Chidi, Emna→Yuki. **Leila/Maria (parent) removed — professor: not evident.** Do not stack or reintroduce.
 
 ---
 
@@ -116,19 +115,7 @@ Design implication: treat passage **and** recovery as one journey. Do not conver
 
 Design implication: intelligent control must include predictable failure behaviour.
 
-### P7 — Maria
-
-| Stage | Experience and pain |
-|---|---|
-| Leaves home | Queuing vehicles create local exhaust and noise |
-| Walks to school | Frequent acceleration and idling |
-| At the school gate | Network gains may hide local deterioration |
-| After a system change | A smoother arterial may mean longer side-street queues |
-| Looks for evidence | A city-wide percentage explains nothing locally |
-
-Design implication: evaluate *where* benefits and burdens land, not just totals.
-
-### P8 — Omar
+### P7 — Omar
 
 | Stage | Experience and pain |
 |---|---|
@@ -143,7 +130,7 @@ Design implication: distinguish “no problem detected” from “insufficient r
 
 ### Shared journey (one ambulance, one school, one crossing)
 
-Personas collide on the same Tunis-centre corridor in simulation. Reference scenario: an urgent-intervention vehicle (Marcus) passes Maria's school street while Amara is mid-crossing and Chidi's delayed TRANSTU bus approaches.
+Personas collide on the same Tunis-centre corridor in simulation. Reference scenario: an urgent-intervention vehicle (Marcus) passes a congested arterial while Amara is mid-crossing and Chidi's delayed TRANSTU bus approaches.
 
 | Moment | Stakeholders | Pain if unmanaged |
 |---|---|---|
@@ -151,7 +138,7 @@ Personas collide on the same Tunis-centre corridor in simulation. Reference scen
 | Crossing occupied | Amara, Marcus | Conflicting traffic released while she is still on the crossing |
 | Passage prepared | Marcus, David, Chidi | Isolated green; bottleneck moves one junction ahead |
 | Bus priority denied | Chidi, Rosa | No recorded reason |
-| Queues build nearby | David, Maria | Spillback and exhaust at the school gate |
+| Queues build nearby | David, Yuki | Spillback and repeated stops on neighbouring approaches |
 | Communications fail at one junction | Yuki, Omar | Dashboard looks normal while control is degraded |
 | Ambulance leaves | All | Instant snap-back recreates the problem |
 | Event reviewed | Rosa, Yuki, Omar | No shared timeline of benefits, costs, failures |
@@ -200,8 +187,7 @@ Personas collide on the same Tunis-centre corridor in simulation. Reference scen
 | Rosa | I-8, I-9 | TRANSTU dépôt / régulation must manage disruption without owning the signal cabinet. | SCATS ships override + audit as product features (Transport NSW 2022) — what her Possible Solution must look like. |
 | Marcus | I-3 | Priority vehicle status is legal (2000-149); siren does not create downstream space. | ALS delay–survival literature (**not** lives saved from sim); US EVP benefits **and** arterial/side-street costs of dense preemption (Nelson & Bullock). |
 | Yuki | I-8, I-9 | Local signal owners exist (municipal / MEHAT); adaptive black boxes without explainability will be switched off. | SCATS intervention; Surtrac fallback on sensor/network failure; SCOOT loss of benefit under congestion. |
-| Maria | I-6, I-7 | Congestion–pollution link is a stated Tunisian urban issue; ANPE monitors ambient AQ, not every school street. | Near-road school exposure literature (Kingsley); stop-linked emission proxies (Deschle); HBEFA/SUMO = proxy. |
-| Omar | I-10 | Peak incidents and recovery are part of congestion reality (CODATU context); no Tunisian universal detection-delay KPI found. | FHWA TIM share 25–30%; clearance / secondary-crash metrics — define our own FAR and miss rates. |
+| Omar | I-10 | Peak incidents and recovery are part of congestion reality (CODATU context); no Tunisian universal detection-delay KPI found. | FHWA TIM share 25–30% (**US scope**); clearance / secondary-crash metrics — define our own FAR and miss rates. |
 
 ### C. Evidence trail (verified sources)
 
@@ -260,7 +246,7 @@ Canonical detail: `.scratch/coflow5-empathize/research/world-truths-and-metrics.
 5. Emergency priority has **civilian externality**; measure passage **and** recovery.
 6. Operable ATC needs **audit, override, and fallback** when sensors/comms fail.
 7. Incidents punch above their time share (~**25–30%** US metro delay handbooks); TIM uses clearance + secondary crashes — **no universal detection-delay number**.
-8. Sustainability is **spatial** — network % can hide school-street displacement; HBEFA/SUMO = **proxy**.
+8. Stop counts and emission **proxies** (HBEFA/SUMO) may be reported as system KPIs — **not** an Empathize parent-persona need (Maria removed).
 9. Simulation compares policies under stated demand; it does not prove Tunis field AQ or lives saved.
 
 **Metric families → personas (what we log in SUMO)**
@@ -274,7 +260,7 @@ Canonical detail: `.scratch/coflow5-empathize/research/world-truths-and-metrics.
 | Emergency / EVP | EV TT vs baselines; EV stops; civilian person-delay; recovery time; zero safety breaches | Marcus |
 | TIM / incidents | Detection delay, FAR, miss rate; roadway/incident clearance; recovery by severity | Omar |
 | Operator health | Reason-code coverage; log completeness; decision latency; fallback activation; data freshness | Yuki, Rosa |
-| Environment (proxy) | CO₂/NOx per link (HBEFA); stops near receptors; pre-registered displacement rule | Maria |
+| Environment (proxy, optional) | CO₂/NOx per link (HBEFA); stops/vehicle — system KPI only | *(no persona — deferred)* |
 
 **Appraisal / handbook anchors (not our SMART targets)**
 
@@ -304,8 +290,8 @@ Each Empathize insight is a **mechanism**. Evidence is Tunis practice + transfer
 | **I-3** | EVP constrained by downstream **space**, not only local signal state | Décret 2000-149 priority+yield; Nelson & Bullock *TRR* 1727 externality | Drivers-won’t-yield frame; lives saved; ▲ −8.1% | Marcus (+Amara) | EV TT; stops; downstream occ.; recovery; zero breaches |
 | **I-4** | Wait, clearance, completion are separate; standards ≠ Tunis law | Wait ≈2×; 20–30 s stress; MUTCD/HCM/ITE as **transfer assumptions** | ▲ 12 s/18 s / 19%; MUTCD 2023 0.8 m/s | Amara | Wait P95; % >30 s; truncations; completion |
 | **I-5** | (a) Bus delay hits many passengers; (b) bunching amplifies waiting | TRANSTU GTFS + strained TC; wait>IVT; Daganzo bunching; SCOOT −39% **feasibility** | Bus≈car delay ratio as Tunis fact; abandon % | Chidi, Rosa | Headway CV; passenger wait; reason codes |
-| **I-6** | Local greed can spill back / burden residential links | Downstream-aware ATC MOEs; design risk under CODATU density | Tunis displacement %; ▲ +11/+34/+26 | David, Maria, Yuki | Spillback; residential delay/flow |
-| **I-7** | Stop-and-go is an actionable emissions lever; volume alone is too coarse | ANPE ≠ street gate; Deschle HDV×signals; Kingsley context; HBEFA **proxy** | “Volume causes it”; ▲ r=0.81; sim AQ | Maria | Stops near receptors; proxy; displacement rule |
+| **I-6** | Local greed can spill back / burden neighbouring approaches | Downstream-aware ATC MOEs; design risk under CODATU density | Tunis displacement %; ▲ +11/+34/+26; parent-persona framing | David, Yuki | Spillback; neighbouring delay/flow |
+| **I-7** | Stop-and-go can be an emissions **proxy** lever (optional system KPI) | Deschle HDV×signals; HBEFA **proxy** only | Parent/Maria persona; Kingsley-as-Tunis; “Volume causes it”; ▲ r=0.81; sim AQ | *(deferred — no persona)* | Stops/vehicle; CO₂/NOx proxy if A5 runs |
 | **I-8** | Without measurement, accountable improvement is blocked | Signal-owner role; ATSPM continuous measures; SCATS audit **pattern** | Tunis “change nothing” statistic; shadowing quotes | Yuki, Rosa | KPI availability; log completeness |
 | **I-9** | Without explanation, operators cannot justify/govern automation | SCATS override+audit; Surtrac monitor/fallback; **no** distrust % | AI-distrust %; prototype quotes as Evidence | Yuki, Rosa | Explanation task; override; interlocks |
 | **I-10** | Non-recurrent events dominate the delay **tail** | CODATU disruption context; FHWA **US** ~25–30% incident share; TIM metrics | 25–30% as Tunis estimate; ▲ 7%/31% | Omar | Detect/miss/FAR; recovery; incident P95 |
@@ -314,7 +300,7 @@ Each Empathize insight is a **mechanism**. Evidence is Tunis practice + transfer
 - I-3: “drivers won’t yield” → **space/storage** problem.
 - I-7: “volume drives local emissions” → **stop-and-go** as signal-controllable lever.
 
-**SMART ↔ insight:** P1↔I-4; P2↔I-1+I-2+I-6; P3↔I-5; P4↔I-8+I-9 (transit); P5↔I-3; P6↔I-8+I-9 (signals); P7↔I-6+I-7; P8↔I-10.
+**SMART ↔ insight:** P1↔I-4; P2↔I-1+I-2+I-6; P3↔I-5; P4↔I-8+I-9 (transit); P5↔I-3; P6↔I-8+I-9 (signals); P7↔I-10. I-7 deferred (no parent persona).
 
 **Gate before submission:** every `from-prior-pack` locus in the citation ledger needs human page/DOI verify (Deschle digit table, NZTA 20–30 s sentence, FHWA 25–30% edition, Wardman/Hounsell/Surtrac/SCATS brochure URLs).
 
@@ -338,8 +324,6 @@ Not a built system. Candidates to prototype and compare. Primary accountable age
 
 **Yuki:** operating mode, data freshness, comms status, faults; decision history (inputs, constraints, actions, reason codes); watchdogs for missed deadlines, invalid inputs, comms loss; **authorised override subject to mandatory signal-safety interlocks** (override cannot enable conflicting greens); fallback ladder watchdog → Max-Pressure → actuated → fixed-time; health checks before resume. Proposed: 100% decisions logged; latency <100 ms; usability task (identify fault, select mode).
 
-**Maria:** monitor residential links, not only the corridor; cut unnecessary stops where safe; report emissions for school-adjacent links and periods; link-by-link displacement check; before/after map. **HBEFA/SUMO = proxy.** Pre-registered displacement rule (proposed): no statistically significant increase in mean NOx proxy on any residential link adjacent to a school (α=0.05, Holm).
-
 **Omar:** compare observed vs expected; grouped alerts with severity, observations, uncertainty; neighbour conditions + sensor health + freshness; bounded recommendations; stale data marked; degradation alert; fallback mode shown; recovery tracked to stabilisation. Exploratory benchmarks (thresholds after week-3 pilot): detection delay, FAR, missed-incident rate, recovery — **by severity**, not one average. Method: EWMA/CUSUM on forecast residuals first; an anomaly does not establish its cause.
 
 ### Solutions matrix
@@ -352,7 +336,6 @@ Not a built system. Candidates to prototype and compare. Primary accountable age
 | Rosa | Understandable decisions | I-8, I-9 | Dashboard, reason codes, authorised intervention | Complete records; successful operator tasks |
 | Marcus | Safe passage + recovery | I-3 | Authenticated corridor priority; pre-clearance; recovery | Faster EV trips at bounded civilian delay |
 | Yuki | Reliable control | I-8, I-9 | Health monitoring; safety-constrained override; fallback ladder | Correct fallback; timely diagnosis |
-| Maria | Fair distribution | I-6, I-7 | Link-level emissions; stop lever; displacement checks | Gains near sensitive locations; no hidden deterioration |
 | Omar | Trustworthy awareness | I-10 | Anomaly detection with uncertainty; stale-data warnings | Acceptable FAR; clear degradation alerting |
 
 ### Shared-journey responses
@@ -363,7 +346,7 @@ Not a built system. Candidates to prototype and compare. Primary accountable age
 | Crossing occupied | Pedestrian clearance **before** conflicting release |
 | Passage prepared | Coordinated pre-clearance; competing priority deferred |
 | Bus priority denied | Reason recorded; Rosa sees emergency precedence |
-| Queues nearby | Spillback and link-level emissions watched; no prolonged recovery queues at the school gate |
+| Queues nearby | Spillback and stops watched on neighbouring approaches |
 | Comms fail | Degraded operation announced; junction to safe local fallback |
 | Ambulance leaves | Gradual re-coordination; waits, headways, queues reassessed |
 | Review | Shared timeline of decisions, benefits, costs, failures |
@@ -380,8 +363,7 @@ Principle: cooperation with explicit safeguards — no specialist hides costs im
 | P4 | Rosa | Understandable, intervenable | 100% reason codes; authorised intervention; warnings with FAR | Logging, not ML | **I-8, I-9** (transit); TRANSTU dépôt; SCATS audit **pattern** | Log from Tier 0; G3 week 10 |
 | P5 | Marcus | Faster passage, honest cost | EV −25% / −10%; civilian delay ≤5%; per-mission log **proposed**; never lives saved | SUMO preemption feasible | **I-3**; Décret 2000-149; EVP cost literature | A2 week 7; H2 on S4 week 11 |
 | P6 | Yuki | Command at all times | 100% logged; latency <100 ms; fallback time; override + interlocks | Watchdog in transfer ATC | **I-8, I-9** (signals); MEHAT/municipal owner; Surtrac/SCATS fallback | Watchdog from Tier 0 |
-| P7 | Maria | Cut near school, no displacement | CO2/NOx per link; proxy labelled; pre-registered displacement rule | λ_eco + HBEFA + per-link diff | **I-6, I-7**; ANPE ≠ street gate; stops lever; HBEFA proxy | A5 week 9; H5 week 11 |
-| P8 | Omar | Trustworthy alerts | Delay/FAR/miss/recovery per severity; comms-loss alerting | EWMA/CUSUM first | **I-10**; FHWA 25–30%; no universal detect KPI | A4 week 6; H4/H6 week 11 |
+| P7 | Omar | Trustworthy alerts | Delay/FAR/miss/recovery per severity; comms-loss alerting | EWMA/CUSUM first | **I-10**; FHWA 25–30%; no universal detect KPI | A4 week 6; H4/H6 week 11 |
 
 ### Accountable agent (evaluation, not actuation by LLM)
 
@@ -393,7 +375,6 @@ Principle: cooperation with explicit safeguards — no specialist hides costs im
 | Rosa | A1 arbitration/audit | Reason-coded records + operator task |
 | Marcus | A2 emergency | H2 EV time vs two baselines |
 | Yuki | A1 fallback/safety | Fallback, log completeness, latency |
-| Maria | A5 sustainability | H5 exposure-weighted gain + displacement rule |
 | Omar | A4 situation | Incident delay/FAR/miss/recovery |
 
 A1 is the only actuation authority in the wider CoFlow-5 design. That is architecture context, not a new Empathize finding. The LLM is not a Possible Solution for signal control.
@@ -402,7 +383,7 @@ A1 is the only actuation authority in the wider CoFlow-5 design. That is archite
 
 1. **Everyday accessibility and reliability:** Amara requests a crossing while David and Chidi use the corridor.
 2. **Emergency passage and recovery:** Marcus gets corridor priority; Rosa and Yuki inspect decisions; measure disruption and recovery for everyone else.
-3. **Incident or communication failure:** Omar is alerted; Yuki checks health and fallback; Maria’s neighbourhood catches displaced queues or emissions.
+3. **Incident or communication failure:** Omar is alerted; Yuki checks health and fallback; neighbouring approaches monitored for spillback.
 
 For each: Before → Intervention → User experience → Trade-offs (who pays) → Evidence (simulation, logs, usability) → Limitations.
 
@@ -421,4 +402,4 @@ If stakeholder access is limited, run labelled **proxy walkthroughs** and say so
 
 ### Presentation close
 
-Empathize for this simulation starts in **Tunisian practice**: TRANSTU riders and dépôt staff, priority vehicles under Tunisian law, municipal/MEHAT signal owners, and residents who live the Congestion–AQ trade-off. Amara needs accessible crossing time; David needs predictable journeys; Chidi needs regular TRANSTU service; Rosa needs understandable priority decisions; Marcus needs passage *and* recovery; Yuki needs operational control; Maria needs local improvement without displacement; Omar needs trustworthy alerts. International ATC citations transfer product patterns. SUMO tests Possible Solutions — it does not prove Tunis field performance.
+Empathize for this simulation starts in **Tunisian practice**: TRANSTU riders and dépôt staff, priority vehicles under Tunisian law, municipal/MEHAT signal owners, and incident coordination. Amara needs accessible crossing time; David needs predictable journeys; Chidi needs regular TRANSTU service; Rosa needs understandable priority decisions; Marcus needs passage *and* recovery; Yuki needs operational control; Omar needs trustworthy alerts. **Parent/Maria persona removed (professor: not evident).** Optional emission proxies remain system KPIs, not an Empathize parent need. International ATC citations transfer product patterns. SUMO tests Possible Solutions — it does not prove Tunis field performance.

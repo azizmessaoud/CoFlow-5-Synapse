@@ -70,15 +70,6 @@ const people=[
     measure:'Legal actions, transition reasons, health evidence and fallback order.', color:C.teal,
   },
   {
-    name:'Maria', file:'p7-maria.png', age:'38', role:'Parent living near an arterial', situation:'Walks her child along a school-adjacent street',
-    statement:'Cleaner traffic on the main road must not mean more exhaust outside our homes.',
-    personality:'Protective, local and sceptical of averages; design assumption.', bio:'Represents residents who can bear hidden local displacement.',
-    need:'Link-level maps, school-sensitive checks and explicit displacement limits.', fear:'The main road improves by moving queues to her street.',
-    uses:'No specialist tool; she needs understandable maps and labels.', rejects:'Calling HBEFA air quality or claiming a Tunis deployment.',
-    evidence:'In 2005–2006, 6.4M students (12.5% of the studied US population) attended schools within 250 m of a major road [C09].',
-    measure:'Per-link stops and emission proxies near selected receptors.', color:C.green,
-  },
-  {
     name:'Omar', file:'p8-omar.png', age:'55', role:'Network duty officer', situation:'Monitors incidents and coordinates operational response',
     statement:'Tell me what is wrong, why you think so, and whether I can still trust the data.',
     personality:'Sceptical, methodical and operational; design assumption.', bio:'Represents the difference between “nothing detected” and “cannot see.”',

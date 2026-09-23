@@ -21,7 +21,7 @@
     {
       "id": "C02",
       "classification": "method",
-      "safe_wording": "The eight personas are research-informed design artifacts and were not validated through stakeholder interviews.",
+      "safe_wording": "The seven personas (Amara, David, Chidi, Rosa, Marcus, Yuki, Omar) are research-informed design artifacts and were not validated through stakeholder interviews. The parent/Maria persona was removed as not evident.",
       "source": ".kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md"
     },
     {

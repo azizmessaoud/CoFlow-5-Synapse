@@ -250,8 +250,7 @@ function honestyBar(slide, text) {
     { id: 'P4', name: 'Rosa, 52', role: 'Depot controller', pain: 'Unexplained priority refusals', need: 'See why, then intervene safely', color: C.green, colorLt: C.greenLt },
     { id: 'P5', name: 'Marcus, 34', role: 'Paramedic', pain: 'Green that dumps a queue one junction ahead', need: 'Passage and recovery as one journey', color: C.red, colorLt: C.redLt },
     { id: 'P6', name: 'Yuki, 47', role: 'Traffic engineer', pain: 'Adaptive control degrades silently', need: 'Diagnose, override, disable', color: C.navy, colorLt: 'E2E8F0' },
-    { id: 'P7', name: 'Maria, 38', role: 'Resident / parent', pain: 'Arterial “wins” dump exhaust on her street', need: 'Local emission proxy, not a city average', color: C.green, colorLt: C.greenLt },
-    { id: 'P8', name: 'Omar, 55', role: 'Duty officer', pain: 'A frozen dashboard can look normal', need: 'What is wrong, why, and how much to trust it', color: C.blue, colorLt: C.blueLt },
+    { id: 'P7', name: 'Omar, 55', role: 'Duty officer', pain: 'A frozen dashboard can look normal', need: 'What is wrong, why, and how much to trust it', color: C.blue, colorLt: C.blueLt },
   ];
 
   personas.forEach((p, i) => {
@@ -292,7 +291,7 @@ function honestyBar(slide, text) {
     });
   });
 
-  honestyBar(s, 'These eight names are the course roster. Do not replace them with Youssef / Amira / Mehdi / Sarra / Habiba, and do not stack extra IMATM names.');
+  honestyBar(s, 'These seven names are the course roster (parent/Maria removed — professor: not evident). Do not stack extra IMATM names.');
 
   s.addNotes('Eight research-informed personas from the Empathize pack. Not interviews.');
 }
@@ -411,7 +410,7 @@ function honestyBar(slide, text) {
     ['David / Chidi', 'Predictable trips; regular buses', 'Mean delay; every bus treated like a car', 'Tails + lateness-gated transit requests'],
     ['Marcus', 'Passage and recovery', 'Isolated green; cost to others hidden', 'A2 request + logged civilian delay'],
     ['Yuki / Omar', 'Override and trusted alerts', 'Silent degradation; frozen dashboards', 'Watchdog ladder + reason-coded log'],
-    ['Maria / Rosa', 'Local harm; explainable priority', 'City average; unexplained refusals', 'HBEFA proxy + disposition codes'],
+    ['Rosa / Omar', 'Explainable priority; trustworthy alerts', 'Unexplained refusals; silent dashboard', 'Reason codes + severity/FAR'],
   ];
   rows.forEach((r, ri) => {
     const y = 3.14 + ri * 0.38;
@@ -727,7 +726,7 @@ function honestyBar(slide, text) {
     ['Emergency travel + civilian delay', 'Marcus', 'No-preemption cell', 'Never convert seconds to lives'],
     ['Bus regularity / lateness', 'Chidi / Rosa', 'Every-bus vs late-only requests', 'Early bus cannot buy priority'],
     ['Ped wait, clearance truncations', 'Amara', 'Standard clearance', 'Zero illegal executed actions'],
-    ['Idle / HBEFA emission proxy', 'Maria', 'Matched seeds', 'Proxy, not measured air quality'],
+    ['Idle / HBEFA emission proxy', 'Optional A5 KPI', 'Matched seeds', 'Proxy, not measured air quality'],
     ['Recovery + Synapse-killed actions', 'Yuki / Omar', 'Fault-injection cell', 'Killing Synapse must not change lights'],
   ];
 

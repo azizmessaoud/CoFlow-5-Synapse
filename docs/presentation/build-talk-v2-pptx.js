@@ -23,7 +23,7 @@ const faces = [
   ['p1-amara.png', 'Amara', 'TIME'], ['p2-david.png', 'David', 'PREDICT'],
   ['p3-chidi.png', 'Chidi', 'REGULAR'], ['p4-rosa.png', 'Rosa', 'EXPLAIN'],
   ['p5-marcus.png', 'Marcus', 'PASS'], ['p6-yuki.png', 'Yuki', 'CONTROL'],
-  ['p7-maria.png', 'Maria', 'HOME'], ['p8-omar.png', 'Omar', 'TRUST'],
+  ['p8-omar.png', 'Omar', 'TRUST'],
 ];
 let count = 0;
 
@@ -57,7 +57,7 @@ function arrow(s, x, y, w = 0.55, color = C.teal) {
 // 1 — Cover
 {
   const s = slide('Open on the faces. Say: traffic is not an average car. These are illustrations of research-informed personas, not stakeholder interviews.');
-  faces.forEach((f, i) => photo(s, f[0], i * W / 8, 0, W / 8, H));
+  faces.forEach((f, i) => photo(s, f[0], i * W / 7, 0, W / 7, H));
   s.addShape(pptx.ShapeType.rect, { x: 0, y: 0, w: W, h: H, fill: { color: C.navy, transparency: 34 }, line: { color: C.navy } });
   label(s, 'ESPRIT · 4DS · DESIGN THINKING', 0.7, 1.45, 7);
   heading(s, 'The light should see a person.', 2.0, 42);
@@ -120,7 +120,7 @@ function arrow(s, x, y, w = 0.55, color = C.teal) {
     text(s, f[2], x, 4.9, 1.48, 0.3, 14, C.white, { bold: true, align: 'center' });
     text(s, f[1], x, 5.35, 1.48, 0.26, 11, C.mute, { align: 'center' });
   });
-  text(s, 'Amara · David · Chidi · Rosa · Marcus · Yuki · Maria · Omar', 0.55, 6.28, 12.2, 0.35, 16, C.teal, { align: 'center' });
+  text(s, 'Amara · David · Chidi · Rosa · Marcus · Yuki · Omar', 0.55, 6.28, 12.2, 0.35, 16, C.teal, { align: 'center' });
   text(s, 'Full persona cards: CoFlow-5-Persona-Cards.pptx', 0.55, 6.7, 12.2, 0.28, 11, C.mute, { align: 'center' });
   footer(s);
 }
@@ -329,7 +329,7 @@ function arrow(s, x, y, w = 0.55, color = C.teal) {
 // 14 — Close
 {
   const s = slide('Close in one sentence: CoFlow-5 is not an LLM traffic controller. It is a testable decision architecture where people define the requirements, A1 alone acts, and evidence decides what we may claim.');
-  faces.forEach((f, i) => photo(s, f[0], i * W / 8, 0, W / 8, H));
+  faces.forEach((f, i) => photo(s, f[0], i * W / 7, 0, W / 7, H));
   s.addShape(pptx.ShapeType.rect, { x: 0, y: 0, w: W, h: H, fill: { color: C.navy, transparency: 30 }, line: { color: C.navy } });
   heading(s, 'People. Evidence. One writer.', 2.25, 42);
   text(s, 'Not an LLM traffic controller.', 0.7, 3.55, 12, 0.48, 24, C.teal, { bold: true, align: 'center' });
