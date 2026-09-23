@@ -246,6 +246,47 @@ Personas collide on the same Tunis-centre corridor in simulation. Reference scen
 | TIM metrics | Roadway/incident clearance; secondary crashes | — | FHWA-JPO-13-062; FHWA-HOP-15-028 |
 | Public opinion | Vendor survey only — directional | — | EY *(Claim flag: not Evidence)* |
 
+### D. World truths + standard metrics (transfer; for Test design)
+
+Canonical detail: `.scratch/coflow5-empathize/research/world-truths-and-metrics.md` (FHWA ASCT MOEs HOP-13-031; ATSPM HOP-20-002; TAT Vol. 6 reliability; DfT TAG; FHWA TIM).
+
+**World truths (established practice)**
+
+1. Mean delay is not enough — report **P90/P95**, buffer / planning-time indices (reliability).
+2. Empty green and **spillback** waste capacity and move bottlenecks.
+3. Pedestrian wait has a **~20–30 s compliance cliff**; clearance must fit who is crossing.
+4. Transit priority should be **conditional** (headway/lateness), not unconditional always-green.
+5. Emergency priority has **civilian externality**; measure passage **and** recovery.
+6. Operable ATC needs **audit, override, and fallback** when sensors/comms fail.
+7. Incidents punch above their time share (~**25–30%** US metro delay handbooks); TIM uses clearance + secondary crashes — **no universal detection-delay number**.
+8. Sustainability is **spatial** — network % can hide school-street displacement; HBEFA/SUMO = **proxy**.
+9. Simulation compares policies under stated demand; it does not prove Tunis field AQ or lives saved.
+
+**Metric families → personas (what we log in SUMO)**
+
+| Family | Standard metrics (world) | Primary User Personas |
+|---|---|---|
+| Intersection / arterial | Delay, travel time, queue, stops, % arrivals on green, split failure, v/c | David, Yuki |
+| Reliability | P95 TT, buffer time/index, planning time index, on-time %; unfinished trips as failures | David |
+| Pedestrian / VRU | Call→WALK delay; mean/P95 wait; % >30 s; clearance truncations; completion | Amara |
+| Transit / TSP | Headway mean/CV; passenger wait; bus TT; request/grant/deny + reason; extra car delay | Chidi, Rosa |
+| Emergency / EVP | EV TT vs baselines; EV stops; civilian person-delay; recovery time; zero safety breaches | Marcus |
+| TIM / incidents | Detection delay, FAR, miss rate; roadway/incident clearance; recovery by severity | Omar |
+| Operator health | Reason-code coverage; log completeness; decision latency; fallback activation; data freshness | Yuki, Rosa |
+| Environment (proxy) | CO₂/NOx per link (HBEFA); stops near receptors; pre-registered displacement rule | Maria |
+
+**Appraisal / handbook anchors (not our SMART targets)**
+
+| Anchor | Figure | Source |
+|---|---|---|
+| Reliability ratio (cars/LGV) | 0.4 | DfT TAG A1.3 |
+| Wait vs in-vehicle (transit) | ≈2× (meta ~1.80) | DfT TAG; Wardman |
+| Ped wait compliance stress | 20–30 s; presets often 40–60 s | NZTA; TfL; DfT LTN 2/95 |
+| Incident share of metro delay | ~25–30% | FHWA handbooks |
+| Clearance design speed | 1.07 m/s; 1.0 m/s if many 65+ | MUTCD; HCM |
+
+CoFlow SMART numbers (e.g. P95 −5%, headway −15%) remain **proposed experimental criteria**, not FHWA/DfT mandates.
+
 ---
 
 ## POSSIBLE SOLUTION
