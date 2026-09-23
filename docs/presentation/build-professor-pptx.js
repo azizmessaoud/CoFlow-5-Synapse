@@ -180,21 +180,7 @@ const personas = [
     color: C.teal,
   },
   {
-    id: 'P7', name: 'Maria', initials: 'MI', photo: 'p7-maria.png', age: '38', role: 'Parent living near an arterial',
-    situation: 'Walks her child along a school-adjacent street', context: 'Tunis design context (assumption)',
-    statement: 'Cleaner traffic on the main road must not mean more exhaust outside our homes.',
-    frustrations: 'A network average can hide queues moved to her street. Modelled emissions are not the air her family breathes.',
-    personality: 'Protective, local and sceptical of averages. These traits are design assumptions.',
-    needs: 'Link-level maps, school-sensitive checks, before/after comparison and explicit displacement limits.',
-    technology: 'No specialist technology is assumed; she sees understandable maps and labels, not TraCI.',
-    bio: 'Maria represents residents who bear local burdens even when a city-wide metric improves.',
-    rejects: 'Calling HBEFA air quality, hiding a worse side street, or claiming a Tunis deployment from simulation.',
-    evidence: `For 2005–2006, 6.4 million students (12.5% of the studied US population) attended schools within 250 m of a major road. ${evidenceTag(['C09'])}`,
-    evaluation: 'Per-link stops and emission proxies near selected receptors; displacement map; no ambient-exposure claim.',
-    color: C.green,
-  },
-  {
-    id: 'P8', name: 'Omar', initials: 'OM', photo: 'p8-omar.png', age: '55', role: 'Network duty officer',
+    id: 'P7', name: 'Omar', initials: 'OM', photo: 'p8-omar.png', age: '55', role: 'Network duty officer',
     situation: 'Monitors incidents and coordinates operational response', context: 'Tunis design context (assumption)',
     statement: 'Tell me what is wrong, why you think so, and whether I can still trust the data.',
     frustrations: 'False alarms destroy trust. A queue may mean an incident, demand or a dead sensor; a frozen screen can look healthy.',
@@ -380,7 +366,7 @@ function personaSlide(persona, index) {
 // 6 — Overview
 {
   const s = titleSlide('Eight personas: traffic is more than the average car', 'Each persona contributes one need, one accountable component and one main evaluation question.', 'Empathize',
-    'Introduce the eight personas quickly. Do not read every card. Tell the professor that the next eight slides show the complete persona canvases.');
+    'Introduce the seven personas quickly. Do not read every card. Tell the professor that the next seven slides show the complete persona canvases.');
   personas.forEach((p, i) => {
     const col = i % 4, row = Math.floor(i / 4), x = 0.5 + col * 3.18, y = 1.58 + row * 2.35;
     rect(s, x, y, 2.95, 2.05, C.white, p.color);
@@ -402,14 +388,14 @@ personas.forEach((persona, index) => personaSlide(persona, index + 1));
 
 // 15 — Shared journey
 {
-  const s = titleSlide('Shared journey: one street, competing needs', 'An ambulance approaches Maria’s school street while Amara is crossing and Chidi’s late bus arrives.', 'User Journey',
+  const s = titleSlide('Shared journey: one street, competing needs', 'An ambulance approaches a congested arterial while Amara is crossing and Chidi’s late bus arrives.', 'User Journey',
     'Tell this as a story. The point is not to make one persona win every time. The point is to preserve safety, record who pays, and recover after priority.');
   const steps = [
     ['1', 'Request arrives', 'Marcus / Yuki', 'Authenticate route, ETA and urgency'],
     ['2', 'Crossing occupied', 'Amara / Marcus', 'Finish active clearance before conflicting movement'],
     ['3', 'Capacity checked', 'Marcus / David', 'Reject a green into blocked downstream space'],
     ['4', 'Bus request judged', 'Chidi / Rosa', 'Late-only request; record accept/reject reason'],
-    ['5', 'Queues watched', 'Maria / David', 'Observe displaced stops and local proxy burden'],
+    ['5', 'Queues watched', 'David / Yuki', 'Observe spillback and neighbouring stops'],
     ['6', 'Failure + recovery', 'Yuki / Omar', 'Degrade visibly; then recover in known stages'],
   ];
   steps.forEach((st, i) => {
@@ -468,8 +454,7 @@ personas.forEach((persona, index) => personaSlide(persona, index + 1));
     ['Rosa', 'understand decisions', 'How might every accept/reject be explainable and reviewable?'],
     ['Marcus', 'passage + recovery', 'How might we create useful space and record civilian cost?'],
     ['Yuki', 'safe command', 'How might we diagnose, override and recover predictably?'],
-    ['Maria', 'no displacement', 'How might we show where modelled burdens move?'],
-    ['Omar', 'trustworthy alerts', 'How might we separate incident, congestion and bad data?'],
+        ['Omar', 'trustworthy alerts', 'How might we separate incident, congestion and bad data?'],
   ];
   povs.forEach((p, i) => {
     const col = i % 2, row = Math.floor(i / 2), x = 0.58 + col * 6.18, y = 1.5 + row * 0.9;
@@ -732,7 +717,7 @@ personas.forEach((persona, index) => personaSlide(persona, index + 1));
   pill(s, 'CLOSE', 0.7, 0.55, 1.1, C.teal);
   tx(s, 'People → evidence → problem → ideas → safe architecture', 0.7, 1.3, 11.9, 0.75, { fontFace: 'Aptos Display', fontSize: 34, bold: true, color: C.white, align: 'center' });
   const points = [
-    ['8 PERSONAS', 'Traffic is not only cars'], ['5 AGENTS', 'Specialists advise'],
+    ['7 PERSONAS', 'Traffic is not only cars'], ['5 AGENTS', 'Specialists advise'],
     ['1 WRITER', 'A1 alone may actuate'], ['3 FALLBACK MODES', 'Max-Pressure → actuated → fixed-time'],
   ];
   points.forEach((p, i) => {

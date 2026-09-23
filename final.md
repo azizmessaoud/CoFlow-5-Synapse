@@ -1,3 +1,5 @@
+> **Roster update:** parent/Maria persona **removed** (professor: not evident). Canonical seven: Amara, David, Chidi, Rosa, Marcus, Yuki, Omar. See `coflow5-empathize-pack.md`.
+
 # CoFlow-5 — System Requirements Book
 
 **Product:** CoFlow-5 × SUMO (five-agent traffic orchestration)

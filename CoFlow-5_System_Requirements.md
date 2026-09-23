@@ -46,10 +46,11 @@ Aim: set aside “smart lights for throughput” and record **who is hurt, when,
 | P4 | Rosa, 52 | Bus depot controller | See why priority was given or refused; act before service breaks |
 | P5 | Marcus, 34 | Ambulance crew | Get through safely **and** let traffic recover |
 | P6 | Yuki, 47 | Traffic engineer | Automation that she can still control and explain |
-| P7 | Maria, 38 | Parent by a school street | Cleaner main road must not dump exhaust on her street |
-| P8 | Omar, 55 | Incident duty officer | Know what is wrong, why, and whether the data is still trustworthy |
+| P7 | Omar, 55 | Incident duty officer | Know what is wrong, why, and whether the data is still trustworthy |
 
-Alternate names in the IMATM report (Amine, Karim, Nadia, Hichem, Emna, Leila) are the **same jobs under other names**. Do not add them as extra people.
+**Roster update (professor):** parent/Maria persona **removed — not evident**. Do not reintroduce Leila/Maria. Optional HBEFA emission proxies remain system KPIs, not an Empathize parent need.
+
+Alternate names in the IMATM report (Amine, Karim, Nadia, Hichem, Emna) map to the jobs above. **Leila/Maria removed.** Do not add them as extra people.
 
 ### 1.2 Problems seen in User Journeys (pain, not features)
 
@@ -59,10 +60,10 @@ Alternate names in the IMATM report (Amine, Karim, Nadia, Hichem, Emna, Leila) a
 - Operators cannot defend a decision with **no reason code**.
 - A green for an ambulance is useless if the **exit is blocked**; recovery is part of the journey.
 - Stale sensors can look “normal” on a frozen screen.
-- Network-wide emission “wins” can **displace** queues to the school gate.
+- Network-wide averages can hide **spillback** onto neighbouring approaches (system KPI; not a parent-persona Empathize need).
 - False alerts destroy trust; an anomaly is not yet a **cause**.
 
-**Shared collision (one network):** ambulance + Amara mid-crossing + Chidi’s late bus + Maria’s school street. A solution for one user can cost another.
+**Shared collision (one network):** ambulance + Amara mid-crossing + Chidi’s late bus. A solution for one user can cost another.
 
 ### 1.3 Evidence (motivates needs; does not set our targets)
 
