@@ -48,18 +48,18 @@
   ],
   "decidedBy": "tests-and-files",
   "artifactHashes": {
-    "artifacts/run_manifest.json": "sha256:231a259979ee2d72aafd3ea8ebd7a550a8715bf3db44b71435c5dc68320cdb0b",
-    "artifacts/graph.json": "sha256:cfede06cfa6bed3abaf5ac8a9a81ddd2f6699e41f6b36074524a5ba8e66724ed",
-    "artifacts/demand_cells.json": "sha256:4b54d611a1d834f25cf0b9bca7052596a1dc4e426733987b7a14f4c0b8830a3f",
+    "artifacts/run_manifest.json": "sha256:23743ae1ab5d1b2eb1387b1122a017521340b8db815797bf20c92c089b8a2143",
+    "artifacts/graph.json": "sha256:0135cdf9c4a4ff41aaf291732aa77190d7951c1d70c0d3a85182103d2738773f",
+    "artifacts/demand_cells.json": "sha256:42e7f0b90a84e116ec182045becaae77a831309cb0fe08b8c608ca4e0ba1a0db",
     "artifacts/junction_states.parquet": "sha256:076fe61eddba2d31bfb6937675a4734384f6ff9d5933e181a0a2780c84b3d788",
     "artifacts/graph_frames.parquet": "sha256:78d8c9da1d16e94b288314474bc759a2f2c0035cb153e4fab8a6da819799deb3",
     "artifacts/decision_events.parquet": "sha256:8a7ece82a2135561414e10da4241aefbc970d42203ea4dd62bb3a3fbb1f61549",
     "artifacts/trips.parquet": "sha256:17d7fecdd11d3d83f2877d77d157eaeea130db08f44501bbe1a6ceb0304a2fa6",
     "artifacts/run_kpis.parquet": "sha256:32b30450e9bb2d885718518f534e1c6984bb76b4e8dccc6b897646d8ad8f1a6d",
-    "artifacts/matched_growth_comparison.json": "sha256:e3a1f04575879abbc534c7f18a74db2ab7fb50d1471f93a3b9b734c17ac62edc",
-    "artifacts/growth_report.md": "sha256:620f5589226ef439a53b47ef61af0d9b58d65f3da29af5dde647546ebfcc0cd5",
-    "artifacts/native_smoke.json": "sha256:aef3c8fbf027b39af7c4a74a2ccd1ce4c8a86f8d1196e7f05950a50c2cc97e4d",
-    "artifacts/input_audit.json": "sha256:efe37940d1c0e1000dc858f22611461265b106edb0a90f89965ff49acdb1f30e",
+    "artifacts/matched_growth_comparison.json": "sha256:18d7af343f9a57b6581671923926dd6f4317e0450333b03825f924155a1dec88",
+    "artifacts/growth_report.md": "sha256:40bc3f089c087084898e28d182af25da1423b71583a50231e89e6dc44d46c264",
+    "artifacts/native_smoke.json": "sha256:185c105e6b6f410100009a87ff857a026103c1061a5076d15fc61a37204526a8",
+    "artifacts/input_audit.json": "sha256:daab54092a9d24212a022c60f6a2522bf1f3efdc0710e7e5178e910cd8a66a2b",
     "report.md": "sha256:d2d726841a2f09bd4b49168f131d64c7d6dd5c27bbb2732a660f6e07132dd33f",
     "deltas.md": "sha256:2d3874ff6f1c1ae677ab74c168bbe55562b11a134891ea5b78251a5af71aaa54"
   },
@@ -89,7 +89,12 @@
   },
   "graphChecks": {
     "pass": true,
-    "signals": ["J0", "J1", "J2", "J3"],
+    "signals": [
+      "J0",
+      "J1",
+      "J2",
+      "J3"
+    ],
     "directedInternalEdges": 8,
     "graphHash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
     "executorOwner": "A1",
@@ -100,8 +105,19 @@
   "growthChecks": {
     "pass": true,
     "evidenceKind": "deterministic-fixture",
-    "demandScales": [0.75, 1.0, 1.25, 1.5],
-    "pairedSeeds": [11, 23, 37, 53, 71],
+    "demandScales": [
+      0.75,
+      1.0,
+      1.25,
+      1.5
+    ],
+    "pairedSeeds": [
+      11,
+      23,
+      37,
+      53,
+      71
+    ],
     "controllerVariants": 4,
     "cleanCells": 80,
     "pairedGroups": 20,

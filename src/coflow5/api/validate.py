@@ -7,8 +7,14 @@ from pathlib import Path
 from coflow5.api.errors import EvidenceError
 
 
+_TEXT_SUFFIXES = {".json", ".md", ".txt", ".xml"}
+
+
 def sha256_file(path: Path) -> str:
-    return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+    data = path.read_bytes()
+    if path.suffix.lower() in _TEXT_SUFFIXES:
+        data = data.replace(b"\r\n", b"\n")
+    return "sha256:" + hashlib.sha256(data).hexdigest()
 
 
 def _load_json(path: Path) -> object:
