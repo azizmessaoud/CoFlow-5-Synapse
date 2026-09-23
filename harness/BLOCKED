@@ -1,1 +1,0 @@
-BLOCKED: Windows Code Integrity policy {0283ac0f-fff1-49ae-ada1-8a933130cad6} blocks SUMO 1.27.1 libsumo dependencies geos_c.dll and jupedsim.dll (events 3033/3077). TraCI from SUMO_HOME\tools works on native Windows. Ask the Windows administrator to allow those Eclipse SUMO DLLs, then run: py -3.11 -c "import libsumo; print(libsumo.__file__)"

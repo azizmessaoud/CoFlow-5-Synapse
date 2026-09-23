@@ -1,0 +1,113 @@
+{
+  "contract_version": 1,
+  "id": "10f-graph-growth-benchmark",
+  "kind": "control",
+  "persona_or_hmw": "P2 David; P6 Yuki; P7 Omar — measure legal, diagnosable four-signal behavior under growth without adding actuation authority",
+  "stage": "prototype-test",
+  "depends_on": [
+    "05-max-pressure",
+    "09-eval-harness",
+    "10b-max-pressure-trip-kpis",
+    "10e-graph-growth-spec"
+  ],
+  "join_keys": [
+    "run_id",
+    "scenario_hash",
+    "graph_hash",
+    "event_id",
+    "message_id"
+  ],
+  "locked_inputs": [
+    "harness/work/05-max-pressure/contract.json",
+    "harness/work/05-max-pressure/gate.json",
+    "harness/work/10b-max-pressure-trip-kpis/contract.json",
+    "harness/work/10b-max-pressure-trip-kpis/gate.json",
+    "harness/work/10e-graph-growth-spec/contract.json",
+    "harness/work/10e-graph-growth-spec/gate.json"
+  ],
+  "benchmark": {
+    "network": "deterministic 2x2 grid with four controlled signals J0 J1 J2 J3",
+    "demand_scales": [0.75, 1.0, 1.25, 1.5],
+    "paired_seeds": [11, 23, 37, 53, 71],
+    "controllers": [
+      "fixed-time",
+      "actuated",
+      "local-cooperative-max-pressure",
+      "graph-aware-cooperative-max-pressure"
+    ],
+    "clean_cells": 80,
+    "matrix_evidence": "deterministic queue-and-trip fixture driven by the same immutable graph and controller contracts; not represented as 80 native SUMO runs",
+    "native_evidence": "one Windows Python 3.11 TraCI graph-aware smoke cell over the four-signal SUMO scenario; failure remains visible and cannot be replaced by fabricated native results",
+    "horizon_seconds": 90,
+    "demand_insertion_seconds": 60,
+    "clearance_tail_seconds": 30,
+    "graph_frame_interval_seconds": 5,
+    "neighbour_ttl_seconds": 5,
+    "term_bounds": {
+      "one_hop_discharge_bonus": 2.0,
+      "service_age_bonus": 2.0,
+      "switch_penalty": 1.0
+    }
+  },
+  "must_pass": [
+    "an immutable graph schema and parser derive a stable graph_hash from the four-signal SUMO network contract and reject unknown signal, lane, edge, and hash identities",
+    "the deterministic 2x2 scenario declares exactly four controlled signals and one A1-owned SignalExecutor per signal; no other component can write signals",
+    "local and graph-aware cooperative Max-Pressure share legal phase candidates and downstream hard masks; graph-aware scoring logs individually bounded one-hop discharge, service-age, and switch terms",
+    "fresh graph observations may contribute a bounded term while stale, missing, or graph-identity-mismatched observations produce explicit reason codes and a live local-Max-Pressure decision",
+    "all 80 paired fixture cells cover four demand scales, five frozen seeds, and four controllers with planned, completed, unfinished, safety, liveness, queue, spillback, switch, service-age, runtime, and artifact-byte accounting",
+    "one native Windows Python 3.11 TraCI smoke runs the four-signal scenario when SUMO is available and records actual execution honestly; the report labels the 80-cell matrix as deterministic fixture evidence rather than native SUMO evidence",
+    "read-only GraphFrame rows occur every five simulated seconds and join graph nodes, edges, decisions, messages, faults, run_id, scenario_hash, and graph_hash without exposing actuation",
+    "matched growth comparison retains null, mixed, negative, unfinished, and gridlocked outcomes and does not require or claim graph-aware superiority",
+    "Rows 05 and 10b and pre-existing unrelated working-tree changes remain byte-for-byte unchanged",
+    "no GNN, DQN, NetworkX, React, WebSocket, hosted LLM, or RoadwayVR runtime dependency is introduced"
+  ],
+  "tests": [
+    "py -3.11 -m pytest tests/contracts/test_junction_graph.py -q",
+    "py -3.11 -m pytest tests/acceptance/test_graph_growth_runner.py -q",
+    "py -3.11 -m pytest tests/contracts/test_graph_growth_evidence.py -q",
+    "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q",
+    "py -3.11 -m pytest tests/scripts/test_watch_sumo.py -q"
+  ],
+  "artifacts": [
+    "artifacts/run_manifest.json",
+    "artifacts/graph.json",
+    "artifacts/demand_cells.json",
+    "artifacts/junction_states.parquet",
+    "artifacts/graph_frames.parquet",
+    "artifacts/decision_events.parquet",
+    "artifacts/trips.parquet",
+    "artifacts/run_kpis.parquet",
+    "artifacts/matched_growth_comparison.json",
+    "artifacts/growth_report.md"
+  ],
+  "supporting_artifacts": [
+    "artifacts/native_smoke.json",
+    "artifacts/input_audit.json"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash; all locked inputs and required artifacts are SHA-256 bound",
+    "all named tests exit zero and gate.openDeltas is zero with gate.decidedBy tests-and-files",
+    "graph schema has four unique signals, valid directed adjacency, known lane references, deterministic graph_hash, and A1 executor_owner only",
+    "clean fixture matrix has exactly 80 unique demand-seed-controller cells and each paired group contains all four controllers",
+    "all Parquet rows resolve exactly one manifest identity and all event_id and message_id references resolve or are explicitly empty",
+    "fresh stale missing and identity-mismatch probes are present; fallback probes select the same action as local Max-Pressure and emit their contracted reason codes",
+    "one executor registry reports one writer for each of J0 J1 J2 J3 and all safety, command, and decision joins reconcile",
+    "native smoke provenance distinguishes executed, unavailable, and failed states and never upgrades deterministic fixture evidence into native evidence",
+    "report and comparison retain unfinished and negative outcomes and contain no winner, deployment, lives-saved, measured-air-quality, or best-episode claim",
+    "Rows 05 and 10b locked inputs still hash-match and protected unrelated files retain their baseline status"
+  ],
+  "imports_forbidden": [
+    "NetworkX|TensorFlow|PyTorch|GNN|DQN|React|WebSocket|RoadwayVR -> Row 10f runtime",
+    "evidence|evaluation|Synapse|API|UI|A2|A3|A4|A5 -> signal actuation",
+    "graph parser|graph frame|graph coordinator -> SignalExecutor construction or raw trafficlight write",
+    "Row 10f generator -> writes under harness/work/05-max-pressure or harness/work/10b-max-pressure-trip-kpis"
+  ],
+  "claim_flags": [
+    "no graph-aware winner or superiority claim",
+    "no 80 native SUMO runs claim",
+    "no deployment or live Tunis claim",
+    "no lives saved or accident prevention claim",
+    "no measured air quality claim",
+    "no best-episode headline"
+  ]
+}

@@ -1,0 +1,753 @@
+{
+  "artifact_references": [
+    {
+      "bytes": 7688,
+      "path": "graph.json",
+      "rows": 1,
+      "schema_name": "junction_graph",
+      "schema_version": 1,
+      "sha256": "sha256:cfede06cfa6bed3abaf5ac8a9a81ddd2f6699e41f6b36074524a5ba8e66724ed"
+    },
+    {
+      "bytes": 35727,
+      "path": "demand_cells.json",
+      "rows": 80,
+      "schema_name": "growth_demand_cells",
+      "schema_version": 1,
+      "sha256": "sha256:4b54d611a1d834f25cf0b9bca7052596a1dc4e426733987b7a14f4c0b8830a3f"
+    },
+    {
+      "bytes": 13476,
+      "path": "junction_states.parquet",
+      "rows": 6080,
+      "schema_name": "junction_state",
+      "schema_version": 1,
+      "sha256": "sha256:076fe61eddba2d31bfb6937675a4734384f6ff9d5933e181a0a2780c84b3d788"
+    },
+    {
+      "bytes": 15296,
+      "path": "graph_frames.parquet",
+      "rows": 1520,
+      "schema_name": "graph_frame",
+      "schema_version": 1,
+      "sha256": "sha256:78d8c9da1d16e94b288314474bc759a2f2c0035cb153e4fab8a6da819799deb3"
+    },
+    {
+      "bytes": 141677,
+      "path": "decision_events.parquet",
+      "rows": 6080,
+      "schema_name": "graph_decision_event",
+      "schema_version": 1,
+      "sha256": "sha256:8a7ece82a2135561414e10da4241aefbc970d42203ea4dd62bb3a3fbb1f61549"
+    },
+    {
+      "bytes": 61055,
+      "path": "trips.parquet",
+      "rows": 2880,
+      "schema_name": "growth_trip",
+      "schema_version": 1,
+      "sha256": "sha256:17d7fecdd11d3d83f2877d77d157eaeea130db08f44501bbe1a6ceb0304a2fa6"
+    },
+    {
+      "bytes": 16182,
+      "path": "run_kpis.parquet",
+      "rows": 80,
+      "schema_name": "growth_run_kpi",
+      "schema_version": 1,
+      "sha256": "sha256:32b30450e9bb2d885718518f534e1c6984bb76b4e8dccc6b897646d8ad8f1a6d"
+    },
+    {
+      "bytes": 39979,
+      "path": "matched_growth_comparison.json",
+      "rows": 20,
+      "schema_name": "matched_growth_comparison",
+      "schema_version": 1,
+      "sha256": "sha256:e3a1f04575879abbc534c7f18a74db2ab7fb50d1471f93a3b9b734c17ac62edc"
+    },
+    {
+      "bytes": 1030,
+      "path": "growth_report.md",
+      "rows": 1,
+      "schema_name": "growth_report",
+      "schema_version": 1,
+      "sha256": "sha256:620f5589226ef439a53b47ef61af0d9b58d65f3da29af5dde647546ebfcc0cd5"
+    },
+    {
+      "bytes": 742,
+      "path": "native_smoke.json",
+      "rows": 1,
+      "schema_name": "native_smoke",
+      "schema_version": 1,
+      "sha256": "sha256:aef3c8fbf027b39af7c4a74a2ccd1ce4c8a86f8d1196e7f05950a50c2cc97e4d"
+    },
+    {
+      "bytes": 2203,
+      "path": "input_audit.json",
+      "rows": 6,
+      "schema_name": "input_audit",
+      "schema_version": 1,
+      "sha256": "sha256:efe37940d1c0e1000dc858f22611461265b106edb0a90f89965ff49acdb1f30e"
+    }
+  ],
+  "claim_boundary": "Deterministic fixture outcomes show behavior, not native SUMO superiority or deployment performance.",
+  "configuration_hash": "sha256:172e46d7b2ed52f833bcec8e09d2efe7ee64717f2c7d9d7e92824fd214f90bfb",
+  "contract_hash": "sha256:a4eaa6f3ca3f4bcedd0f10a2b8201e73275988dab679a18055cba32072219183",
+  "evidence_kind": "deterministic-fixture-matrix-with-native-smoke",
+  "finalized_at": "2026-09-23T14:17:28.673586+00:00",
+  "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+  "immutable": true,
+  "matrix_run_count": 80,
+  "native_matrix_run_count": 0,
+  "native_smoke_status": "failed",
+  "run_id": "a995c95e-340e-5610-893a-6aef391551b1",
+  "runs": [
+    {
+      "controller": "fixed-time",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "c5752bdf-3b9e-5baf-a481-35b2996c2b11",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "c466a8ac-3b05-5177-9183-8ad02bd51364",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "8ec4badb-fbc6-59d5-9585-446b80e8891a",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "b0f50769-defe-5736-8ba4-adecf1a9ab2c",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "7685e74a-02d3-5e90-80ce-2d013482c782",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "33acdc51-381f-5147-beef-c7547e9f464a",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "7d93288b-bae2-5d75-8f10-2ae615ba2494",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "74da8f67-9735-53a9-9cf3-2c8f04583a85",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "c44517ab-c0e1-5721-bb52-4fd1bc0234db",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "d7ccf71f-1509-595c-b26d-929b8ca9f884",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "b3af6a7d-4401-5371-86b9-b9639bf7dbef",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "ae64168d-14d8-535f-b80d-479f86b2c3cb",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "59a8c009-c9a0-5935-80c3-dbf262f8925c",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "9e8599a3-8190-51c3-9663-c26ea891cc8b",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "47874f42-f0b0-5ff8-b9ea-8390e08e2239",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "18d1590c-904a-57bf-bb47-9af191adef5c",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "66bf8b58-5426-58bf-a7c8-9ce234b1b320",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "3f97d200-0a9f-55cc-9953-9ec397cfd93d",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "0e572c14-187b-592e-b41a-63e178ea6128",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 0.75,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "c3989187-27a1-50c5-9a37-5152245704ea",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "4907683c-6e30-597b-8060-0fe39590c1af",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "de6fcc0a-777e-5592-a25f-f5df8387b183",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "43ee3d8f-b396-5f79-8e24-39dff754d7ff",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "c5c4a305-fc6d-58ad-8192-ad00be3709ea",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "2361d49e-6b31-5e17-bb01-d9ace932b83b",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "a00ec920-80a1-5bed-b8d7-688c7bafbd3f",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "9fc331c2-bb16-5beb-a68c-3e653f215a89",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "136046aa-f649-5043-a342-085cff110848",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "96eff488-d5f5-550c-979b-cab1aedbe67a",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "b408b28d-6289-514d-9f09-ced071d1f057",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "17f3e06b-b3c6-5bac-afdd-a87e0d143100",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "92852e63-5307-570d-bcc1-6d402a23a135",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "c979e39e-3000-5ab0-aee3-45549419338f",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "f234b8d0-f193-5d48-b009-3e3f2a7917bf",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "af7c1955-9f37-5bd4-b4ef-79416f089076",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "d1e931fc-fe2e-5f0b-bad0-8c5d0a019a1d",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "7f67a6d9-b5dd-53c5-8ccb-d8a65eb30135",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "a00e8de2-17b5-59b6-8c35-d7e34d437ee4",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.0,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "88509793-c08d-597f-b8f8-fcf8129f1e62",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "cc1d5f7f-6895-5672-a44e-28e933b7398d",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "5f53c493-53d6-55e4-93b3-964419bf579b",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "75ebea0b-292b-508b-9364-0185721313b6",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "91a0887f-5fe3-55bd-b455-03c0d7f700cb",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "a8fb571d-4a51-5a10-b2af-8302aed4cac4",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "91439b4e-45d8-59f4-b239-d42c57bc3fb5",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "a97f787e-a89a-5dcf-bfd7-7ff2d9d3ea1e",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "11567431-aca2-5d33-9f30-6374f04d22d2",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "cf5a8909-c9d6-50ae-821f-3522c5a15828",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "ba23184c-f682-5772-bc71-5ad2b9a880e5",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "cbd2739f-e562-5b39-9405-c08f0ca54eec",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "ad08ee8c-b6e4-5886-b8cc-03b13d5f35b5",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "b0951d16-ec8d-50ac-a2bc-75c518d86cf6",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "e92b6471-20d8-5efe-948b-3053b14054cd",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "9c477560-701a-55e8-a83e-800ce7cbc2a2",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "f8dc33a0-8d6b-5d84-bf3b-2a57e6b50282",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "ec0eda64-47f0-52cb-9e12-edd1fbb3f22d",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "b78c591c-5590-50fe-adc5-88493882e927",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "aa289d29-8a8c-5e3a-b5e5-c1d061afe43b",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.25,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "7dade13c-10bb-54cd-9389-2e6288dec319",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "59e8e05e-d262-552b-bb2e-d1d5d8fe1f0f",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "55775fa6-07dc-5f78-ae82-e7ed149de108",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "c27228f5-71c3-5e0b-99d3-97192382e981",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "7c07d4a2-c091-5786-807b-1e7fe82487ca",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 11
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "533d5014-843b-51e3-ae18-a33705f5d370",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "b3de4969-a70e-5791-bb8f-b935ba4495d8",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "fb6602b5-dfcd-5c54-be02-20e5c640c13d",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "528b6e13-d45e-53b3-9980-c938f1fef488",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 23
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "4ea02872-c300-5c07-a8e5-da43064555fc",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "0ea17ebf-bd2c-5735-a63e-41bc39d50c82",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "75341720-9cd6-51b0-a6b5-cb2443628fa4",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "40f85d13-e821-521e-9af2-ffd22013e9f0",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 37
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "f0816c1a-413b-5fde-8f53-37aa3d407add",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "07943ab0-7440-5001-ae97-83af5338b49e",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "d31516ab-ea35-5d84-84a4-afe7d7e109a3",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "5bc7f97b-19b5-5fba-bafb-a75187179bc9",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 53
+    },
+    {
+      "controller": "fixed-time",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "006a70e9-e127-5917-bdeb-189a4b933d94",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "actuated",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "901de478-5818-5def-9cd6-999294d1fc2f",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "local-cooperative-max-pressure",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "8f9c18e0-3ab8-50b1-8c71-92d5cd22df34",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    },
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "demand_scale": 1.5,
+      "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "run_id": "e0ca5e3f-d949-56d9-a95a-719f7b4d1ca1",
+      "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+      "seed": 71
+    }
+  ],
+  "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+  "schema_version": 1,
+  "source_revision": "79aca6ec1666f8d02d46210068daaa68b7cbeed8",
+  "status": "completed",
+  "versions": {
+    "pyarrow": "21.0.0",
+    "python": "3.11.9"
+  }
+}

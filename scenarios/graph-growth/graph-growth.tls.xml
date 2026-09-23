@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<additional>
+  <tlLogic id="J0" type="static" programID="a1-graph-growth" offset="0">
+    <phase duration="30" state="GrGr"/>
+    <phase duration="4" state="yryr"/>
+    <phase duration="30" state="rGrG"/>
+    <phase duration="4" state="ryry"/>
+  </tlLogic>
+  <tlLogic id="J1" type="static" programID="a1-graph-growth" offset="0">
+    <phase duration="30" state="GrGr"/>
+    <phase duration="4" state="yryr"/>
+    <phase duration="30" state="rGrG"/>
+    <phase duration="4" state="ryry"/>
+  </tlLogic>
+  <tlLogic id="J2" type="static" programID="a1-graph-growth" offset="0">
+    <phase duration="30" state="GrGr"/>
+    <phase duration="4" state="yryr"/>
+    <phase duration="30" state="rGrG"/>
+    <phase duration="4" state="ryry"/>
+  </tlLogic>
+  <tlLogic id="J3" type="static" programID="a1-graph-growth" offset="0">
+    <phase duration="30" state="GrGr"/>
+    <phase duration="4" state="yryr"/>
+    <phase duration="30" state="rGrG"/>
+    <phase duration="4" state="ryry"/>
+  </tlLogic>
+</additional>

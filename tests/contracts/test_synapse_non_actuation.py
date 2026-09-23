@@ -1,12 +1,10 @@
 from __future__ import annotations
 
 import ast
+import hashlib
 import json
 from pathlib import Path
 
-import pytest
-
-from coflow5.evaluation.failure_artifacts import generate_failure_injection_artifacts
 from coflow5.synapse import (
     ExplanationObserverBoundary,
     ImmutableDecisionView,
@@ -19,9 +17,11 @@ ARTIFACTS = ROOT / "harness/work/08-failure-injection/artifacts"
 FORBIDDEN_FAMILIES = {"synapse", "retrieval", "provider", "specialists", "a2", "a3", "a4", "a5"}
 
 
-@pytest.fixture(scope="module", autouse=True)
-def generated_row08_artifacts() -> None:
-    generate_failure_injection_artifacts(ROOT)
+def test_frozen_row08_non_actuation_input_matches_sealed_hash() -> None:
+    contract = json.loads((ROOT / "harness/work/12-synapse-agents/contract.json").read_text(encoding="utf-8"))
+    relative = "harness/work/08-failure-injection/artifacts/action-sequence-comparison.json"
+    actual = "sha256:" + hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
+    assert actual == contract["locked_inputs"][relative]
 
 
 def _imports(path: Path) -> set[str]:
@@ -91,3 +91,38 @@ def test_synapse_provider_and_retrieval_outages_have_identical_action_hashes() -
     assert audit["action_sequence_hashes_equal"] is True
     assert comparison["run_id"] == audit["run_id"]
     assert comparison["scenario_hash"] == audit["scenario_hash"]
+
+
+def test_row12_paths_have_no_process_adapter_network_or_model_dependencies() -> None:
+    forbidden_roots = {
+        "traci", "libsumo", "subprocess", "socket", "requests", "urllib", "httpx",
+        "openai", "anthropic", "transformers", "sentence_transformers", "torch",
+        "langgraph", "pgvector",
+    }
+    violations: list[str] = []
+    for path in (SRC / "synapse").rglob("*.py"):
+        imported = _imports(path)
+        forbidden = {
+            name for name in imported
+            if name.split(".")[0] in forbidden_roots or "sumo_adapter" in name
+        }
+        if forbidden:
+            violations.append(f"{path.relative_to(SRC)}: {sorted(forbidden)}")
+    assert not violations, "Row 12 dependency boundary violation: " + "; ".join(violations)
+
+
+def test_row12_non_actuation_audit_retains_outage_hash_invariance(tmp_path: Path) -> None:
+    from coflow5.evidence.synapse_artifacts import generate_synapse_artifacts
+
+    artifacts = tmp_path / "artifacts"
+    generate_synapse_artifacts(ROOT, artifacts)
+    audit = json.loads((artifacts / "non_actuation_audit.json").read_text(encoding="utf-8"))
+    row12_hashes = {
+        value["action_sequence_hash"]
+        for value in audit["row12_replay"]["variants"].values()
+    }
+    assert audit["row08_source"]["hashes_equal"] is True
+    assert audit["row12_replay"]["hashes_equal"] is True
+    assert len(row12_hashes) == 1
+    assert audit["synapse_actuation_capability"] is None
+    assert audit["frozen_evidence_mutated"] is False

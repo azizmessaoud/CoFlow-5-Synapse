@@ -1,0 +1,16 @@
+{
+  "accepted_bundles": [
+    {
+      "bundle_id": "10f-graph-growth-benchmark",
+      "primary_run_id": "a995c95e-340e-5610-893a-6aef391551b1",
+      "run_count": 81
+    },
+    {
+      "bundle_id": "12-synapse-agents",
+      "primary_run_id": "015ad194-355a-5ef2-bef6-420ee5fa764f",
+      "run_count": 1
+    }
+  ],
+  "rejected_run_count": 0,
+  "served_run_count": 82
+}

@@ -1,0 +1,7 @@
+{
+  "direct_filesystem_reads": false,
+  "manual_phase_control": false,
+  "methods": ["GET"],
+  "sumo_or_traci_imports": false,
+  "websocket": false
+}

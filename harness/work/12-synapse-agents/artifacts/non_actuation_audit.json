@@ -1,0 +1,42 @@
+{
+  "frozen_evidence_mutated": false,
+  "model_dependencies": [],
+  "provider_network_calls": 0,
+  "row08_source": {
+    "hashes_equal": true,
+    "path": "harness/work/08-failure-injection/artifacts/action-sequence-comparison.json",
+    "sha256": "sha256:49b2caf0d4567d37fc55a32b71b1820b1126f929c66fc24a03516dac121bd64c",
+    "variant_hashes": {
+      "hosted_provider_unavailable": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
+      "retrieval_unavailable": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
+      "synapse_available": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
+      "synapse_killed": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a"
+    }
+  },
+  "row12_replay": {
+    "event_count": 76,
+    "hashes_equal": true,
+    "run_id": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+    "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+    "variants": {
+      "hosted_provider_unavailable": {
+        "action_count": 76,
+        "action_sequence_hash": "sha256:8161d853f03b768975c4cdc6e79c7dd90b16716dc2c88722783e1adcb10510b5"
+      },
+      "retrieval_unavailable": {
+        "action_count": 76,
+        "action_sequence_hash": "sha256:8161d853f03b768975c4cdc6e79c7dd90b16716dc2c88722783e1adcb10510b5"
+      },
+      "synapse_available": {
+        "action_count": 76,
+        "action_sequence_hash": "sha256:8161d853f03b768975c4cdc6e79c7dd90b16716dc2c88722783e1adcb10510b5"
+      },
+      "synapse_killed": {
+        "action_count": 76,
+        "action_sequence_hash": "sha256:8161d853f03b768975c4cdc6e79c7dd90b16716dc2c88722783e1adcb10510b5"
+      }
+    }
+  },
+  "schema_version": 1,
+  "synapse_actuation_capability": null
+}

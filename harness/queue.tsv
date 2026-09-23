@@ -1,5 +1,5 @@
 id	kind	status	contract
-01-smoke-test	control	blocked	Pin SUMO and Python 3.11; measure throughput
+01-smoke-test	control	gated	Pin SUMO and Python 3.11; measure throughput
 02-evidence-bundle	integration	gated	Run manifest + Parquet + DuckDB join on run_id
 03-safety-mask	control	gated	One writer; illegal actions rejected
 04-baselines	eval	gated	Fixed-time and actuated on matched seeds
@@ -11,8 +11,11 @@ id	kind	status	contract
 10-a4-a5	control	gated	Forecast ladder then eco advice
 10b-max-pressure-trip-kpis	eval	gated	Matched Max-Pressure trips and run KPIs; Row 05 immutable
 10c-evidence-page	product	gated	Deterministic real-run page with facts, reasons, safety, and limits
-12-synapse-agents	product	todo	S1 plan and wait; S2 explain evidence; S3 audit or abstain; no TraCI
-11-api	product	todo	Read-only FastAPI over frozen evidence after Synapse gates
-13-react-precomputed	product	todo	UI reads artifacts only
+10d-ideate-finalization	spec	gated	Seven-person persona-led agentic-AI ideas, data roadmap, future risks, and ADR-safe convergence
+10e-graph-growth-spec	spec	gated	Graph-aware traffic-growth benchmark, agent features, and read-only operator-view contract
+10f-graph-growth-benchmark	control	gated	Four-junction graph-aware Max-Pressure growth cells and graph evidence frames
+12-synapse-agents	product	gated	S1 plan and wait; S2 explain evidence; S3 audit or abstain; no TraCI
+11-api	product	gated	Read-only FastAPI over frozen evidence after Synapse gates
+13-react-precomputed	product	gated	UI reads artifacts only
 14-tunis-showcase	data	todo	OSM + TRANSTU GTFS; synthetic demand labelled
 15-optional-dqn	optional	blocked	Only after feature freeze

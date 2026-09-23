@@ -9,11 +9,12 @@
     "platform": "Windows-10-10.0.26200-SP0",
     "processor": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel"
   },
-  "measured_at": "2026-09-22T14:25:55.293585+00:00",
+  "measured_at": "2026-09-23T16:03:56.443137+00:00",
   "measurements": {
     "libsumo": {
+      "artifact_bytes": 9268,
       "backend": "libsumo",
-      "blocked": true,
+      "blocked": false,
       "command": [
         "C:\\Program Files (x86)\\Eclipse\\Sumo\\bin\\sumo.EXE",
         "-c",
@@ -25,9 +26,11 @@
         "--tripinfo-output",
         "C:\\Users\\dell\\Downloads\\sumo\\harness\\work\\01-smoke-test\\artifacts\\libsumo-tripinfo.xml"
       ],
-      "error": "DLL load failed while importing _libsumo: Une strat\u00e9gie de contr\u00f4le d\u2019application a bloqu\u00e9 ce fichier.",
-      "error_type": "ImportError",
-      "policy_id": "{0283ac0f-fff1-49ae-ada1-8a933130cad6}"
+      "peak_memory_bytes": 55693312,
+      "simulation_steps": 102,
+      "simulation_steps_per_wall_second": 303.29737773223746,
+      "wall_seconds": 0.3363035999936983,
+      "warnings": []
     },
     "traci": {
       "artifact_bytes": 9321,
@@ -43,14 +46,14 @@
         "--tripinfo-output",
         "C:\\Users\\dell\\Downloads\\sumo\\harness\\work\\01-smoke-test\\artifacts\\traci-tripinfo.xml"
       ],
-      "peak_memory_bytes": 57888768,
+      "peak_memory_bytes": 57905152,
       "simulation_steps": 102,
-      "simulation_steps_per_wall_second": 170.75253487692282,
-      "wall_seconds": 0.5973557000106666
+      "simulation_steps_per_wall_second": 119.45759226208622,
+      "wall_seconds": 0.8538594999990892
     }
   },
-  "run_id": "33eee5d6-6ff9-41e1-b9c3-af086eb2f8e5",
-  "scenario_hash": "sha256:31a2ac8002cd809067f8cf2aef5092fe802df464a601af1dcd4e97a84f125349",
+  "run_id": "599a4510-ce5c-4e46-8efc-635c825c0648",
+  "scenario_hash": "sha256:1fc40e36c228b18cc801bebbe260a84b9140fd9f1145d05d95d57832de752914",
   "seed": 20260922,
   "units": {
     "artifact_size": "bytes",
