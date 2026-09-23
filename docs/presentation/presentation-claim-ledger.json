@@ -116,10 +116,10 @@
       "url": "https://catalogue-data.transport.tn/fr/dataset/horaires-des-voyages-de-la-transtu-gtfs"
     },
     {
-      "id": "C15d",
-      "classification": "Empathize insight alignment",
-      "safe_wording": "Empathize insights I-1 through I-10 are mechanism claims checked against Tunisian practice and transfer literature. IMATM Table 9 placeholder digits are not Evidence. SMART numeric targets remain proposed tests.",
-      "source": "coflow5-empathize-pack.md Evidence §E; .scratch/coflow5-empathize/research/insight-evidence-alignment.md"
+      "id": "C15e",
+      "classification": "Empathize citation precision",
+      "safe_wording": "Transfer sources support mechanisms or measurement methods; they do not establish Tunisian magnitudes. A citation ledger records title, scope, locus status, and transfer limits; remaining from-prior-pack page loci require human verification before submission.",
+      "source": ".scratch/coflow5-empathize/research/citation-ledger.md; issues/06-citation-precision.md"
     },
     {
       "id": "C16",

@@ -161,21 +161,22 @@ Each persona follows: **need → journey (pain → solution) → evidence → de
 
 ## 1b. World truths → metrics catalogue (transfer)
 
-Full table: `.scratch/coflow5-empathize/research/world-truths-and-metrics.md`. Empathize pack Evidence §D summarises. **Insight alignment (I-1…I-10):** `.scratch/coflow5-empathize/research/insight-evidence-alignment.md` and Empathize pack Evidence §E. SMART numbers below are **proposed tests**, not FHWA/DfT mandates. IMATM Table 9 ▲ digits are **not** Evidence.
+Full table: `.scratch/coflow5-empathize/research/world-truths-and-metrics.md`. Empathize pack Evidence §D–E. **Insight alignment:** `.scratch/coflow5-empathize/research/insight-evidence-alignment.md`. **Citation ledger:** `.scratch/coflow5-empathize/research/citation-ledger.md`. SMART numbers are **proposed tests**. IMATM Table 9 ▲ digits are **not** Evidence. Transfer rule: source supports mechanism/metric method — **not** Tunisian magnitude.
 
-| Truth / insight | Standard metrics the world uses | Our persona owner |
-|---|---|---|
-| I-1 Reliability > mean delay | P95 TT, buffer index, planning time index, on-time %; unfinished trips as failures | David |
-| I-2 Empty green / plan waste | AoG %, queue by movement, split failure, green occupancy | David, Yuki |
-| I-6 Spillback / residential push | Downstream queue; blocked events; residential link burden | David, Maria, Yuki |
-| I-4 Ped wait cliff ~20–30 s | Call→WALK delay; mean/P95 wait; % >30 s; clearance truncations; completion | Amara |
-| I-5 Conditional transit priority | Headway CV; passenger wait; grant/deny + reason; extra car delay | Chidi, Rosa |
-| I-3 EVP has externality / needs space | EV TT; civilian person-delay; recovery time; zero safety breaches | Marcus |
-| I-8/I-9 Operable ATC needs takeover | Reason-code coverage; log completeness; latency; fallback time; freshness | Yuki, Rosa |
-| I-10 Incidents dominate the delay tail | Detection delay, FAR, miss; roadway/incident clearance; by severity | Omar |
-| I-7 Emissions are local; stops are the lever | Link CO₂/NOx **proxy**; stops near receptors; displacement rule | Maria |
+| Insight | Mechanism (safe) | Primary metric (measurement need) | Owner |
+|---|---|---|---|
+| I-1 | Upper-tail predictability as design target | P95 TT; buffer/PTI; unfinished = fail | David |
+| I-2 | Empty/ineffective green | AoG %; split failure; green occupancy | David, Yuki |
+| I-3 | EVP constrained by downstream space | EV TT; stops; downstream occ.; recovery | Marcus |
+| I-4 | Wait, clearance, completion separate | Wait P95; truncations; completion | Amara |
+| I-5 | Person-weighted bus delay + bunching | Headway CV; passenger wait; bus TT | Chidi, Rosa |
+| I-6 | Local greed → spillback / residential burden | Spillback; residential delay/flow | David, Maria, Yuki |
+| I-7 | Stop-and-go emissions lever | Stops near receptors + emissions proxy | Maria |
+| I-8 | Observability for accountability | KPI availability; log completeness | Yuki, Rosa |
+| I-9 | Explainability / override / adoption | Explanation task; override; interlocks | Yuki, Rosa |
+| I-10 | Incident-dominated delay tail (US share scoped) | Detect/miss/FAR; recovery; incident P95 | Omar |
 
-Appraisal anchors only: DfT reliability ratio **0.4**; transit wait ≈**2×** in-vehicle; MUTCD/HCM walk **1.07 / 1.0** m/s.
+Appraisal anchors only: DfT reliability ratio **0.4** (UK); transit wait ≈**2×** in-vehicle; MUTCD/HCM walk **1.07 / 1.0** m/s (transfer assumptions).
 
 ---
 

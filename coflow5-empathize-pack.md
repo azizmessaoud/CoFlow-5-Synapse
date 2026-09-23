@@ -290,28 +290,33 @@ CoFlow SMART numbers (e.g. P95 −5%, headway −15%) remain **proposed experime
 
 ### E. Insight → Evidence → Metric check (devil in the details)
 
-Canonical matrix: `.scratch/coflow5-empathize/research/insight-evidence-alignment.md`.
+Canonical matrix: `.scratch/coflow5-empathize/research/insight-evidence-alignment.md`.  
+Citation precision ledger: `.scratch/coflow5-empathize/research/citation-ledger.md`.
 
-Each Empathize insight is a **mechanism**. Evidence is Tunis practice + transfer literature. IMATM Table 9 ▲ figures motivated earlier drafts and are **not** cited as Evidence.
+**Wording rule:** *This source supports the mechanism or measurement approach; it does not establish the Tunisian magnitude.*
 
-| Insight | Mechanism (short) | Empathize Evidence (allowed) | Not Evidence | Owner | Metric |
+Each Empathize insight is a **mechanism**. Evidence is Tunis practice + transfer literature. IMATM Table 9 ▲ figures are **not** Evidence. Metrics are **measurement needs**, not proven Tunis magnitudes.
+
+| Insight | Mechanism (safe wording) | Empathize Evidence (allowed) | Not Evidence | Owner | Metric (need) |
 |---|---|---|---|---|---|
-| **I-1** | Predictability > mean speed | CODATU congestion context; DfT TAG reliability **0.4**; P95/buffer/PTI practice | ▲ BTI 0.68 / 74% leave early | David | P95 TT; unfinished = fail |
-| **I-2** | Fixed-time wastes green on empty approaches | Limited detection as Tunis-realistic default; ATSPM AoG / split failure | ▲ 21.3% empty green | David, Yuki | AoG %; split failure; green occupancy |
-| **I-3** | EVP needs downstream **space**, not only a green | Décret 2000-149 priority+yield; Nelson & Bullock externality; EVP field cuts | ▲ −8.1% / 63% still stopped; lives saved from sim | Marcus (+Amara interlock) | EV TT vs 2 baselines; civilian delay; recovery; zero breaches |
-| **I-4** | Clearance sized for “average” walker excludes slow users | Wait ≈2×; 20–30 s cliff; MUTCD/HCM 1.07→1.0; ITE 0.6–0.8 m/s | ▲ 12 s/18 s; 19% unfinished; “MUTCD 2023 0.8 m/s” | Amara | Wait mean/P95; % >30 s; truncations; completion |
-| **I-5** | Bus delay unfair + bunching loop | TRANSTU GTFS + strained TC; wait ≈2×; Daganzo bunching; SCOOT −39% **feasibility** | ▲ delay 1.12×; CV 0.18→0.57; abandon % | Chidi, Rosa | Headway CV; passenger wait; reason codes; extra car delay |
-| **I-6** | Local greed → spillback / residential push | Downstream-aware ATC practice; queue/oversaturation MOEs | ▲ +11%/+34%/+26% | David, Maria, Yuki | Spillback/queue; residential link burden; P95 under surge |
-| **I-7** | Residents bear stops/idling; **stops** are the lever (not volume alone) | CODATU AQ stress; ANPE ≠ street gate; Kingsley; Deschle; HBEFA **proxy** | ▲ r=0.81; measured street AQ from SUMO | Maria | Link CO₂/NOx proxy; stops; displacement rule |
-| **I-8** | No observability → no accountable change | Signal-owner role; ATSPM purpose; SCATS audit pattern | Shadowing quotes as “interview Evidence” | Yuki, Rosa | Log completeness; before/after KPIs |
-| **I-9** | Unexplainable control gets switched off | SCATS override+audit; Surtrac operator view; **no** “X% distrust AI” | AI-distrust %; prototype-review quotes as Evidence | Yuki, Rosa | Reason-code coverage; interlocked override; explain task |
-| **I-10** | Non-recurrent events dominate the delay tail | CODATU disruption context; FHWA 25–30%; TIM clearance metrics; no universal detect KPI | ▲ 7% time / 31% delay; 18–26 min recovery | Omar (+David/Marcus) | Detect/FAR/miss; recovery by severity; stale-data alerts |
+| **I-1** | Upper-tail predictability can matter more than a small mean cut | CODATU congestion context; TAG A1.3 RR **0.4** (UK appraisal); P95/buffer/PTI methods | Tunis WTP; ▲ BTI 0.68 / 74% leave early | David | P95 TT; unfinished = fail |
+| **I-2** | Unobserved demand → empty/ineffective green as structural waste | Limited detection as realistic assumption; ATSPM AoG / split failure | Tunis empty-green %; ▲ 21.3% | David, Yuki | AoG %; split failure; green occupancy |
+| **I-3** | EVP constrained by downstream **space**, not only local signal state | Décret 2000-149 priority+yield; Nelson & Bullock *TRR* 1727 externality | Drivers-won’t-yield frame; lives saved; ▲ −8.1% | Marcus (+Amara) | EV TT; stops; downstream occ.; recovery; zero breaches |
+| **I-4** | Wait, clearance, completion are separate; standards ≠ Tunis law | Wait ≈2×; 20–30 s stress; MUTCD/HCM/ITE as **transfer assumptions** | ▲ 12 s/18 s / 19%; MUTCD 2023 0.8 m/s | Amara | Wait P95; % >30 s; truncations; completion |
+| **I-5** | (a) Bus delay hits many passengers; (b) bunching amplifies waiting | TRANSTU GTFS + strained TC; wait>IVT; Daganzo bunching; SCOOT −39% **feasibility** | Bus≈car delay ratio as Tunis fact; abandon % | Chidi, Rosa | Headway CV; passenger wait; reason codes |
+| **I-6** | Local greed can spill back / burden residential links | Downstream-aware ATC MOEs; design risk under CODATU density | Tunis displacement %; ▲ +11/+34/+26 | David, Maria, Yuki | Spillback; residential delay/flow |
+| **I-7** | Stop-and-go is an actionable emissions lever; volume alone is too coarse | ANPE ≠ street gate; Deschle HDV×signals; Kingsley context; HBEFA **proxy** | “Volume causes it”; ▲ r=0.81; sim AQ | Maria | Stops near receptors; proxy; displacement rule |
+| **I-8** | Without measurement, accountable improvement is blocked | Signal-owner role; ATSPM continuous measures; SCATS audit **pattern** | Tunis “change nothing” statistic; shadowing quotes | Yuki, Rosa | KPI availability; log completeness |
+| **I-9** | Without explanation, operators cannot justify/govern automation | SCATS override+audit; Surtrac monitor/fallback; **no** distrust % | AI-distrust %; prototype quotes as Evidence | Yuki, Rosa | Explanation task; override; interlocks |
+| **I-10** | Non-recurrent events dominate the delay **tail** | CODATU disruption context; FHWA **US** ~25–30% incident share; TIM metrics | 25–30% as Tunis estimate; ▲ 7%/31% | Omar | Detect/miss/FAR; recovery; incident P95 |
 
 **Rejected / refined (keep visible):**
-- I-3 false start: “drivers won’t yield” → **capacity/space** problem.
-- I-7 false start: “volume drives local emissions” → **stop-start** is the signal-controllable lever.
+- I-3: “drivers won’t yield” → **space/storage** problem.
+- I-7: “volume drives local emissions” → **stop-and-go** as signal-controllable lever.
 
 **SMART ↔ insight:** P1↔I-4; P2↔I-1+I-2+I-6; P3↔I-5; P4↔I-8+I-9 (transit); P5↔I-3; P6↔I-8+I-9 (signals); P7↔I-6+I-7; P8↔I-10.
+
+**Gate before submission:** every `from-prior-pack` locus in the citation ledger needs human page/DOI verify (Deschle digit table, NZTA 20–30 s sentence, FHWA 25–30% edition, Wardman/Hounsell/Surtrac/SCATS brochure URLs).
 
 ---
 
