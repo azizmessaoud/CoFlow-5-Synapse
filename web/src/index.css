@@ -26,8 +26,35 @@ button {
   cursor: pointer;
 }
 
-pre {
-  overflow: auto;
-  background: #1c1c1c;
-  padding: 1rem;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0 1.5rem;
+}
+
+th,
+td {
+  text-align: left;
+  border-bottom: 1px solid #333;
+  padding: 0.35rem 0.5rem;
+  vertical-align: top;
+}
+
+dt {
+  color: #c4a35a;
+  margin-top: 0.6rem;
+}
+
+dd {
+  margin: 0.15rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.runs {
+  padding-left: 1.1rem;
+}
+
+button[aria-pressed="true"] {
+  background: #f4f1ea;
+  color: #111;
 }

@@ -1,0 +1,23 @@
+{
+  "methods": [
+    "GET"
+  ],
+  "paths": [
+    "/docs",
+    "/docs/oauth2-redirect",
+    "/health",
+    "/openapi.json",
+    "/redoc",
+    "/runs",
+    "/runs/{run_id}",
+    "/runs/{run_id}/artifacts/{name}",
+    "/runs/{run_id}/audits",
+    "/runs/{run_id}/citations",
+    "/runs/{run_id}/events",
+    "/runs/{run_id}/explanations",
+    "/runs/{run_id}/golden",
+    "/runs/{run_id}/graph-frames",
+    "/runs/{run_id}/kpis",
+    "/runs/{run_id}/limitations"
+  ]
+}

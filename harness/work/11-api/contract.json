@@ -1,0 +1,48 @@
+{
+  "contract_version": 1,
+  "id": "11-api",
+  "kind": "product",
+  "persona_or_hmw": "P4 Rosa, P6 Yuki, P8 Omar — read frozen evidence without a second writer",
+  "stage": "prototype-test",
+  "requirement_ids": ["9", "14", "15"],
+  "depends_on": ["10f-graph-growth-benchmark", "12-synapse-agents"],
+  "join_keys": ["run_id", "scenario_hash", "graph_hash", "event_id", "message_id", "request_id", "chunk_id"],
+  "locked_inputs": {
+    "harness/work/10f-graph-growth-benchmark/gate.json": "sha256:24c07c64dd72b93798d84b3851e5bddf26d5f33097048dab2efccc219e1e52c4",
+    "harness/work/10f-graph-growth-benchmark/contract.json": "sha256:a4eaa6f3ca3f4bcedd0f10a2b8201e73275988dab679a18055cba32072219183",
+    "harness/work/12-synapse-agents/gate.json": "sha256:8f799dc107720c49dc1c40d7ed128583667d265cb9f6cc1cb09f0167a09151ef",
+    "harness/work/12-synapse-agents/contract.json": "sha256:e0cafee2bc7d87910b1a7161dd8a321c3cf642885acd6176eed1dd8bb1a436af"
+  },
+  "must_pass": [
+    "a bundle is served only when gate.pass is true, openDeltas is 0, decidedBy is tests-and-files, the contract file hash matches gate.contractHash, and every artifact hash matches",
+    "typed GET routes expose health, runs, one run, events, KPIs, graph frames, explanations, audits, citations, golden metrics, and limitations",
+    "run_id, scenario_hash, graph_hash, event_id, message_id, request_id, and chunk_id are copied from the frozen file and never replaced",
+    "pagination is deterministic, limit is bounded, and order does not depend on filesystem iteration",
+    "arbitrary manifests, bad contract hashes, non-green gates, corrupt artifact bytes, and path traversal are rejected with structured errors",
+    "the process exposes no SUMO launch, TraCI or libsumo import, signal write, mutation route, or provider network call",
+    "Rows 10f and 12 stay unmodified; Rows 13 and 14 stay todo; Row 15 stays blocked"
+  ],
+  "tests": [
+    "py -3.11 -m pytest tests/api tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/validated_catalog.json",
+    "artifacts/api_surface.json",
+    "artifacts/sample_page.json",
+    "artifacts/non_actuation_audit.json"
+  ],
+  "imports_forbidden": [
+    "api -> traci",
+    "api -> libsumo",
+    "api -> signal_executor",
+    "api -> sumo_adapter"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named tests exit zero",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files",
+    "artifact, test, and source SHA-256 hashes match the files",
+    "locked Row 10f and Row 12 hashes still match",
+    "queue Row 11 is gated only after those hashes match; Rows 13 and 14 remain todo; Row 15 remains blocked"
+  ]
+}

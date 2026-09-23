@@ -1,0 +1,54 @@
+{
+  "comparison": [
+    {
+      "controller": "graph-aware-cooperative-max-pressure",
+      "seed": 11,
+      "demandScale": 1.5,
+      "planned": 20,
+      "completed": 12,
+      "unfinished": 8
+    }
+  ],
+  "reason": [
+    {
+      "eventId": "9fa9db22-b826-53cc-92eb-319b50688327",
+      "messageId": null,
+      "reason": "GRAPH_NEIGHBOUR_USED",
+      "action": "",
+      "runId": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34"
+    }
+  ],
+  "recovery": "No recovery transition is in this page.",
+  "frame": [
+    {
+      "time": 0,
+      "mode": "graph-aware-cooperative-max-pressure",
+      "freshness": "not recorded",
+      "runId": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+      "scenarioHash": "sha256:scenario",
+      "graphHash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+      "nodes": [
+        {
+          "signal_id": "J0",
+          "phase_id": "NS_GREEN"
+        }
+      ],
+      "edges": []
+    }
+  ],
+  "citation": [
+    {
+      "requestId": "golden-s2-cited",
+      "status": "answered",
+      "abstentionReason": null,
+      "eventId": "9fa9db22-b826-53cc-92eb-319b50688327",
+      "runId": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+      "citations": [
+        {
+          "chunkId": "chunk-be5c0ee6ccf20069fa4c3dc6d7f4f052744c763bbc4f9d1c0591317317134a6a",
+          "sourceId": "adr-0001"
+        }
+      ]
+    }
+  ]
+}

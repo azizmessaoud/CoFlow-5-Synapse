@@ -12,7 +12,7 @@ id	kind	status	contract
 10b-max-pressure-trip-kpis	eval	gated	Matched Max-Pressure trips and run KPIs; Row 05 immutable
 10c-evidence-page	product	gated	Deterministic real-run page with facts, reasons, safety, and limits
 12-synapse-agents	product	todo	S1 plan and wait; S2 explain evidence; S3 audit or abstain; no TraCI
-11-api	product	todo	Read-only FastAPI over frozen evidence after Synapse gates
-13-react-precomputed	product	todo	UI reads artifacts only
+11-api	product	gated	Read-only FastAPI over frozen evidence after Synapse gates
+13-react-precomputed	product	gated	UI reads artifacts only
 14-tunis-showcase	data	todo	OSM + TRANSTU GTFS; synthetic demand labelled
 15-optional-dqn	optional	blocked	Only after feature freeze
