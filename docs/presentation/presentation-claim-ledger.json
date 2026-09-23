@@ -116,10 +116,10 @@
       "url": "https://catalogue-data.transport.tn/fr/dataset/horaires-des-voyages-de-la-transtu-gtfs"
     },
     {
-      "id": "C15c",
-      "classification": "transfer metrics Empathize evidence",
-      "safe_wording": "World traffic-management metrics used for Empathize Test design include FHWA ATSPM/ASCT families (delay, AoG, split failure, ped call-to-walk), reliability indices (P95, buffer, PTI), TIM clearance metrics, TSP headway/reason-code measures, and HBEFA/SUMO emission proxies. CoFlow SMART numeric targets remain proposed experiments, not mandated world thresholds.",
-      "source": "coflow5-empathize-pack.md Evidence §D; .scratch/coflow5-empathize/research/world-truths-and-metrics.md; FHWA HOP-13-031; FHWA HOP-20-002"
+      "id": "C15d",
+      "classification": "Empathize insight alignment",
+      "safe_wording": "Empathize insights I-1 through I-10 are mechanism claims checked against Tunisian practice and transfer literature. IMATM Table 9 placeholder digits are not Evidence. SMART numeric targets remain proposed tests.",
+      "source": "coflow5-empathize-pack.md Evidence §E; .scratch/coflow5-empathize/research/insight-evidence-alignment.md"
     },
     {
       "id": "C16",

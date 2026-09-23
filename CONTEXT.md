@@ -21,8 +21,12 @@ The staged experience of one User Persona from pain to a Possible Solution.
 _Avoid_: flow, story, scenario (when meaning this staged experience)
 
 **Evidence**:
-A cited primary-source claim that supports a User Persona, User Journey, or Possible Solution. For this pack, **Tunisia practice** (law, agencies, open data, operator publications) is primary; international ATC is **transfer** Evidence. IMATM placeholders are not Evidence.
+A cited primary-source claim that supports a User Persona, User Journey, or Possible Solution. For this pack, **Tunisia practice** (law, agencies, open data, operator publications) is primary; international ATC is **transfer** Evidence. IMATM placeholders and SMART targets are not Evidence.
 _Avoid_: literature, background, bibliography (when meaning these supporting claims)
+
+**Insight**:
+A falsifiable mechanism claim from Empathize (I-1…I-10). It must map to Evidence and a metric; it is not itself a measured Tunis field result.
+_Avoid_: complaint, anecdote, Table 9 digit (when meaning the mechanism)
 
 **Tunis simulation setting**:
 The Empathize study place for the SUMO showcase: Grand Tunis roles and institutions, with OSM + scheduled TRANSTU GTFS + labelled synthetic/calibrated road demand. Not a live signal-cabinet deployment.

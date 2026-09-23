@@ -175,6 +175,7 @@ Personas collide on the same Tunis-centre corridor in simulation. Reference scen
 11. CoFlow-5 PDF slides (Gemini Notebook) are architecture statements, not cited Evidence.
 12. Official TRANSTU **GTFS is scheduled offer**, not confirmed live bus positions. Synthetic/calibrated Tunis road demand is not observed loop data.
 13. Do not claim Tunis already operates SCATS, Surtrac, or SCOOT because Rosa/Yuki exist as jobs.
+14. IMATM insight **mechanism** statements may guide Empathize; IMATM Table 9 ▲ digits (empty-green %, EV −8.1%, 19% unfinished crossings, headway CV path, r=0.81, 7%/31% incident share, etc.) stay **placeholders**, not Evidence — see §E.
 
 ### A. Tunisia practice (primary for this simulation)
 
@@ -287,6 +288,31 @@ Canonical detail: `.scratch/coflow5-empathize/research/world-truths-and-metrics.
 
 CoFlow SMART numbers (e.g. P95 −5%, headway −15%) remain **proposed experimental criteria**, not FHWA/DfT mandates.
 
+### E. Insight → Evidence → Metric check (devil in the details)
+
+Canonical matrix: `.scratch/coflow5-empathize/research/insight-evidence-alignment.md`.
+
+Each Empathize insight is a **mechanism**. Evidence is Tunis practice + transfer literature. IMATM Table 9 ▲ figures motivated earlier drafts and are **not** cited as Evidence.
+
+| Insight | Mechanism (short) | Empathize Evidence (allowed) | Not Evidence | Owner | Metric |
+|---|---|---|---|---|---|
+| **I-1** | Predictability > mean speed | CODATU congestion context; DfT TAG reliability **0.4**; P95/buffer/PTI practice | ▲ BTI 0.68 / 74% leave early | David | P95 TT; unfinished = fail |
+| **I-2** | Fixed-time wastes green on empty approaches | Limited detection as Tunis-realistic default; ATSPM AoG / split failure | ▲ 21.3% empty green | David, Yuki | AoG %; split failure; green occupancy |
+| **I-3** | EVP needs downstream **space**, not only a green | Décret 2000-149 priority+yield; Nelson & Bullock externality; EVP field cuts | ▲ −8.1% / 63% still stopped; lives saved from sim | Marcus (+Amara interlock) | EV TT vs 2 baselines; civilian delay; recovery; zero breaches |
+| **I-4** | Clearance sized for “average” walker excludes slow users | Wait ≈2×; 20–30 s cliff; MUTCD/HCM 1.07→1.0; ITE 0.6–0.8 m/s | ▲ 12 s/18 s; 19% unfinished; “MUTCD 2023 0.8 m/s” | Amara | Wait mean/P95; % >30 s; truncations; completion |
+| **I-5** | Bus delay unfair + bunching loop | TRANSTU GTFS + strained TC; wait ≈2×; Daganzo bunching; SCOOT −39% **feasibility** | ▲ delay 1.12×; CV 0.18→0.57; abandon % | Chidi, Rosa | Headway CV; passenger wait; reason codes; extra car delay |
+| **I-6** | Local greed → spillback / residential push | Downstream-aware ATC practice; queue/oversaturation MOEs | ▲ +11%/+34%/+26% | David, Maria, Yuki | Spillback/queue; residential link burden; P95 under surge |
+| **I-7** | Residents bear stops/idling; **stops** are the lever (not volume alone) | CODATU AQ stress; ANPE ≠ street gate; Kingsley; Deschle; HBEFA **proxy** | ▲ r=0.81; measured street AQ from SUMO | Maria | Link CO₂/NOx proxy; stops; displacement rule |
+| **I-8** | No observability → no accountable change | Signal-owner role; ATSPM purpose; SCATS audit pattern | Shadowing quotes as “interview Evidence” | Yuki, Rosa | Log completeness; before/after KPIs |
+| **I-9** | Unexplainable control gets switched off | SCATS override+audit; Surtrac operator view; **no** “X% distrust AI” | AI-distrust %; prototype-review quotes as Evidence | Yuki, Rosa | Reason-code coverage; interlocked override; explain task |
+| **I-10** | Non-recurrent events dominate the delay tail | CODATU disruption context; FHWA 25–30%; TIM clearance metrics; no universal detect KPI | ▲ 7% time / 31% delay; 18–26 min recovery | Omar (+David/Marcus) | Detect/FAR/miss; recovery by severity; stale-data alerts |
+
+**Rejected / refined (keep visible):**
+- I-3 false start: “drivers won’t yield” → **capacity/space** problem.
+- I-7 false start: “volume drives local emissions” → **stop-start** is the signal-controllable lever.
+
+**SMART ↔ insight:** P1↔I-4; P2↔I-1+I-2+I-6; P3↔I-5; P4↔I-8+I-9 (transit); P5↔I-3; P6↔I-8+I-9 (signals); P7↔I-6+I-7; P8↔I-10.
+
 ---
 
 ## POSSIBLE SOLUTION
@@ -313,16 +339,16 @@ Not a built system. Candidates to prototype and compare. Primary accountable age
 
 ### Solutions matrix
 
-| User Persona | Core need | Possible Solution | Proposed success criterion |
-|---|---|---|---|
-| Amara | Accessible, safe crossing | Wait-aware priority; conservative clearance; acknowledgement | Lower waits; zero clearance truncations |
-| David | Predictable journeys | Neighbour coordination; queue-aware adjustment | Lower P95; fewer stops |
-| Chidi | Regular service | Conditional headway-gap priority | Reduced headway variance and passenger wait |
-| Rosa | Understandable decisions | Dashboard, reason codes, authorised intervention | Complete records; successful operator tasks |
-| Marcus | Safe passage + recovery | Authenticated corridor priority; pre-clearance; recovery | Faster EV trips at bounded civilian delay |
-| Yuki | Reliable control | Health monitoring; safety-constrained override; fallback ladder | Correct fallback; timely diagnosis |
-| Maria | Fair distribution | Link-level emissions; displacement checks | Gains near sensitive locations; no hidden deterioration |
-| Omar | Trustworthy awareness | Anomaly detection with uncertainty; stale-data warnings | Acceptable FAR; clear degradation alerting |
+| User Persona | Core need | Insight | Possible Solution | Proposed success criterion |
+|---|---|---|---|---|
+| Amara | Accessible, safe crossing | I-4 | Wait-aware priority; conservative clearance; acknowledgement | Lower waits; zero clearance truncations |
+| David | Predictable journeys | I-1, I-2, I-6 | Neighbour coordination; queue-aware / downstream-aware adjustment | Lower P95; fewer stops; watch AoG/spillback |
+| Chidi | Regular service | I-5 | Conditional headway-gap priority | Reduced headway variance and passenger wait |
+| Rosa | Understandable decisions | I-8, I-9 | Dashboard, reason codes, authorised intervention | Complete records; successful operator tasks |
+| Marcus | Safe passage + recovery | I-3 | Authenticated corridor priority; pre-clearance; recovery | Faster EV trips at bounded civilian delay |
+| Yuki | Reliable control | I-8, I-9 | Health monitoring; safety-constrained override; fallback ladder | Correct fallback; timely diagnosis |
+| Maria | Fair distribution | I-6, I-7 | Link-level emissions; stop lever; displacement checks | Gains near sensitive locations; no hidden deterioration |
+| Omar | Trustworthy awareness | I-10 | Anomaly detection with uncertainty; stale-data warnings | Acceptable FAR; clear degradation alerting |
 
 ### Shared-journey responses
 
@@ -341,16 +367,16 @@ Principle: cooperation with explicit safeguards — no specialist hides costs im
 
 ### Define — SMART (proposed criteria, not literature thresholds)
 
-| # | User Persona | Specific | Measurable | Achievable | Relevant (Evidence) | Time-bound |
+| # | User Persona | Specific | Measurable | Achievable | Relevant (Evidence ↔ insight) | Time-bound |
 |---|---|---|---|---|---|---|
-| P1 | Amara | Cut wait; guarantee completion | Mean ≤20 s; P95 ≤40 s (tail); hard cap 40 s under stated assumptions; zero truncations | Rule-based A3 escalation first | Tunis mixed-age crossings; transfer 2× wait / 30 s cliff / 0.6–0.8 m/s | Tier 0 week 6; every episode |
-| P2 | David | Predictable, not just faster | P95 and stops/vehicle; unfinished counted; P95 −5% vs MP under surge | P95 from recorded trips | CODATU congestion context; transfer reliability ratio 0.4 | S1–S10; headline week 11 |
-| P3 | Chidi | Regular headways | Headway variance −15% vs no priority at ≤3% extra car delay | Conditional TSP | TRANSTU scheduled GTFS + peak irregularity; transfer wait 2× / bunching | A3 week 8; H3 on S6 week 11 |
-| P4 | Rosa | Understandable, intervenable | 100% reason codes; authorised intervention; warnings with FAR | Logging, not ML | TRANSTU dépôt/régulation job; transfer SCATS audit pattern | Log from Tier 0; G3 week 10 |
-| P5 | Marcus | Faster passage, honest cost | EV −25% / −10%; civilian delay ≤5%; per-mission log | SUMO preemption feasible | Décret 2000-149 priority status; transfer EVP cost literature | A2 week 7; H2 on S4 week 11 |
-| P6 | Yuki | Command at all times | 100% logged; latency <100 ms; fallback time; override + interlocks | Watchdog proven in transfer ATC | MEHAT/municipal signal owner; transfer Surtrac/SCATS fallback | Watchdog from Tier 0 |
-| P7 | Maria | Cut near school, no displacement | CO2/NOx per link; proxy labelled; pre-registered displacement rule | λ_eco + HBEFA + per-link diff | Tunis AQ stress + ANPE ≠ street gate; HBEFA proxy | A5 week 9; H5 week 11 |
-| P8 | Omar | Trustworthy alerts | Delay/FAR/miss/recovery per severity; comms-loss alerting | EWMA/CUSUM first | Local incident coordination; transfer FHWA 25–30% share | A4 week 6; H4/H6 week 11 |
+| P1 | Amara | Cut wait; guarantee completion | Mean ≤20 s; P95 ≤40 s (tail); hard cap 40 s under stated assumptions; zero truncations — **proposed**, not MUTCD floors | Rule-based A3 escalation first | **I-4**; Tunis mixed-age crossings; transfer 2× wait / 30 s cliff / 0.6–0.8 m/s | Tier 0 week 6; every episode |
+| P2 | David | Predictable, not just faster | P95 and stops/vehicle; unfinished counted; AoG/spillback watched; P95 −5% vs MP under surge **proposed** | P95 from recorded trips | **I-1, I-2, I-6**; CODATU; TAG 0.4; ATSPM AoG | S1–S10; headline week 11 |
+| P3 | Chidi | Regular headways | Headway variance −15% vs no priority at ≤3% extra car delay **proposed** | Conditional TSP | **I-5**; TRANSTU GTFS; wait 2×; bunching; SCOOT feasibility only | A3 week 8; H3 on S6 week 11 |
+| P4 | Rosa | Understandable, intervenable | 100% reason codes; authorised intervention; warnings with FAR | Logging, not ML | **I-8, I-9** (transit); TRANSTU dépôt; SCATS audit **pattern** | Log from Tier 0; G3 week 10 |
+| P5 | Marcus | Faster passage, honest cost | EV −25% / −10%; civilian delay ≤5%; per-mission log **proposed**; never lives saved | SUMO preemption feasible | **I-3**; Décret 2000-149; EVP cost literature | A2 week 7; H2 on S4 week 11 |
+| P6 | Yuki | Command at all times | 100% logged; latency <100 ms; fallback time; override + interlocks | Watchdog in transfer ATC | **I-8, I-9** (signals); MEHAT/municipal owner; Surtrac/SCATS fallback | Watchdog from Tier 0 |
+| P7 | Maria | Cut near school, no displacement | CO2/NOx per link; proxy labelled; pre-registered displacement rule | λ_eco + HBEFA + per-link diff | **I-6, I-7**; ANPE ≠ street gate; stops lever; HBEFA proxy | A5 week 9; H5 week 11 |
+| P8 | Omar | Trustworthy alerts | Delay/FAR/miss/recovery per severity; comms-loss alerting | EWMA/CUSUM first | **I-10**; FHWA 25–30%; no universal detect KPI | A4 week 6; H4/H6 week 11 |
 
 ### Accountable agent (evaluation, not actuation by LLM)
 
