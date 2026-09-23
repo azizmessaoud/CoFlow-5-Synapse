@@ -27,6 +27,7 @@ Purpose: ground User Personas in **real Tunisian institutions and practice** for
 - Tunis showcase = OSM geometry + official **scheduled** TRANSTU GTFS + **synthetic/calibrated** road demand until observed loops are verified.
 - Results do **not** establish Tunis-wide field performance, measured AQ, or lives saved.
 - Fixed-time / actuated / Max-Pressure comparisons stay on the controlled grid first; Tunis is relevance + data-ingestion story.
+- World ATC metrics (ATSPM, reliability indices, TIM) are the **transfer measurement language** — see `world-truths-and-metrics.md`.
 
 ## Roster mapping (do not stack)
 

@@ -116,10 +116,10 @@
       "url": "https://catalogue-data.transport.tn/fr/dataset/horaires-des-voyages-de-la-transtu-gtfs"
     },
     {
-      "id": "C15b",
-      "classification": "Tunisia practice Empathize evidence",
-      "safe_wording": "Empathize personas map to Tunisian practice roles: TRANSTU riders and dépôt/régulation staff, municipal/MEHAT signal owners, priority vehicles under Décret 2000-149, and residents under ANPE air-quality governance. SCATS/Surtrac/SCOOT citations are transfer patterns, not Tunis deployment claims.",
-      "source": "coflow5-empathize-pack.md Evidence §A; .scratch/coflow5-empathize/research/tunisia-practice-evidence.md"
+      "id": "C15c",
+      "classification": "transfer metrics Empathize evidence",
+      "safe_wording": "World traffic-management metrics used for Empathize Test design include FHWA ATSPM/ASCT families (delay, AoG, split failure, ped call-to-walk), reliability indices (P95, buffer, PTI), TIM clearance metrics, TSP headway/reason-code measures, and HBEFA/SUMO emission proxies. CoFlow SMART numeric targets remain proposed experiments, not mandated world thresholds.",
+      "source": "coflow5-empathize-pack.md Evidence §D; .scratch/coflow5-empathize/research/world-truths-and-metrics.md; FHWA HOP-13-031; FHWA HOP-20-002"
     },
     {
       "id": "C16",

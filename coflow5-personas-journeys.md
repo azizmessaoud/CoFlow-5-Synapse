@@ -159,6 +159,25 @@ Each persona follows: **need → journey (pain → solution) → evidence → de
 
 ---
 
+## 1b. World truths → metrics catalogue (transfer)
+
+Full table: `.scratch/coflow5-empathize/research/world-truths-and-metrics.md`. Empathize pack Evidence §D summarises. SMART numbers below are **proposed tests**, not FHWA/DfT mandates.
+
+| Truth | Standard metrics the world uses | Our persona owner |
+|---|---|---|
+| Reliability > mean delay | P95 TT, buffer index, planning time index, on-time %; unfinished trips as failures | David |
+| Empty green / spillback hurt | AoG %, queue by movement, split failure, stops/mi | David, Yuki |
+| Ped wait compliance cliff ~20–30 s | Call→WALK delay; mean/P95 wait; % >30 s; clearance truncations; completion | Amara |
+| Conditional transit priority | Headway CV; passenger wait; grant/deny + reason; extra car delay | Chidi, Rosa |
+| EVP has externality | EV TT; civilian person-delay; recovery time; zero safety breaches | Marcus |
+| Operable ATC needs takeover | Reason-code coverage; log completeness; latency; fallback time; freshness | Yuki, Rosa |
+| Incidents ~25–30% delay share (US handbooks) | Detection delay, FAR, miss; roadway/incident clearance; by severity | Omar |
+| Emissions are local | Link CO₂/NOx **proxy**; stops near receptors; displacement rule | Maria |
+
+Appraisal anchors only: DfT reliability ratio **0.4**; transit wait ≈**2×** in-vehicle; MUTCD/HCM walk **1.07 / 1.0** m/s.
+
+---
+
 ## 2. SMART objectives (corrected framing)
 
 **Framing:** the SMART objectives combine *evidence-informed stakeholder needs* with *proposed engineering acceptance criteria*. Numerical targets are tested against explicit baselines; they are not achieved results and are not thresholds universally established by the literature.
