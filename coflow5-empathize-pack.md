@@ -192,16 +192,16 @@ Personas collide on the same Tunis-centre corridor in simulation. Reference scen
 
 ### B. Per-persona Evidence (Tunis practice → transfer; motivates need, does not set target)
 
-| User Persona | Tunisia practice | Transfer (not Tunis field proof) |
-|---|---|---|
-| Amara | Central Tunis crossings serve mixed ages; slow walkers are excluded if clearance assumes “young legs.” | Perceived wait ≈ **2×** (Vallyon et al., ATRF 2009); 20–30 s compliance cliff (NZTA RR440; TfL; DfT LTN 2/95); MUTCD/HCM clearance 1.07→1.0 m/s for older shares. |
-| David | CODATU–AFD: daily Grand Tunis congestion — variance is the lived cost. | Reliability ratio **0.4** (DfT TAG A1.3); incidents ~**25%** of congestion (FHWA). |
-| Chidi | TRANSTU schedules exist in GTFS; peak congestion and unstable collective service make regularity the rider need. | Wait ≈ **2×** in-vehicle (DfT TAG; Wardman); bunching loop (Newell & Potts; Daganzo); SCOOT bus priority feasibility −39% Southampton. |
-| Rosa | TRANSTU dépôt / régulation must manage disruption without owning the signal cabinet. | SCATS ships override + audit as product features (Transport NSW 2022) — what her Possible Solution must look like. |
-| Marcus | Priority vehicle status is legal (2000-149); siren does not create downstream space. | ALS delay–survival literature; US EVP benefits **and** arterial/side-street costs of dense preemption (Nelson & Bullock). |
-| Yuki | Local signal owners exist (municipal / MEHAT); adaptive black boxes without explainability will be switched off. | SCATS intervention; Surtrac fallback on sensor/network failure; SCOOT loss of benefit under congestion. |
-| Maria | Congestion–pollution link is a stated Tunisian urban issue; ANPE monitors ambient AQ, not every school street. | Near-road school exposure literature (Kingsley); stop-linked emission proxies (Deschle); HBEFA/SUMO = proxy. |
-| Omar | Peak incidents and recovery are part of congestion reality (CODATU context); no Tunisian universal detection-delay KPI found. | FHWA TIM share 25–30%; clearance / secondary-crash metrics — define our own FAR and miss rates. |
+| User Persona | Insight | Tunisia practice | Transfer (not Tunis field proof) |
+|---|---|---|---|
+| Amara | I-4 | Central Tunis crossings serve mixed ages; slow walkers are excluded if clearance assumes “young legs.” | Perceived wait ≈ **2×** (Vallyon et al., ATRF 2009); 20–30 s compliance cliff (NZTA RR440; TfL; DfT LTN 2/95); MUTCD/HCM clearance 1.07→1.0 m/s for older shares. |
+| David | I-1, I-2, I-6 | CODATU–AFD: daily Grand Tunis congestion — variance is the lived cost; limited detection makes empty-green waste plausible. | Reliability ratio **0.4** (DfT TAG A1.3); incidents ~**25%** of congestion (FHWA); ATSPM AoG / spillback MOEs. |
+| Chidi | I-5 | TRANSTU schedules exist in GTFS; peak congestion and unstable collective service make regularity the rider need. | Wait ≈ **2×** in-vehicle (DfT TAG; Wardman); bunching loop (Newell & Potts; Daganzo); SCOOT bus priority feasibility −39% Southampton. |
+| Rosa | I-8, I-9 | TRANSTU dépôt / régulation must manage disruption without owning the signal cabinet. | SCATS ships override + audit as product features (Transport NSW 2022) — what her Possible Solution must look like. |
+| Marcus | I-3 | Priority vehicle status is legal (2000-149); siren does not create downstream space. | ALS delay–survival literature (**not** lives saved from sim); US EVP benefits **and** arterial/side-street costs of dense preemption (Nelson & Bullock). |
+| Yuki | I-8, I-9 | Local signal owners exist (municipal / MEHAT); adaptive black boxes without explainability will be switched off. | SCATS intervention; Surtrac fallback on sensor/network failure; SCOOT loss of benefit under congestion. |
+| Maria | I-6, I-7 | Congestion–pollution link is a stated Tunisian urban issue; ANPE monitors ambient AQ, not every school street. | Near-road school exposure literature (Kingsley); stop-linked emission proxies (Deschle); HBEFA/SUMO = proxy. |
+| Omar | I-10 | Peak incidents and recovery are part of congestion reality (CODATU context); no Tunisian universal detection-delay KPI found. | FHWA TIM share 25–30%; clearance / secondary-crash metrics — define our own FAR and miss rates. |
 
 ### C. Evidence trail (verified sources)
 

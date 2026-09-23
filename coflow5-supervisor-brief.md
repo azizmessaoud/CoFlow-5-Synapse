@@ -12,7 +12,7 @@ We have **not** built the traffic-light software yet. We have decided **who** we
 | Is the system built? | No. These are **ideas** to prototype in SUMO later |
 | Who controls the lights? | One “boss of the lights” (A1). Everyone else **asks**. The talking AI (LLM) **never** presses a light |
 | Numbers (40 s, −25%, …) | **Targets to test**, not results we already measured |
-| Did we invent evidence? | **No for Tunisian institutions:** TRANSTU, Décret 2000-149, MEHAT signalisation, ANPE, CODATU–AFD, official GTFS. Transfer ATC (SCATS/Surtrac) is labelled as pattern, not Tunis field. IMATM survey digits stay **placeholders**. Wait *feels* 2× is sourced transfer literature. |
+| Did we invent evidence? | **No for Tunisian institutions** and transfer handbooks. Each insight I-1…I-10 is checked: mechanism kept, Table 9 ▲ digits excluded, SMART numbers labelled proposed. IMATM survey digits stay **placeholders**. |
 
 **How many agents?** Five (A1–A5). Only A1 changes lights. A2–A5 ask. An LLM may explain the log; it is **not** a sixth controller.
 
