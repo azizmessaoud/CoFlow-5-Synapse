@@ -10,5 +10,6 @@
 | Older recovery wording: “policy → Max-Pressure → actuated → fixed-time” | A generic policy can be read as the required primary mode | Required path is `cooperative Max-Pressure -> actuated -> fixed-time`; only optional DQN may precede it | Replace generic “policy” in active specifications; preserve as historical text only where labelled |
 | `coflow5-define-ideate.md`: “five planned expert interviews replace placeholders with real quotes” | A plan may be misreported as completed interview evidence | Personas remain research-informed and not interview-validated; no quote or interview claim exists | Label interviews as future validation only |
 | Legacy LLM/controller alternatives | Brainstorm alternatives may be mistaken for accepted architecture | Synapse is non-actuating and structurally barred from TraCI; A1 is sole writer | Keep rejected alternatives visibly rejected |
+| Empathize eight-persona roster including Maria (parent) | Professor: parent persona not evident | Roster is **seven**: Amara, David, Chidi, Rosa, Marcus, Yuki, Omar. Maria/Leila removed; I-7 deferred without persona owner | Update Empathize pack, journeys, presentation validators; do not reintroduce parent under another name |
 
-No contradiction here authorizes product code, marks Prototype/Test complete, adds personas, or changes the accepted eight-person roster.
+Professor-directed roster change authorizes removing Maria; it does not authorize product code, Prototype/Test complete, or adding personas.

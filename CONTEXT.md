@@ -9,8 +9,8 @@ The canonical four-section document this map is finding its way to.
 _Avoid_: spec, README, implementation plan, design-patterns paper
 
 **User Persona**:
-A research-informed stakeholder profile in the Empathize pack, not an interview-validated person.
-_Avoid_: user, role, actor (when meaning this profile)
+A research-informed stakeholder profile in the Empathize pack, not an interview-validated person. Roster is **seven** (Amara, David, Chidi, Rosa, Marcus, Yuki, Omar). Parent/Maria removed — professor: not evident.
+_Avoid_: user, role, actor (when meaning this profile); Maria/Leila parent persona
 
 **Proxy validation**:
 A walkthrough by the student team or professor of research-informed User Personas, User Journeys, and Possible Solutions. It is not an interview with the person a User Persona describes.
@@ -21,8 +21,16 @@ The staged experience of one User Persona from pain to a Possible Solution.
 _Avoid_: flow, story, scenario (when meaning this staged experience)
 
 **Evidence**:
-A cited primary-source claim that supports a User Persona, User Journey, or Possible Solution.
+A cited primary-source claim that supports a User Persona, User Journey, or Possible Solution. For this pack, **Tunisia practice** (law, agencies, open data, operator publications) is primary; international ATC is **transfer** Evidence. IMATM placeholders and SMART targets are not Evidence.
 _Avoid_: literature, background, bibliography (when meaning these supporting claims)
+
+**Insight**:
+A falsifiable mechanism claim from Empathize (I-1…I-10). It must map to Evidence and a metric; it is not itself a measured Tunis field result.
+_Avoid_: complaint, anecdote, Table 9 digit (when meaning the mechanism)
+
+**Tunis simulation setting**:
+The Empathize study place for the SUMO showcase: Grand Tunis roles and institutions, with OSM + scheduled TRANSTU GTFS + labelled synthetic/calibrated road demand. Not a live signal-cabinet deployment.
+_Avoid_: Tunis field trial, live Tunis traffic validation (unless separately verified)
 
 **Possible Solution**:
 A design response in the Empathize pack, not a built system.

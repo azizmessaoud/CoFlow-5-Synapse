@@ -32,7 +32,6 @@ const faces = [
   { file: 'p4-rosa.png', word: 'Explain', name: 'Rosa' },
   { file: 'p5-marcus.png', word: 'Pass', name: 'Marcus' },
   { file: 'p6-yuki.png', word: 'Control', name: 'Yuki' },
-  { file: 'p7-maria.png', word: 'Home', name: 'Maria' },
   { file: 'p8-omar.png', word: 'Trust', name: 'Omar' },
 ];
 
@@ -69,8 +68,8 @@ function body(slide, text, x, y, w, h, size = 18, color = C.mute) {
   faces.forEach((f, i) => {
     s.addImage({
       path: PHOTO(f.file),
-      x: i * (W / 8), y: 0, w: W / 8, h: H,
-      sizing: { type: 'cover', w: W / 8, h: H },
+      x: i * (W / 7), y: 0, w: W / 7, h: H,
+      sizing: { type: 'cover', w: W / 7, h: H },
     });
   });
   s.addShape(pptx.ShapeType.rect, {
@@ -80,7 +79,7 @@ function body(slide, text, x, y, w, h, size = 18, color = C.mute) {
   });
   label(s, 'ESPRIT  ·  4DS  ·  11 SLIDES', 0.7, 1.7, 8);
   heading(s, 'The light should see a person.', 0.7, 2.15, 12, 1.1, 40);
-  body(s, 'CoFlow-5 Synapse  ·  eight research-informed personas  ·  one signal writer', 0.7, 3.4, 11, 0.4, 18, C.teal);
+  body(s, 'CoFlow-5 Synapse  ·  seven research-informed personas  ·  one signal writer', 0.7, 3.4, 11, 0.4, 18, C.teal);
   body(s, 'Illustrations, not interviews. [C02]', 0.7, 6.7, 8, 0.3, 13, C.mute);
   notes(s, 'Open on the faces. Say: traffic is not an average car. These portraits are illustrations. Personas are research-informed, not interview-validated. [C02]');
 }
@@ -90,10 +89,10 @@ function body(slide, text, x, y, w, h, size = 18, color = C.mute) {
   const s = pptx.addSlide();
   s.background = { color: C.navy };
   label(s, 'EMPATHIZE', 0.55, 0.32);
-  heading(s, 'One street. Eight needs.', 0.55, 0.62, 12, 0.6, 32);
+  heading(s, 'One street. Seven needs.', 0.55, 0.62, 12, 0.6, 32);
   faces.forEach((f, i) => {
-    const col = i % 8;
-    const x = 0.35 + col * 1.62;
+    const col = i % 7;
+    const x = 0.45 + col * 1.82;
     s.addImage({
       path: PHOTO(f.file),
       x, y: 1.55, w: 1.48, h: 3.6,
@@ -113,7 +112,7 @@ function body(slide, text, x, y, w, h, size = 18, color = C.mute) {
     });
   });
   body(s, 'Do not add extra names. This is the course roster.', 0.55, 6.95, 12, 0.28, 13, C.mute);
-  notes(s, 'Point at the words, not the biographies. Amara=time, David=predict, Chidi=regular, Rosa=explain, Marcus=pass, Yuki=control, Maria=home, Omar=trust. Full cards live in the long deck if asked.');
+  notes(s, 'Point at the words, not the biographies. Amara=time, David=predict, Chidi=regular, Rosa=explain, Marcus=pass, Yuki=control, Omar=trust. Parent/Maria removed (professor: not evident). Full cards live in the long deck if asked.');
 }
 
 // 3 Amara
@@ -274,7 +273,7 @@ function body(slide, text, x, y, w, h, size = 18, color = C.mute) {
   heading(s, 'Three things we will not say.', 0.7, 1.15, 12, 0.7, 34);
   const flags = [
     ['No lives saved', 'Ambulance seconds in SUMO are not casualties.'],
-    ['No measured air', 'HBEFA is an emission proxy, not the air on Maria’s street.'],
+    ['No measured air', 'HBEFA is an emission proxy, not measured air quality.'],
     ['No best episode', 'We keep unfinished trips, faults, and nulls. [C11]'],
   ];
   flags.forEach((f, i) => {
@@ -363,8 +362,8 @@ function body(slide, text, x, y, w, h, size = 18, color = C.mute) {
   faces.forEach((f, i) => {
     s.addImage({
       path: PHOTO(f.file),
-      x: i * (W / 8), y: 0, w: W / 8, h: H,
-      sizing: { type: 'cover', w: W / 8, h: H },
+      x: i * (W / 7), y: 0, w: W / 7, h: H,
+      sizing: { type: 'cover', w: W / 7, h: H },
     });
   });
   s.addShape(pptx.ShapeType.rect, {

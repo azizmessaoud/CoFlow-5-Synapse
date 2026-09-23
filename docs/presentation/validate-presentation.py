@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent
 PPTX = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else ROOT / "CoFlow-5-Synapse-DT-4DS.pptx"
 SOURCE = ROOT / "build-professor-pptx.js"
 LEDGER = ROOT / "presentation-claim-ledger.json"
-PERSONAS = ("Amara", "David", "Chidi", "Rosa", "Marcus", "Yuki", "Maria", "Omar")
+PERSONAS = ("Amara", "David", "Chidi", "Rosa", "Marcus", "Yuki", "Omar")
 REQUIRED_TEXT = (
     "32-row mixed-source evidence register",
     "cooperative Max-Pressure",
@@ -127,7 +127,7 @@ def main() -> int:
 
     print(
         "PASS presentation validation "
-        f"slides={len(slides)} notes={len(notes)} personas=8 citations={len(claim_ids)} "
+        f"slides={len(slides)} notes={len(notes)} personas=7 citations={len(claim_ids)} "
         f"max_slide_chars={max(map(len, slide_texts))} bytes={PPTX.stat().st_size}"
     )
     return 0
