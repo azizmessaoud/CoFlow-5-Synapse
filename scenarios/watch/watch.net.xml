@@ -84,10 +84,12 @@
     </edge>
 
     <tlLogic id="J0" type="static" programID="0" offset="0">
-        <phase duration="42" state="gGrrgGrr"/>
-        <phase duration="3"  state="yyrryyrr"/>
-        <phase duration="42" state="rrgGrrgG"/>
-        <phase duration="3"  state="rryyrryy"/>
+        <phase duration="30" state="gGrrgGrr"/>
+        <phase duration="4" state="yyrryyrr"/>
+        <phase duration="2" state="rrrrrrrr"/>
+        <phase duration="30" state="rrgGrrgG"/>
+        <phase duration="4" state="rryyrryy"/>
+        <phase duration="2" state="rrrrrrrr"/>
     </tlLogic>
 
     <junction id="E" type="dead_end" x="600.00" y="300.00" incLanes="E_out_0 E_out_1" intLanes="" shape="600.00,300.00 600.00,294.80 600.00,300.00"/>
