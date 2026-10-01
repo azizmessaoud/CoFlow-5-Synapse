@@ -1,0 +1,15 @@
+{
+  "actual_traci_execution": false,
+  "claim_boundary": "This is one diagnostic native smoke, not the 80-cell evaluation matrix.",
+  "evidence_kind": "native-traci-smoke",
+  "failure_reason": "OSError: [WinError 4551] Une strat\u00e9gie de contr\u00f4le d\u2019application a bloqu\u00e9 ce fichier",
+  "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+  "horizon_seconds": 30.0,
+  "matrix_member": false,
+  "run_id": "31a0b14c-5f14-5708-9a9a-cbbdfb4d893f",
+  "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+  "schema_version": 1,
+  "seed": 37,
+  "status": "failed",
+  "sumo_binary": "C:\\Program Files (x86)\\Eclipse\\Sumo\\\\bin\\sumo.EXE"
+}

@@ -1,0 +1,98 @@
+{
+  "id": "10d-ideate-finalization",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:39bd0cf452946a29123fe7b6a599e223c619df943053dd2de254f7bc3ddb6bf8",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_ideate_finalization.py -q",
+      "exitCode": 0,
+      "output": "5 passed in 0.39s"
+    }
+  ],
+  "artifactsPresent": [
+    ".scratch/coflow5-ideate-finalize/spec.md",
+    "harness/work/10d-ideate-finalization/report.md"
+  ],
+  "decidedBy": "tests-and-files",
+  "artifactHashes": {
+    ".scratch/coflow5-ideate-finalize/spec.md": "sha256:ec67cf06098e41cfbce28a7b2fa317c64bc25b1523c3d906399631639b17c3ea",
+    "harness/work/10d-ideate-finalization/report.md": "sha256:539b7fad7aea9c63adb58e3e5a940b9b516b2cfdee594cd158d0aaacd020c460",
+    "harness/work/10d-ideate-finalization/deltas.md": "sha256:cb265d93a29ac6db7eb0bcb7bbed6dc0c1a5a480a083eb940b626fdc5c0253c8",
+    "tests/acceptance/test_ideate_finalization.py": "sha256:840e6f63c629a8bf0514d409c682bd7ca5b4dd8364e580a71969449bd9e39844"
+  },
+  "schemaChecks": {
+    "pass": true,
+    "matrixColumns": 12,
+    "matrixRows": 56,
+    "uniqueIdeaIds": 56,
+    "allowedFitAndDispositionValuesOnly": true,
+    "breakAlwaysRejects": true
+  },
+  "personaChecks": {
+    "pass": true,
+    "approvedPersonas": 7,
+    "ideasPerPersona": 8,
+    "chosenNowIdeas": 7,
+    "presentationRows": 7,
+    "mariaOrLeilaIdeaOwners": 0,
+    "i7PersonaRows": 0
+  },
+  "presentationChecks": {
+    "pass": true,
+    "columns": ["Persona", "Say this", "Agent", "Metric", "First failure"],
+    "exactSpokenLines": 7,
+    "sourceRows": ["AM-02", "DV-02", "CH-03", "RO-02", "MC-02", "YK-02", "OM-02"],
+    "omarCloseExact": true,
+    "rosterAndAuthorityExact": true
+  },
+  "anomalyChecks": {
+    "pass": true,
+    "anomalyClasses": 8,
+    "alertContractPresent": true,
+    "explicitVisionStates": true,
+    "normalForbiddenOnBadVision": true,
+    "directSignalRecommendations": 0
+  },
+  "dataChecks": {
+    "pass": true,
+    "dataClasses": 10,
+    "nowLaterSeparated": true,
+    "officialSourceRulesPresent": 5,
+    "heatmapMethodAndWindowRequired": true,
+    "transtuLicenceAssumed": false
+  },
+  "futureRiskChecks": {
+    "pass": true,
+    "futureProblems": 24,
+    "clusters": 8,
+    "ownerAndPersonaCoverage": true
+  },
+  "joinChecks": {
+    "pass": true,
+    "requiredProductJoinCreated": false,
+    "reason": "spec row creates no run evidence; alert and explanation designs preserve run_id, scenario_hash, message_id, correlation_id, and immutable event references"
+  },
+  "forbiddenImportChecks": {
+    "pass": true,
+    "productCodeCreatedOrModified": false,
+    "synapseActuationGranted": false,
+    "specialistSignalWriterGranted": false
+  },
+  "honestyChecks": {
+    "pass": true,
+    "livesSavedClaim": false,
+    "measuredAirQualityClaim": false,
+    "liveTunisClaim": false,
+    "scrapeAsTruthClaim": false,
+    "accidentPreventionFromSimulationClaim": false,
+    "bestEpisodeClaim": false
+  },
+  "sourceChecks": {
+    "pass": true,
+    "professorAndPr3RosterAuthorityRecorded": true,
+    "adr0001AuthorityRecorded": true,
+    "officialDataSourceLimitsRecorded": true,
+    "transferMagnitudeWordingRecorded": true
+  }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <input>
+    <net-file value="graph-growth.net.xml"/>
+    <route-files value="graph-growth.rou.xml"/>
+    <additional-files value="graph-growth.tls.xml"/>
+    <gui-settings-file value="graph-growth.settings.xml"/>
+  </input>
+  <random_number>
+    <seed value="11"/>
+  </random_number>
+  <time><begin value="0"/><end value="90"/><step-length value="1"/></time>
+  <processing><time-to-teleport value="-1"/></processing>
+  <report><no-step-log value="true"/><duration-log.disable value="true"/></report>
+</configuration>

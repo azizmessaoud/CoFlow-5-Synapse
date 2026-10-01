@@ -1,0 +1,41 @@
+{
+  "cases": [
+    {
+      "case_id": "s1-wait",
+      "expected": "awaiting-human-approval",
+      "request_id": "golden-s1-wait"
+    },
+    {
+      "case_id": "s2-cited",
+      "expected": "answered-with-citations",
+      "request_id": "golden-s2-cited"
+    },
+    {
+      "case_id": "s2-provider-retry-fallback",
+      "expected": "two-attempts-then-template",
+      "request_id": "golden-s2-retry-fallback"
+    },
+    {
+      "case_id": "s2-abstention",
+      "expected": "retrieval-miss",
+      "request_id": "golden-s2-abstain"
+    },
+    {
+      "case_id": "s3-pass",
+      "expected": "pass",
+      "request_id": "golden-s3-pass"
+    },
+    {
+      "case_id": "s3-abstention",
+      "expected": "abstained",
+      "request_id": "golden-s3-abstain"
+    },
+    {
+      "case_id": "provider-outage",
+      "expected": "template-fallback",
+      "request_id": "provider-outage-fallback"
+    }
+  ],
+  "golden_set_version": "synapse-golden-v1",
+  "schema_version": 1
+}

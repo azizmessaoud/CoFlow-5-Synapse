@@ -1,0 +1,13 @@
+{
+  "event_id": "9fa9db22-b826-53cc-92eb-319b50688327",
+  "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+  "message_id": null,
+  "request_ids": [
+    "golden-s2-abstain",
+    "golden-s2-cited",
+    "golden-s2-retry-fallback",
+    "provider-outage-fallback"
+  ],
+  "run_id": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+  "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46"
+}

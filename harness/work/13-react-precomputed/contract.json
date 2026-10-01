@@ -1,0 +1,44 @@
+{
+  "contract_version": 1,
+  "id": "13-react-precomputed",
+  "kind": "product",
+  "persona_or_hmw": "P4 Rosa and P6 Yuki — read the frozen evidence page without a phase button",
+  "stage": "prototype-test",
+  "requirement_ids": ["9", "14", "15"],
+  "depends_on": ["11-api"],
+  "join_keys": ["run_id", "scenario_hash", "graph_hash", "event_id", "message_id", "request_id", "chunk_id"],
+  "locked_inputs": {
+    "harness/work/11-api/gate.json": "sha256:bed8fe7bb0951090d1ca0a09cc6624ed34aff555d4bfaaad9e9494884856e20a",
+    "harness/work/11-api/contract.json": "sha256:3430b87e4a3b4385340aedc956e141b2a3ef25394ec11713f352b213a3d00ebd"
+  },
+  "must_pass": [
+    "the React view fetches only the Row 11 GET routes under /api",
+    "the page shows graph frames, controller comparison, unfinished trips, recovery state, messages, reason codes, citations, abstentions, freshness, and limitations",
+    "run_id, scenario_hash, graph_hash, event_id, message_id, request_id, and chunk_id are rendered as returned and never replaced",
+    "npm dependencies are pinned to exact versions",
+    "the source has no manual phase control, WebSocket, TraCI path, or direct artifact filesystem read",
+    "Row 11 stays unmodified and Row 14 stays todo"
+  ],
+  "tests": [
+    "node --test web/src/evidence.test.js",
+    "py -3.11 -m pytest tests/ui/test_react_readonly.py -q"
+  ],
+  "artifacts": [
+    "artifacts/ui_surface.json",
+    "artifacts/boundary_audit.json",
+    "artifacts/sample_view.json"
+  ],
+  "imports_forbidden": [
+    "ui -> traci",
+    "ui -> websocket",
+    "ui -> filesystem artifact read"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "both named tests exit zero",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files",
+    "artifact, test, and source SHA-256 hashes match the files",
+    "locked Row 11 hashes still match",
+    "queue Row 13 is gated only after those hashes match; Row 14 remains todo; Row 15 remains blocked"
+  ]
+}

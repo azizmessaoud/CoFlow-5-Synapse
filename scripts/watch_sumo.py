@@ -23,6 +23,7 @@ SCENES = {
     "safety": ROOT / "scenarios" / "safety-mask" / "safety.sumocfg",
     "baselines": ROOT / "scenarios" / "baselines" / "baselines.sumocfg",
     "max-pressure": ROOT / "scenarios" / "max-pressure" / "max-pressure.sumocfg",
+    "graph-growth": ROOT / "scenarios" / "graph-growth" / "graph-growth.sumocfg",
     "demo": ROOT / "scenarios" / "watch" / "watch.sumocfg",
 }
 EVALUATION_REPORT = ROOT / "harness" / "work" / "09-eval-harness" / "artifacts" / "evaluation-report.json"
@@ -188,6 +189,8 @@ def _display(value: float | int | str | None, *, decimals: int = 2) -> str:
 def build_watch_report(
     *, config: Path, route_file: Path, tripinfo: Path,
     evaluation_report: Path = EVALUATION_REPORT,
+    controller: str = "fixed-time watch scene",
+    scene_note: str = "This window is a visual scene. It is not the matched Row 04 or Row 05 evidence.",
 ) -> str:
     observed = tripinfo_summary(tripinfo)
     baseline_sentence, max_pressure_sentence = evaluation_sentences(evaluation_report)
@@ -199,7 +202,8 @@ def build_watch_report(
     return "\n".join((
         "",
         "=== Watch run page ===",
-        "Controller: fixed-time watch scene",
+        "This is the SUMO window. The browser list is a saved record and is not this picture.",
+        f"Controller: {controller}",
         f"Seed: {_display(seed)}",
         f"Simulation time: {_display(begin)} to {_display(end)} seconds",
         f"Trips completed / planned: {completed} / {planned}",
@@ -207,14 +211,14 @@ def build_watch_report(
         f"Max waiting seconds: {_display(observed['max_waiting'])}",
         "Safety violations: none recorded in this watch scene",
         "Limitations:",
-        "- This window is a visual scene. It is not the matched Row 04 or Row 05 evidence.",
+        "- " + scene_note,
         f"- {baseline_sentence} {max_pressure_sentence}",
         "- No lives saved. No measured air quality. No winner announced.",
     ))
 
 
-def demo_command(tripinfo: Path) -> list[str]:
-    config = SCENES["demo"]
+def gui_command(scene: str, tripinfo: Path) -> list[str]:
+    config = SCENES[scene]
     return [
         require_gui(), "-c", str(config), "--start", "true", "--delay", "1000",
         "--quit-on-end", "true", "--tripinfo-output", str(tripinfo),
@@ -222,17 +226,50 @@ def demo_command(tripinfo: Path) -> list[str]:
     ]
 
 
-def watch_demo() -> int:
-    config = SCENES["demo"]
-    route_file = config.parent / "watch.rou.xml"
+def demo_command(tripinfo: Path) -> list[str]:
+    return gui_command("demo", tripinfo)
+
+
+def _route_file(config: Path) -> Path:
+    route_value = _config_value(config, "route-files")
+    if not route_value:
+        raise SystemExit(f"{config.name} has no route file")
+    return config.parent / route_value.split(",")[0].strip()
+
+
+def watch_paced(scene: str, *, intro: str, controller: str, scene_note: str) -> int:
+    config = SCENES[scene]
+    route_file = _route_file(config)
     if not config.is_file() or not route_file.is_file():
-        raise SystemExit("watch scene is missing; rebuild scenarios/watch first")
-    print("Watch scene. This is not the Row 05 evidence run.")
-    with tempfile.TemporaryDirectory(prefix="coflow5-watch-") as directory:
-        tripinfo = Path(directory) / "watch-tripinfo.xml"
-        exit_code = subprocess.call(demo_command(tripinfo), cwd=config.parent)
-        print(build_watch_report(config=config, route_file=route_file, tripinfo=tripinfo))
+        raise SystemExit(f"{scene} scene is missing")
+    print(intro)
+    with tempfile.TemporaryDirectory(prefix=f"coflow5-{scene}-") as directory:
+        tripinfo = Path(directory) / "tripinfo.xml"
+        exit_code = subprocess.call(gui_command(scene, tripinfo), cwd=config.parent)
+        page = build_watch_report(
+            config=config, route_file=route_file, tripinfo=tripinfo,
+            controller=controller, scene_note=scene_note,
+        )
+        print(page)
     return exit_code
+
+
+def watch_demo() -> int:
+    return watch_paced(
+        "demo",
+        intro="Watch scene. This is not the Row 05 evidence run.",
+        controller="fixed-time watch scene",
+        scene_note="This window is a visual scene. It is not the matched Row 04 or Row 05 evidence.",
+    )
+
+
+def watch_graph_growth() -> int:
+    return watch_paced(
+        "graph-growth",
+        intro="Four-junction picture. This is not one of the 80 saved browser rows.",
+        controller="fixed-time four-junction scene",
+        scene_note="The browser list is the saved comparison. This window is only the road picture.",
+    )
 
 
 def watch_a1() -> int:
@@ -265,6 +302,8 @@ def main() -> int:
         return watch_a1()
     if args.scene == "demo":
         return watch_demo()
+    if args.scene == "graph-growth":
+        return watch_graph_growth()
     return watch_scene(args.scene)
 
 

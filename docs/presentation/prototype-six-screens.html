@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROTOTYPE — six screens, one application</title>
+<style>
+  :root { --ink: #1c1915; --muted: #5c564c; --line: #e4ddd2; --paper: #f7f3ec; --card: #fffdf8; --accent: #8c3a2f; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 17px/1.45 Georgia, "Iowan Old Style", serif; color: var(--ink); background: var(--paper); }
+  main { max-width: 980px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { font-size: 28px; font-weight: 600; margin: 0 0 8px; }
+  h2 { font-size: 15px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 28px 0 10px; }
+  p { margin: 0 0 12px; }
+  .stamp { display: inline-block; border: 1px solid var(--accent); color: var(--accent); font: 12px/1 ui-sans-serif, sans-serif; letter-spacing: .08em; padding: 3px 8px; margin-bottom: 12px; }
+  .lede { color: var(--muted); max-width: 68ch; }
+  .panel { background: var(--card); border: 1px solid var(--line); padding: 16px 18px; }
+  .panel dl { display: grid; gap: 14px; margin: 0; }
+  .panel dt { color: var(--muted); font: 12px/1.2 ui-sans-serif, sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+  .panel dd { margin: 2px 0 0; max-width: 68ch; }
+  .changed { background: #f3e4d8; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; }
+  button { font: 14px/1.2 ui-sans-serif, sans-serif; background: var(--card); border: 1px solid var(--ink); color: var(--ink); padding: 8px 10px; cursor: pointer; }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  button.active { background: var(--ink); color: var(--paper); }
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .tabs button { border: 0; border-bottom: 2px solid transparent; background: transparent; }
+  .tabs button.active { border-bottom-color: var(--accent); background: transparent; color: var(--accent); }
+  .step { margin-top: 8px; }
+  .note { font: 14px/1.4 ui-sans-serif, sans-serif; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <div class="stamp">PROTOTYPE — NOT PROJECT EVIDENCE</div>
+  <h1>Six people, six screens, one application</h1>
+  <p class="lede" id="question"></p>
+
+  <h2>This person’s solution</h2>
+  <div class="panel" id="state"></div>
+
+  <h2>Builder</h2>
+  <div class="row" id="people"></div>
+
+  <h2>Guided walkthroughs</h2>
+  <div class="tabs" id="tabs"></div>
+  <p id="scene"></p>
+  <div class="step" id="steps"></div>
+  <p class="note">Open this file in a browser. Nothing is saved. The React app already reads frozen runs and cannot reach the simulator. These six screens are the solution set for that app. The language-model layer explains a record. It does not choose the light.</p>
+</main>
+<script>
+/* Pure six-screen module. No document access. */
+const QUESTION = "The six builders need one solution each. Every solution is a screen on the same agentic application. What may that screen show, and what may the language model say on it?";
+
+const BUILDERS = {
+  aziz: {
+    short: "Aziz",
+    name: "Aziz Messaoud",
+    pair: "Control, with Fares",
+    persona: "Amara",
+    screen: "Crossing record",
+    owns: "The decision row: a crossing stayed protected, and the truncation count on that fixture is zero.",
+    shows: "One decision. Reason: pedestrian clearance active. Clearance seconds. Truncations: 0.",
+    agent: "S2 reads that reason aloud. S3 abstains if the reason is missing from the file.",
+    waits: "S1 may describe a slower walking speed in a scenario file. A person approves it before any run.",
+    out: "Her voice, an interview, a crash prevented, a rain map."
+  },
+  fares: {
+    short: "Fares",
+    name: "Fares Ben Kacem",
+    pair: "Control, with Aziz",
+    persona: "Marcus",
+    screen: "Exit check",
+    owns: "The emergency request and the recovery ladder: Max-Pressure, then actuated, then fixed-time.",
+    shows: "Accepted or refused. If refused, the exit had no room. Two numbers side by side: ambulance time, civilian delay.",
+    agent: "S2 quotes the refusal that is in the log. S3 abstains if a survival sentence has no citation in that log.",
+    waits: "S1 may propose another emergency route. The screen’s approve button is the gate.",
+    out: "Lives saved, a shorter yellow, a weather reason."
+  },
+  aymen: {
+    short: "Aymen",
+    name: "Mohamed Aymen Hamzaoui",
+    pair: "Data, with Oumayma",
+    persona: "David",
+    screen: "Trip tail",
+    owns: "The matched comparison already on the evidence page. Seed 37. Three controllers.",
+    shows: "Finished trips, mean wait, P95 wait, unfinished trips. Max-Pressure: 70 of 84, mean 14.21 s, P95 25 s, 14 unfinished. Actuated finished 84 of 84 with a lower mean wait and a higher time loss. One seed.",
+    agent: "S2 says the result is mixed. S3 abstains on any sentence that names a winner.",
+    waits: "S1 may propose a surge scenario. The chart does not appear until that run is a frozen file.",
+    out: "A winner, live map speeds, a weather layer on the bars."
+  },
+  oumayma: {
+    short: "Oumayma",
+    name: "Oumayma Saddouri",
+    pair: "Data, with Aymen",
+    persona: "Omar",
+    screen: "Class, and the school street beside it",
+    owns: "The six situation classes from the fixture, plus the two emission-proxy links.",
+    shows: "Class name, residual, and whether the sample is fresh. Beside it, the school street as a place: one proxy link improved, one worsened. The label stays SUMO/HBEFA proxy.",
+    agent: "S2 repeats the class and stops. Asked for a cause, S3 abstains.",
+    waits: "A heatmap button stays disabled until a file exists with junction, time, and a station observation.",
+    out: "Rain as a seventh class, a crash pin, measured air, a green map that hides the worsened link."
+  },
+  eya: {
+    short: "Eya",
+    name: "Eya Laourine",
+    pair: "Product, with Ranim",
+    persona: "Chidi",
+    screen: "Bus gap",
+    owns: "The frontend component that explains one transit decision.",
+    shows: "Headway in minutes. The early bus got no priority. Extra car delay is labelled as a proposed test, not a result. TRANSTU’s 187.4 million passengers stay dated 2018.",
+    agent: "S2 repeats early or late exactly as the log has it. S3 abstains if the sentence flips them.",
+    waits: "The screen reads the artifact. It does not call the simulator.",
+    out: "Car-following distance as his result, today’s ridership, a crash prevented on the line."
+  },
+  ranim: {
+    short: "Ranim",
+    name: "Ranim Ben Salem",
+    pair: "Product, with Eya",
+    persona: "Rosa",
+    screen: "Incident page, the shell of the app",
+    owns: "The React shell the other five screens sit in. Today that app lists frozen runs and says it cannot reach the simulator.",
+    shows: "One incident: accepted or refused, the reason code, the fault, the fallback. A badge: S3 passed, or S3 abstained. An approve button for S1 that waits.",
+    agent: "S2 paraphrases the one retrieved decision. S1’s proposal sits in a queue until a person presses approve. S3 passes or abstains.",
+    waits: "The other five screens are routes inside this shell. They appear when their file is present.",
+    out: "A reason that is not in the log, a light she changed, an averaged death count, a weather heatmap route."
+  }
+};
+
+const WALKS = [
+  {
+    id: "shell",
+    title: "One application",
+    scene: "Start on Rosa’s shell. Then open the five records that shell is allowed to render.",
+    steps: [
+      { label: "Open Ranim’s shell", action: { type: "person", id: "ranim", note: "Walkthrough: the shell." } },
+      { label: "Open Aziz’s crossing record", action: { type: "person", id: "aziz", note: "Walkthrough: Amara’s screen." } },
+      { label: "Open Fares’s exit check", action: { type: "person", id: "fares", note: "Walkthrough: Marcus’s screen." } },
+      { label: "Open Aymen’s trip tail", action: { type: "person", id: "aymen", note: "Walkthrough: David’s screen." } },
+      { label: "Open Oumayma’s class", action: { type: "person", id: "oumayma", note: "Walkthrough: Omar’s screen." } },
+      { label: "Open Eya’s bus gap", action: { type: "person", id: "eya", note: "Walkthrough: Chidi’s screen." } }
+    ]
+  },
+  {
+    id: "product",
+    title: "Who builds the frontend",
+    scene: "Eya and Ranim build the screens. The other four supply the file a screen may read. The language model speaks only after that file exists.",
+    steps: [
+      { label: "Ranim owns the shell", action: { type: "person", id: "ranim", note: "Product owns the shell." } },
+      { label: "Eya owns the bus explanation", action: { type: "person", id: "eya", note: "Product owns the explanation component." } },
+      { label: "Aymen supplies the numbers", action: { type: "person", id: "aymen", note: "Data supplies the comparison." } },
+      { label: "Aziz supplies the crossing row", action: { type: "person", id: "aziz", note: "Control supplies the decision." } }
+    ]
+  },
+  {
+    id: "agent",
+    title: "What the language model may do",
+    scene: "On every screen the same three limits hold: propose and wait, explain one record, pass or abstain.",
+    steps: [
+      { label: "Rosa’s page waits for approve", action: { type: "person", id: "ranim", note: "S1 waits." } },
+      { label: "Omar’s class is repeated, then the page stops", action: { type: "person", id: "oumayma", note: "S2 stops at the class." } },
+      { label: "David’s page abstains on a winner", action: { type: "person", id: "aymen", note: "S3 abstains." } },
+      { label: "Chidi’s page keeps early as early", action: { type: "person", id: "eya", note: "S2 copies the log." } }
+    ]
+  }
+];
+
+function initialState() {
+  return { id: "ranim", lastChange: "Opened on Ranim, because the shell is the application the other screens sit in." };
+}
+
+function reduce(state, action) {
+  if (action.type === "person") {
+    return { id: action.id, lastChange: action.note || ("Builder changed to " + BUILDERS[action.id].name + ".") };
+  }
+  return state;
+}
+
+function viewModel(state) {
+  const person = BUILDERS[state.id];
+  return {
+    question: QUESTION,
+    name: person.name,
+    pair: person.pair,
+    persona: person.persona,
+    screen: person.screen,
+    owns: person.owns,
+    shows: person.shows,
+    agent: person.agent,
+    waits: person.waits,
+    out: person.out,
+    lastChange: state.lastChange
+  };
+}
+
+let state = initialState();
+
+function render() {
+  const view = viewModel(state);
+  document.getElementById("question").textContent = view.question;
+  const fields = [
+    ["Builder", view.name],
+    ["Pair", view.pair],
+    ["Person this screen is for", view.persona],
+    ["Screen", view.screen],
+    ["What they own", view.owns],
+    ["What the frontend shows", view.shows],
+    ["What the language model does", view.agent],
+    ["What waits for a person", view.waits],
+    ["What stays off this screen", view.out],
+    ["What just changed", view.lastChange]
+  ];
+  document.getElementById("state").innerHTML = "<dl>" + fields.map(function (field, index) {
+    const mark = index === fields.length - 1 ? " class=\"changed\"" : "";
+    return "<dt>" + field[0] + "</dt><dd" + mark + ">" + field[1] + "</dd>";
+  }).join("") + "</dl>";
+
+  document.getElementById("people").innerHTML = Object.keys(BUILDERS).map(function (id) {
+    const person = BUILDERS[id];
+    return "<button type=\"button\" data-person=\"" + id + "\"" + (id === state.id ? " class=\"active\"" : "") + ">" + person.short + " · " + person.screen + "</button>";
+  }).join("");
+
+  document.getElementById("tabs").innerHTML = WALKS.map(function (walk) {
+    return "<button type=\"button\" data-walk=\"" + walk.id + "\">" + walk.title + "</button>";
+  }).join("");
+  const current = WALKS.find(function (walk) { return walk.id === window.__walk; }) || WALKS[0];
+  window.__walk = current.id;
+  document.querySelector("[data-walk=\"" + current.id + "\"]").classList.add("active");
+  document.getElementById("scene").textContent = current.scene;
+  document.getElementById("steps").innerHTML = current.steps.map(function (step, index) {
+    return "<button type=\"button\" data-step=\"" + index + "\">" + (index + 1) + ". " + step.label + "</button>";
+  }).join(" ");
+}
+
+document.getElementById("people").addEventListener("click", function (event) {
+  const id = event.target.getAttribute("data-person");
+  if (!id) return;
+  state = reduce(state, { type: "person", id: id });
+  render();
+});
+document.getElementById("tabs").addEventListener("click", function (event) {
+  const id = event.target.getAttribute("data-walk");
+  if (!id) return;
+  window.__walk = id;
+  render();
+});
+document.getElementById("steps").addEventListener("click", function (event) {
+  const button = event.target.closest("button");
+  if (!button) return;
+  const walk = WALKS.find(function (item) { return item.id === window.__walk; });
+  state = reduce(state, walk.steps[Number(button.getAttribute("data-step"))].action);
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

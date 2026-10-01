@@ -1,13 +1,14 @@
 name: PR architecture
 
 # SUMO-free merge gate. Native smoke stays on Windows (ADR-0003).
-# The Python project lives on prototype/coflow5-scaffold. main has no pyproject.toml.
+# This job approves the later read-only product path. It does not deploy signals.
 on:
   pull_request:
   push:
     branches:
       - main
       - prototype/coflow5-scaffold
+      - cursor/readonly-evidence-api
 
 permissions:
   contents: read

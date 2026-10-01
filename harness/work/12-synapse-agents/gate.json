@@ -1,0 +1,184 @@
+{
+  "id": "12-synapse-agents",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:e0cafee2bc7d87910b1a7161dd8a321c3cf642885acd6176eed1dd8bb1a436af",
+  "decidedBy": "tests-and-files",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_synapse_retrieval.py -q",
+      "exitCode": 0,
+      "output": "3 passed in 0.36s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_synapse_agents.py -q",
+      "exitCode": 0,
+      "output": "6 passed in 1.67s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_synapse_evidence.py -q",
+      "exitCode": 0,
+      "output": "5 passed in 1.65s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_synapse_non_actuation.py -q",
+      "exitCode": 0,
+      "output": "6 passed in 3.35s"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q",
+      "exitCode": 0,
+      "output": "11 passed in 1.08s"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/run_manifest.json",
+    "artifacts/corpus_manifest.json",
+    "artifacts/corpus_chunks.parquet",
+    "artifacts/scenario_proposals.json",
+    "artifacts/explanations.json",
+    "artifacts/evidence_audits.json",
+    "artifacts/synapse_traces.parquet",
+    "artifacts/golden_cases.json",
+    "artifacts/golden_results.json",
+    "artifacts/non_actuation_audit.json",
+    "report.md",
+    "deltas.md"
+  ],
+  "artifactHashes": {
+    "artifacts/run_manifest.json": "sha256:e72087bb9358b7f13ae0ccf64d4df93ef4b0d4572cffc3bd22a864aa5f8927f0",
+    "artifacts/corpus_manifest.json": "sha256:0fb85cd62443b40400dac6c3a7c5a8cc517692c4766e70def089e398fdbea77d",
+    "artifacts/corpus_chunks.parquet": "sha256:73d8a113c879a7497fea6fbc8f705b7df392853599c34fcd6e48dff5f2076de2",
+    "artifacts/scenario_proposals.json": "sha256:587b8b6b8106f4b1f34b9d6703c0f8f14ab750436a2942d57ef92e49fbccdd6c",
+    "artifacts/explanations.json": "sha256:0c8a2009503dcb8b081c11301b14959a8a56d13bff112ab6b7d2391948ef3177",
+    "artifacts/evidence_audits.json": "sha256:894a5d80b401299f8aebcb4b09f970ee30baad7cc26d90c1981d9a8a6a776918",
+    "artifacts/synapse_traces.parquet": "sha256:5792abec539e9d9a4fb5a812c52efeb7dd115a5baae6a4f7041d610d795468cc",
+    "artifacts/golden_cases.json": "sha256:04b35c5e8d4643521a264f07bbc3177f608d974155eeac3d98ac22c9793dd349",
+    "artifacts/golden_results.json": "sha256:25b8b2247aa344fcdec22c0a776a768c171e910d7f61af1ccaffcce3873845c1",
+    "artifacts/non_actuation_audit.json": "sha256:b71bf9f2788a345e396b59f53a6e03a838b8085a971d2ea9f4e284c4920b332c",
+    "report.md": "sha256:6b30289131a622d57dc43ec53346ab971d47236e0f16863d7546dd0a47e2fcdb",
+    "deltas.md": "sha256:04db4273ba657380c18ccacd7119560307b0fc787efb8d324c2215ed38fd573e"
+  },
+  "testHashes": {
+    "tests/contracts/test_synapse_retrieval.py": "sha256:31937bd1c588d6f2fefb5db3acb0b1622c70ae09161021cf7652ae65d28152bb",
+    "tests/acceptance/test_synapse_agents.py": "sha256:a49863d6f26ad9d8f7d60b1adcde09e7c85203e47c252acaba0d5c286317a2af",
+    "tests/contracts/test_synapse_evidence.py": "sha256:dc25804969879148ca29ec92d19a560152679cf7ee6e64c2c69c9c6cc265b72c",
+    "tests/contracts/test_synapse_non_actuation.py": "sha256:2a0d7a02ef645cd93d7b3a847f41f3f2318711a6c01483730329411e3e575b6c",
+    "tests/architecture/test_forbidden_imports.py": "sha256:8c9354839ffddc66643b1ea7cd7392cc0a141700e0727f134b23aac170b9bed8"
+  },
+  "sourceHashes": {
+    "src/coflow5/synapse/observer.py": "sha256:0431d08b2857c10022873c0958ca90c8399691cdb6a2e55cc4384c68b4f5a8bc",
+    "src/coflow5/synapse/retrieval.py": "sha256:e1187a371b68b658e4acc7a10ef9c0b9a1fc9db2deda433ed7d8cbaffe577a93",
+    "src/coflow5/synapse/evidence_reader.py": "sha256:f2437229a72bbc76b9c2e9648004fa76e62d10b8368c0b86a2a3f6429a2b7a18",
+    "src/coflow5/synapse/provider.py": "sha256:e28a456ee19b86212ee24931b8c68f280b45db4ec3dc9387e91959994916e3d0",
+    "src/coflow5/synapse/specialists.py": "sha256:e1ac552446bd0369f038cbe8d0e500f4de6e8e24a14d00dca80db4ca5ce2cb93",
+    "src/coflow5/synapse/__init__.py": "sha256:011092e093b46d9c6685114fca7f57bb7312fb1d1808cab4b11f2b2758fb338d",
+    "src/coflow5/evidence/synapse_artifacts.py": "sha256:d7b21282823227ed2ae7a92a259bb89d5d3ac6e4739e8b262eef8175c592ea54",
+    "scripts/generate_synapse_artifacts.py": "sha256:b6f2228a02ce5ca217344377da64286da00ae9705a01a26af5742f9db64d51dc"
+  },
+  "corpusSourceHashes": {
+    "docs/adr/0001-reliable-ai-platform-boundary.md": "sha256:c74f6a9c0f02afed399f69deaed98faa0ab97a49bebda0da8b1ecf516213791f",
+    "docs/source/course-brief.md": "sha256:e9a086abb8cb659d37bce0e2f1df980585c71a33d3bf4126c08e466f0f0dc8be",
+    ".kiro/specs/coflow5-reliable-agentic-platform/requirements.md": "sha256:06977dd060bd5a420202c1eaffdb0e74c8e5ca458c7dad77cf21d745f3ccc468",
+    ".kiro/specs/coflow5-reliable-agentic-platform/design.md": "sha256:b8535279b20f19ba43f1dcac703a1fcc9ef21058d36997661241a90b957cf62c"
+  },
+  "lockedInputHashes": {
+    "harness/work/10f-graph-growth-benchmark/gate.json": "sha256:24c07c64dd72b93798d84b3851e5bddf26d5f33097048dab2efccc219e1e52c4",
+    "harness/work/10f-graph-growth-benchmark/artifacts/run_manifest.json": "sha256:231a259979ee2d72aafd3ea8ebd7a550a8715bf3db44b71435c5dc68320cdb0b",
+    "harness/work/10f-graph-growth-benchmark/artifacts/decision_events.parquet": "sha256:8a7ece82a2135561414e10da4241aefbc970d42203ea4dd62bb3a3fbb1f61549",
+    "harness/work/08-failure-injection/gate.json": "sha256:6087562e0347770c08f1f17dd5fb9ff0cfe89d1383d2f80b3042243955417b2f",
+    "harness/work/08-failure-injection/artifacts/action-sequence-comparison.json": "sha256:49b2caf0d4567d37fc55a32b71b1820b1126f929c66fc24a03516dac121bd64c"
+  },
+  "joinChecks": {
+    "pass": true,
+    "sourceRunId": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+    "scenarioHash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+    "sourceEventId": "9fa9db22-b826-53cc-92eb-319b50688327",
+    "chunkRows": 260,
+    "traceRows": 47,
+    "orphanRequests": 0,
+    "orphanRunScenarioEvents": 0,
+    "orphanChunks": 0,
+    "traceStages": [
+      "event-fetch",
+      "retrieval",
+      "generation",
+      "verification",
+      "retry",
+      "fallback",
+      "terminal"
+    ]
+  },
+  "qualityChecks": {
+    "pass": true,
+    "goldenPassed": 7,
+    "goldenTotal": 7,
+    "retrievalRecall": 1.0,
+    "validCitations": 15,
+    "totalCitations": 15,
+    "eventConsistentAnswers": 3,
+    "answeredCases": 3,
+    "reasonCodesCovered": [
+      "GRAPH_NEIGHBOUR_USED"
+    ],
+    "s2Abstentions": 1,
+    "s3Passes": 1,
+    "s3Abstentions": 1,
+    "providerAttemptCap": 2,
+    "maxProviderAttempts": 2,
+    "fallbackCount": 2,
+    "observedTraceLatencyP95Ms": 67.0976,
+    "inputTokens": 137,
+    "outputTokens": 1823,
+    "estimatedCostUsd": 0.0
+  },
+  "authorityChecks": {
+    "pass": true,
+    "s1Status": "awaiting-human-approval",
+    "executedProposalCount": 0,
+    "automaticApproval": false,
+    "s2UnsupportedAnswerReleased": false,
+    "s3PartialClaimPassAllowed": false,
+    "synapseActuationCapability": null
+  },
+  "nonActuationChecks": {
+    "pass": true,
+    "row08ActionHash": "sha256:1b531200f19a934e64843dfae59332a0e4e8da2d7ce701884fbdbe12f3d1af3a",
+    "row12ReplayActionHash": "sha256:8161d853f03b768975c4cdc6e79c7dd90b16716dc2c88722783e1adcb10510b5",
+    "outageVariants": [
+      "synapse_available",
+      "synapse_killed",
+      "retrieval_unavailable",
+      "hosted_provider_unavailable"
+    ],
+    "allVariantHashesEqual": true,
+    "frozenEvidenceMutated": false
+  },
+  "architectureChecks": {
+    "pass": true,
+    "actuationImports": 0,
+    "processLaunchImports": 0,
+    "networkImports": 0,
+    "credentialAccess": 0,
+    "modelDependencies": 0,
+    "newDependencies": 0,
+    "embeddingEnabled": false,
+    "hostedOrLocalModelEnabled": false
+  },
+  "honestyChecks": {
+    "pass": true,
+    "livesSavedClaim": false,
+    "measuredAirQualityClaim": false,
+    "deploymentClaim": false,
+    "winnerClaim": false,
+    "unsupportedPolicyClaim": false,
+    "modelPerformanceClaim": false
+  },
+  "preservationChecks": {
+    "pass": true,
+    "row08And10fLockedHashesMatch": true,
+    "sealedContractModified": false,
+    "rows11_13_14Started": false,
+    "unrelatedWorkingTreeChangesPreserved": true
+  }
+}

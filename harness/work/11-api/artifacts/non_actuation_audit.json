@@ -1,0 +1,8 @@
+{
+  "actuates": false,
+  "forbidden_imports": [],
+  "methods": [
+    "GET"
+  ],
+  "sumo_launch": false
+}

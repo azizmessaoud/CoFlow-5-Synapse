@@ -1,0 +1,27 @@
+{
+  "contract_hash": "sha256:a4eaa6f3ca3f4bcedd0f10a2b8201e73275988dab679a18055cba32072219183",
+  "locked_input_hashes": {
+    "harness/work/05-max-pressure/contract.json": "sha256:59f1fed8b3cb1dfc3629d9c3df666c3041712fbd4cde496a7eaa1f6e041b8f89",
+    "harness/work/05-max-pressure/gate.json": "sha256:8d01e405301400506915e8b0c347818235364e5ec486bf9f340f1f8e3734e5ec",
+    "harness/work/10b-max-pressure-trip-kpis/contract.json": "sha256:ae1a6cdab0642d4b54c6ab8f1649d2abf25a497df587b04a70c123e807757c4c",
+    "harness/work/10b-max-pressure-trip-kpis/gate.json": "sha256:68e28b5aa5f25dc4c4efeee9446c3d4a3e3bcf66a9668773d5a6a9e584cbe9fa",
+    "harness/work/10e-graph-growth-spec/contract.json": "sha256:53d4ae78d4cba8b76f2f8162d0619da394c274bf867dd216e87f9205635c1a41",
+    "harness/work/10e-graph-growth-spec/gate.json": "sha256:9e8da04d65c424aad12c8fa27661137ef0ca3a72288b1b79e14ecb336ca3dd7d"
+  },
+  "locked_inputs_unchanged": true,
+  "row05_and_10b_modified": false,
+  "scenario_files": {
+    "scenarios/graph-growth/graph-growth.net.xml": "sha256:917ec52a9ebce6caed4ea4f61f4595c567cfe3e3a3107c5e91f036590b3706a1",
+    "scenarios/graph-growth/graph-growth.rou.xml": "sha256:6633970d7ec07cee1f1a026eb646b0bbef3fe98cf3f4c96ae04637b0ede73ad3",
+    "scenarios/graph-growth/graph-growth.sumocfg": "sha256:ae0cc21c8dc84b19c13fccc2e4c0744962609ead326b12db172b87071829c5d1",
+    "scenarios/graph-growth/graph-growth.tls.xml": "sha256:4f9fd1efbc02e1fa57b0e6478d47f23319f674fea84b9d0ea8b711c14cb298a2"
+  },
+  "schema_version": 1,
+  "source_hashes": {
+    "scripts/generate_graph_growth_artifacts.py": "sha256:710a548d6caf78838df2f7dfaac797b591de59fa2eb2300c7607ee7776286be7",
+    "src/coflow5/control/graph_max_pressure.py": "sha256:2af4d83d5bb36c4be5bc191d1dad5709b8221fd01b0d5e310b380f6d4ee81cdd",
+    "src/coflow5/control/junction_graph.py": "sha256:35839dca130af8281afeba9608c557081233f81ef5981b88cf3170bddc7bf241",
+    "src/coflow5/evidence/graph_growth_artifacts.py": "sha256:7a21f15e277598bc09d89b4fd534f45e1d774795ab77787890ef687a0895da38",
+    "src/coflow5/sumo_adapter/graph_growth_runner.py": "sha256:2a896e1a2830e72930b64167e30c246d5987d97a45c2d771aa547499a8d62632"
+  }
+}

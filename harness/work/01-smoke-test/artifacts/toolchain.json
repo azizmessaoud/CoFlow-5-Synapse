@@ -1,6 +1,6 @@
 {
-  "captured_at": "2026-09-22T14:25:53.810622+00:00",
-  "libsumo_importable": false,
+  "captured_at": "2026-09-23T16:03:52.986222+00:00",
+  "libsumo_importable": true,
   "native_os": "Windows-10-10.0.26200-SP0",
   "package_versions": {
     "libsumo": "1.27.1",
@@ -12,7 +12,7 @@
   },
   "python_executable": "C:\\Users\\dell\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
   "python_version": "3.11.9",
-  "source_revision": "bcc9d0b57d6cbc05b7b0c95af0835e49285cdb03",
+  "source_revision": "0c38cbd8de72fb760b7b750c4c05ec9f9ae2fb4d",
   "sumo_binary": "C:\\Program Files (x86)\\Eclipse\\Sumo\\bin\\sumo.EXE",
   "sumo_gui_binary": "C:\\Program Files (x86)\\Eclipse\\Sumo\\bin\\sumo-gui.EXE",
   "sumo_gui_version": "1.27.1",
@@ -20,5 +20,8 @@
   "sumo_home": "C:\\Program Files (x86)\\Eclipse\\Sumo",
   "sumo_version": "1.27.1",
   "sumo_version_output": "Eclipse SUMO sumo 1.27.1\n Build features: Windows-10.0.17763 AMD64 MSVC 19.29.30133.0 Release FMI Proj GUI FMT SWIG Parquet Eigen\n Copyright (C) 2001-2026 German Aerospace Center (DLR) and others; https://sumo.dlr.de\n\nEclipse SUMO sumo 1.27.1 is part of SUMO.\nThis program and the accompanying materials\nare made available under the terms of the Eclipse Public License v2.0\nwhich accompanies this distribution, and is available at\nhttp://www.eclipse.org/legal/epl-v20.html\nThis program may also be made available under the following Secondary\nLicenses when the conditions for such availability set forth in the Eclipse\nPublic License 2.0 are satisfied: GNU General Public License, version 2\nor later which is available at\nhttps://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html\nSPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later",
-  "traci_file": "C:\\Program Files (x86)\\Eclipse\\Sumo\\tools\\traci\\__init__.py"
+  "traci_file": "C:\\Program Files (x86)\\Eclipse\\Sumo\\tools\\traci\\__init__.py",
+  "warnings": [
+    "pyarrow 21.0.0 may be incompatible with libsumo compiled against libarrow2300"
+  ]
 }

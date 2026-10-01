@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROTOTYPE — where each problem came from</title>
+<style>
+  :root { --ink: #1c1915; --muted: #5c564c; --line: #e4ddd2; --paper: #f7f3ec; --card: #fffdf8; --accent: #8c3a2f; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 17px/1.45 Georgia, "Iowan Old Style", serif; color: var(--ink); background: var(--paper); }
+  main { max-width: 980px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { font-size: 28px; font-weight: 600; margin: 0 0 8px; }
+  h2 { font-size: 15px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 28px 0 10px; }
+  p { margin: 0 0 12px; }
+  .stamp { display: inline-block; border: 1px solid var(--accent); color: var(--accent); font: 12px/1 ui-sans-serif, sans-serif; letter-spacing: .08em; padding: 3px 8px; margin-bottom: 12px; }
+  .lede { color: var(--muted); max-width: 62ch; }
+  .panel { background: var(--card); border: 1px solid var(--line); padding: 16px 18px; }
+  .panel dl { display: grid; gap: 14px; margin: 0; }
+  .panel dt { color: var(--muted); font: 12px/1.2 ui-sans-serif, sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+  .panel dd { margin: 2px 0 0; max-width: 68ch; }
+  .changed { background: #f3e4d8; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; }
+  button { font: 14px/1.2 ui-sans-serif, sans-serif; background: var(--card); border: 1px solid var(--ink); color: var(--ink); padding: 8px 10px; cursor: pointer; }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  button.active { background: var(--ink); color: var(--paper); }
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); }
+  .tabs button { border: 0; border-bottom: 2px solid transparent; background: transparent; }
+  .tabs button.active { border-bottom-color: var(--accent); background: transparent; color: var(--accent); }
+  .step { margin-top: 8px; }
+  .note { font: 14px/1.4 ui-sans-serif, sans-serif; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <div class="stamp">PROTOTYPE — NOT PROJECT EVIDENCE</div>
+  <h1>Need, want, problem, and possible solution</h1>
+  <p class="lede" id="question"></p>
+
+  <h2>What the professor would see</h2>
+  <div class="panel" id="state"></div>
+
+  <h2>Choose a person</h2>
+  <div class="row" id="people"></div>
+
+  <h2>Open one part of the card</h2>
+  <div class="row" id="asks"></div>
+
+  <h2>Guided walkthroughs</h2>
+  <div class="tabs" id="tabs"></div>
+  <p id="scene"></p>
+  <div class="step" id="steps"></div>
+  <p class="note">Open this file in a browser. Nothing is saved. A heatmap appears only after a scratch table is recorded in this page, and that table is not in the repository.</p>
+</main>
+<script>
+/* Pure evidence-trace module. No document access. */
+const PEOPLE = {
+  amara: {
+    name: "Amara, pedestrian with a cane",
+    agent: "A3 Multimodal asks. A1 decides.",
+    need: "Enough time to finish the crossing when the street is busy.",
+    want: "A request she can tell was heard, and a walk interval that fits a cane at about 0.8 m/s. This want is a design reading, not an interview.",
+    problem: "Standard clearance assumes about 1.07 m/s. A long wait also pushes people to cross on red.",
+    scenario: "She crosses the high street twice a day. The walk starts, traffic is released, and she is still in the crossing.",
+    source: "Literature: perceived wait is about 2× actual (Vallyon, Turner and Hodgson, ATRF 2009). Frustration grows after 20–30 seconds (NZTA RR440, 2009).",
+    collection: "No interview. No scraped map. SUMO fixture: an active crossing is kept and a conflicting request is rejected.",
+    solution: "Accessible request, an acknowledgement, wait-aware priority with no repeated deferral, and a conservative clearance. A3 asks. A1 keeps the crossing.",
+    otherIdea: "Rain might slow her further. That is an idea. There is no weather series, so anomaly detection does not apply to her crossing.",
+    forbid: "Do not say she was interviewed. Do not turn the fixture into a city crash reduction."
+  },
+  david: {
+    name: "David, delivery driver",
+    agent: "A1 Flow",
+    need: "A trip time he can plan around, not only a lower average.",
+    want: "Fewer repeated stops and a warning when a surge will break the schedule. Design reading, not an interview.",
+    problem: "A better mean can still make the worst trips late. Small delays stack across 60 or more stops.",
+    scenario: "He enters the arterial on a planned route, hits a surge, and misses the next delivery window.",
+    source: "Literature: reliability ratio 0.4 for cars and light goods vehicles (DfT TAG A1.3). Incidents are about 25% of congestion (FHWA).",
+    collection: "One matched SUMO seed. Actuated finished 84 of 84 trips. Fixed-time finished 71 of 84. Mean wait was lower for actuated and total time loss was higher.",
+    collectionKind: "simulation-fixture",
+    solution: "Coordinate neighbouring junctions and share queue information. Report mean, P95, and unfinished trips. Proposed test: P95 about 5% lower than Max-Pressure under surge. That target is not yet a result.",
+    otherIdea: "An incident is about 25% of congestion in the FHWA split. A4 can flag a surge. Weather is not his sensor.",
+    forbid: "Do not hide unfinished trips. Do not call one seed proof."
+  },
+  chidi: {
+    name: "Chidi, bus rider",
+    agent: "A3 Multimodal",
+    need: "Buses that arrive evenly, not three after a long wait.",
+    want: "A late or gapped bus helped, and his connection kept. Design reading, not an interview.",
+    problem: "A long gap, then a bunch. Faster buses are not more regular buses.",
+    scenario: "He waits at a high-frequency stop with no timetable. Two buses arrive together and the connection is gone.",
+    source: "Literature: wait is valued about 2× in-vehicle time (DfT TAG; Wardman). Bunching reinforces itself (Newell and Potts, 1964; Daganzo, 2009).",
+    collection: "SUMO fixture only. An early bus sends no priority request. A late or gapped bus may request it.",
+    collectionKind: "simulation-fixture",
+    solution: "Watch headway. Give priority only after an unusual gap. Keep the pedestrian clearance. Proposed test: lower headway variance at no more than 3% extra car delay. Not yet a result.",
+    otherIdea: "Bad weather can bunch a route. That join needs a weather series and a timetable. Neither is collected. Anomaly detection here means an unusual gap, not rain.",
+    forbid: "Do not claim Tunis ridership. GTFS showcase is not collected yet."
+  },
+  rosa: {
+    name: "Rosa",
+    agent: "A1 writes the incident report. Rosa reads it. She does not change the light.",
+    need: "One incident report: why a request was accepted or refused, and what happened when something failed.",
+    want: "Positions, headways, reason codes, faults, and the fallback, in one record she can act on inside the safety rules. Design reading, not an interview.",
+    problem: "A refusal with no reason, or a screen that still looks normal after messages die, leaves her unable to explain the shift.",
+    scenario: "A bus is refused while an ambulance passes. Messages then drop at one junction. She needs the report, not a second operator.",
+    source: "Product evidence: SCATS ships manual override and an audit trail (Transport NSW, 2022). Surtrac falls back when sensors fail (Smith et al., CMU).",
+    collection: "Gated decision records with reason codes, plus the fault fixture: 8 fault classes, 8 legal local decisions, and the same signal sequence when Synapse is stopped.",
+    collectionKind: "simulation-fixture",
+    solution: "The incident report shows the reason code, the fault, and the fallback: Max-Pressure, then actuated, then fixed-time. Override cannot create conflicting greens.",
+    otherIdea: "An unusual headway can be flagged with a confidence. A silent feed is stale data in that same report, not a separate person and not a weather map.",
+    forbid: "Do not add a second controller persona for the same report. A template page is not a language model."
+  },
+  marcus: {
+    name: "Marcus, paramedic",
+    agent: "A2 Emergency asks. A1 decides.",
+    need: "A safe path through, then traffic that recovers after the ambulance leaves.",
+    want: "The signals to know the route before he reaches the queue, without releasing the crossing early. Design reading, not an interview.",
+    problem: "A green light is useless if the exit is blocked. Priority that is too close together dumps delay on the side street.",
+    scenario: "The ambulance approaches while Amara is still in the crossing and a queue fills the exit.",
+    source: "Literature: about 7% lower survival-to-discharge per minute of delay in one ALS study (PLOS One, 2022). Field signal priority is a separate result (Cary, Houston). Closely spaced preemption adds delay on the side street (Nelson and Bullock, 2000).",
+    collection: "SUMO fixture. Ambulance effect and civilian delay are stored as two numbers. A blocked exit rejects the request.",
+    collectionKind: "simulation-fixture",
+    solution: "Authenticated request with route and ETA. A1 checks the exit and the crossing. Log ambulance time and civilian delay separately. Proposed tests are not results. Recovery is Max-Pressure, then actuated, then fixed-time.",
+    otherIdea: "Weather does not authenticate an emergency. Do not treat rain as a reason to preempt.",
+    forbid: "Do not convert simulated seconds into lives saved."
+  },
+  omar: {
+    name: "Omar, duty officer",
+    agent: "A4 Situation",
+    need: "An alert he can trust, including when the data are stale.",
+    want: "The suspected class, the observations behind it, and a clear statement when the data are not enough. Design reading, not an interview.",
+    problem: "A queue can be an incident, ordinary demand, or a dead sensor. A false alarm trains him to ignore the next one.",
+    scenario: "Traffic slows in rain. The screen either shouts “incident” or stays quiet while the feed is frozen.",
+    source: "Literature: incidents are 25–30% of metro congestion delay (FHWA; Puget Sound, 2006). Weather is 15% of non-recurring congestion in the same FHWA split. There is no universal detection-delay number.",
+    collection: "A4 fixture classifies a time series: normal, anomaly, likely incident, congestion, stale data, or insufficient data. No scraped intersection map. No weather grid. No accident counts.",
+    collectionKind: "simulation-fixture",
+    solution: "Compare observed with expected using EWMA or CUSUM. Publish a class: normal, anomaly, likely incident, congestion, stale, or insufficient. An anomaly does not name its cause. If data are stale, A1 gets no forecast.",
+    otherIdea: "Weather anomaly detection is the professor’s extra idea. It becomes legal only with an intersection-time-weather table. Until then, rain stays inside the FHWA 15% citation. Do not label a residual as weather.",
+    forbid: "Do not draw a weather or crash heatmap from a citation."
+  }
+};
+
+const ASKS = {
+  need: "Need",
+  want: "Want",
+  problem: "Problem",
+  scenario: "Real-life situation",
+  solution: "Possible solution",
+  other: "Weather or anomaly idea",
+  collection: "Data we collected",
+  weather: "Draw a weather heatmap",
+  crashes: "Draw an accident heatmap"
+};
+
+function emptyGrid() {
+  return { recorded: false, rows: 0, label: "none" };
+}
+
+function initialState() {
+  return { personaId: "amara", ask: "need", grid: emptyGrid(), lastChange: "Opened on Amara." };
+}
+
+function reduce(state, action) {
+  if (action.type === "reset") {
+    const next = initialState();
+    if (action.personaId) next.personaId = action.personaId;
+    if (action.ask) next.ask = action.ask;
+    next.lastChange = action.note || "Walkthrough reset.";
+    return next;
+  }
+  if (action.type === "person") {
+    return { ...state, personaId: action.personaId, lastChange: "Person changed to " + PEOPLE[action.personaId].name + "." };
+  }
+  if (action.type === "ask") {
+    return { ...state, ask: action.ask, lastChange: "Question changed to: " + ASKS[action.ask] };
+  }
+  if (action.type === "record-grid") {
+    return {
+      ...state,
+      grid: { recorded: true, rows: 12, label: "PROTOTYPE scratch — 12 fake intersection rows, not in the repository" },
+      lastChange: "A scratch table was recorded in this page only."
+    };
+  }
+  if (action.type === "wipe-grid") {
+    return { ...state, grid: emptyGrid(), lastChange: "Scratch table wiped." };
+  }
+  return state;
+}
+
+function heatmapVerdict(state, kind) {
+  const person = PEOPLE[state.personaId];
+  if (!state.grid.recorded) {
+    return {
+      allowed: false,
+      text: "No heatmap. " + person.name + " has a citation and a simulation fixture, not a table of intersections with " + kind + ". FHWA’s 15% weather share is a national split, not a map of these junctions."
+    };
+  }
+  return {
+    allowed: true,
+    text: "This page can shade 12 scratch cells. " + state.grid.label + ". It does not prevent crashes and it is not project evidence."
+  };
+}
+
+function answer(state) {
+  const person = PEOPLE[state.personaId];
+  if (state.ask === "need") return person.need;
+  if (state.ask === "want") return person.want;
+  if (state.ask === "problem") return person.problem;
+  if (state.ask === "scenario") return person.scenario;
+  if (state.ask === "solution") return person.agent + " " + person.solution;
+  if (state.ask === "other") return person.otherIdea;
+  if (state.ask === "collection") return person.collection + " Source: " + person.source;
+  if (state.ask === "weather") return heatmapVerdict(state, "weather").text;
+  if (state.ask === "crashes") return heatmapVerdict(state, "accident counts").text;
+  return "";
+}
+
+function panel(state) {
+  const person = PEOPLE[state.personaId];
+  const heat = state.ask === "weather" || state.ask === "crashes";
+  const verdict = heat ? heatmapVerdict(state, state.ask === "weather" ? "weather" : "accident counts") : null;
+  return {
+    person: person.name,
+    agent: person.agent,
+    need: person.need,
+    want: person.want,
+    problem: person.problem,
+    scenario: person.scenario,
+    solution: person.solution,
+    otherIdea: person.otherIdea,
+    focus: ASKS[state.ask] + ": " + answer(state),
+    heatmap: verdict ? (verdict.allowed ? "Scratch cells only" : "Refused") : "Not requested",
+    collectedTable: state.grid.recorded ? state.grid.label : "No intersection table in the project",
+    mustNotSay: person.forbid,
+    changed: state.lastChange
+  };
+}
+
+/* Page shell. It only calls the module. */
+const WALKS = [
+  {
+    id: "amara",
+    title: "Amara, the honest path",
+    text: "Show where her problem came from, what was collected, and the agent. Watch that a heatmap is refused.",
+    steps: [
+      { type: "reset", personaId: "amara", ask: "need", note: "Start with Amara’s need." },
+      { type: "ask", ask: "scenario" },
+      { type: "ask", ask: "solution" },
+      { type: "ask", ask: "other" }
+    ]
+  },
+  {
+    id: "omar",
+    title: "Omar and the weather map",
+    text: "The professor asked for a weather heatmap. Omar’s source mentions weather as 15% of non-recurring congestion. That citation cannot draw cells.",
+    steps: [
+      { type: "reset", personaId: "omar", ask: "need", note: "Start with Omar’s need." },
+      { type: "ask", ask: "scenario" },
+      { type: "ask", ask: "other" },
+      { type: "ask", ask: "weather" }
+    ]
+  },
+  {
+    id: "scratch",
+    title: "What a collected table would unlock",
+    text: "Record a scratch grid in this page, then ask for the heatmap again. The cells are fake and labelled as such.",
+    steps: [
+      { type: "reset", personaId: "omar", ask: "weather", note: "Heatmap still refused." },
+      { type: "record-grid" },
+      { type: "ask", ask: "weather" },
+      { type: "wipe-grid" }
+    ]
+  },
+  {
+    id: "rosa",
+    title: "Rosa’s incident report",
+    text: "There is no separate engineer persona. Rosa reads one report: the reason, the fault, and the fallback.",
+    steps: [
+      { type: "reset", personaId: "rosa", ask: "need", note: "Start with Rosa’s need." },
+      { type: "ask", ask: "scenario" },
+      { type: "ask", ask: "solution" },
+      { type: "ask", ask: "other" }
+    ]
+  }
+];
+
+let state = initialState();
+let walk = WALKS[0];
+let stepIndex = 0;
+
+function render() {
+  document.getElementById("question").textContent = "Question this page answers: for each person, what is the need, the want, the problem, the real situation, and the possible solution — and which weather or anomaly idea is only an idea?";
+  const view = panel(state);
+  const fields = [
+    ["Person", view.person],
+    ["Agent", view.agent],
+    ["Need", view.need],
+    ["Want", view.want],
+    ["Problem", view.problem],
+    ["Real-life situation", view.scenario],
+    ["Possible solution", view.solution],
+    ["Weather or anomaly idea", view.otherIdea],
+    ["Focused answer", view.focus],
+    ["Heatmap", view.heatmap],
+    ["Intersection table", view.collectedTable],
+    ["Do not say", view.mustNotSay],
+    ["What just changed", view.changed]
+  ];
+  document.getElementById("state").innerHTML = "<dl>" + fields.map(function (pair, index) {
+    const mark = index === 8 || index === 12 ? " class=\"changed\"" : "";
+    return "<dt>" + pair[0] + "</dt><dd" + mark + ">" + pair[1] + "</dd>";
+  }).join("") + "</dl>";
+
+  document.getElementById("people").innerHTML = Object.keys(PEOPLE).map(function (id) {
+    return "<button data-person=\"" + id + "\"" + (state.personaId === id ? " class=\"active\"" : "") + ">" + PEOPLE[id].name.split(",")[0] + "</button>";
+  }).join("");
+  document.getElementById("asks").innerHTML = Object.keys(ASKS).map(function (id) {
+    return "<button data-ask=\"" + id + "\"" + (state.ask === id ? " class=\"active\"" : "") + ">" + ASKS[id] + "</button>";
+  }).join("") + "<button data-grid=\"record\">Record a scratch intersection table</button><button data-grid=\"wipe\">Wipe that table</button>";
+
+  document.getElementById("tabs").innerHTML = WALKS.map(function (item) {
+    return "<button data-walk=\"" + item.id + "\"" + (walk.id === item.id ? " class=\"active\"" : "") + ">" + item.title + "</button>";
+  }).join("");
+  document.getElementById("scene").textContent = walk.text;
+  document.getElementById("steps").innerHTML = walk.steps.map(function (action, index) {
+    const label = action.type === "ask" ? ASKS[action.ask] : action.type === "record-grid" ? "Record a scratch table" : action.type === "wipe-grid" ? "Wipe the scratch table" : "Reset this walkthrough";
+    return "<button data-step=\"" + index + "\">" + (index + 1) + ". " + label + "</button> ";
+  }).join("");
+}
+
+document.body.addEventListener("click", function (event) {
+  const button = event.target.closest("button");
+  if (!button) return;
+  if (button.dataset.person) state = reduce(state, { type: "person", personaId: button.dataset.person });
+  if (button.dataset.ask) state = reduce(state, { type: "ask", ask: button.dataset.ask });
+  if (button.dataset.grid === "record") state = reduce(state, { type: "record-grid" });
+  if (button.dataset.grid === "wipe") state = reduce(state, { type: "wipe-grid" });
+  if (button.dataset.walk) {
+    walk = WALKS.find(function (item) { return item.id === button.dataset.walk; });
+    stepIndex = 0;
+    state = reduce(state, walk.steps[0]);
+  }
+  if (button.dataset.step) {
+    stepIndex = Number(button.dataset.step);
+    state = reduce(state, walk.steps[stepIndex]);
+  }
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+{
+  "explanations": [
+    {
+      "abstention_reason": null,
+      "answer": "Immutable event 9fa9db22-b826-53cc-92eb-319b50688327 selected NS_GREEN at J0 with reason GRAPH_NEIGHBOUR_USED. Synapse reports this completed decision and does not alter it. Policy support: [chunk-be5c0ee6ccf20069fa4c3dc6d7f4f052744c763bbc4f9d1c0591317317134a6a].",
+      "citations": [
+        {
+          "chunk_id": "chunk-be5c0ee6ccf20069fa4c3dc6d7f4f052744c763bbc4f9d1c0591317317134a6a",
+          "evidence_class": "architecture-decision",
+          "matched_tokens": [
+            "actuation",
+            "control",
+            "max-pressure",
+            "synapse"
+          ],
+          "source_id": "adr-0001",
+          "source_path": "docs/adr/0001-reliable-ai-platform-boundary.md",
+          "source_sha256": "sha256:c74f6a9c0f02afed399f69deaed98faa0ab97a49bebda0da8b1ecf516213791f"
+        },
+        {
+          "chunk_id": "chunk-0142a00e3413415a784feb1dabbf5a6c9c276ce339f3f86d0c8dab8cf083ca66",
+          "evidence_class": "product-requirement",
+          "matched_tokens": [
+            "control",
+            "max-pressure",
+            "safety",
+            "synapse"
+          ],
+          "source_id": "requirements",
+          "source_path": ".kiro/specs/coflow5-reliable-agentic-platform/requirements.md",
+          "source_sha256": "sha256:06977dd060bd5a420202c1eaffdb0e74c8e5ca458c7dad77cf21d745f3ccc468"
+        },
+        {
+          "chunk_id": "chunk-81e9fae676afc2faf2806ddc7a0fcb91cb5a11f632792d8b869990f7cc8f11e9",
+          "evidence_class": "course-authority",
+          "matched_tokens": [
+            "control",
+            "max-pressure",
+            "synapse"
+          ],
+          "source_id": "course-brief",
+          "source_path": "docs/source/course-brief.md",
+          "source_sha256": "sha256:e9a086abb8cb659d37bce0e2f1df980585c71a33d3bf4126c08e466f0f0dc8be"
+        },
+        {
+          "chunk_id": "chunk-d0f4378b7e66dbb988b980126e5e882c1b7dca89ed2307b51439b232cb1870bb",
+          "evidence_class": "product-design",
+          "matched_tokens": [
+            "actuation",
+            "max-pressure",
+            "synapse"
+          ],
+          "source_id": "design",
+          "source_path": ".kiro/specs/coflow5-reliable-agentic-platform/design.md",
+          "source_sha256": "sha256:b8535279b20f19ba43f1dcac703a1fcc9ef21058d36997661241a90b957cf62c"
+        },
+        {
+          "chunk_id": "chunk-b41aa533146708ef6908ef85f0bc3197a58473c39fbbdf93e8d9360324611570",
+          "evidence_class": "product-design",
+          "matched_tokens": [
+            "actuation",
+            "safety",
+            "synapse"
+          ],
+          "source_id": "design",
+          "source_path": ".kiro/specs/coflow5-reliable-agentic-platform/design.md",
+          "source_sha256": "sha256:b8535279b20f19ba43f1dcac703a1fcc9ef21058d36997661241a90b957cf62c"
+        }
+      ],
+      "classification": "decision-explanation",
+      "event_facts": {
+        "accepted_action": "NS_GREEN",
+        "controller": "graph-aware-cooperative-max-pressure",
+        "downstream_blocked": false,
+        "event_id": "9fa9db22-b826-53cc-92eb-319b50688327",
+        "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+        "reason_code": "GRAPH_NEIGHBOUR_USED",
+        "run_id": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+        "safety_accepted": true,
+        "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+        "signal_id": "J0",
+        "simulation_time": 0.0
+      },
+      "fallback_used": false,
+      "generation_mode": "deterministic-template-v1",
+      "provider_attempts": 0,
+      "request_id": "golden-s2-cited",
+      "schema_version": 1,
+      "status": "answered"
+    },
+    {
+      "abstention_reason": null,
+      "answer": "Immutable event 9fa9db22-b826-53cc-92eb-319b50688327 selected NS_GREEN at J0 with reason GRAPH_NEIGHBOUR_USED. Synapse reports this completed decision and does not alter it. Policy support: [chunk-be5c0ee6ccf20069fa4c3dc6d7f4f052744c763bbc4f9d1c0591317317134a6a].",
+      "citations": [
+        {
+          "chunk_id": "chunk-be5c0ee6ccf20069fa4c3dc6d7f4f052744c763bbc4f9d1c0591317317134a6a",
+          "evidence_class": "architecture-decision",
+          "matched_tokens": [
+            "actuation",
+            "control",
+            "max-pressure",
+            "synapse"
+          ],
+          "source_id": "adr-0001",
+          "source_path": "docs/adr/0001-reliable-ai-platform-boundary.md",
+          "source_sha256": "sha256:c74f6a9c0f02afed399f69deaed98faa0ab97a49bebda0da8b1ecf516213791f"
+        },
+        {
+          "chunk_id": "chunk-0142a00e3413415a784feb1dabbf5a6c9c276ce339f3f86d0c8dab8cf083ca66",
+          "evidence_class": "product-requirement",
+          "matched_tokens": [
+            "control",
+            "max-pressure",
+            "safety",
+            "synapse"
+          ],
+          "source_id": "requirements",
+          "source_path": ".kiro/specs/coflow5-reliable-agentic-platform/requirements.md",
+          "source_sha256": "sha256:06977dd060bd5a420202c1eaffdb0e74c8e5ca458c7dad77cf21d745f3ccc468"
+        },
+        {
+          "chunk_id": "chunk-81e9fae676afc2faf2806ddc7a0fcb91cb5a11f632792d8b869990f7cc8f11e9",
+          "evidence_class": "course-authority",
+          "matched_tokens": [
+            "control",
+            "max-pressure",
+            "synapse"
+          ],
+          "source_id": "course-brief",
+          "source_path": "docs/source/course-brief.md",
+          "source_sha256": "sha256:e9a086abb8cb659d37bce0e2f1df980585c71a33d3bf4126c08e466f0f0dc8be"
+        },
+        {
+          "chunk_id": "chunk-d0f4378b7e66dbb988b980126e5e882c1b7dca89ed2307b51439b232cb1870bb",
+          "evidence_class": "product-design",
+          "matched_tokens": [
+            "actuation",
+            "max-pressure",
+            "synapse"
+          ],
+          "source_id": "design",
+          "source_path": ".kiro/specs/coflow5-reliable-agentic-platform/design.md",
+          "source_sha256": "sha256:b8535279b20f19ba43f1dcac703a1fcc9ef21058d36997661241a90b957cf62c"
+        },
+        {
+          "chunk_id": "chunk-b41aa533146708ef6908ef85f0bc3197a58473c39fbbdf93e8d9360324611570",
+          "evidence_class": "product-design",
+          "matched_tokens": [
+            "actuation",
+            "safety",
+            "synapse"
+          ],
+          "source_id": "design",
+          "source_path": ".kiro/specs/coflow5-reliable-agentic-platform/design.md",
+          "source_sha256": "sha256:b8535279b20f19ba43f1dcac703a1fcc9ef21058d36997661241a90b957cf62c"
+        }
+      ],
+      "classification": "decision-explanation",
+      "event_facts": {
+        "accepted_action": "NS_GREEN",
+        "controller": "graph-aware-cooperative-max-pressure",
+        "downstream_blocked": false,
+        "event_id": "9fa9db22-b826-53cc-92eb-319b50688327",
+        "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+        "reason_code": "GRAPH_NEIGHBOUR_USED",
+        "run_id": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+        "safety_accepted": true,
+        "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+        "signal_id": "J0",
+        "simulation_time": 0.0
+      },
+      "fallback_used": true,
+      "generation_mode": "deterministic-template-v1",
+      "provider_attempts": 2,
+      "request_id": "golden-s2-retry-fallback",
+      "schema_version": 1,
+      "status": "answered"
+    },
+    {
+      "abstention_reason": "retrieval-miss",
+      "answer": null,
+      "citations": [],
+      "classification": "decision-explanation",
+      "event_facts": {
+        "accepted_action": "NS_GREEN",
+        "controller": "graph-aware-cooperative-max-pressure",
+        "downstream_blocked": false,
+        "event_id": "9fa9db22-b826-53cc-92eb-319b50688327",
+        "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+        "reason_code": "GRAPH_NEIGHBOUR_USED",
+        "run_id": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+        "safety_accepted": true,
+        "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+        "signal_id": "J0",
+        "simulation_time": 0.0
+      },
+      "fallback_used": false,
+      "generation_mode": "none",
+      "provider_attempts": 0,
+      "request_id": "golden-s2-abstain",
+      "schema_version": 1,
+      "status": "abstained"
+    },
+    {
+      "abstention_reason": null,
+      "answer": "Immutable event 9fa9db22-b826-53cc-92eb-319b50688327 selected NS_GREEN at J0 with reason GRAPH_NEIGHBOUR_USED. Synapse reports this completed decision and does not alter it. Policy support: [chunk-be5c0ee6ccf20069fa4c3dc6d7f4f052744c763bbc4f9d1c0591317317134a6a].",
+      "citations": [
+        {
+          "chunk_id": "chunk-be5c0ee6ccf20069fa4c3dc6d7f4f052744c763bbc4f9d1c0591317317134a6a",
+          "evidence_class": "architecture-decision",
+          "matched_tokens": [
+            "actuation",
+            "control",
+            "max-pressure",
+            "synapse"
+          ],
+          "source_id": "adr-0001",
+          "source_path": "docs/adr/0001-reliable-ai-platform-boundary.md",
+          "source_sha256": "sha256:c74f6a9c0f02afed399f69deaed98faa0ab97a49bebda0da8b1ecf516213791f"
+        },
+        {
+          "chunk_id": "chunk-0142a00e3413415a784feb1dabbf5a6c9c276ce339f3f86d0c8dab8cf083ca66",
+          "evidence_class": "product-requirement",
+          "matched_tokens": [
+            "control",
+            "max-pressure",
+            "safety",
+            "synapse"
+          ],
+          "source_id": "requirements",
+          "source_path": ".kiro/specs/coflow5-reliable-agentic-platform/requirements.md",
+          "source_sha256": "sha256:06977dd060bd5a420202c1eaffdb0e74c8e5ca458c7dad77cf21d745f3ccc468"
+        },
+        {
+          "chunk_id": "chunk-81e9fae676afc2faf2806ddc7a0fcb91cb5a11f632792d8b869990f7cc8f11e9",
+          "evidence_class": "course-authority",
+          "matched_tokens": [
+            "control",
+            "max-pressure",
+            "synapse"
+          ],
+          "source_id": "course-brief",
+          "source_path": "docs/source/course-brief.md",
+          "source_sha256": "sha256:e9a086abb8cb659d37bce0e2f1df980585c71a33d3bf4126c08e466f0f0dc8be"
+        },
+        {
+          "chunk_id": "chunk-d0f4378b7e66dbb988b980126e5e882c1b7dca89ed2307b51439b232cb1870bb",
+          "evidence_class": "product-design",
+          "matched_tokens": [
+            "actuation",
+            "max-pressure",
+            "synapse"
+          ],
+          "source_id": "design",
+          "source_path": ".kiro/specs/coflow5-reliable-agentic-platform/design.md",
+          "source_sha256": "sha256:b8535279b20f19ba43f1dcac703a1fcc9ef21058d36997661241a90b957cf62c"
+        },
+        {
+          "chunk_id": "chunk-b41aa533146708ef6908ef85f0bc3197a58473c39fbbdf93e8d9360324611570",
+          "evidence_class": "product-design",
+          "matched_tokens": [
+            "actuation",
+            "safety",
+            "synapse"
+          ],
+          "source_id": "design",
+          "source_path": ".kiro/specs/coflow5-reliable-agentic-platform/design.md",
+          "source_sha256": "sha256:b8535279b20f19ba43f1dcac703a1fcc9ef21058d36997661241a90b957cf62c"
+        }
+      ],
+      "classification": "decision-explanation",
+      "event_facts": {
+        "accepted_action": "NS_GREEN",
+        "controller": "graph-aware-cooperative-max-pressure",
+        "downstream_blocked": false,
+        "event_id": "9fa9db22-b826-53cc-92eb-319b50688327",
+        "graph_hash": "sha256:318efc52365362aa48e6eacb8273a2b16c4c6bd4ebb75ffb7b62497f3e5b0b5c",
+        "reason_code": "GRAPH_NEIGHBOUR_USED",
+        "run_id": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+        "safety_accepted": true,
+        "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+        "signal_id": "J0",
+        "simulation_time": 0.0
+      },
+      "fallback_used": true,
+      "generation_mode": "deterministic-template-v1",
+      "provider_attempts": 1,
+      "request_id": "provider-outage-fallback",
+      "schema_version": 1,
+      "status": "answered"
+    }
+  ],
+  "schema_version": 1
+}

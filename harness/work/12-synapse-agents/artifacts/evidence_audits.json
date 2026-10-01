@@ -1,0 +1,72 @@
+{
+  "audits": [
+    {
+      "checks": [
+        {
+          "actual": "NS_GREEN",
+          "claim_id": "action",
+          "expected": "NS_GREEN",
+          "field_or_path": "accepted_action",
+          "passed": true,
+          "source_type": "event-field"
+        },
+        {
+          "actual": "GRAPH_NEIGHBOUR_USED",
+          "claim_id": "reason",
+          "expected": "GRAPH_NEIGHBOUR_USED",
+          "field_or_path": "reason_code",
+          "passed": true,
+          "source_type": "event-field"
+        },
+        {
+          "actual": "sha256:8a7ece82a2135561414e10da4241aefbc970d42203ea4dd62bb3a3fbb1f61549",
+          "claim_id": "event-artifact",
+          "expected": "sha256:8a7ece82a2135561414e10da4241aefbc970d42203ea4dd62bb3a3fbb1f61549",
+          "field_or_path": "harness/work/10f-graph-growth-benchmark/artifacts/decision_events.parquet",
+          "passed": true,
+          "source_type": "artifact-hash"
+        }
+      ],
+      "failed_checks": [],
+      "references": [
+        {
+          "event_id": "9fa9db22-b826-53cc-92eb-319b50688327",
+          "evidence_sha256": "sha256:8a7ece82a2135561414e10da4241aefbc970d42203ea4dd62bb3a3fbb1f61549",
+          "field": "accepted_action"
+        },
+        {
+          "event_id": "9fa9db22-b826-53cc-92eb-319b50688327",
+          "evidence_sha256": "sha256:8a7ece82a2135561414e10da4241aefbc970d42203ea4dd62bb3a3fbb1f61549",
+          "field": "reason_code"
+        },
+        {
+          "path": "harness/work/10f-graph-growth-benchmark/artifacts/decision_events.parquet",
+          "sha256": "sha256:8a7ece82a2135561414e10da4241aefbc970d42203ea4dd62bb3a3fbb1f61549"
+        }
+      ],
+      "request_id": "golden-s3-pass",
+      "schema_version": 1,
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "actual": "NS_GREEN",
+          "claim_id": "invented-action",
+          "expected": "INVENTED_ACTION",
+          "field_or_path": "accepted_action",
+          "passed": false,
+          "source_type": "event-field"
+        }
+      ],
+      "failed_checks": [
+        "invented-action"
+      ],
+      "references": [],
+      "request_id": "golden-s3-abstain",
+      "schema_version": 1,
+      "status": "abstained"
+    }
+  ],
+  "schema_version": 1
+}

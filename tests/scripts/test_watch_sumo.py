@@ -25,11 +25,12 @@ def test_watch_scenario_is_long_readable_paced_and_detached(monkeypatch) -> None
         lanes = edge.findall("lane")
         vehicle_lanes = [lane for lane in lanes if "passenger" in (lane.get("allow") or "")]
         sidewalks = [lane for lane in lanes if lane.get("allow") == "pedestrian"]
-        assert len(vehicle_lanes) == (2 if edge.get("id", "").endswith("_in") else 1)
+        assert len(vehicle_lanes) == 2
         assert len(sidewalks) == 1
 
     connections = ET.parse(WATCH / "watch.con.xml").getroot().findall("connection")
     assert len(connections) == 8
+    assert all(connection.get("fromLane") == connection.get("toLane") for connection in connections)
     assert not any(connection.get("from", "").replace("_in", "") == connection.get("to", "").replace("_out", "") for connection in connections)
 
     tls = ET.parse(WATCH / "watch.tls.xml").getroot().find("tlLogic")
@@ -82,6 +83,8 @@ def test_terminal_page_uses_tripinfo_and_gated_evidence(tmp_path: Path) -> None:
         config=WATCH / "watch.sumocfg", route_file=WATCH / "watch.rou.xml",
         tripinfo=tripinfo,
     )
+    assert "=== Watch run page ===" in page
+    assert "This is the SUMO window." in page
     assert "Controller: fixed-time watch scene" in page
     assert "Seed: 53" in page
     assert "Simulation time: 0 to 120 seconds" in page
@@ -124,3 +127,20 @@ def test_tripinfo_arrival_zero_is_completed(tmp_path: Path) -> None:
     summary = watch_sumo.tripinfo_summary(tripinfo)
     assert summary["completed"] == 1
     assert summary["mean_waiting"] == 1.0
+
+
+def test_graph_growth_scene_is_optional_read_only_diagnosis(monkeypatch) -> None:
+    graph_config = ROOT / "scenarios/graph-growth/graph-growth.sumocfg"
+    assert watch_sumo.SCENES["graph-growth"] == graph_config
+    calls = []
+    monkeypatch.setattr(watch_sumo, "require_gui", lambda: "sumo-gui.exe")
+    monkeypatch.setattr(watch_sumo.subprocess, "call", lambda command, cwd: calls.append((command, cwd)) or 0)
+    assert watch_sumo.watch_graph_growth() == 0
+    command, cwd = calls[0]
+    assert command[:3] == ["sumo-gui.exe", "-c", str(graph_config)]
+    assert cwd == graph_config.parent
+    assert command[command.index("--start") + 1] == "true"
+    assert command[command.index("--delay") + 1] == "1000"
+    assert "--quit-on-end" in command
+    source = (ROOT / "scripts/watch_sumo.py").read_text(encoding="utf-8")
+    assert "setRedYellowGreenState" not in source

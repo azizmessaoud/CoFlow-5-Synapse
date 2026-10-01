@@ -1,0 +1,95 @@
+{
+  "id": "10e-graph-growth-spec",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:53d4ae78d4cba8b76f2f8162d0619da394c274bf867dd216e87f9205635c1a41",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/acceptance/test_graph_growth_spec.py -q",
+      "exitCode": 0,
+      "output": "5 passed in 0.37s"
+    }
+  ],
+  "artifactsPresent": [
+    ".scratch/coflow5-graph-growth/spec.md",
+    "harness/work/10e-graph-growth-spec/report.md"
+  ],
+  "decidedBy": "tests-and-files",
+  "artifactHashes": {
+    ".scratch/coflow5-graph-growth/spec.md": "sha256:61e85b55805f32834e2ccdb1cc952d2e5a01bfc62230d563c11a01ea857a9819",
+    "harness/work/10e-graph-growth-spec/report.md": "sha256:f3151f5a45b60e5cf9677322a3a089485d8952d8a02f1ac5ef82b1b7c1627976",
+    "harness/work/10e-graph-growth-spec/deltas.md": "sha256:7ac29bb3bf21e8c276729f9710b9c3e1315b7c4ef536a022195eaa0755d188dc",
+    "tests/acceptance/test_graph_growth_spec.py": "sha256:b4104824967844dffd3429929d9e177c67ba20ad1a415677484d80711db0cdd3"
+  },
+  "auditChecks": {
+    "pass": true,
+    "currentSignalsMeasured": 1,
+    "currentDemandCells": 1,
+    "currentEvaluationSeeds": 1,
+    "currentMultiJunctionScenario": false,
+    "superiorityEstablished": false
+  },
+  "graphChecks": {
+    "pass": true,
+    "benchmarkSignals": 4,
+    "graphViews": ["movement", "junction"],
+    "freshnessFallback": "local cooperative Max-Pressure",
+    "secondWriter": false,
+    "requiredGraphLibrary": null
+  },
+  "growthChecks": {
+    "pass": true,
+    "demandScales": [0.75, 1.0, 1.25, 1.5],
+    "pairedSeeds": 5,
+    "controllerVariants": 4,
+    "cleanPairedRuns": 80,
+    "winnerRequired": false,
+    "unfinishedTripsRetained": true
+  },
+  "agentChecks": {
+    "pass": true,
+    "topLevelAgents": ["A1", "A2", "A3", "A4", "A5"],
+    "a1OnlySignalWriter": true,
+    "synapseReadOnly": true,
+    "gnnOrDqnRequired": false
+  },
+  "interfaceChecks": {
+    "pass": true,
+    "sumoGuiUse": "optional diagnosis",
+    "graphFrameReadOnly": true,
+    "reactOrder": "Row 13 after Synapse and API",
+    "uiTraCIWrite": false
+  },
+  "roadwayVrChecks": {
+    "pass": true,
+    "runtimeDependency": false,
+    "reusedConcepts": ["TraCI lifecycle", "vehicle/lane telemetry", "getNextTLS", "GUI schema", "GUI delay"],
+    "rejectedConcepts": ["hard-coded IDs", "direct phase setters", "0.1-second phase shortening", "online Q-learning/DQL", "queue-only reward"]
+  },
+  "nextRowChecks": {
+    "pass": true,
+    "nextExecutableRow": "10f-graph-growth-benchmark",
+    "rows05And10bImmutable": true,
+    "testsSpecified": 5,
+    "artifactsSpecified": 10,
+    "stopConditionsSpecified": true
+  },
+  "joinChecks": {
+    "pass": true,
+    "plannedKeys": ["run_id", "scenario_hash", "graph_hash", "event_id", "message_id"]
+  },
+  "forbiddenImportChecks": {
+    "pass": true,
+    "roadwayVrDependency": false,
+    "newProductDependency": false,
+    "nonA1Actuation": false
+  },
+  "honestyChecks": {
+    "pass": true,
+    "growthRobustnessClaim": false,
+    "winnerClaim": null,
+    "deploymentClaim": false,
+    "liveTunisClaim": false,
+    "accidentPreventionClaim": false
+  }
+}

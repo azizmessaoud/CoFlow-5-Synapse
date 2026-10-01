@@ -1,0 +1,49 @@
+{
+  "id": "11-api",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:3430b87e4a3b4385340aedc956e141b2a3ef25394ec11713f352b213a3d00ebd",
+  "decidedBy": "tests-and-files",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/api tests/architecture/test_forbidden_imports.py -q",
+      "exitCode": 0,
+      "output": "19 passed, 1 warning in 1.98s"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/validated_catalog.json",
+    "artifacts/api_surface.json",
+    "artifacts/sample_page.json",
+    "artifacts/non_actuation_audit.json",
+    "report.md",
+    "deltas.md"
+  ],
+  "artifactHashes": {
+    "artifacts/validated_catalog.json": "sha256:fd8ad182f2b0943e1d631c5593f380ba7ad16d1cccf45c8e0d502f97993a80b3",
+    "artifacts/api_surface.json": "sha256:28456d8ed69301cdca7841260e2f85311d9388a86bbee2a6a5f365736acabccb",
+    "artifacts/sample_page.json": "sha256:df0808a4692ab72e216e0f00971c0f54f3dd5c453ebaafa27b00cd1027b338c4",
+    "artifacts/non_actuation_audit.json": "sha256:bc7a0cafde2978d384d786196186f114202cd473f81fe48fba16e59fe64d3e68",
+    "report.md": "sha256:eef2a0b0b92d3151a71dd68224d047e8b395701530acca4a36c90cd52c1994d1",
+    "deltas.md": "sha256:adf8db81180e4a3d9527b6f8b43bd2b3976efaddeded95b9c656b5e80d84e8b4"
+  },
+  "testHashes": {
+    "tests/api/test_readonly_api.py": "sha256:7d9eb5b58db5eb234e749b432cbcd1d3cc05c8551dd5aa3d3c7b2f69cbc93489",
+    "tests/architecture/test_forbidden_imports.py": "sha256:8c9354839ffddc66643b1ea7cd7392cc0a141700e0727f134b23aac170b9bed8"
+  },
+  "sourceHashes": {
+    "src/coflow5/api/__init__.py": "sha256:c053a68d307fa9766aa0998a5f35d4e6882046c71d49187f8198e53a36250737",
+    "src/coflow5/api/app.py": "sha256:4d1892a17cb2f233ded7b2233b60e113e6f2d86847455da8172d3fc2a7c45165",
+    "src/coflow5/api/store.py": "sha256:53ba81fac8cad1c1d01a2689f87e4cdcaba32f6be3de4773ca49d88e6d672edb",
+    "src/coflow5/api/validate.py": "sha256:3069f4dac2857fbba4c58a6bce24142ffbcafd0865ba5a8b3113f51453226d46",
+    "src/coflow5/api/records.py": "sha256:682ad79d46b4721710ef20e2fcc1c4762230e595917888aa117c63b4019b2d3e",
+    "src/coflow5/api/errors.py": "sha256:356f9968a68b83e7385c489f2f453f32b401626994b86ad120853ed586d7ca8e",
+    "scripts/generate_api_artifacts.py": "sha256:bac63bb4ecd29d969902c08270fb23cb26dbbb814fcdb3d765497fbe1d5bb1b3"
+  },
+  "lockedInputHashes": {
+    "harness/work/10f-graph-growth-benchmark/gate.json": "sha256:24c07c64dd72b93798d84b3851e5bddf26d5f33097048dab2efccc219e1e52c4",
+    "harness/work/10f-graph-growth-benchmark/contract.json": "sha256:a4eaa6f3ca3f4bcedd0f10a2b8201e73275988dab679a18055cba32072219183",
+    "harness/work/12-synapse-agents/gate.json": "sha256:8f799dc107720c49dc1c40d7ed128583667d265cb9f6cc1cb09f0167a09151ef",
+    "harness/work/12-synapse-agents/contract.json": "sha256:e0cafee2bc7d87910b1a7161dd8a321c3cf642885acd6176eed1dd8bb1a436af"
+  }
+}
