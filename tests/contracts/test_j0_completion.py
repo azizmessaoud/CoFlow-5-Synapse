@@ -51,3 +51,29 @@ def test_j0_completion_retains_missing_cells_as_blocking_findings() -> None:
         "ABLATION_PAIR_MISSING",
         "RECOVERY_TRANSITION_MISSING",
     } <= codes
+
+
+def test_j0_completion_rejects_missing_scenario_hash() -> None:
+    rows = _runs((37, 41, 43, 47, 53))
+    rows[0].pop("scenario_hash")
+
+    audit = audit_j0_completion(rows, _ablations(), _recovery())
+
+    assert not audit.pass_gate
+    assert "SCENARIO_NOT_MATCHED" in {finding.code for finding in audit.findings}
+
+
+def test_j0_completion_normalizes_native_recovery_mode_names() -> None:
+    recovery = [
+        {
+            "previous_mode": "COOPERATIVE_MAX_PRESSURE",
+            "next_mode": "ACTUATED",
+        },
+        {"previous_mode": "ACTUATED", "next_mode": "FIXED_TIME"},
+    ]
+
+    audit = audit_j0_completion(
+        _runs((37, 41, 43, 47, 53)), _ablations(), recovery
+    )
+
+    assert audit.pass_gate

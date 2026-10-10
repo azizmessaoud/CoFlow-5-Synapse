@@ -36,8 +36,13 @@ def audit_j0_completion(
     """
     run_rows = tuple(runs)
     findings: list[J0CompletionFinding] = []
-    scenario_hashes = {str(row.get("scenario_hash")) for row in run_rows}
-    if len(scenario_hashes) != 1 or None in scenario_hashes:
+    scenario_hash_values = [row.get("scenario_hash") for row in run_rows]
+    scenario_hashes = {str(value) for value in scenario_hash_values}
+    if (
+        not scenario_hash_values
+        or any(not isinstance(value, str) or not value for value in scenario_hash_values)
+        or len(scenario_hashes) != 1
+    ):
         findings.append(J0CompletionFinding(
             "SCENARIO_NOT_MATCHED",
             "all controller rows must share exactly one scenario_hash",
@@ -86,7 +91,11 @@ def audit_j0_completion(
             ))
 
     def _mode(value: object) -> str:
-        return str(value).strip().lower().replace("_", "-")
+        normalized = str(value).strip().lower().replace("_", "-")
+        return {
+            "cooperative-max-pressure": "cooperative",
+            "max-pressure": "cooperative",
+        }.get(normalized, normalized)
 
     recovery_modes = {
         (_mode(row.get("previous_mode")), _mode(row.get("next_mode")))

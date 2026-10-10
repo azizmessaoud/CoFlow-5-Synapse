@@ -9,7 +9,8 @@ import sys
 import uuid
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any, Iterable
+from collections.abc import Iterable
+from typing import Any
 
 from coflow5.control.baselines import ActuatedController, FixedTimeController
 from coflow5.evidence.baseline_artifacts import _planned_trip_ids, _scenario_hash
@@ -18,7 +19,6 @@ from coflow5.sumo_adapter.max_pressure_trip_runner import (
     run_native_max_pressure_trip_scenario,
 )
 
-SUMO_RELEASE = "1.27.1"
 DEFAULT_SEEDS = (37, 41, 43, 47, 53)
 HORIZON_SECONDS = 120.0
 
@@ -39,8 +39,6 @@ def _run_row(result: Any, *, controller: str | None = None) -> dict[str, Any]:
         }
     row = asdict(result)
     row.pop("trips", None)
-    row.pop("safety_events", None)
-    row.pop("executed_commands", None)
     row["status"] = str(row.get("status", "completed"))
     return row
 
@@ -109,7 +107,7 @@ def capture_j0_matched_runs(
 
     capture = {
         "schema_version": 1,
-        "status": "completed",
+        "status": "captured_pending_audit",
         "scenario_hash": scenario_hash,
         "seeds": list(selected_seeds),
         "controllers": ["fixed-time", "actuated", "cooperative-max-pressure"],
