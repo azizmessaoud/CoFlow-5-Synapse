@@ -7,9 +7,9 @@ import platform
 import shutil
 import sys
 import uuid
+from collections.abc import Iterable
 from dataclasses import asdict
 from pathlib import Path
-from collections.abc import Iterable
 from typing import Any
 
 from coflow5.control.baselines import ActuatedController, FixedTimeController
