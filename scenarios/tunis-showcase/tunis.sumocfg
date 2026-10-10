@@ -2,6 +2,8 @@
   <input>
     <net-file value="tunis.net.xml"/>
     <route-files value="tunis.rou.xml"/>
+    <additional-files value="tunis-junctions.add.xml"/>
+    <gui-settings-file value="tunis.settings.xml"/>
   </input>
   <time><begin value="0"/><end value="600"/><step-length value="1"/></time>
   <processing><time-to-teleport value="-1"/></processing>
