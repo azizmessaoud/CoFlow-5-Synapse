@@ -237,6 +237,25 @@ def _route_file(config: Path) -> Path:
     return config.parent / route_value.split(",")[0].strip()
 
 
+# 0xC0E90002. Windows reports this as signed -1058471934 or unsigned 3236495362.
+_GUI_BLOCKED = 0xC0E90002
+
+
+def gui_failure_line(exit_code: int, binary: str) -> str:
+    if (exit_code & 0xFFFFFFFF) == _GUI_BLOCKED:
+        folder = str(Path(binary).parent)
+        return (
+            "sumo-gui did not open. Windows Smart App Control blocked arrow.dll in "
+            f"{folder} while starting {binary} (exit {exit_code & 0xFFFFFFFF}). "
+            "The DLL is not signed, so no window appears. "
+            "The page below is not a picture of a window."
+        )
+    return (
+        f"sumo-gui exited with code {exit_code} and did not leave a trip file: {binary}. "
+        "No window stayed open. The page below is not this attempt."
+    )
+
+
 def watch_paced(scene: str, *, intro: str, controller: str, scene_note: str) -> int:
     config = SCENES[scene]
     route_file = _route_file(config)
@@ -245,7 +264,10 @@ def watch_paced(scene: str, *, intro: str, controller: str, scene_note: str) -> 
     print(intro)
     with tempfile.TemporaryDirectory(prefix=f"coflow5-{scene}-") as directory:
         tripinfo = Path(directory) / "tripinfo.xml"
-        exit_code = subprocess.call(gui_command(scene, tripinfo), cwd=config.parent)
+        command = gui_command(scene, tripinfo)
+        exit_code = subprocess.call(command, cwd=config.parent)
+        if exit_code != 0:
+            print(gui_failure_line(exit_code, command[0]))
         page = build_watch_report(
             config=config, route_file=route_file, tripinfo=tripinfo,
             controller=controller, scene_note=scene_note,

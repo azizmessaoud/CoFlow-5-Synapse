@@ -129,6 +129,16 @@ def test_tripinfo_arrival_zero_is_completed(tmp_path: Path) -> None:
     assert summary["mean_waiting"] == 1.0
 
 
+def test_blocked_gui_is_named_before_the_watch_page(monkeypatch, capsys) -> None:
+    monkeypatch.setattr(watch_sumo, "require_gui", lambda: r"C:\Program Files (x86)\Eclipse\Sumo\bin\sumo-gui.exe")
+    monkeypatch.setattr(watch_sumo.subprocess, "call", lambda command, cwd: watch_sumo._GUI_BLOCKED)
+    assert watch_sumo.watch_demo() == watch_sumo._GUI_BLOCKED
+    output = capsys.readouterr().out
+    assert "sumo-gui did not open" in output
+    assert "Smart App Control blocked arrow.dll" in output
+    assert output.index("sumo-gui did not open") < output.index("=== Watch run page ===")
+
+
 def test_graph_growth_scene_is_optional_read_only_diagnosis(monkeypatch) -> None:
     graph_config = ROOT / "scenarios/graph-growth/graph-growth.sumocfg"
     assert watch_sumo.SCENES["graph-growth"] == graph_config
