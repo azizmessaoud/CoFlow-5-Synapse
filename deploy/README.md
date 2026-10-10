@@ -16,9 +16,11 @@ docker compose up --build
 
 Open `http://localhost:8080`. Health: `http://localhost:8000/health`.
 
-For an offline evidence-only walkthrough without Docker:
+For an offline evidence-only walkthrough without Docker, run from the
+repository root:
 
 ```powershell
+cd C:\Users\dell\Downloads\sumo
 py -3.11 scripts\offline_walkthrough.py
 ```
 

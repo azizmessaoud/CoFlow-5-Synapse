@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import os
 from pathlib import Path
 from uuid import uuid4
@@ -113,7 +115,7 @@ def create_app(
                 raise HTTPException(status_code=404, detail="unknown run_id") from exc
         return {"runs": runs}
 
-    idempotent_results: dict[tuple[str, str], dict[str, object]] = {}
+    idempotent_results: dict[tuple[str, str], tuple[str, dict[str, object]]] = {}
     proposals: dict[str, dict[str, object]] = {}
 
     def product_request(
@@ -133,9 +135,18 @@ def create_app(
         if policy_id is not None and not isinstance(policy_id, str):
             raise HTTPException(status_code=422, detail="policy_id must be a string")
         key = (operation, idempotency_key)
+        request_hash = hashlib.sha256(
+            json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()
         cached = idempotent_results.get(key)
         if cached is not None:
-            return cached
+            cached_hash, cached_response = cached
+            if cached_hash != request_hash:
+                raise HTTPException(
+                    status_code=409,
+                    detail="Idempotency-Key was already used for a different request",
+                )
+            return cached_response
         try:
             if operation == "explanations":
                 result = synapse_service.explain(
@@ -153,7 +164,7 @@ def create_app(
             "citations": list(result.citations),
             "provenance": result.provenance.as_dict(),
         }
-        idempotent_results[key] = response
+        idempotent_results[key] = (request_hash, response)
         return response
 
     @app.post("/explanations")

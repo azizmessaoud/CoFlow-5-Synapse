@@ -51,6 +51,24 @@ def test_idempotency_replays_the_same_product_response() -> None:
     assert first.json() == second.json()
 
 
+def test_idempotency_rejects_key_reuse_for_a_different_request() -> None:
+    client = _client()
+    headers = {"Idempotency-Key": "same"}
+    first = client.post(
+        "/explanations",
+        json={"question": "Why?", "event_id": "event-1"},
+        headers=headers,
+    )
+    second = client.post(
+        "/explanations",
+        json={"question": "Why now?", "event_id": "event-1"},
+        headers=headers,
+    )
+
+    assert first.status_code == 200
+    assert second.status_code == 409
+
+
 def test_question_length_is_an_explicit_client_error() -> None:
     response = _client().post(
         "/explanations",
