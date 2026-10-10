@@ -220,6 +220,10 @@ Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains trans
 6. THE SYSTEM SHALL evaluate retrieval recall at k, citation validity, event consistency, reason-code coverage, abstention, latency, token use, estimated cost, and fallback rate.
 7. THE SYSTEM SHALL treat LLM-as-judge as a secondary signal, not the sole reference.
 8. THE SYSTEM SHALL provide a deterministic template fallback that works without a hosted LLM.
+9. EVERY typed Synapse response SHALL include `run_id`, `scenario_hash`, `event_id`, `message_id`, `bundle_digest`, `corpus_hash`, and `query_hash`; non-applicable fields SHALL be explicit nulls.
+10. THE fallback state SHALL be exactly one of `verified`, `template`, or `abstain`; a missing event SHALL abstain, while missing policy support MAY return a template marked `policy_support_missing`.
+11. THE SYSTEM SHALL pin `corpus_hash` on every explanation and MAY cache only by `(bundle_digest, endpoint, query_hash)`.
+12. `abstention_rate` and `fallback_rate` SHALL be first-class metrics partitioned by endpoint, fallback state, corpus version, and time window.
 
 ## Requirement 13: API and operator interface
 
@@ -234,6 +238,11 @@ Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains trans
 5. THE operator interface SHALL show active controller and recovery state, agent messages, decisions and reason codes, comparisons, citations, and known limitations.
 6. THE hosted portfolio SHALL use precomputed SUMO evidence and MAY provide live bounded Synapse queries.
 7. THE SYSTEM SHALL NOT promise continuous cloud training.
+8. `HOSTED` SHALL have zero mutation and zero signal surface; `LOCAL_RUNNER` MAY mutate runs and proposals but SHALL also have zero signal surface.
+9. `POST /explanations` and `POST /audits` SHALL require `Idempotency-Key`.
+10. THE SYSTEM SHALL enforce named bounds for runs per comparison, events per page, and question length.
+11. Unsupported or abstaining domain outcomes SHALL return HTTP 200 with a typed payload; HTTP 4xx SHALL be reserved for malformed or over-limit requests.
+12. What-if lineage SHALL be `proposal -> human approval -> new run_id`; proposals SHALL be referenced by, never merged into, measured evidence.
 
 ## Requirement 14: Observability and security
 
@@ -246,6 +255,8 @@ Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains trans
 3. THE SYSTEM SHALL record corpus, parser, embedding, prompt, provider, model, and evaluator versions.
 4. THE SYSTEM SHALL NOT write credentials, secrets, or unnecessary personal information to logs, prompts, traces, or public artifacts.
 5. WHEN an approved prompt, model, embedding, or corpus changes, THE SYSTEM SHALL execute the golden regression set and report quality, latency, and cost deltas.
+6. THE SYSTEM SHALL preserve the seven response provenance fields through API, audit, explanation, and UI boundaries.
+7. THE hosted product SHALL remain usable from frozen artifacts without a hosted LLM through template fallback and typed abstention.
 
 ## Requirement 15: Delivery boundaries
 
@@ -259,4 +270,3 @@ Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains trans
 4. THE team SHALL freeze the cooperative Max-Pressure evidence slice before adding optional RL.
 5. IF schedule or compute capacity is insufficient, THEN THE team SHALL cut optional DQN/MAPPO, local LLM serving, learned A5, neural forecasting, Redis, and civic planning analyses before safety, authority, evaluation, or failure recovery.
 6. THE required prototype SHALL remain verifiable without the hosted LLM.
-

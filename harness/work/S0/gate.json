@@ -1,0 +1,17 @@
+{
+  "id": "S0",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:f2d503e8a357590146ab3bb71493ee05b33bbeaccd977c8a5bf88799d2f68afd",
+  "testsRun": [
+    {
+      "command": "PowerShell contract assertions over S0 boundary files",
+      "exitCode": 0,
+      "output": "all boundary assertions passed"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/boundary-audit.json"
+  ],
+  "decidedBy": "tests-and-files"
+}

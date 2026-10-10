@@ -365,6 +365,20 @@ stateDiagram-v2
 
 Plain typed state and functions define the domain flow. LangGraph is added for persisted human approval/resume and bounded retry after the flow works. The hosted LLM is behind a provider-neutral adapter. A deterministic template implementation is mandatory.
 
+Every typed product response carries `run_id`, `scenario_hash`, `event_id`,
+`message_id`, `bundle_digest`, `corpus_hash`, and `query_hash`, with explicit
+nulls for non-applicable identifiers. Responses use the fallback states
+`verified`, `template`, or `abstain`. Missing events abstain; missing policy
+support may use a template with a `policy_support_missing` marker. Explanation
+caches are keyed by `(bundle_digest, endpoint, query_hash)` and every
+explanation pins `corpus_hash`.
+
+`HOSTED` is an immutable read-only profile. `LOCAL_RUNNER` may mutate runs and
+proposals, but neither profile has a signal surface. What-if lineage is
+`proposal -> human approval -> new run_id`; the proposal is referenced by the
+new run and never merged into measured evidence. Product writes remain beside
+the evidence bundle.
+
 ### API
 
 Stable operations:
@@ -378,6 +392,11 @@ Stable operations:
 - submit and approve a what-if request.
 
 Requests and responses use Pydantic schemas. Long work is queued and cancellable. Progress uses server-sent events unless bidirectional communication becomes necessary.
+
+`POST /explanations` and `POST /audits` require `Idempotency-Key`. API bounds
+cover runs per comparison, events per page, and question length. Abstention is
+an HTTP 200 typed domain result; 4xx responses are reserved for malformed or
+over-limit requests.
 
 ### React operator view
 
@@ -398,7 +417,10 @@ The hosted interface reads precomputed SUMO evidence. UI work does not block the
 
 ### Controlled benchmark
 
-The main scientific environment is a controlled 4×4 grid. Development starts with a single junction and corridor. Demand regimes include balanced, asymmetric, surge, and incident conditions.
+The required scientific environment is the controlled single-junction J0
+benchmark and corridor. Development starts with J0; a 4×4 grid is planned
+scale-up work, not a completion or matched-inference requirement. Demand
+regimes include balanced, asymmetric, surge, and incident conditions.
 
 Required road users:
 
@@ -543,4 +565,3 @@ The required demonstration proves:
 - fail Max-Pressure: actuated, then fixed-time recovery is visible;
 - remove retrieval or fail the provider: template or abstention is returned;
 - change a prompt, model, embedding, or corpus: the golden regression report changes visibly.
-
