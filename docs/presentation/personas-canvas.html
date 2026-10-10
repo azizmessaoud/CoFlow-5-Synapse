@@ -43,6 +43,14 @@
       padding: 8px 14px;
       border: 2px solid #1a5aa8;
     }
+    .tag {
+      background: #1a5aa8;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 3px 7px;
+      vertical-align: middle;
+    }
     .box {
       border: 2px solid #333;
       padding: 8px 10px;
@@ -125,7 +133,7 @@
   <section class="brief" style="page-break-after: always;">
     <h1>Best way to build (please verify this plan)</h1>
     <ol>
-      <li><strong>Spine:</strong> pin SUMO, 4×4 grid, fixed-time + actuated baselines. No “AI” required yet.</li>
+      <li><strong>Spine:</strong> pin SUMO, the controlled J0 benchmark, and fixed-time + actuated baselines. No “AI” required yet.</li>
       <li><strong>Tier 0 (MVP):</strong> A1 vs those baselines <em>and</em> Max-Pressure. Safety mask. Honest stats (no best-episode tables). This alone can satisfy the brief.</li>
       <li><strong>Tier 1:</strong> bus + A2, A3, A5. Turn agents off (ablation) to show each one earns its keep.</li>
       <li><strong>Tier 2:</strong> A4 + incident flags + communication-loss tests. Bigger map only after the grid is solid.</li>
@@ -340,7 +348,7 @@
   </article>
 
   <article class="sheet">
-    <div class="nom">Name: Yuki</div>
+    <div class="nom">Name: Yuki <span class="tag">Infrastructure persona</span></div>
     <div class="avatar"><img src="personas/p6-yuki.png" alt="Illustrated portrait of Yuki" /></div>
     <div class="box frust">
       <h2>Frustrations and fears:</h2>
@@ -381,7 +389,7 @@
   </article>
 
   <article class="sheet">
-    <div class="nom">Name: Maria</div>
+    <div class="nom">Name: Maria <span class="tag">Infrastructure persona</span></div>
     <div class="avatar"><img src="personas/p7-maria.png" alt="Illustrated portrait of Maria" /></div>
     <div class="box frust">
       <h2>Frustrations and fears:</h2>

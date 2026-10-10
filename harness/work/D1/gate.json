@@ -1,0 +1,27 @@
+{
+  "id": "D1",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:6df79ab6aee38677bb1763cdce19f20a6ff34e1ebdf05d893b727a5395c9f63d",
+  "testsRun": [
+    {
+      "command": "py -3.11 docs/presentation/validate-short-decks.py",
+      "exitCode": 0,
+      "output": "PASS short presentation validation"
+    },
+    {
+      "command": "py -3.11 docs/presentation/validate-presentation.py",
+      "exitCode": 0,
+      "output": "PASS presentation validation"
+    },
+    {
+      "command": "PowerShell stale-claim assertions",
+      "exitCode": 0,
+      "output": "canonical vocabulary and claim flags verified"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/delivery-boundary-audit.json"
+  ],
+  "decidedBy": "tests-and-files"
+}

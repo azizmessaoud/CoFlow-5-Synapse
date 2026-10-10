@@ -166,7 +166,7 @@ function honestyBar(slide, text) {
   addHeading(s, 'Design Thinking — five stages, in order', 0.5, 0.66, 9);
 
   const phases = [
-    { num: '1', label: 'EMPATHIZE', sub: '8 personas\nJourneys + evidence', color: C.amber, status: 'DONE' },
+    { num: '1', label: 'EMPATHIZE', sub: '6 validation personas\n+ 2 infrastructure', color: C.amber, status: 'DONE' },
     { num: '2', label: 'DEFINE', sub: 'Human-centred\nproblem + HMW', color: C.blue, status: 'DONE' },
     { num: '3', label: 'IDEATE', sub: 'Many ideas,\none architecture', color: C.purple, status: 'DONE' },
     { num: '4', label: 'PROTOTYPE', sub: 'SUMO + A1–A5\n+ evidence bundle', color: C.green, status: 'PLANNED' },
@@ -233,7 +233,7 @@ function honestyBar(slide, text) {
 }
 
 // ════════════════════════════════════════
-// SLIDE 3 — EIGHT PERSONAS
+// SLIDE 3 — PERSONA ROSTER
 // ════════════════════════════════════════
 {
   const s = pres.addSlide();
@@ -241,7 +241,7 @@ function honestyBar(slide, text) {
 
   phaseTag(s, 'PHASE 1 · EMPATHIZE', C.amber);
   sectionLine(s);
-  addHeading(s, 'Eight User Personas — not only drivers', 0.5, 0.64, 9);
+  addHeading(s, 'Six validation personas + two infrastructure personas', 0.5, 0.64, 9);
 
   const personas = [
     { id: 'P1', name: 'Amara, 74', role: 'Pedestrian (cane)', pain: 'Standard clearance assumes a faster walker', need: 'Enough time to finish crossing', color: C.purple, colorLt: C.purpleLt },
@@ -292,9 +292,9 @@ function honestyBar(slide, text) {
     });
   });
 
-  honestyBar(s, 'These eight names are the course roster. Do not replace them with Youssef / Amira / Mehdi / Sarra / Habiba, and do not stack extra IMATM names.');
+  honestyBar(s, 'These six validation names plus Yuki and Maria are the canonical roster. Do not replace them with Youssef / Amira / Mehdi / Sarra / Habiba, and do not stack extra IMATM names.');
 
-  s.addNotes('Eight research-informed personas from the Empathize pack. Not interviews.');
+  s.addNotes('Six validation and two infrastructure personas from the Empathize pack. All are research-informed, not interviews.');
 }
 
 // ════════════════════════════════════════
@@ -825,9 +825,9 @@ function honestyBar(slide, text) {
   addHeading(s, 'Known limits — we will keep them visible', 0.5, 0.64, 9);
 
   const limits = [
-    { title: 'Prototype is not built yet', desc: 'This deck is Stages 1–3 plus the planned SUMO architecture. There is no gated smoke test and no experiment table.' },
+    { title: 'Prototype and Test remain bounded', desc: 'The controlled J0 slice has gated evidence; multi-seed inference, stakeholder validation, Synapse, API/UI, and Tunis remain incomplete.' },
     { title: 'Simulation is not a city', desc: 'SUMO is a stand-in street. Sensor noise, V2I ambulance detection, and weather are out of the first slice.' },
-    { title: 'Tunis demand will be labelled synthetic', desc: 'OSM + TRANSTU GTFS is a showcase after the 4×4 science grid is frozen. It cannot validate deployment.' },
+    { title: 'Tunis demand will be labelled synthetic', desc: 'OSM + TRANSTU GTFS is a showcase after the J0 evidence baseline is frozen. It cannot validate deployment.' },
     { title: 'RL is a risk, not a requirement', desc: 'Early reward-shaping failures are expected if DQN is tried later. The course prototype must still work without it.' },
     { title: 'Scale is unproven', desc: 'We start with a small controlled grid. Synapse and UI read precomputed evidence; they are not a 50-junction controller.' },
   ];
@@ -888,7 +888,7 @@ function honestyBar(slide, text) {
       title: 'Designed (Stages 1–3)',
       color: C.blueLt,
       points: [
-        'Eight personas, not the average car',
+        'Six validation personas + two infrastructure personas, not the average car',
         'Five agents; only A1 writes lights',
         'Max-Pressure required; DQN optional',
         'Synapse explains; never TraCI',

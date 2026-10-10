@@ -1,0 +1,25 @@
+{
+  "id": "D1",
+  "status": "pass",
+  "canonicalPersonaWording": "six validation personas plus Yuki and Maria as infrastructure personas",
+  "canonicalBenchmark": "J0",
+  "separateShowcase": "Tunis OSM/TRANSTU with synthetic or calibrated road demand",
+  "claimFlags": [
+    "simulation is not deployment evidence",
+    "HBEFA outputs are emission proxies",
+    "simulated emergency delay is not lives saved",
+    "personas are research-informed, not interview-validated"
+  ],
+  "validatedSources": [
+    "docs/presentation/presentation-claim-ledger.json",
+    "docs/presentation/build-dt-pptx.js",
+    "docs/presentation/build-professor-pptx.js",
+    "docs/presentation/build-persona-cards.js",
+    "docs/presentation/build-talk-pptx.js",
+    "docs/presentation/build-talk-v2-pptx.js",
+    "docs/presentation/personas-canvas.html",
+    "docs/presentation/system-design-for-professor.md",
+    "final.md",
+    "CoFlow-5_Final_Project_Book.md"
+  ]
+}

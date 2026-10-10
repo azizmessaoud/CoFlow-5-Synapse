@@ -21,7 +21,7 @@
     {
       "id": "C02",
       "classification": "method",
-      "safe_wording": "The eight personas are research-informed design artifacts and were not validated through stakeholder interviews.",
+      "safe_wording": "The six validation personas are research-informed design artifacts; Yuki and Maria are infrastructure personas. None were validated through stakeholder interviews.",
       "source": ".kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md"
     },
     {
