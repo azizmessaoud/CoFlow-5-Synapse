@@ -10,7 +10,9 @@
     "recovery evidence includes cooperative to actuated and actuated to fixed-time transitions",
     "safety, efficiency, emergency, multimodal, and emission-proxy KPIs remain traceable",
     "null and negative results remain visible",
-    "every result retains run_id, scenario_hash, and event/message references"
+    "every result retains run_id, scenario_hash, and event/message references",
+    "specialist, controller, communication, forecast, and Synapse failures are identified",
+    "compatible repeated runs have equal action hashes within declared tolerance"
   ],
   "tests": [
     "python -m pytest tests/contracts/test_j0_completion.py -q",
@@ -25,6 +27,7 @@
     "completion validator passes",
     "five matched seeds are observed, not merely planned",
     "all ablation pairs and recovery transitions resolve to evidence",
+    "all required failure kinds and deterministic repeat checks resolve to evidence",
     "incomplete artifacts cannot enter the completion bundle"
   ],
   "imports_forbidden": [

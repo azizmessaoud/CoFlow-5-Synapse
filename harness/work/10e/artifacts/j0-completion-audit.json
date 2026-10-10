@@ -6,7 +6,9 @@
   "requiredMatchedSeedCount": 5,
   "currentMissingEvidence": [
     "A2/A3/A4/A5 pairwise on/off native KPI comparisons",
-    "complete recovery transition rows for the completion bundle"
+    "complete recovery transition rows for the completion bundle",
+    "specialist, controller, communication, forecast, and Synapse failure rows",
+    "compatible repeated-run determinism checks"
   ],
   "validator": "coflow5.evaluation.j0_completion.audit_j0_completion",
   "claimBoundary": "No J0 completion claim is made while this audit is blocked."

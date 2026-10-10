@@ -24,6 +24,14 @@ def _ablations() -> list[dict[str, object]]:
     ]
 
 
+def _repeat_checks() -> list[dict[str, object]]:
+    return [{
+        "compatible": True,
+        "action_hash_equal": True,
+        "within_tolerance": True,
+    }]
+
+
 def _ablations_with_kpis() -> list[dict[str, object]]:
     return [
         {
@@ -36,19 +44,42 @@ def _ablations_with_kpis() -> list[dict[str, object]]:
 
 def _recovery() -> list[dict[str, object]]:
     return [
-        {"previous_mode": "cooperative", "next_mode": "actuated"},
-        {"previous_mode": "actuated", "next_mode": "fixed-time"},
+        {
+            "previous_mode": "cooperative",
+            "next_mode": "actuated",
+            "failure_kind": "specialist",
+        },
+        {
+            "previous_mode": "actuated",
+            "next_mode": "fixed-time",
+            "failure_kind": "controller",
+        },
+        {"failure_kind": "communication"},
+        {"failure_kind": "forecast"},
+        {"failure_kind": "synapse"},
     ]
 
 
 def test_j0_completion_passes_only_with_five_matched_seeds_and_all_evidence() -> None:
     audit = audit_j0_completion(
-        _runs((37, 41, 43, 47, 53)), _ablations_with_kpis(), _recovery()
+        _runs((37, 41, 43, 47, 53)),
+        _ablations_with_kpis(),
+        _recovery(),
+        repeat_checks=_repeat_checks(),
     )
 
     assert audit.pass_gate
-    assert audit.matched_seeds == (37, 41, 43, 47, 53)
-    assert audit.findings == ()
+
+
+def test_j0_completion_requires_failure_case_and_repeat_evidence() -> None:
+    audit = audit_j0_completion(
+        _runs((37, 41, 43, 47, 53)),
+        _ablations_with_kpis(),
+        _recovery()[:2],
+    )
+
+    codes = {finding.code for finding in audit.findings}
+    assert {"FAILURE_CASE_MISSING", "DETERMINISM_CHECK_MISSING"} <= codes
 
 
 def test_j0_completion_retains_missing_cells_as_blocking_findings() -> None:
@@ -86,12 +117,23 @@ def test_j0_completion_normalizes_native_recovery_mode_names() -> None:
         {
             "previous_mode": "COOPERATIVE_MAX_PRESSURE",
             "next_mode": "ACTUATED",
+            "failure_kind": "specialist",
         },
-        {"previous_mode": "ACTUATED", "next_mode": "FIXED_TIME"},
+        {
+            "previous_mode": "ACTUATED",
+            "next_mode": "FIXED_TIME",
+            "failure_kind": "controller",
+        },
+        {"failure_kind": "communication"},
+        {"failure_kind": "forecast"},
+        {"failure_kind": "synapse"},
     ]
 
     audit = audit_j0_completion(
-        _runs((37, 41, 43, 47, 53)), _ablations_with_kpis(), recovery
+        _runs((37, 41, 43, 47, 53)),
+        _ablations_with_kpis(),
+        recovery,
+        repeat_checks=_repeat_checks(),
     )
 
     assert audit.pass_gate

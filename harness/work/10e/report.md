@@ -8,3 +8,8 @@ visible rather than being imputed.
 
 The blocked audit preserves the missing evidence explicitly and makes no
 completion, deployment, air-quality, or lives-saved claim.
+
+The completion validator also requires explicit failure-kind coverage for
+specialist, controller, communication, forecast, and Synapse failures, plus a
+compatible repeated-run determinism check. The browser watcher is a visual demo
+only and is not evidence for this row.

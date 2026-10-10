@@ -9,6 +9,9 @@ REQUIRED_CONTROLLERS = frozenset(
 REQUIRED_ABLATIONS = frozenset({"A2", "A3", "A4", "A5"})
 MINIMUM_MATCHED_SEEDS = 5
 REQUIRED_RUN_PROVENANCE = frozenset({"event_ids", "message_ids"})
+REQUIRED_FAILURE_KINDS = frozenset(
+    {"specialist", "controller", "communication", "forecast", "synapse"}
+)
 
 
 @dataclass(frozen=True)
@@ -28,6 +31,8 @@ def audit_j0_completion(
     runs: Iterable[Mapping[str, object]],
     ablations: Iterable[Mapping[str, object]],
     recovery_events: Iterable[Mapping[str, object]],
+    *,
+    repeat_checks: Iterable[Mapping[str, object]] = (),
 ) -> J0CompletionAudit:
     """Validate the frozen J0 completion boundary without creating evidence.
 
@@ -134,6 +139,29 @@ def audit_j0_completion(
         findings.append(J0CompletionFinding(
             "RECOVERY_TRANSITION_MISSING",
             f"missing transitions: {missing_transitions}",
+        ))
+    failure_kinds = {
+        str(row.get("failure_kind")).strip().lower()
+        for row in recovery_events
+        if row.get("failure_kind")
+    }
+    missing_failures = sorted(REQUIRED_FAILURE_KINDS - failure_kinds)
+    if missing_failures:
+        findings.append(J0CompletionFinding(
+            "FAILURE_CASE_MISSING",
+            f"missing failure cases: {missing_failures}",
+        ))
+
+    checks = tuple(repeat_checks)
+    if not checks or any(
+        not bool(check.get("compatible"))
+        or not bool(check.get("action_hash_equal"))
+        or not bool(check.get("within_tolerance"))
+        for check in checks
+    ):
+        findings.append(J0CompletionFinding(
+            "DETERMINISM_CHECK_MISSING",
+            "compatible repeated runs must have equal action hashes within tolerance",
         ))
 
     return J0CompletionAudit(
