@@ -10,8 +10,9 @@
   },
   "junction_selection": {
     "required_count": 6,
-    "status": "pending_extraction",
+    "status": "extracted_in_wsl",
+    "artifact": "junctions.json",
     "command": "py -3.11 scripts\\find_tunis_junctions.py --pbf <path> --bbox 10.170,36.790,10.190,36.805 --output junctions.json"
   },
-  "environment_note": "pyosmium native DLL is blocked by Windows application-control policy"
+  "environment_note": "Extraction ran successfully in WSL Ubuntu with pyosmium 4.3.1"
 }

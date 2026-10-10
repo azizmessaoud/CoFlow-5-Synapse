@@ -16,6 +16,9 @@ def test_junction_selection_is_deterministic(monkeypatch, tmp_path) -> None:
                 70: {19, 20, 21},
             }
             self.node_tags = {20: {"highway": "traffic_signals"}}
+            self.node_locations = {
+                node_id: (10.18, 36.8) for node_id in self.node_to_ways
+            }
             self.way_tags = {}
             self.way_highway = {
                 way: "secondary"

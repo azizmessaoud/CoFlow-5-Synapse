@@ -41,6 +41,7 @@ class JunctionFinder(osmium.SimpleHandler if osmium else object):  # type: ignor
         self.way_highway: dict[int, str] = {}
         self.node_tags: dict[int, dict[str, str]] = {}
         self.way_tags: dict[int, dict[str, str]] = {}
+        self.node_locations: dict[int, tuple[float, float]] = {}
         self.bbox = bbox
 
     def _in_bbox(self, lon: float, lat: float) -> bool:
@@ -58,8 +59,10 @@ class JunctionFinder(osmium.SimpleHandler if osmium else object):  # type: ignor
                 self.node_to_ways[node.ref].add(way.id)
 
     def node(self, node: Any) -> None:
-        if node.location.valid() and self._in_bbox(node.lon, node.lat) and node.tags:
-            self.node_tags[node.id] = {tag.k: tag.v for tag in node.tags}
+        if node.location.valid() and self._in_bbox(node.lon, node.lat):
+            self.node_locations[node.id] = (node.lon, node.lat)
+            if node.tags:
+                self.node_tags[node.id] = {tag.k: tag.v for tag in node.tags}
 
 
 def _score(finder: JunctionFinder, node_id: int, way_ids: set[int]) -> tuple[int, list[str]]:
@@ -107,6 +110,8 @@ def find_junctions(pbf_path: Path, output_path: Path, bbox: tuple[float, ...]) -
         candidates.append(
             {
                 "node_id": node_id,
+                "lon": finder.node_locations[node_id][0],
+                "lat": finder.node_locations[node_id][1],
                 "degree": len(way_ids),
                 "score": score,
                 "reasons": reasons,

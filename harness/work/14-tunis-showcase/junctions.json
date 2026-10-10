@@ -1,0 +1,162 @@
+{
+  "aoi": {
+    "name": "Tunis centre-ville central corridor",
+    "bbox": [
+      10.17,
+      36.79,
+      10.19,
+      36.805
+    ],
+    "pbf": "/mnt/c/Users/dell/Downloads/ai agent prototype/tunisia-261009.osm.pbf",
+    "selection_rule": "degree >= 3, ranked by traffic_signals > roundabout > stop/give_way > named > degree > major_road, then node_id"
+  },
+  "junction_count": 6,
+  "junctions": [
+    {
+      "node_id": 5294059357,
+      "lon": 10.1858822,
+      "lat": 36.8003535,
+      "degree": 3,
+      "score": 75,
+      "reasons": [
+        "roundabout_way",
+        "degree=3",
+        "major_road"
+      ],
+      "tags": {},
+      "way_ids": [
+        10641416,
+        10641456,
+        26013493
+      ],
+      "way_highways": [
+        "primary",
+        "primary",
+        "primary"
+      ]
+    },
+    {
+      "node_id": 287386655,
+      "lon": 10.1785171,
+      "lat": 36.7994477,
+      "degree": 5,
+      "score": 25,
+      "reasons": [
+        "degree=5",
+        "major_road"
+      ],
+      "tags": {},
+      "way_ids": [
+        10641392,
+        26242831,
+        39169970,
+        39170210,
+        100081107
+      ],
+      "way_highways": [
+        "primary",
+        "primary",
+        "primary",
+        "secondary",
+        "primary"
+      ]
+    },
+    {
+      "node_id": 287837812,
+      "lon": 10.1879851,
+      "lat": 36.7947418,
+      "degree": 4,
+      "score": 25,
+      "reasons": [
+        "degree=4",
+        "major_road"
+      ],
+      "tags": {},
+      "way_ids": [
+        56065135,
+        704802731,
+        1409299974,
+        1501192411
+      ],
+      "way_highways": [
+        "residential",
+        "tertiary",
+        "secondary",
+        "secondary"
+      ]
+    },
+    {
+      "node_id": 287863982,
+      "lon": 10.1784826,
+      "lat": 36.800991,
+      "degree": 4,
+      "score": 25,
+      "reasons": [
+        "degree=4",
+        "major_road"
+      ],
+      "tags": {},
+      "way_ids": [
+        26280306,
+        39170210,
+        306643020,
+        545291183
+      ],
+      "way_highways": [
+        "secondary",
+        "secondary",
+        "unclassified",
+        "residential"
+      ]
+    },
+    {
+      "node_id": 387151856,
+      "lon": 10.1793339,
+      "lat": 36.8031945,
+      "degree": 4,
+      "score": 25,
+      "reasons": [
+        "degree=4",
+        "major_road"
+      ],
+      "tags": {},
+      "way_ids": [
+        26280306,
+        33803062,
+        95132613,
+        106509679
+      ],
+      "way_highways": [
+        "secondary",
+        "residential",
+        "residential",
+        "residential"
+      ]
+    },
+    {
+      "node_id": 517939913,
+      "lon": 10.179482,
+      "lat": 36.7997186,
+      "degree": 4,
+      "score": 25,
+      "reasons": [
+        "degree=4",
+        "major_road"
+      ],
+      "tags": {},
+      "way_ids": [
+        100080972,
+        100081107,
+        545291184,
+        577010717
+      ],
+      "way_highways": [
+        "residential",
+        "primary",
+        "residential",
+        "primary"
+      ]
+    }
+  ],
+  "all_candidate_count": 96
+}
