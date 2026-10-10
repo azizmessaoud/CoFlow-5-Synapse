@@ -1,0 +1,10 @@
+{
+  "id": "10e",
+  "status": "pass",
+  "reason": null,
+  "currentMatchedSeeds": [37, 41, 43, 47, 53],
+  "requiredMatchedSeedCount": 5,
+  "currentMissingEvidence": [],
+  "validator": "coflow5.evaluation.j0_completion.audit_j0_completion",
+  "claimBoundary": "Controlled J0 evidence only; no deployment, lives-saved, or measured-air-quality claim."
+}

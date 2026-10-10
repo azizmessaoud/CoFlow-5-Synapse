@@ -16,6 +16,14 @@ docker compose up --build
 
 Open `http://localhost:8080`. Health: `http://localhost:8000/health`.
 
+For an offline evidence-only walkthrough without Docker, run from the
+repository root:
+
+```powershell
+cd C:\Users\dell\Downloads\sumo
+py -3.11 scripts\offline_walkthrough.py
+```
+
 Replace `deploy/evidence/demo-readonly-0001/` with a real bundle (`run_id`, `scenario_hash`, Parquet/KPI files) after rows 02 and 09 gate. The demo fixture is labelled `status: fixture` on purpose.
 
 Do not use this compose as the row 01 command. Native smoke remains `py -3.11 scripts\run_native_smoke.py` on Windows.

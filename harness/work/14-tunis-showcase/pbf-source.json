@@ -1,0 +1,18 @@
+{
+  "status": "input_verified",
+  "path": "C:/Users/dell/Downloads/ai agent prototype/tunisia-261009.osm.pbf",
+  "sha256": "sha256:8bea4a9f2a86cce8ca198d9bad50dd1103239bbcb55669058fa50042c767f51",
+  "source_identity": "Geofabrik Tunisia daily OSM PBF, renamed locally",
+  "aoi": {
+    "name": "Tunis centre-ville central corridor",
+    "bbox": [10.17, 36.79, 10.19, 36.805],
+    "bbox_order": "left,bottom,right,top"
+  },
+  "junction_selection": {
+    "required_count": 6,
+    "status": "extracted_in_wsl",
+    "artifact": "junctions.json",
+    "command": "py -3.11 scripts\\find_tunis_junctions.py --pbf <path> --bbox 10.170,36.790,10.190,36.805 --output junctions.json"
+  },
+  "environment_note": "Extraction ran successfully in WSL Ubuntu with pyosmium 4.3.1"
+}

@@ -1,0 +1,19 @@
+{
+  "contract_version": 1,
+  "id": "14-tunis-showcase",
+  "kind": "data",
+  "status": "pass",
+  "requirements": [
+    "bounded OSM subnetwork with source identity and version",
+    "official TRANSTU scheduled GTFS with retrieval provenance",
+    "synthetic or calibrated road demand explicitly labelled",
+    "scheduled transit separated from simulated road outcomes",
+    "Tunis claims remain showcase-only"
+  ],
+  "artifacts": [
+    "pbf-source.json",
+    "junctions.json",
+    "inputs/transtu-gtfs.zip",
+    "manifest.json"
+  ]
+}

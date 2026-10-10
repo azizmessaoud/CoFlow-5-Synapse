@@ -1,0 +1,93 @@
+{
+  "audit": {
+    "findings": [],
+    "matched_seeds": [
+      37,
+      41,
+      43,
+      47,
+      53
+    ],
+    "pass_gate": true
+  },
+  "bundle_id": "f281a2f7-ac48-4934-ac2b-8609da3ed263",
+  "claim_boundary": "Controlled J0 evidence only; native observations and labelled deterministic fixtures. No deployment, lives-saved, or measured air-quality claim.",
+  "forecast_provenance": {
+    "event_id": "incident-001",
+    "evidence_basis": "row-10d-fixture",
+    "message_id": "eco-001",
+    "run_id": "j0-advisory-loop-19",
+    "scenario_hash": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+  },
+  "recovery_events": [
+    {
+      "event_id": "7614900e-26e7-5c4a-b97d-9dc3a38da673",
+      "evidence_basis": "native-row-08",
+      "failure_kind": "controller",
+      "message_id": null,
+      "next_mode": "ACTUATED",
+      "previous_mode": "COOPERATIVE_MAX_PRESSURE",
+      "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
+      "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f"
+    },
+    {
+      "event_id": "eb2f9cde-763d-545a-9ceb-dc7f3c67f406",
+      "evidence_basis": "native-row-08",
+      "failure_kind": "controller",
+      "message_id": null,
+      "next_mode": "FIXED_TIME",
+      "previous_mode": "ACTUATED",
+      "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
+      "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f"
+    },
+    {
+      "event_id": "cadafd81-a697-56b4-89f7-0721a1664796",
+      "evidence_basis": "native-row-08",
+      "failure_kind": "communication",
+      "message_id": null,
+      "next_mode": "ACTUATED",
+      "previous_mode": "COOPERATIVE_MAX_PRESSURE",
+      "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
+      "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f"
+    },
+    {
+      "event_id": "6231ace4-9e8b-52ab-ae5b-4fe17c5f5497",
+      "evidence_basis": "native-row-08",
+      "failure_kind": "synapse",
+      "message_id": null,
+      "next_mode": "ACTUATED",
+      "previous_mode": "COOPERATIVE_MAX_PRESSURE",
+      "run_id": "7dd9f460-ca50-4c5a-9991-67944a897d35",
+      "scenario_hash": "sha256:5f0d8fb2d5b4de36f9acc659abd3a2f72ce3a3c0d1a3235f090ad426b15b088f"
+    },
+    {
+      "event_id": "evt-bcd7e45893531afeb5a7f3f4",
+      "evidence_basis": "row-07-fixture",
+      "failure_kind": "specialist",
+      "message_id": null,
+      "next_mode": "ACTUATED",
+      "previous_mode": "COOPERATIVE_MAX_PRESSURE",
+      "run_id": "fef734cb-d035-42a9-ab69-5fb09a02bf8d",
+      "scenario_hash": "sha256:41603ecf9459d692a46f87056b141b63335978f54da00775eb0211257112e604"
+    },
+    {
+      "event_id": "incident-001",
+      "evidence_basis": "row-10d-fixture",
+      "failure_kind": "forecast",
+      "message_id": "eco-001",
+      "next_mode": "ACTUATED",
+      "previous_mode": "COOPERATIVE_MAX_PRESSURE",
+      "run_id": "j0-advisory-loop-19",
+      "scenario_hash": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+    }
+  ],
+  "schema_version": 1,
+  "sources": {
+    "ablations": "artifacts/j0-ablations.json",
+    "action_comparison": "08-failure-injection/artifacts/action-sequence-comparison.json",
+    "advisory_loop": "10d/artifacts/j0-advisory-loop.json",
+    "matched_runs": "artifacts/matched-runs.json",
+    "recovery": "08-failure-injection/artifacts/recovery-audit.json"
+  },
+  "status": "pass"
+}

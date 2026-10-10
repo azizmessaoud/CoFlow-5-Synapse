@@ -80,17 +80,17 @@ function body(slide, text, x, y, w, h, size = 18, color = C.mute) {
   });
   label(s, 'ESPRIT  ·  4DS  ·  11 SLIDES', 0.7, 1.7, 8);
   heading(s, 'The light should see a person.', 0.7, 2.15, 12, 1.1, 40);
-  body(s, 'CoFlow-5 Synapse  ·  eight research-informed personas  ·  one signal writer', 0.7, 3.4, 11, 0.4, 18, C.teal);
+  body(s, 'CoFlow-5 Synapse  ·  six validation + two infrastructure personas  ·  one signal writer', 0.7, 3.4, 11, 0.4, 18, C.teal);
   body(s, 'Illustrations, not interviews. [C02]', 0.7, 6.7, 8, 0.3, 13, C.mute);
   notes(s, 'Open on the faces. Say: traffic is not an average car. These portraits are illustrations. Personas are research-informed, not interview-validated. [C02]');
 }
 
-// 2 Eight words
+// 2 Persona needs
 {
   const s = pptx.addSlide();
   s.background = { color: C.navy };
   label(s, 'EMPATHIZE', 0.55, 0.32);
-  heading(s, 'One street. Eight needs.', 0.55, 0.62, 12, 0.6, 32);
+  heading(s, 'One street. Eight perspectives.', 0.55, 0.62, 12, 0.6, 32);
   faces.forEach((f, i) => {
     const col = i % 8;
     const x = 0.35 + col * 1.62;
@@ -236,7 +236,7 @@ function body(slide, text, x, y, w, h, size = 18, color = C.mute) {
   label(s, 'METHOD', 0.7, 0.7);
   heading(s, 'We started with people. Not with an LLM.', 0.7, 1.15, 12, 0.7, 32);
   const stages = [
-    ['1 Empathize', '8 personas + journeys', 'Done'],
+    ['1 Empathize', '6 validation + 2 infrastructure personas', 'Done'],
     ['2 Define', 'Problem is not mean delay', 'Done'],
     ['3 Ideate', 'Cut the unsafe ideas', 'Done'],
     ['4 Prototype', 'SUMO, one writer', 'Now'],

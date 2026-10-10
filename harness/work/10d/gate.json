@@ -1,0 +1,30 @@
+{
+  "id": "10d",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:1a79959e1b2625ed9e80125f62ceab2a2a27e177ebce59f3d8ff55c6440df28f",
+  "testsRun": [
+    {
+      "command": "python -m pytest tests/acceptance/test_integrated_advisory_loop.py -q",
+      "exitCode": 0,
+      "output": "2 passed"
+    },
+    {
+      "command": "python -m pytest tests/acceptance/test_a4_situation.py tests/acceptance/test_a5_sustainability.py -q",
+      "exitCode": 0,
+      "output": "15 passed"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/j0-advisory-loop.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "checks": {
+    "incidentTraceable": true,
+    "a4BoundsPresent": true,
+    "a5ProxyLabelPresent": true,
+    "expiredAdvicePreservesLocalControl": true,
+    "llmRequired": false,
+    "specialistSignalWrites": 0
+  }
+}

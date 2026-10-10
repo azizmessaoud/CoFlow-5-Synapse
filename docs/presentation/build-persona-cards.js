@@ -7,7 +7,7 @@ pptx.defineLayout({ name: 'CARDS', width: 13.333, height: 7.5 });
 pptx.layout = 'CARDS';
 pptx.author = 'CoFlow-5 Synapse · ESPRIT 4DS';
 pptx.title = 'CoFlow-5 — Persona Cards';
-pptx.subject = 'Eight research-informed Design Thinking persona cards';
+pptx.subject = 'Six validation and two infrastructure Design Thinking persona cards';
 pptx.lang = 'en-US';
 pptx.theme = { headFontFace: 'Aptos Display', bodyFontFace: 'Aptos', lang: 'en-US' };
 
@@ -95,9 +95,13 @@ function field(s,title,value,x,y,w,h,color=C.teal){box(s,x,y,w,h,C.card,color);t
 
 people.forEach((p,i)=>{
   const s=pptx.addSlide();s.background={color:C.navy};
+  const personaClass = p.name === 'Yuki' || p.name === 'Maria'
+    ? 'INFRASTRUCTURE PERSONA'
+    : 'VALIDATION PERSONA';
   s.addImage({path:PHOTO(p.file),x:0,y:0,w:4.55,h:H,sizing:{type:'cover',w:4.55,h:H}});
   s.addShape(pptx.ShapeType.rect,{x:0,y:5.35,w:4.55,h:2.15,fill:{color:C.navy,transparency:5},line:{color:C.navy}});
   text(s,`P${i+1} · AGE ${p.age}`,0.35,5.55,3.9,0.3,12,C.teal,{bold:true,charSpacing:1});
+  text(s,personaClass,0.35,5.28,3.9,0.2,9,C.amber,{bold:true,charSpacing:0.8});
   text(s,p.name,0.35,5.92,3.9,0.52,32,C.white,{bold:true,fontFace:'Aptos Display'});
   text(s,p.role,0.35,6.42,3.9,0.34,14,C.white);
   text(s,'Illustration · not an interviewed person',0.35,6.9,3.9,0.25,10.5,C.mute,{italic:true});
@@ -116,9 +120,9 @@ people.forEach((p,i)=>{
   field(s,'MEASURE · PROPOSED, NOT A RESULT',p.measure,10.3,5.3,2.58,1.25,C.amber);
   text(s,`BIO · ${p.bio}`,4.9,6.72,7.95,0.3,11.5,C.mute);
   text(s,`PERSONALITY · ${p.personality}`,4.9,7.05,7.95,0.22,10,C.mute);
-  s.addNotes(`Research-informed design persona, not an interview. ${p.statement} Need: ${p.need} Fear: ${p.fear} Evidence: ${p.evidence} Proposed measure: ${p.measure}`);
+  s.addNotes(`${personaClass.toLowerCase()}, research-informed design persona, not an interview. ${p.statement} Need: ${p.need} Fear: ${p.fear} Evidence: ${p.evidence} Proposed measure: ${p.measure}`);
 });
 
-if(people.length!==8)throw new Error('Expected 8 personas');
+if(people.length!==8)throw new Error('Expected 6 validation plus 2 infrastructure personas');
 const output=path.join(__dirname,'CoFlow-5-Persona-Cards.pptx');
 pptx.writeFile({fileName:output}).then(()=>console.log(`SUCCESS ${output} slides=8`)).catch((e)=>{console.error(e);process.exit(1);});

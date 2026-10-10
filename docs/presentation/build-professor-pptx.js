@@ -285,7 +285,7 @@ function personaSlide(persona, index) {
   pill(s, 'ESPRIT · 4DS · DATA SCIENCE', 0.7, 0.55, 2.75, C.teal);
   tx(s, 'CoFlow-5 Synapse', 0.7, 1.35, 11.8, 0.8, { fontFace: 'Aptos Display', fontSize: 42, bold: true, color: C.white });
   tx(s, 'Design Thinking → a reliable five-agent traffic solution', 0.72, 2.18, 11.3, 0.55, { fontSize: 24, color: 'B9DCE7' });
-  tx(s, 'Eight research-informed personas · controlled SUMO scenarios · one signal writer · evidence before claims', 0.72, 2.85, 11.2, 0.55, { fontSize: 16, color: 'D8E8EF' });
+  tx(s, 'Six validation + two infrastructure personas · controlled J0 SUMO scenario · one signal writer · evidence before claims', 0.72, 2.85, 11.2, 0.55, { fontSize: 16, color: 'D8E8EF' });
   const labels = [['EMPATHIZE', 'people and journeys'], ['DEFINE', 'human-centred problem'], ['IDEATE', 'compare and cut ideas'], ['PROPOSE', 'five agents, one writer']];
   labels.forEach((item, i) => {
     rect(s, 0.72 + i * 3.02, 4.1, 2.75, 1.2, i === 3 ? '184D59' : C.navy2, i === 3 ? C.teal : '335D76');
@@ -362,7 +362,7 @@ function personaSlide(persona, index) {
     'Explain that we used three methods: consult evidence, map journeys and use SUMO as a stand-in environment. A team or professor walkthrough is proxy validation, not a stakeholder interview.');
   const methods = [
     ['CONSULT', 'Primary papers, official guidance and product documentation', 'DfT · FHWA · MUTCD · SCATS · SUMO'],
-    ['OBSERVE', 'Eight staged User Journeys from approach to recovery', 'Pain, uncertainty, trade-offs and failure'],
+    ['OBSERVE', 'Six validation + two infrastructure User Journeys from approach to recovery', 'Pain, uncertainty, trade-offs and failure'],
     ['IMMERSE', 'SUMO as a controlled street environment', 'Useful for tests; not a substitute for field interviews'],
     ['CHALLENGE', 'Claim flags and a source-type audit', 'Prevent folklore numbers and exaggerated conclusions'],
   ];
@@ -379,8 +379,8 @@ function personaSlide(persona, index) {
 
 // 6 — Overview
 {
-  const s = titleSlide('Eight personas: traffic is more than the average car', 'Each persona contributes one need, one accountable component and one main evaluation question.', 'Empathize',
-    'Introduce the eight personas quickly. Do not read every card. Tell the professor that the next eight slides show the complete persona canvases.');
+  const s = titleSlide('Six validation personas + two infrastructure personas', 'Each persona contributes one need, one accountable component and one main evaluation question.', 'Empathize',
+    'Introduce the six validation personas and two infrastructure personas quickly. Do not read every card. Explain that all are research-informed design artifacts, not interviews.');
   personas.forEach((p, i) => {
     const col = i % 4, row = Math.floor(i / 4), x = 0.5 + col * 3.18, y = 1.58 + row * 2.35;
     rect(s, x, y, 2.95, 2.05, C.white, p.color);

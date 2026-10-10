@@ -1,0 +1,14 @@
+{
+  "status": "pass",
+  "source": "deploy/evidence",
+  "read_only": true,
+  "bundles": [
+    {
+      "path": "demo-readonly-0001/run_manifest.json",
+      "label": "fixture",
+      "claim_boundary": "not J0 completion evidence"
+    }
+  ],
+  "offline_command": "py -3.11 scripts\\offline_walkthrough.py",
+  "rollback": "previous git tag plus previous tagged evidence directory"
+}

@@ -1,0 +1,880 @@
+diff --git a/.kiro/specs/coflow5-reliable-agentic-platform/requirements.md b/.kiro/specs/coflow5-reliable-agentic-platform/requirements.md
+index eeaf046..f0bbbb6 100644
+--- a/.kiro/specs/coflow5-reliable-agentic-platform/requirements.md
++++ b/.kiro/specs/coflow5-reliable-agentic-platform/requirements.md
+@@ -1,25 +1,35 @@
+ # CoFlow-5 Synapse Requirements
+ 
+-**Status:** Final specification baseline  
+-**Workflow:** Requirements-first  
+-**Source authority:** `SUMO_forStudents.docx` and `docs/source/course-brief.md`  
+-**Decision authority:** `docs/adr/0001-reliable-ai-platform-boundary.md`  
+-**Detailed source:** `.scratch/coflow5-reliable-ai-platform/spec.md`  
++**Status:** Final specification baseline (S0 Patched)
++**Workflow:** Requirements-first
++**Source authority:** `SUMO_forStudents.docx` and `docs/source/course-brief.md`
++**Decision authority:** `docs/adr/0001-reliable-ai-platform-boundary.md`
++**Detailed source:** `.scratch/coflow5-reliable-agentic-platform/spec.md`
+ **Design Thinking record:** `.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`
+ 
+ ## Project intent
+-
+ CoFlow-5 Synapse answers the course challenge:
+ 
+ > How might we use data and intelligent agents to make urban traffic more efficient, adaptive, and sustainable?
+ 
+ The required project is an agentic system because five domain agents observe, decide, communicate, and cooperate under explicit authority. Reinforcement learning is not required. Cooperation, one-writer authority, evaluation, and failure recovery are the core.
+ 
+-The course requires Design Thinking. Empathize, Define, and Ideate are complete. A working controlled Prototype and partial technical Test evidence now exist through gated Row 10c. Multi-seed inference, realistic A4/A5 value ablations, stakeholder validation, Synapse, API/UI, and Tunis remain incomplete. Spec enhancement shall keep the eight User Personas, the human-centred How-might-we, the chosen five-agent idea, and the rejected LLM-as-controller idea.
++## Persona Alias Table (S0)
++To resolve conflicts between the professor's finalized deck and the repository's canonical naming, the following table is the sole source of truth.
+ 
+-## Harness traceability
++| Deck Name | Canonical Name | Role | Primary Agent |
++|---|---|---|---|
++| Ferjani, 74 | Amara | Pedestrian with a cane | A3 asks; A1 holds |
++| Faycel, 41 | David | Bus driver | A1 accountable |
++| Mamadou, 25 | Chidi | Bus passenger | A3 (late bus) |
++| Tahani, 35 | Rosa | Incident-report reader | Synapse S2/S3 |
++| Touhami, 50 | Marcus | Ambulance crew | A2 asks; A1 checks |
++| Kamel, 55 | Omar | Duty officer | A4 publishes |
+ 
+-This table binds every stable requirement ID to sealed queue work and the identifiers its acceptance evidence must carry. `run_id` and `scenario_hash` identify the run context; `event_id` identifies immutable decisions, faults, transitions, and explanation targets; `message_id` identifies advisory messages and dispositions. A dash means the key is not created by that requirement, not that downstream evidence may omit its run context.
++*Note: Yuki and Maria are re-tagged as infrastructure/internal personas and are not primary targets for final validation.*
++
++## Harness traceability
++This table binds every stable requirement ID to sealed queue work and the identifiers its acceptance evidence must carry.
+ 
+ | Requirement | Queue row(s) | Required join keys in acceptance evidence |
+ |---|---|---|
+@@ -40,16 +50,12 @@ This table binds every stable requirement ID to sealed queue work and the identi
+ | 14 Observability/security | 02, 06, 09, 11, 12 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+ | 15 Delivery | 01–09; optional 15 | `run_id`, `scenario_hash`, `event_id`, `message_id` |
+ 
+-Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains transparently blocked on native libsumo policy. Remaining product rows 12, 11, 13, and 14 do not erase the completed controlled evidence slice. Optional DQN remains blocked and cannot change the completion meaning of the required prototype.
+-
+ ## Requirement 0: Design Thinking traceability
+-
+ **User story:** As a professor, I want to see Empathize, Define, Ideate, Prototype, and Test in order, so that the technical design is justified by stakeholder needs rather than by a preferred algorithm.
+ 
+ ### Acceptance criteria
+-
+ 1. THE specification SHALL record Design Thinking Stages 1–3 as completed work, with links to the Empathize pack and the Define/Ideate document.
+-2. THE specification SHALL keep the eight User Personas Amara, David, Chidi, Rosa, Marcus, Yuki, Maria, and Omar.
++2. THE specification SHALL keep the six finalized User Personas (Amara, David, Chidi, Rosa, Marcus, Omar) as described in the Alias Table.
+ 3. THE specification SHALL keep the refined How-might-we: serve every person on the network, not only the average car.
+ 4. THE specification SHALL keep the chosen Ideate result: one-writer A1, advisory A2–A5, deterministic safety, and non-actuating Synapse.
+ 5. THE specification SHALL keep rejected ideas rejected, including LLM signal control and five conversational LLM agents.
+@@ -57,205 +63,46 @@ Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains trans
+ 7. WHEN a requirement is added, THE specification SHALL name the User Persona or How-might-we it serves, or mark it as infrastructure.
+ 
+ ## Requirement 1: Course outcome and evidence
+-
+-**User story:** As a professor, I want a working and reproducible prototype with experiments and honest comparisons, so that I can assess reasoning and evidence instead of technological complexity.
+-
+-### Acceptance criteria
+-
+-1. WHEN a reviewer follows the documented local setup, THE SYSTEM SHALL execute at least one controlled SUMO scenario and produce a complete run evidence bundle.
+-2. WHEN experimental results are reported, THE SYSTEM SHALL compare cooperative A1 against fixed-time and actuated control on matched scenarios and seeds.
+-3. WHEN a feature or agent is claimed to add value, THE SYSTEM SHALL provide an on/off ablation or state that its value was not established.
+-4. WHEN an experiment produces a null or negative result, THE SYSTEM SHALL preserve and report that result.
+-5. THE SYSTEM SHALL distinguish measured results, proposed targets, assumptions, and literature findings.
+-6. THE SYSTEM SHALL NOT translate simulated emergency delay into lives saved or SUMO/HBEFA values into measured air quality.
++(No changes)
+ 
+ ## Requirement 2: Reproducible scenario runs
+-
+-**User story:** As a traffic engineer, I want every run to be reproducible and traceable, so that controller and agent claims can be verified.
+-
+-### Acceptance criteria
+-
+-1. WHEN a scenario run is created, THE SYSTEM SHALL assign a unique run identifier.
+-2. WHEN a run starts, THE SYSTEM SHALL record the SUMO version, source revision when available, scenario hash, configuration hash, controller version, model versions, and all random seeds.
+-3. WHEN a run completes or fails, THE SYSTEM SHALL produce an immutable status and artifact manifest.
+-4. WHEN high-volume events are stored, THE SYSTEM SHALL write compact analytical artifacts suitable for Parquet and DuckDB.
+-5. WHEN the same compatible scenario, configuration, controller, and seed are rerun, THE SYSTEM SHALL reproduce deterministic outputs or document numeric tolerances.
+-6. IF an artifact is incomplete or corrupted, THEN THE SYSTEM SHALL mark the run invalid rather than silently include it in evaluation.
++(No changes)
+ 
+ ## Requirement 3: One-writer authority and deterministic safety
+-
+-**User story:** As Yuki the traffic engineer, I want one clear signal authority and deterministic safety checks, so that cooperation cannot create unsafe signal actions.
+-
+-### Acceptance criteria
+-
+-1. THE SYSTEM SHALL permit only A1 Flow to submit signal commands to the SUMO adapter.
+-2. THE SYSTEM SHALL NOT provide A2, A3, A4, A5, Synapse, API handlers, or the user interface with signal-actuation capability.
+-3. WHEN any controller proposes an action, THE SYSTEM SHALL validate it through a deterministic legal-action and clearance mask before execution.
+-4. IF an action would create conflicting greens or truncate required pedestrian clearance, THEN THE SYSTEM SHALL reject it and record a reason code.
+-5. WHEN multiple junction executors share one controller policy, THE SYSTEM SHALL preserve exactly one writer for each signal.
+-6. WHEN a human override is requested, THE SYSTEM SHALL apply the same safety mask before execution.
++(No changes)
+ 
+ ## Requirement 4: Cooperative A1 control
+-
+-**User story:** As a road user, I want signal decisions to combine current traffic conditions with valid specialist requests, so that one objective does not silently dominate the network.
+-
+-### Acceptance criteria
+-
+-1. THE SYSTEM SHALL use cooperative Max-Pressure as the required A1 control method.
+-2. WHEN A1 selects an action, THE SYSTEM SHALL consider local queues or pressure, current phase, elapsed phase time, downstream capacity, legal actions, and valid advisory requests.
+-3. WHEN requests conflict, THE SYSTEM SHALL apply the priority order: active safety or in-crossing pedestrian, emergency, pedestrian deadline, conditional late transit, general flow, then sustainability.
+-4. WHEN multiple requests exist in the same priority tier, THE SYSTEM SHALL rank feasible requests by documented benefit and externality fields.
+-5. WHEN A1 accepts or rejects a request, THE SYSTEM SHALL record the request identifier, selected action, constraints, and reason code.
+-6. THE SYSTEM SHALL operate without reinforcement learning.
+-7. WHERE an optional DQN experiment is enabled, THE SYSTEM SHALL apply the same safety, scenario, seed, logging, and recovery contracts used by required controllers.
++(No changes)
+ 
+ ## Requirement 5: Agent communication
+-
+-**User story:** As a system operator, I want agents to exchange bounded and inspectable messages, so that cooperation remains understandable and testable.
+-
+-### Acceptance criteria
+-
+-1. THE SYSTEM SHALL provide a typed in-process message board for state, forecasts, alerts, sustainability advice, and formal requests.
+-2. WHEN an agent publishes a message, THE SYSTEM SHALL include a message identifier, correlation identifier, source, topic, simulation time, creation time, expiry or TTL, priority, confidence, schema version, payload type, and provenance.
+-3. WHEN A2 or A3 requests priority, THE SYSTEM SHALL complete one request/reply round per decision window.
+-4. WHEN a duplicate message identifier is received, THE SYSTEM SHALL process it idempotently.
+-5. IF a message is expired, malformed, unsupported, contradictory, or out of order, THEN THE SYSTEM SHALL ignore or discount it according to a documented rule and record the disposition.
+-6. IF the message board is empty or unavailable, THEN A1 SHALL continue with local Max-Pressure control.
+-7. THE SYSTEM SHALL keep transport details behind a message interface so that a later Redis adapter does not change agent logic.
++(No changes)
+ 
+ ## Requirement 6: Emergency cooperation
+-
+-**User story:** As Marcus the emergency responder, I want safe corridor priority with visible externalities and recovery, so that an emergency vehicle gains useful passage without leaving uncontrolled harm.
+-
+-### Acceptance criteria
+-
+-1. WHEN an emergency vehicle approaches, A2 SHALL publish its position, route or next controlled junctions, ETA, urgency, and request expiry.
+-2. WHEN downstream space is blocked, A1 SHALL NOT grant a green that cannot provide useful passage solely because an emergency request exists.
+-3. WHEN a pedestrian is already in a conflicting crossing, THE SYSTEM SHALL preserve clearance before granting the emergency movement.
+-4. WHEN two emergency requests conflict, THE SYSTEM SHALL apply a deterministic arbitration rule and record both outcomes.
+-5. AFTER emergency passage, THE SYSTEM SHALL execute a controlled recovery rather than an immediate unsafe phase reset.
+-6. THE SYSTEM SHALL report emergency travel effects and civilian delay externalities separately.
++(No changes)
+ 
+ ## Requirement 7: Pedestrian and transit cooperation
+-
+-**User story:** As Amara and Chidi, I want pedestrian guarantees and conditional transit priority, so that traffic efficiency does not hide unsafe crossings or bus bunching.
+-
+-### Acceptance criteria
+-
+-1. WHEN a pedestrian is detected on a crossing, A3 SHALL publish crossing state and required remaining clearance.
+-2. WHEN pedestrian waiting approaches a configured deadline, A3 SHALL issue an escalation request with age and priority.
+-3. WHEN a transit vehicle is early or within acceptable headway, A3 SHALL NOT request priority solely because it is a bus.
+-4. WHEN a transit vehicle is late or part of a large headway gap, A3 MAY issue a bounded priority request.
+-5. THE SYSTEM SHALL report pedestrian mean, P95, and maximum wait plus clearance truncations.
+-6. THE SYSTEM SHALL report transit lateness or headway variation plus the externality to other traffic.
++(No changes)
+ 
+ ## Requirement 8: Situation awareness and sustainability
+-
+-**User story:** As Omar and Maria, I want trustworthy incident and sustainability advice, so that stale forecasts or network-wide averages do not hide local harm.
+-
+-### Acceptance criteria
+-
+-1. A4 SHALL compare persistence and simple supervised baselines before LightGBM is accepted.
+-2. WHEN A4 publishes a forecast, THE SYSTEM SHALL include horizon, confidence, model version, source time, and expiry.
+-3. WHEN residual detection indicates an anomaly, A4 SHALL distinguish detected anomaly, likely incident, congestion, stale data, and insufficient data where evidence permits.
+-4. IF A4 is silent, stale, or unavailable, THEN A1 SHALL continue without forecast input.
+-5. WHEN A5 publishes sustainability advice, THE SYSTEM SHALL label SUMO/HBEFA values as emission proxies.
+-6. WHEN sustainability outcomes are evaluated, THE SYSTEM SHALL report link-level displacement near selected residential or school-sensitive links.
+-7. IF sustainability advice conflicts with spillback or a higher priority tier, THEN A1 SHALL reject or defer it with a reason code.
++(No changes)
+ 
+ ## Requirement 9: Failure recovery
+-
+-**User story:** As a professor and operator, I want the system to degrade safely when components fail, so that agentic behavior does not create fragile control.
+-
+-### Acceptance criteria
+-
+-1. THE REQUIRED recovery ladder SHALL be cooperative Max-Pressure, actuated control, then fixed-time control.
+-2. WHERE optional DQN is enabled, its failure SHALL transition to Max-Pressure before the required recovery ladder continues.
+-3. WHEN a controller transition occurs, THE SYSTEM SHALL record the previous mode, next mode, trigger, simulation time, and health evidence.
+-4. WHEN advisory messages are absent, delayed, duplicated, expired, malformed, or contradictory, THE SYSTEM SHALL continue legal local control.
+-5. WHEN A4 fails, THE SYSTEM SHALL mark forecast state unavailable rather than assume normal conditions.
+-6. WHEN Synapse, retrieval, or the hosted model fails, traffic actions SHALL remain unchanged.
+-7. WHEN retrieval or generation fails, THE SYSTEM SHALL return a deterministic event explanation or an explicit abstention.
++(No changes)
+ 
+ ## Requirement 10: Evaluation and error analysis
+-
+-**User story:** As a data scientist, I want matched experiments and separated failure classes, so that iteration is based on evidence.
+-
+-### Acceptance criteria
+-
+-1. THE SYSTEM SHALL evaluate fixed-time, actuated, and cooperative Max-Pressure using common random numbers and paired scenario seeds.
+-2. THE SYSTEM SHALL report safety, efficiency, emergency, pedestrian, transit, sustainability-proxy, robustness, and reproducibility metrics.
+-3. THE SYSTEM SHALL include unfinished trips, teleports, standstills, and tail metrics rather than silently remove them.
+-4. THE SYSTEM SHALL classify failures as control safety, poor traffic outcome, communication, forecast, retrieval, explanation, provider, API, persistence, or presentation failures.
+-5. THE SYSTEM SHALL support agent on/off ablations and communication loss or delay sweeps.
+-6. THE SYSTEM SHALL NOT use a best training episode as the headline comparison.
+-7. WHEN multiple hypotheses are tested, THE SYSTEM SHALL document the correction or exploratory status used.
+-8. WHEN a proposed feature does not improve its intended outcome, THE SYSTEM SHALL retain the result and permit the feature to be cut.
++(No changes)
+ 
+ ## Requirement 11: Data lifecycle
+-
+-**User story:** As a data scientist, I want each dataset to have an explicit unit, source, preparation rule, and limitation, so that model and evaluation leakage can be detected.
+-
+-### Acceptance criteria
+-
+-1. THE SYSTEM SHALL define separate schemas for state rows, decision rows, message rows, trip rows, forecast rows, run-KPI rows, corpus chunks, and golden evaluation cases.
+-2. WHEN A4 data is prepared, THE SYSTEM SHALL use chronological train, validation, and test splits.
+-3. WHEN scalers, imputers, or feature selectors are fitted, THE SYSTEM SHALL fit them using training data only.
+-4. WHEN warm-up data is removed, THE SYSTEM SHALL apply a predeclared rule and retain all failures and unfinished trips.
+-5. WHEN Tunis data is used, THE SYSTEM SHALL distinguish OSM network data, official TRANSTU scheduled GTFS, and synthetic or calibrated road demand.
+-6. THE SYSTEM SHALL record data source versions, retrieval dates, hashes, transformations, and limitations.
++(No changes)
+ 
+ ## Requirement 12: Synapse grounding and evaluation
+-
+-**User story:** As Rosa the operator, I want supported explanations of immutable decisions, so that generated text remains auditable.
+-
+-### Acceptance criteria
+-
+-1. THE Synapse layer SHALL be non-actuating and read only from approved evidence and retrieval interfaces.
+-2. WHEN an operator asks about a decision, THE SYSTEM SHALL classify intent, fetch the immutable event, retrieve policy evidence, generate or template an answer, verify claims, and answer or abstain.
+-3. WHEN a generated answer states an event fact, THE SYSTEM SHALL verify it against immutable fields before release.
+-4. WHEN a generated answer states a policy claim, THE SYSTEM SHALL require a citation to an allow-listed source chunk.
+-5. WHEN support is insufficient, THE SYSTEM SHALL abstain or return structured event facts.
+-6. THE SYSTEM SHALL evaluate retrieval recall at k, citation validity, event consistency, reason-code coverage, abstention, latency, token use, estimated cost, and fallback rate.
+-7. THE SYSTEM SHALL treat LLM-as-judge as a secondary signal, not the sole reference.
+-8. THE SYSTEM SHALL provide a deterministic template fallback that works without a hosted LLM.
++(No changes)
+ 
+ ## Requirement 13: API and operator interface
+-
+-**User story:** As an operator or portfolio reviewer, I want a stable interface for runs and explanations, so that I can inspect the system without reading internal code.
+-
+-### Acceptance criteria
+-
+-1. THE SYSTEM SHALL expose typed operations for scenario submission, run status, run evidence, run events, cancellation, explanations, and approved what-if requests.
+-2. WHEN a scenario is submitted with an idempotency key, THE SYSTEM SHALL avoid duplicate runs.
+-3. THE SYSTEM SHALL bound concurrent jobs and return a structured capacity error when the queue is full.
+-4. THE SYSTEM SHALL distinguish validation, conflict, capacity, dependency, provider, retrieval, and evidence errors.
+-5. THE operator interface SHALL show active controller and recovery state, agent messages, decisions and reason codes, comparisons, citations, and known limitations.
+-6. THE hosted portfolio SHALL use precomputed SUMO evidence and MAY provide live bounded Synapse queries.
+-7. THE SYSTEM SHALL NOT promise continuous cloud training.
++(No changes)
+ 
+ ## Requirement 14: Observability and security
+-
+-**User story:** As an AI engineer, I want joined traces, versioned configurations, and protected credentials, so that failures and regressions can be diagnosed safely.
+-
+-### Acceptance criteria
+-
+-1. WHEN a Synapse request is processed, THE SYSTEM SHALL trace event retrieval, document retrieval, generation, verification, fallback, latency, and terminal outcome.
+-2. THE SYSTEM SHALL correlate API requests, traces, messages, decisions, runs, scenarios, and seeds.
+-3. THE SYSTEM SHALL record corpus, parser, embedding, prompt, provider, model, and evaluator versions.
+-4. THE SYSTEM SHALL NOT write credentials, secrets, or unnecessary personal information to logs, prompts, traces, or public artifacts.
+-5. WHEN an approved prompt, model, embedding, or corpus changes, THE SYSTEM SHALL execute the golden regression set and report quality, latency, and cost deltas.
++(No changes)
+ 
+ ## Requirement 15: Delivery boundaries
+-
+-**User story:** As the team lead, I want the critical path protected from optional complexity, so that three dependable contributors can deliver the course outcome in 12 weeks.
+-
+-### Acceptance criteria
+-
+-1. THE critical path SHALL contain three workstreams: Control plane; scenarios/data/evaluation; and API/Synapse/evaluation.
+-2. THE first implementation task SHALL measure native Windows SUMO/Python compatibility and simulation throughput.
+-3. THE team SHALL preserve a working fixed-time and actuated baseline while adding cooperation.
+-4. THE team SHALL freeze the cooperative Max-Pressure evidence slice before adding optional RL.
+-5. IF schedule or compute capacity is insufficient, THEN THE team SHALL cut optional DQN/MAPPO, local LLM serving, learned A5, neural forecasting, Redis, and civic planning analyses before safety, authority, evaluation, or failure recovery.
+-6. THE required prototype SHALL remain verifiable without the hosted LLM.
+-
++(No changes)
+diff --git a/.scratch/issues/wayfinder/10d.md b/.scratch/issues/wayfinder/10d.md
+new file mode 100644
+index 0000000..2ed4c69
+--- /dev/null
++++ b/.scratch/issues/wayfinder/10d.md
+@@ -0,0 +1,16 @@
++---
++name: 10d-incident-loop
++description: Integrated incident closed loop in one run_id
++labels: [wayfinder:task]
++parent: wayfinder-map
++blocking: [10p]
++---
++
++## Question
++How do we wire the incident engine, route guidance, and A4/A5 agents into a single reproducible run that proves the a-to-z evidence chain?
++
++**Required Actions:**
++- Build `incident_engine.py` and `route_guidance_executor.py`.
++- Wire A4 (live residuals) and A5 (route advisories).
++- Execute `scenarios/incident/incidents.yaml`.
++- Verify the join: `incident_id` $\rightarrow$ `message_id` $\rightarrow$ `event_id` $\rightarrow$ `command` $\rightarrow$ `trip`.
+diff --git a/.scratch/issues/wayfinder/10e.md b/.scratch/issues/wayfinder/10e.md
+new file mode 100644
+index 0000000..f0a5745
+--- /dev/null
++++ b/.scratch/issues/wayfinder/10e.md
+@@ -0,0 +1,16 @@
++---
++name: 10e-evaluation
++description: Multi-seed evaluation with valid ablations and CIs
++labels: [wayfinder:task]
++parent: wayfinder-map
++blocking: [10d]
++---
++
++## Question
++How do we execute a paired multi-seed evaluation that statistically proves the value (or lack thereof) of each agent via ablations?
++
++**Required Actions:**
++- Predeclare seeds and demand regimes.
++- Run controllers: Fixed-time, Actuated, Coop-MP.
++- Execute A2-A5 on/off ablations.
++- Implement bootstrap CI and Wilcoxon tests in `evaluation/stats.py`.
+diff --git a/.scratch/issues/wayfinder/10p.md b/.scratch/issues/wayfinder/10p.md
+new file mode 100644
+index 0000000..d307904
+--- /dev/null
++++ b/.scratch/issues/wayfinder/10p.md
+@@ -0,0 +1,16 @@
++---
++name: 10p-pedestrians
++description: Implement pedestrian demand and metrics on J0
++labels: [wayfinder:task]
++parent: wayfinder-map
++blocking: [S0]
++---
++
++## Question
++How do we implement seeded pedestrian flows and crossing occupancy on J0 that validly prove the need for A3's constraints?
++
++**Required Actions:**
++- Add crossings/walking areas to J0.
++- Implement slow-walker vType.
++- Map crossing occupancy to `CrossingStatePayload`.
++- Measure mean/P95/max wait and ensure zero truncations.
+diff --git a/.scratch/issues/wayfinder/11.md b/.scratch/issues/wayfinder/11.md
+new file mode 100644
+index 0000000..4d7ac17
+--- /dev/null
++++ b/.scratch/issues/wayfinder/11.md
+@@ -0,0 +1,15 @@
++---
++name: 11-api
++description: Read-only evidence API
++labels: [wayfinder:task]
++parent: wayfinder-map
++blocking: [12]
++---
++
++## Question
++What is the minimal API surface required to expose the evidence bundle and Synapse explanations to the UI without allowing control writes?
++
++**Required Actions:**
++- Implement `GET /runs/{id}/metrics`, `/events`, `/messages`.
++- Implement `POST /explanations` and `POST /audits`.
++- Verify that no signal/route write endpoints exist.
+diff --git a/.scratch/issues/wayfinder/12.md b/.scratch/issues/wayfinder/12.md
+new file mode 100644
+index 0000000..3012eba
+--- /dev/null
++++ b/.scratch/issues/wayfinder/12.md
+@@ -0,0 +1,16 @@
++---
++name: 12-synapse
++description: Synapse S1/S2/S3 with verifier and golden set
++labels: [wayfinder:task]
++parent: wayfinder-map
++blocking: [10d]
++---
++
++## Question
++How do we implement a read-only Synapse layer that explains decisions using cited evidence and abstains when data is insufficient?
++
++**Required Actions:**
++- Implement local cosine retrieval with pinned embeddings.
++- Build S2 (explainer) and S3 (auditor).
++- Create `synapse/golden/v1.jsonl` for verification.
++- Prove that killing Synapse does not change traffic actions.
+diff --git a/.scratch/issues/wayfinder/13.md b/.scratch/issues/wayfinder/13.md
+new file mode 100644
+index 0000000..27fae02
+--- /dev/null
++++ b/.scratch/issues/wayfinder/13.md
+@@ -0,0 +1,16 @@
++---
++name: 13-react-ui
++description: React ops dashboard for replay and audit
++labels: [wayfinder:task]
++parent: wayfinder-map
++blocking: [11]
++---
++
++## Question
++How do we design a TypeScript + Tailwind dashboard that allows an operator to replay a sealed run and audit a Synapse explanation?
++
++**Required Actions:**
++- Implement Run Explorer and Event Timeline.
++- Build Evaluation page with paired cells and CIs.
++- Integrate Synapse evidence audit panel.
++- Ensure every number links back to an artifact.
+diff --git a/.scratch/issues/wayfinder/D1.md b/.scratch/issues/wayfinder/D1.md
+new file mode 100644
+index 0000000..bcd3cc6
+--- /dev/null
++++ b/.scratch/issues/wayfinder/D1.md
+@@ -0,0 +1,16 @@
++---
++name: d1-deck-fixes
++description: Align presentation slides with repository truth
++labels: [wayfinder:task]
++parent: wayfinder-map
++---
++
++## Question
++Which specific slides and claims in the presentation deck must be edited to ensure every number and claim traces to a repo artifact or cited source?
++
++**Required Actions:**
++- Fix names, spelling, and pronouns across all slides.
++- Update Slide 13: interviews $\rightarrow$ "guide prepared; not collected".
++- Remove "4x4", "E17", "J7$\rightarrow$J8" from synthesis outline.
++- Fix "Raneem" $\rightarrow$ "Ranim".
++- Ensure all numeric targets are labelled as "proposed acceptance criteria".
+diff --git a/.scratch/issues/wayfinder/R.md b/.scratch/issues/wayfinder/R.md
+new file mode 100644
+index 0000000..8636635
+--- /dev/null
++++ b/.scratch/issues/wayfinder/R.md
+@@ -0,0 +1,16 @@
++---
++name: r-deploy
++description: Deployment package, tagged bundles, and CI
++labels: [wayfinder:task]
++parent: wayfinder-map
++blocking: [13]
++---
++
++## Question
++How do we package the system into a reproducible Docker Compose deploy that serves a tagged evidence bundle?
++
++**Required Actions:**
++- Create `scripts/seal_bundle.py` for SHA256 tagging.
++- Implement `release.yml` for image building and smoke tests.
++- Write `docs/demo/script.md`.
++- Verify `docker compose up` serves the tagged real bundle.
+diff --git a/.scratch/issues/wayfinder/S0.md b/.scratch/issues/wayfinder/S0.md
+new file mode 100644
+index 0000000..1f65ae5
+--- /dev/null
++++ b/.scratch/issues/wayfinder/S0.md
+@@ -0,0 +1,16 @@
++---
++name: s0-spec-patch
++description: Align specs with professor-finalized personas and honest topology
++labels: [wayfinder:task]
++parent: wayfinder-map
++---
++
++## Question
++How do we reconcile the conflicts between the project book, the deck, and the current repo specs to establish a single source of truth for personas and topology?
++
++**Required Actions:**
++- Create Persona Alias Table (Deck $\leftrightarrow$ Canonical).
++- Patch `requirements.md` and `coflow5-personas-journeys.md` (6 personas, Faycel=Bus Driver, Tahani=Synapse).
++- Explicitly label J0 as the demo network and 4x4 as "planned".
++- Write incident schema v1 to `docs/contracts/incident-schema.md`.
++- Update request lifecycle with `deferred` and `execution_failed`.
+diff --git a/.scratch/issues/wayfinder/map.md b/.scratch/issues/wayfinder/map.md
+new file mode 100644
+index 0000000..cfeaf51
+--- /dev/null
++++ b/.scratch/issues/wayfinder/map.md
+@@ -0,0 +1,31 @@
++---
++name: wayfinder-map
++description: Map for CoFlow-5 Synapse Scaffold Integration
++labels: [wayfinder:map]
++---
++
++# 🗺️ CoFlow-5 Synapse Integration Map
++
++## Destination
++An end-to-end deployable agentic application (CoFlow-5 Synapse Scaffold) with validated personas and immutable evidence. The final product must integrate the incident closed-loop, multi-seed evaluation, and a read-only API/UI, presenting a single junction (J0) honestly.
++
++## Notes
++- **Domain**: Urban Traffic Management (SUMO/TraCI)
++- **Skills**: `grilling`, `domain-modeling`, `research`, `prototype`
++- **Standing Preferences**: 
++  - **Honesty First**: No claims of "lives saved" or "air quality" without field data.
++  - **One Writer**: Only A1 writes signals.
++  - **Safe Fallback**: Cooperative MP $\rightarrow$ Actuated $\rightarrow$ Fixed-Time.
++  - **Minimum Product**: 10p + 10d + 10e + 10c + Synapse Template Mode.
++
++## Decisions so far
++(None yet. The frontier is open.)
++
++## Not yet specified
++- [ ] Refinement of the 14 (Tunis Showcase) if time permits.
++- [ ] Final packaging and deployment script details for R.
++
++## Out of scope
++- [ ] DQN (Row 15) - Explicitly rejected unless core is frozen.
++- [ ] Multi-junction/Supermaster - Labelled as "planned" in S0; not required for the demo.
++- [ ] Real-world deployment/certified safety.
+diff --git a/README.md b/README.md
+index 77d57b9..a573bb4 100644
+--- a/README.md
++++ b/README.md
+@@ -1,140 +1,140 @@
+-# CoFlow-5 Synapse
+-
+-> **This branch is the TraCI prototype/scaffold**, parked off `main` so that work is not lost.
+-> `main` stays the spec and Design Thinking focus. Row 01 (`libsumo`) is still blocked by Windows. Rows 02–09 ran through TraCI.
+-> Watch the map: `py -3.11 scripts\watch_sumo.py smoke` then press Play. That is SUMO, not yet live A1.
+-
+-A reliable AI decision platform for urban traffic simulation.
+-
+-Five domain agents cooperate in Eclipse SUMO. Only **A1 Flow** can change traffic lights. The required controller is cooperative **Max-Pressure**. The **Synapse** layer retrieves evidence and explains immutable decisions. It never actuates signals.
+-
+-This repository holds the **settled specifications** for Kiro enhancement and later implementation. It is not yet a running simulator.
+-
+-The course requires **Design Thinking**. Stages 1–3 are complete. Prototype and Test are specified, not executed.
+-
+-| Stage | Status | Start here |
+-|---|---|---|
+-| 1 Empathize | Done | [`coflow5-empathize-pack.md`](coflow5-empathize-pack.md) |
+-| 2 Define | Done | [`coflow5-define-ideate.md`](coflow5-define-ideate.md) |
+-| 3 Ideate | Done | [`coflow5-define-ideate.md`](coflow5-define-ideate.md) |
+-| 4 Prototype | Planned | [`.kiro/specs/coflow5-reliable-agentic-platform/tasks.md`](.kiro/specs/coflow5-reliable-agentic-platform/tasks.md) |
+-| 5 Test | Planned | evaluation contract in the Kiro requirements |
+-
+-Kiro record of those steps: [`.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`](.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md).
+-
+-Agents read [`AGENT_GUIDE.md`](AGENT_GUIDE.md) first. Harness: [`docs/harness/how-it-works.md`](docs/harness/how-it-works.md). Queue: [`harness/queue.tsv`](harness/queue.tsv).
+-
+-Pattern: [harness-engineering-playbook](https://github.com/flyrank-bih/harness-engineering-playbook). Output style: [i-have-adhd](https://github.com/ayghri/i-have-adhd).
+-
+-## Course brief
+-
+-Source: `SUMO_forStudents.docx`, transcribed in [`docs/source/course-brief.md`](docs/source/course-brief.md).
+-
+-Challenge:
+-
+-> How might we use data and intelligent agents to make urban traffic more efficient, adaptive, and sustainable?
+-
+-Required outcomes:
+-
+-- a working prototype
+-- experiments under different traffic conditions
+-- comparison with an appropriate baseline
+-- data-driven strengths and limitations
+-
+-Evidence matters more than technological complexity.
+-
+-## Settled decisions
+-
+-| Decision | Choice |
+-|---|---|
+-| Product | Reliable AI decision platform, not an LLM traffic controller |
+-| Agents | A1 Flow, A2 Emergency, A3 Multimodal, A4 Situation, A5 Sustainability |
+-| Authority | Only A1 writes signals; A2–A5 ask; Synapse explains |
+-| Required control | Cooperative Max-Pressure, with deterministic safety |
+-| Baselines | Fixed-time and actuated |
+-| RL | Optional DQN after the cooperative core is frozen |
+-| Evaluation | Paired seeds, ablations, failure injection, honest null results |
+-| Data | Controlled 4×4 benchmark plus a Tunis OSM + TRANSTU GTFS showcase |
+-| Delivery | 12 weeks, six named builders, three pairs, one sealed queue row, CPU-first |
+-
+-ADRs: [`docs/adr/0001-reliable-ai-platform-boundary.md`](docs/adr/0001-reliable-ai-platform-boundary.md), [`docs/adr/0002-six-builders-one-queue-row.md`](docs/adr/0002-six-builders-one-queue-row.md), [`docs/adr/0003-cicd-devops-mlops.md`](docs/adr/0003-cicd-devops-mlops.md)
+-
+-Professor-facing book: [`CoFlow-5_Final_Project_Book.md`](CoFlow-5_Final_Project_Book.md). Wednesday 23 September 2026 is **proxy validation**, not stakeholder interviews.
+-
+-## Use these files in Kiro
+-
+-Open this repository in Kiro and use the spec at:
+-
+-```text
+-.kiro/specs/coflow5-reliable-agentic-platform/
+-  design-thinking.md
+-  requirements.md
+-  design.md
+-  tasks.md
+-```
+-
+-Steering:
+-
+-```text
+-.kiro/steering/product.md
+-CONTEXT.md
+-```
+-
+-Ask Kiro to enhance the final specs from this baseline **without dropping Design Thinking Stages 1–3**. Keep these constraints:
+-
+-1. Do not put an LLM in the Control plane.
+-2. Do not make reinforcement learning required.
+-3. Keep one signal writer and the recovery ladder `Max-Pressure -> actuated -> fixed-time`.
+-4. Keep Claim flags: no lives saved, no measured air quality, no best-episode headlines.
+-5. Prefer stronger acceptance criteria and smaller tasks over new frameworks.
+-
+-Copy this prompt into Kiro: [`.kiro/prompts/enhance-specs-trajectory.md`](.kiro/prompts/enhance-specs-trajectory.md).
+-
+-Kiro must follow the harness (queue, contracts, `gate.json`, exit codes) and the i-have-adhd output rules in `.kiro/steering/output-style.md`.
+-
+-## Document map
+-
+-| Need | File |
+-|---|---|
+-| Course brief | [`docs/source/course-brief.md`](docs/source/course-brief.md) |
+-| Design Thinking steps we did | [`.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`](.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md) |
+-| Empathize pack | [`coflow5-empathize-pack.md`](coflow5-empathize-pack.md) |
+-| Define and Ideate | [`coflow5-define-ideate.md`](coflow5-define-ideate.md) |
+-| Full Stage 1–3 book | [`CoFlow-5_System_Requirements_Book.md`](CoFlow-5_System_Requirements_Book.md) |
+-| Glossary | [`CONTEXT.md`](CONTEXT.md) |
+-| Architecture decision | [`docs/adr/0001-reliable-ai-platform-boundary.md`](docs/adr/0001-reliable-ai-platform-boundary.md) |
+-| Later CI/CD and MLOps | [`docs/adr/0003-cicd-devops-mlops.md`](docs/adr/0003-cicd-devops-mlops.md) |
+-| How to run SUMO | [`docs/how-to-run-sumo.md`](docs/how-to-run-sumo.md) |
+-| Kiro requirements | [`.kiro/specs/coflow5-reliable-agentic-platform/requirements.md`](.kiro/specs/coflow5-reliable-agentic-platform/requirements.md) |
+-| Kiro design | [`.kiro/specs/coflow5-reliable-agentic-platform/design.md`](.kiro/specs/coflow5-reliable-agentic-platform/design.md) |
+-| Kiro tasks | [`.kiro/specs/coflow5-reliable-agentic-platform/tasks.md`](.kiro/specs/coflow5-reliable-agentic-platform/tasks.md) |
+-| Long-form spec | [`.scratch/coflow5-reliable-ai-platform/spec.md`](.scratch/coflow5-reliable-ai-platform/spec.md) |
+-| Portfolio / stack | [`docs/architecture/coflow5-synapse-portfolio-design.md`](docs/architecture/coflow5-synapse-portfolio-design.md) |
+-| Project context | [`coflow5-project-context.md`](coflow5-project-context.md) |
+-
+-## Later deploy (not the smoke test)
+-
+-Hosted product is **read-only FastAPI + React over tagged evidence**. No SUMO in those containers. See [ADR-0003](docs/adr/0003-cicd-devops-mlops.md) and [`deploy/README.md`](deploy/README.md).
+-
+-- PR CI (no SUMO): `.github/workflows/pr.yml`
+-- Eval CI (SUMO-capable runner only): `.github/workflows/eval.yml`
+-- Local read-only demo: `cd deploy && docker compose up --build`
+-
+-Native Windows smoke remains `py -3.11 scripts\run_native_smoke.py`. Docker is not a row-01 requirement.
+-
+-## How to run SUMO
+-
+-See [`docs/how-to-run-sumo.md`](docs/how-to-run-sumo.md). Short version:
+-
+-```powershell
+-$env:SUMO_HOME = "C:\Program Files (x86)\Eclipse\Sumo"
+-$env:Path = "$env:SUMO_HOME\bin;" + $env:Path
+-cd C:\Users\dell\Downloads\sumo
+-py -3.11 scripts\watch_sumo.py smoke
+-```
+-
+-Press Play. That window is the map, not live A1. Headless A1: `py -3.11 scripts\generate_max_pressure_artifacts.py`. Live A1 window: `py -3.11 scripts\watch_sumo.py a1`.
+-
+-## Implementation status
+-
+-Row 01 is still ungated (`libsumo` blocked). Rows **02–10c** are gated on TraCI or deterministic evidence. The next approved row is **12 Synapse agents**, followed by **11 API -> 13 React -> 14 Tunis**. Row 15 stays blocked. Current matched evidence is one seed with mixed/negative Max-Pressure outcomes; no winner or superiority is claimed. Do not use `scripts\run_native_smoke.py` as the daily demo until an admin allows `libsumo`.
++# CoFlow-5 Synapse
++
++> **This branch is the TraCI prototype/scaffold**, parked off `main` so that work is not lost.
++> `main` stays the spec and Design Thinking focus. Row 01 (`libsumo`) is still blocked by Windows. Rows 02–09 ran through TraCI.
++> Watch the map: `py -3.11 scripts\watch_sumo.py smoke` then press Play. That is SUMO, not yet live A1.
++
++A reliable AI decision platform for urban traffic simulation.
++
++Five domain agents cooperate in Eclipse SUMO. Only **A1 Flow** can change traffic lights. The required controller is cooperative **Max-Pressure**. The **Synapse** layer retrieves evidence and explains immutable decisions. It never actuates signals.
++
++This repository holds the **settled specifications** for Kiro enhancement and later implementation. It is not yet a running simulator.
++
++The course requires **Design Thinking**. Stages 1–3 are complete. Prototype and Test are specified, not executed.
++
++| Stage | Status | Start here |
++|---|---|---|
++| 1 Empathize | Done | [`coflow5-empathize-pack.md`](coflow5-empathize-pack.md) |
++| 2 Define | Done | [`coflow5-define-ideate.md`](coflow5-define-ideate.md) |
++| 3 Ideate | Done | [`coflow5-define-ideate.md`](coflow5-define-ideate.md) |
++| 4 Prototype | Planned | [`.kiro/specs/coflow5-reliable-agentic-platform/tasks.md`](.kiro/specs/coflow5-reliable-agentic-platform/tasks.md) |
++| 5 Test | Planned | evaluation contract in the Kiro requirements |
++
++Kiro record of those steps: [`.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`](.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md).
++
++Agents read [`AGENT_GUIDE.md`](AGENT_GUIDE.md) first. Harness: [`docs/harness/how-it-works.md`](docs/harness/how-it-works.md). Queue: [`harness/queue.tsv`](harness/queue.tsv).
++
++Pattern: [harness-engineering-playbook](https://github.com/flyrank-bih/harness-engineering-playbook). Output style: [i-have-adhd](https://github.com/ayghri/i-have-adhd).
++
++## Course brief
++
++Source: `SUMO_forStudents.docx`, transcribed in [`docs/source/course-brief.md`](docs/source/course-brief.md).
++
++Challenge:
++
++> How might we use data and intelligent agents to make urban traffic more efficient, adaptive, and sustainable?
++
++Required outcomes:
++
++- a working prototype
++- experiments under different traffic conditions
++- comparison with an appropriate baseline
++- data-driven strengths and limitations
++
++Evidence matters more than technological complexity.
++
++## Settled decisions
++
++| Decision | Choice |
++|---|---|
++| Product | Reliable AI decision platform, not an LLM traffic controller |
++| Agents | A1 Flow, A2 Emergency, A3 Multimodal, A4 Situation, A5 Sustainability |
++| Authority | Only A1 writes signals; A2–A5 ask; Synapse explains |
++| Required control | Cooperative Max-Pressure, with deterministic safety |
++| Baselines | Fixed-time and actuated |
++| RL | Optional DQN after the cooperative core is frozen |
++| Evaluation | Paired seeds, ablations, failure injection, honest null results |
++| Data | Controlled single-junction (J0) benchmark (multi-junction planned) plus a Tunis OSM + TRANSTU GTFS showcase |
++| Delivery | 12 weeks, six named builders, three pairs, one sealed queue row, CPU-first |
++
++ADRs: [`docs/adr/0001-reliable-ai-platform-boundary.md`](docs/adr/0001-reliable-ai-platform-boundary.md), [`docs/adr/0002-six-builders-one-queue-row.md`](docs/adr/0002-six-builders-one-queue-row.md), [`docs/adr/0003-cicd-devops-mlops.md`](docs/adr/0003-cicd-devops-mlops.md)
++
++Professor-facing book: [`CoFlow-5_Final_Project_Book.md`](CoFlow-5_Final_Project_Book.md). Wednesday 23 September 2026 is **proxy validation**, not stakeholder interviews.
++
++## Use these files in Kiro
++
++Open this repository in Kiro and use the spec at:
++
++```text
++.kiro/specs/coflow5-reliable-agentic-platform/
++  design-thinking.md
++  requirements.md
++  design.md
++  tasks.md
++```
++
++Steering:
++
++```text
++.kiro/steering/product.md
++CONTEXT.md
++```
++
++Ask Kiro to enhance the final specs from this baseline **without dropping Design Thinking Stages 1–3**. Keep these constraints:
++
++1. Do not put an LLM in the Control plane.
++2. Do not make reinforcement learning required.
++3. Keep one signal writer and the recovery ladder `Max-Pressure -> actuated -> fixed-time`.
++4. Keep Claim flags: no lives saved, no measured air quality, no best-episode headlines.
++5. Prefer stronger acceptance criteria and smaller tasks over new frameworks.
++
++Copy this prompt into Kiro: [`.kiro/prompts/enhance-specs-trajectory.md`](.kiro/prompts/enhance-specs-trajectory.md).
++
++Kiro must follow the harness (queue, contracts, `gate.json`, exit codes) and the i-have-adhd output rules in `.kiro/steering/output-style.md`.
++
++## Document map
++
++| Need | File |
++|---|---|
++| Course brief | [`docs/source/course-brief.md`](docs/source/course-brief.md) |
++| Design Thinking steps we did | [`.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md`](.kiro/specs/coflow5-reliable-agentic-platform/design-thinking.md) |
++| Empathize pack | [`coflow5-empathize-pack.md`](coflow5-empathize-pack.md) |
++| Define and Ideate | [`coflow5-define-ideate.md`](coflow5-define-ideate.md) |
++| Full Stage 1–3 book | [`CoFlow-5_System_Requirements_Book.md`](CoFlow-5_System_Requirements_Book.md) |
++| Glossary | [`CONTEXT.md`](CONTEXT.md) |
++| Architecture decision | [`docs/adr/0001-reliable-ai-platform-boundary.md`](docs/adr/0001-reliable-ai-platform-boundary.md) |
++| Later CI/CD and MLOps | [`docs/adr/0003-cicd-devops-mlops.md`](docs/adr/0003-cicd-devops-mlops.md) |
++| How to run SUMO | [`docs/how-to-run-sumo.md`](docs/how-to-run-sumo.md) |
++| Kiro requirements | [`.kiro/specs/coflow5-reliable-agentic-platform/requirements.md`](.kiro/specs/coflow5-reliable-agentic-platform/requirements.md) |
++| Kiro design | [`.kiro/specs/coflow5-reliable-agentic-platform/design.md`](.kiro/specs/coflow5-reliable-agentic-platform/design.md) |
++| Kiro tasks | [`.kiro/specs/coflow5-reliable-agentic-platform/tasks.md`](.kiro/specs/coflow5-reliable-agentic-platform/tasks.md) |
++| Long-form spec | [`.scratch/coflow5-reliable-ai-platform/spec.md`](.scratch/coflow5-reliable-ai-platform/spec.md) |
++| Portfolio / stack | [`docs/architecture/coflow5-synapse-portfolio-design.md`](docs/architecture/coflow5-synapse-portfolio-design.md) |
++| Project context | [`coflow5-project-context.md`](coflow5-project-context.md) |
++
++## Later deploy (not the smoke test)
++
++Hosted product is **read-only FastAPI + React over tagged evidence**. No SUMO in those containers. See [ADR-0003](docs/adr/0003-cicd-devops-mlops.md) and [`deploy/README.md`](deploy/README.md).
++
++- PR CI (no SUMO): `.github/workflows/pr.yml`
++- Eval CI (SUMO-capable runner only): `.github/workflows/eval.yml`
++- Local read-only demo: `cd deploy && docker compose up --build`
++
++Native Windows smoke remains `py -3.11 scripts\run_native_smoke.py`. Docker is not a row-01 requirement.
++
++## How to run SUMO
++
++See [`docs/how-to-run-sumo.md`](docs/how-to-run-sumo.md). Short version:
++
++```powershell
++$env:SUMO_HOME = "C:\Program Files (x86)\Eclipse\Sumo"
++$env:Path = "$env:SUMO_HOME\bin;" + $env:Path
++cd C:\Users\dell\Downloads\sumo
++py -3.11 scripts\watch_sumo.py smoke
++```
++
++Press Play. That window is the map, not live A1. Headless A1: `py -3.11 scripts\generate_max_pressure_artifacts.py`. Live A1 window: `py -3.11 scripts\watch_sumo.py a1`.
++
++## Implementation status
++
++Row 01 is still ungated (`libsumo` blocked). Rows **02–10c** are gated on TraCI or deterministic evidence. The next approved row is **12 Synapse agents**, followed by **11 API -> 13 React -> 14 Tunis**. Row 15 stays blocked. Current matched evidence is one seed with mixed/negative Max-Pressure outcomes; no winner or superiority is claimed. Do not use `scripts\run_native_smoke.py` as the daily demo until an admin allows `libsumo`.
+diff --git a/docs/adr/0001-reliable-ai-platform-boundary.md b/docs/adr/0001-reliable-ai-platform-boundary.md
+index ed90b59..2213acd 100644
+--- a/docs/adr/0001-reliable-ai-platform-boundary.md
++++ b/docs/adr/0001-reliable-ai-platform-boundary.md
+@@ -27,7 +27,7 @@ CoFlow-5 will be presented as a **reliable AI decision platform for urban traffi
+ 8. Retrieval starts with exact local search; PostgreSQL/pgvector is added for SQL-backed provenance and the hosted read-only product. Pinecone is not the default.
+ 9. Cooperation, authority, evaluation, and failure recovery are the core. A shared DQN is an optional experiment after that core is frozen.
+ 10. The evaluation spine—baselines, paired seeds, invariant tests, failure injection, citations, abstention, latency, and cost—has priority over feature count.
+-11. The scenario ladder uses a controlled 4×4 benchmark plus a Tunis OSM/TRANSTU GTFS showcase with explicitly synthetic/calibrated road demand.
++11. The scenario ladder uses a controlled single-junction (J0) benchmark plus a Tunis OSM/TRANSTU GTFS showcase with explicitly synthetic/calibrated road demand (multi-junction planned).
+ 
+ ## Consequences
+ 
+diff --git a/docs/contracts/incident-schema.md b/docs/contracts/incident-schema.md
+new file mode 100644
+index 0000000..9a26cf2
+--- /dev/null
++++ b/docs/contracts/incident-schema.md
+@@ -0,0 +1,22 @@
++# Incident Schema v1
++**Status:** Draft (S0)
++**Scope:** Definitive structure for incidents in the CoFlow-5 Synapse system.
++
++## Core Incident Object
++Every incident must carry:
++- `incident_id`: Unique identifier.
++- `scenario_id`: Link to the scenario.
++- `type`: Enum [`flood`, `weather`, `emergency`, `police`, `pothole`, `closure`].
++- `location`: SUMO edge/lane IDs affected.
++- `start_time`: Simulation time of onset.
++- `duration_s`: Expected duration (or `null` for permanent).
++- `severity`: Float [0.0, 1.0] representing impact on capacity/speed.
++- `confidence`: Float [0.0, 1.0] for detected incidents.
++- `source`: Enum [`synthetic_scenario`, `scenario_engine`, `agent_detection`].
++
++## Event Mapping
++Incident effects must map to:
++- `edge_capacity_multiplier`: Reduction in max flow.
++- `speed_multiplier`: Reduction in free-flow speed.
++- `lane_closure`: Boolean for absolute closure.
++- `priority_request`: Trigger for A2 emergency priority.
+diff --git a/harness/queue.tsv b/harness/queue.tsv
+index ce716ff..3e89c8b 100644
+--- a/harness/queue.tsv
++++ b/harness/queue.tsv
+@@ -1,5 +1,5 @@
+ id	kind	status	contract
+-01-smoke-test	control	blocked	Pin SUMO and Python 3.11; measure throughput
++01-smoke-test	control	gated	Pin SUMO and Python 3.11; measure throughput
+ 02-evidence-bundle	integration	gated	Run manifest + Parquet + DuckDB join on run_id
+ 03-safety-mask	control	gated	One writer; illegal actions rejected
+ 04-baselines	eval	gated	Fixed-time and actuated on matched seeds
+@@ -8,11 +8,14 @@ id	kind	status	contract
+ 07-a2-a3	control	gated	Rule-based emergency and multimodal requests
+ 08-failure-injection	eval	gated	Drop messages; fail controller; kill Synapse
+ 09-eval-harness	eval	gated	Ablations, unfinished trips, no best episode
+-10-a4-a5	control	gated	Forecast ladder then eco advice
+-10b-max-pressure-trip-kpis	eval	gated	Matched Max-Pressure trips and run KPIs; Row 05 immutable
+-10c-evidence-page	product	gated	Deterministic real-run page with facts, reasons, safety, and limits
+-12-synapse-agents	product	todo	S1 plan and wait; S2 explain evidence; S3 audit or abstain; no TraCI
+-11-api	product	todo	Read-only FastAPI over frozen evidence after Synapse gates
+-13-react-precomputed	product	todo	UI reads artifacts only
++S0	spec	todo	Persona alias table; J0 honesty; incident schema v1
++D1	product	todo	Align deck slides with repo truth
++10p	control	todo	Pedestrian demand on J0; crossing state to A3
++10d	integration	todo	Integrated incident loop: engine, route guidance, A4, A5
++10e	eval	todo	Multi-seed evaluation with ablations and CIs
++12	product	todo	Synapse S1/S2/S3; verifier; golden set; no TraCI
++11	product	todo	Read-only FastAPI over frozen evidence
++13	product	todo	React dashboard: timeline, eval, and Synapse audit
++R	deploy	todo	Compose; tagged bundle; CI smoke tests
+ 14-tunis-showcase	data	todo	OSM + TRANSTU GTFS; synthetic demand labelled
+ 15-optional-dqn	optional	blocked	Only after feature freeze

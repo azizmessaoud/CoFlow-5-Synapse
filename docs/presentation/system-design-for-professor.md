@@ -89,7 +89,7 @@ Log (reason codes)  -->  LLM may *read* this later, never write lights
 ### Step 0 — simulation spine (week 1)
 
 - Pin **SUMO ≥ 1.24** + Python, git hash in every log.
-- One **4×4 grid** (or small real snippet later).
+- One controlled **J0 single-junction benchmark** (with multi-junction scale-up later).
 - Two dumb baselines: **fixed-time** and **actuated**.
 - Measure run speed (how many seeds we can afford).
 

@@ -14,7 +14,6 @@ import uuid
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from statistics import fmean
-from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SUMO_HOME = Path(r"C:\Program Files (x86)\Eclipse\Sumo")
@@ -24,6 +23,7 @@ SCENES = {
     "baselines": ROOT / "scenarios" / "baselines" / "baselines.sumocfg",
     "max-pressure": ROOT / "scenarios" / "max-pressure" / "max-pressure.sumocfg",
     "demo": ROOT / "scenarios" / "watch" / "watch.sumocfg",
+    "tunis": ROOT / "scenarios" / "tunis-showcase" / "tunis.sumocfg",
 }
 EVALUATION_REPORT = ROOT / "harness" / "work" / "09-eval-harness" / "artifacts" / "evaluation-report.json"
 MAX_PRESSURE_FOLLOWUP_GATE = ROOT / "harness" / "work" / "10b-max-pressure-trip-kpis" / "gate.json"
@@ -177,7 +177,7 @@ def evaluation_sentences(
     return str(baseline), gap
 
 
-def _display(value: float | int | str | None, *, decimals: int = 2) -> str:
+def _display(value: float | str | None, *, decimals: int = 2) -> str:
     if value is None:
         return "not in this watch run"
     if isinstance(value, float):
@@ -238,7 +238,9 @@ def watch_demo() -> int:
 def watch_a1() -> int:
     sys.path.insert(0, str(ROOT / "src"))
     from coflow5.evidence.max_pressure_artifacts import EVALUATION_SEED, _scenario_hash
-    from coflow5.sumo_adapter.max_pressure_runner import run_native_max_pressure_scenario
+    from coflow5.sumo_adapter.max_pressure_runner import (
+        run_native_max_pressure_scenario,
+    )
 
     config = SCENES["max-pressure"]
     print("Starting sumo-gui with TraCI A1 at one simulation second per wall-clock second.")

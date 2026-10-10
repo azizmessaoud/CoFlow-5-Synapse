@@ -1,6 +1,6 @@
 # CoFlow-5 Synapse Requirements
 
-**Status:** Final specification baseline  
+**Status:** Final specification baseline (S0 Patched)  
 **Workflow:** Requirements-first  
 **Source authority:** `SUMO_forStudents.docx` and `docs/source/course-brief.md`  
 **Decision authority:** `docs/adr/0001-reliable-ai-platform-boundary.md`  
@@ -15,7 +15,8 @@ CoFlow-5 Synapse answers the course challenge:
 
 The required project is an agentic system because five domain agents observe, decide, communicate, and cooperate under explicit authority. Reinforcement learning is not required. Cooperation, one-writer authority, evaluation, and failure recovery are the core.
 
-The course requires Design Thinking. Empathize, Define, and Ideate are complete. A working controlled Prototype and partial technical Test evidence now exist through gated Row 10c. Multi-seed inference, realistic A4/A5 value ablations, stakeholder validation, Synapse, API/UI, and Tunis remain incomplete. Spec enhancement shall keep the eight User Personas, the human-centred How-might-we, the chosen five-agent idea, and the rejected LLM-as-controller idea.
+## Persona Alias Table (S0)
+To resolve conflicts between the professor's finalized deck and the repository's canonical naming, the [Persona Alias Table](../../docs/contracts/persona-aliases.md) is the sole source of truth.
 
 ## Harness traceability
 
@@ -49,7 +50,7 @@ Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains trans
 ### Acceptance criteria
 
 1. THE specification SHALL record Design Thinking Stages 1–3 as completed work, with links to the Empathize pack and the Define/Ideate document.
-2. THE specification SHALL keep the eight User Personas Amara, David, Chidi, Rosa, Marcus, Yuki, Maria, and Omar.
+2. THE specification SHALL keep the six finalized User Personas (Amara, David, Chidi, Rosa, Marcus, Omar) as described in the Alias Table. (Note: Yuki and Maria have been re-tagged as infrastructure/internal personas to align with the professor-finalized 6-persona set and prioritize high-leverage validation cases).
 3. THE specification SHALL keep the refined How-might-we: serve every person on the network, not only the average car.
 4. THE specification SHALL keep the chosen Ideate result: one-writer A1, advisory A2–A5, deterministic safety, and non-actuating Synapse.
 5. THE specification SHALL keep rejected ideas rejected, including LLM signal control and five conversational LLM agents.
@@ -219,6 +220,10 @@ Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains trans
 6. THE SYSTEM SHALL evaluate retrieval recall at k, citation validity, event consistency, reason-code coverage, abstention, latency, token use, estimated cost, and fallback rate.
 7. THE SYSTEM SHALL treat LLM-as-judge as a secondary signal, not the sole reference.
 8. THE SYSTEM SHALL provide a deterministic template fallback that works without a hosted LLM.
+9. EVERY typed Synapse response SHALL include `run_id`, `scenario_hash`, `event_id`, `message_id`, `bundle_digest`, `corpus_hash`, and `query_hash`; non-applicable fields SHALL be explicit nulls.
+10. THE fallback state SHALL be exactly one of `verified`, `template`, or `abstain`; a missing event SHALL abstain, while missing policy support MAY return a template marked `policy_support_missing`.
+11. THE SYSTEM SHALL pin `corpus_hash` on every explanation and MAY cache only by `(bundle_digest, endpoint, query_hash)`.
+12. `abstention_rate` and `fallback_rate` SHALL be first-class metrics partitioned by endpoint, fallback state, corpus version, and time window.
 
 ## Requirement 13: API and operator interface
 
@@ -233,6 +238,11 @@ Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains trans
 5. THE operator interface SHALL show active controller and recovery state, agent messages, decisions and reason codes, comparisons, citations, and known limitations.
 6. THE hosted portfolio SHALL use precomputed SUMO evidence and MAY provide live bounded Synapse queries.
 7. THE SYSTEM SHALL NOT promise continuous cloud training.
+8. `HOSTED` SHALL have zero mutation and zero signal surface; `LOCAL_RUNNER` MAY mutate runs and proposals but SHALL also have zero signal surface.
+9. `POST /explanations` and `POST /audits` SHALL require `Idempotency-Key`.
+10. THE SYSTEM SHALL enforce named bounds for runs per comparison, events per page, and question length.
+11. Unsupported or abstaining domain outcomes SHALL return HTTP 200 with a typed payload; HTTP 4xx SHALL be reserved for malformed or over-limit requests.
+12. What-if lineage SHALL be `proposal -> human approval -> new run_id`; proposals SHALL be referenced by, never merged into, measured evidence.
 
 ## Requirement 14: Observability and security
 
@@ -245,6 +255,8 @@ Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains trans
 3. THE SYSTEM SHALL record corpus, parser, embedding, prompt, provider, model, and evaluator versions.
 4. THE SYSTEM SHALL NOT write credentials, secrets, or unnecessary personal information to logs, prompts, traces, or public artifacts.
 5. WHEN an approved prompt, model, embedding, or corpus changes, THE SYSTEM SHALL execute the golden regression set and report quality, latency, and cost deltas.
+6. THE SYSTEM SHALL preserve the seven response provenance fields through API, audit, explanation, and UI boundaries.
+7. THE hosted product SHALL remain usable from frozen artifacts without a hosted LLM through template fallback and typed abstention.
 
 ## Requirement 15: Delivery boundaries
 
@@ -258,4 +270,3 @@ Rows 02–10c are gated evidence on the working TraCI path; Row 01 remains trans
 4. THE team SHALL freeze the cooperative Max-Pressure evidence slice before adding optional RL.
 5. IF schedule or compute capacity is insufficient, THEN THE team SHALL cut optional DQN/MAPPO, local LLM serving, learned A5, neural forecasting, Redis, and civic planning analyses before safety, authority, evaluation, or failure recovery.
 6. THE required prototype SHALL remain verifiable without the hosted LLM.
-

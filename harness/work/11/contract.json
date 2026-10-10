@@ -1,0 +1,19 @@
+{
+  "contract_version": 1,
+  "id": "11",
+  "kind": "product",
+  "status": "pass",
+  "requirements": [
+    "typed run, event, comparison, explanation, audit, and approval operations",
+    "HOSTED has no proposal mutation surface",
+    "LOCAL_RUNNER proposal approval creates a new run identifier",
+    "idempotency keys are required for explanation and audit POST operations",
+    "events per page and runs per comparison are bounded",
+    "abstentions are HTTP 200 domain results",
+    "malformed and over-limit requests are explicit errors",
+    "no signal actuation surface"
+  ],
+  "artifacts": [
+    "api-contract.json"
+  ]
+}

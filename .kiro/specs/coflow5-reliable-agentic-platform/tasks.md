@@ -42,10 +42,12 @@ Design Thinking Stages 1–3 are already done. Do not re-invent User Personas or
 | 10c | Deterministic evidence page | Render controller, seed, trip, wait, request, reason, safety, and limitation facts without an LLM. |
 | 12 | Three bounded Synapse agents | S1 plans and waits; S2 explains frozen evidence; S3 audits or abstains; none can reach TraCI. |
 | 11 | Read-only API | Start after Row 12; expose frozen evidence without active-control authority. |
-| 13–14 | React evidence view and Tunis showcase | Start in that order after the API; cut from the bottom if needed. |
+| 13 | React evidence view | Start after the API; read frozen evidence only and preserve claim labels. |
+| R | Tagged bundle, Compose, and CI smoke tests | Package the offline walkthrough before the Tunis showcase. |
+| 14 | Tunis showcase | Start after packaging; label scheduled GTFS and synthetic/calibrated road demand separately. |
 | 15 | Optional DQN | Remains blocked until the cooperative core and required evidence/product rows freeze. |
 
-Rows 01–09 and the matched 10b evidence follow-up are never rewritten or cut. The human-approved execution order is 10 -> 10b -> 10c -> 12 -> 11 -> 13 -> 14; Row 15 stays blocked. If schedule contracts, cut in order 15, 14, 13, then 11 while retaining the deterministic evidence page and honest limits. Prototype and Test remain incomplete until their gates produce evidence; CAPTURE does not mark them complete.
+Rows 01–09 and the matched 10b evidence follow-up are never rewritten or cut. The human-approved execution order is S0 -> D1 -> 10p -> 10d -> 10e -> 12 -> 11 -> 13 -> R -> 14; Row 15 stays blocked. If schedule contracts, cut in order 15, 14, 13, then 11 while retaining the deterministic evidence page and honest limits. Prototype and Test remain incomplete until their gates produce evidence; CAPTURE does not mark them complete.
 
 ## 1. Toolchain and smoke test
 
@@ -170,6 +172,21 @@ _Check:_ changing an evidence value changes the page, while missing or invalid e
 
 _Check:_ a professor can read one evaluation report and see strengths, limitations, and failure classes.
 
+## Queue row 10e — J0 completion evidence
+
+- [ ] Produce at least five matched seeds for cooperative A1, actuated, and
+      fixed-time control.
+- [ ] Run A2, A3, A4, and A5 on/off ablations with pairwise KPI comparisons.
+- [ ] Record specialist, controller, and Synapse failure transitions with
+      previous mode, next mode, trigger, and simulation time.
+- [ ] Report safety, efficiency, emergency, pedestrian/transit, and
+      emission-proxy KPIs with honest null or negative outcomes.
+- [ ] Freeze the bundle and verify `run_id`, `scenario_hash`, `event_id`, and
+      `message_id` joins.
+
+_Check:_ the J0 matrix, ablations, and failure logs satisfy the frozen
+controlled-prototype completion contract without relying on Tunis or DQN.
+
 ## Queue row 08 — Failure recovery
 
 - [ ] Implement `Max-Pressure -> actuated -> fixed-time`.
@@ -198,6 +215,12 @@ _Check:_ re-ingestion keeps stable chunk identity for unchanged content.
 
 _Check:_ all three roles pass bounded golden tests, and killing Synapse leaves traffic actions unchanged for identical control inputs.
 
+_Contract overlay:_ every typed response carries the seven provenance fields
+(`run_id`, `scenario_hash`, `event_id`, `message_id`, `bundle_digest`,
+`corpus_hash`, `query_hash`); fallback is `verified`, `template`, or
+`abstain`; missing policy support is marked in template output; explanation
+caches use `(bundle_digest, endpoint, query_hash)`.
+
 ## Queue rows 11 and 13 — API and operator view
 
 Start Row 11 only after Row 12 gates; start Row 13 only after Row 11 gates.
@@ -206,8 +229,17 @@ Start Row 11 only after Row 12 gates; start Row 13 only after Row 11 gates.
 - [ ] Add idempotency keys, bounded queues, and structured errors.
 - [ ] Show controller/recovery state, messages, reason codes, citations, and limitations.
 - [ ] Serve hosted views from precomputed evidence.
+- [ ] Enforce `HOSTED` read-only and `LOCAL_RUNNER` run/proposal mutation
+      boundaries; neither profile exposes a signal surface.
+- [ ] Require `Idempotency-Key` on explanation and audit POSTs and enforce
+      named query bounds.
+- [ ] Return abstention as typed HTTP 200; reserve 4xx for malformed or
+      over-limit requests.
 
 _Check:_ the required prototype remains usable without a hosted LLM.
+
+_Contract overlay:_ preserve all seven response provenance fields and keep
+explanations, audits, and proposals beside immutable evidence.
 
 ## Queue row 12 — Observability and golden evals
 
@@ -218,14 +250,37 @@ _Check:_ the required prototype remains usable without a hosted LLM.
 
 _Check:_ changing a prompt produces a visible regression report.
 
+- [ ] Report first-class `abstention_rate` and `fallback_rate` by endpoint,
+      fallback state, corpus version, and time window.
+
+## Queue row R — Professor validation package
+
+- [ ] Provide one offline runnable walkthrough from frozen artifacts.
+- [ ] Provide one evidence index linking the J0 manifest, matched-seed
+      comparison, ablations, failure transitions, product responses, and
+      Tunis manifest.
+- [ ] Run the walkthrough in evidence-first order: J0 baselines, ablations
+      and failures, Synapse fallback states, then Tunis showcase.
+- [ ] Label every result as measured J0 evidence, proposed target, assumption,
+      literature finding, or Tunis showcase observation.
+- [ ] State that proxy validation is not interviewing and simulation is not
+      deployment evidence.
+
+_Check:_ the walkthrough succeeds with the hosted LLM unavailable and uses
+template fallback or typed abstention instead.
+
 ## Queue row 14 — Tunis showcase, after the grid is frozen
 
 - [ ] Import a bounded OSM subnetwork.
 - [ ] Import official TRANSTU scheduled GTFS and record source version.
 - [ ] Generate labelled synthetic or calibrated road demand.
-- [ ] Keep the 4×4 grid as the scientific comparison.
+- [ ] Keep J0 as the required scientific comparison; label any 4×4 work as
+      planned scale-up rather than completion evidence.
 
 _Check:_ reports distinguish scheduled transit data from synthetic road demand.
+
+_Contract overlay:_ Tunis is a showcase observation, not a matched-seed
+inference baseline and not deployment evidence.
 
 ## Queue row 15 — Optional DQN experiment, after feature freeze
 

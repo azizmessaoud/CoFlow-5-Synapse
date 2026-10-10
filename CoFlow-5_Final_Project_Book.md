@@ -62,9 +62,9 @@ The requested “five Ws” are **Who, What, Where, When, and Why**. We add **Ho
 
 | Question | CoFlow-5 answer |
 |---|---|
-| **Who?** | Eight research-informed User Personas; six named builders (Aziz, Eya, Fares, Aymen, Oumayma, Ranim); a professor/reviewer. Wednesday’s walkthrough is proxy validation, not interviews with the personas. |
+| **Who?** | Six validation User Personas plus Yuki and Maria as infrastructure personas; six named builders (Aziz, Eya, Fares, Aymen, Oumayma, Ranim); a professor/reviewer. Wednesday’s walkthrough is proxy validation, not interviews with the personas. |
 | **What?** | A reproducible SUMO prototype where five domain agents cooperate, only A1 writes lights, and every important decision is logged and testable. |
-| **Where?** | First in a controlled 4×4 SUMO benchmark; later in a bounded Tunis OSM + official TRANSTU scheduled-GTFS showcase with synthetic/calibrated road demand clearly labelled. |
+| **Where?** | First in the controlled single-junction J0 SUMO benchmark; later in a bounded Tunis OSM + official TRANSTU scheduled-GTFS showcase with synthetic/calibrated road demand clearly labelled. |
 | **When?** | Proxy-validate assumptions on 23 September 2026; build and test over 12 weeks; freeze the reliable core before optional additions. |
 | **Why?** | Average vehicle delay hides pedestrian safety, trip reliability, bus regularity, emergency externalities, local environmental displacement, and operational failure. |
 | **How?** | Design Thinking → sealed requirements → native smoke test → evidence bundle → safety and baselines → cooperative Max-Pressure → typed requests → failure injection → paired evaluation → product interface. |
@@ -142,7 +142,7 @@ Rejected as the chosen method: independent RL, LLM signal control, five conversa
 
 Wednesday’s session is **proxy validation**. It does **not** turn any User Persona into an interview-validated person. It records who in the team (± professor) discussed which assumptions, what changed on correction cards, and what remains **Not tested**.
 
-## 7. Empathize — the eight User Personas
+## 7. Empathize — six validation User Personas plus two infrastructure personas
 
 These profiles are research-informed design tools. Ages and situations help the team reason about needs; they are not claims about interviewed individuals.
 
@@ -318,13 +318,13 @@ Everyone listens. Nobody argues to “win approval.” The only prototype in the
 
 ## 11. Preparation checklist for tonight
 
-- Print or export the eight canvases from [personas-canvas.html](docs/presentation/personas-canvas.html).
+- Print or export the six validation canvases and two infrastructure canvases from [personas-canvas.html](docs/presentation/personas-canvas.html).
 - Prepare one problem card, one architecture card, and five agent cards. These are Possible Solutions, not a built system.
 - Prepare the shared journey: ambulance approaches while Amara is crossing, a late bus arrives, queues grow near Maria’s school street, and communication fails.
 - Create one Appendix A sheet per builder plus one for a professor if present.
 - Open the existing [Design Thinking presentation](docs/presentation/CoFlow-5-Synapse-DT-4DS.pptx) and [professor design note](docs/presentation/system-design-for-professor.md).
-- Rehearse the introduction once: “We are testing our assumptions. User Personas are research-informed. SUMO is not built.”
-- **30-minute fallback:** unprompted experience, one relevant User Persona, shared scenario, one failure question, ranking. Do not rush all eight personas.
+- Rehearse the introduction once: “We are testing our assumptions. User Personas are research-informed. J0 has a controlled evidence slice; the full product remains incomplete.”
+- **30-minute fallback:** unprompted experience, one relevant User Persona, shared scenario, one failure question, ranking. Do not rush all six validation personas and two infrastructure personas.
 
 ## 12. Two-hour proxy-validation workshop
 
@@ -339,7 +339,7 @@ Everyone listens. Nobody argues to “win approval.” The only prototype in the
 | 100–110 min | Failure scenario | “What should happen if messages, forecasts, or explanations stop?” | Recovery and trust expectations. |
 | 110–120 min | Ranking and close | “Choose the three needs we must prove first.” | Ranked needs and follow-up permission. |
 
-For a 30-minute individual session, use experience first, one relevant persona, the shared scenario, one failure question, and final ranking. Do not rush through all eight personas with every individual.
+For a 30-minute individual session, use experience first, one relevant persona, the shared scenario, one failure question, and final ranking. Do not rush through all six validation personas and two infrastructure personas with every individual.
 
 ## 13. Validation questions
 
@@ -562,7 +562,7 @@ Every transition records previous mode, next mode, trigger, simulation time, and
 
 | ID | Requirement |
 |---|---|
-| R0 | Preserve Design Thinking traceability and the eight User Personas. |
+| R0 | Preserve Design Thinking traceability and the six validation User Personas, with Yuki and Maria classified as infrastructure personas. |
 | R1 | Produce a working prototype, experiments, baselines, and honest strengths/limitations. |
 | R2 | Make runs reproducible with versions, hashes, seeds, status, timing, and artifacts. |
 | R3 | Enforce one-writer authority and deterministic signal safety. |

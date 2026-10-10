@@ -9,7 +9,7 @@
 > [!IMPORTANT]
 > **Historical/superseded architecture note (ADR-0001):** This preserved narrative records Design Thinking Stages 1–3; it is not the current controller specification. References to shared-policy MARL as Core A1 or to a generic `policy → Max-Pressure → actuated → fixed-time` ladder are superseded. Cooperative Max-Pressure is required, with recovery `Max-Pressure → actuated → fixed-time`; DQN is optional after the cooperative core freezes. Only A1 writes signals. Synapse is non-actuating and cannot reach TraCI. Personas are research-informed, not interview-validated, and no requirement IDs are changed by this note.
 
-**One-sentence summary:** CoFlow-5 Empathizes with eight people and a verified evidence trail; Defines human-centred needs (not "cut vehicle delay"); Ideates a five-agent hybrid where only A1 writes lights, others ask over a message bus, and an LLM may explain the log but never control SUMO.
+**One-sentence summary:** CoFlow-5 Empathizes with six validation personas and two infrastructure personas, then builds a verified evidence trail; Defines human-centred needs (not "cut vehicle delay"); Ideates a five-agent hybrid where only A1 writes lights, others ask over a message bus, and an LLM may explain the log but never control SUMO.
 
 ---
 
@@ -19,7 +19,7 @@ Stages 1–3 are the prompt we executed. Stage definitions follow the Interactio
 
 | Stage | Prompt (what we had to do) | CoFlow-5 output in this book |
 |---|---|---|
-| 1 Empathize | User-centric research: understand users, needs, underlying problems; consult experts; observe; set aside "throughput-only" assumptions | §1 — 8 personas, journeys, why each persona exists (evidence), claim flags |
+| 1 Empathize | User-centric research: understand users, needs, underlying problems; consult experts; observe; set aside "throughput-only" assumptions | §1 — 6 validation personas plus 2 infrastructure personas, journeys, why each persona exists (evidence), claim flags |
 | 2 Define | Organise Empathize findings; state human-centred problems (not company wishes); open Ideate with How-might-we | §2 — POV statements, HMW, system problem statement |
 | 3 Ideate | Many ideas, other viewpoints; Brainstorm / Worst Possible Idea / SCAMPER; then choose what to build | §3 — solutions per persona with evidence why, rejected ideas, architecture comparison, chosen 5-agent design |
 | 4–5 (next) | Prototype and Test | §8 — SUMO build order and experiments; **not executed** |
@@ -64,11 +64,11 @@ EMPATHIZE — Who suffers from traffic congestion?
 | Stage requirement | CoFlow-5 action |
 |---|---|
 | Consult experts | Literature: DfT TAG, FHWA, SCATS, Surtrac, PLOS One ALS, Kingsley school exposure, RESCO/T-REX on RL limits |
-| Observe users | Journey maps for 8 personas (crossing, corridor, depot, ambulance, control room, school street, incident desk) |
-| Immerse in environment | Planned SUMO worlds (4×4, later RESCO/realistic nets). Not yet run as the product; Empathize used published networks as context, not as our measured results |
+| Observe users | Journey maps for 6 validation personas plus 2 infrastructure personas (crossing, corridor, depot, ambulance, control room, school street, incident desk) |
+| Immerse in environment | Controlled J0 SUMO benchmark, with later scale-up/showcase work. Empathize used published networks as context, not as our measured results |
 | Set aside assumptions | 33-row evidence trail; claim flags; IMATM Tunis survey digits treated as placeholders |
 
-**The 8 personas**
+**The 6 validation personas plus 2 infrastructure personas**
 
 | ID | Persona | Who | Need (their words) |
 |---|---|---|---|
@@ -384,7 +384,7 @@ Shall = required. Should = keep unless ablation kills it. Must not = forbidden.
 
 ## Report-ready close
 
-- **Stage 1:** Eight personas; journeys; verified sources (wait 2×, TAG 0.4, bunching, EVP cost, SCATS audit, school exposure, incident share); claim flags.
+- **Stage 1:** Six validation personas plus two infrastructure personas; journeys; verified sources (wait 2×, TAG 0.4, bunching, EVP cost, SCATS audit, school exposure, incident share); claim flags.
 - **Stage 2:** Not "cut delay 15%." POV: control that only sees cars fails people. HMW: agents and data for every person — and for the second the radio dies.
 - **Stage 3:** Brainstorm, Worst Idea, SCAMPER, six architectures. Chosen: A1 Coordinator, A2 Emergency, A3 Ped/Transit, A4 Lookout, A5 Green Guardian, message bus, safety layer, LLM explainer only.
 

@@ -1,0 +1,24 @@
+{
+  "id": "12",
+  "title": "Deliver bounded Synapse explanations and audits",
+  "status": "pass",
+  "requirements": [
+    "seven-field provenance on every response",
+    "verified, template, and abstain fallback states",
+    "missing events abstain",
+    "missing policy support is marked template",
+    "corpus hash is pinned",
+    "cache key is bundle_digest, endpoint, query_hash",
+    "audits abstain when evidence does not support a claim",
+    "no TraCI or signal-actuation imports",
+    "golden evaluation metric pack"
+  ],
+  "validation": [
+    "tests/contracts/test_synapse_service.py",
+    "tests/api/test_synapse_api.py",
+    "tests/contracts/test_synapse_non_actuation.py"
+  ],
+  "artifacts": [
+    "artifacts/golden-metrics.json"
+  ]
+}

@@ -62,7 +62,7 @@ function arrow(s, x, y, w = 0.55, color = C.teal) {
   label(s, 'ESPRIT · 4DS · DESIGN THINKING', 0.7, 1.45, 7);
   heading(s, 'The light should see a person.', 2.0, 42);
   text(s, 'CoFlow-5 Synapse', 0.7, 3.2, 6, 0.45, 23, C.teal, { bold: true });
-  text(s, '8 personas  ·  5 agents  ·  1 signal writer', 0.7, 3.8, 9, 0.4, 19, C.white);
+  text(s, '6 validation + 2 infrastructure personas  ·  5 agents  ·  1 signal writer', 0.7, 3.8, 9, 0.4, 19, C.white);
   text(s, 'Illustrations—not interviews. [C02]', 0.7, 6.75, 6, 0.3, 12, C.mute);
 }
 
@@ -108,11 +108,11 @@ function arrow(s, x, y, w = 0.55, color = C.teal) {
   footer(s);
 }
 
-// 4 — Eight personas
+// 4 — Persona roster
 {
   const s = slide('Point at the one-word needs. Do not read biographies. Full evidence-backed cards are in the separate persona companion deck.');
   label(s, 'Empathize');
-  heading(s, 'One street. Eight human needs.', 0.8, 34);
+  heading(s, 'One street. Eight human perspectives.', 0.8, 34);
   faces.forEach((f, i) => {
     const x = 0.3 + i * 1.62;
     photo(s, f[0], x, 1.75, 1.48, 3.7);
