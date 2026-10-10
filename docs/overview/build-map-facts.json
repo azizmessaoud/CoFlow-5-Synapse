@@ -373,5 +373,39 @@
     "mmdc": false,
     "svg": "skipped; mmdc absent",
     "html": "inline SVG/CSS; no external network"
-  }
+  },
+  "agents": [
+    {
+      "id": "A1",
+      "purpose": "Controller",
+      "authority": "Sole intended write path through safety/executor"
+    },
+    {
+      "id": "A2",
+      "purpose": "Emergency requests",
+      "authority": "Advisory only"
+    },
+    {
+      "id": "A3",
+      "purpose": "Pedestrian/transit requests",
+      "authority": "Advisory only"
+    },
+    {
+      "id": "A4",
+      "purpose": "Incident/congestion assessment",
+      "authority": "Advisory only"
+    },
+    {
+      "id": "A5",
+      "purpose": "Emissions proxy",
+      "authority": "Advisory only"
+    },
+    {
+      "id": "shared-board",
+      "purpose": "Typed coordination",
+      "authority": "No signal writes"
+    }
+  ],
+  "integrated_coordination_proven": false,
+  "target": "Six junctions: J1-J5 signal control and J6 observer (professor approved)"
 }

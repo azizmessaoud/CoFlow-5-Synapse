@@ -130,3 +130,83 @@ This follows harness/queue.tsv; the owner decides changes.
 ## Claims and export
 
 Say simulation evidence, not real-world result. Do not claim lives saved, measured air quality, or a best controller. Mark decision_epoch and Tunis 5+1 planned, not done. Row 10e gate has five matched seeds. Mermaid CLI mmdc is absent, so SVG export was skipped and no packages were installed. The HTML uses inline SVG/CSS and no external network.
+
+## Agent roles, purpose, and tool boundaries
+
+The repository contains five bounded adviser/controller modules (A1–A5), which exceeds the requested minimum of three. Their existence does not prove that all five coordinate in a single live SUMO run. Coordination is a typed-message design; the integrated decision epoch remains the key gap.
+
+| Agent | Why it exists | Inputs and useful tools | Authority |
+|---|---|---|---|
+| A1 — Controller | Select a safe signal action from observed demand and adviser requests. | TraCI observations, Max-Pressure, typed board messages; `src/coflow5/control/a1_controller.py`, `max_pressure.py` | Proposes through the safety/executor boundary. It is the only intended path to signal writes. |
+| A2 — Emergency | Represent emergency-vehicle priority as an expiring request with route, next junction, ETA, urgency, benefit, and civilian externality. | Typed request and message-board publish; `src/coflow5/a2/emergency.py` | Advisory only; cannot actuate. |
+| A3 — Multimodal | Represent pedestrian clearance and conditional late-bus/transit priority. | Crossing/clearance state and transit request; `src/coflow5/a3/multimodal.py` | Advisory only; cannot actuate. |
+| A4 — Situation | Classify incidents and forecast congestion with provenance, confidence, horizon, model version, and staleness. | Incident/situation records; `src/coflow5/a4/situation.py` | Advisory only; cannot actuate. |
+| A5 — Sustainability | Estimate link-level emissions proxies and flag sensitive links or displaced impacts. | SUMO/HBEFA proxy inputs; `src/coflow5/a5/sustainability.py` | Advisory only; cannot actuate. |
+| Shared message board | Coordinate agents through typed, inspectable messages. | `src/coflow5/messaging/board.py` | Carries requests; it is not a signal writer. |
+
+These are bounded code modules and contracts, not evidence of five independently trained AI models. “Enough tools” means each role has access to the inputs and typed operations needed for its job, while only the safety-controlled executor writes signal states. Do not grant every agent direct TraCI or unrestricted tools.
+
+## SWOT grounded in the inspected feature branch
+
+- **Strengths:** one intended signal write boundary; typed adviser roles and message board; Row 10e has a passing declared gate with five matched seeds, eight ablation cells, and deterministic-repeat evidence; Synapse, API, dashboard, release, and Tunis showcase gates pass their declared contracts.
+- **Weaknesses:** no integrated `decision_epoch` was found; all-agent single-run coordination is unproven; the Row 01 gate file is absent; the Tunis data showcase does not prove the approved five signalized junctions plus one observer junction; README status is stale.
+- **Opportunities:** join the existing adviser, control, safety, and evidence paths in one reproducible run; use the professor-approved six-junction target; replay that run through the existing explanation and product chain.
+- **Threats:** main and feature histories differ; moving Row 14 earlier would alter the queue dependency and needs owner approval; unclear learned-model requirement and deadline; simulation evidence could be overstated as real-world impact.
+
+## Gaps and risks
+
+| Area | Verified state | Remaining work | Priority |
+|---|---|---|---|
+| Coordination | Row 10d passes its declared incident-advisory contract. | Implement and demonstrate one ordered epoch across A2–A5, board, A1, safety, SUMO, and evidence. | High |
+| Evaluation | Row 10e passes its declared five-seed/eight-cell contract, including deterministic repeat. | Evaluate the integrated runtime with predeclared matched runs and ablations; do not treat current gate as integration proof. | High |
+| Tunis network | Row 14 passes the OSM/GTFS showcase/data contract (six candidate locations). | Build/register and verify J1–J5 signal control plus J6 observer; current `netconvert --tls.guess` does not establish that control registry. | High |
+| Explainability | Row 12 and `SynapseService` (`explain`, `audit`, `metrics`, `event_summaries`) exist and pass their gate. | Replay final integrated evidence and verify explanations, citations, and abstention behavior on it. | Medium |
+| Product | Rows 11, 13, and R pass their declared API, dashboard, and release contracts. | Validate the final integrated run through these existing surfaces; they are not skeleton TODOs. | Medium |
+| Process | Feature contains the named milestones; main is a separate history and README is stale. | Owner chooses the durable source branch and reconciles narrative/status. | High |
+| Queue Row 01 | Queue labels it gated; `harness/work/01-smoke-test/gate.json` is absent. | Resolve the mismatch; current evidence is unverified, not a proven environment block. | High |
+
+Risk controls: keep the executor as the sole signal write site; preserve run IDs, input hashes, action hashes, and provenance end to end; fail closed on stale or malformed requests; do not claim learned intelligence unless an actual model and its evaluation are in scope; label the Tunis result as simulation/showcase evidence.
+
+## Owner decisions still needed
+
+1. Are learned models required, or are bounded rule-based/statistical advisers acceptable? What is the delivery deadline?
+2. Approve a `decision_epoch` completion contract for Row 10d, or keep integration as a separately named queue item?
+3. Should the queue be reordered to deliver the Tunis network before Row R? Row 14 currently depends on R; any change requires owner approval.
+4. Which contiguous Tunis corridor/bounding box and signal phases should define J1–J5, and what qualifies J6 as observer-only?
+5. Which branch should be the long-term source of truth? Six junctions (J1–J5 control, J6 observer) is already professor-approved.
+
+## Proposed 62-day completion plan (estimate, not queue status)
+
+The current queue remains authoritative. This is a planning proposal with dependencies, review points, and estimates; it does not silently reorder queue rows or declare gated work unfinished. Tasks involving Rows 10e, 12, 11, 13, R, and 14 are follow-up integration/verification on final evidence, not rebuilds of passing deliverables.
+
+| ID | Estimate | Deliverable |
+|---|---:|---|
+| P01 | Day 1 | Record the branch/source-of-truth decision; this build map already records current facts. |
+| P02 | Days 1–3 | Resolve learned-model requirement and deadline; six-junction target is already approved. |
+| P03 | Days 2–4 | Reconcile README narrative with queue/gate facts. |
+| P04 | Days 4–6 | Review and accept this evidence map. |
+| P05 | Days 7–8 | Approve or defer the Row 10d integrated-epoch completion contract. |
+| P06 | Days 8–9 | Freeze evidence keys and junction identities. |
+| P07 | Days 9–11 | Connect A2–A5 to the shared typed board in the integrated runner. |
+| P08 | Days 12–13 | Make A1 consume bounded requests and emit reason codes. |
+| P09 | Days 14–15 | Produce one run-ID trace from observation through requests, decision, action, trips, and evidence. |
+| P10 | Days 16–17 | Verify safety, Synapse isolation, and repeat hashes on the integrated run. |
+| P11 | Days 18–20 | Predeclare integrated evaluation conditions and metrics. |
+| P12 | Days 21–23 | Run at least five matched integrated scenarios for cooperative, actuated, and fixed-time controllers. |
+| P13 | Days 24–26 | Run integrated adviser on/off ablations. |
+| P14 | Days 27–28 | Define the Tunis junction registry schema. |
+| P15 | Days 29–31 | Select and document the contiguous corridor and junction classification. |
+| P16 | Days 32–34 | Build and run five controlled signal junctions plus J6 observer. |
+| P17 | Day 35 | Verify exactly five controlled writers and zero writes at J6. |
+| P18 | Days 36–38 | Replay final evidence through existing Synapse. |
+| P19 | Days 39–41 | Check explanation questions, citations, and abstentions on final evidence. |
+| P20 | Days 42–44 | Verify Synapse cannot start SUMO or use TraCI to change signals. |
+| P21 | Days 45–46 | Run a Synapse kill test and confirm action hashes do not change. |
+| P22 | Days 47–49 | Verify API provenance and abstentions for the final run. |
+| P23 | Days 50–52 | Verify dashboard views against a frozen final run. |
+| P24 | Days 53–55 | Verify remaining dashboard views and raw evidence links. |
+| P25 | Days 56–57 | Check claim labels and no-control guarantees. |
+| P26 | Days 58–60 | Check offline release hashes, secrets, and local-path leakage. |
+| P27 | Days 61–62 | Rehearse the demo and present limitations with evidence. |
+
+Re-estimate after owner decisions and integration findings; these day ranges are planning estimates, not a commitment or proof of completion.
