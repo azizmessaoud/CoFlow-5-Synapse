@@ -1,0 +1,14 @@
+{
+  "id": "10e",
+  "status": "blocked",
+  "reason": "REQUIRED_NATIVE_EVIDENCE_NOT_YET_CAPTURED",
+  "currentMatchedSeeds": [37],
+  "requiredMatchedSeedCount": 5,
+  "currentMissingEvidence": [
+    "matched controller rows for seeds 41, 43, 47, and 53",
+    "A2/A3/A4/A5 pairwise on/off native KPI comparisons",
+    "complete recovery transition rows for the completion bundle"
+  ],
+  "validator": "coflow5.evaluation.j0_completion.audit_j0_completion",
+  "claimBoundary": "No J0 completion claim is made while this audit is blocked."
+}

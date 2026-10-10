@@ -1,0 +1,35 @@
+{
+  "contract_version": 1,
+  "id": "10e",
+  "kind": "eval",
+  "stage": "test",
+  "depends_on": ["10d"],
+  "must_pass": [
+    "at least five matched J0 seeds contain cooperative, actuated, and fixed-time rows",
+    "A2, A3, A4, and A5 each have explicit on and off ablation cells",
+    "recovery evidence includes cooperative to actuated and actuated to fixed-time transitions",
+    "safety, efficiency, emergency, multimodal, and emission-proxy KPIs remain traceable",
+    "null and negative results remain visible",
+    "every result retains run_id, scenario_hash, and event/message references"
+  ],
+  "tests": [
+    "python -m pytest tests/contracts/test_j0_completion.py -q",
+    "python -m pytest tests/acceptance/test_evaluation_harness.py -q",
+    "python -m pytest tests/contracts/test_report_honesty.py -q"
+  ],
+  "artifacts": [
+    "artifacts/j0-completion-audit.json"
+  ],
+  "gate_checks": [
+    "completion validator passes",
+    "five matched seeds are observed, not merely planned",
+    "all ablation pairs and recovery transitions resolve to evidence",
+    "incomplete artifacts cannot enter the completion bundle"
+  ],
+  "imports_forbidden": [
+    "evaluation -> signal actuation",
+    "evaluation -> hosted LLM",
+    "simulation emergency time -> lives saved",
+    "HBEFA -> measured air quality"
+  ]
+}

@@ -4,9 +4,9 @@
 
 **Blocked by:** 04: Completing the integrated incident and advisory loop.
 
-**Status:** ready-for-agent
+**Status:** in-progress
 
-- [ ] At least five matched seeds are run for cooperative A1, actuated, and fixed-time control.
+- [ ] At least five matched seeds are run for cooperative A1, actuated, and fixed-time control. Validator and blocked audit are in place; native capture remains.
 - [ ] A2, A3, A4, and A5 each have on/off ablations with pairwise KPI comparisons.
 - [ ] Specialist, controller, communication, forecast, and Synapse failure cases record recovery transitions.
 - [ ] Safety, efficiency, emergency, pedestrian/transit, and emission-proxy KPIs are reported together.
