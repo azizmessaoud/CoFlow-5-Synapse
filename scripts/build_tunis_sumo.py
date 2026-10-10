@@ -58,7 +58,7 @@ def write_gui_overlay(net: Path) -> tuple[Path, Path]:
     settings = SCENARIO / "tunis.settings.xml"
     settings.write_text(
         f"""<viewsettings>
-  <viewport x="{center_x:.2f}" y="{center_y:.2f}" zoom="3.0"/>
+  <viewport x="{center_x:.2f}" y="{center_y:.2f}" zoom="0.65"/>
   <delay value="100"/>
   <scheme name="real world"/>
 </viewsettings>
