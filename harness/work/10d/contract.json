@@ -1,0 +1,33 @@
+{
+  "contract_version": 1,
+  "id": "10d",
+  "kind": "integration",
+  "stage": "prototype-test",
+  "depends_on": ["10p"],
+  "must_pass": [
+    "an injected incident is traceable through bounded A4 advice",
+    "A5 advice is proxy-labelled and carries displacement-aware context",
+    "A1 records deterministic dispositions for advisory requests",
+    "expired advisory input preserves local control",
+    "the loop runs without an LLM or learned controller"
+  ],
+  "tests": [
+    "python -m pytest tests/acceptance/test_integrated_advisory_loop.py -q",
+    "python -m pytest tests/acceptance/test_a4_situation.py tests/acceptance/test_a5_sustainability.py -q"
+  ],
+  "artifacts": [
+    "artifacts/j0-advisory-loop.json"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named tests exit 0",
+    "A4 source time, horizon, confidence, expiry, and model identity are present",
+    "A5 advice is labelled an emission proxy and measured_air_quality is false",
+    "expired advice does not change the selected local action",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "a4|a5 -> traci|libsumo|signal executor",
+    "advisory loop -> hosted LLM|langgraph"
+  ]
+}
