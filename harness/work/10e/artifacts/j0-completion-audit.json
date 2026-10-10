@@ -1,14 +1,10 @@
 {
   "id": "10e",
-  "status": "blocked",
-  "reason": "REQUIRED_ABLATION_EVIDENCE_NOT_YET_CAPTURED",
+  "status": "pass",
+  "reason": null,
   "currentMatchedSeeds": [37, 41, 43, 47, 53],
   "requiredMatchedSeedCount": 5,
-  "currentMissingEvidence": [
-    "complete recovery transition rows for the completion bundle",
-    "specialist, controller, communication, forecast, and Synapse failure rows",
-    "compatible repeated-run determinism checks"
-  ],
+  "currentMissingEvidence": [],
   "validator": "coflow5.evaluation.j0_completion.audit_j0_completion",
-  "claimBoundary": "No J0 completion claim is made while this audit is blocked."
+  "claimBoundary": "Controlled J0 evidence only; no deployment, lives-saved, or measured-air-quality claim."
 }

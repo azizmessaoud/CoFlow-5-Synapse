@@ -194,3 +194,20 @@ def test_j0_completion_requires_ablation_provenance() -> None:
     assert "ABLATION_PROVENANCE_MISSING" in {
         finding.code for finding in audit.findings
     }
+
+
+def test_j0_completion_rejects_duplicate_recovery_event_ids() -> None:
+    recovery = _recovery()
+    recovery[1]["event_id"] = "same-event"
+    recovery[0]["event_id"] = "same-event"
+
+    audit = audit_j0_completion(
+        _runs((37, 41, 43, 47, 53)),
+        _ablations_with_kpis(),
+        recovery,
+        repeat_checks=_repeat_checks(),
+    )
+
+    assert "RECOVERY_EVENT_ID_DUPLICATE" in {
+        finding.code for finding in audit.findings
+    }

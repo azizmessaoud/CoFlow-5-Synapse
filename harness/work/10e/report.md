@@ -10,6 +10,11 @@ A2/A3/A4/A5 on/off cell in `artifacts/j0-ablations.json`. These are native
 controller observations with bounded advisory inputs; they are not deployment
 or causal claims.
 
+The completion bundle joins those native rows to the existing Row 07, Row 08,
+and Row 10d evidence using real run, scenario, event, and message identifiers.
+Its audit passes, while the claim boundary remains limited to controlled
+simulation and labelled deterministic fixtures.
+
 The blocked audit preserves the missing evidence explicitly and makes no
 completion, deployment, air-quality, or lives-saved claim.
 

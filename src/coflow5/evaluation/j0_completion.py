@@ -157,6 +157,14 @@ def audit_j0_completion(
         for row in recovery_events
         if row.get("failure_kind")
     }
+    recovery_event_ids = [
+        row.get("event_id") for row in recovery_events if row.get("event_id")
+    ]
+    if len(recovery_event_ids) != len(set(recovery_event_ids)):
+        findings.append(J0CompletionFinding(
+            "RECOVERY_EVENT_ID_DUPLICATE",
+            "recovery rows require unique event_id values",
+        ))
     missing_failures = sorted(REQUIRED_FAILURE_KINDS - failure_kinds)
     if missing_failures:
         findings.append(J0CompletionFinding(

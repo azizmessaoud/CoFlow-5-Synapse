@@ -1,0 +1,44 @@
+{
+  "id": "10e",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:b3931d7b76ddbff8f5577d85a7ce44c7b41137aac4e35448b1384895369a949f",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_j0_completion.py tests/contracts/test_j0_completion_bundle.py -q",
+      "exitCode": 0,
+      "output": "11 passed"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_j0_ablation_evidence.py tests/contracts/test_j0_matched_evidence.py -q",
+      "exitCode": 0,
+      "output": "2 passed"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/matched-runs.json",
+    "artifacts/j0-ablations.json",
+    "artifacts/j0-completion-bundle.json",
+    "artifacts/j0-completion-audit.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "checks": {
+    "matchedSeeds": [
+      37,
+      41,
+      43,
+      47,
+      53
+    ],
+    "ablationCells": 8,
+    "recoveryFailureKinds": [
+      "communication",
+      "controller",
+      "forecast",
+      "specialist",
+      "synapse"
+    ],
+    "deterministicRepeat": true,
+    "claimBoundaryPreserved": true
+  }
+}

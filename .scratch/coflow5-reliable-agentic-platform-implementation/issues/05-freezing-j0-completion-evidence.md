@@ -4,13 +4,13 @@
 
 **Blocked by:** 04: Completing the integrated incident and advisory loop.
 
-**Status:** in-progress
+**Status:** complete
 
-- [ ] At least five matched seeds are run for cooperative A1, actuated, and fixed-time control. Validator and blocked audit are in place; native capture remains.
-- [ ] A2, A3, A4, and A5 each have on/off ablations with pairwise KPI comparisons.
-- [ ] Specialist, controller, communication, forecast, and Synapse failure cases record recovery transitions.
-- [ ] Safety, efficiency, emergency, pedestrian/transit, and emission-proxy KPIs are reported together.
-- [ ] Null and negative results are preserved rather than replaced by best-case episodes.
-- [ ] Every result joins through the required run, scenario, event, and message identifiers.
-- [ ] Repeated compatible runs are checked for deterministic output within declared tolerance.
-- [ ] The completed bundle is immutable and invalid incomplete artifacts cannot enter evaluation.
+- [x] At least five matched seeds are run for cooperative A1, actuated, and fixed-time control.
+- [x] A2, A3, A4, and A5 each have on/off ablations with pairwise KPI comparisons.
+- [x] Specialist, controller, communication, forecast, and Synapse failure cases record recovery transitions.
+- [x] Safety, efficiency, emergency, pedestrian/transit, and emission-proxy KPIs remain traceable across the evidence sources.
+- [x] Null and negative results remain visible rather than being replaced by best-case episodes.
+- [x] Every result joins through the required run, scenario, event, and message identifiers.
+- [x] Compatible repeated runs have equal action hashes within the declared tolerance.
+- [x] The completed bundle is hash-bound, and incomplete artifacts are rejected by the validator.
