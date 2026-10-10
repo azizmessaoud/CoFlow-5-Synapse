@@ -10,7 +10,7 @@ id	kind	status	requires	contract
 09-eval-harness	eval	gated	08-failure-injection	Ablations, unfinished trips, no best episode
 S0	spec	gated		Persona alias table; J0 honesty; incident schema v1
 D1	product	gated	S0	Align deck slides with repo truth
-10p	control	todo	D1	Pedestrian demand on J0; crossing state to A3
+10p	control	gated	D1	Pedestrian demand on J0; crossing state to A3
 10d	integration	todo	10p	Integrated incident loop: engine, route guidance, A4, A5
 10e	eval	todo	10d	J0: >=5 matched seeds; A2-A5 on/off ablations; recovery logs; honest KPIs; nulls allowed
 12	product	todo	10e	Synapse S1/S2/S3; seven-field provenance; verified/template/abstain; golden set; no TraCI

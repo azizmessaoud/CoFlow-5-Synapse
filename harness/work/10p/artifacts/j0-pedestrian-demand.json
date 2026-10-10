@@ -1,0 +1,25 @@
+{
+  "id": "10p",
+  "status": "pass",
+  "evidence_basis": "deterministic seeded controlled J0 demand fixture; not a roadside measurement",
+  "run_id": "j0-pedestrian-seed-11",
+  "scenario_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "seed": 11,
+  "crossing_id": "north_south_crossing",
+  "signal_id": "J0",
+  "pedestrians": [
+    {"pedestrian_id": "ped-001", "event_id": "j0-pedestrian-seed-11:ped-001:occupancy", "arrival_time": 14.048, "clearance_start": 14.048, "clearance_end": 22.048, "wait_seconds": 0.0, "clearance_truncated": false},
+    {"pedestrian_id": "ped-002", "event_id": "j0-pedestrian-seed-11:ped-002:occupancy", "arrival_time": 14.313, "clearance_start": 22.048, "clearance_end": 30.048, "wait_seconds": 7.735, "clearance_truncated": false},
+    {"pedestrian_id": "ped-003", "event_id": "j0-pedestrian-seed-11:ped-003:occupancy", "arrival_time": 15.157, "clearance_start": 30.048, "clearance_end": 38.048, "wait_seconds": 14.891, "clearance_truncated": false},
+    {"pedestrian_id": "ped-004", "event_id": "j0-pedestrian-seed-11:ped-004:occupancy", "arrival_time": 16.195, "clearance_start": 38.048, "clearance_end": 46.048, "wait_seconds": 21.853, "clearance_truncated": false},
+    {"pedestrian_id": "ped-005", "event_id": "j0-pedestrian-seed-11:ped-005:occupancy", "arrival_time": 23.484, "clearance_start": 46.048, "clearance_end": 54.048, "wait_seconds": 22.564, "clearance_truncated": false}
+  ],
+  "metrics": {
+    "pedestrian_count": 5,
+    "mean_wait_s": 13.4086,
+    "p95_wait_s": 22.4218,
+    "max_wait_s": 22.564,
+    "clearance_truncations": 0
+  },
+  "claim_boundary": "Controlled simulation fixture only; no deployment, roadside measurement, or lives-saved claim."
+}
