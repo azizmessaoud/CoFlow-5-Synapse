@@ -97,7 +97,9 @@ def audit_j0_completion(
 
     ablation_rows = tuple(ablations)
     ablation_pairs = {
-        (str(row.get("agent")), bool(row.get("enabled"))) for row in ablation_rows
+        (str(row.get("agent")), row.get("enabled"))
+        for row in ablation_rows
+        if isinstance(row.get("enabled"), bool)
     }
     for agent in sorted(REQUIRED_ABLATIONS):
         if (agent, True) not in ablation_pairs or (agent, False) not in ablation_pairs:
@@ -108,6 +110,16 @@ def audit_j0_completion(
         pair_rows = [
             row for row in ablation_rows if str(row.get("agent")) == agent
         ]
+        if any(
+            not row.get("run_id")
+            or not isinstance(row.get("event_ids"), (list, tuple))
+            or not isinstance(row.get("message_ids"), (list, tuple))
+            for row in pair_rows
+        ):
+            findings.append(J0CompletionFinding(
+                "ABLATION_PROVENANCE_MISSING",
+                f"{agent} on/off cells require run_id, event_ids, and message_ids",
+            ))
         pair_kpis = [
             row.get("kpis")
             for row in pair_rows

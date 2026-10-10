@@ -36,6 +36,9 @@ def _ablations_with_kpis() -> list[dict[str, object]]:
     return [
         {
             **row,
+            "run_id": f"ablation-{row['agent']}-{row['enabled']}",
+            "event_ids": [f"event-{row['agent']}-{row['enabled']}"],
+            "message_ids": [f"message-{row['agent']}-{row['enabled']}"],
             "kpis": {"mean_waiting_time_s": 10.0 if row["enabled"] else 12.0},
         }
         for row in _ablations()
@@ -157,5 +160,37 @@ def test_j0_completion_requires_pairwise_numeric_kpis() -> None:
 
     assert not audit.pass_gate
     assert "ABLATION_KPI_COMPARISON_MISSING" in {
+        finding.code for finding in audit.findings
+    }
+
+
+def test_j0_completion_does_not_coerce_string_ablation_flags() -> None:
+    ablations = _ablations_with_kpis()
+    ablations[0]["enabled"] = "false"
+
+    audit = audit_j0_completion(
+        _runs((37, 41, 43, 47, 53)),
+        ablations,
+        _recovery(),
+        repeat_checks=_repeat_checks(),
+    )
+
+    assert not audit.pass_gate
+    assert "ABLATION_PAIR_MISSING" in {finding.code for finding in audit.findings}
+
+
+def test_j0_completion_requires_ablation_provenance() -> None:
+    ablations = _ablations_with_kpis()
+    ablations[0].pop("message_ids")
+
+    audit = audit_j0_completion(
+        _runs((37, 41, 43, 47, 53)),
+        ablations,
+        _recovery(),
+        repeat_checks=_repeat_checks(),
+    )
+
+    assert not audit.pass_gate
+    assert "ABLATION_PROVENANCE_MISSING" in {
         finding.code for finding in audit.findings
     }
