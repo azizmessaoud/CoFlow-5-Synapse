@@ -11,7 +11,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PBF = Path(r"C:\Users\dell\Downloads\ai agent prototype\tunisia-261009.osm.pbf")
 SCENARIO = ROOT / "scenarios" / "tunis-showcase"
-BBOX = (10.170, 36.790, 10.190, 36.805)
+# Wider Tunis display extent supplied for the visual showcase:
+# left, bottom, right, top.
+BBOX = (10.127879, 36.787714, 10.233358, 36.820741)
 JUNCTION_IDS = (
     "5294059357",
     "287386655",

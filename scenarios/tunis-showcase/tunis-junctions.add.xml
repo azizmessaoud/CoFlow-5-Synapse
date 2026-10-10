@@ -1,8 +1,8 @@
 <additional>
-  <poi id="tunis-j1" x="1640.57" y="1458.33" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J1 (5294059357)"/>
-  <poi id="tunis-j2" x="984.74" y="1349.72" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J2 (287386655)"/>
-  <poi id="tunis-j3" x="1835.91" y="838.11" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J3 (287837812)"/>
-  <poi id="tunis-j4" x="979.56" y="1520.89" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J4 (287863982)"/>
-  <poi id="tunis-j5" x="1052.49" y="1766.27" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J5 (387151856)"/>
-  <poi id="tunis-j6" x="1070.46" y="1380.83" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J6 (517939913)"/>
+  <poi id="tunis-j1" x="5957.08" y="3030.58" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J1 (5294059357)"/>
+  <poi id="tunis-j2" x="5301.25" y="2921.97" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J2 (287386655)"/>
+  <poi id="tunis-j3" x="6152.42" y="2410.37" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J3 (287837812)"/>
+  <poi id="tunis-j4" x="5296.06" y="3093.14" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J4 (287863982)"/>
+  <poi id="tunis-j5" x="5368.99" y="3338.52" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J5 (387151856)"/>
+  <poi id="tunis-j6" x="5386.96" y="2953.08" type="selected-junction" color="1,0.2,0.1" layer="100" lonLat="false" name="Tunis J6 (517939913)"/>
 </additional>
