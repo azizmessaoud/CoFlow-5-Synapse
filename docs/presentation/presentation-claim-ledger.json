@@ -111,9 +111,15 @@
     {
       "id": "C15",
       "classification": "official/open data source",
-      "safe_wording": "A future Tunis showcase may use OpenStreetMap geometry and official scheduled TRANSTU datasets; format must be verified and road demand remains synthetic or calibrated until observed data is sourced.",
+      "safe_wording": "The Tunis showcase may use OpenStreetMap geometry and official scheduled TRANSTU GTFS from the Ministry of Transport open-data portal; road demand remains synthetic or calibrated until observed data is sourced.",
       "source": "Tunisia Ministry of Transport open-data portal and OpenStreetMap",
-      "url": "https://data.transport.tn/fr/"
+      "url": "https://catalogue-data.transport.tn/fr/dataset/horaires-des-voyages-de-la-transtu-gtfs"
+    },
+    {
+      "id": "C15e",
+      "classification": "Empathize citation precision",
+      "safe_wording": "Transfer sources support mechanisms or measurement methods; they do not establish Tunisian magnitudes. A citation ledger records title, scope, locus status, and transfer limits; remaining from-prior-pack page loci require human verification before submission.",
+      "source": ".scratch/coflow5-empathize/research/citation-ledger.md; issues/06-citation-precision.md"
     },
     {
       "id": "C16",

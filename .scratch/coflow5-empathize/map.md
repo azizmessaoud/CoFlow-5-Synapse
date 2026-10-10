@@ -18,10 +18,15 @@ One canonical Empathize pack with four top-level sections — User Personas, Use
 
 - [Binary sources](issues/04-binary-sources.md): Unique Empathize claims live in the IMATM report (six Tunis User Personas, S-1–S-10); the PDF is architecture slides; `SUMO_forStudents.docx` is a brief with no roster. Notes: [binary-sources.md](research/binary-sources.md).
 - Empathize pack filename: [`coflow5-empathize-pack.md`](../../coflow5-empathize-pack.md) — four top-level sections (User Personas, User Journeys, Evidence, Possible Solution). v2 eight User Personas including operators. IMATM names are an alternate roster, not extra people.
+- [Tunisia practice Evidence](research/tunisia-practice-evidence.md): Empathize leads with TRANSTU, Décret 2000-149, MEHAT signalisation, ANPE, CODATU–AFD, official GTFS; SCATS/Surtrac/SCOOT are transfer-only; simulation honesty flags kept.
+- [World truths + metrics](research/world-truths-and-metrics.md): FHWA ATSPM/ASCT MOEs, reliability indices, TIM, TSP, ped, EVP, operator, emission-proxy families mapped to the eight User Personas; SMART targets stay proposed.
+- [Insight → Evidence → Metric](research/insight-evidence-alignment.md): I-1…I-10 checked detail-by-detail; Table 9 ▲ excluded; rejected framings recorded. Evidence bar: [03-evidence-bar.md](issues/03-evidence-bar.md) resolved.
+- **Empathize alignment verdict (wayfinder):** conceptual spine passes. Wording refined (I-1 soft WTP; I-3 space; I-4 wait/clearance/completion; I-5 dual mechanisms; I-7 stops lever; I-8≠I-9). Citation precision gate: [06-citation-precision.md](issues/06-citation-precision.md) resolved with [citation-ledger.md](research/citation-ledger.md); human page-verify remains for `from-prior-pack` loci only.
 
 ## Not yet specified
 
 - How Possible Solution cites A1–A5 beyond the evaluation-accountability table already in the pack.
+- Human verification of remaining `from-prior-pack` page loci in the citation ledger (before professor submission).
 
 ## Out of scope
 
