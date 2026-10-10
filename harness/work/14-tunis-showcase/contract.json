@@ -3,13 +3,16 @@
   "id": "14-tunis-showcase",
   "kind": "data",
   "status": "blocked",
-  "blocked_reason": "The repository does not contain an official TRANSTU GTFS archive or a retrieval record.",
-  "unblock": "Provide an official TRANSTU GTFS ZIP with retrieval metadata, then run scripts/prepare_tunis_showcase.py.",
+  "blocked_reason": "Official TRANSTU GTFS and retrieval metadata are absent; pyosmium native DLL loading is also blocked by Windows application-control policy.",
+  "unblock": "Provide an official TRANSTU GTFS ZIP with retrieval metadata, allow pyosmium/osmium native DLLs or run extraction on a permitted host, then run both Tunis scripts.",
   "requirements": [
     "bounded OSM subnetwork with source identity and version",
     "official TRANSTU scheduled GTFS with retrieval provenance",
     "synthetic or calibrated road demand explicitly labelled",
     "scheduled transit separated from simulated road outcomes",
     "Tunis claims remain showcase-only"
+  ],
+  "artifacts": [
+    "pbf-source.json"
   ]
 }
