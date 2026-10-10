@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 
-
 REQUIRED_CONTROLLERS = frozenset(
     {"cooperative-max-pressure", "actuated", "fixed-time"}
 )
