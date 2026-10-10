@@ -54,7 +54,7 @@ Evidence matters more than technological complexity.
 | Baselines | Fixed-time and actuated |
 | RL | Optional DQN after the cooperative core is frozen |
 | Evaluation | Paired seeds, ablations, failure injection, honest null results |
-| Data | Controlled 4×4 benchmark plus a Tunis OSM + TRANSTU GTFS showcase |
+| Data | Controlled single-junction (J0) benchmark (multi-junction planned) plus a Tunis OSM + TRANSTU GTFS showcase |
 | Delivery | 12 weeks, six named builders, three pairs, one sealed queue row, CPU-first |
 
 ADRs: [`docs/adr/0001-reliable-ai-platform-boundary.md`](docs/adr/0001-reliable-ai-platform-boundary.md), [`docs/adr/0002-six-builders-one-queue-row.md`](docs/adr/0002-six-builders-one-queue-row.md), [`docs/adr/0003-cicd-devops-mlops.md`](docs/adr/0003-cicd-devops-mlops.md)
