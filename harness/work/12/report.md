@@ -9,6 +9,6 @@ boundary.
 
 Validation: 6 focused tests passed, including the existing non-actuation
 contract. Over-limit questions are explicit 422 client errors and abstentions
-remain HTTP 200 domain responses. The golden metric pack for latency, cost, and
-fallback-rate reporting remains the next bounded step; this row is not gated
-until that evidence exists.
+remain HTTP 200 domain responses. The golden metric pack records citation
+validity, event consistency, fallback state, abstention behavior, latency,
+cost, and the boundary against TraCI and signal actuation.

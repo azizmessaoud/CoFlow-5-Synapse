@@ -59,3 +59,33 @@ def test_question_length_is_an_explicit_client_error() -> None:
     )
 
     assert response.status_code == 422
+
+
+def test_hosted_has_no_proposal_mutation_surface() -> None:
+    response = _client().post("/proposals", json={"run_id": "run-1"})
+
+    assert response.status_code == 405
+
+
+def test_local_proposal_approval_creates_new_run_lineage() -> None:
+    client = TestClient(create_app(profile="LOCAL_RUNNER"))
+    # The local profile contract is tested through the API boundary; no signal
+    # executor is installed in this app.
+    created = client.post("/proposals", json={"run_id": "run-1"})
+    assert created.status_code == 201
+    proposal_id = created.json()["proposal_id"]
+    approved = client.post(f"/proposals/{proposal_id}/approve")
+    assert approved.status_code == 200
+    assert approved.json()["approved_run_id"] != "run-1"
+
+
+def test_api_rejects_unbounded_event_and_comparison_requests() -> None:
+    client = _client()
+
+    events = client.get("/events", params=[("event_ids", str(i)) for i in range(101)])
+    comparisons = client.get(
+        "/comparisons", params=[("run_ids", str(i)) for i in range(6)]
+    )
+
+    assert events.status_code == 422
+    assert comparisons.status_code == 422

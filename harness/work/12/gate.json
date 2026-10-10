@@ -1,0 +1,29 @@
+{
+  "id": "12",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:2f843309e254ad9bd2f672a40ba79f75f6744e7fc677a7c87a1359e6ce19c3fd",
+  "testsRun": [
+    {
+      "command": "py -3.11 -m pytest tests/contracts/test_synapse_service.py tests/api/test_synapse_api.py tests/contracts/test_synapse_non_actuation.py -q",
+      "exitCode": 0,
+      "output": "9 passed"
+    },
+    {
+      "command": "ruff check src/coflow5/synapse/service.py src/coflow5/api/app.py",
+      "exitCode": 0,
+      "output": "All checks passed"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/golden-metrics.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "checks": {
+    "provenanceFields": 7,
+    "fallbackStates": ["verified", "template", "abstain"],
+    "typedAbstentionStatus": 200,
+    "actuationBoundary": false,
+    "corpusPinned": true
+  }
+}

@@ -6,10 +6,12 @@
 
 **Status:** ready-for-agent
 
-- [ ] Run, manifest, evidence, event, comparison, explanation, audit, and approval operations are typed and bounded.
-- [ ] `HOSTED` has no mutation surface; `LOCAL_RUNNER` may mutate runs and proposals but neither profile can actuate signals.
-- [ ] Explanation and audit POST operations require idempotency keys.
-- [ ] Bounds exist for runs per comparison, events per page, and question length.
-- [ ] Abstention is returned as a typed HTTP 200 domain result; malformed or over-limit requests are explicit errors.
-- [ ] What-if lineage is proposal, human approval, then a new run identifier.
-- [ ] Responses preserve the seven provenance fields and never create a second evidence source.
+- [x] Run, manifest, evidence, event, comparison, explanation, audit, and approval operations are typed and bounded.
+- [x] `HOSTED` has no mutation surface; `LOCAL_RUNNER` may mutate runs and proposals but neither profile can actuate signals.
+- [x] Explanation and audit POST operations require idempotency keys.
+- [x] Bounds exist for runs per comparison, events per page, and question length.
+- [x] Abstention is returned as a typed HTTP 200 domain result; malformed or over-limit requests are explicit errors.
+- [x] What-if lineage is proposal, human approval, then a new run identifier.
+- [x] Responses preserve the seven provenance fields and never create a second evidence source.
+
+**Status:** complete

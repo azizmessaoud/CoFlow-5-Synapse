@@ -1,7 +1,7 @@
 {
   "id": "12",
   "title": "Deliver bounded Synapse explanations and audits",
-  "status": "in_progress",
+  "status": "pass",
   "requirements": [
     "seven-field provenance on every response",
     "verified, template, and abstain fallback states",
@@ -17,5 +17,8 @@
     "tests/contracts/test_synapse_service.py",
     "tests/api/test_synapse_api.py",
     "tests/contracts/test_synapse_non_actuation.py"
+  ],
+  "artifacts": [
+    "artifacts/golden-metrics.json"
   ]
 }

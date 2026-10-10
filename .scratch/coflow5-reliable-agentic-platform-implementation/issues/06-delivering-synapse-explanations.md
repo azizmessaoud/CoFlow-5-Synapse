@@ -13,6 +13,6 @@
 - [x] Explanations pin the corpus identity and use the approved cache key.
 - [x] Audits compare claims with evidence and abstain when support is insufficient.
 - [x] Synapse cannot reach signal actuation, active control state, or TraCI.
-- [ ] Golden evaluations cover citation validity, event consistency, abstention, latency, cost, and fallback rate.
+- [x] Golden evaluations cover citation validity, event consistency, abstention, latency, cost, and fallback rate.
 
-**Status:** in progress (core service and API seam implemented; golden metric pack remains)
+**Status:** complete

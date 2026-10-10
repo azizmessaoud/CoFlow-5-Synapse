@@ -13,9 +13,9 @@ D1	product	gated	S0	Align deck slides with repo truth
 10p	control	gated	D1	Pedestrian demand on J0; crossing state to A3
 10d	integration	gated	10p	Integrated incident loop: engine, route guidance, A4, A5
 10e	eval	gated	10d	J0: >=5 matched seeds; A2-A5 on/off ablations; recovery logs; honest KPIs; nulls allowed
-12	product	todo	10e	Synapse S1/S2/S3; seven-field provenance; verified/template/abstain; golden set; no TraCI
-11	product	todo	12	Read-only FastAPI; HOSTED/LOCAL_RUNNER bounds; idempotency; typed 200 abstentions
-13	product	todo	11	React dashboard over frozen evidence; provenance; claim labels; audit and fallback metrics
-R	deploy	todo	13	Offline walkthrough; evidence index; tagged bundle; Compose; CI smoke tests
-14-tunis-showcase	data	todo	R	OSM + TRANSTU GTFS; synthetic demand labelled; showcase only
+12	product	gated	10e	Synapse S1/S2/S3; seven-field provenance; verified/template/abstain; golden set; no TraCI
+11	product	gated	12	Read-only FastAPI; HOSTED/LOCAL_RUNNER bounds; idempotency; typed 200 abstentions
+13	product	gated	11	React dashboard over frozen evidence; provenance; claim labels; audit and fallback metrics
+R	deploy	gated	13	Offline walkthrough; evidence index; tagged bundle; Compose; CI smoke tests
+14-tunis-showcase	data	blocked	R	OSM + TRANSTU GTFS; synthetic demand labelled; showcase only
 15-optional-dqn	optional	blocked	10e,12,11,13,R,14-tunis-showcase	Only after feature freeze

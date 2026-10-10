@@ -1,0 +1,28 @@
+{
+  "id": "R",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:a910bf2960639c07b904ac450e05ffd598b0bd3d5af3bdf2485d2774250164fd",
+  "testsRun": [
+    {
+      "command": "py -3.11 scripts/offline_walkthrough.py",
+      "exitCode": 0,
+      "output": "tagged evidence index emitted"
+    },
+    {
+      "command": "npm.cmd run build (cwd=web)",
+      "exitCode": 0,
+      "output": "built successfully"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/evidence-index.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "checks": {
+    "offline": true,
+    "evidenceReadOnly": true,
+    "sumoInDeployImages": false,
+    "nativeSmokeSeparate": true
+  }
+}

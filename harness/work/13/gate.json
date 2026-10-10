@@ -1,0 +1,23 @@
+{
+  "id": "13",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:dcfd31ca73b1b0ad56d1bb20c7458283577749939692d3d2487d0837c651a297",
+  "testsRun": [
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "output": "built successfully"
+    }
+  ],
+  "artifactsPresent": [
+    "dashboard-contract.json"
+  ],
+  "decidedBy": "tests-and-files",
+  "checks": {
+    "readOnly": true,
+    "signalCommandSurface": false,
+    "metricsVisible": true,
+    "claimLabelsVisible": true
+  }
+}

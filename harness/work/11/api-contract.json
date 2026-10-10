@@ -1,0 +1,24 @@
+{
+  "status": "pass",
+  "profiles": {
+    "HOSTED": {
+      "proposal_mutation": false,
+      "signal_actuation": false
+    },
+    "LOCAL_RUNNER": {
+      "proposal_mutation": true,
+      "signal_actuation": false,
+      "approval_lineage": "proposal -> human approval -> new run_id"
+    }
+  },
+  "bounds": {
+    "events_per_page": 100,
+    "runs_per_compare": 5,
+    "question_length": 2000
+  },
+  "typed_abstention_status": 200,
+  "required_idempotency": [
+    "POST /explanations",
+    "POST /audits"
+  ]
+}
