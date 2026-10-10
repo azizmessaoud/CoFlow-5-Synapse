@@ -12,10 +12,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from coflow5.control.baselines import ActuatedController, FixedTimeController
-from coflow5.evidence.baseline_artifacts import (
-    _planned_trip_ids,
-    _scenario_hash,
-)
+from coflow5.evidence.baseline_artifacts import _planned_trip_ids, _scenario_hash
 from coflow5.sumo_adapter.baseline_runner import run_baseline_scenario
 from coflow5.sumo_adapter.max_pressure_trip_runner import (
     run_native_max_pressure_trip_scenario,
