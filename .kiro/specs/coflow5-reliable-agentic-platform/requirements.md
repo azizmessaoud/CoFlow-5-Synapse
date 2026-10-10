@@ -15,18 +15,7 @@ CoFlow-5 Synapse answers the course challenge:
 The required project is an agentic system because five domain agents observe, decide, communicate, and cooperate under explicit authority. Reinforcement learning is not required. Cooperation, one-writer authority, evaluation, and failure recovery are the core.
 
 ## Persona Alias Table (S0)
-To resolve conflicts between the professor's finalized deck and the repository's canonical naming, the following table is the sole source of truth.
-
-| Deck Name | Canonical Name | Role | Primary Agent |
-|---|---|---|---|
-| Ferjani, 74 | Amara | Pedestrian with a cane | A3 asks; A1 holds |
-| Faycel, 41 | David | Bus driver | A1 accountable |
-| Mamadou, 25 | Chidi | Bus passenger | A3 (late bus) |
-| Tahani, 35 | Rosa | Incident-report reader | Synapse S2/S3 |
-| Touhami, 50 | Marcus | Ambulance crew | A2 asks; A1 checks |
-| Kamel, 55 | Omar | Duty officer | A4 publishes |
-
-*Note: Yuki and Maria are re-tagged as infrastructure/internal personas and are not primary targets for final validation.*
+To resolve conflicts between the professor's finalized deck and the repository's canonical naming, the [Persona Alias Table](../../docs/contracts/persona-aliases.md) is the sole source of truth.
 
 ## Harness traceability
 This table binds every stable requirement ID to sealed queue work and the identifiers its acceptance evidence must carry.
@@ -55,7 +44,7 @@ This table binds every stable requirement ID to sealed queue work and the identi
 
 ### Acceptance criteria
 1. THE specification SHALL record Design Thinking Stages 1–3 as completed work, with links to the Empathize pack and the Define/Ideate document.
-2. THE specification SHALL keep the six finalized User Personas (Amara, David, Chidi, Rosa, Marcus, Omar) as described in the Alias Table.
+2. THE specification SHALL keep the six finalized User Personas (Amara, David, Chidi, Rosa, Marcus, Omar) as described in the Alias Table. (Note: Yuki and Maria have been re-tagged as infrastructure/internal personas to align with the professor-finalized 6-persona set and prioritize high-leverage validation cases).
 3. THE specification SHALL keep the refined How-might-we: serve every person on the network, not only the average car.
 4. THE specification SHALL keep the chosen Ideate result: one-writer A1, advisory A2–A5, deterministic safety, and non-actuating Synapse.
 5. THE specification SHALL keep rejected ideas rejected, including LLM signal control and five conversational LLM agents.
