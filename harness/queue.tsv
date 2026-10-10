@@ -17,5 +17,5 @@ D1	product	gated	S0	Align deck slides with repo truth
 11	product	gated	12	Read-only FastAPI; HOSTED/LOCAL_RUNNER bounds; idempotency; typed 200 abstentions
 13	product	gated	11	React dashboard over frozen evidence; provenance; claim labels; audit and fallback metrics
 R	deploy	gated	13	Offline walkthrough; evidence index; tagged bundle; Compose; CI smoke tests
-14-tunis-showcase	data	blocked	R	OSM + TRANSTU GTFS; synthetic demand labelled; showcase only
+14-tunis-showcase	data	gated	R	OSM + TRANSTU GTFS; synthetic demand labelled; showcase only
 15-optional-dqn	optional	blocked	10e,12,11,13,R,14-tunis-showcase	Only after feature freeze

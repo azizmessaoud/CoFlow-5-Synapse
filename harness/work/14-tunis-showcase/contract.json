@@ -2,9 +2,7 @@
   "contract_version": 1,
   "id": "14-tunis-showcase",
   "kind": "data",
-  "status": "blocked",
-  "blocked_reason": "Official TRANSTU GTFS and retrieval metadata are absent.",
-  "unblock": "Provide an official TRANSTU GTFS ZIP with retrieval metadata, then run scripts/prepare_tunis_showcase.py with junctions.json.",
+  "status": "pass",
   "requirements": [
     "bounded OSM subnetwork with source identity and version",
     "official TRANSTU scheduled GTFS with retrieval provenance",
@@ -14,6 +12,8 @@
   ],
   "artifacts": [
     "pbf-source.json",
-    "junctions.json"
+    "junctions.json",
+    "inputs/transtu-gtfs.zip",
+    "manifest.json"
   ]
 }

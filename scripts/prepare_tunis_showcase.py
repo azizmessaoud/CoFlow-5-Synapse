@@ -23,6 +23,8 @@ def prepare(
     output_path: Path,
     *,
     junctions_path: Path | None = None,
+    gtfs_url: str | None = None,
+    gtfs_retrieved_at: str | None = None,
 ) -> dict[str, object]:
     if not osm_path.is_file():
         raise FileNotFoundError(f"OSM extract not found: {osm_path}")
@@ -30,11 +32,20 @@ def prepare(
         raise FileNotFoundError(f"TRANSTU GTFS archive not found: {gtfs_path}")
     if junctions_path is not None and not junctions_path.is_file():
         raise FileNotFoundError(f"junction selection not found: {junctions_path}")
+    if not gtfs_url or not gtfs_retrieved_at:
+        raise ValueError("gtfs_url and gtfs_retrieved_at are required")
     with zipfile.ZipFile(gtfs_path) as archive:
         names = {Path(name).name for name in archive.namelist()}
     missing = sorted(REQUIRED_GTFS_FILES - names)
     if missing:
         raise ValueError("GTFS archive is missing: " + ", ".join(missing))
+    junctions = (
+        json.loads(junctions_path.read_text(encoding="utf-8"))
+        if junctions_path is not None
+        else None
+    )
+    if isinstance(junctions, dict) and isinstance(junctions.get("aoi"), dict):
+        junctions = {**junctions["aoi"], **{k: v for k, v in junctions.items() if k != "aoi"}}
     manifest = {
         "status": "showcase_only",
         "sources": {
@@ -50,14 +61,12 @@ def prepare(
             "transtu_gtfs": {
                 "path": str(gtfs_path),
                 "sha256": sha256(gtfs_path),
-                "identity": "official TRANSTU scheduled GTFS; verify retrieval metadata",
+                "identity": "official TRANSTU scheduled GTFS",
+                "source_url": gtfs_url,
+                "retrieved_at": gtfs_retrieved_at,
             },
-            "aoi": (
-                json.loads(junctions_path.read_text(encoding="utf-8"))
-                if junctions_path is not None
-                else None
-            ),
         },
+        "aoi": junctions,
         "road_demand": "synthetic_or_calibrated_unless_observed_source_is_attached",
         "scheduled_transit_is_not_road_outcome_evidence": True,
         "claim_boundary": [
@@ -79,10 +88,19 @@ def main() -> int:
     parser.add_argument("--gtfs", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--junctions", type=Path)
+    parser.add_argument("--gtfs-url")
+    parser.add_argument("--gtfs-retrieved-at")
     args = parser.parse_args()
     print(
         json.dumps(
-            prepare(args.osm, args.gtfs, args.output, junctions_path=args.junctions),
+            prepare(
+                args.osm,
+                args.gtfs,
+                args.output,
+                junctions_path=args.junctions,
+                gtfs_url=args.gtfs_url,
+                gtfs_retrieved_at=args.gtfs_retrieved_at,
+            ),
             indent=2,
         )
     )
