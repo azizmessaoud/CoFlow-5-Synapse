@@ -38,6 +38,7 @@ py -3.11 scripts\watch_sumo.py smoke
 | `py -3.11 scripts\watch_sumo.py safety` | 4-way used by later rows |
 | `py -3.11 scripts\watch_sumo.py baselines` | Baseline TLS file |
 | `py -3.11 scripts\watch_sumo.py max-pressure` | Max-Pressure TLS file, **not** live A1 |
+| `py -3.11 scripts\watch_sumo.py tunis` | Imported Tunis OSM showcase with fixed synthetic routes |
 
 Same thing by hand:
 
@@ -46,7 +47,25 @@ sumo-gui -c scenarios\smoke\smoke.sumocfg
 sumo-gui -c scenarios\safety-mask\safety.sumocfg
 sumo-gui -c scenarios\baselines\baselines.sumocfg
 sumo-gui -c scenarios\max-pressure\max-pressure.sumocfg
+sumo-gui -c scenarios\tunis-showcase\tunis.sumocfg
 ```
+
+### Tunis OSM showcase
+
+Build the runnable Tunis scenario once. The PBF is clipped in WSL because
+Windows pyosmium is blocked by local application-control policy; SUMO itself
+then runs natively on Windows:
+
+```powershell
+$env:SUMO_HOME = "C:\Program Files (x86)\Eclipse\Sumo"
+py -3.11 scripts\build_tunis_sumo.py
+py -3.11 scripts\watch_sumo.py tunis
+```
+
+The builder uses the frozen AOI (`10.170,36.790,10.190,36.805`), converts the
+OSM topology with `netconvert`, and creates deterministic synthetic vehicle
+routes with seed `20261010`. The routes are not observed Tunis traffic and
+the TRANSTU schedule is not used as road-outcome evidence.
 
 Press Play.
 
