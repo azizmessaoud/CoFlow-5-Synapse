@@ -21,6 +21,7 @@
   ],
   "artifacts": [
     "artifacts/matched-runs.json",
+    "artifacts/j0-ablations.json",
     "artifacts/j0-completion-audit.json"
   ],
   "gate_checks": [

@@ -5,7 +5,6 @@
   "currentMatchedSeeds": [37, 41, 43, 47, 53],
   "requiredMatchedSeedCount": 5,
   "currentMissingEvidence": [
-    "A2/A3/A4/A5 pairwise on/off native KPI comparisons",
     "complete recovery transition rows for the completion bundle",
     "specialist, controller, communication, forecast, and Synapse failure rows",
     "compatible repeated-run determinism checks"
