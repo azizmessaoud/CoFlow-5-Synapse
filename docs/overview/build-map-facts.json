@@ -1,0 +1,377 @@
+{
+  "project": "CoFlow-5 Synapse",
+  "date": "2026-10-10",
+  "branch": "feature/tunis-showcase-deployment-readiness",
+  "tip": "8a45da035f25f1073b4a42f4dc2f13803754baf6",
+  "docs_branch": "docs/build-map",
+  "sources": [
+    "git log --graph --all --decorate --oneline",
+    "harness/queue.tsv",
+    "harness/work/<row>/contract.json",
+    "harness/work/<row>/gate.json"
+  ],
+  "graph": {
+    "base": "79aca6ec1666f8d02d46210068daaa68b7cbeed8",
+    "main": "a79a4f23b267c77e5bb2313fd3457d646e67474a",
+    "feature": "8a45da035f25f1073b4a42f4dc2f13803754baf6",
+    "five_d": "5e7602184dada502c380fc47da9ef06c696e5aed",
+    "five_d_in_main": false,
+    "five_d_in_feature": true,
+    "other_refs": [
+      "cursor/readonly-evidence-api 7f4696a4c836d636d9a3983f3887f1b6c54bf9f3",
+      "wayfinder/S0-spec-patch ce3b28b7e15479636c918a00e220e95db43750ea",
+      "wayfinder/S0-clean 4ec0813387b5a888c913365f6371c822a5157b48"
+    ]
+  },
+  "highlight": {
+    "row": "14-tunis-showcase",
+    "sha": "73d1fe565aaa2200f4d9770a93fb9a9ddc6bfb3b"
+  },
+  "rows": [
+    {
+      "row": "01-smoke-test",
+      "work": "Native SUMO smoke",
+      "status": "unverified",
+      "queue_status": "gated",
+      "gate_path": "harness/work/01-smoke-test/gate.json",
+      "gate_present": false,
+      "gate_pass": false,
+      "latest_gate_touch_sha": null,
+      "depends_on": [],
+      "note": "Queue says gated; gate missing"
+    },
+    {
+      "row": "02-evidence-bundle",
+      "work": "Evidence bundle",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/02-evidence-bundle/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "a6aa22933620e919771ab9add1a9064da88ad323",
+      "depends_on": [
+        "01-smoke-test"
+      ],
+      "note": ""
+    },
+    {
+      "row": "03-safety-mask",
+      "work": "Safety mask",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/03-safety-mask/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "a6aa22933620e919771ab9add1a9064da88ad323",
+      "depends_on": [
+        "02-evidence-bundle"
+      ],
+      "note": ""
+    },
+    {
+      "row": "04-baselines",
+      "work": "Baselines",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/04-baselines/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "a6aa22933620e919771ab9add1a9064da88ad323",
+      "depends_on": [
+        "03-safety-mask"
+      ],
+      "note": ""
+    },
+    {
+      "row": "05-max-pressure",
+      "work": "A1 Max-Pressure",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/05-max-pressure/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "a6aa22933620e919771ab9add1a9064da88ad323",
+      "depends_on": [
+        "04-baselines"
+      ],
+      "note": ""
+    },
+    {
+      "row": "06-message-board",
+      "work": "Message board",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/06-message-board/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "a6aa22933620e919771ab9add1a9064da88ad323",
+      "depends_on": [
+        "05-max-pressure"
+      ],
+      "note": ""
+    },
+    {
+      "row": "07-a2-a3",
+      "work": "A2/A3 advisers",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/07-a2-a3/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "1f377e5c40af4f4aa0c82416effc8095e95d7047",
+      "depends_on": [
+        "06-message-board"
+      ],
+      "note": ""
+    },
+    {
+      "row": "08-failure-injection",
+      "work": "Failure injection",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/08-failure-injection/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "1f377e5c40af4f4aa0c82416effc8095e95d7047",
+      "depends_on": [
+        "07-a2-a3"
+      ],
+      "note": ""
+    },
+    {
+      "row": "09-eval-harness",
+      "work": "Evaluation harness",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/09-eval-harness/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "1f377e5c40af4f4aa0c82416effc8095e95d7047",
+      "depends_on": [
+        "08-failure-injection"
+      ],
+      "note": ""
+    },
+    {
+      "row": "10-a4-a5",
+      "work": "A4/A5 fixtures",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/10-a4-a5/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "1f377e5c40af4f4aa0c82416effc8095e95d7047",
+      "depends_on": [
+        "09-eval-harness"
+      ],
+      "note": ""
+    },
+    {
+      "row": "10b-max-pressure-trip-kpis",
+      "work": "Trip KPIs",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/10b-max-pressure-trip-kpis/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "1f377e5c40af4f4aa0c82416effc8095e95d7047",
+      "depends_on": [
+        "10-a4-a5"
+      ],
+      "note": ""
+    },
+    {
+      "row": "10c-evidence-page",
+      "work": "Evidence page",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/10c-evidence-page/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "1f377e5c40af4f4aa0c82416effc8095e95d7047",
+      "depends_on": [
+        "10b-max-pressure-trip-kpis"
+      ],
+      "note": ""
+    },
+    {
+      "row": "S0",
+      "work": "Persona/J0 honesty/incident schema",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/S0/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "720efa0ec317bcb0a74341077a27f9ae24eb74d9",
+      "depends_on": [],
+      "note": ""
+    },
+    {
+      "row": "D1",
+      "work": "Presentation aligned to repo",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/D1/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "5e94b7f6b76ca5ab53df07c7538b0901766ed0cb",
+      "depends_on": [
+        "S0"
+      ],
+      "note": ""
+    },
+    {
+      "row": "10p",
+      "work": "J0 pedestrian demand",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/10p/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "8383df1dcb05dd5d0f3f32c2bb7723ee7c120db4",
+      "depends_on": [
+        "D1"
+      ],
+      "note": ""
+    },
+    {
+      "row": "10d",
+      "work": "Incident advisory contract",
+      "status": "gated (contract only)",
+      "queue_status": "gated (contract only)",
+      "gate_path": "harness/work/10d/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "5e7602184dada502c380fc47da9ef06c696e5aed",
+      "depends_on": [
+        "10p"
+      ],
+      "note": "No proof all A2-A5 coordinate in one SUMO run"
+    },
+    {
+      "row": "10e",
+      "work": "5 seeds, 8 ablation cells",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/10e/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "8ad8192041bdeecef3b135bc928f644f3245a05b",
+      "depends_on": [
+        "10d"
+      ],
+      "note": "Evaluation does not prove runtime integration"
+    },
+    {
+      "row": "12",
+      "work": "Synapse",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/12/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "a71acbbb3c712159da312f837e030e6ab68c5b98",
+      "depends_on": [
+        "10e"
+      ],
+      "note": ""
+    },
+    {
+      "row": "11",
+      "work": "FastAPI",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/11/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "a71acbbb3c712159da312f837e030e6ab68c5b98",
+      "depends_on": [
+        "12"
+      ],
+      "note": ""
+    },
+    {
+      "row": "13",
+      "work": "React dashboard",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/13/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "a71acbbb3c712159da312f837e030e6ab68c5b98",
+      "depends_on": [
+        "11"
+      ],
+      "note": ""
+    },
+    {
+      "row": "R",
+      "work": "Release package",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/R/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "a71acbbb3c712159da312f837e030e6ab68c5b98",
+      "depends_on": [
+        "13"
+      ],
+      "note": ""
+    },
+    {
+      "row": "14-tunis-showcase",
+      "work": "OSM/GTFS data showcase",
+      "status": "gated",
+      "queue_status": "gated",
+      "gate_path": "harness/work/14-tunis-showcase/gate.json",
+      "gate_present": true,
+      "gate_pass": true,
+      "latest_gate_touch_sha": "73d1fe565aaa2200f4d9770a93fb9a9ddc6bfb3b",
+      "depends_on": [
+        "R"
+      ],
+      "note": "Not controlled J1-J5 plus J6 observer"
+    },
+    {
+      "row": "15-optional-dqn",
+      "work": "Optional DQN",
+      "status": "optional",
+      "queue_status": "blocked",
+      "gate_path": "harness/work/15-optional-dqn/gate.json",
+      "gate_present": false,
+      "gate_pass": false,
+      "latest_gate_touch_sha": null,
+      "depends_on": [
+        "10e",
+        "12",
+        "11",
+        "13",
+        "R",
+        "14"
+      ],
+      "note": "Queue status blocked until freeze"
+    }
+  ],
+  "proposals": [
+    "10d-completion: todo; needs owner approval; queue entry absent",
+    "Controlled Tunis 5+1: todo; Row 14 only gates data/provenance"
+  ],
+  "code_facts": {
+    "writer": "src/coflow5/sumo_adapter/signal_executor.py",
+    "raw_write": "trafficlight.setRedYellowGreenState",
+    "decision_epoch_found": false,
+    "tunis_builder": "scripts/build_tunis_sumo.py",
+    "tls_option": "netconvert --tls.guess",
+    "controlled_5_plus_1_proven": false
+  },
+  "claims": [
+    "simulation evidence only",
+    "no lives-saved, measured-air-quality, or best-controller claims",
+    "10e gate has five seeds and eight ablation cells"
+  ],
+  "export": {
+    "mmdc": false,
+    "svg": "skipped; mmdc absent",
+    "html": "inline SVG/CSS; no external network"
+  }
+}
