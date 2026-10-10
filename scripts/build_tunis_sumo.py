@@ -53,12 +53,19 @@ def write_gui_overlay(net: Path) -> tuple[Path, Path]:
                 f'lonLat="false" name="Tunis J{index} ({junction_id})"/>\n'
             )
         stream.write("</additional>\n")
-    center_x = sum(float(locations[junction_id][0]) for junction_id in JUNCTION_IDS) / 6
-    center_y = sum(float(locations[junction_id][1]) for junction_id in JUNCTION_IDS) / 6
+    network_junctions = root.findall("junction")
+    center_x = (
+        min(float(junction.get("x", "0")) for junction in network_junctions)
+        + max(float(junction.get("x", "0")) for junction in network_junctions)
+    ) / 2
+    center_y = (
+        min(float(junction.get("y", "0")) for junction in network_junctions)
+        + max(float(junction.get("y", "0")) for junction in network_junctions)
+    ) / 2
     settings = SCENARIO / "tunis.settings.xml"
     settings.write_text(
         f"""<viewsettings>
-  <viewport x="{center_x:.2f}" y="{center_y:.2f}" zoom="0.8"/>
+  <viewport x="{center_x:.2f}" y="{center_y:.2f}" zoom="100"/>
   <delay value="100"/>
   <scheme name="real world"/>
 </viewsettings>
