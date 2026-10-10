@@ -1,0 +1,38 @@
+{
+  "chunk_count": 260,
+  "chunker_version": "stable-content-hash-v1",
+  "embedding_model_enabled": false,
+  "parser_version": "plain-text-paragraph-v1",
+  "retrieval_version": "deterministic-exact-token-v1",
+  "schema_version": 1,
+  "sources": [
+    {
+      "chunk_count": 20,
+      "evidence_class": "architecture-decision",
+      "path": "docs/adr/0001-reliable-ai-platform-boundary.md",
+      "sha256": "sha256:c74f6a9c0f02afed399f69deaed98faa0ab97a49bebda0da8b1ecf516213791f",
+      "source_id": "adr-0001"
+    },
+    {
+      "chunk_count": 22,
+      "evidence_class": "course-authority",
+      "path": "docs/source/course-brief.md",
+      "sha256": "sha256:e9a086abb8cb659d37bce0e2f1df980585c71a33d3bf4126c08e466f0f0dc8be",
+      "source_id": "course-brief"
+    },
+    {
+      "chunk_count": 143,
+      "evidence_class": "product-design",
+      "path": ".kiro/specs/coflow5-reliable-agentic-platform/design.md",
+      "sha256": "sha256:b8535279b20f19ba43f1dcac703a1fcc9ef21058d36997661241a90b957cf62c",
+      "source_id": "design"
+    },
+    {
+      "chunk_count": 75,
+      "evidence_class": "product-requirement",
+      "path": ".kiro/specs/coflow5-reliable-agentic-platform/requirements.md",
+      "sha256": "sha256:06977dd060bd5a420202c1eaffdb0e74c8e5ca458c7dad77cf21d745f3ccc468",
+      "source_id": "requirements"
+    }
+  ]
+}

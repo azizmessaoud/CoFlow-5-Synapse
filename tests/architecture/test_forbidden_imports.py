@@ -152,3 +152,37 @@ def test_a2_a3_have_transport_only_authority_and_no_hosted_agent_runtime() -> No
             )):
                 violations.append(f"{relative}: signal actuation capability")
     assert not violations, "A2/A3 authority boundary violations: " + "; ".join(violations)
+
+
+def test_graph_growth_has_no_unearned_graph_ml_or_ui_dependency() -> None:
+    row10f_paths = [
+        SRC / "control" / "junction_graph.py",
+        SRC / "control" / "graph_max_pressure.py",
+        SRC / "sumo_adapter" / "graph_growth_runner.py",
+        SRC / "evidence" / "graph_growth_artifacts.py",
+    ]
+    forbidden = {"networkx", "tensorflow", "torch", "langgraph", "react", "websockets"}
+    violations = {
+        str(path.relative_to(ROOT)): sorted(imports_in(path) & forbidden)
+        for path in row10f_paths if imports_in(path) & forbidden
+    }
+    assert not violations
+    assert not _raw_signal_write_calls(SRC / "sumo_adapter" / "graph_growth_runner.py")
+    assert "signal_executor" not in (SRC / "evidence" / "graph_growth_artifacts.py").read_text(encoding="utf-8").lower()
+
+
+
+def test_synapse_row12_has_only_local_read_only_dependencies() -> None:
+    forbidden = {
+        "traci", "libsumo", "subprocess", "socket", "requests", "urllib", "httpx",
+        "openai", "anthropic", "transformers", "sentence_transformers", "torch",
+        "langgraph", "pgvector",
+    }
+    violations: dict[str, list[str]] = {}
+    for path in (SRC / "synapse").rglob("*.py"):
+        imported = imports_in(path)
+        bad = sorted((imported & forbidden) | ({"sumo_adapter"} if "coflow5.sumo_adapter" in path.read_text(encoding="utf-8") else set()))
+        if bad:
+            violations[str(path.relative_to(ROOT))] = bad
+    assert not violations
+    assert not _raw_signal_write_calls(SRC / "synapse" / "specialists.py")

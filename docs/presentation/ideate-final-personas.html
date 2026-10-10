@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoFlow-5 — Personas through prevention</title>
+<style>
+  :root { --ink:#14202b; --muted:#4d5c68; --line:#d5dde3; --paper:#f4f7f8; --accent:#0f6e6a; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:18px/1.4 Georgia, "Iowan Old Style", serif; color:var(--ink); background:#10181f; }
+  .slide { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:28px 20px; }
+  .frame { width:min(1100px, 100%); background:var(--paper); border:1px solid var(--line); padding:28px 32px 36px; }
+  h1 { font-size:34px; line-height:1.15; margin:0 0 10px; }
+  h2 { font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin:0 0 8px; }
+  p { margin:0 0 10px; }
+  .stamp { display:inline-block; border:1px solid var(--accent); color:var(--accent); font:12px/1 ui-sans-serif, sans-serif; letter-spacing:.06em; padding:3px 8px; margin-bottom:12px; }
+  .row { display:flex; gap:22px; align-items:flex-start; }
+  img.portrait { width:210px; height:260px; object-fit:cover; object-position:center top; background:#ddd; }
+  table { width:100%; border-collapse:collapse; font:15px/1.35 ui-sans-serif, sans-serif; }
+  th, td { text-align:left; vertical-align:top; border-bottom:1px solid var(--line); padding:8px 8px 8px 0; }
+  th { color:var(--muted); font-weight:600; }
+  .tag { font:12px/1 ui-sans-serif, sans-serif; letter-spacing:.04em; text-transform:uppercase; }
+  .now { color:#1d6b3a; }
+  .later { color:#8a5a12; }
+  .empty { color:#8c3a2f; }
+  ul { margin:8px 0 0; padding-left:18px; }
+  li { margin:0 0 6px; }
+  .note { color:var(--muted); font:14px/1.4 ui-sans-serif, sans-serif; }
+  ol.arc { margin:8px 0 0; padding-left:22px; columns:2; font:16px/1.45 ui-sans-serif, sans-serif; }
+  ol.arc li { break-inside:avoid; margin:0 0 8px; }
+  .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin-top:12px; }
+  .card { border:1px solid var(--line); padding:12px; background:#fff; }
+  .card strong { display:block; font-size:20px; }
+  .card span { display:block; color:var(--muted); font:14px/1.35 ui-sans-serif, sans-serif; margin-top:4px; }
+  @media print {
+    body { background:#fff; }
+    .slide { break-after:page; min-height:auto; }
+    ol.arc { columns:2; }
+  }
+  @media (max-width: 800px) {
+    ol.arc, .grid { columns:1; grid-template-columns:1fr; }
+    h1 { font-size:28px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="slide">
+  <div class="frame">
+    <div class="stamp">SAME STORY AS CoFlow-5-Persona-Cards.pptx</div>
+    <h2>Design thinking · CoFlow-5 Synapse</h2>
+    <h1>The solution names the person it affects.</h1>
+    <p>Six portraits: Amara, David, Chidi, Rosa, Marcus, and Omar. Ages and jobs are design readings of groups named in published counts. They are not people we interviewed.</p>
+    <ol class="arc">
+      <li>Empathize — understand users and their needs</li>
+      <li>Personas — readings of those groups</li>
+      <li>Persona needs / problems — one problem per person</li>
+      <li>Evidence — survey, interviews, and research</li>
+      <li>Ideation — an idea from that person’s need</li>
+      <li>Solutions — that idea becomes one solution for them</li>
+      <li>Online data collection — accidents, roads, intersections, lights, weather, transport</li>
+      <li>Data analysis — patterns and risk factors we can name</li>
+      <li>Heatmap — hotspot picture only when the table exists</li>
+      <li>Accident prevention — how the solution addresses their problem</li>
+    </ol>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <h2>1 · Empathize</h2>
+    <h1>Who is on the road, from published counts.</h1>
+    <p>This is how we understand the users. It is not a set of interviews.</p>
+    <table>
+      <tr><th>Group named in the sources</th><th>Who carries that need</th></tr>
+      <tr><td>Pedestrians. Older people and people with disabilities, named in the 2024 strategy. Pedestrians were 28% of the 2023 deaths in the WHO investment case that quotes ONSR.</td><td>Amara</td></tr>
+      <tr><td>Occupants of motor vehicles. They carry most of the health cost in that case.</td><td>David</td></tr>
+      <tr><td>TRANSTU passengers in Greater Tunis. 187.4 million paying trips in 2018, not this year.</td><td>Chidi</td></tr>
+      <tr><td>The operator and the crash record. One reader. Not a second controller.</td><td>Rosa</td></tr>
+      <tr><td>Civil Protection, which answers road emergencies. We did not ride with a crew.</td><td>Marcus</td></tr>
+      <tr><td>Readers of the crash file. A residual is not a cause.</td><td>Omar</td></tr>
+    </table>
+    <p class="note">2023 deaths are published as both 2,273 and 1,216, with the same 5,796 crashes. Show both. Do not average them.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <h2>2 · Personas</h2>
+    <h1>Six readings of those groups.</h1>
+    <p>The next six slides are the cards. Each one says who is affected, before any solution is named.</p>
+    <div class="grid">
+      <div class="card"><strong>Amara, 74</strong><span>Retired pedestrian; uses a cane. Affected while she is still in the crossing.</span></div>
+      <div class="card"><strong>David, 41</strong><span>Delivery-van driver. Affected on the trip that does not finish.</span></div>
+      <div class="card"><strong>Chidi, 27</strong><span>Frequent bus passenger. Affected by a long gap between buses.</span></div>
+      <div class="card"><strong>Rosa, 52</strong><span>Incident-report reader. Affected by a refusal that has no reason.</span></div>
+      <div class="card"><strong>Marcus, 34</strong><span>Urban ambulance crew. Affected when a green light leads into a full exit.</span></div>
+      <div class="card"><strong>Omar, 55</strong><span>Network duty officer. Affected when a queue might be a crash, demand, or a dead sensor.</span></div>
+    </div>
+    <p class="note">Illustrations, not interviewed people. Special needs stay on Amara’s card. School-street air is a place, not a seventh person.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <div class="row">
+      <img class="portrait" src="personas/p1-amara.png" alt="Portrait used for Amara">
+      <div>
+        <h2>Persona 1 — Amara</h2>
+        <h1>Enough time to finish the crossing.</h1>
+        <p>Retired pedestrian; uses a cane. Crosses a busy central street for shops and transit. Tunis design context, as an assumption.</p>
+        <p>“I need enough time to finish crossing, even when traffic is busy.” Design statement, not a quote.</p>
+        <p><strong>Affected:</strong> Amara, while she is still in the crossing. Her fear is that cars receive green before she finishes.</p>
+        <p class="note">Illustration · not an interviewed person.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <div class="row">
+      <img class="portrait" src="personas/p2-david.png" alt="Portrait used for David">
+      <div>
+        <h2>Persona 2 — David</h2>
+        <h1>The trip that does not finish.</h1>
+        <p>Delivery-van driver. The “more than 60 stops” day is a design reading.</p>
+        <p>“I can plan around a longer trip if I know how long it will actually take.” Design statement, not a quote.</p>
+        <p><strong>Affected:</strong> David, on the trip that does not finish. His fear is that a better mean hides the tail.</p>
+        <p class="note">Illustration · not an interviewed person.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <div class="row">
+      <img class="portrait" src="personas/p3-chidi.png" alt="Portrait used for Chidi">
+      <div>
+        <h2>Persona 3 — Chidi</h2>
+        <h1>A gap between buses.</h1>
+        <p>Frequent bus passenger on a high-frequency corridor, where regularity is the service.</p>
+        <p>“Buses should arrive regularly—not three at once after a long wait.” Design statement, not a quote.</p>
+        <p><strong>Affected:</strong> Chidi, waiting through a long gap. His fear is three buses after one long wait.</p>
+        <p class="note">Illustration · not an interviewed person.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <div class="row">
+      <img class="portrait" src="personas/p4-rosa.png" alt="Portrait used for Rosa">
+      <div>
+        <h2>Persona 4 — Rosa</h2>
+        <h1>A reason, or an abstention.</h1>
+        <p>Incident-report reader. She reads disruption and the crash record. She does not change the light.</p>
+        <p>“Show me why priority was granted or denied, and let me respond safely.” Design statement, not a quote.</p>
+        <p><strong>Affected:</strong> Rosa, reading a refusal that has no reason.</p>
+        <p class="note">Illustration · not an interviewed person.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <div class="row">
+      <img class="portrait" src="personas/p5-marcus.png" alt="Portrait used for Marcus">
+      <div>
+        <h2>Persona 5 — Marcus</h2>
+        <h1>A path through, then recovery.</h1>
+        <p>Urban ambulance crew, standing in for Civil Protection. We did not ride with them.</p>
+        <p>“Get us through safely, and make sure traffic recovers after we pass.” Design statement, not a quote.</p>
+        <p><strong>Affected:</strong> Marcus, and the people his priority delays. His fear is a green light into a full link.</p>
+        <p class="note">Illustration · not an interviewed person.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <div class="row">
+      <img class="portrait" src="personas/p8-omar.png" alt="Portrait used for Omar">
+      <div>
+        <h2>Persona 6 — Omar</h2>
+        <h1>An alert he can trust, including “we cannot see.”</h1>
+        <p>Network duty officer. He monitors incidents and coordinates a response.</p>
+        <p>“Tell me what is wrong, why you think so, and whether I can still trust the data.” Design statement, not a quote.</p>
+        <p><strong>Affected:</strong> Omar, when a queue might be a crash, demand, or a dead sensor.</p>
+        <p class="note">Illustration · not an interviewed person. The portrait file is p8-omar.png. He is the sixth card.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <h2>3 · Persona needs / problems</h2>
+    <h1>One problem per person. The solution has to reach that person.</h1>
+    <table>
+      <tr><th>Who is affected</th><th>Need</th><th>Problem</th></tr>
+      <tr><td>Amara</td><td>Enough clearance to finish.</td><td>Clearance assumes a faster walk than hers.</td></tr>
+      <tr><td>David</td><td>The real duration, including the bad trip.</td><td>A better average hides the late or unfinished trip.</td></tr>
+      <tr><td>Chidi</td><td>Priority only after an unusual gap.</td><td>Buses bunch, then the early bus is treated as urgent.</td></tr>
+      <tr><td>Rosa</td><td>A reason code she can read afterward.</td><td>A refusal with no reason cannot be checked after the shift.</td></tr>
+      <tr><td>Marcus</td><td>An exit check, then recovery.</td><td>A green light into a full exit only moves the queue.</td></tr>
+      <tr><td>Omar</td><td>The class, and whether the sample is fresh.</td><td>A residual can be a crash, extra demand, or a quiet sensor.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <h2>4 · Evidence</h2>
+    <h1>Survey, interviews, and research. Only research has a source.</h1>
+    <table>
+      <tr><th>Who</th><th>Survey</th><th>Interview</th><th>Research that supports the need</th></tr>
+      <tr><td>Amara</td><td class="tag empty">No survey file</td><td class="tag empty">Not interviewed</td><td>Pedestrians were 28% of the 2023 deaths in the WHO case quoting ONSR. The 2024 strategy names older people and people with disabilities. Clearance guidance is about 1.07 m/s, and slower where needed.</td></tr>
+      <tr><td>David</td><td class="tag empty">No survey file</td><td class="tag empty">Not interviewed</td><td>Occupants carry most of that case’s health cost. One matched seed finished 71, 84, and 70 of 84 trips. Mixed. No winner.</td></tr>
+      <tr><td>Chidi</td><td class="tag empty">No survey file</td><td class="tag empty">Not interviewed</td><td>TRANSTU: 187.4 million paying passengers in 2018, not this year. Waiting time is valued above in-vehicle time in DfT appraisal guidance.</td></tr>
+      <tr><td>Rosa</td><td class="tag empty">No survey file</td><td class="tag empty">Not interviewed</td><td>ONSR compiles the crash record. SCATS documents an audit trail. That is an analogy, not a Tunis control room we visited.</td></tr>
+      <tr><td>Marcus</td><td class="tag empty">No survey file</td><td class="tag empty">Not interviewed</td><td>Civil Protection answers road emergencies. A Taipei survival-per-minute figure is a citation from elsewhere. This simulation does not output lives saved.</td></tr>
+      <tr><td>Omar</td><td class="tag empty">No survey file</td><td class="tag empty">Not interviewed</td><td>The detector has classes. An anomaly does not name a cause. FHWA congestion shares are not a map of these junctions.</td></tr>
+    </table>
+    <p class="note">A percentage, a sample size, or a quote from a survey or an interview would be invented. Those columns stay empty on purpose.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <h2>5 · Ideation</h2>
+    <h1>Each idea starts from that person’s need.</h1>
+    <table>
+      <tr><th>Who is affected</th><th>Problem</th><th>Idea we keep</th></tr>
+      <tr><td>Amara</td><td>Clearance assumes a faster walk.</td><td>Hold the conflicting green until she finishes, and count truncations.</td></tr>
+      <tr><td>David</td><td>The average hides the unfinished trip.</td><td>Show unfinished trips and the tail beside the mean.</td></tr>
+      <tr><td>Chidi</td><td>Buses bunch.</td><td>Ask for green only after an unusual gap. An early bus gets nothing.</td></tr>
+      <tr><td>Rosa</td><td>A refusal with no reason.</td><td>Explain one grant or denial with the reason code and a citation, or abstain.</td></tr>
+      <tr><td>Marcus</td><td>Green into a full exit.</td><td>Authenticated request, an exit check, then recovery.</td></tr>
+      <tr><td>Omar</td><td>A residual is not a verdict.</td><td>Publish the class, the residual, and whether the sample is fresh.</td></tr>
+    </table>
+    <p class="note">Refused: a scraped map treated as truth, a camera that guesses ability, a chatbot that writes the light, a lives-saved claim. A later file we still owe — a measured crossing, a dated GTFS extract, a driver message, a corridor file — does not become a solution on this slide.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <h2>6 · Solutions</h2>
+    <h1>Who is affected, then the solution that reaches them.</h1>
+    <table>
+      <tr><th>Who is affected</th><th>Problem</th><th>Solution</th></tr>
+      <tr><td>Amara, while she is still in the crossing</td><td>Clearance assumes a faster walk than hers.</td><td>A3 asks. A1 holds the conflicting green. Truncations are counted.</td></tr>
+      <tr><td>David, on the trip that does not finish</td><td>A better average hides the late trip.</td><td>The evidence page keeps unfinished trips in the count, next to the mean.</td></tr>
+      <tr><td>Chidi, waiting through a long gap</td><td>An early bus is treated as urgent.</td><td>A3 asks only for a late bus or a large gap. Pedestrian clearance stays ahead of the bus.</td></tr>
+      <tr><td>Rosa, reading a refusal with no reason</td><td>The no cannot be checked later.</td><td>S2 returns one cited explanation, or an abstention. She does not write the signal.</td></tr>
+      <tr><td>Marcus, and the people his priority delays</td><td>Green into a full exit only moves the queue.</td><td>A2 sends route and expiry. A1 checks the exit, then recovers: Max-Pressure, actuated, fixed-time.</td></tr>
+      <tr><td>Omar, when the queue has three possible meanings</td><td>Crash, demand, or a dead sensor.</td><td>A4 publishes the class and the freshness. It does not name the cause. Stale data leaves A1 on local control.</td></tr>
+    </table>
+    <p class="note">Only A1 writes the signal. The language-model layer explains the log, or abstains.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <h2>7 · Online data collection</h2>
+    <h1>Accidents, roads, intersections, lights, weather, and transport are different files.</h1>
+    <table>
+      <tr><th>Source</th><th></th><th>What it can support</th></tr>
+      <tr><td>Accidents — ONSR, INS, WHO published totals</td><td class="tag now">Context</td><td>Who is harmed, at national or governorate scale. Not this junction and this hour. 2023 deaths are 2,273 and 1,216. Show both.</td></tr>
+      <tr><td>Roads and intersections — OpenStreetMap</td><td class="tag later">Later</td><td>A labelled map. Row 14 is not started. Not today’s speeds.</td></tr>
+      <tr><td>Traffic lights — our SUMO runs</td><td class="tag now">Now</td><td>Reason codes and legal phases in the model. No public adaptive-signal network in Tunis was found.</td></tr>
+      <tr><td>Weather — a station joined to a junction and an hour</td><td class="tag later">Later</td><td>A regime tag, after that table exists. Not “rain caused the crash.”</td></tr>
+      <tr><td>Traffic and public transport — TRANSTU, with the year</td><td class="tag later">Later</td><td>187.4 million paying passengers in 2018. Not a live bus, and not current ridership.</td></tr>
+      <tr><td>Scraped map colours, news, or social posts</td><td class="tag empty">Reject</td><td>Nothing as evidence. Not a ground-truth accident or a live speed.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <h2>8 · Data analysis</h2>
+    <h1>Patterns we can name. Not a hotspot model.</h1>
+    <ul>
+      <li>From the press briefing of ONSR: inattention about 42% of crashes, speeding about 14% of crashes and about 30% of deaths, unsafe pedestrian crossing about 8% of crashes. These are cause classes in that briefing, not a model of our junction.</li>
+      <li>Men are the large majority of recorded deaths in the WHO profile and the investment case.</li>
+      <li>From our one matched seed: actuated finished more trips and had a lower mean wait. Max-Pressure did not win. Unfinished trips stayed in the count. That is David’s pattern.</li>
+      <li>From the emission-proxy fixture: one link improved and one worsened. That is displacement, not measured air. The school street is a place, not a person.</li>
+    </ul>
+    <p class="note">A risk factor for a specific intersection, hour, and weather type was not found.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <h2>9 · Heatmap</h2>
+    <h1>No hotspot map until the table exists.</h1>
+    <p>A shaded map needs rows of intersection, time, and the thing being counted, plus the denominator. That table is not in the repository. Weather is not joined to a junction and an hour, so rain is not a layer on this map.</p>
+    <p><strong>Will not draw:</strong> rain over roads, crash pins from the news, or a green map that hides the link whose proxy got worse.</p>
+    <p><strong>Later, with the method printed on it:</strong> counts of a class, or delay, by link and by time window, with the sample size on the cell. A dark cell is not a cause and not a life saved.</p>
+    <p class="note">Until that table exists, this stage stays a refusal. It is not an empty picture pretending to be a result.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="frame">
+    <h2>10 · Accident prevention</h2>
+    <h1>How each solution addresses that person’s problem.</h1>
+    <table>
+      <tr><th>Who is affected</th><th>What changes for them</th></tr>
+      <tr><td>Amara</td><td>Conflicting traffic stays red while the crossing is occupied. The fixture counted zero truncations. That is not a count of crashes prevented.</td></tr>
+      <tr><td>David</td><td>A jammed scenario cannot look safe just because the average improved. Unfinished trips stay visible.</td></tr>
+      <tr><td>Chidi</td><td>An early bus does not steal the crossing from the person still in it.</td></tr>
+      <tr><td>Rosa</td><td>The reason is kept, so a bad pattern can be found after the shift. She still does not change the light.</td></tr>
+      <tr><td>Marcus</td><td>He is not sent into a blocked exit, and Amara’s crossing is not cut. Civilian delay is logged beside his time. Not lives saved.</td></tr>
+      <tr><td>Omar</td><td>A stale sensor is not called a healthy road, so a false all-clear is not the alert.</td></tr>
+    </table>
+    <p class="note">Fewer conflicts in the model. Not fewer deaths in Tunisia. No lives saved. No measured air. No Tunis deployment. No winner.</p>
+  </div>
+</section>
+
+</body>
+</html>

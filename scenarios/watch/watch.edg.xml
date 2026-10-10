@@ -5,35 +5,39 @@
     <lane index="1" allow="passenger bus" speed="13.9" width="3.2"/>
     <lane index="2" allow="passenger bus" speed="13.9" width="3.2"/>
   </edge>
-  <edge id="N_out" from="J0" numLanes="2" to="N">
+  <edge id="N_out" from="J0" numLanes="3" to="N">
     <lane index="0" allow="pedestrian" speed="1.5" width="2.0"/>
     <lane index="1" allow="passenger bus" speed="13.9" width="3.2"/>
+    <lane index="2" allow="passenger bus" speed="13.9" width="3.2"/>
   </edge>
   <edge id="S_in" from="S" to="J0" numLanes="3">
     <lane index="0" allow="pedestrian" speed="1.5" width="2.0"/>
     <lane index="1" allow="passenger bus" speed="13.9" width="3.2"/>
     <lane index="2" allow="passenger bus" speed="13.9" width="3.2"/>
   </edge>
-  <edge id="S_out" from="J0" numLanes="2" to="S">
+  <edge id="S_out" from="J0" numLanes="3" to="S">
     <lane index="0" allow="pedestrian" speed="1.5" width="2.0"/>
     <lane index="1" allow="passenger bus" speed="13.9" width="3.2"/>
+    <lane index="2" allow="passenger bus" speed="13.9" width="3.2"/>
   </edge>
   <edge id="E_in" from="E" to="J0" numLanes="3">
     <lane index="0" allow="pedestrian" speed="1.5" width="2.0"/>
     <lane index="1" allow="passenger bus" speed="13.9" width="3.2"/>
     <lane index="2" allow="passenger bus" speed="13.9" width="3.2"/>
   </edge>
-  <edge id="E_out" from="J0" numLanes="2" to="E">
+  <edge id="E_out" from="J0" numLanes="3" to="E">
     <lane index="0" allow="pedestrian" speed="1.5" width="2.0"/>
     <lane index="1" allow="passenger bus" speed="13.9" width="3.2"/>
+    <lane index="2" allow="passenger bus" speed="13.9" width="3.2"/>
   </edge>
   <edge id="W_in" from="W" to="J0" numLanes="3">
     <lane index="0" allow="pedestrian" speed="1.5" width="2.0"/>
     <lane index="1" allow="passenger bus" speed="13.9" width="3.2"/>
     <lane index="2" allow="passenger bus" speed="13.9" width="3.2"/>
   </edge>
-  <edge id="W_out" from="J0" numLanes="2" to="W">
+  <edge id="W_out" from="J0" numLanes="3" to="W">
     <lane index="0" allow="pedestrian" speed="1.5" width="2.0"/>
     <lane index="1" allow="passenger bus" speed="13.9" width="3.2"/>
+    <lane index="2" allow="passenger bus" speed="13.9" width="3.2"/>
   </edge>
 </edges>

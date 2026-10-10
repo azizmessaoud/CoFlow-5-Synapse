@@ -1,0 +1,29 @@
+{
+  "fetches": [
+    "/api/health",
+    "/api/runs",
+    "/api/runs/{run_id}",
+    "/api/runs/{run_id}/kpis",
+    "/api/runs/{run_id}/events",
+    "/api/runs/{run_id}/graph-frames",
+    "/api/runs/{run_id}/explanations",
+    "/api/runs/{run_id}/audits",
+    "/api/runs/{run_id}/citations",
+    "/api/runs/{run_id}/limitations"
+  ],
+  "panels": [
+    "runs",
+    "controller comparison",
+    "unfinished trips",
+    "graph frames",
+    "freshness",
+    "messages and reasons",
+    "recovery",
+    "explanations",
+    "citations",
+    "abstentions",
+    "audits",
+    "limitations"
+  ],
+  "writes": []
+}

@@ -19,7 +19,7 @@ Those are different consumers. Mixing them produces three false claims:
 2. A hosted API that can change traffic lights.
 3. MLflow (or any dashboard) inventing a second `run_id`.
 
-Row 01 is still ungated on this machine: Python 3.11.9 and SUMO 1.27.1 run; TraCI runs; Windows application control blocks `libsumo` DLLs. That is an ops fact for toolchain evidence, not a reason to make WSL or Docker the required path.
+Row 01 gated on 23 September 2026. The 22 September Code Integrity note is stale: TraCI, SUMO 1.27.1, and a 102-step libsumo smoke completed on the same Windows machine. pyarrow 21.0.0 may not match libsumo’s libarrow2300; that warning is not a failed gate. The hosted path below stays SUMO-free.
 
 ## Decision
 

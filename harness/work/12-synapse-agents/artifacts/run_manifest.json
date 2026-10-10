@@ -1,0 +1,190 @@
+{
+  "artifact_references": [
+    {
+      "bytes": 1376,
+      "path": "corpus_manifest.json",
+      "rows": 4,
+      "schema_name": "synapse_corpus_manifest",
+      "schema_version": 1,
+      "sha256": "sha256:6e672cf2280ac250edf2f7deb3bf9f54240c27df31d13f76ff1587f59a015c76"
+    },
+    {
+      "bytes": 44432,
+      "path": "corpus_chunks.parquet",
+      "rows": 260,
+      "schema_name": "synapse_corpus_chunk",
+      "schema_version": 1,
+      "sha256": "sha256:73d8a113c879a7497fea6fbc8f705b7df392853599c34fcd6e48dff5f2076de2"
+    },
+    {
+      "bytes": 663,
+      "path": "scenario_proposals.json",
+      "rows": 1,
+      "schema_name": "synapse_scenario_proposal",
+      "schema_version": 1,
+      "sha256": "sha256:1e5a437850390810cc479ec8b4d6f7d280b22c88cf555f8a37ce389558936b23"
+    },
+    {
+      "bytes": 12612,
+      "path": "explanations.json",
+      "rows": 4,
+      "schema_name": "synapse_explanation",
+      "schema_version": 1,
+      "sha256": "sha256:e0d24e2ee3a4b0ce2267e252a120317082db59f3f3c07c682ae68ebbf7402761"
+    },
+    {
+      "bytes": 2324,
+      "path": "evidence_audits.json",
+      "rows": 2,
+      "schema_name": "synapse_evidence_audit",
+      "schema_version": 1,
+      "sha256": "sha256:356bd9b24e1da9c3221195255b26beede650bc79622f9062301680f9888b161e"
+    },
+    {
+      "bytes": 7401,
+      "path": "synapse_traces.parquet",
+      "rows": 47,
+      "schema_name": "synapse_trace",
+      "schema_version": 1,
+      "sha256": "sha256:5792abec539e9d9a4fb5a812c52efeb7dd115a5baae6a4f7041d610d795468cc"
+    },
+    {
+      "bytes": 1012,
+      "path": "golden_cases.json",
+      "rows": 7,
+      "schema_name": "synapse_golden_case",
+      "schema_version": 1,
+      "sha256": "sha256:c4c8fced2602ffd925e31569ca3362985e539b5651977adcae26c8f76fbd159f"
+    },
+    {
+      "bytes": 1850,
+      "path": "golden_results.json",
+      "rows": 7,
+      "schema_name": "synapse_golden_result",
+      "schema_version": 1,
+      "sha256": "sha256:cb582f904e7be0de1c14f8da95cbc7f3f57bf174746178edaf349c2e8e4c16c6"
+    },
+    {
+      "bytes": 1828,
+      "path": "non_actuation_audit.json",
+      "rows": 4,
+      "schema_name": "synapse_non_actuation_audit",
+      "schema_version": 1,
+      "sha256": "sha256:707a45c8d986aa80bcc510753605b184ee5050300ca50acfb90e75348eac4d08"
+    }
+  ],
+  "claim_flags": [
+    "no lives saved or accident prevention",
+    "no measured air quality",
+    "no deployment or live-control claim",
+    "no model or embedding performance claim when disabled",
+    "no answer without immutable event support and allow-listed policy citation"
+  ],
+  "configuration_hash": "sha256:ab1f7b49110c51cb766c61be4a6c4fbdd256137b23fc214f14ecab19402b8e1a",
+  "contract_hash": "sha256:e0cafee2bc7d87910b1a7161dd8a321c3cf642885acd6176eed1dd8bb1a436af",
+  "evidence_kind": "deterministic-non-actuating-synapse",
+  "finalized_at": "2026-09-23T14:43:57.921023+00:00",
+  "generation": {
+    "default": "deterministic-template-v1",
+    "estimated_cost_usd": 0.0,
+    "hosted_or_local_model": {
+      "enabled": false,
+      "identifier": "Qwen/Qwen2.5-1.5B-Instruct",
+      "reason": "not earned; provider-neutral deterministic baseline gates first",
+      "revision": null
+    },
+    "network_calls": false,
+    "provider_interface": "typed optional draft provider with at most one retry"
+  },
+  "immutable": true,
+  "locked_inputs": {
+    "harness/work/08-failure-injection/artifacts/action-sequence-comparison.json": "sha256:49b2caf0d4567d37fc55a32b71b1820b1126f929c66fc24a03516dac121bd64c",
+    "harness/work/08-failure-injection/gate.json": "sha256:6087562e0347770c08f1f17dd5fb9ff0cfe89d1383d2f80b3042243955417b2f",
+    "harness/work/10f-graph-growth-benchmark/artifacts/decision_events.parquet": "sha256:8a7ece82a2135561414e10da4241aefbc970d42203ea4dd62bb3a3fbb1f61549",
+    "harness/work/10f-graph-growth-benchmark/artifacts/run_manifest.json": "sha256:231a259979ee2d72aafd3ea8ebd7a550a8715bf3db44b71435c5dc68320cdb0b",
+    "harness/work/10f-graph-growth-benchmark/gate.json": "sha256:24c07c64dd72b93798d84b3851e5bddf26d5f33097048dab2efccc219e1e52c4"
+  },
+  "quality_metrics": {
+    "abstention": {
+      "count": 1,
+      "expected_cases_passed": true,
+      "reasons": [
+        "retrieval-miss"
+      ]
+    },
+    "audit": {
+      "abstention_count": 1,
+      "pass_count": 1
+    },
+    "citation_validity": {
+      "rate": 1.0,
+      "total": 15,
+      "valid": 15
+    },
+    "estimated_cost_usd": 0.0,
+    "event_consistency": {
+      "checked_answers": 3,
+      "passed": true
+    },
+    "fallback": {
+      "count": 2,
+      "max_observed_attempts": 2,
+      "provider_attempt_cap": 2
+    },
+    "golden_regression": {
+      "passed": 7,
+      "total": 7
+    },
+    "latency_ms": {
+      "measurement": "local perf_counter around deterministic stages",
+      "p95_observed": 67.0976,
+      "samples": 47
+    },
+    "reason_code_coverage": [
+      "GRAPH_NEIGHBOUR_USED"
+    ],
+    "retrieval_recall": {
+      "expected_source_ids": [
+        "adr-0001"
+      ],
+      "retrieved_source_ids": [
+        "adr-0001",
+        "course-brief",
+        "design",
+        "requirements"
+      ],
+      "value": 1.0
+    },
+    "tokens": {
+      "input": 137,
+      "method": "deterministic lexical count",
+      "output": 1823
+    }
+  },
+  "run_id": "015ad194-355a-5ef2-bef6-420ee5fa764f",
+  "scenario_hash": "sha256:893fa5b0e52a4500881d78b8819bf893ebba1af4a81c563fca872fb927425d46",
+  "schema_version": 1,
+  "source_event_id": "9fa9db22-b826-53cc-92eb-319b50688327",
+  "source_hashes": {
+    "scripts/generate_synapse_artifacts.py": "sha256:b6f2228a02ce5ca217344377da64286da00ae9705a01a26af5742f9db64d51dc",
+    "src/coflow5/evidence/synapse_artifacts.py": "sha256:d7b21282823227ed2ae7a92a259bb89d5d3ac6e4739e8b262eef8175c592ea54",
+    "src/coflow5/synapse/__init__.py": "sha256:011092e093b46d9c6685114fca7f57bb7312fb1d1808cab4b11f2b2758fb338d",
+    "src/coflow5/synapse/evidence_reader.py": "sha256:f2437229a72bbc76b9c2e9648004fa76e62d10b8368c0b86a2a3f6429a2b7a18",
+    "src/coflow5/synapse/observer.py": "sha256:0431d08b2857c10022873c0958ca90c8399691cdb6a2e55cc4384c68b4f5a8bc",
+    "src/coflow5/synapse/provider.py": "sha256:e28a456ee19b86212ee24931b8c68f280b45db4ec3dc9387e91959994916e3d0",
+    "src/coflow5/synapse/retrieval.py": "sha256:e1187a371b68b658e4acc7a10ef9c0b9a1fc9db2deda433ed7d8cbaffe577a93",
+    "src/coflow5/synapse/specialists.py": "sha256:e1ac552446bd0369f038cbe8d0e500f4de6e8e24a14d00dca80db4ca5ce2cb93"
+  },
+  "source_run_id": "0db24e7b-133e-5b79-ba0c-171f1c0aaf34",
+  "status": "completed",
+  "versions": {
+    "agents": {
+      "S1": "scenario-planner-v1",
+      "S2": "decision-explainer-v1",
+      "S3": "evidence-auditor-v1"
+    },
+    "pyarrow": "21.0.0",
+    "python": "3.11.9",
+    "retrieval": "deterministic-exact-token-v1"
+  }
+}

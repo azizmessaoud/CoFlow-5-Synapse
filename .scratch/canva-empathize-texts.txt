@@ -1,0 +1,309 @@
+===== PAGE 1 =====
+PBhSljPlxqwVl7cB-LBYcPTZGmhsNjxn3	— DESIGN THINKING · EMPATHIZE PHASE
+PBhSljPlxqwVl7cB-LBHj89Zx7knslmBf	Intelligent traffic management
+PBhSljPlxqwVl7cB-LBbF5jNpwDgtvxKl	01 / 19
+PBhSljPlxqwVl7cB-LB2RpMctClrH4cmW	Understanding the people behind the traffic system
+PBhSljPlxqwVl7cB-LBTjff7Dvkr589MS	Real-world stakeholder personas, empathy maps, and the needs that should guide an adaptive multi-agent traffic management prototype.
+PBhSljPlxqwVl7cB-LBBQN1hCprFdCv9L	Data Science Engineering • SUMO Project
+===== PAGE 2 =====
+PBQsX4LByB6t0Wcd-LBC3bdNswB01C1g5	— METHODOLOGY
+PBQsX4LByB6t0Wcd-LBwJGqB8rgByC3r3	Empathize first, architect second
+PBQsX4LByB6t0Wcd-LBBbkdDCgcpm484P	02 / 19
+PBQsX4LByB6t0Wcd-LBBBhvb6lzNP9qgc	The project brief asks us to understand stakeholders and needs before choosing the technical solution. Here, the traffic system is viewed through people who directly experience intersections, operate vehicles, or depend on reliable movement.
+PBQsX4LByB6t0Wcd-LBmj9XwXQqQ2L7s2	1
+PBQsX4LByB6t0Wcd-LByYDCDVMrdjRwS7	Empathize
+PBQsX4LByB6t0Wcd-LBjGjZKR4Jcf7c59	2
+PBQsX4LByB6t0Wcd-LBr5FltlGWLRkQG2	Define
+PBQsX4LByB6t0Wcd-LB8B53k56fxQ93tN	3
+PBQsX4LByB6t0Wcd-LB18Lnrws79TsflJ	Ideate
+PBQsX4LByB6t0Wcd-LBg4JyWRQc8ynR8M	4
+PBQsX4LByB6t0Wcd-LBjfKJNJc3Vl8YNQ	Prototype
+PBQsX4LByB6t0Wcd-LBJf0b0MgHqTNlBm	5
+PBQsX4LByB6t0Wcd-LB52ygND2SJ0nf4c	Test
+PBQsX4LByB6t0Wcd-LBfq3yfRJfd3hmGh	WE ARE HERE
+PBQsX4LByB6t0Wcd-LBZ5MHXg6GBy0T0H	Tool: empathy map — what the stakeholder says, thinks, does, feels, plus pains and gains.
+===== PAGE 3 =====
+PBwjnTsttlYQNBQl-LBBP4TPwh0z7JGBk	— WHY EMPATHY MATTERS
+PBwjnTsttlYQNBQl-LBX4lSvykpxld6dn	The problem, in human terms
+PBwjnTsttlYQNBQl-LBjD72TRd58g3DWj	03 / 19
+PBwjnTsttlYQNBQl-LB68yPy8CH02YZv6	SAFETY
+PBwjnTsttlYQNBQl-LBVkLwZ8ht84VLcK	A signal decision affects pedestrians, cyclists, drivers, and people crossing or turning.
+PBwjnTsttlYQNBQl-LBVy9sSb2dsMYQ0M	TIME
+PBwjnTsttlYQNBQl-LBYDyxDpfm7mhyzW	Congestion becomes lost time for commuters, public transport, deliveries, and emergency response.
+PBwjnTsttlYQNBQl-LBDjMmQStdS6gBHd	RELIABILITY
+PBwjnTsttlYQNBQl-LBJmSlWR0DPYGjY2	Road users need predictable signal behavior; operators need to know what the system is doing.
+PBwjnTsttlYQNBQl-LBRBYtdDGZ40zQhg	PRIORITY
+PBwjnTsttlYQNBQl-LBsf3MW7hDtjF3MX	Emergency and public-transport vehicles may need coordinated signal priority without creating unsafe conflicts.
+PBwjnTsttlYQNBQl-LBZkTHttPrfDWlp6	SUSTAINABILITY
+PBwjnTsttlYQNBQl-LBVk9l5tF46rLwD6	Reducing stop-and-go movement can support efficiency, while avoiding solutions that simply move congestion elsewhere.
+===== PAGE 4 =====
+PB8SZ48T8DmwrfB6-LBDV8tb0l454rfSL	— THE PERSONAS
+PB8SZ48T8DmwrfB6-LBsL4PvP7pXgGXC9	Four people who experience the intersection differently
+PB8SZ48T8DmwrfB6-LBW4Pm96ySq85dbR	04 / 19
+PB8SZ48T8DmwrfB6-LBkDWT480JwktnKG	01
+PB8SZ48T8DmwrfB6-LBSk8mYFYk8J48ML	Meriem
+PB8SZ48T8DmwrfB6-LBdLcxCZgc3Y8LyT	Pedestrian / Daily Commuter
+PB8SZ48T8DmwrfB6-LBsxzX40szf0r8Rl	Wants safe, predictable crossings with short waits
+PB8SZ48T8DmwrfB6-LBNZvKSsj2pzQsDX	02
+PB8SZ48T8DmwrfB6-LBl561qtM3WfjqvG	Sami
+PB8SZ48T8DmwrfB6-LBd4ZlyJMMJzGNFl	City Bus Driver
+PB8SZ48T8DmwrfB6-LBzYFF4MGPWc140f	Wants reliable progression and fewer unnecessary stops
+PB8SZ48T8DmwrfB6-LBBXGYDbHy3tBw7r	03
+PB8SZ48T8DmwrfB6-LB5BxTLxshB9qy8Q	Nabil
+PB8SZ48T8DmwrfB6-LBKS4Mw5TXmLpMWS	Ambulance / Emergency Driver
+PB8SZ48T8DmwrfB6-LBKnts3JnnV5Lyys	Needs rapid, coordinated passage during emergencies
+PB8SZ48T8DmwrfB6-LB5wCWmqjwkCLyRc	04
+PB8SZ48T8DmwrfB6-LBNlSYtPB8sjFwGs	Youssef
+PB8SZ48T8DmwrfB6-LBxCV388w1FH5k5W	Cyclist / Micromobility User
+PB8SZ48T8DmwrfB6-LBHCdhVczBlHJRxP	Needs safe signal timing and visible protection at crossings
+===== PAGE 5 =====
+PBg2vVdx9tDf1FVv-LBVmqm8D04ccJmVY	— PERSONA 1 · REAL-WORLD ROAD USER
+PBg2vVdx9tDf1FVv-LBQdChDtGVCTMHgp	Meriem
+PBg2vVdx9tDf1FVv-LBrLdG6wW8vx41hB	05 / 19
+PBg2vVdx9tDf1FVv-LBfV0SNMvxb7vLKV	PEDESTRIAN / DAILY COMMUTER
+PBg2vVdx9tDf1FVv-LB9rRsQvthn5lpS7	28 · walks to work and uses crossings near busy intersections
+PBg2vVdx9tDf1FVv-LBZgQwYPt0BTymQw	GOAL
+PBg2vVdx9tDf1FVv-LBfmJ36qpkSDbyDm	Cross safely without waiting unnecessarily or guessing when it is safe to cross.
+PBg2vVdx9tDf1FVv-LBV91g5hK7YM00xH	“I want the signal to notice people waiting, not just count cars.”
+PBg2vVdx9tDf1FVv-LBkFXYdQjmyCm9sQ	SAYS
+PBg2vVdx9tDf1FVv-LBqtNRpbDwtlkRlk	“Why am I waiting at an empty crossing?”
+PBg2vVdx9tDf1FVv-LBG7NJPksLNrbm7m	THINKS
+PBg2vVdx9tDf1FVv-LBBGQpnGCQ5Vk6WK	“Will the turning vehicles actually stop when I get the walk signal?”
+PBg2vVdx9tDf1FVv-LB8fBmH0z20sz43X	DOES
+PBg2vVdx9tDf1FVv-LBsmnV3dmN3FNSy6	Waits at crossings, checks the signal, and chooses routes with easier crossings.
+PBg2vVdx9tDf1FVv-LBBHVG3T3fqzGYcW	FEELS
+PBg2vVdx9tDf1FVv-LBbSqykt5GCPpqCL	Exposed when crossing phases are short or vehicle movements feel unpredictable.
+PBg2vVdx9tDf1FVv-LB1ZLKtTzs5wK6VK	PAINS → GAINS
+PBg2vVdx9tDf1FVv-LB4dv5GVdqbN7pkq	Long waits, difficult crossings → wants pedestrian-aware phases and predictable crossing time.
+PBg2vVdx9tDf1FVv-LBWqWkZz2lrkxLjl	ADDRESSED BY
+PBg2vVdx9tDf1FVv-LBC6fJfjmzGR6jxz	Pedestrian Detection · Signal Agent · Safety Constraints
+===== PAGE 6 =====
+PBhQxWWvHdXD7ByR-LBZny1S7bD83N1JD	— PERSONA 2 · REAL-WORLD ROAD USER
+PBhQxWWvHdXD7ByR-LBQ0Y0Ylf2W3mslb	Sami
+PBhQxWWvHdXD7ByR-LBZDcpQWNzSD6Sxw	06 / 19
+PBhQxWWvHdXD7ByR-LBQWR22jsmR3Rjld	CITY BUS DRIVER
+PBhQxWWvHdXD7ByR-LBKJRQRfwGyxsD5G	41 · drives a scheduled urban bus on a corridor with several signalized junctions
+PBhQxWWvHdXD7ByR-LBG7vBKwxRHply5b	GOAL
+PBhQxWWvHdXD7ByR-LBG9NJFTrb0pSzLv	Keep the service moving reliably while respecting passengers, pedestrians, and other traffic.
+PBhQxWWvHdXD7ByR-LB1fN20hZxQkCYM7	“If I miss three lights in a row, the timetable problem follows me for the rest of the route.”
+PBhQxWWvHdXD7ByR-LBcDTknK4n9bQfmj	SAYS
+PBhQxWWvHdXD7ByR-LBHpkCZtqftV1qN7	“Can the next signal give me a little more green when I'm late?”
+PBhQxWWvHdXD7ByR-LBg36GsBr7d1Xpht	THINKS
+PBhQxWWvHdXD7ByR-LByVkTNb3qg6QPgV	“Priority should help the bus without blocking everyone else.”
+PBhQxWWvHdXD7ByR-LByLW7LJ4ZbCQYXY	DOES
+PBhQxWWvHdXD7ByR-LBR4cjRJhfcqYMNg	Approaches stops, boards passengers, merges into traffic, and follows a fixed route.
+PBhQxWWvHdXD7ByR-LBc4yNzLWLN6RlYm	FEELS
+PBhQxWWvHdXD7ByR-LBMc6jCGLRypkh9b	Pressured by schedule delays and passenger expectations.
+PBhQxWWvHdXD7ByR-LBqTzY4gpjTBhh0L	PAINS → GAINS
+PBhQxWWvHdXD7ByR-LB6GxLbrpZppCFZ8	Repeated signal delay, schedule variability → wants targeted transit priority and measurable corridor effects.
+PBhQxWWvHdXD7ByR-LBdFyPbbcjgjvnk9	ADDRESSED BY
+PBhQxWWvHdXD7ByR-LBSgCHjff5TV8Yrg	Transit Priority · Multi-Agent Coordination · KPI / Evaluation
+===== PAGE 7 =====
+PB9zPZP36js45DjG-LBhcWzRfYgxFvp0h	— PERSONA 3 · REAL-WORLD ROAD USER
+PB9zPZP36js45DjG-LBtc3BVQQKBvwlT2	Nabil
+PB9zPZP36js45DjG-LBrzcVrmHGMmvb99	07 / 19
+PB9zPZP36js45DjG-LBkMDKSHzRmHdthW	AMBULANCE / EMERGENCY DRIVER
+PB9zPZP36js45DjG-LB11N76ghZ8hNpW2	36 · emergency-response driver navigating time-critical calls
+PB9zPZP36js45DjG-LBbQCFk3WkpYqtSz	GOAL
+PB9zPZP36js45DjG-LBqccd5FXtqrSlFh	Reach the incident quickly and safely, with coordinated signal priority along the route.
+PB9zPZP36js45DjG-LBCXXj4Kmds4zcHw	“When every second matters, I need the intersections ahead to cooperate.”
+PB9zPZP36js45DjG-LBt9N85N99kw53Xm	SAYS
+PB9zPZP36js45DjG-LBkmpQszBRnkr52B	“Can the route be cleared before we reach the junction?”
+PB9zPZP36js45DjG-LBq9N8nTNgt0YWdS	THINKS
+PB9zPZP36js45DjG-LBr17GsrqKzV84vL	“Priority must be coordinated across several signals, not just the next one.”
+PB9zPZP36js45DjG-LB4Q32yf2MMCh97j	DOES
+PB9zPZP36js45DjG-LBgrKZzHy75vPnGk	Follows an emergency route, monitors intersections, and reacts to changing road conditions.
+PB9zPZP36js45DjG-LBQKGTSdKbGtGw01	FEELS
+PB9zPZP36js45DjG-LBl3syVQTltYP7nr	Time-critical and highly sensitive to blocked approaches or unpredictable signal changes.
+PB9zPZP36js45DjG-LB7vmZTpbNn0DdlQ	PAINS → GAINS
+PB9zPZP36js45DjG-LBnbShH0tjtV02Rh	Isolated signal response, blocked approaches → wants coordinated emergency priority with safe fallback.
+PB9zPZP36js45DjG-LBB6GW9r538Qpbfk	ADDRESSED BY
+PB9zPZP36js45DjG-LByJK4VxFqJHX1YT	Emergency Priority Agent · Multi-Agent Coordination · Audit / Override
+===== PAGE 8 =====
+PB1Y6dhSTg6hCGdq-LBLB1cq7MvXm2Fpr	— PERSONA 4 · REAL-WORLD ROAD USER
+PB1Y6dhSTg6hCGdq-LBjhdFTszdKF3DFW	Youssef
+PB1Y6dhSTg6hCGdq-LBdnNj2FYQvd5nCx	08 / 19
+PB1Y6dhSTg6hCGdq-LBrh404mSzZz6ZGJ	CYCLIST / MICROMOBILITY USER
+PB1Y6dhSTg6hCGdq-LB2j50ZcrZTZX3t8	24 · cycles regularly through urban intersections
+PB1Y6dhSTg6hCGdq-LBgnrX0sdQN3kLYh	GOAL
+PB1Y6dhSTg6hCGdq-LBQrMhYstjmBNdqf	Move through intersections safely without being overlooked by vehicle-focused optimization.
+PB1Y6dhSTg6hCGdq-LBnKmMlfcDbltmQS	“The fastest traffic plan isn't useful to me if it makes the crossing unsafe.”
+PB1Y6dhSTg6hCGdq-LBxBnQ0qM9PDKzhZ	SAYS
+PB1Y6dhSTg6hCGdq-LBDjQ7025CWXFcpX	“Can the signal give cyclists a clear and predictable phase?”
+PB1Y6dhSTg6hCGdq-LBRTcNspMNvxCTcJ	THINKS
+PB1Y6dhSTg6hCGdq-LBXqsrnQLsLK2pDV	“A shorter vehicle queue should not mean a riskier crossing.”
+PB1Y6dhSTg6hCGdq-LBPdQM3GMlMjQ3Wt	DOES
+PB1Y6dhSTg6hCGdq-LBSKHzR98c5b5K8B	Uses cycle lanes and crossings, watches turning vehicles, and adapts route when junctions feel unsafe.
+PB1Y6dhSTg6hCGdq-LB9YSsrDpSRns81y	FEELS
+PB1Y6dhSTg6hCGdq-LB0ttcy8SLwDyQsW	Vulnerable around fast turns and complex multi-lane intersections.
+PB1Y6dhSTg6hCGdq-LBlThbW5pnW6HbnB	PAINS → GAINS
+PB1Y6dhSTg6hCGdq-LBCvnFqvcKtvpDWB	Vehicle-centric optimization, unclear phases → wants explicit vulnerable-road-user constraints and visibility.
+PB1Y6dhSTg6hCGdq-LBws2Tp4WmwQjHhN	ADDRESSED BY
+PB1Y6dhSTg6hCGdq-LBqTGbr9FZrLVcTr	Cycle / Pedestrian Phase Logic · Safety Constraints · Evaluation
+===== PAGE 9 =====
+PB3zl5TrDk3RHxlf-LBw5MhlR87GZNMQ9	— SYNTHESIS
+PB3zl5TrDk3RHxlf-LBBQ4HyQLCNtq4fR	One intersection, four different needs
+PB3zl5TrDk3RHxlf-LBFzTNnrRTJFTWL7	09 / 19
+PB3zl5TrDk3RHxlf-LBDY4rxBRwGRHlZw	PERSONA
+PB3zl5TrDk3RHxlf-LBysMp8TQt8dMzYd	CORE NEED
+PB3zl5TrDk3RHxlf-LB9kYlRdbZxlMBt1	SYSTEM IMPLICATION
+PB3zl5TrDk3RHxlf-LBlBDfNLBRrGq26H	Meriem — Pedestrian
+PB3zl5TrDk3RHxlf-LBHBynkmtJH4WNTM	Safe + predictable crossing
+PB3zl5TrDk3RHxlf-LBmkz9pB7MkJL9FP	Pedestrian-aware signal control
+PB3zl5TrDk3RHxlf-LB2Dn2W1gND2Hs4G	Sami — Bus Driver
+PB3zl5TrDk3RHxlf-LBPTwWjXp0FBc2sX	Reliable progression
+PB3zl5TrDk3RHxlf-LBys4F3kLHVPBWjB	Transit priority + coordination
+PB3zl5TrDk3RHxlf-LBYsBRL5bjXBM3YC	Nabil — Emergency Driver
+PB3zl5TrDk3RHxlf-LBd4FWB0BHgTqcV5	Rapid, coordinated passage
+PB3zl5TrDk3RHxlf-LB9FlSDdBZ46dQZV	Emergency priority + coordination
+PB3zl5TrDk3RHxlf-LBl47GVYwVDTKVwR	Youssef — Cyclist
+PB3zl5TrDk3RHxlf-LByFrTXx3FRbDsFy	Safe, visible movement
+PB3zl5TrDk3RHxlf-LBvW0WL8HvFGtjPJ	Vulnerable-user constraints
+PB3zl5TrDk3RHxlf-LBqZ44BLv1cRnbxD	Recurring theme: optimizing traffic flow must remain compatible with safety, priority needs, and human experience.
+===== PAGE 10 =====
+PBTSqprKL6S6GlHN-LBdlf4NqL5tnHDLM	— THE RECURRING THEME
+PBTSqprKL6S6GlHN-LBQjvGMjRkPSnSzt	Not automation in isolation
+PBTSqprKL6S6GlHN-LBBPJ8PzMx7tRQlV	10 / 19
+PBTSqprKL6S6GlHN-LBhxWRvHDFfvmYZ8	“Intelligent” should mean
+PBTSqprKL6S6GlHN-LB46JNSfyXPZXkyr	responsive to who is waiting
+PBTSqprKL6S6GlHN-LBggjgwGkf2PzjxN	coordinated across intersections
+PBTSqprKL6S6GlHN-LBhrNsPx0jxsGQ95	safe for vulnerable road users
+PBTSqprKL6S6GlHN-LBqJc2SsKTLvpgqf	able to prioritize emergencies
+PBTSqprKL6S6GlHN-LB3sy4FGJNfmGqkz	measurable against a baseline
+PBTSqprKL6S6GlHN-LBFw1t9dCngbyQzD	The agent should optimize more than vehicle throughput: it should balance delay, safety constraints, priority requests, and network effects.
+===== PAGE 11 =====
+PBCykTTC2LjDl0kS-LBC3RbPWyFXS8dGG	— REFERENCES
+PBCykTTC2LjDl0kS-LBZQ29C3JCYkzdHW	Sources & project basis
+PBCykTTC2LjDl0kS-LBpR5rrHSSM7bHCx	11 / 19
+PBCykTTC2LjDl0kS-LBpwZ8vRRcD3Wrgl	[1] Project brief — Intelligent Multi-Agent Traffic Management (provided course material).
+PBCykTTC2LjDl0kS-LBR2cpS2znMFylLq	[2] Eclipse SUMO Documentation — Pedestrian Simulation and TraCI pedestrian crossing tutorial.
+PBCykTTC2LjDl0kS-LBtCTm2hGWXQWyLL	[3] Eclipse SUMO Documentation — Public Transport Tutorial and traffic-light control.
+PBCykTTC2LjDl0kS-LBN8yG1jYJVb7Lcc	[4] FHWA Traffic Detector Handbook — priority vehicles, including emergency and transit vehicles.
+PBCykTTC2LjDl0kS-LBtc7k7GK3LLrs0h	[5] Persona statements are representative design hypotheses for stakeholder validation; they are not interviews with named individuals.
+PBCykTTC2LjDl0kS-LBmVvtTQSYvHQBf2	SUMO supports multimodal simulation including pedestrians and public transport, and supports external traffic-light control through TraCI.
+===== PAGE 12 =====
+PBjvkdqddcstcV3P-LB164v3lBftLQNhb	— END OF EMPATHIZE PHASE
+PBjvkdqddcstcV3P-LBqTttDXjNp3KjHZ	From empathy to Ideate
+PBjvkdqddcstcV3P-LB8rMSdLLxTXqgJh	12 / 19
+PBjvkdqddcstcV3P-LBwKG9nby5HLRsrQ	Four real-world perspectives, one shared requirement:
+PBjvkdqddcstcV3P-LB64v10K81XRv5Lw	adaptive traffic control that stays safe, explainable, measurable, and responsive to the people using the road.
+===== PAGE 13 =====
+PB9xX9W5W8NDXZD2-LBc4t4HNVcgMPK26	— IDEATION PHASE
+PB9xX9W5W8NDXZD2-LBrfJCXdxVdVKyW1	From real-world needs to solution ideas
+PB9xX9W5W8NDXZD2-LBLdwzbM0T4J9jcw	13 / 19
+PB9xX9W5W8NDXZD2-LBRNzsph929VsCRp	The personas give us four different perspectives on the same intersection. Ideation turns those needs into possible agent behaviors before we commit to one prototype.
+PB9xX9W5W8NDXZD2-LB40DT4Y5s4jJLTM	1
+PB9xX9W5W8NDXZD2-LBNFX40Lbw7S241x	Empathize
+PB9xX9W5W8NDXZD2-LBxC4smsDMzfwQwp	2
+PB9xX9W5W8NDXZD2-LBRXXjry10vMZBMP	Define
+PB9xX9W5W8NDXZD2-LB35tfvR209crLgs	3
+PB9xX9W5W8NDXZD2-LBpzq48YswdVq7V4	Ideate
+PB9xX9W5W8NDXZD2-LBz4Pd2TV6N0CM83	4
+PB9xX9W5W8NDXZD2-LB1WBLW9KFJwnSG6	Prototype
+PB9xX9W5W8NDXZD2-LB12nzr2zrwVP11K	5
+PB9xX9W5W8NDXZD2-LBFW4bqnd17bvrTS	Test
+PB9xX9W5W8NDXZD2-LBzYhHjvdfk1Tq2l	WE ARE HERE
+PB9xX9W5W8NDXZD2-LBJTs3zVq1lH0SzJ	Ideation rule: generate several plausible solutions first; evaluate them with measurable traffic, safety, priority and sustainability criteria later.
+===== PAGE 14 =====
+PBs4cSltlZc2G83S-LBLVjZ5xd4KyVPqF	— IDEATION · HOW MIGHT WE
+PBs4cSltlZc2G83S-LBrmXY7b6mJW8msL	Turning persona needs into design questions
+PBs4cSltlZc2G83S-LB2Dtph4zpKCDQq0	14 / 19
+PBs4cSltlZc2G83S-LBSXvgK6vgvbn8sZ	01
+PBs4cSltlZc2G83S-LB81xTs4NDmTy9rQ	How might we reduce unnecessary waiting at intersections?
+PBs4cSltlZc2G83S-LBvP1BZydRRTtmxy	PEDESTRIAN + GENERAL TRAFFIC
+PBs4cSltlZc2G83S-LBNtg2s00CNw4C3Q	02
+PBs4cSltlZc2G83S-LBPWqmT9Z6vMDXZ1	How might we improve bus reliability without simply stopping everyone else?
+PBs4cSltlZc2G83S-LB9Z3qHgZPLLDbtj	TRANSIT PRIORITY
+PBs4cSltlZc2G83S-LBjVq6fxRMT7Dyt6	03
+PBs4cSltlZc2G83S-LB8W9CmsX73v8CPL	How might we coordinate signals for an approaching ambulance?
+PBs4cSltlZc2G83S-LBfj1v11nsVtl4XB	EMERGENCY RESPONSE
+PBs4cSltlZc2G83S-LB6RTqBHrqhyqXSz	04
+PBs4cSltlZc2G83S-LBGlN97B1X9hfgK3	How might we protect pedestrians and cyclists while optimizing flow?
+PBs4cSltlZc2G83S-LBB5SCrp79m61cNL	VULNERABLE ROAD USERS
+PBs4cSltlZc2G83S-LBdV1pzMF9CRwTVt	05
+PBs4cSltlZc2G83S-LBcV2KgvRZ0wcc5y	How might neighboring intersections cooperate instead of optimizing alone?
+PBs4cSltlZc2G83S-LB0jCZ1RzQ1NNJPQ	MULTI-AGENT COORDINATION
+PBs4cSltlZc2G83S-LBj2lBJXkdx6QJM6	06
+PBs4cSltlZc2G83S-LB5DMf4wMwfrQ1Hg	How might signal timing adapt as demand changes over time?
+PBs4cSltlZc2G83S-LBv41RXNQ3lNfcXm	ADAPTIVE CONTROL
+===== PAGE 15 =====
+PB7Vgrlcc8P3JPcC-LBPRwChS5GYpYncz	— IDEATION · BRAINSTORM
+PB7Vgrlcc8P3JPcC-LBWrpDTBCTtBz3L9	Candidate intelligent-agent ideas
+PB7Vgrlcc8P3JPcC-LB1cpGqHcMWkC81l	15 / 19
+PB7Vgrlcc8P3JPcC-LBVC29wh6FGNz9Cg	The goal here is breadth: several agents can later be combined into one cooperative architecture.
+PB7Vgrlcc8P3JPcC-LBd6Qsf1lZjkQkdD	Adaptive Signal Agent
+PB7Vgrlcc8P3JPcC-LBWNVB7yg2rkkNB9	Adjust phase timing from current traffic state.
+PB7Vgrlcc8P3JPcC-LB2QhjNzSdwM9QMf	Pedestrian Agent
+PB7Vgrlcc8P3JPcC-LBJQ7w9ZfdZ4Bqns	Detect waiting pedestrians and crossing demand.
+PB7Vgrlcc8P3JPcC-LBL7tFySJ8BHKq0S	Transit Priority Agent
+PB7Vgrlcc8P3JPcC-LBjrGgB6886MgFDp	Request targeted priority for delayed buses.
+PB7Vgrlcc8P3JPcC-LBYQrsGQ23VPPX3v	Emergency Priority Agent
+PB7Vgrlcc8P3JPcC-LBsm8gj5Txl01Kq2	Coordinate safe signal priority for ambulances.
+PB7Vgrlcc8P3JPcC-LBrTb9GbtwwLRYjs	Cyclist Safety Agent
+PB7Vgrlcc8P3JPcC-LB3k8CNcV8CVmbGk	Represent vulnerable-road-user constraints.
+PB7Vgrlcc8P3JPcC-LBs9SmjZkTSBZnHY	Queue Monitor Agent
+PB7Vgrlcc8P3JPcC-LBDjJnrs50dk75Lq	Detect queues, spillback and growing demand.
+PB7Vgrlcc8P3JPcC-LBrZSjMnzTXXlKpG	Prediction Agent
+PB7Vgrlcc8P3JPcC-LB4gwHHCvcspt1Z9	Estimate near-future traffic conditions.
+PB7Vgrlcc8P3JPcC-LBVlYfKct4k35XNM	Coordination Agent
+PB7Vgrlcc8P3JPcC-LBgdFZTRvwMzgBR3	Share state and resolve competing requests.
+===== PAGE 16 =====
+PB00FyXdy8HlcvkG-LBVT6zrxf09WrnhM	— IDEATION · MAPPING
+PB00FyXdy8HlcvkG-LBPt6zxLSZcrD37k	From stakeholder need to agent responsibility
+PB00FyXdy8HlcvkG-LBxbwB5lNPBvdfC5	16 / 19
+PB00FyXdy8HlcvkG-LBz96pP2BDn0f0lG	USER / NEED
+PB00FyXdy8HlcvkG-LBLBLXzc2Kxw9qP7	AGENT IDEA
+PB00FyXdy8HlcvkG-LBqrM4zWc7499gQj	INFORMATION
+PB00FyXdy8HlcvkG-LBSQN5P2jd2HyBKh	Pedestrian / predictable, safe crossing
+PB00FyXdy8HlcvkG-LBBbCMN5bHGsGhqv	Pedestrian Agent
+PB00FyXdy8HlcvkG-LBYFM85XkCzJK5QQ	Waiting people, crossing state, signal phase
+PB00FyXdy8HlcvkG-LBzwNDd7Hvkd3zHr	Bus driver / reliable corridor travel
+PB00FyXdy8HlcvkG-LBwxsWn26hnwzjny	Transit Priority Agent
+PB00FyXdy8HlcvkG-LB7f2rVk6XQHFJmX	Bus position, delay, route, signal state
+PB00FyXdy8HlcvkG-LBCfyQfjpzNJN4HH	Emergency driver / rapid safe passage
+PB00FyXdy8HlcvkG-LBwvcZBf78GlfTPg	Emergency Priority Agent
+PB00FyXdy8HlcvkG-LB8MCV3ZtPHXdtD1	Emergency position, route, ETA, signal state
+PB00FyXdy8HlcvkG-LBqzVR17scl9bmyv	Cyclist / safe multimodal movement
+PB00FyXdy8HlcvkG-LB9qPHwhm3SF6MZr	Safety Agent
+PB00FyXdy8HlcvkG-LByYjmTmH1KchLGc	Approach demand, conflicts, phase constraints
+PB00FyXdy8HlcvkG-LBrSQwHnXDVs7cTH	Design implication: no single agent sees the whole problem; cooperation is part of the solution.
+===== PAGE 17 =====
+PBcqyS7DVBtFQhYR-LBzrSNxYDKCrHGBd	— IDEATION · ARCHITECTURE
+PBcqyS7DVBtFQhYR-LBhxm0vGqHtJLbTv	A cooperative multi-agent intersection
+PBcqyS7DVBtFQhYR-LBLSb7Kc7qMJpCZH	17 / 19
+PBcqyS7DVBtFQhYR-LBcz0b3HV67BR1Hx	Local agents react to their own signals while exchanging enough context to avoid conflicting decisions.
+PBcqyS7DVBtFQhYR-LBN6QLxfTBDHgclc	SIGNAL AGENT
+PBcqyS7DVBtFQhYR-LB16S9z2NRP69x8R	PEDESTRIAN AGENT
+PBcqyS7DVBtFQhYR-LB9mKSBQpX1MHM2H	TRANSIT AGENT
+PBcqyS7DVBtFQhYR-LBgyKlqYvBdhMXX6	EMERGENCY AGENT
+PBcqyS7DVBtFQhYR-LBFbfvDqRZXlkL5H	SAFETY AGENT
+PBcqyS7DVBtFQhYR-LBHbNXdnZ4Z9zGyz	COORDINATION LAYER
+PBcqyS7DVBtFQhYR-LBClvhkKqfB1VQ9v	Shares state, priority requests, conflicts and decisions.
+PBcqyS7DVBtFQhYR-LBXNCN12zGXQXdrx	Core idea: distributed decisions + shared context + explicit safety constraints.
+===== PAGE 18 =====
+PBBG95nghbb71k6L-LBmKpycHnc15RCzL	— IDEATION · NARROWING
+PBBG95nghbb71k6L-LBgjwKZw0jjY1sZ5	What the prototype should be able to prove
+PBBG95nghbb71k6L-LB4vsVWnjH4cXJG1	18 / 19
+PBBG95nghbb71k6L-LBHL209nzkZjsZFC	Traffic
+PBBG95nghbb71k6L-LBG3565syp1bW0wf	Average waiting time · travel time · queue length
+PBBG95nghbb71k6L-LBZHLy0XG2QlGNkr	Priority
+PBBG95nghbb71k6L-LBjBhjrx3CZlBjlp	Bus delay · emergency response delay
+PBBG95nghbb71k6L-LB28QZbLd6S5fyhd	Safety
+PBBG95nghbb71k6L-LBYxMXnF4ZQzz2ZX	Pedestrian/cyclist waiting · constraint violations
+PBBG95nghbb71k6L-LBscfq3Z13TSpR3N	Adaptability
+PBBG95nghbb71k6L-LB3nNYbk858VxQrX	Different demand levels · incident recovery
+PBBG95nghbb71k6L-LB4XDnCVPVnmZyCJ	Sustainability
+PBBG95nghbb71k6L-LBtVlJdhhbxNdFL6	Stops/idling · emissions proxy
+PBBG95nghbb71k6L-LB4kTpNDk20k1F5K	Computation
+PBBG95nghbb71k6L-LB0Yc85qwtyjSGFt	Decision frequency · runtime overhead
+PBBG95nghbb71k6L-LBv3MBh8XcgB7b3G	Prototype direction: cooperative adaptive signal agents, tested against a conventional/fixed-time baseline.
+PBBG95nghbb71k6L-LB6MVXVjW5vhXTH8	SUMO + TraCI can provide simulated state and allow external control of traffic-light phases; SUMO also supports pedestrian-actuated crossing logic.
+===== PAGE 19 =====
+PBlDzrB0SnbzLXhz-LBqTfSh6CfYFQdVW	— IDEATION · END
+PBlDzrB0SnbzLXhz-LBhhRd7bSv7Hhy90	From ideas to a testable prototype
+PBlDzrB0SnbzLXhz-LBSQ95SwVrQ9P7PF	19 / 19
+PBlDzrB0SnbzLXhz-LBgySVD0s3NrGyzM	The Ideate phase connects the four real-world personas to a concrete multi-agent concept.
+PBlDzrB0SnbzLXhz-LBkbvXL8wTj581ts	USER NEEDS → HOW MIGHT WE → AGENT IDEAS → COOPERATIVE ARCHITECTURE → MEASURABLE EXPERIMENT
+PBlDzrB0SnbzLXhz-LB5GlFMSKJJZrG5F	Next phase: Prototype the agents in SUMO and compare their behavior under different traffic conditions.
+PBlDzrB0SnbzLXhz-LBvmRCfy414xQMyp	Evidence basis: project brief; SUMO Traffic Lights and TraCI documentation; SUMO pedestrian crossing tutorial.
+PBlDzrB0SnbzLXhz-LBl9gYCfV6QzP2pr	Design proposals in this phase are project hypotheses to be validated experimentally.

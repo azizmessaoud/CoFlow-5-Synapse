@@ -1,0 +1,92 @@
+{
+  "all_passed": true,
+  "golden_set_version": "synapse-golden-v1",
+  "metrics": {
+    "abstention": {
+      "count": 1,
+      "expected_cases_passed": true,
+      "reasons": [
+        "retrieval-miss"
+      ]
+    },
+    "audit": {
+      "abstention_count": 1,
+      "pass_count": 1
+    },
+    "citation_validity": {
+      "rate": 1.0,
+      "total": 15,
+      "valid": 15
+    },
+    "estimated_cost_usd": 0.0,
+    "event_consistency": {
+      "checked_answers": 3,
+      "passed": true
+    },
+    "fallback": {
+      "count": 2,
+      "max_observed_attempts": 2,
+      "provider_attempt_cap": 2
+    },
+    "golden_regression": {
+      "passed": 7,
+      "total": 7
+    },
+    "latency_ms": {
+      "measurement": "local perf_counter around deterministic stages",
+      "p95_observed": 67.0976,
+      "samples": 47
+    },
+    "reason_code_coverage": [
+      "GRAPH_NEIGHBOUR_USED"
+    ],
+    "retrieval_recall": {
+      "expected_source_ids": [
+        "adr-0001"
+      ],
+      "retrieved_source_ids": [
+        "adr-0001",
+        "course-brief",
+        "design",
+        "requirements"
+      ],
+      "value": 1.0
+    },
+    "tokens": {
+      "input": 137,
+      "method": "deterministic lexical count",
+      "output": 1823
+    }
+  },
+  "results": [
+    {
+      "case_id": "s1-wait",
+      "passed": true
+    },
+    {
+      "case_id": "s2-cited",
+      "passed": true
+    },
+    {
+      "case_id": "s2-provider-retry-fallback",
+      "passed": true
+    },
+    {
+      "case_id": "s2-abstention",
+      "passed": true
+    },
+    {
+      "case_id": "s3-pass",
+      "passed": true
+    },
+    {
+      "case_id": "s3-abstention",
+      "passed": true
+    },
+    {
+      "case_id": "provider-outage",
+      "passed": true
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,5 +1,5 @@
 id	kind	status	contract
-01-smoke-test	control	blocked	Pin SUMO and Python 3.11; measure throughput
+01-smoke-test	control	gated	Pin SUMO and Python 3.11; measure throughput
 02-evidence-bundle	integration	gated	Run manifest + Parquet + DuckDB join on run_id
 03-safety-mask	control	gated	One writer; illegal actions rejected
 04-baselines	eval	gated	Fixed-time and actuated on matched seeds
@@ -8,11 +8,14 @@ id	kind	status	contract
 07-a2-a3	control	gated	Rule-based emergency and multimodal requests
 08-failure-injection	eval	gated	Drop messages; fail controller; kill Synapse
 09-eval-harness	eval	gated	Ablations, unfinished trips, no best episode
-10-a4-a5	control	gated	Forecast ladder then eco advice
-10b-max-pressure-trip-kpis	eval	gated	Matched Max-Pressure trips and run KPIs; Row 05 immutable
-10c-evidence-page	product	gated	Deterministic real-run page with facts, reasons, safety, and limits
-12-synapse-agents	product	todo	S1 plan and wait; S2 explain evidence; S3 audit or abstain; no TraCI
-11-api	product	todo	Read-only FastAPI over frozen evidence after Synapse gates
-13-react-precomputed	product	todo	UI reads artifacts only
+S0	spec	todo	Persona alias table; J0 honesty; incident schema v1
+D1	product	todo	Align deck slides with repo truth
+10p	control	todo	Pedestrian demand on J0; crossing state to A3
+10d	integration	todo	Integrated incident loop: engine, route guidance, A4, A5
+10e	eval	todo	Multi-seed evaluation with ablations and CIs
+12	product	todo	Synapse S1/S2/S3; verifier; golden set; no TraCI
+11	product	todo	Read-only FastAPI over frozen evidence
+13	product	todo	React dashboard: timeline, eval, and Synapse audit
+R	deploy	todo	Compose; tagged bundle; CI smoke tests
 14-tunis-showcase	data	todo	OSM + TRANSTU GTFS; synthetic demand labelled
 15-optional-dqn	optional	blocked	Only after feature freeze

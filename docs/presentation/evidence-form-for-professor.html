@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoFlow-5 — Evidence form</title>
+<style>
+  :root { --ink:#14202b; --muted:#4d5c68; --line:#d5dde3; --paper:#f7f4ee; --accent:#0f6e6a; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#10181f; font:16px/1.4 Georgia, "Iowan Old Style", serif; color:var(--ink); }
+  .page { width:min(920px, 100%); margin:28px auto; background:var(--paper); padding:36px 40px 44px; }
+  h1 { font-size:32px; line-height:1.15; margin:8px 0 6px; }
+  h2 { font:12px/1 ui-sans-serif, sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin:22px 0 8px; }
+  p { margin:0 0 10px; }
+  .kicker { font:12px/1 ui-sans-serif, sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
+  .meta { font:13px/1.4 ui-sans-serif, sans-serif; color:var(--muted); }
+  table { width:100%; border-collapse:collapse; font:14px/1.35 ui-sans-serif, sans-serif; margin-top:6px; }
+  th, td { text-align:left; vertical-align:top; border-bottom:1px solid var(--line); padding:8px 8px 8px 0; }
+  th { color:var(--muted); font-weight:600; }
+  .num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .warn { border:1px solid #8a5a12; color:#6d470c; padding:10px 12px; font:14px/1.4 ui-sans-serif, sans-serif; margin:12px 0; }
+  .empty { color:#8c3a2f; font:13px/1 ui-sans-serif, sans-serif; letter-spacing:.04em; text-transform:uppercase; }
+  ol { margin:6px 0 0; padding-left:20px; }
+  li { margin:0 0 6px; }
+  @media print { body { background:#fff; } .page { margin:0; width:auto; } }
+</style>
+</head>
+<body>
+<article class="page">
+  <div class="kicker">CoFlow-5 Synapse · ESPRIT 4DS · evidence form</div>
+  <h1>Statistics we can show. Survey results we cannot.</h1>
+  <p class="meta">For the professor. Safe to post on LinkedIn only with the warning below the tables. Checked against the research note of 23 September 2026. Form dated 26 September 2026.</p>
+
+  <div class="warn">2023 road deaths are published as both 2,273 and 1,216, with the same 5,796 crashes. Both stay on this form. They are not averaged. This form is not a count of lives saved, not measured air, and not a Tunis deployment.</div>
+
+  <h2>1 · Published statistics</h2>
+  <table>
+    <tr><th>Figure</th><th>Number</th><th>Who it speaks for</th><th>Source</th></tr>
+    <tr><td>Reported road deaths, 2019</td><td class="num">2,273</td><td>National record</td><td>WHO country profile, Global status report on road safety 2023</td></tr>
+    <tr><td>Of those reported deaths</td><td class="num">84% male</td><td>National record</td><td>Same WHO profile</td></tr>
+    <tr><td>WHO estimate, 2021</td><td class="num">2,004</td><td>National estimate, interval 1,786–2,222</td><td>Same WHO profile. 16.3 per 100,000</td></tr>
+    <tr><td>Crashes, 2023</td><td class="num">5,796</td><td>National record. Same total in both accounts</td><td>WHO / Health / Interior investment case quoting ONSR, and La Presse briefing of ONSR, 17 Jan 2025</td></tr>
+    <tr><td>Deaths, 2023, investment case</td><td class="num">2,273</td><td>National record, one account</td><td>Investment case quoting ONSR. Injuries in that case: 7,909</td></tr>
+    <tr><td>Deaths, 2023, press briefing</td><td class="num">1,216</td><td>National record, the other account</td><td>La Presse, 17 Jan 2025, briefing of ONSR</td></tr>
+    <tr><td>Least protected users, 2023 deaths in the investment case</td><td class="num">28% / 32% / 2%</td><td>Pedestrians, motorcyclists, cyclists. Amara’s group is the pedestrian share</td><td>Same investment case. More than 82% of fatalities male</td></tr>
+    <tr><td>2024 strategy</td><td class="num">named groups</td><td>Children, older people, people with disabilities</td><td>National Road Safety Strategy, as cited in the investment case</td></tr>
+    <tr><td>Cause classes in the 2025 briefing</td><td class="num">42.11% / 14.35% / 8.12%</td><td>Inattention of crashes; speeding of crashes (about 30% of deaths); unsafe pedestrian crossing of crashes</td><td>La Presse briefing of ONSR. Cause classes, not a model of our junction</td></tr>
+    <tr><td>Crashes, deaths, injuries, 2024</td><td class="num">5,687 / 1,169 / 7,786</td><td>National, that briefing</td><td>Same La Presse article</td></tr>
+    <tr><td>Tunis governorate, 2024</td><td class="num">953 / 136 / 1,146</td><td>Crashes, deaths, injuries. Highest crash count among governorates in that briefing</td><td>Same article. Not one intersection</td></tr>
+    <tr><td>TRANSTU paying passengers</td><td class="num">187.4 million</td><td>Chidi’s group. Bus and rail, Greater Tunis, 2018</td><td>TRANSTU activity report 2018. Not this year’s ridership</td></tr>
+  </table>
+
+  <h2>2 · One simulation record</h2>
+  <p>Matched seed 37. One seed. Mixed. No winner. Watch seed 53 is a classroom picture and is not this row.</p>
+  <table>
+    <tr><th>Controller</th><th>Trips finished</th><th>Mean wait</th><th>P95 wait</th></tr>
+    <tr><td>Fixed-time</td><td class="num">71 / 84</td><td class="num">13.17 s</td><td class="num">33 s</td></tr>
+    <tr><td>Actuated</td><td class="num">84 / 84</td><td class="num">10.35 s</td><td class="num">16 s</td></tr>
+    <tr><td>Cooperative Max-Pressure</td><td class="num">70 / 84</td><td class="num">14.21 s</td><td class="num">25 s</td></tr>
+  </table>
+  <p class="meta">Source: harness/work/10c-evidence-page/artifacts/evidence-page.txt. Unfinished trips stayed in the count. That row is David’s evidence. It is not a Tunis result.</p>
+
+  <h2>3 · LinkedIn survey</h2>
+  <p><span class="empty">No responses in the repository. n is blank on purpose.</span></p>
+  <p>The post can ask these questions. Answers in the comments are not a sample until the file records who was asked, how many people, the date, the questions, and the answers.</p>
+  <ol>
+    <li>When you cross on foot, is the green long enough to finish? (Amara)</li>
+    <li>Does a better average trip hide a trip that does not finish? (David)</li>
+    <li>Do buses on your line arrive in a regular gap, or bunched? (Chidi)</li>
+    <li>If a priority request is refused, can you read the reason afterward? (Rosa)</li>
+    <li>Has a green light sent you into a street that was already full? (Marcus)</li>
+    <li>When a queue appears, can you tell a crash from a dead sensor? (Omar)</li>
+  </ol>
+  <table>
+    <tr><th>Field the professor can check</th><th>Status on 26 Sep 2026</th></tr>
+    <tr><td>Survey file</td><td>Not in the repository</td></tr>
+    <tr><td>Sample size</td><td>Not collected</td></tr>
+    <tr><td>Interview transcript</td><td>Not in the repository. Marcus was not interviewed</td></tr>
+    <tr><td>Heatmap of junction, hour, and weather</td><td>Table not in the repository. Not drawn</td></tr>
+  </table>
+
+  <h2>4 · What each statistic is allowed to support</h2>
+  <table>
+    <tr><th>Person</th><th>Allowed sentence</th></tr>
+    <tr><td>Amara</td><td>Pedestrians were 28% of 2023 deaths in the investment case. The 2024 strategy names older people and people with disabilities. She was not interviewed.</td></tr>
+    <tr><td>David</td><td>Occupants carry most of that case’s health cost. On seed 37 the unfinished trips stayed visible. No winner.</td></tr>
+    <tr><td>Chidi</td><td>187.4 million TRANSTU paying passengers in 2018. Not today’s headway.</td></tr>
+    <tr><td>Rosa</td><td>ONSR compiles the crash record. She reads it. She does not write the light.</td></tr>
+    <tr><td>Marcus</td><td>Civil Protection answers road emergencies. No crew transcript. Not lives saved.</td></tr>
+    <tr><td>Omar</td><td>A cause class in a briefing is not a cause named by our detector.</td></tr>
+  </table>
+  <p class="meta">No lives saved. No measured air. No Tunis deployment. No winner.</p>
+</article>
+</body>
+</html>

@@ -1,0 +1,94 @@
+{
+  "contract_version": 1,
+  "id": "12-synapse-agents",
+  "kind": "product",
+  "persona_or_hmw": "P4 Rosa and P6 Yuki — explain and audit immutable decisions with citations or abstention while traffic control remains unchanged",
+  "stage": "prototype-test",
+  "requirement_ids": ["9", "12", "14", "15"],
+  "depends_on": ["08-failure-injection", "10c-evidence-page", "10f-graph-growth-benchmark"],
+  "join_keys": ["run_id", "scenario_hash", "event_id", "request_id", "chunk_id"],
+  "locked_inputs": {
+    "harness/work/10f-graph-growth-benchmark/gate.json": "sha256:24c07c64dd72b93798d84b3851e5bddf26d5f33097048dab2efccc219e1e52c4",
+    "harness/work/10f-graph-growth-benchmark/artifacts/run_manifest.json": "sha256:231a259979ee2d72aafd3ea8ebd7a550a8715bf3db44b71435c5dc68320cdb0b",
+    "harness/work/10f-graph-growth-benchmark/artifacts/decision_events.parquet": "sha256:8a7ece82a2135561414e10da4241aefbc970d42203ea4dd62bb3a3fbb1f61549",
+    "harness/work/08-failure-injection/gate.json": "sha256:6087562e0347770c08f1f17dd5fb9ff0cfe89d1383d2f80b3042243955417b2f",
+    "harness/work/08-failure-injection/artifacts/action-sequence-comparison.json": "sha256:49b2caf0d4567d37fc55a32b71b1820b1126f929c66fc24a03516dac121bd64c"
+  },
+  "corpus": {
+    "parser_version": "plain-text-paragraph-v1",
+    "chunker_version": "stable-content-hash-v1",
+    "retrieval_version": "deterministic-exact-token-v1",
+    "sources": {
+      "adr-0001": {"path": "docs/adr/0001-reliable-ai-platform-boundary.md", "sha256": "sha256:c74f6a9c0f02afed399f69deaed98faa0ab97a49bebda0da8b1ecf516213791f", "evidence_class": "architecture-decision"},
+      "course-brief": {"path": "docs/source/course-brief.md", "sha256": "sha256:e9a086abb8cb659d37bce0e2f1df980585c71a33d3bf4126c08e466f0f0dc8be", "evidence_class": "course-authority"},
+      "requirements": {"path": ".kiro/specs/coflow5-reliable-agentic-platform/requirements.md", "sha256": "sha256:06977dd060bd5a420202c1eaffdb0e74c8e5ca458c7dad77cf21d745f3ccc468", "evidence_class": "product-requirement"},
+      "design": {"path": ".kiro/specs/coflow5-reliable-agentic-platform/design.md", "sha256": "sha256:b8535279b20f19ba43f1dcac703a1fcc9ef21058d36997661241a90b957cf62c", "evidence_class": "product-design"}
+    },
+    "embedding_model": {"enabled": false, "identifier": "sentence-transformers/all-MiniLM-L6-v2", "revision": null, "reason": "not earned; exact local retrieval gates first"}
+  },
+  "generation": {
+    "default": "deterministic-template-v1",
+    "provider_interface": "typed optional draft provider with at most one retry",
+    "hosted_or_local_model": {"enabled": false, "identifier": "Qwen/Qwen2.5-1.5B-Instruct", "revision": null, "reason": "not earned; provider-neutral deterministic baseline gates first"},
+    "network_calls": false,
+    "estimated_cost_usd": 0.0
+  },
+  "must_pass": [
+    "allow-listed local corpus ingestion records source identity, evidence class, source content hash, parser and chunker versions, stable content-derived chunk IDs, and deterministic exact-token retrieval with citations",
+    "re-ingestion leaves unchanged chunk identities stable and any path or hash outside the sealed allow-list fails closed",
+    "S1 emits a schema-valid bounded scenario proposal with a source run identity, writes only a proposal artifact, has status awaiting-human-approval, and exposes no SUMO launcher, TraCI binding, signal executor, or automatic approval",
+    "S2 classifies a decision question, fetches exactly one completed immutable Row 10f event through a hash-validating read interface, retrieves allow-listed policy chunks, drafts a deterministic or optional-provider answer, verifies action reason event and citation facts, retries an invalid provider draft at most once, and answers with citations or abstains with structured event facts",
+    "S2 provider failure falls to the deterministic cited template when support exists; retrieval miss or invalid event identity returns explicit abstention without invented policy",
+    "S3 verifies every supplied claim against immutable event fields or hash-bound artifacts and returns pass with references only when every claim resolves; otherwise it abstains with failed checks",
+    "joined trace rows cover event fetch retrieval generation verification retry fallback and terminal outcome with run scenario event request agent versions latency tokens estimated cost and no secrets",
+    "a versioned golden set covers S1 wait S2 cited answer S2 provider retry/fallback S2 abstention S3 pass and S3 abstention, with deterministic quality metrics and visible regression results",
+    "identical frozen A1 action sequences and hashes are retained across Synapse available killed retrieval-unavailable and provider-unavailable variants",
+    "Synapse retrieval provider and specialist modules cannot import TraCI libsumo signal executor subprocess SUMO runners or active control modules and cannot mutate frozen evidence",
+    "no new dependency, embedding model, Qwen model, LangGraph, pgvector, hosted provider, or network call is added before the deterministic typed gate passes",
+    "all claim flags remain: no lives saved, measured air quality, deployment, winner, or unsupported policy claim"
+  ],
+  "tests": [
+    "py -3.11 -m pytest tests/contracts/test_synapse_retrieval.py -q",
+    "py -3.11 -m pytest tests/acceptance/test_synapse_agents.py -q",
+    "py -3.11 -m pytest tests/contracts/test_synapse_evidence.py -q",
+    "py -3.11 -m pytest tests/contracts/test_synapse_non_actuation.py -q",
+    "py -3.11 -m pytest tests/architecture/test_forbidden_imports.py -q"
+  ],
+  "artifacts": [
+    "artifacts/run_manifest.json",
+    "artifacts/corpus_manifest.json",
+    "artifacts/corpus_chunks.parquet",
+    "artifacts/scenario_proposals.json",
+    "artifacts/explanations.json",
+    "artifacts/evidence_audits.json",
+    "artifacts/synapse_traces.parquet",
+    "artifacts/golden_cases.json",
+    "artifacts/golden_results.json",
+    "artifacts/non_actuation_audit.json"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash and all locked inputs corpus sources required artifacts tests and product sources remain SHA-256 bound",
+    "all five named tests exit zero; gate.openDeltas is zero and gate.decidedBy is tests-and-files",
+    "every explanation audit and trace resolves one declared request and its applicable run scenario event and chunk identities with zero orphan references",
+    "retrieval recall citation validity event consistency reason-code coverage abstention fallback latency token and cost metrics are present without unmeasured-value invention",
+    "S1 remains awaiting-human-approval and no proposal artifact is interpreted as an executed scenario",
+    "invalid provider draft is attempted no more than twice and never released before deterministic verification",
+    "S3 passes only fully supported claims and abstains on any mismatch missing artifact or hash failure",
+    "Row 08 control action hashes remain equal across all Synapse outage variants and Row 12 replay yields the same action hash under retrieval and provider failures",
+    "architecture scan finds no actuation process launch network credential or unearned model dependency in Synapse paths",
+    "Rows 08 10f and all pre-existing unrelated working-tree paths remain unchanged; queue changes only Row 12 after pass"
+  ],
+  "imports_forbidden": [
+    "synapse|retrieval|provider|specialists -> traci|libsumo|signal_executor|sumo_adapter|subprocess",
+    "Synapse -> evidence mutation|active A1 control|scenario launch|automatic approval",
+    "Row 12 deterministic path -> sentence-transformers|transformers|torch|langgraph|pgvector|openai|anthropic|network call",
+    "unsupported answer -> citation or event fact release"
+  ],
+  "claim_flags": [
+    "no lives saved or accident prevention",
+    "no measured air quality",
+    "no deployment or live-control claim",
+    "no model or embedding performance claim when disabled",
+    "no answer without immutable event support and allow-listed policy citation"
+  ]
+}

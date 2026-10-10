@@ -1,0 +1,48 @@
+{
+  "id": "13-react-precomputed",
+  "pass": true,
+  "openDeltas": 0,
+  "contractHash": "sha256:41133ba86b685bc3c8d8edcfd0d0e5ce5eec64161d5777e5aae1daae192bdb21",
+  "decidedBy": "tests-and-files",
+  "testsRun": [
+    {
+      "command": "node --test web/src/evidence.test.js",
+      "exitCode": 0,
+      "output": "5 passed"
+    },
+    {
+      "command": "py -3.11 -m pytest tests/ui/test_react_readonly.py -q",
+      "exitCode": 0,
+      "output": "2 passed in 0.21s"
+    }
+  ],
+  "artifactsPresent": [
+    "artifacts/ui_surface.json",
+    "artifacts/boundary_audit.json",
+    "artifacts/sample_view.json",
+    "report.md",
+    "deltas.md"
+  ],
+  "artifactHashes": {
+    "artifacts/ui_surface.json": "sha256:f0660e247a4a68ec01acbfb57e04066fe4bbf9e1b3025b2da51e21d77d012ac1",
+    "artifacts/boundary_audit.json": "sha256:719c674fdd63efcf24dd1d8d7169e5ee3430c2586c10e200dbf70f6d718e6933",
+    "artifacts/sample_view.json": "sha256:5f9635eb9836661a11dc4dedb1c349cb66d173b36ec229a3cce8cdd503873953",
+    "report.md": "sha256:f52c86737794fa57fbb20dfb11f05d3acc2f8bdf24354f5bb4d3e889a0f7406f",
+    "deltas.md": "sha256:f35c48bf6305191856d4904c245825a25cbcee7341d4812400b42f69c191f820"
+  },
+  "testHashes": {
+    "web/src/evidence.test.js": "sha256:ab05f929fd2e56c24e9ce6a2c40c2563ac5056aa7420e9a27644773275319c6b",
+    "tests/ui/test_react_readonly.py": "sha256:96dc4a86173dbc37225510d58b68feb1aae29c0f06ae26f58a9526560a98cc8c"
+  },
+  "sourceHashes": {
+    "web/src/App.jsx": "sha256:3493e38cb66a346da6b13272ed690212c5ae73e4da813d1d0153296059bc98f5",
+    "web/src/evidence.js": "sha256:6b123f07aca455d0c3f8ab2c08b146fd625fcc4a02070f0d387f2fbb1163c478",
+    "web/src/index.css": "sha256:45a2f389de8a55407cc05d030cc357198fd6f11d1ca0b59f14159717aacb78ef",
+    "web/package.json": "sha256:9a92b2ab7d2ab3b3f586050a6925b915f45c379b82ea448fd46d581d1773a647",
+    "web/package-lock.json": "sha256:fe4fe7afc40e653b804e613017e52e802d55047e1c6d5fa642f3f67a27404a52"
+  },
+  "lockedInputHashes": {
+    "harness/work/11-api/gate.json": "sha256:bed8fe7bb0951090d1ca0a09cc6624ed34aff555d4bfaaad9e9494884856e20a",
+    "harness/work/11-api/contract.json": "sha256:3430b87e4a3b4385340aedc956e141b2a3ef25394ec11713f352b213a3d00ebd"
+  }
+}

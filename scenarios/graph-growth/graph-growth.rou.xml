@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+  <vType id="passenger" accel="2.6" decel="4.5" sigma="0" length="5" minGap="2.5" maxSpeed="13.9"/>
+  <route id="west0-east0" edges="W0_J0 J0_J1 J1_E0"/>
+  <route id="east1-west1" edges="E1_J3 J3_J2 J2_W1"/>
+  <route id="south0-north0" edges="S0_J0 J0_J2 J2_N0"/>
+  <route id="north1-south1" edges="N1_J3 J3_J1 J1_S1"/>
+  <flow id="west0-demand" type="passenger" route="west0-east0" begin="0" end="20" number="4" departLane="best" departSpeed="max"/>
+  <flow id="east1-demand" type="passenger" route="east1-west1" begin="1" end="21" number="4" departLane="best" departSpeed="max"/>
+  <flow id="south0-demand" type="passenger" route="south0-north0" begin="2" end="22" number="4" departLane="best" departSpeed="max"/>
+  <flow id="north1-demand" type="passenger" route="north1-south1" begin="3" end="23" number="4" departLane="best" departSpeed="max"/>
+</routes>

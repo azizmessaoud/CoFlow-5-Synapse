@@ -1,0 +1,56 @@
+{
+  "contract_version": 1,
+  "id": "10d-ideate-finalization",
+  "kind": "spec",
+  "persona_or_hmw": "P1 Amara; P2 David; P3 Chidi; P4 Rosa; P5 Marcus; P6 Yuki; P7 Omar — which ideas can the settled five-agent plus Synapse architecture carry, and which future problem will each persona hit first?",
+  "stage": "ideate-addendum",
+  "source_authority": {
+    "professor_decision": "Seven personas only; Maria/Leila removed; I-6 belongs to David and Yuki; I-7 is an optional A5 system KPI with no persona.",
+    "pull_request": "https://github.com/azizmessaoud/CoFlow-5-Synapse/pull/3",
+    "pull_request_head_commit": "832dc38db1b9533642d2c3b6675e076c012a3823",
+    "boundary": "docs/adr/0001-reliable-ai-platform-boundary.md",
+    "course_brief": "docs/source/course-brief.md"
+  },
+  "depends_on": [
+    "10-a4-a5",
+    "10c-evidence-page"
+  ],
+  "must_pass": [
+    "the decision matrix is the source of truth and contains 8 to 12 agent-tagged ideas for each of the seven professor-approved personas",
+    "each persona idea traces to one primary persona, an allowed insight, data need, honesty label, allowed agent, metric, architecture fit, first future risk, disposition, and reason",
+    "Omar and A4 anomaly detection receive a standalone Ideate treatment covering anomaly classes, transparent methods, evidence fields, degraded vision, weather context, incident source classes, heatmaps, and rejected unsafe alternatives",
+    "the data roadmap separates prototype-safe Now sources from unbuilt Later connectors and records provenance, time, licence, uncertainty, freshness, and simulation or derivation status",
+    "at least 15 future problems are clustered across sensing, safety, coordination, trust, burden, operations, evaluation honesty, and security, each with a first-affected persona, mitigation owner, and Ideate seed",
+    "architecture convergence preserves A1 as sole signal writer using cooperative Max-Pressure, A2 through A5 as typed advisers, the required recovery ladder, and non-actuating Synapse with only bounded sub-agents",
+    "Maria and Leila are not personas or idea owners; I-7 remains an optional A5 system KPI with no persona and does not count toward persona idea coverage",
+    "claims remain honest: no lives saved, measured air quality, live Tunis traffic, scrape-as-truth, universal incident threshold, best episode, or accident-prevention claim from simulation",
+    "no Empathize roster file, presentation builder, SUMO scenario, or product/control source is modified by this row"
+  ],
+  "tests": [
+    "py -3.11 -m pytest tests/acceptance/test_ideate_finalization.py -q"
+  ],
+  "artifacts": [
+    ".scratch/coflow5-ideate-finalize/spec.md",
+    "harness/work/10d-ideate-finalization/report.md"
+  ],
+  "gate_checks": [
+    "contract hash matches gate.contractHash",
+    "named acceptance test exits zero",
+    "all required artifact paths exist",
+    "seven persona sections each contain 8 to 12 uniquely identified ideas and one chosen Now idea",
+    "decision matrix values satisfy Carry, Stretch, Break and Now, Later, Reject invariants",
+    "Break always maps to Reject and no Synapse or specialist idea gains signal-write authority",
+    "Omar alert contract distinguishes normal, anomaly, likely incident, stale data, and insufficient data",
+    "data and heatmap claims include method, window, source class, and honesty status",
+    "future-problem and presentation views are traceable to the source matrix",
+    "gate.openDeltas is 0 and gate.decidedBy is tests-and-files"
+  ],
+  "imports_forbidden": [
+    "Ideate row -> product or control source modification",
+    "Synapse or sub-agent -> TraCI|libsumo|signal executor",
+    "A2|A3|A4|A5 -> traffic-light write capability",
+    "scraped news -> ground-truth incident",
+    "weather association -> causal crash proof",
+    "SUMO or HBEFA -> deployment, lives-saved, measured-air-quality, or accident-prevention claim"
+  ]
+}

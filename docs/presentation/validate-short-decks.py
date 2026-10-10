@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent
 MAIN = ROOT / 'CoFlow-5-Synapse-TALK.pptx'
 PERSONAS = ROOT / 'CoFlow-5-Persona-Cards.pptx'
 LEDGER = ROOT / 'presentation-claim-ledger.json'
-NAMES = ('Amara', 'David', 'Chidi', 'Rosa', 'Marcus', 'Yuki', 'Maria', 'Omar')
+NAMES = ('Amara', 'David', 'Chidi', 'Rosa', 'Marcus', 'Omar')
 
 
 def text(data: bytes) -> str:
@@ -47,9 +47,14 @@ def main() -> int:
     main = inspect(MAIN)
     cards = inspect(PERSONAS)
     assert main['slides'] == main['notes'] == main['transitions'] == 14, main
-    assert cards['slides'] == cards['notes'] == cards['transitions'] == 8, cards
+    assert cards['slides'] == cards['notes'] == cards['transitions'], cards
+    assert cards['slides'] > 6, cards['slides']
     assert main['max_chars'] <= 520, main['max_chars']
-    assert cards['max_chars'] <= 1050, cards['max_chars']
+    persona_slides = [t for t in cards['texts'] if 'DESIGN STATEMENT' in t]
+    other_slides = [t for t in cards['texts'] if 'DESIGN STATEMENT' not in t]
+    assert len(persona_slides) == 6, len(persona_slides)
+    assert max(map(len, persona_slides)) <= 1050, max(map(len, persona_slides))
+    assert max(map(len, other_slides)) <= 2200, max(map(len, other_slides))
     required_main = (
         'Design Thinking', 'Empathize', 'Define', 'Ideate',
         'cooperative Max-Pressure', 'Only A1', 'Synapse never actuates',
@@ -58,14 +63,22 @@ def main() -> int:
     )
     for value in required_main:
         assert value.lower() in main['all'].lower(), f'main deck missing: {value}'
-    for name in NAMES:
+    for number, name in enumerate(NAMES, start=1):
         assert name in main['all'], f'main deck missing persona: {name}'
-        assert sum(f'Persona {i + 1} — {name}' in t for i, t in enumerate(cards['texts'])) == 1, f'card missing: {name}'
+        assert sum(f'Persona {number} — {name}' in t for t in cards['texts']) == 1, f'card missing: {name}'
+    required_arc = (
+        'Empathize', 'Personas', 'Persona needs', 'Evidence', 'Ideation',
+        'Solutions', 'Who is affected', 'Online data collection', 'Data analysis',
+        'Heatmap', 'Accident prevention', 'No survey file', 'Not interviewed',
+    )
+    for value in required_arc:
+        assert value in cards['all'], f'persona deck missing stage: {value}'
     required_card_fields = ('DESIGN STATEMENT', 'NEED', 'FEAR', 'USES', 'REJECTS', 'EVIDENCE', 'MEASURE')
-    for slide, name in zip(cards['texts'], NAMES):
+    for slide, name in zip(persona_slides, NAMES):
         for field in required_card_fields:
             assert field in slide, f'{name} card missing {field}'
         assert 'not an interviewed person' in slide.lower(), f'{name} disclaimer missing'
+        assert name in slide, f'{name} missing from own card'
     combined = main['all'] + '\n' + cards['all']
     for value in forbidden:
         assert value.lower() not in combined.lower(), f'forbidden stale wording: {value}'
