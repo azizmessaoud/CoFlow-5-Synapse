@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -11,7 +10,7 @@ def test_native_capture_contains_three_controller_rows_for_five_matched_seeds() 
             encoding="utf-8"
         )
     )
-    assert capture["status"] == "completed"
+    assert capture["status"] == "captured_pending_audit"
     assert capture["seeds"] == [37, 41, 43, 47, 53]
     assert len(capture["runs"]) == 15
     for seed in capture["seeds"]:

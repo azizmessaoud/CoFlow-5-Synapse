@@ -27,10 +27,32 @@ def _hash_file(path: Path) -> str:
     return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _provenance(result: Any) -> dict[str, list[str]]:
+    event_ids: set[str] = set()
+    message_ids: set[str] = set()
+    for attribute in ("safety_events", "executed_commands", "decisions"):
+        for item in getattr(result, attribute, ()):
+            event_id = getattr(item, "event_id", None)
+            if event_id:
+                event_ids.add(str(event_id))
+            for field in ("message_id", "referenced_message_id"):
+                message_id = getattr(item, field, None)
+                if message_id:
+                    message_ids.add(str(message_id))
+            for message_id in getattr(item, "considered_message_ids", ()):
+                if message_id:
+                    message_ids.add(str(message_id))
+    return {
+        "event_ids": sorted(event_ids),
+        "message_ids": sorted(message_ids),
+    }
+
+
 def _run_row(result: Any, *, controller: str | None = None) -> dict[str, Any]:
     if controller == "cooperative-max-pressure":
         return {
             **dict(result.kpis),
+            **_provenance(result),
             "run_id": result.run_id,
             "scenario_hash": result.scenario_hash,
             "seed": result.seed,
@@ -39,6 +61,7 @@ def _run_row(result: Any, *, controller: str | None = None) -> dict[str, Any]:
         }
     row = asdict(result)
     row.pop("trips", None)
+    row.update(_provenance(result))
     row["status"] = str(row.get("status", "completed"))
     return row
 

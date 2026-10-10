@@ -8,6 +8,7 @@ REQUIRED_CONTROLLERS = frozenset(
 )
 REQUIRED_ABLATIONS = frozenset({"A2", "A3", "A4", "A5"})
 MINIMUM_MATCHED_SEEDS = 5
+REQUIRED_RUN_PROVENANCE = frozenset({"event_ids", "message_ids"})
 
 
 @dataclass(frozen=True)
@@ -49,6 +50,17 @@ def audit_j0_completion(
 
     by_seed: dict[int, set[str]] = {}
     for row in run_rows:
+        if (
+            not row.get("run_id")
+            or any(
+                not isinstance(row.get(field), (list, tuple))
+                for field in REQUIRED_RUN_PROVENANCE
+            )
+        ):
+            findings.append(J0CompletionFinding(
+                "RUN_PROVENANCE_MISSING",
+                "each run requires run_id, event_ids, and message_ids",
+            ))
         try:
             seed = int(row["seed"])
             controller = str(row["controller"])
@@ -78,15 +90,28 @@ def audit_j0_completion(
                 f"seed {seed} missing {', '.join(missing)}",
             ))
 
+    ablation_rows = tuple(ablations)
     ablation_pairs = {
-        (str(row.get("agent")), bool(row.get("enabled")))
-        for row in ablations
+        (str(row.get("agent")), bool(row.get("enabled"))) for row in ablation_rows
     }
     for agent in sorted(REQUIRED_ABLATIONS):
         if (agent, True) not in ablation_pairs or (agent, False) not in ablation_pairs:
             findings.append(J0CompletionFinding(
                 "ABLATION_PAIR_MISSING",
                 f"{agent} requires explicit on and off cells",
+            ))
+        pair_rows = [
+            row for row in ablation_rows if str(row.get("agent")) == agent
+        ]
+        pair_kpis = [
+            row.get("kpis")
+            for row in pair_rows
+            if isinstance(row.get("kpis"), Mapping)
+        ]
+        if len(pair_kpis) < 2 or not _has_numeric_kpi_pair(pair_kpis):
+            findings.append(J0CompletionFinding(
+                "ABLATION_KPI_COMPARISON_MISSING",
+                f"{agent} requires numeric KPI values for on and off cells",
             ))
 
     def _mode(value: object) -> str:
@@ -115,4 +140,13 @@ def audit_j0_completion(
         pass_gate=not findings,
         matched_seeds=matched,
         findings=tuple(findings),
+    )
+
+
+def _has_numeric_kpi_pair(kpis: list[Mapping[str, object]]) -> bool:
+    shared_keys = set(kpis[0]).intersection(kpis[1])
+    return any(
+        isinstance(kpis[0][key], (int, float))
+        and isinstance(kpis[1][key], (int, float))
+        for key in shared_keys
     )

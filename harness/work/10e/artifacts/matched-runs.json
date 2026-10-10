@@ -43,7 +43,7 @@
       "simulation_end": 120.0,
       "simulation_steps": 120,
       "standstill_vehicle_seconds": 1225,
-      "status": "completed",
+      "status": "captured_pending_audit",
       "teleport_events": 0,
       "total_time_loss_s": 1227.5770888369252,
       "traci_version": "SUMO 1.27.1",
@@ -616,5 +616,5 @@
     "baselines_routes": "sha256:2016d166bd8775011fb243a43d21bc6368d4c63a99502184530c04c875a15898",
     "network": "sha256:aeae2e59c9e0b2c0e8bbff4960b056039b8ba8092ba808bcde3a9a000cdcbc8b"
   },
-  "status": "completed"
+  "status": "captured_pending_audit"
 }
