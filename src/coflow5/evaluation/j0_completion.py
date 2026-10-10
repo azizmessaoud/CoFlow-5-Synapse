@@ -85,8 +85,11 @@ def audit_j0_completion(
                 f"{agent} requires explicit on and off cells",
             ))
 
+    def _mode(value: object) -> str:
+        return str(value).strip().lower().replace("_", "-")
+
     recovery_modes = {
-        (str(row.get("previous_mode")), str(row.get("next_mode")))
+        (_mode(row.get("previous_mode")), _mode(row.get("next_mode")))
         for row in recovery_events
     }
     required_transitions = {

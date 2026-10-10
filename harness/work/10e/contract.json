@@ -18,6 +18,7 @@
     "python -m pytest tests/contracts/test_report_honesty.py -q"
   ],
   "artifacts": [
+    "artifacts/matched-runs.json",
     "artifacts/j0-completion-audit.json"
   ],
   "gate_checks": [
