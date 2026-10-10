@@ -27,7 +27,7 @@ CoFlow-5 will be presented as a **reliable AI decision platform for urban traffi
 8. Retrieval starts with exact local search; PostgreSQL/pgvector is added for SQL-backed provenance and the hosted read-only product. Pinecone is not the default.
 9. Cooperation, authority, evaluation, and failure recovery are the core. A shared DQN is an optional experiment after that core is frozen.
 10. The evaluation spine—baselines, paired seeds, invariant tests, failure injection, citations, abstention, latency, and cost—has priority over feature count.
-11. The scenario ladder uses a controlled 4×4 benchmark plus a Tunis OSM/TRANSTU GTFS showcase with explicitly synthetic/calibrated road demand.
+11. The scenario ladder uses a controlled single-junction (J0) benchmark plus a Tunis OSM/TRANSTU GTFS showcase with explicitly synthetic/calibrated road demand (multi-junction planned).
 
 ## Consequences
 
