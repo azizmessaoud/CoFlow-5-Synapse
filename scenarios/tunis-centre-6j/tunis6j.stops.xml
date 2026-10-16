@@ -1,16 +1,18 @@
 <additional>
   <busStop id="ts_1" lane="10641477_1" startPos="27.4" endPos="42.4" lines="104 11 38B 38C 43B 5 51A 5C 5D 74" name="Terminus Tunis Marine Bus"><param key="junction" value=""/></busStop>
-  <busStop id="ts_2" lane="1096914206_0" startPos="43.3" endPos="58.3" lines="104 11 74" name="Rue De La Turquie"><param key="junction" value=""/></busStop>
+  <busStop id="ts_2" lane="1096914206#1_0" startPos="4.6" endPos="19.6" lines="104 11 74" name="Rue De La Turquie"><param key="junction" value=""/></busStop>
   <busStop id="ts_3" lane="32900383#2_0" startPos="22.1" endPos="37.1" lines="104 11 19E 74" name="Moncef Bey"><param key="junction" value=""/></busStop>
   <busStop id="ts_4" lane="1501192411#0_1" startPos="0.0" endPos="15.0" lines="104_R" name="Moncef Bey"><param key="junction" value="J3"/></busStop>
-  <busStop id="ts_5" lane="48720376#1_0" startPos="18.6" endPos="33.6" lines="104_R 11_R 36 36_R 38B_R 38C_R 43B_R 5_R 51A_R 5C_R 5D_R 74_R" name="Terminus Tunis Marine Bus"><param key="junction" value=""/></busStop>
+  <busStop id="ts_5" lane="48720376#1_0" startPos="18.6" endPos="33.6" lines="104_R 11_R 36_R 38B_R 38C_R 43B_R 5_R 51A_R 5C_R 5D_R 74_R" name="Terminus Tunis Marine Bus"><param key="junction" value=""/></busStop>
   <busStop id="ts_6" lane="93808387#7_0" startPos="1.8" endPos="16.8" lines="11_R" name="Saad Zaghloul"><param key="junction" value=""/></busStop>
   <busStop id="ts_7" lane="1224306096_1" startPos="18.1" endPos="33.1" lines="19E" name="Station Barcelone"><param key="junction" value=""/></busStop>
-  <busStop id="ts_8" lane="503753403#3_0" startPos="13.9" endPos="28.9" lines="36 38B 38C 5 51A 5C 5D" name="Jeans Jaures"><param key="junction" value=""/></busStop>
-  <busStop id="ts_9" lane="93808420#2_1" startPos="74.4" endPos="89.4" lines="36_R 43B_R 5_R" name="Ministére Du Tourisme"><param key="junction" value="J1"/></busStop>
-  <busStop id="ts_10" lane="94346392_2" startPos="95.0" endPos="110.0" lines="43B" name="Ministére Du Tourisme"><param key="junction" value=""/></busStop>
-  <busStop id="ts_11" lane="93808420#2_1" startPos="11.3" endPos="26.3" lines="5C_R" name="Ministére Du Tourisme"><param key="junction" value="J1"/></busStop>
-  <busStop id="ts_12" lane="1409208379_0" startPos="65.1" endPos="80.1" lines="6P_R" name="Le Passage"><param key="junction" value=""/></busStop>
-  <busStop id="ts_13" lane="-109431656#1_1" startPos="0.0" endPos="15.0" lines="6P_R" name="Jardin Thameur"><param key="junction" value=""/></busStop>
-  <busStop id="ts_14" lane="33803081#0_0" startPos="3.1" endPos="18.1" lines="74_R" name="Ali Derghouth"><param key="junction" value=""/></busStop>
+  <busStop id="ts_8" lane="93808391#0_1" startPos="0.0" endPos="15.0" lines="19E_R" name="Société Stil"><param key="junction" value=""/></busStop>
+  <busStop id="ts_9" lane="1328051297#2_0" startPos="0.0" endPos="15.0" lines="19E_R" name="Ali Derghouth"><param key="junction" value=""/></busStop>
+  <busStop id="ts_10" lane="503753403#3_0" startPos="13.9" endPos="28.9" lines="36 38B 38C 5 51A 5C 5D" name="Jeans Jaures"><param key="junction" value=""/></busStop>
+  <busStop id="ts_11" lane="93808420#6_1" startPos="74.4" endPos="89.4" lines="36_R 43B_R 5_R" name="Ministére Du Tourisme"><param key="junction" value="J1"/></busStop>
+  <busStop id="ts_12" lane="94346392_2" startPos="95.0" endPos="110.0" lines="43B" name="Ministére Du Tourisme"><param key="junction" value=""/></busStop>
+  <busStop id="ts_13" lane="93808420#6_1" startPos="11.3" endPos="26.3" lines="5C_R" name="Ministére Du Tourisme"><param key="junction" value="J1"/></busStop>
+  <busStop id="ts_14" lane="1409208379_0" startPos="65.1" endPos="80.1" lines="6P_R" name="Le Passage"><param key="junction" value=""/></busStop>
+  <busStop id="ts_15" lane="1409208465#2_1" startPos="0.0" endPos="0.2" lines="6P_R" name="Jardin Thameur"><param key="junction" value=""/></busStop>
+  <busStop id="ts_16" lane="1409299974#2_1" startPos="7.5" endPos="22.5" lines="74_R" name="Ali Derghouth"><param key="junction" value=""/></busStop>
 </additional>

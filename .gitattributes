@@ -6,3 +6,9 @@ docs/presentation/** linguist-generated
 *.pptx linguist-generated
 tools/** linguist-documentation
 *.parquet linguist-generated
+
+# Scenario sources whose SHA-256 is recorded in a manifest must be byte-identical
+# on every platform, so they never get CRLF on a Windows checkout.
+scenarios/**/*.osm.xml text eol=lf
+scenarios/tunis-centre-6j/selection.json text eol=lf
+scenarios/tunis-centre-6j/lane_overrides.json text eol=lf

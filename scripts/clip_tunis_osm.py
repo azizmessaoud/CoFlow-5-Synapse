@@ -1,8 +1,4 @@
-"""Clip a PBF to the Tunis showcase AOI for SUMO import.
-
-This helper runs in WSL because the local Windows pyosmium DLL is blocked by
-application-control policy.
-"""
+"""Clip a PBF to the Tunis showcase AOI for SUMO import (requires pyosmium)."""
 
 from __future__ import annotations
 
@@ -23,8 +19,9 @@ class CollectWays(osmium.SimpleHandler):
 
     def way(self, way: Any) -> None:
         if way.tags.get("highway") not in {
-            "motorway", "trunk", "primary", "secondary", "tertiary",
-            "unclassified", "residential", "living_street",
+            "motorway", "motorway_link", "trunk", "trunk_link", "primary", "primary_link",
+            "secondary", "secondary_link", "tertiary", "tertiary_link", "unclassified",
+            "residential", "living_street", "service", "road",
         }:
             return
         refs = [node.ref for node in way.nodes]

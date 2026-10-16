@@ -10,23 +10,24 @@ bus_lines:
   - ["11", "10641477", "32900383#3"]    # Ligne 11 aller: Terminus Tunis Marine Bus -> Terminus Jbel Lahmer L 11
   - ["11_R", "3290038301#0", "48720376#1"]    # Ligne 11 retour: Terminus Jbel Lahmer L 11 -> Terminus Tunis Marine Bus
   - ["19E", "1224306096", "32900383#3"]    # Ligne 19E aller: Station Barcelone -> Terminus Cité Chaker
-  - ["36", "93792985#0", "33803051#1"]    # Ligne 36 aller: La Fayette -> Terminus Ministére Des Affaires Etrangeres ( L 36 B )
+  - ["19E_R", "93808391#0", "32900383#3"]    # Ligne 19E retour: Terminus Cité Chaker -> Station Barcelone
+  - ["36", "93808420#0", "33803051#3"]    # Ligne 36 aller: La Fayette -> Terminus Ministére Des Affaires Etrangeres ( L 36 B )
   - ["36_R", "93808420#0", "48720376#1"]    # Ligne 36 retour: Terminus Ministére Des Affaires Etrangeres ( L 36 B ) -> Terminus Tunis Marine Bus
-  - ["38B", "10641477", "33803051#1"]    # Ligne 38B aller: Terminus Tunis Marine Bus -> Terminus Omrane Supérieur L 78 + 38 B
+  - ["38B", "10641477", "33803051#3"]    # Ligne 38B aller: Terminus Tunis Marine Bus -> Terminus Omrane Supérieur L 78 + 38 B
   - ["38B_R", "93808420#0", "48720376#1"]    # Ligne 38B retour: Terminus Omrane Supérieur L 78 + 38 B -> Terminus Tunis Marine Bus
-  - ["38C", "10641477", "33803051#1"]    # Ligne 38C aller: Terminus Tunis Marine Bus -> Terminus 38C
+  - ["38C", "10641477", "33803051#3"]    # Ligne 38C aller: Terminus Tunis Marine Bus -> Terminus 38C
   - ["38C_R", "93808420#0", "48720376#1"]    # Ligne 38C retour: Terminus 38C -> Terminus Tunis Marine Bus
   - ["43B", "10641477", "94346392"]    # Ligne 43B aller: Terminus Tunis Marine Bus -> Terminus Rabta L ( 43B + 43 )
   - ["43B_R", "93808420#0", "48720376#1"]    # Ligne 43B retour: Terminus Rabta L ( 43B + 43 ) -> Terminus Tunis Marine Bus
-  - ["5", "10641477", "33803051#1"]    # Ligne 5 aller: Terminus Tunis Marine Bus -> Depot Charguia
+  - ["5", "10641477", "33803051#3"]    # Ligne 5 aller: Terminus Tunis Marine Bus -> Depot Charguia
   - ["5_R", "93808420#0", "48720376#1"]    # Ligne 5 retour: Depot Charguia -> Terminus Tunis Marine Bus
-  - ["51A", "10641477", "33803051#1"]    # Ligne 51A aller: Terminus Tunis Marine Bus -> Terminus 5D/ 51A
+  - ["51A", "10641477", "33803051#3"]    # Ligne 51A aller: Terminus Tunis Marine Bus -> Terminus 5D/ 51A
   - ["51A_R", "93808420#0", "48720376#1"]    # Ligne 51A retour: Terminus 5D/ 51A -> Terminus Tunis Marine Bus
-  - ["5C", "10641477", "33803051#1"]    # Ligne 5C aller: Terminus Tunis Marine Bus -> Menzeh 6
+  - ["5C", "10641477", "33803051#3"]    # Ligne 5C aller: Terminus Tunis Marine Bus -> Menzeh 6
   - ["5C_R", "93808420#0", "48720376#1"]    # Ligne 5C retour: Menzeh 6 -> Terminus Tunis Marine Bus
-  - ["5D", "10641477", "33803051#1"]    # Ligne 5D aller: Terminus Tunis Marine Bus -> Terminus 5D/ 51A
+  - ["5D", "10641477", "33803051#3"]    # Ligne 5D aller: Terminus Tunis Marine Bus -> Terminus 5D/ 51A
   - ["5D_R", "93808420#0", "48720376#1"]    # Ligne 5D retour: Terminus 5D/ 51A -> Terminus Tunis Marine Bus
-  - ["6P_R", "1409208379", "-109431656#1"]    # Ligne 6P retour: Terminus 6P -> Jardin Thameur
+  - ["6P_R", "1409208379", "1409208465#2"]    # Ligne 6P retour: Terminus 6P -> Jardin Thameur
   - ["74", "10641477", "32900383#3"]    # Ligne 74 aller: Terminus Tunis Marine Bus -> Mourouj 5
   - ["74_R", "3290038301#0", "100080974#1"]    # Ligne 74 retour: Mourouj 5 -> Inoplast
 

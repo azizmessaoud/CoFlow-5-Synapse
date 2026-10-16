@@ -1,5 +1,6 @@
 """
-Real TRANSTU bus lines on a SUMO network: stops, routes and the traffix bus_lines config.
+Community-published TRANSTU-attributed bus line geometry on a SUMO network: stops,
+routes and the traffix bus_lines config. This is not an official timetable or GTFS feed.
 
   py -3.11 scripts\\import_transtu_lines.py            use the committed clipped stop list
   py -3.11 scripts\\import_transtu_lines.py --fetch    refresh it from the TRANSTU visualisation
@@ -329,11 +330,12 @@ def build(net_file, fetch):
         f.write("\n".join(out) + "\n")
     with open(os.path.join(folder, f"{name}.lines.json"), "w", encoding="utf-8") as f:
         json.dump({"source": SOURCE, "source_sha256": sha,
-                   "note": "TRANSTU stop list; routes snapped to OSM roads. Headways are assumed, not timetabled.",
+                   "source_status": "community-published visualization; not independently verified as an official TRANSTU feed",
+                   "note": "TRANSTU-attributed stop/line geometry; routes snapped to OSM roads. Headways are assumed, not timetabled.",
                    "lines": lines}, f, indent=1, ensure_ascii=False)
         f.write("\n")
     with open(cache_csv, "w", encoding="utf-8", newline="") as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator="\n")
         w.writerow(["line", "order", "name", "lon", "lat"])
         w.writerows(sorted(kept_rows, key=lambda r: (r[0], r[1])))
     write_config(name, lines)

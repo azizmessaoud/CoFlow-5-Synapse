@@ -62,7 +62,7 @@ def test_scenario_places_and_bus_lines_exist_on_the_map():
         assert first in edges and last in edges
     stops = ET.parse(config.network_files()[0].replace(".net.xml", ".stops.xml")).getroot()
     before = {s.find("param").get("value") for s in stops.findall("busStop") if s.get("lines")}
-    assert before <= set(J) | {""}          # real TRANSTU stops: some sit before a light, most do not
+    assert before <= set(J) | {""}          # community-published TRANSTU-attributed stop geometry
     assert before & set(J), "no stop before any light: transit priority has nothing to work with"
     # a stop tied to a light must be served by a line that then drives through that light
     import sumolib

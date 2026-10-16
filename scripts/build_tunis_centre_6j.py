@@ -1,14 +1,20 @@
 """Build the six-junction Tunis centre-ville SUMO network from committed OSM.
 
-Input is the already-clipped ``scenarios/tunis-showcase/tunis.osm.xml`` (OSM
-highways from the hash-verified Geofabrik PBF, see row 14). This script clips
+Input is the checked-in ``scenarios/tunis-showcase/tunis.osm.xml`` OSM extract.
+The original country PBF is not in this checkout, so its date/checksum cannot
+be independently verified here; the clipped XML is hash-recorded on each build. This script clips
 it to the centre-ville box around the six junctions in
 ``scenarios/tunis-centre-6j/selection.json`` and signalises exactly
 those six nodes, renamed J1..J6 (node and light ids). Every other OSM ``traffic_signals`` tag is removed
 so the control hierarchy has one master per selected junction and nothing
 else writes a light. Road demand is synthetic (randomTrips, fixed seed).
 
+Evidence-backed lane counts and speeds from ``lane_overrides.json`` are written
+onto a temporary copy of the clip before ``netconvert``; the committed
+``tunis6j.osm.xml`` stays a plain OSM clip (see ``scripts/lane_overrides.py``).
+
     python scripts/build_tunis_centre_6j.py            # needs SUMO_HOME or the eclipse-sumo wheel
+    python scripts/build_tunis_centre_6j.py --require-verified-lanes   # release build
 
 Outputs go to ``scenarios/tunis-centre-6j/``.
 """
@@ -16,9 +22,11 @@ Outputs go to ``scenarios/tunis-centre-6j/``.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import hashlib
 import heapq
 import json
+import math
 import os
 import re
 import subprocess
@@ -27,6 +35,9 @@ import tempfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import lane_overrides  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_OSM = ROOT / "scenarios" / "tunis-showcase" / "tunis.osm.xml"
@@ -56,6 +67,7 @@ NETCONVERT_OPTS = [
     "--tls.yellow.time", str(YELLOW),
     "--output.street-names",
     "--output.original-names",
+    "--osm.annotate-defaults",
 ]
 
 
@@ -84,6 +96,59 @@ def run(command: list[str]) -> None:
 
 def sha256(path: Path) -> str:
     return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def lane_tag_coverage(source: Path, junction_node_ids: set[str]) -> dict:
+    """Count OSM road ways with lane counts; uncovered values are importer defaults, not observations."""
+    root = ET.parse(source).getroot()
+    lane_keys = {"lanes", "lanes:forward", "lanes:backward", "lanes:both_ways"}
+    counts: dict[str, dict[str, int]] = {}
+    incident_ways = incident_tagged = 0
+    for way in root.findall("way"):
+        tags = {tag.get("k"): tag.get("v") for tag in way.findall("tag")}
+        highway = tags.get("highway")
+        if not highway:
+            continue
+        has_lane_tag = any(tags.get(key) for key in lane_keys)
+        if any(node.get("ref") in junction_node_ids for node in way.findall("nd")):
+            incident_ways += 1
+            incident_tagged += int(has_lane_tag)
+        row = counts.setdefault(highway, {"ways": 0, "ways_with_lane_count_tags": 0})
+        row["ways"] += 1
+        if has_lane_tag:
+            row["ways_with_lane_count_tags"] += 1
+    total = sum(row["ways"] for row in counts.values())
+    tagged = sum(row["ways_with_lane_count_tags"] for row in counts.values())
+    return {
+        "road_ways": total,
+        "ways_with_lane_count_tags": tagged,
+        "ways_without_lane_count_tags": total - tagged,
+        "six_junction_incident_ways": {
+            "ways": incident_ways,
+            "ways_with_lane_count_tags": incident_tagged,
+            "ways_without_lane_count_tags": incident_ways - incident_tagged,
+        },
+        "by_highway": counts,
+        "interpretation": "Explicit OSM lane tags are source data; missing lane counts are inferred by SUMO and are not verified real-world lane counts.",
+    }
+
+
+def validate_selection_coordinates(source: Path, selected: list[dict]) -> float:
+    """Fail if a selected OSM node is absent or its stored WGS84 location has drifted."""
+    nodes = {node.get("id"): node for node in ET.parse(source).getroot().findall("node")}
+    errors = []
+    for row in selected:
+        node = nodes.get(str(row["node_id"]))
+        if node is None:
+            raise SystemExit(f"selected OSM junction {row['node_id']} is absent from {source}")
+        lat = float(node.get("lat"))
+        dlat = (lat - float(row["lat"])) * 111_320
+        dlon = (float(node.get("lon")) - float(row["lon"])) * 111_320 * math.cos(math.radians(lat))
+        errors.append(math.hypot(dlat, dlon))
+    maximum = max(errors, default=0.0)
+    if maximum > 0.25:
+        raise SystemExit(f"selected junction coordinates drifted by up to {maximum:.2f} m; review selection.json")
+    return maximum
 
 
 def load_selection() -> list[dict]:
@@ -277,8 +342,7 @@ def rename_junctions(netconvert: str, raw: Path, work: Path, labels: dict[str, s
 
 
 def write_bus_stops(home: Path, net: Path, spec: dict) -> None:
-    """Real TRANSTU stops and routes (scripts/import_transtu_lines.py, from the committed
-    tunis6j.transtu.csv), and which of them sit before each light."""
+    """Community-published TRANSTU-attributed stop/line geometry and which stops sit before each light."""
     sys.path.insert(0, str(home / "tools"))
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from import_transtu_lines import build
@@ -342,7 +406,13 @@ def write_configs() -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--source-osm", type=Path, default=SOURCE_OSM)
+    parser.add_argument("--source-pbf", type=Path, help="original country PBF used to create --source-osm")
+    parser.add_argument("--source-pbf-data-as-of", help="Geofabrik's OSM data timestamp, in ISO 8601 UTC")
+    parser.add_argument("--require-verified-lanes", action="store_true",
+                        help="release check: refuse to build while any J1..J6 incident way lacks lane evidence")
     args = parser.parse_args()
+    if args.source_pbf and not args.source_pbf.is_file():
+        raise SystemExit(f"source PBF not found: {args.source_pbf}")
     home = sumo_home()
     netconvert = tool(home, "netconvert")
     random_trips = str(home / "tools" / "randomTrips.py")
@@ -352,6 +422,16 @@ def main() -> int:
 
     osm = SCENARIO / f"{PREFIX}.osm.xml"
     clip = clip_osm(args.source_osm, osm, set(node_ids))
+    coordinate_error = validate_selection_coordinates(osm, selected)
+    lane_coverage = lane_tag_coverage(osm, set(node_ids))
+    overrides = lane_overrides.load(lane_overrides.OVERRIDES)
+    problems = lane_overrides.validate(overrides, osm, {node_id: f"J{i}" for i, node_id in enumerate(node_ids, start=1)})
+    if problems:
+        raise SystemExit("lane_overrides.json is invalid:\n  " + "\n  ".join(problems))
+    override_coverage = lane_overrides.coverage(overrides)
+    if args.require_verified_lanes and override_coverage["verified"]["count"] != len(overrides["ways"]):
+        raise SystemExit(f"--require-verified-lanes: {len(overrides['ways']) - override_coverage['verified']['count']} "
+                         "junction-incident ways have no lane evidence; see lane_overrides.json")
     print(f"clipped ways={clip['ways']} nodes={clip['nodes']} "
           f"osm_signals_removed={len(clip['osm_signals_removed'])}")
 
@@ -362,8 +442,11 @@ def main() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         work = Path(tmp)
         raw = work / "raw.net.xml"
+        patched = work / "tunis6j.overridden.osm.xml"
+        applied = lane_overrides.apply(overrides, osm, patched)
+        extra = ["--osm.turn-lanes", "true"] if applied["needs_osm_turn_lanes"] else []
         run([
-            netconvert, "--osm-files", str(osm), *NETCONVERT_OPTS,
+            netconvert, "--osm-files", str(patched), *NETCONVERT_OPTS, *extra,
             "--junctions.join-exclude", ",".join(node_ids),
             "--tls.set", ",".join(node_ids),
             "--tls.default-type", "static", "--output-file", str(raw),
@@ -397,10 +480,18 @@ def main() -> int:
     for leftover in SCENARIO.glob("*.rou.alt.xml"):
         leftover.unlink()
 
+    for built in (net, actuated):
+        mismatch = lane_overrides.check_net(overrides, built)
+        if mismatch:
+            raise SystemExit(f"{built.name} does not carry the override values:\n  " + "\n  ".join(mismatch))
+
     spec = junction_spec(net, selected, names)
     write_bus_stops(home, net, spec)
     write_overlay(spec)
     write_configs()
+    # The PBF is not in the checkout; without --source-pbf its identity comes from the
+    # committed selection.json (recorded when the PBF was downloaded), labelled as such.
+    pbf = json.loads(JUNCTIONS.read_text(encoding="utf-8"))["aoi"]["source"]
     manifest = {
         "id": "tunis-centre-6j",
         "status": "showcase_only",
@@ -410,11 +501,35 @@ def main() -> int:
             "osm": {
                 "path": str(args.source_osm.relative_to(ROOT)).replace("\\", "/"),
                 "sha256": sha256(args.source_osm),
-                "identity": "Geofabrik Tunisia OSM PBF, clipped in row 14 (pbf-source.json)",
+                "identity": "OpenStreetMap contributor data, clipped from the Geofabrik Tunisia extract",
+                "source_url": "https://download.geofabrik.de/africa/tunisia.html",
+                "source_pbf_filename": args.source_pbf.name if args.source_pbf else pbf["filename"],
+                "source_pbf_sha256": sha256(args.source_pbf) if args.source_pbf else pbf["sha256"],
+                "source_pbf_data_as_of": args.source_pbf_data_as_of or pbf["data_as_of_utc"],
+                "source_pbf_retrieved_at_utc": (
+                    datetime.fromtimestamp(args.source_pbf.stat().st_mtime, timezone.utc).isoformat()
+                    if args.source_pbf else pbf["downloaded_at_utc"]
+                ),
+                "source_pbf_identity_from": (
+                    "hashed in this build" if args.source_pbf
+                    else "selection.json aoi.source; PBF not present, not re-hashed in this build"
+                ),
             },
             "junction_selection": {
                 "path": str(JUNCTIONS.relative_to(ROOT)).replace("\\", "/"),
                 "sha256": sha256(JUNCTIONS),
+            },
+            "lane_overrides": {
+                "path": str(lane_overrides.OVERRIDES.relative_to(ROOT)).replace("\\", "/"),
+                "sha256": sha256(lane_overrides.OVERRIDES),
+                "schema": overrides["schema"],
+                "applied_before_netconvert": "to a temporary copy of tunis6j.osm.xml; the committed clip is unmodified OSM",
+                "coverage": override_coverage,
+                "lanes_applied_to_ways": applied["lanes_applied_to_ways"],
+                "speeds_applied": applied["speeds_applied"],
+                "recorded_not_applied": applied["recorded_not_applied"],
+                "legal_sources": [{key: src[key] for key in ("id", "url", "retrieved_utc", "limits_of_use")}
+                                  for src in overrides["legal_sources"]],
             },
         },
         "network": {
@@ -424,6 +539,21 @@ def main() -> int:
                            "so each light has exactly one master",
             "netconvert_options": NETCONVERT_OPTS,
             "sumo_version": "1.27.1",
+            "lane_tag_coverage": lane_coverage,
+        },
+        "validation": {
+            "selected_junctions_checked": len(selected),
+            "selected_junction_coordinate_max_error_m": round(coordinate_error, 4),
+            "coordinate_tolerance_m": 0.25,
+            "lane_count_status": (
+                f"{override_coverage['verified']['count']} of {len(overrides['ways'])} junction-incident ways "
+                f"lane-verified with evidence; {override_coverage['osm_tagged']['count']} use uncorroborated OSM "
+                f"lane tags; {override_coverage['unverified']['count']} use SUMO importer defaults, which are "
+                "not real-world lane counts"
+            ),
+            "speed_status": "junction-incident ways without an OSM maxspeed use Tunisia's 50 km/h urban legal "
+                            "default (lane_overrides.json legal_sources); posted signs and road-specific "
+                            "30/70 km/h decisions are not verified; all other roads keep SUMO type defaults",
         },
         "road_demand": f"synthetic: randomTrips seed={SEED}, period=1.2 s, fringe-factor=10, "
                        f"{END} s; pedestrians seed={SEED + 1}, period=4 s",

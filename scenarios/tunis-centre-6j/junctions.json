@@ -14,12 +14,168 @@
   "sources": {
     "osm": {
       "path": "scenarios/tunis-showcase/tunis.osm.xml",
-      "sha256": "sha256:e9a413f58c76d1c2cccad5dabd57ad1b451338fd8a86bbccfd381e14554b5275",
-      "identity": "Geofabrik Tunisia OSM PBF, clipped in row 14 (pbf-source.json)"
+      "sha256": "sha256:57835992025b35d198259239eddd4d3154688ac72c468a9eff4e1ff08ba764cc",
+      "identity": "OpenStreetMap contributor data, clipped from the Geofabrik Tunisia extract",
+      "source_url": "https://download.geofabrik.de/africa/tunisia.html",
+      "source_pbf_filename": "tunisia-latest.osm.pbf",
+      "source_pbf_sha256": "sha256:c089f966ee441f2e30af89de7b2e172194c550be3746aee8b2a9685e43ef9bb1",
+      "source_pbf_data_as_of": "2026-10-15T20:21:00Z",
+      "source_pbf_retrieved_at_utc": "2026-10-16T20:16:21Z",
+      "source_pbf_identity_from": "selection.json aoi.source; PBF not present, not re-hashed in this build"
     },
     "junction_selection": {
       "path": "scenarios/tunis-centre-6j/selection.json",
-      "sha256": "sha256:5186b1c08b1d64a5fe1c072428a641a07951e05a77f81b75c5478ecd375839c0"
+      "sha256": "sha256:dffe6747d8a00f66cbe18d538748d410c67593436d8fbe923e791129c24bd167"
+    },
+    "lane_overrides": {
+      "path": "scenarios/tunis-centre-6j/lane_overrides.json",
+      "sha256": "sha256:89b5ed6103e1ea4f5f8c32ab6210ef74e3747e143522c1c22c6d444abd538cd6",
+      "schema": "coflow5.lane_overrides/1",
+      "applied_before_netconvert": "to a temporary copy of tunis6j.osm.xml; the committed clip is unmodified OSM",
+      "coverage": {
+        "osm_tagged": {
+          "count": 3,
+          "osm_way_ids": [
+            "10641416",
+            "10641456",
+            "26280306"
+          ]
+        },
+        "unverified": {
+          "count": 18,
+          "osm_way_ids": [
+            "10641392",
+            "26013493",
+            "26242831",
+            "33803062",
+            "39169970",
+            "39170210",
+            "56065135",
+            "95132613",
+            "100080972",
+            "100081107",
+            "106509679",
+            "306643020",
+            "545291183",
+            "545291184",
+            "577010717",
+            "704802731",
+            "1409299974",
+            "1501192411"
+          ]
+        },
+        "verified": {
+          "count": 0,
+          "osm_way_ids": []
+        }
+      },
+      "lanes_applied_to_ways": [],
+      "speeds_applied": [
+        {
+          "osm_way_id": "10641392",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "10641416",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "10641456",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "26013493",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "26242831",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "26280306",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "33803062",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "39169970",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "39170210",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "56065135",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "95132613",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "100080972",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "100081107",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "106509679",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "306643020",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "545291183",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "545291184",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "577010717",
+          "kmh": 50,
+          "basis": "legal_default"
+        },
+        {
+          "osm_way_id": "704802731",
+          "kmh": 50,
+          "basis": "legal_default"
+        }
+      ],
+      "recorded_not_applied": [],
+      "legal_sources": [
+        {
+          "id": "tn-code-route-urban-speed",
+          "url": "https://www.transport.tn/uploads/Loi/Route.pdf",
+          "retrieved_utc": "2026-10-16",
+          "limits_of_use": "legal default only; road-specific 30 or 70 km/h decisions and posted signs were not checked, so legal_default speeds are not observed limits"
+        }
+      ]
     }
   },
   "network": {
@@ -52,9 +208,70 @@
       "--tls.yellow.time",
       "3",
       "--output.street-names",
-      "--output.original-names"
+      "--output.original-names",
+      "--osm.annotate-defaults"
     ],
-    "sumo_version": "1.27.1"
+    "sumo_version": "1.27.1",
+    "lane_tag_coverage": {
+      "road_ways": 466,
+      "ways_with_lane_count_tags": 43,
+      "ways_without_lane_count_tags": 423,
+      "six_junction_incident_ways": {
+        "ways": 21,
+        "ways_with_lane_count_tags": 3,
+        "ways_without_lane_count_tags": 18
+      },
+      "by_highway": {
+        "primary": {
+          "ways": 33,
+          "ways_with_lane_count_tags": 16
+        },
+        "tertiary": {
+          "ways": 24,
+          "ways_with_lane_count_tags": 8
+        },
+        "motorway_link": {
+          "ways": 7,
+          "ways_with_lane_count_tags": 4
+        },
+        "motorway": {
+          "ways": 6,
+          "ways_with_lane_count_tags": 6
+        },
+        "secondary": {
+          "ways": 19,
+          "ways_with_lane_count_tags": 6
+        },
+        "residential": {
+          "ways": 212,
+          "ways_with_lane_count_tags": 2
+        },
+        "unclassified": {
+          "ways": 2,
+          "ways_with_lane_count_tags": 0
+        },
+        "service": {
+          "ways": 161,
+          "ways_with_lane_count_tags": 0
+        },
+        "secondary_link": {
+          "ways": 1,
+          "ways_with_lane_count_tags": 0
+        },
+        "tertiary_link": {
+          "ways": 1,
+          "ways_with_lane_count_tags": 1
+        }
+      },
+      "interpretation": "Explicit OSM lane tags are source data; missing lane counts are inferred by SUMO and are not verified real-world lane counts."
+    }
+  },
+  "validation": {
+    "selected_junctions_checked": 6,
+    "selected_junction_coordinate_max_error_m": 0.0,
+    "coordinate_tolerance_m": 0.25,
+    "lane_count_status": "0 of 21 junction-incident ways lane-verified with evidence; 3 use uncorroborated OSM lane tags; 18 use SUMO importer defaults, which are not real-world lane counts",
+    "speed_status": "junction-incident ways without an OSM maxspeed use Tunisia's 50 km/h urban legal default (lane_overrides.json legal_sources); posted signs and road-specific 30/70 km/h decisions are not verified; all other roads keep SUMO type defaults"
   },
   "road_demand": "synthetic: randomTrips seed=20261016, period=1.2 s, fringe-factor=10, 3600 s; pedestrians seed=20261017, period=4 s",
   "claim_boundary": "showcase only; no deployment validation, no measured air quality, no lives saved",
@@ -85,15 +302,21 @@
         "10641456#7_0",
         "10641456#7_1",
         "10641456#7_2",
+        "10641456#7_3",
         "26013493_0",
-        "26013493_1"
+        "26013493_1",
+        "26013493_2",
+        ":J1_w0_0",
+        ":J1_w1_0"
       ],
-      "signal_links": 7,
+      "signal_links": 9,
       "phases": [
-        "GGGrrrr",
-        "Gyyrrrr",
-        "GrrGGGG",
-        "Grryyyy"
+        "gGGrrrrrG",
+        "gGGrrrrrr",
+        "yyyrrrrrr",
+        "rrrGGGGGr",
+        "rrrGGGGrr",
+        "rrryyyyrr"
       ],
       "downstream_neighbours": [
         "J3",
@@ -103,7 +326,7 @@
       ],
       "bus_stops": [
         "ts_11",
-        "ts_9"
+        "ts_13"
       ]
     },
     {
@@ -132,18 +355,27 @@
       "incoming_lanes": [
         "-26242831#0_0",
         "-26242831#0_1",
-        "100081107_0",
-        "100081107_1",
-        "39170210#2_0"
+        "-26242831#0_2",
+        "100081107#1_0",
+        "100081107#1_1",
+        "100081107#1_2",
+        "39170210#4_0",
+        "39170210#4_1",
+        ":J2_w0_0",
+        ":J2_w2_0",
+        ":J2_w3_0"
       ],
-      "signal_links": 10,
+      "signal_links": 13,
       "phases": [
-        "GGGGrrrGrr",
-        "GyyyrrrGrr",
-        "GrrrGGGGrr",
-        "yrrryyyGrr",
-        "rrrrrrrGGG",
-        "rrrrrrrGyy"
+        "gGGGrrrrrrrGG",
+        "gGGGrrrrrrrrr",
+        "yyyyrrrrrrrrr",
+        "rrrrgGGrrrGrG",
+        "rrrrgGGrrrrrr",
+        "rrrryyyrrrrrr",
+        "rrrrrrrgGGrGr",
+        "rrrrrrrgGGrrr",
+        "rrrrrrryyyrrr"
       ],
       "downstream_neighbours": [
         "J1",
@@ -176,21 +408,23 @@
         "major_road"
       ],
       "incoming_lanes": [
-        "1501192411#1_0",
-        "1501192411#1_1",
+        "1501192411#3_0",
+        "1501192411#3_1",
         "704802731_0",
+        "704802731_1",
         ":J3_w0_0",
         ":J3_w1_0",
-        ":J3_w2_0"
+        ":J3_w2_0",
+        ":J3_w3_0"
       ],
-      "signal_links": 8,
+      "signal_links": 9,
       "phases": [
-        "gGGrrrGr",
-        "gGGrrrrr",
-        "yyyrrrrr",
-        "rrrGgGrG",
-        "rrrGgrrr",
-        "rrryyrrr"
+        "gGgrrrGrG",
+        "gGgrrrrrr",
+        "yyyrrrrrr",
+        "rrrGgGrGr",
+        "rrrGgrrrr",
+        "rrryyrrrr"
       ],
       "downstream_neighbours": [
         "J1"
@@ -224,19 +458,22 @@
       ],
       "incoming_lanes": [
         "26280306#5_0",
+        "26280306#5_1",
         "306643020_0",
         "306643020_1",
         "545291183_0",
         "545291183_1",
+        ":J4_w0_0",
         ":J4_w1_0"
       ],
-      "signal_links": 6,
+      "signal_links": 7,
       "phases": [
-        "rrGgGr",
-        "rryyyr",
-        "GGrrrG",
-        "GGrrrr",
-        "yyrrrr"
+        "rrGgGGr",
+        "rrGgGrr",
+        "rryyyrr",
+        "gGrrrrG",
+        "gGrrrrr",
+        "yyrrrrr"
       ],
       "downstream_neighbours": [
         "J2",
@@ -272,22 +509,23 @@
         "106509679#2_0",
         "106509679#2_1",
         "26280306#1_0",
+        "26280306#1_1",
         "95132613_0",
         "95132613_1",
         ":J5_w0_0",
-        ":J5_w1_0",
-        ":J5_w2_0"
+        ":J5_w2_0",
+        ":J5_w3_0"
       ],
       "signal_links": 11,
       "phases": [
-        "gGgrrrrrGGG",
-        "gGgrrrrrrrr",
+        "gGGrrrrrrGG",
+        "gGGrrrrrrrr",
         "yyyrrrrrrrr",
-        "rrrrrrGgGGr",
-        "rrrrrrGgrrr",
+        "rrrrrrGGrGr",
+        "rrrrrrGGrrr",
         "rrrrrryyrrr",
-        "rrrGGgrrrrG",
-        "rrrGGgrrrrr",
+        "rrrgGgrrGrG",
+        "rrrgGgrrrrr",
         "rrryyyrrrrr"
       ],
       "downstream_neighbours": [
@@ -323,15 +561,18 @@
         "545291184#2_1",
         "577010717#1_0",
         "577010717#1_1",
-        ":J6_w1_0"
+        "577010717#1_2",
+        ":J6_w0_0",
+        ":J6_w2_0"
       ],
-      "signal_links": 6,
+      "signal_links": 7,
       "phases": [
-        "GGgrrG",
-        "GGgrrr",
-        "yyyrrr",
-        "rrrGGr",
-        "rrryyr"
+        "GGGrrrG",
+        "GGGrrrr",
+        "yyyrrrr",
+        "rrrgGGr",
+        "rrrgGrr",
+        "rrryyrr"
       ],
       "downstream_neighbours": [
         "J1",

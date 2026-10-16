@@ -115,9 +115,10 @@ OSM node ids, signal plans, downstream neighbours and bus stops are in
 `scenarios/tunis-centre-6j/README.md`. Network facts (folder, bus lines, scenario event places,
 demand level) are in `config/networks/tunis6j.yaml`. Scenarios refer to places as `"@name"`.
 
-Bus lines are the real TRANSTU lines that cross the map (`scripts/import_transtu_lines.py`
-writes `tunis6j.lines.json` and the bus stops). Their headway is an assumption, not the
-timetable. The background street map comes from Esri tiles aligned to the network
+Bus-line geometry is TRANSTU-attributed data from a community-maintained visualization
+(`scripts/import_transtu_lines.py` writes `tunis6j.lines.json` and bus stops); it is not an
+independently verified official feed. Its headway is an assumption, not a timetable. The
+background street map comes from Esri tiles aligned to the network
 (`scripts/build_basemap.py`).
 
 Rebuild the network from the committed OSM extract:
@@ -127,10 +128,36 @@ py -3.11 scripts\build_tunis_centre_6j.py      # also re-imports TRANSTU lines a
 py -3.11 -m pytest tests\scripts\test_tunis_centre_6j.py -q
 ```
 
+To refresh the map from a fresh Geofabrik Tunisia PBF, download the current
+[`tunisia-latest.osm.pbf`](https://download.geofabrik.de/africa/tunisia.html), clip the wider Tunis
+area, then rebuild the six-junction scenario while recording the PBF fingerprint:
+
+```powershell
+py -3.11 scripts\clip_tunis_osm.py --input path\to\tunisia-latest.osm.pbf --output scenarios\tunis-showcase\tunis.osm.xml --bbox 10.127879 36.787714 10.233358 36.820741
+py -3.11 scripts\build_tunis_centre_6j.py --source-pbf path\to\tunisia-latest.osm.pbf --source-pbf-data-as-of 2026-10-15T20:21:00Z
+```
+
+The current scenario is based on OSM data through 2026-10-15 20:21 UTC. All six selected OSM node IDs
+were present, and their stored coordinates match the refreshed source coordinates within 0.01 m.
+However, the lane data are not complete: **43/466 road ways** in the central clip have explicit OSM
+lane-count tags, and only **3/21 unique ways directly incident to the six junctions** have them.
+SUMO annotates defaults for the rest; **those defaults are not verified real-world lane counts**.
+The OSM geometry was cross-checked against Esri World Imagery at zoom 19, but the imagery capture
+date is not exposed and it is not adequate evidence to certify every lane marking. The previous
+claim that lanes matched satellite imagery within a few metres was unsupported and has been removed.
+For exact lane counts, the 18 untagged junction-incident ways need current local survey or
+authoritative road-design data; do not treat the current lane configuration as fully verified.
+They are tracked in `scenarios/tunis-centre-6j/lane_overrides.json` (all still `unverified`; a
+desk search of Panoramax, KartaView and Wikimedia Commons found no dated imagery showing the
+stop-line markings) and listed on the printable `field-survey-sheet.html`. Verified values entered
+there are applied before `netconvert`; `py -3.11 scripts\lane_overrides.py --strict` fails until all
+21 junction roads have evidence. Junction roads without an OSM `maxspeed` use Tunisia's 50 km/h
+urban legal default instead of SUMO's 80–100 km/h; see the scenario README for sources and limits.
+
 The six junctions were chosen deterministically from the Tunis OSM graph
 (`scenarios/tunis-centre-6j/selection.json`): degree ≥ 3, then traffic signals > roundabout >
-stop/give-way > named > degree > major road > node id. Lane counts follow the OSM `lanes` tags
-(motorway ramp guessing is off), and the lanes line up with satellite imagery within a few metres.
+stop/give-way > named > degree > major road > node id. Motorway ramp lane guessing is disabled in
+this city-centre network.
 
 To use traffix3's original schematic network instead, set `TRAFFIX_NETWORK=tunis_centre`, then run
 `scripts\build_network.py` and `scripts\build_demand.py`.
@@ -271,12 +298,31 @@ The headless J0 A1 run is `py -3.11 scripts\generate_max_pressure_artifacts.py`.
 ### Wider Tunis showcase
 
 ```powershell
-py -3.11 scripts\build_tunis_sumo.py      # clip (in WSL), netconvert, randomTrips, junction markers
+py -3.11 scripts\build_tunis_sumo.py      # uses the committed OSM extract; SUMO/netconvert + randomTrips
 py -3.11 scripts\watch_sumo.py tunis
 ```
 
-The OSM PBF is clipped in WSL because Windows `pyosmium` is blocked by local application control;
-SUMO itself runs natively. The routes (seed `20261010`) are not observed Tunis traffic.
+The builder is portable across Windows, Linux and macOS when SUMO is installed (set `SUMO_HOME` if
+needed). It uses the checked-in `scenarios/tunis-showcase/tunis.osm.xml` by default instead of a
+developer-specific local file path. To refresh from the latest country extract, download the
+[Geofabrik Tunisia OSM PBF](https://download.geofabrik.de/africa/tunisia.html) and run
+`py -3.11 scripts\build_tunis_sumo.py --pbf path\to\tunisia-latest.osm.pbf --force` with `pyosmium`
+installed. The network preserves OSM road geometry and tagged lane attributes as interpreted by
+SUMO `netconvert`; it is a map snapshot, so verify current construction, closures and lane marking
+against local survey data before claiming current field accuracy. The fixed-seed routes are
+synthetic, not observed Tunis traffic. Each run writes `scenarios/tunis-showcase/tunis.source.json`
+with the imported OSM XML hash, OSM attribution/license, AOI, and (when supplied) the source PBF hash.
+
+The central six-junction network is the recommended reproducible study AOI. Its road extract,
+selected junctions and build options are hash-recorded in `scenarios/tunis-centre-6j/junctions.json`.
+The TRANSTU stop/line geometry used there is imported from the community-maintained
+[`transtu-visualisation` dataset](https://hobbes-286.github.io/transtu-visualisation/), whose map
+credits TRANSTU and OpenStreetMap. It is **not** a directly published or independently validated
+official timetable/GTFS feed. The repository stores the source rows and content hash; generated
+bus routes are snapped to legal OSM bus edges and tested for continuity, stop ordering and loops.
+The configured 15-minute line headway is explicitly an assumption, not observed or published
+service frequency. Do not describe these line geometries or demand levels as independently
+verified real-world operations.
 
 ### Native smoke test
 
@@ -631,9 +677,9 @@ measurable, not "AI improved traffic by X%".
 
 | Source | Identity | Use |
 |---|---|---|
-| Geofabrik Tunisia OSM PBF (`tunisia-261009.osm.pbf`) | `sha256:8bea4a9f2a86cce8ca198d9bad50dd1103239bbcb55669058fa50042c767f51` | Road topology for the Tunis networks |
-| TRANSTU GTFS (Tunisian transport CKAN portal) | `sha256:293718f3cd96e5c5bcd7c980b4752a1f17d31106ee4465c39064c9bdc5d7dded` | Official scheduled transit; not road-outcome evidence |
-| TRANSTU line visualisation (hobbes-286.github.io/transtu-visualisation) | `scenarios/tunis-centre-6j/tunis6j.transtu.csv` | Bus lines and stops crossing J1..J6 |
+| OpenStreetMap via [Geofabrik Tunisia](https://download.geofabrik.de/africa/tunisia.html) | Clipped source snapshot: `scenarios/tunis-showcase/tunis.osm.xml`; hash recorded in `scenarios/tunis-centre-6j/junctions.json` | Road topology. Original country PBF and its historic checksum are not included in this checkout, so the original PBF timestamp/checksum cannot be verified here. |
+| TRANSTU-attributed line visualization ([community-published source](https://hobbes-286.github.io/transtu-visualisation/)) | `scenarios/tunis-centre-6j/tunis6j.transtu.csv`; source hash in `tunis6j.lines.json` | Stop/line geometry mapped to OSM roads; not an official GTFS/timetable and not independently validated. |
+| Previously referenced TRANSTU GTFS archive | Archive is not present in this checkout; its publisher and recorded checksum cannot be independently verified here. | Do not use as evidence of official scheduled service unless the original feed and publisher are confirmed. |
 | Esri World Street Map / World Imagery tiles | attribution in the app | Background map and satellite overlay |
 
 Selected OSM junctions: 5294059357 (J1), 287386655 (J2), 287837812 (J3), 287863982 (J4),

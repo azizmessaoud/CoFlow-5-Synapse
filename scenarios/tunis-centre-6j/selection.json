@@ -7,7 +7,14 @@
       10.19,
       36.805
     ],
-    "pbf": "/mnt/c/Users/dell/Downloads/ai agent prototype/tunisia-261009.osm.pbf",
+    "source": {
+      "provider": "Geofabrik Tunisia OSM extract",
+      "url": "https://download.geofabrik.de/africa/tunisia.html",
+      "filename": "tunisia-latest.osm.pbf",
+      "sha256": "sha256:c089f966ee441f2e30af89de7b2e172194c550be3746aee8b2a9685e43ef9bb1",
+      "data_as_of_utc": "2026-10-15T20:21:00Z",
+      "downloaded_at_utc": "2026-10-16T20:16:21Z"
+    },
     "selection_rule": "degree >= 3, ranked by traffic_signals > roundabout > stop/give_way > named > degree > major_road, then node_id"
   },
   "junction_count": 6,

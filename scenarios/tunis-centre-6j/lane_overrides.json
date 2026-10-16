@@ -1,0 +1,816 @@
+{
+  "schema": "coflow5.lane_overrides/1",
+  "scope": "Every OSM highway way incident to J1..J6 in tunis6j.osm.xml. Lane values are null unless evidence exists; SUMO importer defaults are never copied here.",
+  "osm_snapshot": {
+    "source_pbf_data_as_of": "2026-10-15T20:21:00Z",
+    "clipped_osm_note": "way ids and node order checked against scenarios/tunis-centre-6j/tunis6j.osm.xml"
+  },
+  "direction_convention": "forward/backward follow the OSM way's node order, not compass direction; node_order_at_junctions says which direction approaches each junction",
+  "statuses": {
+    "verified": "lane counts backed by field survey, authoritative plan, or dated geolocated street-level imagery; applied before netconvert",
+    "osm_tagged": "OSM carries a lane tag; used as source data, not independently corroborated",
+    "unverified": "no evidence; SUMO's importer default is used and is not a real-world lane count"
+  },
+  "legal_sources": [
+    {
+      "id": "tn-code-route-urban-speed",
+      "jurisdiction": "Tunisia",
+      "rule": "50 km/h inside built-up areas (agglomérations); a commune president may lower it to 30 km/h on roads under the commune's authority; the Minister of Equipment and Housing may raise it to 70 km/h on specific roads or sections",
+      "quote_fr": "Tout conducteur ne doit pas dépasser la vitesse de cinquante (50) kilomètres à l'heure (km/h) à l'intérieur des agglomérations. Dans des zones ou les conditions de circulation l'exigent, cette limite peut être réduite à trente (30) km/h par décision du Président de la commune et ce, sur les routes qui relèvent de son autorité. Cette vitesse peut être portée à 70 km/h à l'heure, par décision du Ministre de l'Equipement et de l'Habitat, sur certaines routes ou tronçons de routes et ce, en fonction des exigences de la circulation et des caractéristiques de ces routes.",
+      "document": "Code de la route and implementing texts, Imprimerie Officielle de la République Tunisienne compilation, published by the Ministry of Transport",
+      "url": "https://www.transport.tn/uploads/Loi/Route.pdf",
+      "article": "not confirmed from the excerpt; read the PDF to cite the article number",
+      "retrieved_utc": "2026-10-16",
+      "limits_of_use": "legal default only; road-specific 30 or 70 km/h decisions and posted signs were not checked, so legal_default speeds are not observed limits"
+    }
+  ],
+  "evidence_searches": [
+    {
+      "date": "2026-10-16",
+      "source": "Panoramax (api.panoramax.xyz)",
+      "query": "bbox 10.1745,36.7915,10.1920,36.8065",
+      "result": "4 images, all 2019-04-09, nearest 270 m from any junction; no approach visible; not usable"
+    },
+    {
+      "date": "2026-10-16",
+      "source": "KartaView (api.openstreetcam.org nearby-photos, 150 m)",
+      "query": "J1, J2, J3",
+      "result": "0 photos"
+    },
+    {
+      "date": "2026-10-16",
+      "source": "Wikimedia Commons geosearch (120 m around each junction)",
+      "result": "tourist/building photos; J1 clock-tower set (File:Tour de l'Horloge du centre-ville de Tunis 01..06.jpg, CC0, taken 2025-10-02) shows a signalised pedestrian crossing at the roundabout but no countable lane markings; no other photo shows an approach at the stop line; no lane count verified"
+    },
+    {
+      "date": "2026-10-17",
+      "source": "Mapillary (graph.mapillary.com, user-supplied token; token not stored)",
+      "result": "445 image hits (junction boxes overlap, so some images count twice), all 2015/2018 except 18 from 2020-08-21 near J3; matching photos for 19 of 30 way-directions, none for 26242831 (both), 33803062, 39170210 at J4, 56065135, 95132613 exit, 106509679, 306643020 (both), 545291183, 704802731 approach. All are handheld phone shots through a windscreen. On 18 of the 19 matched directions the carriageway near the junction shows no lane-divider paint, or the view is blocked or turning, so no lane count can be read at the stop line. The only countable markings: 10641416 (OSM lanes=2) shows one dashed divider = 2 marked lanes about 30 m past J1 (391454508600365 on 2018-05-27, 813444632625851 on 2018-05-26); the way is 316 m and uniformity is not confirmed, so it stays osm_tagged. No lane count verified. Incidental observations (2018): signal heads at the J1 roundabout entries from Avenue Mohamed V and the roundabout (500700031128096, 325457825591789); zebra crossings with stop lines on the J6 Rue d'Alger and Avenue Habib Bourguiba approaches (599754087650398, 241702187743440, 582172526508230); tram tracks embedded in Avenue Habib Thameur at J4/J5 (2592441237723578, 2863940113817511); no bus-only lane markings seen.",
+      "query": "images within 80 m of each junction; per way-direction: on the way (<14 m offset), 8-90 m from the junction, camera heading within 35 deg of travel"
+    },
+    {
+      "date": "2026-10-16",
+      "source": "Esri World Imagery",
+      "result": "capture date not exposed; not used for lane counts"
+    }
+  ],
+  "ways": [
+    {
+      "osm_way_id": "10641392",
+      "name": "شارع الحبيب بورقيبة",
+      "name_fr": "Avenue Habib Bourguiba",
+      "highway": "primary",
+      "oneway": true,
+      "junctions": [
+        "J2"
+      ],
+      "node_order_at_junctions": {
+        "J2": {
+          "node_position": "start",
+          "approach": false,
+          "exit": true
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "10641416",
+      "name": "شارع الحبيب بورقيبة",
+      "name_fr": "Avenue Habib Bourguiba",
+      "highway": "primary",
+      "oneway": true,
+      "junctions": [
+        "J1"
+      ],
+      "node_order_at_junctions": {
+        "J1": {
+          "node_position": "start",
+          "approach": false,
+          "exit": true
+        }
+      },
+      "status": "osm_tagged",
+      "osm_lane_tags": {
+        "lanes": "2"
+      },
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": "Mapillary 391454508600365 (2018-05-27) and 813444632625851 (2018-05-26), heading west about 30 m past J1: one dashed divider, 2 marked lanes, matching OSM lanes=2; a solid edge line with a strip on the right (crowd barriers stood in it). Not promoted to verified: imagery is 8 years old and covers 30 m of a 316 m way."
+    },
+    {
+      "osm_way_id": "10641456",
+      "name": "ساحة 14 جانفي 2011",
+      "name_fr": "Place du 14 Janvier 2011",
+      "highway": "primary",
+      "oneway": true,
+      "junctions": [
+        "J1"
+      ],
+      "node_order_at_junctions": {
+        "J1": {
+          "node_position": "mid",
+          "approach": true,
+          "exit": true
+        }
+      },
+      "status": "osm_tagged",
+      "osm_lane_tags": {
+        "lanes": "3"
+      },
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "26013493",
+      "name": "شارع محمد الخامس",
+      "name_fr": "Avenue Mohamed V",
+      "highway": "primary",
+      "oneway": true,
+      "junctions": [
+        "J1"
+      ],
+      "node_order_at_junctions": {
+        "J1": {
+          "node_position": "end",
+          "approach": true,
+          "exit": false
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "26242831",
+      "name": "شارع فرنسا",
+      "name_fr": "Avenue de France",
+      "highway": "primary",
+      "oneway": false,
+      "junctions": [
+        "J2"
+      ],
+      "node_order_at_junctions": {
+        "J2": {
+          "node_position": "start",
+          "approach_direction": "backward",
+          "exit_direction": "forward"
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "26280306",
+      "name": "شارع الحبيب ثامر",
+      "name_fr": "Avenue Habib Thameur",
+      "highway": "secondary",
+      "oneway": true,
+      "junctions": [
+        "J4",
+        "J5"
+      ],
+      "node_order_at_junctions": {
+        "J4": {
+          "node_position": "end",
+          "approach": true,
+          "exit": false
+        },
+        "J5": {
+          "node_position": "mid",
+          "approach": true,
+          "exit": true
+        }
+      },
+      "status": "osm_tagged",
+      "osm_lane_tags": {
+        "lanes": "1"
+      },
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "33803062",
+      "name": "نهج سبارت",
+      "name_fr": "Rue de Sparte",
+      "highway": "residential",
+      "oneway": true,
+      "junctions": [
+        "J5"
+      ],
+      "node_order_at_junctions": {
+        "J5": {
+          "node_position": "start",
+          "approach": false,
+          "exit": true
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "39169970",
+      "name": "نهج جمال عبد الناصر",
+      "name_fr": "Rue Jamel Abdel Nasser",
+      "highway": "primary",
+      "oneway": true,
+      "junctions": [
+        "J2"
+      ],
+      "node_order_at_junctions": {
+        "J2": {
+          "node_position": "start",
+          "approach": false,
+          "exit": true
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "39170210",
+      "name": "نهج روما",
+      "name_fr": "Rue de Rome",
+      "highway": "secondary",
+      "oneway": true,
+      "junctions": [
+        "J2",
+        "J4"
+      ],
+      "node_order_at_junctions": {
+        "J2": {
+          "node_position": "end",
+          "approach": true,
+          "exit": false
+        },
+        "J4": {
+          "node_position": "start",
+          "approach": false,
+          "exit": true
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "56065135",
+      "name": "نهج سعد زغلول",
+      "name_fr": "Rue Saad Zagloul",
+      "highway": "residential",
+      "oneway": true,
+      "junctions": [
+        "J3"
+      ],
+      "node_order_at_junctions": {
+        "J3": {
+          "node_position": "start",
+          "approach": false,
+          "exit": true
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "95132613",
+      "name": "Rue Salonique",
+      "name_fr": null,
+      "highway": "residential",
+      "oneway": false,
+      "junctions": [
+        "J5"
+      ],
+      "node_order_at_junctions": {
+        "J5": {
+          "node_position": "end",
+          "approach_direction": "forward",
+          "exit_direction": "backward"
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "100080972",
+      "name": null,
+      "name_fr": null,
+      "highway": "residential",
+      "oneway": true,
+      "junctions": [
+        "J6"
+      ],
+      "node_order_at_junctions": {
+        "J6": {
+          "node_position": "start",
+          "approach": false,
+          "exit": true
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "100081107",
+      "name": "شارع الحبيب بورقيبة",
+      "name_fr": "Avenue Habib Bourguiba",
+      "highway": "primary",
+      "oneway": true,
+      "junctions": [
+        "J2",
+        "J6"
+      ],
+      "node_order_at_junctions": {
+        "J2": {
+          "node_position": "end",
+          "approach": true,
+          "exit": false
+        },
+        "J6": {
+          "node_position": "start",
+          "approach": false,
+          "exit": true
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "106509679",
+      "name": "نهج أثينا",
+      "name_fr": "Rue d'Athènes",
+      "highway": "residential",
+      "oneway": true,
+      "junctions": [
+        "J5"
+      ],
+      "node_order_at_junctions": {
+        "J5": {
+          "node_position": "end",
+          "approach": true,
+          "exit": false
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "306643020",
+      "name": null,
+      "name_fr": null,
+      "highway": "unclassified",
+      "oneway": false,
+      "junctions": [
+        "J4"
+      ],
+      "node_order_at_junctions": {
+        "J4": {
+          "node_position": "end",
+          "approach_direction": "forward",
+          "exit_direction": "backward"
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "545291183",
+      "name": "نهج المختار عطية",
+      "name_fr": "Rue Mokhtar Attia",
+      "highway": "residential",
+      "oneway": true,
+      "junctions": [
+        "J4"
+      ],
+      "node_order_at_junctions": {
+        "J4": {
+          "node_position": "end",
+          "approach": true,
+          "exit": false
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "545291184",
+      "name": "نهج عاصمة الجزائر",
+      "name_fr": "Rue d'Alger",
+      "highway": "residential",
+      "oneway": true,
+      "junctions": [
+        "J6"
+      ],
+      "node_order_at_junctions": {
+        "J6": {
+          "node_position": "end",
+          "approach": true,
+          "exit": false
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "577010717",
+      "name": "شارع الحبيب بورقيبة",
+      "name_fr": "Avenue Habib Bourguiba",
+      "highway": "primary",
+      "oneway": true,
+      "junctions": [
+        "J6"
+      ],
+      "node_order_at_junctions": {
+        "J6": {
+          "node_position": "end",
+          "approach": true,
+          "exit": false
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "704802731",
+      "name": "نهج سعد زغلول",
+      "name_fr": "Rue Saad Zagloul",
+      "highway": "tertiary",
+      "oneway": false,
+      "junctions": [
+        "J3"
+      ],
+      "node_order_at_junctions": {
+        "J3": {
+          "node_position": "end",
+          "approach_direction": "forward",
+          "exit_direction": "backward"
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "legal_default",
+        "source": "tn-code-route-urban-speed"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "1409299974",
+      "name": "Avenue Moncef Bey",
+      "name_fr": "Avenue Moncef Bey",
+      "highway": "secondary",
+      "oneway": true,
+      "junctions": [
+        "J3"
+      ],
+      "node_order_at_junctions": {
+        "J3": {
+          "node_position": "start",
+          "approach": false,
+          "exit": true
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "osm_tag"
+      },
+      "notes": null
+    },
+    {
+      "osm_way_id": "1501192411",
+      "name": "Avenue Moncef Bey",
+      "name_fr": "Avenue Moncef Bey",
+      "highway": "secondary",
+      "oneway": true,
+      "junctions": [
+        "J3"
+      ],
+      "node_order_at_junctions": {
+        "J3": {
+          "node_position": "end",
+          "approach": true,
+          "exit": false
+        }
+      },
+      "status": "unverified",
+      "osm_lane_tags": null,
+      "lanes": null,
+      "lanes_forward": null,
+      "lanes_backward": null,
+      "turn_lanes": null,
+      "turn_lanes_forward": null,
+      "turn_lanes_backward": null,
+      "restricted_lanes": [],
+      "uniform_along_way": null,
+      "evidence": [],
+      "confidence": null,
+      "maxspeed": {
+        "kmh": 50,
+        "basis": "osm_tag"
+      },
+      "notes": null
+    }
+  ]
+}

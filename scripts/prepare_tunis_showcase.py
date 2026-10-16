@@ -61,9 +61,10 @@ def prepare(
             "transtu_gtfs": {
                 "path": str(gtfs_path),
                 "sha256": sha256(gtfs_path),
-                "identity": "official TRANSTU scheduled GTFS",
+                "identity": "GTFS archive supplied by the caller; publisher and official status are not independently verified",
                 "source_url": gtfs_url,
                 "retrieved_at": gtfs_retrieved_at,
+                "publisher_verified": False,
             },
         },
         "aoi": junctions,

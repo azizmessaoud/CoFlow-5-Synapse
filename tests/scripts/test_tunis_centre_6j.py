@@ -23,6 +23,22 @@ def test_six_junctions_follow_row_14_selection() -> None:
     assert [row["osm_node_id"] for row in rows] == [node["node_id"] for node in selected]
 
 
+def test_selected_junction_coordinates_match_current_clipped_osm_nodes() -> None:
+    osm = ET.parse(SCENARIO / "tunis6j.osm.xml").getroot()
+    nodes = {node.get("id"): node for node in osm.findall("node")}
+    for row in spec()["junctions"]:
+        node = nodes[str(row["osm_node_id"])]
+        assert abs(row["lon"] - float(node.get("lon"))) < 1e-7
+        assert abs(row["lat"] - float(node.get("lat"))) < 1e-7
+
+
+def test_manifest_records_selected_junction_coordinate_validation() -> None:
+    validation = spec()["validation"]
+    assert validation["selected_junctions_checked"] == 6
+    assert validation["selected_junction_coordinate_max_error_m"] < 0.01
+    assert validation["selected_junction_coordinate_max_error_m"] <= validation["coordinate_tolerance_m"]
+
+
 @pytest.mark.parametrize("net_name", NETS)
 def test_only_the_six_junctions_are_signalised(net_name: str) -> None:
     root = ET.parse(SCENARIO / net_name).getroot()
@@ -75,6 +91,19 @@ def test_lane_counts_follow_osm_tags() -> None:
         if len(lanes) != int(tags["lanes"]):
             wrong.append(f"{eid} {tags.get('name')}: OSM {tags['lanes']} lanes, SUMO {len(lanes)}")
     assert not wrong, wrong
+
+
+def test_manifest_discloses_unmapped_lane_counts_as_inferred() -> None:
+    coverage = spec()["network"]["lane_tag_coverage"]
+    assert coverage["road_ways"] == sum(row["ways"] for row in coverage["by_highway"].values())
+    assert coverage["ways_with_lane_count_tags"] + coverage["ways_without_lane_count_tags"] == coverage["road_ways"]
+    assert coverage["ways_without_lane_count_tags"] > 0
+    incident = coverage["six_junction_incident_ways"]
+    assert incident["ways_with_lane_count_tags"] + incident["ways_without_lane_count_tags"] == incident["ways"]
+    assert incident["ways_without_lane_count_tags"] > 0
+    assert incident["ways"] == 21
+    assert incident["ways_with_lane_count_tags"] == 3
+    assert "not verified real-world lane counts" in coverage["interpretation"]
 
 
 def test_demand_is_labelled_synthetic_and_claims_stay_showcase_only() -> None:

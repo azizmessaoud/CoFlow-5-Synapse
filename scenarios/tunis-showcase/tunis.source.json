@@ -1,0 +1,26 @@
+{
+  "scenario": "tunis-showcase",
+  "status": "showcase_only",
+  "captured_at_utc": "2026-10-16T20:33:36+00:00",
+  "aoi_bbox_wgs84": [
+    10.127879,
+    36.787714,
+    10.233358,
+    36.820741
+  ],
+  "aoi_bbox_order": "left,bottom,right,top",
+  "roads": {
+    "source": "OpenStreetMap contributors via Geofabrik Tunisia extract",
+    "source_url": "https://download.geofabrik.de/africa/tunisia.html",
+    "license": "Open Database License (ODbL)",
+    "imported_osm_xml": "tunis.osm.xml",
+    "imported_osm_xml_sha256": "sha256:57835992025b35d198259239eddd4d3154688ac72c468a9eff4e1ff08ba764cc",
+    "original_pbf": "tunisia-latest.osm.pbf",
+    "original_pbf_sha256": "sha256:c089f966ee441f2e30af89de7b2e172194c550be3746aee8b2a9685e43ef9bb1",
+    "original_pbf_data_as_of_utc": "2026-10-15T20:21:00Z",
+    "source_limit": null,
+    "geometry_and_lane_tags": "OSM road geometry and available lane attributes imported by SUMO netconvert; inferred attributes are not field-survey evidence."
+  },
+  "traffic_demand": "synthetic randomTrips; fixed seed 20261010; not observed Tunis traffic",
+  "claim_boundary": "showcase only; verify changes, closures, lane markings and transit operations locally before operational use"
+}
