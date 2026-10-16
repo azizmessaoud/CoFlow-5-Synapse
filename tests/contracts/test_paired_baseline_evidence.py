@@ -10,7 +10,7 @@ import pyarrow.parquet as pq
 from coflow5.evidence.baseline_artifacts import build_baseline_comparison
 
 ROOT = Path(__file__).resolve().parents[2]
-ARTIFACTS = ROOT / "harness/work/04-baselines/artifacts"
+ARTIFACTS = ROOT / "results/evidence/04-baselines/artifacts"
 
 
 def _load(name: str) -> dict:

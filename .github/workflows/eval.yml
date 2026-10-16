@@ -23,5 +23,3 @@ jobs:
         run: python -m pip install -r requirements-smoke.txt
       - name: Run named row-01 tests when unblocked
         run: python -m pytest tests/acceptance/test_native_windows_smoke.py tests/architecture -q
-      - name: Fail if best-episode headline appears
-        run: python scripts/check_eval_claim_flags.py

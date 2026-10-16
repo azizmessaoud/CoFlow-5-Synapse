@@ -13,7 +13,7 @@ from coflow5.evidence.schemas import PARQUET_SCHEMAS, RunManifest
 from coflow5.smoke import scenario_hash
 
 ROOT = Path(__file__).resolve().parents[2]
-ARTIFACTS = ROOT / "harness" / "work" / "02-evidence-bundle" / "artifacts"
+ARTIFACTS = ROOT / "results" / "evidence" / "02-evidence-bundle" / "artifacts"
 
 
 @pytest.fixture(scope="session", autouse=True)

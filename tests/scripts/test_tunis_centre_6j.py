@@ -8,7 +8,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
 SCENARIO = ROOT / "scenarios" / "tunis-centre-6j"
-SELECTION = ROOT / "harness" / "work" / "14-tunis-showcase" / "junctions.json"
+SELECTION = ROOT / "scenarios" / "tunis-centre-6j" / "selection.json"
 NETS = ("tunis6j.net.xml", "tunis6j_actuated.net.xml")
 
 
@@ -43,15 +43,38 @@ def test_lights_are_named_j1_to_j6_after_their_osm_nodes() -> None:
     assert all(row["name"] and row["osm_node_id"] for row in rows)
 
 
-def test_every_junction_has_phases_neighbours_and_a_bus_stop() -> None:
-    stops = ET.parse(SCENARIO / "tunis6j.stops.xml").getroot().findall("busStop")
-    stop_junctions = {
-        stop.find("param").get("value") for stop in stops if stop.find("param").get("key") == "junction"
-    }
+def test_every_junction_has_phases_and_neighbours() -> None:
     for row in spec()["junctions"]:
         assert row["phases"] and all(len(state) == row["signal_links"] for state in row["phases"])
         assert row["downstream_neighbours"], row["id"]
-        assert row["tls_id"] in stop_junctions
+
+
+def test_junction_bus_stops_match_the_stop_file() -> None:
+    stops = ET.parse(SCENARIO / "tunis6j.stops.xml").getroot().findall("busStop")
+    before = {stop.get("id"): stop.find("param").get("value") for stop in stops}
+    for row in spec()["junctions"]:
+        assert row["bus_stops"] == sorted(s for s, j in before.items() if j == row["tls_id"])
+
+
+def test_lane_counts_follow_osm_tags() -> None:
+    """Roads keep the lanes OSM gives them: no motorway ramp lanes invented in the city centre."""
+    osm = ET.parse(SCENARIO / "tunis6j.osm.xml").getroot()
+    ways = {w.get("id"): {t.get("k"): t.get("v") for t in w.findall("tag")} for w in osm.findall("way")}
+    root = ET.parse(SCENARIO / "tunis6j.net.xml").getroot()
+    wrong = []
+    for edge in root.findall("edge"):
+        eid = edge.get("id")
+        if edge.get("function"):
+            continue
+        assert "Ramp" not in eid, f"{eid}: ramp edge guessed in the city centre"
+        tags = ways.get(eid.lstrip("-").split("#")[0], {})
+        if tags.get("oneway") != "yes" or not tags.get("lanes", "").isdigit():
+            continue
+        lanes = [l for l in edge.findall("lane") if "passenger" in (l.get("allow") or "passenger")
+                 and "passenger" not in (l.get("disallow") or "")]
+        if len(lanes) != int(tags["lanes"]):
+            wrong.append(f"{eid} {tags.get('name')}: OSM {tags['lanes']} lanes, SUMO {len(lanes)}")
+    assert not wrong, wrong
 
 
 def test_demand_is_labelled_synthetic_and_claims_stay_showcase_only() -> None:

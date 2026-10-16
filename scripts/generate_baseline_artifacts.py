@@ -12,4 +12,4 @@ if __name__ == "__main__":
     comparison = generate_baseline_artifacts(ROOT)
     print(f"paired={comparison['all_cells_paired']}")
     print(f"seeds={comparison['common_evaluation_seeds']}")
-    print(f"artifacts={ROOT / 'harness/work/04-baselines/artifacts'}")
+    print(f"artifacts={ROOT / 'results/evidence/04-baselines/artifacts'}")

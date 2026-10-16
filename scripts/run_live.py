@@ -5,7 +5,7 @@ Starts the backend for the frontend (live demo).
   python scripts/run_live.py --scenario rain --speed 6
   python scripts/run_live.py --gui       also opens SUMO's window showing the SAME run as the browser
 
-During development, run the React dev server too (see frontend/README.md).
+During development, run the React dev server too: cd frontend; npm run dev.
 """
 import argparse
 

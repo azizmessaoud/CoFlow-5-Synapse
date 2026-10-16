@@ -13,4 +13,4 @@ if __name__ == "__main__":
     print(f"run_id={manifest['run_id']}")
     print(f"scenario_hash={manifest['scenario_hash']}")
     print(f"status={manifest['status']}")
-    print(f"artifacts={ROOT / 'harness' / 'work' / '02-evidence-bundle' / 'artifacts'}")
+    print(f"artifacts={ROOT / 'results' / 'evidence' / '02-evidence-bundle' / 'artifacts'}")

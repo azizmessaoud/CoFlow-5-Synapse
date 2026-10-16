@@ -1,0 +1,36 @@
+{
+  "bounds": [
+    -40.0,
+    -40.0,
+    1421.1,
+    1484.89
+  ],
+  "zoom": 19,
+  "metres_per_pixel": 0.25,
+  "attribution": "Tiles \u00a9 Esri \u2014 Esri, HERE, Garmin, OpenStreetMap contributors, Maxar, Earthstar Geographics",
+  "styles": {
+    "streets": "tunis6j.basemap.jpg"
+  },
+  "tiles": {
+    "streets": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+    "satellite": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+  },
+  "max_zoom": 19,
+  "net_to_merc": [
+    3.1130952734317115e-08,
+    3.8515955126733976e-10,
+    0.5282650174231148,
+    3.8682392739384035e-10,
+    -3.1265478438550484e-08,
+    0.389950739402541
+  ],
+  "merc_to_net": [
+    32117454.280781467,
+    395655.0450026825,
+    -17120813.52257026,
+    397364.7749290602,
+    -31979262.787444916,
+    12260423.259761076
+  ],
+  "fit_error_px": 0.2965
+}

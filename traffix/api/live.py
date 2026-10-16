@@ -5,6 +5,7 @@ and keeps a snapshot of everything the persona pages need.
 import json
 import os
 import threading
+import traceback
 import time
 from datetime import datetime
 
@@ -24,6 +25,14 @@ from ..simulation.network_model import load_models
 from ..simulation.world import World
 
 SUMO_HOME = os.environ.get("SUMO_HOME", sumo.SUMO_HOME)
+
+
+def _close_traci():
+    """Close the TraCI connection if one is open; SUMO may already be gone."""
+    try:
+        traci.close()
+    except Exception:                                   # noqa: BLE001 - nothing open or SUMO gone
+        pass
 
 
 def _point_back(shape, dist, side):
@@ -72,8 +81,17 @@ def network_geometry(net_file):
                           "lines": b.get("lines").split(), "junction": p.get("value") if p is not None else ""})
     xs = [n["x"] for n in nodes]
     ys = [n["y"] for n in nodes]
+    basemap = None                                   # street map warped into net x/y (scripts/build_basemap.py)
+    basemap_file = net_file.replace(".net.xml", ".basemap.json")
+    if os.path.exists(basemap_file):
+        with open(basemap_file, encoding="utf-8") as f:
+            meta = json.load(f)
+        basemap = {"bounds": meta["bounds"], "attribution": meta["attribution"],
+                   "styles": {name: f"/api/basemap/{name}" for name in meta["styles"]},
+                   "tiles": meta.get("tiles", {}), "max_zoom": meta.get("max_zoom", 19),
+                   "net_to_merc": meta.get("net_to_merc"), "merc_to_net": meta.get("merc_to_net")}
     return {"nodes": nodes, "edges": edges, "signals": signals, "crossings": crossings, "bus_stops": stops,
-            "bounds": [min(xs), min(ys), max(xs), max(ys)]}
+            "bounds": [min(xs), min(ys), max(xs), max(ys)], "basemap": basemap}
 
 
 class LiveRun:
@@ -101,22 +119,56 @@ class LiveRun:
                         for e in net.getEdges() if not e.getFunction()}
         self.edge_name = {e.getID(): e.getName() or e.getID() for e in net.getEdges() if not e.getFunction()}
         self.edge_to = {e.getID(): e.getToNode().getID() for e in net.getEdges() if not e.getFunction()}
-        names = {}
-        for n in net.getNodes():
-            nm = n.getParam("name") if hasattr(n, "getParam") else None
-            names[n.getID()] = nm or n.getID()
         entries, exits, _ = classify_edges(net)
-        self.places = {"from": [{"edge": e.getID(), "name": names[e.getFromNode().getID()]} for e in entries],
-                       "to": [{"edge": e.getID(), "name": names[e.getToNode().getID()]} for e in exits]}
+        self.places = {"from": self._place_names(entries, "getOutgoing"),
+                       "to": self._place_names(exits, "getIncoming")}
         self.lines, self.line_edges = {}, {}
+        routes = config.line_routes(net)
+        self.geometry["line_info"] = {lid: {k: r[k] for k in ("name", "direction", "from", "to", "stops")}
+                                      for lid, r in routes.items()}
+        self.geometry["transit"] = {"headway_s": config.demand()["bus_headway"],
+                                    "late_factor": config.agents()["transit"]["late_factor"]}
         for line, first, last in config.bus_lines():
-            if net.hasEdge(first) and net.hasEdge(last):
+            if line in routes:
+                path = [net.getEdge(e) for e in routes[line]["edges"]]
+            elif net.hasEdge(first) and net.hasEdge(last):
                 path, _ = net.getShortestPath(net.getEdge(first), net.getEdge(last), vClass="bus")
-                if path:
-                    self.lines[line] = [e.getToNode().getID() for e in path
-                                        if e.getToNode().getType() == "traffic_light"]
-                    self.line_edges[line] = [e.getID() for e in path]
+            else:
+                path = None
+            if path:
+                self.lines[line] = [e.getToNode().getID() for e in path
+                                    if e.getToNode().getType() == "traffic_light"]
+                self.line_edges[line] = [e.getID() for e in path]
         self.geometry["lines"] = self.line_edges
+
+    @staticmethod
+    def _place_names(edges, onward):
+        """Label each map entry or exit by its street, or by the nearest named street it leads
+        into (`onward` = "getOutgoing") or comes from ("getIncoming"); then a compass side."""
+        from html import unescape
+
+        def mid(e):
+            return e.getShape()[len(e.getShape()) // 2]
+
+        def street(e):
+            level = [e]
+            for _ in range(5):
+                named = sorted(x.getName() for x in level if x.getName())
+                if named:
+                    return unescape(named[0])
+                level = [o for x in level for o in getattr(x, onward)() if not o.getFunction()]
+            return "Side street"
+        xs = [mid(e)[0] for e in edges] or [0]
+        ys = [mid(e)[1] for e in edges] or [0]
+        cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
+        out, seen = [], {}
+        for e in sorted(edges, key=lambda e: (street(e), e.getID())):
+            x, y = mid(e)
+            side = ("north" if y > cy else "south") if abs(y - cy) > abs(x - cx) else ("east" if x > cx else "west")
+            name = f"{street(e)} ({side})"
+            seen[name] = seen.get(name, 0) + 1
+            out.append({"edge": e.getID(), "name": name if seen[name] == 1 else f"{name} {seen[name]}"})
+        return out
 
     def plan_trip(self, from_edge, to_edge):
         """Fastest route now, its delay vs normal, the alerts on it, and an alternative.
@@ -168,20 +220,49 @@ class LiveRun:
         self.alert_writer = AlertWriter(self)
         self.alert_writer.start()
         self.running = True
-        threading.Thread(target=self._run, daemon=True).start()
+        self.thread = threading.Thread(target=self._run, daemon=True)
+        self.thread.start()
 
     def stop(self):
+        """Ask the run to end and wait for it, so the next run gets a free TraCI connection.
+        False if the run is still going after 20 s (TraCI is global: no new run may start then)."""
         self.running = False
         if hasattr(self, "alert_writer"):
             self.alert_writer.stop()
+        thread = getattr(self, "thread", None)
+        if thread and thread is not threading.current_thread():
+            thread.join(timeout=20)
+            return not thread.is_alive()
+        return True
 
     def _run(self):
+        """Any failure ends as status "error" with a reason the page can show, never a silent hang."""
+        try:
+            self._simulate()
+        except Exception as e:                          # noqa: BLE001 - reported to the operator
+            traceback.print_exc()
+            closed = type(e).__name__ == "FatalTraCIError"
+            reason = ("SUMO stopped (was the SUMO window closed?)."
+                      if closed else f"{type(e).__name__}: {e}")
+            with self.lock:
+                self.snapshot = {**self.snapshot, "status": "error", "error": reason}
+            self.running = False
+            if hasattr(self, "alert_writer"):
+                self.alert_writer.stop()
+
+    def _simulate(self):
         net = config.network_files()[0]
         stops = net.replace(".net.xml", ".stops.xml")
         binary = os.path.join(SUMO_HOME, "bin", "sumo-gui" if self.gui else "sumo")
         gui_opts = ["--start", "--quit-on-end", "--delay", "0"] if self.gui else []
+        settings = net.replace(".net.xml", ".settings.xml")    # viewport + street-map decal
+        if self.gui and os.path.exists(settings):
+            gui_opts += ["--gui-settings-file", settings]
+        extra = [f for f in (stops, net.replace(".net.xml", ".poi.add.xml") if self.gui else None)
+                 if f and os.path.exists(f)]
+        _close_traci()                                  # a run that died earlier may have left its connection
         traci.start([binary, "-n", net, "-r", self.routes] + gui_opts
-                    + (["-a", stops] if os.path.exists(stops) else []) + [
+                    + (["-a", ",".join(extra)] if extra else []) + [
                      "--time-to-teleport", "300", "--ignore-route-errors", "true",
                      "--no-step-log", "true", "--no-warnings", "true", "--seed", str(self.seed)])
         models = load_models(net)
@@ -201,14 +282,32 @@ class LiveRun:
                 if int(now) % 5 == 0 or not hasattr(self, "_tt"):
                     sm = self.system.supermaster
                     self._tt = sm.rerouting.travel_times() if sm else self.system.sensors.edge_travel_times()
+                if int(now) % 2 == 0 or not hasattr(self, "_next_stops"):
+                    self._next_stops = self._bus_next_stops()
                 snap = self._snapshot(now, models)
                 with self.lock:
                     self.snapshot = snap
                 time.sleep(max(0.0, 1.0 / self.speed - (time.time() - t0)))
         finally:
-            traci.close()
+            _close_traci()
             with self.lock:
                 self.snapshot["status"] = "finished"
+
+    def _bus_next_stops(self):
+        """Each bus's remaining stops with the driving distance to them: {bus: [[stop id, metres], ...]}."""
+        out = {}
+        for v in traci.vehicle.getIDList():
+            if traci.vehicle.getTypeID(v) != "bus":
+                continue
+            rows = []
+            for st in traci.vehicle.getStops(v, 8):
+                if not st.stoppingPlaceID:
+                    continue
+                d = traci.vehicle.getDrivingDistance(v, st.lane.rsplit("_", 1)[0], st.endPos)
+                if d >= 0:
+                    rows.append([st.stoppingPlaceID, round(d)])
+            out[v] = rows
+        return out
 
     def _snapshot(self, now, models):
         s, bus = self.system.sensors, self.system.bus
@@ -255,6 +354,7 @@ class LiveRun:
             "congestion": pubs("CONGESTION"), "ambulances": pubs("AMBULANCE_ROUTE"),
             "edge_tt": {e: round(min(v, 1e5), 1) for e, v in self._tt.items()},
             "lines": self.lines,
+            "bus_next_stops": self._next_stops,
             "stale": pubs("DATA_STALE"), "weather": s.weather, "forecast": bus.forecast,
             "buses": self.system.supermaster.transit.state if self.system.supermaster else {},
             "notifications": bus.notifications[-150:],

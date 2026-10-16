@@ -41,7 +41,7 @@ bus_disruption:
   start: "2026-10-13 08:00"
   duration: 3600
   events:
-    bus_delay: {line: L1_east, delay: 600, from_bus: 3}
+    bus_delay: {line: "74", delay: 600, from_bus: 1}   # 900 s headway: bus 1 runs ~1500 s after bus 0, past the 1.5x late line
 rush_transition:
   description: three hours following the morning profile
   start: "2026-10-13 06:30"

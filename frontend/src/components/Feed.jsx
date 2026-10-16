@@ -26,5 +26,9 @@ export function Stat({ label, value, tone }) {
 
 export function Waiting({ live }) {
   if (live.status === "running" || live.status === "finished") return null;
+  if (live.status === "starting")
+    return <div className="card empty">Starting SUMO and the agents… the map fills in within a few seconds.</div>;
+  if (live.status === "error")
+    return <div className="card empty">The simulation stopped: {live.error} Press Start to try again.</div>;
   return <div className="card empty">Start a scenario above to bring this page to life.</div>;
 }

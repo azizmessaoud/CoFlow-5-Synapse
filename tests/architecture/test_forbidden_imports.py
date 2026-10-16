@@ -70,7 +70,7 @@ def test_libsumo_is_never_imported_at_adapter_module_load() -> None:
 
 def test_evidence_has_no_signal_actuation_or_mlflow_identity_dependency() -> None:
     violations: list[str] = []
-    paths = list((SRC / "evidence").rglob("*.py")) + [SRC / "evaluation" / "harness.py"]
+    paths = list((SRC / "evidence").rglob("*.py")) + list((SRC / "evaluation").rglob("*.py"))
     for path in paths:
         source = path.read_text(encoding="utf-8").lower()
         imported = imports_in(path)

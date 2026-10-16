@@ -1,5 +1,6 @@
 <viewsettings>
-  <viewport x="691.02" y="724.52" zoom="350"/>
+  <viewport x="691.02" y="724.52" zoom="130"/>
   <delay value="50"/>
   <scheme name="real world"/>
+  <decal file="tunis6j.basemap.jpg" centerX="690.55" centerY="722.45" width="1461.10" height="1524.89" rotation="0.00" layer="-10"/>
 </viewsettings>

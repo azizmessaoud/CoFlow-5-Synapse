@@ -6,7 +6,7 @@ readable names: junction names, street names, "bus 3 of line L1 east", clock
 times. Deterministic, so it never states anything the log does not contain.
 Used by the analyst page, the explainer (Synapse) and the persona pages.
 """
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from .decision_log import REASON_CODES
 

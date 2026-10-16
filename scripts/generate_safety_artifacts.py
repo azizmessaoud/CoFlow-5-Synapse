@@ -12,4 +12,4 @@ if __name__ == "__main__":
     manifest = generate_safety_artifacts(ROOT)
     print(f"run_id={manifest['run_id']}")
     print(f"scenario_hash={manifest['scenario_hash']}")
-    print(f"artifacts={ROOT / 'harness/work/03-safety-mask/artifacts'}")
+    print(f"artifacts={ROOT / 'results/evidence/03-safety-mask/artifacts'}")

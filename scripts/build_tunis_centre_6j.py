@@ -3,7 +3,7 @@
 Input is the already-clipped ``scenarios/tunis-showcase/tunis.osm.xml`` (OSM
 highways from the hash-verified Geofabrik PBF, see row 14). This script clips
 it to the centre-ville box around the six junctions in
-``harness/work/14-tunis-showcase/junctions.json`` and signalises exactly
+``scenarios/tunis-centre-6j/selection.json`` and signalises exactly
 those six nodes, renamed J1..J6 (node and light ids). Every other OSM ``traffic_signals`` tag is removed
 so the control hierarchy has one master per selected junction and nothing
 else writes a light. Road demand is synthetic (randomTrips, fixed seed).
@@ -30,7 +30,7 @@ from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_OSM = ROOT / "scenarios" / "tunis-showcase" / "tunis.osm.xml"
-JUNCTIONS = ROOT / "harness" / "work" / "14-tunis-showcase" / "junctions.json"
+JUNCTIONS = ROOT / "scenarios" / "tunis-centre-6j" / "selection.json"
 SCENARIO = ROOT / "scenarios" / "tunis-centre-6j"
 NETWORK_CONFIG = ROOT / "config" / "networks" / "tunis6j.yaml"
 PREFIX = "tunis6j"
@@ -46,7 +46,6 @@ NEIGHBOUR_CUTOFF = 800.0  # m of road; a farther light is not a direct neighbour
 NETCONVERT_OPTS = [
     "--proj.utm",
     "--geometry.remove",
-    "--ramps.guess",
     "--junctions.join",
     "--sidewalks.guess",
     "--crossings.guess",
@@ -278,47 +277,15 @@ def rename_junctions(netconvert: str, raw: Path, work: Path, labels: dict[str, s
 
 
 def write_bus_stops(home: Path, net: Path, spec: dict) -> None:
-    """Bus stops before every light on each line of ``config/networks/tunis6j.yaml``.
-
-    Same rule and layout as traffix3's ``build_network.py``: 20 m stop ending
-    30 m before the stop line, ``lines`` attribute and a ``junction`` param.
-    """
-    import yaml
-
+    """Real TRANSTU stops and routes (scripts/import_transtu_lines.py, from the committed
+    tunis6j.transtu.csv), and which of them sit before each light."""
     sys.path.insert(0, str(home / "tools"))
-    import sumolib
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from import_transtu_lines import build
 
-    lines_cfg = yaml.safe_load(NETWORK_CONFIG.read_text(encoding="utf-8"))["bus_lines"]
-    road = sumolib.net.readNet(str(net))
-    names = {row["tls_id"]: row["name"] for row in spec["junctions"]}
-    stops: dict[str, dict] = {}
-    for line, first, last in lines_cfg:
-        path, _ = road.getShortestPath(road.getEdge(first), road.getEdge(last), vClass="bus")
-        if not path:
-            raise SystemExit(f"bus line {line} has no bus route from {first} to {last}")
-        for edge in path:
-            node = edge.getToNode()
-            if node.getType() != "traffic_light" or edge.getLength() < 15:
-                continue
-            lane = next(item for item in edge.getLanes() if item.allows("bus"))
-            end = max(10.0, lane.getLength() - 30)
-            stop = stops.setdefault(edge.getID(), {
-                "lane": lane.getID(), "start": max(0.0, end - 20), "end": end,
-                "junction": node.getID(), "lines": [],
-            })
-            stop["lines"].append(line)
-    out = ["<additional>"]
-    for edge_id, stop in stops.items():
-        name = escape(f'{stop["junction"]} {names.get(stop["junction"], "")}'.strip(), {chr(34): "&quot;"})
-        out.append(
-            f'  <busStop id="stop_{edge_id}" lane="{stop["lane"]}" startPos="{stop["start"]:.1f}" '
-            f'endPos="{stop["end"]:.1f}" lines="{" ".join(stop["lines"])}" name="{name}">'
-            f'<param key="junction" value="{stop["junction"]}"/></busStop>'
-        )
-    out.append("</additional>")
-    (SCENARIO / f"{PREFIX}.stops.xml").write_text("\n".join(out) + "\n", encoding="utf-8")
+    _, stops = build(str(net), fetch=False)
     for row in spec["junctions"]:
-        row["bus_stops"] = sorted(f"stop_{e}" for e, st in stops.items() if st["junction"] == row["tls_id"])
+        row["bus_stops"] = sorted(k for k, st in stops.items() if st.get("junction") == row["tls_id"])
 
 
 def write_overlay(spec: dict) -> None:
@@ -334,15 +301,20 @@ def write_overlay(spec: dict) -> None:
     (SCENARIO / f"{PREFIX}.poi.add.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
     xs = [row["x"] for row in spec["junctions"]]
     ys = [row["y"] for row in spec["junctions"]]
-    (SCENARIO / f"{PREFIX}.settings.xml").write_text(
+    settings = SCENARIO / f"{PREFIX}.settings.xml"
+    settings.write_text(
         f"""<viewsettings>
-  <viewport x="{(min(xs) + max(xs)) / 2:.2f}" y="{(min(ys) + max(ys)) / 2:.2f}" zoom="350"/>
+  <viewport x="{(min(xs) + max(xs)) / 2:.2f}" y="{(min(ys) + max(ys)) / 2:.2f}" zoom="130"/>
   <delay value="50"/>
   <scheme name="real world"/>
 </viewsettings>
 """,
         encoding="utf-8",
     )
+    basemap = SCENARIO / f"{PREFIX}.basemap.json"
+    if basemap.is_file():                   # keep the street-map decal from scripts/build_basemap.py
+        from build_basemap import add_decal
+        add_decal(str(SCENARIO / f"{PREFIX}.net.xml"), json.loads(basemap.read_text(encoding="utf-8")))
 
 
 def write_configs() -> None:

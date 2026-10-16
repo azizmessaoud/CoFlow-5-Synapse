@@ -49,7 +49,7 @@ def test_watch_scenario_is_long_readable_paced_and_detached(monkeypatch) -> None
     assert config.find(".//end").get("value") == "120"
     assert config.find(".//step-length").get("value") == "1"
     assert config.find(".//seed").get("value") == "53"
-    assert "harness/work" not in (config.find(".//tripinfo-output").get("value") or "")
+    assert "results/evidence" not in (config.find(".//tripinfo-output").get("value") or "")
 
     routes = ET.parse(WATCH / "watch.rou.xml").getroot()
     buses = [flow for flow in routes.findall("flow") if flow.get("type") == "bus"]
@@ -68,7 +68,7 @@ def test_watch_scenario_is_long_readable_paced_and_detached(monkeypatch) -> None
     assert 'sumo_extra_args=("--delay", "1000")' in source
 
 
-def test_terminal_page_uses_tripinfo_and_gated_evidence(tmp_path: Path) -> None:
+def test_terminal_page_uses_tripinfo(tmp_path: Path) -> None:
     tripinfo = tmp_path / "tripinfo.xml"
     tripinfo.write_text(
         """<?xml version="1.0"?><tripinfos>
@@ -89,16 +89,9 @@ def test_terminal_page_uses_tripinfo_and_gated_evidence(tmp_path: Path) -> None:
     assert "Mean waiting seconds: 3.00" in page
     assert "Max waiting seconds: 5.00" in page
     assert "Safety violations: none recorded in this watch scene" in page
-    assert "actuated completed 84/84 trips versus fixed-time 71/84" in page
-    assert "Row 10b later measured cooperative Max-Pressure: 70/84 trips completed" in page
-    assert "mean wait 14.21 s, and P95 wait 25.00 s" in page
-    assert "so no winner is established" in page
-    assert "Max-Pressure trip KPIs are still missing" not in page
-    _, historical_fallback = watch_sumo.evaluation_sentences(
-        followup_gate_path=tmp_path / "missing-gate.json",
-        followup_comparison_path=tmp_path / "missing-comparison.json",
-    )
-    assert historical_fallback == "Max-Pressure trip KPIs are still missing."
+    # no stored evaluation report: the page says so instead of quoting numbers
+    assert watch_sumo.evaluation_sentences(tmp_path / "missing-report.json") == (
+        "not in this watch run", "not in this watch run")
     assert "No lives saved. No measured air quality. No winner announced." in page
 
 

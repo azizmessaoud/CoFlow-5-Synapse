@@ -67,9 +67,41 @@ def poisson(rng, rate_fn, duration):
             out.append(t)
 
 
+# Paint mix of cars in Tunis traffic, the same mix and the same pick per vehicle id as the web map
+# (frontend NetworkMap.jsx CAR_PAINTS), so sumo-gui and the browser show each car in one colour.
+CAR_PAINTS = [("244,244,242", 28), ("184,190,196", 18), ("107,113,120", 11), ("29,33,38", 12),
+              ("247,198,0", 13), ("158,42,43", 6), ("45,79,138", 6), ("216,205,180", 4), ("63,107,74", 2)]
+
+
+def _paint(xml):
+    """Give a car trip its colour: FNV-1a hash of the id, as in the web map."""
+    if ' type="car"' not in xml:
+        return xml
+    vid = xml.split('id="', 1)[1].split('"', 1)[0]
+    h = 2166136261
+    for ch in vid:
+        h = ((h ^ ord(ch)) * 16777619) & 0xFFFFFFFF
+    r = h % sum(w for _, w in CAR_PAINTS)
+    for color, w in CAR_PAINTS:
+        r -= w
+        if r < 0:
+            return xml.replace(' type="car"', f' type="car" color="{color}"', 1)
+    return xml
+
+
+def net_digest(net_file):
+    """Fingerprint of a network file: traffic built for an older build of the same map
+    may drive on edges that no longer exist."""
+    import hashlib
+    with open(net_file, "rb") as f:
+        return hashlib.sha256(f.read()).hexdigest()[:16]
+
+
 class DemandGenerator:
     def __init__(self, net_file):
-        self.net = sumolib.net.readNet(net_file, withPedestrianConnections=True)
+        self.network = os.path.basename(net_file).replace(".net.xml", "")
+        self.digest = net_digest(net_file)
+        self.net =sumolib.net.readNet(net_file, withPedestrianConnections=True)
         self.entries, self.exits, self.inner = classify_edges(self.net)
         self.walk_edges = [e for e in self.net.getEdges()
                            if not e.getFunction() and e.allows("pedestrian")]
@@ -82,18 +114,39 @@ class DemandGenerator:
                 self.stops[b.get("lane").rsplit("_", 1)[0]] = b.get("id")
         self.dwell = config.simulation().get("bus_stop_dwell", 20)
         self.d = config.demand()
-        self._paths = {}
+        self._paths = {}                                  # (edge, vclass) -> edges reachable from it
+        self._next = {}                                   # vclass -> {edge: edges the router may step to}
+
+    def _reachable(self, a, vclass):
+        """Every edge a `vclass` trip can reach from `a`: the edges sumolib's router would search
+        (allowed successors; walkers may also go against the direction). One search per start
+        edge instead of one shortest-path search per trip."""
+        key = (a, vclass)
+        if key not in self._paths:
+            if vclass not in self._next:
+                walk = vclass == "pedestrian"
+                nxt = {}
+                for e in self.net.getEdges(withInternal=True):
+                    nxt[e] = list(e.getAllowedOutgoing(vclass))
+                    if walk:
+                        nxt[e] += list(e.getIncoming())
+                        if not self.net.hasWalkingArea and e.getFunction() == "":
+                            nxt[e] += [i for i in e.getToNode().getIncoming() if i.getFunction() == ""]
+                self._next[vclass] = nxt
+            nxt = self._next[vclass]
+            seen, todo = {a}, [a]
+            while todo:
+                for n in nxt.get(todo.pop(), ()):
+                    if n not in seen:
+                        seen.add(n)
+                        todo.append(n)
+            self._paths[key] = seen
+        return self._paths[key]
 
     def _ok(self, a, b, vclass="passenger"):
-        key = (a.getID(), b.getID(), vclass)
-        if key not in self._paths:
-            if a == b or b.getToNode() == a.getFromNode():
-                self._paths[key] = False
-            else:
-                p, _ = self.net.getShortestPath(a, b, vClass=vclass,
-                                                ignoreDirection=(vclass == "pedestrian"))
-                self._paths[key] = p is not None
-        return self._paths[key]
+        if a == b or b.getToNode() == a.getFromNode():
+            return False
+        return b in self._reachable(a, vclass)
 
     def _pick(self, rng, kind, towards=None):
         for _ in range(40):
@@ -146,15 +199,20 @@ class DemandGenerator:
                                      f'to="{pair[1].getID()}" departLane="best"/>'))
         # buses
         delay = events.get("bus_delay")
+        routes = config.line_routes(self.net)
         for line, first, last in config.bus_lines():
-            if not (self.net.hasEdge(first) and self.net.hasEdge(last)):
-                continue
-            p, _ = self.net.getShortestPath(self.net.getEdge(first), self.net.getEdge(last), vClass="bus")
-            if p is None:
-                continue
-            edges = " ".join(e.getID() for e in p)
-            stops = "".join(f'<stop busStop="{self.stops[e.getID()]}" duration="{self.dwell}"/>'
-                            for e in p if e.getID() in self.stops)
+            if line in routes:                           # real route and stops (e.g. TRANSTU lines)
+                edges = " ".join(routes[line]["edges"])
+                stops = "".join(f'<stop busStop="{s}" duration="{self.dwell}"/>' for s in routes[line]["stops"])
+            else:
+                if not (self.net.hasEdge(first) and self.net.hasEdge(last)):
+                    continue
+                p, _ = self.net.getShortestPath(self.net.getEdge(first), self.net.getEdge(last), vClass="bus")
+                if p is None:
+                    continue
+                edges = " ".join(e.getID() for e in p)
+                stops = "".join(f'<stop busStop="{self.stops[e.getID()]}" duration="{self.dwell}"/>'
+                                for e in p if e.getID() in self.stops)
             off = rng.uniform(0, d["bus_headway"])
             k = 0
             while off + k * d["bus_headway"] < duration:
@@ -192,11 +250,12 @@ class DemandGenerator:
                                      f'from="{pair[0].getID()}" to="{pair[1].getID()}" departLane="best"/>'))
 
         items.sort(key=lambda x: x[0])
+        items = [(t, _paint(x)) for t, x in items]
         base = os.path.join(out_dir, f"{name}_seed{seed}")
         with open(base + ".rou.xml", "w") as f:
             f.write("<routes>\n" + VTYPES.format(n=d["normal_walker_speed"], s=d["slow_walker_speed"])
                     + "\n".join(x for _, x in items) + "\n</routes>\n")
-        meta = {"scenario": name, "seed": seed, "start": start.strftime("%Y-%m-%d %H:%M"),
+        meta = {"scenario": name, "seed": seed, "network": self.network, "net_digest": self.digest, "start": start.strftime("%Y-%m-%d %H:%M"),
                 "duration": duration, "events": events,
                 "vehicles": sum(1 for _, x in items if "<trip" in x or "<vehicle" in x)}
         with open(base + ".events.json", "w") as f:

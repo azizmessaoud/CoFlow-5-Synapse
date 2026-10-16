@@ -6,9 +6,14 @@ export default function ScenarioBar({ live }) {
   const [choice, setChoice] = useState("morning_peak");
   const [speed, setSpeed] = useState(4);
   const [controller, setController] = useState("traffix");
+  const [failed, setFailed] = useState("");
   useEffect(() => { if (live.scenario) setChoice(live.scenario); }, [live.scenario]);
-  const start = () => api(`/start?scenario=${choice}&speed=${speed}&controller=${controller}`, { method: "POST" });
-  const stop = () => api("/stop", { method: "POST" });
+  const start = () => {
+    setFailed("");
+    api(`/start?scenario=${choice}&speed=${speed}&controller=${controller}`, { method: "POST" })
+      .catch((e) => setFailed(`Start failed: ${e.message}`));
+  };
+  const stop = () => api("/stop", { method: "POST" }).catch((e) => setFailed(`Stop failed: ${e.message}`));
   const status = live.status;
   return (
     <div className="bar">
@@ -35,6 +40,9 @@ export default function ScenarioBar({ live }) {
         <span className="clock">{live.clock}</span>
         <span className="pill ok">live</span>
       </>}
+      {status === "starting" && <span className="pill info">starting SUMO…</span>}
+      {status === "error" && <span className="pill bad">simulation stopped: {live.error}</span>}
+      {failed && <span className="pill bad">{failed}</span>}
       {status === "finished" && <span className="pill info">finished</span>}
       {status === "idle" && <span className="muted">No simulation running</span>}
       {status === "offline" && <span className="pill bad">backend offline: run python scripts/run_live.py</span>}

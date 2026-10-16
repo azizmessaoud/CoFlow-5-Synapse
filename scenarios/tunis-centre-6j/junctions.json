@@ -14,12 +14,12 @@
   "sources": {
     "osm": {
       "path": "scenarios/tunis-showcase/tunis.osm.xml",
-      "sha256": "sha256:78b667e4728f9e5cf580659f3d712fbe397dbcb755bc403be98e80144fb6bc99",
+      "sha256": "sha256:e9a413f58c76d1c2cccad5dabd57ad1b451338fd8a86bbccfd381e14554b5275",
       "identity": "Geofabrik Tunisia OSM PBF, clipped in row 14 (pbf-source.json)"
     },
     "junction_selection": {
-      "path": "harness/work/14-tunis-showcase/junctions.json",
-      "sha256": "sha256:bef55d09c03109459901a18c6162020ef19a774e2bd82b1c622e57447ddb67f6"
+      "path": "scenarios/tunis-centre-6j/selection.json",
+      "sha256": "sha256:5186b1c08b1d64a5fe1c072428a641a07951e05a77f81b75c5478ecd375839c0"
     }
   },
   "network": {
@@ -39,7 +39,6 @@
     "netconvert_options": [
       "--proj.utm",
       "--geometry.remove",
-      "--ramps.guess",
       "--junctions.join",
       "--sidewalks.guess",
       "--crossings.guess",
@@ -99,11 +98,12 @@
       "downstream_neighbours": [
         "J3",
         "J4",
+        "J5",
         "J6"
       ],
       "bus_stops": [
-        "stop_10641456#7",
-        "stop_26013493"
+        "ts_11",
+        "ts_9"
       ]
     },
     {
@@ -151,10 +151,7 @@
         "J5",
         "J6"
       ],
-      "bus_stops": [
-        "stop_100081107",
-        "stop_39170210#2"
-      ]
+      "bus_stops": []
     },
     {
       "id": "J3",
@@ -199,7 +196,7 @@
         "J1"
       ],
       "bus_stops": [
-        "stop_1501192411#1"
+        "ts_4"
       ]
     },
     {
@@ -246,10 +243,7 @@
         "J5",
         "J6"
       ],
-      "bus_stops": [
-        "stop_26280306#5",
-        "stop_306643020"
-      ]
+      "bus_stops": []
     },
     {
       "id": "J5",
@@ -301,9 +295,7 @@
         "J4",
         "J6"
       ],
-      "bus_stops": [
-        "stop_26280306#1"
-      ]
+      "bus_stops": []
     },
     {
       "id": "J6",
@@ -346,9 +338,7 @@
         "J2",
         "J4"
       ],
-      "bus_stops": [
-        "stop_577010717#1"
-      ]
+      "bus_stops": []
     }
   ]
 }

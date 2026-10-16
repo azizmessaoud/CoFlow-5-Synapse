@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import os
 import platform
 import subprocess
 import sys
@@ -12,7 +11,7 @@ import pytest
 from coflow5.smoke import FROZEN_SCENARIO_FILES, scenario_hash
 
 ROOT = Path(__file__).resolve().parents[2]
-ARTIFACTS = ROOT / "harness" / "work" / "01-smoke-test" / "artifacts"
+ARTIFACTS = ROOT / "results" / "evidence" / "01-smoke-test" / "artifacts"
 
 
 @pytest.fixture(scope="session", autouse=True)

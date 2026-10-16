@@ -23,7 +23,7 @@ function TripPlanner({ live, onRoute }) {
   const plan = async () => {
     if (!from || !to) { setError("Choose where you start and where you're going"); return; }
     try {
-      const t = await api(`/trip?origin=${from}&destination=${to}`);
+      const t = await api(`/trip?${new URLSearchParams({ origin: from, destination: to })}`);  // ids hold '#'
       if (t.error) { setError(t.error); setTrip(null); onRoute(null); return; }
       setError(""); setTrip(t); onRoute(t);
     } catch (e) { setError(String(e)); }

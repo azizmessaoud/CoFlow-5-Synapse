@@ -66,6 +66,15 @@ if __name__ == "__main__":
     done, rows = done_keys(a.out)
     jobs = [(c, s, seed, a.gui) for s in a.scenario for c in a.controller for seed in a.seeds
             if (c, s, seed) not in done]
+    from traffix.evaluation.runner import GEN, demand_is_current
+    stale = sorted({(s, seed) for _, s, seed, _ in jobs
+                    if not demand_is_current(os.path.join(GEN, f"{s}_seed{seed}"))})
+    if stale:                                               # traffic missing or built for another map
+        from traffix.demand.generator import DemandGenerator
+        print(f"Building traffic for the {config.network_name()} map ({len(stale)} scenario/seed pairs)")
+        gen = DemandGenerator(config.network_files()[0])
+        for s, seed in stale:
+            gen.build(s, sc[s], seed, GEN)
     print(f"Running {len(jobs)} simulations" + (f" ({len(done)} already saved in {a.out}, skipped)" if done else ""))
     failures = []
     if a.gui or a.workers <= 1:

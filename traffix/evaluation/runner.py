@@ -7,6 +7,7 @@ import sumo
 
 from ..core import config
 from ..core.decision_log import DecisionLog
+from ..demand.generator import net_digest
 from ..orchestration.system import TraffixSystem
 from ..simulation.backend import traci
 from ..simulation.network_model import load_models
@@ -36,11 +37,26 @@ def detection_metrics(entries, events):
     return out
 
 
+def demand_is_current(base):
+    """True when the traffic files at `base` exist and were built for the current build of the map.
+    Traffic built for another map, or an older build, can use stops or edges this one lacks."""
+    try:
+        with open(base + ".events.json") as f:
+            meta = json.load(f)
+    except FileNotFoundError:
+        return False
+    return (meta.get("network") == config.network_name()
+            and meta.get("net_digest") == net_digest(config.network_files()[0]))
+
+
 def run_one(controller, scenario, seed, gui=False, route_dir=GEN, hooks=None, save_log=True):
     """hooks: optional callables f(now, system) called every second (used by data generation)."""
     nets = config.network_files()
     net = nets[1] if controller == "actuated" else nets[0]
     base = os.path.join(route_dir, f"{scenario}_seed{seed}")
+    if not demand_is_current(base):
+        raise RuntimeError(f"{base}.rou.xml was not built for the current {config.network_name()} map: "
+                           f"run scripts/build_demand.py --scenario {scenario} --seeds {seed}")
     meta = json.load(open(base + ".events.json"))
     tag = f"{controller}_{scenario}_{seed}"
     for d in ("tripinfo", "logs"):

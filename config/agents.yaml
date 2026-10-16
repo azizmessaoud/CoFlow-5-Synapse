@@ -69,8 +69,8 @@ synapse:                       # language agents: set ANTHROPIC_API_KEY or GROQ_
   explainer_model: claude-sonnet-5-5
   copilot_model: claude-sonnet-5-5
   alert_model: claude-haiku-4-5-20251001     # fast and cheap: alerts are short and frequent
-  groq_explainer_model: llama-3.3-70b-versatile    # check names at console.groq.com/docs/models
-  groq_copilot_model: llama-3.3-70b-versatile
-  groq_alert_model: llama-3.1-8b-instant
+  groq_explainer_model: openai/gpt-oss-120b        # check names at console.groq.com/docs/models
+  groq_copilot_model: openai/gpt-oss-120b
+  groq_alert_model: openai/gpt-oss-20b
   copilot_every: 180           # simulated seconds between copilot summaries
   alert_batch_every: 5         # real seconds between alert rewriting batches

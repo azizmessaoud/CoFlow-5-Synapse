@@ -38,7 +38,9 @@ def model_for(role):
 
 def _post(url, body, headers):
     req = urllib.request.Request(url, data=json.dumps(body).encode(),
-                                 headers={"content-type": "application/json", **headers})
+                                 headers={"content-type": "application/json",
+                                          # Groq's Cloudflare front returns 403 to urllib's default agent
+                                          "user-agent": "traffix-synapse/1.0", **headers})
     with urllib.request.urlopen(req, timeout=90) as r:
         return json.load(r)
 
@@ -94,6 +96,8 @@ def _chat_groq(model, system, user, tools, handlers, max_tokens, max_rounds):
     calls = []
     for _ in range(max_rounds):
         body = {"model": model, "max_tokens": max_tokens, "messages": messages, "temperature": 0.2}
+        if "gpt-oss" in model:      # reasoning model: its hidden reasoning counts toward max_tokens
+            body.update(reasoning_effort="low", max_tokens=max_tokens + 2000)
         if fns:
             body["tools"] = fns
         msg = _post(GROQ_API, body, headers)["choices"][0]["message"]

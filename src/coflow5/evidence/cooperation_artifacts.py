@@ -15,7 +15,7 @@ import uuid
 from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterable, Mapping
+from typing import Any, Iterable
 
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -314,7 +314,7 @@ def _publish_directory(staging: Path, destination: Path) -> None:
 
 def generate_cooperation_artifacts(root: Path, output_dir: Path | None = None) -> dict[str, Any]:
     root = root.resolve()
-    destination = (output_dir or root / "harness/work/07-a2-a3/artifacts").resolve()
+    destination = (output_dir or root / "results/evidence/07-a2-a3/artifacts").resolve()
     destination.parent.mkdir(parents=True, exist_ok=True)
     for pattern in (f".{destination.name}.staging-*", f".{destination.name}.previous-*"):
         for stale in destination.parent.glob(pattern):

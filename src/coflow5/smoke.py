@@ -96,7 +96,7 @@ def run_smoke(root: Path) -> dict:
         except importlib.metadata.PackageNotFoundError:
             package_versions[name] = None
 
-    artifacts = root / "harness" / "work" / "01-smoke-test" / "artifacts"
+    artifacts = root / "results" / "evidence" / "01-smoke-test" / "artifacts"
     artifacts.mkdir(parents=True, exist_ok=True)
     config = root / "scenarios" / "smoke" / "smoke.sumocfg"
     current_scenario_hash = scenario_hash(root)
@@ -187,7 +187,7 @@ def run_smoke(root: Path) -> dict:
     )
 
     if libsumo_blocked:
-        blocked = root / "harness" / "BLOCKED"
+        blocked = root / "results" / "evidence" / "BLOCKED"
         blocked.write_text(
             "BLOCKED: Windows Code Integrity policy "
             "{0283ac0f-fff1-49ae-ada1-8a933130cad6} blocks SUMO 1.27.1 "

@@ -7,6 +7,7 @@ which reads from the supermaster's live run; it never reaches the masters or SUM
   POST /api/stop
   GET  /api/state                           full live snapshot
   GET  /api/network                         map geometry
+  GET  /api/basemap/streets                 street map image (offline fallback under the live tiles)
   GET  /api/notifications?persona=bus_driver
   GET  /api/decisions?limit=200&q=ambulance
   GET  /api/places                          trip planner start and end points
@@ -90,8 +91,8 @@ def start(scenario: str = "morning_peak", speed: float = 4.0, seed: int = 1, con
         raise HTTPException(404, f"Unknown scenario {scenario}")
     if controller not in LIVE_CONTROLLERS:
         raise HTTPException(404, f"Unknown controller {controller}")
-    if RUN["live"]:
-        RUN["live"].stop()
+    if RUN["live"] and not RUN["live"].stop():
+        raise HTTPException(409, "The previous run is still stopping. Try again in a few seconds.")
     RUN["live"] = LiveRun(scenario, seed, speed, controller, gui=SETTINGS["gui"])
     RUN["live"].start()
     return {"started": scenario, "speed": speed, "controller": controller}
@@ -112,6 +113,21 @@ def state():
 @app.get("/api/network")
 def network():
     return live().geometry
+
+
+@app.get("/api/basemap/{style}")
+def basemap(style: str):
+    """Street map image behind the network map (built by scripts/build_basemap.py)."""
+    net = config.network_files()[0]
+    meta_file = net.replace(".net.xml", ".basemap.json")
+    if not os.path.exists(meta_file):
+        raise HTTPException(404, "no basemap for this network: run scripts/build_basemap.py")
+    with open(meta_file, encoding="utf-8") as f:
+        files = json.load(f)["styles"]
+    if style not in files:
+        raise HTTPException(404, f"Unknown basemap style {style}")
+    return FileResponse(os.path.join(os.path.dirname(net), files[style]),
+                        headers={"cache-control": "public, max-age=86400"})
 
 
 @app.get("/api/notifications")

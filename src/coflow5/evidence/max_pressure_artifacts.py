@@ -134,7 +134,7 @@ def generate_max_pressure_artifacts(root: Path, output_dir: Path | None = None) 
     if detected_sumo != SUMO_RELEASE:
         raise RuntimeError(f"expected SUMO {SUMO_RELEASE}, found {detected_sumo}")
 
-    destination = (output_dir or root / "harness/work/05-max-pressure/artifacts").resolve()
+    destination = (output_dir or root / "results/evidence/05-max-pressure/artifacts").resolve()
     destination.parent.mkdir(parents=True, exist_ok=True)
     for stale in destination.parent.glob(f".{destination.name}.staging-*"):
         shutil.rmtree(stale, ignore_errors=True)

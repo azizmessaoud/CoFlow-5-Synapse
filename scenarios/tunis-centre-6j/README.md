@@ -22,7 +22,7 @@ py -3.11 -m pytest tests\scripts\test_tunis_centre_6j.py -q
 
 | ID (node + light) | OSM node | Streets | Lat, lon | Phases | Downstream lights (≤ 800 m) |
 |---|---|---|---|---|---|
-| J1 | 5294059357 | Av. Habib Bourguiba / Place du 14 Janvier 2011 / Av. Mohamed V | 36.80035, 10.18588 | 4 | J3, J4, J6 |
+| J1 | 5294059357 | Av. Habib Bourguiba / Place du 14 Janvier 2011 / Av. Mohamed V | 36.80035, 10.18588 | 4 | J3, J4, J5, J6 |
 | J2 | 287386655 | Av. Habib Bourguiba / Av. de France / Rue Jamel Abdel Nasser / Rue de Rome | 36.79945, 10.17852 | 6 | J1, J4, J5, J6 |
 | J3 | 287837812 | Rue Saad Zagloul / Av. Moncef Bey | 36.79474, 10.18799 | 6 | J1 |
 | J4 | 287863982 | Av. Habib Thameur / Rue de Rome / Rue Mokhtar Attia | 36.80099, 10.17848 | 5 | J2, J5, J6 |
@@ -41,7 +41,15 @@ signal plans, bus stops and source hashes for each junction.
 | `tunis6j_actuated.net.xml` | same network, actuated plans |
 | `tunis6j.rou.xml` | 3000 synthetic vehicles over 3600 s (randomTrips seed 20261016) |
 | `tunis6j.ped.rou.xml` | 900 synthetic pedestrians (seed 20261017) |
-| `tunis6j.stops.xml` | bus stops before each light on the four illustrative bus lines |
+| `tunis6j.stops.xml` | real TRANSTU stops (names, lines served), snapped to bus lanes |
+| `tunis6j.lines.json` | 24 real TRANSTU line variants: full route through the network, stops, assumed 15 min headway |
+| `tunis6j.transtu.csv` | the TRANSTU stop rows those lines come from ([transtu-visualisation](https://hobbes-286.github.io/transtu-visualisation/)) |
+| `tunis6j.basemap.jpg`, `.basemap.json` | street map warped into SUMO x/y: sumo-gui background, web map fallback, web tile transform |
+
+Rebuild the bus lines with `py -3.11 scripts\import_transtu_lines.py` (`--fetch` to refresh the
+source) and the map with `py -3.11 scripts\build_basemap.py`. Where a TRANSTU stop can only be
+reached by looping round a block (one-way streets), the bus serves it where its route passes within
+80 m, or the stop is left out and the import says so. Headways are assumed, not timetabled.
 | `tunis6j.poi.add.xml`, `tunis6j.settings.xml` | GUI labels J1..J6 and viewport |
 | `junctions.json` | junction spec and provenance manifest |
 
@@ -51,7 +59,7 @@ This is the default network of the traffix hierarchy in this repo
 (`config/networks/tunis6j.yaml`, `TRAFFIX_NETWORK=tunis6j`). File names follow
 traffix3's `<network>.net.xml` / `_actuated.net.xml` / `.stops.xml` layout.
 Light and node ids are J1..J6; each node carries its street names as a `name`
-param. Run it with `python scripts/run_live.py`; see `docs/traffix/README.md`.
+param. Run it with `python scripts/run_live.py`; see the root `README.md`.
 
 ## Claim boundary
 

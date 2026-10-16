@@ -6,6 +6,7 @@ __pycache__/
 .hypothesis/
 .mypy_cache/
 .ruff_cache/
+.omc/
 .coverage
 htmlcov/
 *.egg-info/
@@ -18,10 +19,8 @@ htmlcov/
 Thumbs.db
 ~$*
 *.log
-!harness/work/**/artifacts/*.log
 
 .superdesign/tmp/
-.scratch/**/_extract/
 *.print.html
 * — Supervisor Presentation_files/
 
@@ -33,8 +32,7 @@ dist/
 *.msi
 *.exe
 CoFlow-5_Traffic_Orchestration.pdf
-CoFlow-5_System_Requirements_Book.pdf
-coflow5-personas-journeys (1).md
+README.pdf
 
 # traffix3 live demo serves the built frontend
 !frontend/dist/

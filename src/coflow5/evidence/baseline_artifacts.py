@@ -404,7 +404,7 @@ def generate_baseline_artifacts(root: Path, output_dir: Path | None = None) -> d
     if detected_sumo != SUMO_RELEASE:
         raise RuntimeError(f"expected SUMO {SUMO_RELEASE}, found {detected_sumo}")
 
-    destination = (output_dir or root / "harness/work/04-baselines/artifacts").resolve()
+    destination = (output_dir or root / "results/evidence/04-baselines/artifacts").resolve()
     destination.parent.mkdir(parents=True, exist_ok=True)
     for pattern in (f".{destination.name}.staging-*", f".{destination.name}.previous-*"):
         for stale in destination.parent.glob(pattern):

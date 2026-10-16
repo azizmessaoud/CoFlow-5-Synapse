@@ -1,6 +1,6 @@
 param(
-    [string]$InputPath = (Join-Path $PSScriptRoot "..\CoFlow-5_System_Requirements_Book.md"),
-    [string]$OutputPath = (Join-Path $PSScriptRoot "..\CoFlow-5_System_Requirements_Book.pdf")
+    [string]$InputPath = (Join-Path $PSScriptRoot "..\README.md"),
+    [string]$OutputPath = (Join-Path $PSScriptRoot "..\README.pdf")
 )
 
 $ErrorActionPreference = "Stop"

@@ -3,7 +3,13 @@ import { useEffect, useState } from "react";
 
 export async function api(path, options = {}) {
   const res = await fetch(`/api${path}`, options);
-  if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
+  if (!res.ok) {
+    const text = await res.text();
+    let detail = text;
+    try { detail = JSON.parse(text).detail || text; } catch { /* not JSON */ }
+    if (typeof detail !== "string") detail = JSON.stringify(detail);   // FastAPI 422: a list of objects
+    throw new Error(`${res.status} ${detail}`);
+  }
   return res.json();
 }
 

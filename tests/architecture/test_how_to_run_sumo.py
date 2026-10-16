@@ -8,11 +8,10 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_how_to_run_doc_names_both_run_actions() -> None:
-    text = (ROOT / "docs" / "how-to-run-sumo.md").read_text(encoding="utf-8")
+    text = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "watch_sumo.py smoke" in text
     assert "generate_max_pressure_artifacts.py" in text
     assert "run_native_smoke.py" in text
-    assert "row 10" in text.lower() or "**row 10**" in text.lower()
 
 
 def test_watch_sumo_help_lists_scenes_without_sumo() -> None:

@@ -111,7 +111,7 @@ def capture_j0_ablation_runs(
             "lives-saved, or measured-air-quality claim."
         ),
     }
-    destination = (output_dir or root / "harness/work/10e/artifacts") / "j0-ablations.json"
+    destination = (output_dir or root / "results/evidence/10e/artifacts") / "j0-ablations.json"
     destination.parent.mkdir(parents=True, exist_ok=True)
     staging = destination.with_name(f".{destination.name}.staging-{uuid.uuid4()}")
     staging.write_text(json.dumps(capture, indent=2, sort_keys=True) + "\n", encoding="utf-8")

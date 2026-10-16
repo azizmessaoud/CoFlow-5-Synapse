@@ -11,7 +11,7 @@ import pyarrow.parquet as pq
 from coflow5.evidence.schemas import RunManifest
 
 ROOT = Path(__file__).resolve().parents[2]
-ARTIFACTS = ROOT / "harness/work/05-max-pressure/artifacts"
+ARTIFACTS = ROOT / "results/evidence/05-max-pressure/artifacts"
 HASH = re.compile(r"^sha256:[0-9a-f]{64}$")
 
 

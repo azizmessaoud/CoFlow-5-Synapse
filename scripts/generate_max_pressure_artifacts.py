@@ -12,4 +12,4 @@ if __name__ == "__main__":
     manifest = generate_max_pressure_artifacts(ROOT)
     print(f"run_id={manifest['run_id']}")
     print(f"scenario_hash={manifest['scenario_hash']}")
-    print(f"artifacts={ROOT / 'harness/work/05-max-pressure/artifacts'}")
+    print(f"artifacts={ROOT / 'results/evidence/05-max-pressure/artifacts'}")

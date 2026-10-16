@@ -26,9 +26,9 @@ SCENES = {
     "tunis": ROOT / "scenarios" / "tunis-showcase" / "tunis.sumocfg",
     "tunis6j": ROOT / "scenarios" / "tunis-centre-6j" / "tunis6j.sumocfg",
 }
-EVALUATION_REPORT = ROOT / "harness" / "work" / "09-eval-harness" / "artifacts" / "evaluation-report.json"
-MAX_PRESSURE_FOLLOWUP_GATE = ROOT / "harness" / "work" / "10b-max-pressure-trip-kpis" / "gate.json"
-MAX_PRESSURE_FOLLOWUP_COMPARISON = ROOT / "harness" / "work" / "10b-max-pressure-trip-kpis" / "artifacts" / "matched-comparison.json"
+EVALUATION_REPORT = ROOT / "results" / "evidence" / "09-eval-harness" / "artifacts" / "evaluation-report.json"
+MAX_PRESSURE_FOLLOWUP_GATE = ROOT / "results" / "evidence" / "10b-max-pressure-trip-kpis" / "gate.json"
+MAX_PRESSURE_FOLLOWUP_COMPARISON = ROOT / "results" / "evidence" / "10b-max-pressure-trip-kpis" / "artifacts" / "matched-comparison.json"
 
 
 def prepare_env() -> None:
@@ -255,7 +255,7 @@ def watch_a1() -> int:
     )
     print(f"steps={result.simulation_steps}")
     print(f"accepted_commands={result.accepted_command_count}")
-    print("This watch run did not rewrite harness/work/05-max-pressure/artifacts.")
+    print("This watch run did not rewrite results/evidence/05-max-pressure/artifacts.")
     return 0
 
 

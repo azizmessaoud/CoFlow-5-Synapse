@@ -21,7 +21,7 @@ from coflow5.evidence.schemas import (
 )
 
 ROOT = Path(__file__).resolve().parents[2]
-ARTIFACTS = ROOT / "harness" / "work" / "02-evidence-bundle" / "artifacts"
+ARTIFACTS = ROOT / "results" / "evidence" / "02-evidence-bundle" / "artifacts"
 
 
 def _copy_bundle(tmp_path: Path) -> Path:

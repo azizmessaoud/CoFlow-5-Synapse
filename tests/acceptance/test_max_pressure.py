@@ -20,7 +20,7 @@ from coflow5.control.max_pressure import (
 from coflow5.sumo_adapter.signal_executor import ImmutableSafetyLog, SignalExecutorRegistry
 
 ROOT = Path(__file__).resolve().parents[2]
-ARTIFACTS = ROOT / "harness/work/05-max-pressure/artifacts"
+ARTIFACTS = ROOT / "results/evidence/05-max-pressure/artifacts"
 RUN_ID = "run-max-pressure-test"
 SCENARIO_HASH = "sha256:" + "5" * 64
 

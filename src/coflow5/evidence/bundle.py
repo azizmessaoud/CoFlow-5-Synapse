@@ -118,7 +118,7 @@ def generate_bundle(root: Path, output_dir: Path | None = None) -> dict[str, Any
     if detected_sumo != SUMO_RELEASE:
         raise RuntimeError(f"Expected SUMO {SUMO_RELEASE}, found {detected_sumo}")
 
-    output_dir = (output_dir or root / "harness" / "work" / "02-evidence-bundle" / "artifacts").resolve()
+    output_dir = (output_dir or root / "results" / "evidence" / "02-evidence-bundle" / "artifacts").resolve()
     output_dir.parent.mkdir(parents=True, exist_ok=True)
     staging = output_dir.parent / f".{output_dir.name}.staging-{uuid.uuid4()}"
     staging.mkdir()

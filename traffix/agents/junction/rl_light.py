@@ -25,8 +25,7 @@ import random
 
 import numpy as np
 
-from ...core import config
-from .observation import MAX_PHASES, build_obs
+from .observation import build_obs
 from .traffic_light import TrafficLightAgent
 
 DECIDE_EVERY = 5

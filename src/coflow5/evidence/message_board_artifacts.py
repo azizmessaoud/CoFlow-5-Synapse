@@ -195,7 +195,7 @@ def generate_message_board_artifacts(
     output_dir: Path | None = None,
 ) -> dict[str, Any]:
     root = root.resolve()
-    destination = (output_dir or root / "harness/work/06-message-board/artifacts").resolve()
+    destination = (output_dir or root / "results/evidence/06-message-board/artifacts").resolve()
     destination.parent.mkdir(parents=True, exist_ok=True)
     for stale in destination.parent.glob(f".{destination.name}.staging-*"):
         shutil.rmtree(stale, ignore_errors=True)

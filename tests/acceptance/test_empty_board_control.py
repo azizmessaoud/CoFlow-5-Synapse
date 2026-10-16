@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 import json
-import subprocess
-import sys
 from pathlib import Path
 
 import pyarrow.parquet as pq
@@ -20,7 +18,7 @@ from coflow5.messaging import InProcessMessageBoard, MessageDisposition, read_a1
 from coflow5.sumo_adapter.signal_executor import ImmutableSafetyLog, SignalExecutorRegistry
 
 ROOT = Path(__file__).resolve().parents[2]
-ARTIFACTS = ROOT / "harness/work/06-message-board/artifacts"
+ARTIFACTS = ROOT / "results/evidence/06-message-board/artifacts"
 RUN_ID = "run-empty-board-control"
 SCENARIO_HASH = "sha256:" + "b" * 64
 

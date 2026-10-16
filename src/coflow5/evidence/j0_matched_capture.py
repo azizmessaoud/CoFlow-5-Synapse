@@ -101,7 +101,7 @@ def capture_j0_matched_runs(
     planned_trip_ids = _planned_trip_ids(root / "scenarios/baselines/baselines.rou.xml")
     rows: list[dict[str, Any]] = []
     for seed in selected_seeds:
-        seed_dir = (output_dir or root / "harness/work/10e/artifacts") / f"seed-{seed}"
+        seed_dir = (output_dir or root / "results/evidence/10e/artifacts") / f"seed-{seed}"
         seed_dir.mkdir(parents=True, exist_ok=True)
         for controller in (FixedTimeController(), ActuatedController()):
             result = run_baseline_scenario(
@@ -145,7 +145,7 @@ def capture_j0_matched_runs(
             "measured-air-quality claim."
         ),
     }
-    destination = (output_dir or root / "harness/work/10e/artifacts") / "matched-runs.json"
+    destination = (output_dir or root / "results/evidence/10e/artifacts") / "matched-runs.json"
     destination.parent.mkdir(parents=True, exist_ok=True)
     _atomic_write(destination, capture)
     return capture

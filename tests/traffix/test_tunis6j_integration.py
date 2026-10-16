@@ -61,8 +61,101 @@ def test_scenario_places_and_bus_lines_exist_on_the_map():
     for _line, first, last in config.bus_lines():
         assert first in edges and last in edges
     stops = ET.parse(config.network_files()[0].replace(".net.xml", ".stops.xml")).getroot()
-    served = {s.find("param").get("value") for s in stops.findall("busStop") if s.get("lines")}
-    assert served == set(J)
+    before = {s.find("param").get("value") for s in stops.findall("busStop") if s.get("lines")}
+    assert before <= set(J) | {""}          # real TRANSTU stops: some sit before a light, most do not
+    assert before & set(J), "no stop before any light: transit priority has nothing to work with"
+    # a stop tied to a light must be served by a line that then drives through that light
+    import sumolib
+    net = sumolib.net.readNet(config.network_files()[0])
+    routes = config.line_routes(net)
+    for s in stops.findall("busStop"):
+        j = s.find("param").get("value")
+        if j:
+            crossed = {net.getEdge(e).getToNode().getID() for ln in s.get("lines").split()
+                       for e in routes.get(ln, {}).get("edges", [])}
+            assert j in crossed, f"{s.get('id')} is tied to {j} but none of its lines cross {j}"
+
+
+def static_live_run():
+    """The trip planner part of a live run, without starting SUMO."""
+    from traffix.api.live import LiveRun
+    lr = LiveRun.__new__(LiveRun)
+    lr.geometry = {}
+    lr._static(config.network_files()[0])
+    lr.state = lambda: {}
+    return lr
+
+
+def test_trip_planner_places_are_named_streets():
+    places = static_live_run().places
+    for side in ("from", "to"):
+        names = [p["name"] for p in places[side]]
+        assert not [n for n in names if n.isdigit()], f"{side}: bare OSM ids shown to the driver"
+        assert len(set(names)) == len(names), f"{side}: two places share one label"
+
+
+def test_trip_api_accepts_edge_ids_with_hash():
+    # the user's failing pair: From 11414303232 (-1230791925) to 6640940830 (9516351301#3)
+    from fastapi.testclient import TestClient
+    from traffix.api import server
+    server.RUN["live"] = static_live_run()
+    try:
+        r = TestClient(server.app).get("/api/trip", params={"origin": "-1230791925",
+                                                             "destination": "9516351301#3"})
+    finally:
+        server.RUN["live"] = None
+    assert r.status_code == 200 and "error" not in r.json()
+    assert r.json()["edges"][-1] == "9516351301#3"
+
+
+def test_experiments_refuse_traffic_built_for_another_map(tmp_path):
+    import json
+    from traffix.evaluation import runner
+    (tmp_path / "offpeak_seed1.events.json").write_text(json.dumps(
+        {"scenario": "offpeak", "seed": 1, "start": "2026-10-14 11:00", "duration": 60,
+         "events": {}, "vehicles": 0, "network": "tunis_centre"}))
+    (tmp_path / "offpeak_seed1.rou.xml").write_text("<routes/>")
+    with pytest.raises(RuntimeError, match="build_demand"):
+        runner.run_one("fixed", "offpeak", 1, route_dir=str(tmp_path))
+    assert runner.demand_is_current(str(tmp_path / "offpeak_seed1")) is False
+
+
+def test_generated_traffic_records_its_map(tmp_path):
+    import json
+    from traffix.demand.generator import DemandGenerator
+    from traffix.evaluation import runner
+    scen = {"start": "2026-10-14 11:00", "duration": 60}
+    _, meta = DemandGenerator(config.network_files()[0]).build("t6j", scen, 1, str(tmp_path))
+    assert meta["network"] == "tunis6j"
+    assert runner.demand_is_current(str(tmp_path / "t6j_seed1"))
+    # same map name, but the network was rebuilt since (e.g. lanes or edges changed)
+    meta["net_digest"] = "an older build"
+    (tmp_path / "t6j_seed1.events.json").write_text(json.dumps(meta))
+    assert runner.demand_is_current(str(tmp_path / "t6j_seed1")) is False
+
+
+def test_trip_reachability_matches_sumolib_routing():
+    """The generator's quick reachability check must agree with sumolib's own router."""
+    import random
+    from traffix.demand.generator import DemandGenerator
+    g = DemandGenerator(config.network_files()[0])
+    rng = random.Random(7)
+    cases = [(rng.choice(g.entries + g.inner), rng.choice(g.exits + g.inner), "passenger") for _ in range(120)]
+    cases += [(*rng.sample(g.walk_edges, 2), "pedestrian") for _ in range(120)]
+    for a, b, vc in cases:
+        if a == b or b.getToNode() == a.getFromNode():
+            continue
+        path, _ = g.net.getShortestPath(a, b, vClass=vc, ignoreDirection=(vc == "pedestrian"))
+        assert g._ok(a, b, vc) == (path is not None), (a.getID(), b.getID(), vc)
+
+
+def test_traffic_for_one_scenario_builds_quickly(tmp_path):
+    # run_experiments rebuilds up to 35 scenario/seed pairs; 134 s each made that over an hour
+    import time
+    from traffix.demand.generator import DemandGenerator
+    t = time.time()
+    DemandGenerator(config.network_files()[0]).build("offpeak", config.scenarios()["offpeak"], 1, str(tmp_path))
+    assert time.time() - t < 30
 
 
 def test_network_model_gives_six_masters_with_street_names():

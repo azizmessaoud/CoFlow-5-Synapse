@@ -190,7 +190,6 @@ class ExplainerAgent:
 def _agent(entries, question, narrator, lang, tools, model=None):
     """Tool-using Claude agent: it decides what to look up, then answers with checked citations."""
     import os
-    from ...core import config
     model = model or os.environ.get("SYNAPSE_MODEL") or "explainer"
 
     def search_log(query):

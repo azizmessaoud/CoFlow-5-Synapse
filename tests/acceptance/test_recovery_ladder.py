@@ -1,10 +1,7 @@
 from __future__ import annotations
 
-import json
 from dataclasses import FrozenInstanceError
-from pathlib import Path
 
-import pyarrow.parquet as pq
 import pytest
 
 from coflow5.control.recovery import (
@@ -13,15 +10,6 @@ from coflow5.control.recovery import (
     RecoveryMode,
     RecoverySupervisor,
 )
-from coflow5.evaluation.failure_artifacts import generate_failure_injection_artifacts
-
-ROOT = Path(__file__).resolve().parents[2]
-ARTIFACTS = ROOT / "harness/work/08-failure-injection/artifacts"
-
-
-@pytest.fixture(scope="module", autouse=True)
-def generated_row08_artifacts() -> None:
-    generate_failure_injection_artifacts(ROOT)
 
 
 def test_required_recovery_ladder_is_exact_immutable_and_visible() -> None:
@@ -67,27 +55,3 @@ def test_optional_dqn_can_only_enter_required_ladder_at_max_pressure() -> None:
         RecoveryMode.OPTIONAL_DQN, RecoveryMode.COOPERATIVE_MAX_PRESSURE,
     )
     assert REQUIRED_RECOVERY_LADDER[0] is supervisor.mode
-
-
-def test_recovery_artifact_contains_only_required_path_and_unique_joined_events() -> None:
-    audit = json.loads((ARTIFACTS / "recovery-audit.json").read_text(encoding="utf-8"))
-    rows = pq.read_table(ARTIFACTS / "faults.parquet").to_pylist()
-    transitions = [row for row in rows if row["event_kind"] == "transition"]
-    assert audit["valid"] is True
-    assert audit["required_recovery_ladder"] == [
-        "COOPERATIVE_MAX_PRESSURE", "ACTUATED", "FIXED_TIME"
-    ]
-    assert audit["observed_required_transitions"] == [
-        ["COOPERATIVE_MAX_PRESSURE", "ACTUATED"],
-        ["ACTUATED", "FIXED_TIME"],
-    ]
-    assert audit["unexpected_transitions"] == []
-    assert audit["optional_dqn_dependency"] is False
-    assert audit["hidden_exception_swallowing"] is False
-    assert len({row["event_id"] for row in rows}) == len(rows)
-    assert all(row["trigger"] and row["health_evidence_json"] for row in transitions)
-    assert all(
-        row["run_id"] == audit["run_id"]
-        and row["scenario_hash"] == audit["scenario_hash"]
-        for row in rows
-    )

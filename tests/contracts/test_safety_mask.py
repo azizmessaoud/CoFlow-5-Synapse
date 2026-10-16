@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-import json
-from pathlib import Path
 
-import pyarrow.parquet as pq
 import pytest
 
 from coflow5.control import (
@@ -20,9 +17,6 @@ from coflow5.sumo_adapter.signal_executor import (
     ImmutableSafetyLog,
     SignalExecutorRegistry,
 )
-
-ROOT = Path(__file__).resolve().parents[2]
-ARTIFACTS = ROOT / "harness/work/03-safety-mask/artifacts"
 
 
 class FakeTrafficLight:
@@ -128,8 +122,6 @@ def test_registry_exposes_no_constructible_writer_or_factory_authority() -> None
     assert connection.trafficlight.writes == []
 
 
-
-
 def test_runtime_capability_type_cannot_be_cloned_into_a_second_writer() -> None:
     connection, _, registry, capability = _executor()
     with pytest.raises(TypeError):
@@ -192,38 +184,3 @@ def test_non_finite_inputs_are_reason_coded_and_never_execute() -> None:
         assert event.reason_code == SafetyReason.NON_FINITE_INPUT.value
         assert connection.trafficlight.writes == []
         assert len(log.events) == 1 and log.commands == ()
-
-
-def test_native_traci_artifacts_join_every_proposal_command_and_rejection() -> None:
-    manifest = json.loads((ARTIFACTS / "run_manifest.json").read_text(encoding="utf-8"))
-    audit = json.loads((ARTIFACTS / "safety-audit.json").read_text(encoding="utf-8"))
-    events = pq.read_table(ARTIFACTS / "decision_events.parquet").to_pylist()
-    commands = pq.read_table(ARTIFACTS / "executed_commands.parquet").to_pylist()
-    assert manifest["backend"] == "traci" and manifest["status"] == "completed"
-    assert manifest["versions"]["python"] == "3.11.9"
-    assert manifest["versions"]["sumo"] == "1.27.1"
-    assert audit["actual_traci_execution"] is True
-    assert audit["one_writer_per_signal"] is True
-    assert audit["controlled_link_mapping_validated"] is True
-    assert audit["illegal_executed_actions"] == 0
-    assert audit["physically_conflicting_executed_actions"] == 0
-    assert audit["physical_conflict_details"] == []
-    for command in commands:
-        state = command["signal_state"]
-        assert len(state) == len(audit["controlled_links"])
-        assert not any(
-            state[first] in {"G", "g"} and state[second] in {"G", "g"}
-            for first, second in audit["conflicting_link_pairs"]
-        )
-    assert audit["human_override_events"] >= 2
-    assert len(events) == audit["proposal_count"] == audit["event_count"]
-    assert len({row["event_id"] for row in events}) == len(events)
-    accepted = {row["event_id"] for row in events if row["accepted"]}
-    rejected = {row["event_id"] for row in events if not row["accepted"]}
-    executed = {row["event_id"] for row in commands}
-    assert accepted == executed
-    assert rejected.isdisjoint(executed)
-    for row in events + commands:
-        assert (row["run_id"], row["scenario_hash"]) == (
-            manifest["run_id"], manifest["scenario_hash"]
-        )

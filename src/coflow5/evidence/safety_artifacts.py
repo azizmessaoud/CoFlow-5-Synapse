@@ -107,7 +107,7 @@ def generate_safety_artifacts(root: Path, output_dir: Path | None = None) -> dic
     if detected_sumo != SUMO_RELEASE:
         raise RuntimeError(f"expected SUMO {SUMO_RELEASE}, found {detected_sumo}")
 
-    destination = (output_dir or root / "harness/work/03-safety-mask/artifacts").resolve()
+    destination = (output_dir or root / "results/evidence/03-safety-mask/artifacts").resolve()
     destination.parent.mkdir(parents=True, exist_ok=True)
     staging = destination.parent / f".{destination.name}.staging-{uuid.uuid4()}"
     staging.mkdir()

@@ -1,6 +1,6 @@
 # Later read-only deploy
 
-This folder is the **product CD shape** from [ADR-0003](../docs/adr/0003-cicd-devops-mlops.md). It is not the native Windows smoke test.
+This folder is the **product CD shape** from [ADR-0003](../README.md#10-architecture-decisions). It is not the native Windows smoke test.
 
 Images:
 
