@@ -1,0 +1,18 @@
+# traffix3's schematic network of central Tunis (scripts/build_network.py).
+dir: data/networks
+
+bus_lines:
+  - [L1_east, bab_bhar_B1, B4_tunis_marine]
+  - [L1_west, tunis_marine_B4, B1_bab_bhar]
+  - [L2_south, mv_n_B4, F4_mv_s]
+  - [L2_north, mv_s_F4, B4_mv_n]
+
+places:
+  incident_edge: B3_B4
+  incident_edge_b: B4_B3
+  incident_edge_c: F1_F3
+  training_incident_edge: B2_B3
+  sensor_fault_tls: B3
+  sensor_fault_tls_b: F3
+  flood_edge: F3_F4
+  surge_towards: B3

@@ -4,7 +4,7 @@ Input is the already-clipped ``scenarios/tunis-showcase/tunis.osm.xml`` (OSM
 highways from the hash-verified Geofabrik PBF, see row 14). This script clips
 it to the centre-ville box around the six junctions in
 ``harness/work/14-tunis-showcase/junctions.json`` and signalises exactly
-those six nodes as J1..J6. Every other OSM ``traffic_signals`` tag is removed
+those six nodes, renamed J1..J6 (node and light ids). Every other OSM ``traffic_signals`` tag is removed
 so the control hierarchy has one master per selected junction and nothing
 else writes a light. Road demand is synthetic (randomTrips, fixed seed).
 
@@ -20,8 +20,10 @@ import hashlib
 import heapq
 import json
 import os
+import re
 import subprocess
 import sys
+import tempfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -30,6 +32,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_OSM = ROOT / "scenarios" / "tunis-showcase" / "tunis.osm.xml"
 JUNCTIONS = ROOT / "harness" / "work" / "14-tunis-showcase" / "junctions.json"
 SCENARIO = ROOT / "scenarios" / "tunis-centre-6j"
+NETWORK_CONFIG = ROOT / "config" / "networks" / "tunis6j.yaml"
 PREFIX = "tunis6j"
 
 # left, bottom, right, top. The six junctions span lon 10.1785-10.1880 and
@@ -212,40 +215,21 @@ def junction_spec(net: Path, selected: list[dict], names: dict[str, list[str]]) 
     root = ET.parse(net).getroot()
     junctions = {j.get("id"): j for j in root.findall("junction")}
     tls = {t.get("id"): t for t in root.findall("tlLogic")}
-    node_to_tls = {}
-    for node in selected:
-        node_id = str(node["node_id"])
-        if node_id in tls:
-            node_to_tls[node_id] = node_id
-            continue
-        owner = next(
-            (
-                j.get("id")
-                for j in junctions.values()
-                if j.get("type") == "traffic_light" and node_id in j.get("id", "").split("_")
-            ),
-            None,
-        )
-        if owner is None:
-            raise SystemExit(f"junction {node_id} is not signalised in {net.name}")
-        node_to_tls[node_id] = owner
-    tls_ids = [node_to_tls[str(node["node_id"])] for node in selected]
+    tls_ids = [f"J{index}" for index in range(1, len(selected) + 1)]
     if sorted(tls) != sorted(tls_ids):
-        raise SystemExit(f"expected exactly the six selected TLS, found {sorted(tls)}")
+        raise SystemExit(f"expected exactly the six J1..J6 lights, found {sorted(tls)}")
     reach = neighbours(net, tls_ids)
-    label = {tls_id: f"J{index}" for index, tls_id in enumerate(tls_ids, start=1)}
     rows = []
-    for index, node in enumerate(selected, start=1):
+    for tls_id, node in zip(tls_ids, selected):
         node_id = str(node["node_id"])
-        tls_id = node_to_tls[node_id]
         junction = junctions[tls_id]
-        logic = tls[tls_id]
-        phases = [phase.get("state") for phase in logic.findall("phase")]
+        phases = [phase.get("state") for phase in tls[tls_id].findall("phase")]
         rows.append(
             {
-                "id": f"J{index}",
+                "id": tls_id,
                 "osm_node_id": node["node_id"],
                 "tls_id": tls_id,
+                "name": junction_name(tls_id, names.get(node_id, [])),
                 "lon": node["lon"],
                 "lat": node["lat"],
                 "x": float(junction.get("x")),
@@ -256,47 +240,85 @@ def junction_spec(net: Path, selected: list[dict], names: dict[str, list[str]]) 
                 "incoming_lanes": sorted(set(junction.get("incLanes", "").split())),
                 "signal_links": len(phases[0]) if phases else 0,
                 "phases": phases,
-                "downstream_neighbours": sorted(label[n] for n in reach[tls_id]),
+                "downstream_neighbours": reach[tls_id],
             }
         )
     return {"junctions": rows}
 
 
-def write_bus_stops(net: Path, spec: dict) -> None:
-    """One bus stop on the longest bus-legal approach of each junction.
+def junction_name(tls_id: str, streets: list[str]) -> str:
+    """Street names only: traffix's narrator already writes "J1 (<name>)"."""
+    return " x ".join(streets[:2]) if streets else tls_id
 
-    Same layout as traffix3's ``<network>.stops.xml`` so its demand generator
-    and runner pick the stops up next to ``<network>.net.xml``.
+
+def rename_junctions(netconvert: str, raw: Path, work: Path, labels: dict[str, str],
+                     names: dict[str, str]) -> Path:
+    """Plain-XML round trip that renames the six OSM nodes (and their lights) to J1..J6.
+
+    traffix3 treats a light's id and its node's id as the same thing, so both
+    are renamed together. Each node also gets a ``name`` param for the GUI,
+    the decision log narrator and the dashboard.
     """
-    root = ET.parse(net).getroot()
-    edges = {edge.get("id"): edge for edge in root.findall("edge") if not edge.get("function")}
-    lines = ["<additional>"]
-    for row in spec["junctions"]:
-        best = None
-        for edge in edges.values():
-            if edge.get("to") != row["tls_id"]:
+    run([netconvert, "--sumo-net-file", str(raw), "--plain-output-prefix", str(work / "plain")])
+    pattern = re.compile(r'(?<=["\s])(' + "|".join(labels) + r')(?=["\s])')
+    for suffix in ("nod", "edg", "con", "tll"):
+        path = work / f"plain.{suffix}.xml"
+        text = pattern.sub(lambda match: labels[match.group(1)], path.read_text(encoding="utf-8"))
+        if suffix == "nod":
+            for label, name in names.items():
+                text = re.sub(
+                    rf'(<node id="{label}"[^>]*?)/>',
+                    lambda match: f'{match.group(1)}>\n        <param key="name" '
+                                  f'value="{escape(name, {chr(34): "&quot;"})}"/>\n    </node>',
+                    text,
+                    count=1,
+                )
+        path.write_text(text, encoding="utf-8")
+    return work / "plain.netccfg"
+
+
+def write_bus_stops(home: Path, net: Path, spec: dict) -> None:
+    """Bus stops before every light on each line of ``config/networks/tunis6j.yaml``.
+
+    Same rule and layout as traffix3's ``build_network.py``: 20 m stop ending
+    30 m before the stop line, ``lines`` attribute and a ``junction`` param.
+    """
+    import yaml
+
+    sys.path.insert(0, str(home / "tools"))
+    import sumolib
+
+    lines_cfg = yaml.safe_load(NETWORK_CONFIG.read_text(encoding="utf-8"))["bus_lines"]
+    road = sumolib.net.readNet(str(net))
+    names = {row["tls_id"]: row["name"] for row in spec["junctions"]}
+    stops: dict[str, dict] = {}
+    for line, first, last in lines_cfg:
+        path, _ = road.getShortestPath(road.getEdge(first), road.getEdge(last), vClass="bus")
+        if not path:
+            raise SystemExit(f"bus line {line} has no bus route from {first} to {last}")
+        for edge in path:
+            node = edge.getToNode()
+            if node.getType() != "traffic_light" or edge.getLength() < 15:
                 continue
-            for lane in edge.findall("lane"):
-                allowed = lane.get("allow")
-                disallowed = lane.get("disallow", "")
-                bus_ok = ("bus" in allowed.split()) if allowed else ("bus" not in disallowed.split())
-                length = float(lane.get("length"))
-                if bus_ok and length >= 20 and (best is None or length > best[1]):
-                    best = (lane.get("id"), length, edge.get("id"))
-        if best is None:
-            raise SystemExit(f"{row['id']} has no bus-legal approach of at least 20 m")
-        lane_id, length, edge_id = best
-        # 30 m short of the stop line on long approaches; roundabout arms are short.
-        end = length - 30 if length >= 60 else length - 5
-        name = f"{row['id']} " + " / ".join(row["streets"][:2])
-        lines.append(
-            f'  <busStop id="stop_{row["id"]}" lane="{lane_id}" startPos="{max(0.0, end - 20):.1f}" '
-            f'endPos="{end:.1f}" name="{escape(name, {chr(34): "&quot;"})}">'
-            f'<param key="junction" value="{row["tls_id"]}"/></busStop>'
+            lane = next(item for item in edge.getLanes() if item.allows("bus"))
+            end = max(10.0, lane.getLength() - 30)
+            stop = stops.setdefault(edge.getID(), {
+                "lane": lane.getID(), "start": max(0.0, end - 20), "end": end,
+                "junction": node.getID(), "lines": [],
+            })
+            stop["lines"].append(line)
+    out = ["<additional>"]
+    for edge_id, stop in stops.items():
+        name = escape(f'{stop["junction"]} {names.get(stop["junction"], "")}'.strip(), {chr(34): "&quot;"})
+        out.append(
+            f'  <busStop id="stop_{edge_id}" lane="{stop["lane"]}" startPos="{stop["start"]:.1f}" '
+            f'endPos="{stop["end"]:.1f}" lines="{" ".join(stop["lines"])}" name="{name}">'
+            f'<param key="junction" value="{stop["junction"]}"/></busStop>'
         )
-        row["bus_stop"] = {"id": f"stop_{row['id']}", "edge": edge_id, "lane": lane_id}
-    lines.append("</additional>")
-    (SCENARIO / f"{PREFIX}.stops.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    out.append("</additional>")
+    (SCENARIO / f"{PREFIX}.stops.xml").write_text("\n".join(out) + "\n", encoding="utf-8")
+    for row in spec["junctions"]:
+        row["bus_stops"] = sorted(f"stop_{e}" for e, st in stops.items() if st["junction"] == row["tls_id"])
 
 
 def write_overlay(spec: dict) -> None:
@@ -361,15 +383,28 @@ def main() -> int:
     print(f"clipped ways={clip['ways']} nodes={clip['nodes']} "
           f"osm_signals_removed={len(clip['osm_signals_removed'])}")
 
-    common = [
-        netconvert, "--osm-files", str(osm), *NETCONVERT_OPTS,
-        "--junctions.join-exclude", ",".join(node_ids),
-        "--tls.set", ",".join(node_ids),
-    ]
     net = SCENARIO / f"{PREFIX}.net.xml"
     actuated = SCENARIO / f"{PREFIX}_actuated.net.xml"
-    run([*common, "--tls.default-type", "static", "--output-file", str(net)])
-    run([*common, "--tls.default-type", "actuated", "--output-file", str(actuated)])
+    names = way_names(osm)
+    labels = {node_id: f"J{index}" for index, node_id in enumerate(node_ids, start=1)}
+    with tempfile.TemporaryDirectory() as tmp:
+        work = Path(tmp)
+        raw = work / "raw.net.xml"
+        run([
+            netconvert, "--osm-files", str(osm), *NETCONVERT_OPTS,
+            "--junctions.join-exclude", ",".join(node_ids),
+            "--tls.set", ",".join(node_ids),
+            "--tls.default-type", "static", "--output-file", str(raw),
+        ])
+        config = rename_junctions(
+            netconvert, raw, work, labels,
+            {label: junction_name(label, names.get(node_id, [])) for node_id, label in labels.items()},
+        )
+        run([netconvert, "-c", str(config), "--output-file", str(net)])
+    run([
+        netconvert, "--sumo-net-file", str(net), "--tls.rebuild",
+        "--tls.default-type", "actuated", "--output-file", str(actuated),
+    ])
 
     py = sys.executable
     run([
@@ -390,8 +425,8 @@ def main() -> int:
     for leftover in SCENARIO.glob("*.rou.alt.xml"):
         leftover.unlink()
 
-    spec = junction_spec(net, selected, way_names(osm))
-    write_bus_stops(net, spec)
+    spec = junction_spec(net, selected, names)
+    write_bus_stops(home, net, spec)
     write_overlay(spec)
     write_configs()
     manifest = {

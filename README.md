@@ -6,6 +6,11 @@
 
 A reliable AI decision platform for urban traffic simulation.
 
+> **Run it on Tunis:** `python scripts/setup.py` then `python scripts/run_live.py` and open http://localhost:8000.
+> The traffix3 agent hierarchy (six junction masters, supermaster, network agents) controls J1..J6 of
+> Tunis centre-ville on real OSM streets; CoFlow Synapse explains every decision with provenance or abstains.
+> Guide: [`docs/traffix/README.md`](docs/traffix/README.md). Decision: [ADR-0004](docs/adr/0004-traffix-hierarchy-on-tunis6j.md).
+
 Five domain agents cooperate in Eclipse SUMO. Only **A1 Flow** can change traffic lights. The required controller is cooperative **Max-Pressure**. The **Synapse** layer retrieves evidence and explains immutable decisions. It never actuates signals.
 
 This repository holds the **settled specifications** for Kiro enhancement and later implementation. It is not yet a running simulator.

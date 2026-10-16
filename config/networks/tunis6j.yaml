@@ -1,0 +1,27 @@
+# Tunis centre-ville, real OSM streets, only J1..J6 signalised.
+# Built by scripts/build_tunis_centre_6j.py into scenarios/tunis-centre-6j/.
+dir: scenarios/tunis-centre-6j
+
+# Illustrative bus lines over real streets (entry edge, exit edge).
+# They are NOT TRANSTU lines; scheduled TRANSTU GTFS stays separate (row 14).
+bus_lines:
+  - [L1_west, "987899464", "39169967#4"]       # Av. Mohamed V -> J1 -> Bourguiba -> J6 -> J2 -> Av. de France
+  - [L1_east, "-100080974#1", "1097965047"]    # Rue de Rome -> J4 -> J2 -> Bourguiba -> J1 -> Rue Hedi Nouira
+  - [L2_south, "1409208379", "109431713"]      # Av. Habib Thameur -> J5 -> J4 -> J2 -> Rue Jamel Abdel Nasser
+  - [L3_south, "-100080974#1", "1094716007"]   # Rue de Rome -> J4 -> J2 -> Av. Moncef Bey -> J3
+
+# Overrides of simulation.yaml > demand for this network. The real street grid
+# has many more entry roads than the schematic one and saturates sooner.
+demand:
+  base_vehicles_per_hour: 2400
+
+# Scenario event locations. scenarios.yaml and training refer to them as "@name".
+places:
+  incident_edge: "577010716#1"      # Av. Habib Bourguiba eastbound, between J6 and J1
+  incident_edge_b: "10641416#1"     # Av. Habib Bourguiba westbound, between J1 and J6
+  incident_edge_c: "577010716#0"    # Av. Habib Bourguiba eastbound, just east of J6
+  training_incident_edge: "10641416#2"  # Av. Habib Bourguiba westbound, nearer J6
+  sensor_fault_tls: J1              # Place du 14 Janvier 2011
+  sensor_fault_tls_b: J4            # Av. Habib Thameur x Rue de Rome
+  flood_edge: "26280306#2"          # Av. Habib Thameur, J5 towards J4
+  surge_towards: J1

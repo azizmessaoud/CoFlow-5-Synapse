@@ -42,6 +42,7 @@ If older text puts an LLM in the Control plane or makes DQN required, ADR-0001 w
 | Stack / portfolio | `docs/architecture/coflow5-synapse-portfolio-design.md` |
 | SUMO / TraCI | official Eclipse SUMO docs first, not the RoadwayVR tutorial as a dependency |
 | How to run SUMO | `docs/how-to-run-sumo.md` |
+| traffix hierarchy on Tunis J1..J6, CoFlow Synapse bridge | `docs/adr/0004-traffix-hierarchy-on-tunis6j.md`, `docs/traffix/README.md` |
 | Output style | `.kiro/steering/output-style.md` |
 
 ## Workflow

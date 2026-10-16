@@ -32,5 +32,7 @@ jobs:
           python -m pip install -e ".[api]" pytest==8.4.2
       - name: Byte-compile
         run: python -m compileall -q src tests
+      - name: traffix hierarchy rules (one light writer, Synapse cannot reach SUMO)
+        run: python scripts/check_architecture.py
       - name: Architecture and read-only API tests
         run: python -m pytest tests/architecture tests/api -q

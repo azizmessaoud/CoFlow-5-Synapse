@@ -37,6 +37,12 @@ def test_actuated_variant_uses_actuated_plans() -> None:
     assert {logic.get("type") for logic in root.findall("tlLogic")} == {"actuated"}
 
 
+def test_lights_are_named_j1_to_j6_after_their_osm_nodes() -> None:
+    rows = spec()["junctions"]
+    assert [row["tls_id"] for row in rows] == ["J1", "J2", "J3", "J4", "J5", "J6"]
+    assert all(row["name"] and row["osm_node_id"] for row in rows)
+
+
 def test_every_junction_has_phases_neighbours_and_a_bus_stop() -> None:
     stops = ET.parse(SCENARIO / "tunis6j.stops.xml").getroot().findall("busStop")
     stop_junctions = {

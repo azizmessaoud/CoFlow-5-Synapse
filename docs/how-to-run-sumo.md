@@ -83,7 +83,7 @@ py -3.11 scripts\watch_sumo.py tunis6j
 ```
 
 See `scenarios/tunis-centre-6j/README.md` for the junction table and the
-traffix3 drop-in.
+traffix hierarchy (`python scripts/run_live.py`, see `docs/traffix/README.md`).
 
 ## B. Run the gated agents (headless)
 

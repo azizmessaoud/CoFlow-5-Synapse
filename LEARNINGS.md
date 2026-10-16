@@ -31,3 +31,7 @@ Do not store secrets. Do not treat a chat conclusion as gated work.
 - None of the six row-14 junctions was signalised in `tunis-showcase` (all `priority`). Control rows need `scenarios/tunis-centre-6j/`, built with `--tls.guess false --tls.set <six ids>` and OSM signal tags stripped, so only J1..J6 have lights.
 - Clip ways at the box edge, not "any node inside": the latter pulled the net out to 1.8 x 3.4 km.
 - J1 (Place du 14 Janvier) is a roundabout node; its approaches are 25-35 m, so bus stops there sit close to the stop line.
+- traffix3 treats a light id and its node id as the same string (map geometry, crossings, surge events). Rename both by a netconvert plain-XML round trip; do not rename only the `tlLogic`.
+- CoFlow `SynapseService.audit` accepts a claim that contains any fact value. Keep facts distinctive (reason code, action, agent); a bare junction id let a false claim through.
+- traffix `Monitor` must drop arrived buses before querying them: a bus that teleports past its midpoint edge is gone from SUMO.
+- The real Tunis grid saturates at traffix3's 4000 veh/h; `config/networks/tunis6j.yaml` sets 2400.

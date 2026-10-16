@@ -35,3 +35,10 @@ dist/
 CoFlow-5_Traffic_Orchestration.pdf
 CoFlow-5_System_Requirements_Book.pdf
 coflow5-personas-journeys (1).md
+
+# traffix3 live demo serves the built frontend
+!frontend/dist/
+# traffix generated demand and experiment output
+data/generated/
+data/training/
+results/

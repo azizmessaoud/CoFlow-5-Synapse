@@ -20,7 +20,7 @@ py -3.11 -m pytest tests\scripts\test_tunis_centre_6j.py -q
 
 ## Junctions
 
-| ID | OSM node / TLS id | Streets | Lat, lon | Phases | Downstream lights (≤ 800 m) |
+| ID (node + light) | OSM node | Streets | Lat, lon | Phases | Downstream lights (≤ 800 m) |
 |---|---|---|---|---|---|
 | J1 | 5294059357 | Av. Habib Bourguiba / Place du 14 Janvier 2011 / Av. Mohamed V | 36.80035, 10.18588 | 4 | J3, J4, J6 |
 | J2 | 287386655 | Av. Habib Bourguiba / Av. de France / Rue Jamel Abdel Nasser / Rue de Rome | 36.79945, 10.17852 | 6 | J1, J4, J5, J6 |
@@ -29,8 +29,8 @@ py -3.11 -m pytest tests\scripts\test_tunis_centre_6j.py -q
 | J5 | 387151856 | Av. Habib Thameur / Rue de Sparte / Rue Salonique / Rue d'Athènes | 36.80319, 10.17933 | 9 | J2, J4, J6 |
 | J6 | 517939913 | Av. Habib Bourguiba / Rue d'Alger | 36.79972, 10.17948 | 5 | J1, J2, J4 |
 
-The TLS id is the OSM node id. `junctions.json` has the incoming lanes,
-signal plans, bus stop and source hashes for each junction.
+`junctions.json` maps each J id to its OSM node and has the incoming lanes,
+signal plans, bus stops and source hashes for each junction.
 
 ## Files
 
@@ -41,27 +41,17 @@ signal plans, bus stop and source hashes for each junction.
 | `tunis6j_actuated.net.xml` | same network, actuated plans |
 | `tunis6j.rou.xml` | 3000 synthetic vehicles over 3600 s (randomTrips seed 20261016) |
 | `tunis6j.ped.rou.xml` | 900 synthetic pedestrians (seed 20261017) |
-| `tunis6j.stops.xml` | one bus stop on an approach of each junction |
+| `tunis6j.stops.xml` | bus stops before each light on the four illustrative bus lines |
 | `tunis6j.poi.add.xml`, `tunis6j.settings.xml` | GUI labels J1..J6 and viewport |
 | `junctions.json` | junction spec and provenance manifest |
 
-## traffix3 drop-in
+## traffix hierarchy
 
-The file names follow traffix3's `<network>.net.xml` / `<network>_actuated.net.xml` /
-`<network>.stops.xml` convention. In a traffix3 checkout:
-
-```powershell
-copy scenarios\tunis-centre-6j\tunis6j.net.xml          data\networks\
-copy scenarios\tunis-centre-6j\tunis6j_actuated.net.xml data\networks\
-copy scenarios\tunis-centre-6j\tunis6j.stops.xml        data\networks\
-$env:TRAFFIX_NETWORK = "tunis6j"
-python scripts/build_demand.py
-python scripts/run_live.py
-```
-
-Its masters read junctions, phases and crossings from the network, so the six
-junctions become six masters. Bus lines and the incident location fall back to
-traffix3's automatic choices on a non-schematic network.
+This is the default network of the traffix hierarchy in this repo
+(`config/networks/tunis6j.yaml`, `TRAFFIX_NETWORK=tunis6j`). File names follow
+traffix3's `<network>.net.xml` / `_actuated.net.xml` / `.stops.xml` layout.
+Light and node ids are J1..J6; each node carries its street names as a `name`
+param. Run it with `python scripts/run_live.py`; see `docs/traffix/README.md`.
 
 ## Claim boundary
 
