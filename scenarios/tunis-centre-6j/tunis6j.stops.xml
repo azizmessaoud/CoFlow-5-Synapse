@@ -1,0 +1,8 @@
+<additional>
+  <busStop id="stop_J1" lane="26013493_0" startPos="9.5" endPos="29.5" name="J1 Avenue Habib Bourguiba / Place du 14 Janvier 2011"><param key="junction" value="5294059357"/></busStop>
+  <busStop id="stop_J2" lane="100081107_0" startPos="28.3" endPos="48.3" name="J2 Avenue Habib Bourguiba / Avenue de France"><param key="junction" value="287386655"/></busStop>
+  <busStop id="stop_J3" lane="1501192411#1_1" startPos="37.3" endPos="57.3" name="J3 Rue Saad Zagloul / Avenue Moncef Bey"><param key="junction" value="287837812"/></busStop>
+  <busStop id="stop_J4" lane="545291183_1" startPos="48.1" endPos="68.1" name="J4 Avenue Habib Thameur / Rue de Rome"><param key="junction" value="287863982"/></busStop>
+  <busStop id="stop_J5" lane="95132613_1" startPos="35.8" endPos="55.8" name="J5 Avenue Habib Thameur / Rue de Sparte"><param key="junction" value="387151856"/></busStop>
+  <busStop id="stop_J6" lane="577010717#1_0" startPos="30.1" endPos="50.1" name="J6 Avenue Habib Bourguiba / Rue d'Alger"><param key="junction" value="517939913"/></busStop>
+</additional>

@@ -24,6 +24,7 @@ SCENES = {
     "max-pressure": ROOT / "scenarios" / "max-pressure" / "max-pressure.sumocfg",
     "demo": ROOT / "scenarios" / "watch" / "watch.sumocfg",
     "tunis": ROOT / "scenarios" / "tunis-showcase" / "tunis.sumocfg",
+    "tunis6j": ROOT / "scenarios" / "tunis-centre-6j" / "tunis6j.sumocfg",
 }
 EVALUATION_REPORT = ROOT / "harness" / "work" / "09-eval-harness" / "artifacts" / "evaluation-report.json"
 MAX_PRESSURE_FOLLOWUP_GATE = ROOT / "harness" / "work" / "10b-max-pressure-trip-kpis" / "gate.json"

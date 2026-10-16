@@ -1,0 +1,14 @@
+<configuration>
+  <input>
+    <net-file value="tunis6j_actuated.net.xml"/>
+    <route-files value="tunis6j.rou.xml,tunis6j.ped.rou.xml"/>
+    <additional-files value="tunis6j.stops.xml,tunis6j.poi.add.xml"/>
+    <gui-settings-file value="tunis6j.settings.xml"/>
+  </input>
+  <time><begin value="0"/><end value="3600"/><step-length value="1"/></time>
+  <processing>
+    <time-to-teleport value="300"/>
+    <ignore-route-errors value="true"/>
+  </processing>
+  <report><no-step-log value="true"/></report>
+</configuration>

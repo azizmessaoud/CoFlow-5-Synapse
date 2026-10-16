@@ -1,0 +1,8 @@
+<additional>
+  <poi id="J1" x="923.86" y="880.66" type="coflow-junction" color="1,0.2,0.1" layer="100" name="J1 Avenue Habib Bourguiba / Place du 14 Janvier 2011"/>
+  <poi id="J2" x="268.03" y="772.05" type="coflow-junction" color="1,0.2,0.1" layer="100" name="J2 Avenue Habib Bourguiba / Avenue de France"/>
+  <poi id="J3" x="1119.20" y="260.44" type="coflow-junction" color="1,0.2,0.1" layer="100" name="J3 Rue Saad Zagloul / Avenue Moncef Bey"/>
+  <poi id="J4" x="262.84" y="943.22" type="coflow-junction" color="1,0.2,0.1" layer="100" name="J4 Avenue Habib Thameur / Rue de Rome"/>
+  <poi id="J5" x="335.77" y="1188.60" type="coflow-junction" color="1,0.2,0.1" layer="100" name="J5 Avenue Habib Thameur / Rue de Sparte"/>
+  <poi id="J6" x="353.74" y="803.16" type="coflow-junction" color="1,0.2,0.1" layer="100" name="J6 Avenue Habib Bourguiba / Rue d'Alger"/>
+</additional>

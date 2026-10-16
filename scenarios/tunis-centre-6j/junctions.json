@@ -1,0 +1,357 @@
+{
+  "id": "tunis-centre-6j",
+  "status": "showcase_only",
+  "aoi": {
+    "name": "Tunis centre-ville, six selected junctions",
+    "bbox": [
+      10.1755,
+      36.7925,
+      10.191,
+      36.8055
+    ],
+    "bbox_order": "left,bottom,right,top"
+  },
+  "sources": {
+    "osm": {
+      "path": "scenarios/tunis-showcase/tunis.osm.xml",
+      "sha256": "sha256:78b667e4728f9e5cf580659f3d712fbe397dbcb755bc403be98e80144fb6bc99",
+      "identity": "Geofabrik Tunisia OSM PBF, clipped in row 14 (pbf-source.json)"
+    },
+    "junction_selection": {
+      "path": "harness/work/14-tunis-showcase/junctions.json",
+      "sha256": "sha256:bef55d09c03109459901a18c6162020ef19a774e2bd82b1c622e57447ddb67f6"
+    }
+  },
+  "network": {
+    "signalised_junctions": [
+      "5294059357",
+      "287386655",
+      "287837812",
+      "287863982",
+      "387151856",
+      "517939913"
+    ],
+    "osm_signals_removed": [
+      "93850208",
+      "11503933962"
+    ],
+    "signal_rule": "only J1..J6 carry traffic lights; other OSM signals are dropped so each light has exactly one master",
+    "netconvert_options": [
+      "--proj.utm",
+      "--geometry.remove",
+      "--ramps.guess",
+      "--junctions.join",
+      "--sidewalks.guess",
+      "--crossings.guess",
+      "--keep-edges.by-vclass",
+      "passenger,pedestrian,bus",
+      "--remove-edges.isolated",
+      "--no-turnarounds",
+      "true",
+      "--tls.guess",
+      "false",
+      "--tls.yellow.time",
+      "3",
+      "--output.street-names",
+      "--output.original-names"
+    ],
+    "sumo_version": "1.27.1"
+  },
+  "road_demand": "synthetic: randomTrips seed=20261016, period=1.2 s, fringe-factor=10, 3600 s; pedestrians seed=20261017, period=4 s",
+  "claim_boundary": "showcase only; no deployment validation, no measured air quality, no lives saved",
+  "junctions": [
+    {
+      "id": "J1",
+      "osm_node_id": 5294059357,
+      "tls_id": "5294059357",
+      "lon": 10.1858822,
+      "lat": 36.8003535,
+      "x": 923.86,
+      "y": 880.66,
+      "streets": [
+        "Avenue Habib Bourguiba",
+        "Place du 14 Janvier 2011",
+        "Avenue Mohamed V"
+      ],
+      "osm_highways": [
+        "primary"
+      ],
+      "selection_reasons": [
+        "roundabout_way",
+        "degree=3",
+        "major_road"
+      ],
+      "incoming_lanes": [
+        "10641456#7_0",
+        "10641456#7_1",
+        "10641456#7_2",
+        "26013493_0",
+        "26013493_1"
+      ],
+      "signal_links": 7,
+      "phases": [
+        "GGGrrrr",
+        "Gyyrrrr",
+        "GrrGGGG",
+        "Grryyyy"
+      ],
+      "downstream_neighbours": [
+        "J3",
+        "J4",
+        "J6"
+      ],
+      "bus_stop": {
+        "id": "stop_J1",
+        "edge": "26013493",
+        "lane": "26013493_0"
+      }
+    },
+    {
+      "id": "J2",
+      "osm_node_id": 287386655,
+      "tls_id": "287386655",
+      "lon": 10.1785171,
+      "lat": 36.7994477,
+      "x": 268.03,
+      "y": 772.05,
+      "streets": [
+        "Avenue Habib Bourguiba",
+        "Avenue de France",
+        "Rue Jamel Abdel Nasser",
+        "Rue de Rome"
+      ],
+      "osm_highways": [
+        "primary",
+        "secondary"
+      ],
+      "selection_reasons": [
+        "degree=5",
+        "major_road"
+      ],
+      "incoming_lanes": [
+        "-26242831#0_0",
+        "-26242831#0_1",
+        "100081107_0",
+        "100081107_1",
+        "39170210#2_0"
+      ],
+      "signal_links": 10,
+      "phases": [
+        "GGGGrrrGrr",
+        "GyyyrrrGrr",
+        "GrrrGGGGrr",
+        "yrrryyyGrr",
+        "rrrrrrrGGG",
+        "rrrrrrrGyy"
+      ],
+      "downstream_neighbours": [
+        "J1",
+        "J4",
+        "J5",
+        "J6"
+      ],
+      "bus_stop": {
+        "id": "stop_J2",
+        "edge": "100081107",
+        "lane": "100081107_0"
+      }
+    },
+    {
+      "id": "J3",
+      "osm_node_id": 287837812,
+      "tls_id": "287837812",
+      "lon": 10.1879851,
+      "lat": 36.7947418,
+      "x": 1119.2,
+      "y": 260.44,
+      "streets": [
+        "Rue Saad Zagloul",
+        "Avenue Moncef Bey"
+      ],
+      "osm_highways": [
+        "residential",
+        "secondary",
+        "tertiary"
+      ],
+      "selection_reasons": [
+        "degree=4",
+        "major_road"
+      ],
+      "incoming_lanes": [
+        "1501192411#1_0",
+        "1501192411#1_1",
+        "704802731_0",
+        ":287837812_w0_0",
+        ":287837812_w1_0",
+        ":287837812_w2_0"
+      ],
+      "signal_links": 8,
+      "phases": [
+        "gGGrrrGr",
+        "gGGrrrrr",
+        "yyyrrrrr",
+        "rrrGgGrG",
+        "rrrGgrrr",
+        "rrryyrrr"
+      ],
+      "downstream_neighbours": [
+        "J1"
+      ],
+      "bus_stop": {
+        "id": "stop_J3",
+        "edge": "1501192411#1",
+        "lane": "1501192411#1_1"
+      }
+    },
+    {
+      "id": "J4",
+      "osm_node_id": 287863982,
+      "tls_id": "287863982",
+      "lon": 10.1784826,
+      "lat": 36.800991,
+      "x": 262.84,
+      "y": 943.22,
+      "streets": [
+        "Avenue Habib Thameur",
+        "Rue de Rome",
+        "Rue Mokhtar Attia"
+      ],
+      "osm_highways": [
+        "residential",
+        "secondary",
+        "unclassified"
+      ],
+      "selection_reasons": [
+        "degree=4",
+        "major_road"
+      ],
+      "incoming_lanes": [
+        "26280306#5_0",
+        "306643020_0",
+        "306643020_1",
+        "545291183_0",
+        "545291183_1",
+        ":287863982_w1_0"
+      ],
+      "signal_links": 6,
+      "phases": [
+        "rrGgGr",
+        "rryyyr",
+        "GGrrrG",
+        "GGrrrr",
+        "yyrrrr"
+      ],
+      "downstream_neighbours": [
+        "J2",
+        "J5",
+        "J6"
+      ],
+      "bus_stop": {
+        "id": "stop_J4",
+        "edge": "545291183",
+        "lane": "545291183_1"
+      }
+    },
+    {
+      "id": "J5",
+      "osm_node_id": 387151856,
+      "tls_id": "387151856",
+      "lon": 10.1793339,
+      "lat": 36.8031945,
+      "x": 335.77,
+      "y": 1188.6,
+      "streets": [
+        "Avenue Habib Thameur",
+        "Rue de Sparte",
+        "Rue Salonique",
+        "Rue d'Athènes"
+      ],
+      "osm_highways": [
+        "residential",
+        "secondary"
+      ],
+      "selection_reasons": [
+        "degree=4",
+        "major_road"
+      ],
+      "incoming_lanes": [
+        "106509679#2_0",
+        "106509679#2_1",
+        "26280306#1_0",
+        "95132613_0",
+        "95132613_1",
+        ":387151856_w0_0",
+        ":387151856_w1_0",
+        ":387151856_w2_0"
+      ],
+      "signal_links": 11,
+      "phases": [
+        "gGgrrrrrGGG",
+        "gGgrrrrrrrr",
+        "yyyrrrrrrrr",
+        "rrrrrrGgGGr",
+        "rrrrrrGgrrr",
+        "rrrrrryyrrr",
+        "rrrGGgrrrrG",
+        "rrrGGgrrrrr",
+        "rrryyyrrrrr"
+      ],
+      "downstream_neighbours": [
+        "J2",
+        "J4",
+        "J6"
+      ],
+      "bus_stop": {
+        "id": "stop_J5",
+        "edge": "95132613",
+        "lane": "95132613_1"
+      }
+    },
+    {
+      "id": "J6",
+      "osm_node_id": 517939913,
+      "tls_id": "517939913",
+      "lon": 10.179482,
+      "lat": 36.7997186,
+      "x": 353.74,
+      "y": 803.16,
+      "streets": [
+        "Avenue Habib Bourguiba",
+        "Rue d'Alger"
+      ],
+      "osm_highways": [
+        "primary",
+        "residential"
+      ],
+      "selection_reasons": [
+        "degree=4",
+        "major_road"
+      ],
+      "incoming_lanes": [
+        "545291184#2_0",
+        "545291184#2_1",
+        "577010717#1_0",
+        "577010717#1_1",
+        ":517939913_w1_0"
+      ],
+      "signal_links": 6,
+      "phases": [
+        "GGgrrG",
+        "GGgrrr",
+        "yyyrrr",
+        "rrrGGr",
+        "rrryyr"
+      ],
+      "downstream_neighbours": [
+        "J1",
+        "J2",
+        "J4"
+      ],
+      "bus_stop": {
+        "id": "stop_J6",
+        "edge": "577010717#1",
+        "lane": "577010717#1_0"
+      }
+    }
+  ]
+}

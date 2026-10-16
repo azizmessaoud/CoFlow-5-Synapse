@@ -39,6 +39,7 @@ py -3.11 scripts\watch_sumo.py smoke
 | `py -3.11 scripts\watch_sumo.py baselines` | Baseline TLS file |
 | `py -3.11 scripts\watch_sumo.py max-pressure` | Max-Pressure TLS file, **not** live A1 |
 | `py -3.11 scripts\watch_sumo.py tunis` | Imported Tunis OSM showcase with fixed synthetic routes |
+| `py -3.11 scripts\watch_sumo.py tunis6j` | Tunis centre-ville, only the six selected junctions signalised (J1..J6) |
 
 Same thing by hand:
 
@@ -48,6 +49,7 @@ sumo-gui -c scenarios\safety-mask\safety.sumocfg
 sumo-gui -c scenarios\baselines\baselines.sumocfg
 sumo-gui -c scenarios\max-pressure\max-pressure.sumocfg
 sumo-gui -c scenarios\tunis-showcase\tunis.sumocfg
+sumo-gui -c scenarios\tunis-centre-6j\tunis6j.sumocfg
 ```
 
 ### Tunis OSM showcase
@@ -68,6 +70,20 @@ routes with seed `20261010`. The routes are not observed Tunis traffic and
 the TRANSTU schedule is not used as road-outcome evidence.
 
 Press Play.
+
+### Tunis centre-ville, six junctions
+
+`scenarios/tunis-centre-6j/` is the control network: a 1.4 km box of the
+committed OSM around the six row-14 junctions, where only J1..J6 carry
+traffic lights. It needs no PBF or WSL, only SUMO:
+
+```powershell
+py -3.11 scripts\build_tunis_centre_6j.py
+py -3.11 scripts\watch_sumo.py tunis6j
+```
+
+See `scenarios/tunis-centre-6j/README.md` for the junction table and the
+traffix3 drop-in.
 
 ## B. Run the gated agents (headless)
 

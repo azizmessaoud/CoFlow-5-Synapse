@@ -25,3 +25,9 @@ Do not store secrets. Do not treat a chat conclusion as gated work.
 - Row 08 VERIFY: recovery followed only `COOPERATIVE_MAX_PRESSURE -> ACTUATED -> FIXED_TIME`; optional DQN did not replace the ladder.
 - Row 08 VERIFY: Synapse available, killed, retrieval unavailable, and provider unavailable all produced the same action-sequence hash while failures stayed visible.
 - Row 08 VERIFY: click `harness/work/08-failure-injection/artifacts/action-sequence-comparison.json`; rerun `py -3.11 -m pytest tests/contracts/test_synapse_non_actuation.py -q`; pass means explanations cannot change light actions.
+
+## 2026-10-16
+
+- None of the six row-14 junctions was signalised in `tunis-showcase` (all `priority`). Control rows need `scenarios/tunis-centre-6j/`, built with `--tls.guess false --tls.set <six ids>` and OSM signal tags stripped, so only J1..J6 have lights.
+- Clip ways at the box edge, not "any node inside": the latter pulled the net out to 1.8 x 3.4 km.
+- J1 (Place du 14 Janvier) is a roundabout node; its approaches are 25-35 m, so bus stops there sit close to the stop line.

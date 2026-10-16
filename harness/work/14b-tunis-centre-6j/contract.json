@@ -1,0 +1,26 @@
+{
+  "contract_version": 1,
+  "id": "14b-tunis-centre-6j",
+  "kind": "data",
+  "status": "open",
+  "requires": ["14-tunis-showcase"],
+  "requirements": [
+    "network built from the committed row-14 OSM, no new download",
+    "exactly the six row-14 junctions are signalised, ids J1..J6 map to OSM node ids",
+    "static and actuated variants of the same network",
+    "synthetic vehicle and pedestrian demand with fixed seeds, labelled synthetic",
+    "TraCI can set every J1..J6 light",
+    "Tunis claims remain showcase-only"
+  ],
+  "artifacts": [
+    "scenarios/tunis-centre-6j/junctions.json",
+    "scenarios/tunis-centre-6j/tunis6j.net.xml",
+    "scenarios/tunis-centre-6j/tunis6j_actuated.net.xml",
+    "scenarios/tunis-centre-6j/tunis6j.stops.xml"
+  ],
+  "gate": {
+    "command": "py -3.11 -m pytest tests/scripts/test_tunis_centre_6j.py -q",
+    "decidedBy": "tests-and-files",
+    "note": "the TraCI test skips without SUMO; the gate run needs SUMO 1.27.1 on native Windows"
+  }
+}
