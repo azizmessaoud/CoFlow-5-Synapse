@@ -80,6 +80,12 @@ The analyst page shows a **Verify with CoFlow Synapse** button under each decisi
   are higher than on the schematic network. `demand.base_vehicles_per_hour` is
   2400 for this map (`config/networks/tunis6j.yaml`), not 4000.
 - Models in `models/` were retrained on this map with
-  `python scripts/train.py --skip-tune --skip-rl`. The tuned traffic-light
-  parameters and the RL policy still come from the schematic network; run the
-  full `python scripts/train.py` (30-60 min) to retune them for Tunis.
+  `python scripts/train.py --skip-tune --skip-rl`. Exceptions, recorded in
+  `models/metrics.json`:
+  - sensor health: the retrained model scored F1 0.62 against 0.98 for its
+    rule, so no model file is shipped and the agent uses the rule;
+  - incident detection: too few labelled incidents on this map to retrain, so
+    the schematic-network model is still used;
+  - tuned traffic-light parameters and the RL policy still come from the
+    schematic network. Run the full `python scripts/train.py` (30-60 min) to
+    retune them for Tunis.
