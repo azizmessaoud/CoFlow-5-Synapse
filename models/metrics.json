@@ -8,55 +8,53 @@
   "mae_inbound_share": 0.024
  },
  "incident": {
-  "skipped": "not enough labelled data",
-  "in_use": "model trained on traffix3's schematic network; too few labelled incidents on the Tunis map to retrain"
+  "skipped": "not enough labelled data"
  },
  "pedestrian": {
-  "rows": 1706,
-  "positives": 256,
-  "precision": 0.696,
-  "recall": 0.75,
-  "f1": 0.722,
+  "rows": 3097,
+  "positives": 246,
+  "precision": 0.397,
+  "recall": 0.5,
+  "f1": 0.443,
   "rule_f1": 0.0
  },
  "ambulance_eta": {
-  "rows": 692,
-  "mae": 87.13,
-  "rule_mae": 118.49
+  "rows": 737,
+  "mae": 43.65,
+  "rule_mae": 92.63
  },
  "bus_eta": {
-  "rows": 148816,
-  "mae": 137.65,
-  "rule_mae": 215.53
+  "rows": 66659,
+  "mae": 139.69,
+  "rule_mae": 285.81
  },
  "bus_lateness": {
-  "rows": 1242,
-  "mae": 119.35,
-  "rule_mae": 164.68
+  "rows": 270,
+  "mae": 158.94,
+  "rule_mae": 212.25
  },
  "edge_travel_time": {
-  "rows": 65337,
-  "mae": 23.15,
-  "rule_mae": 23.03
+  "rows": 68700,
+  "mae": 0.53,
+  "rule_mae": 2.5
  },
  "rain_speed": {
-  "rows": 1509,
-  "mae": 0.21,
-  "rule_mae": 0.43
+  "rows": 1443,
+  "mae": 0.15,
+  "rule_mae": 0.38
  },
  "arrivals": {
-  "rows": 79605,
-  "mae": 0.75,
-  "rule_mae": 0.79
+  "rows": 83655,
+  "mae": 0.69,
+  "rule_mae": 0.69
  },
  "sensor_health": {
   "rows": 60366,
   "positives": 366,
-  "precision": 0.45,
+  "precision": 0.607,
   "recall": 0.989,
-  "f1": 0.619,
-  "rule_f1": 0.978,
-  "in_use": "rule: the model's F1 on the Tunis map is below the rule's, so the model file is not shipped"
+  "f1": 0.752,
+  "rule_f1": 0.978
  },
  "notification": {
   "rows": 105,
@@ -65,8 +63,41 @@
  },
  "_versions": {
   "scikit-learn": "1.9.1",
-  "numpy": "2.5.3",
-  "python": "3.13.16"
+  "numpy": "2.4.6",
+  "python": "3.11.9"
  },
- "_network": "tunis6j (retrained with scripts/train.py --skip-tune --skip-rl); traffic_light_params, predictive_params and rl_q are still from the schematic network"
+ "rl_traffic_light": {
+  "method": "Fitted Q-Iteration, HistGradientBoosting",
+  "gamma": 0.9,
+  "rounds": [
+   {
+    "round": 1,
+    "behaviour": "max-pressure + exploration",
+    "wait_car_plus_ped_s": 232.6,
+    "transitions": 25254
+   },
+   {
+    "round": 2,
+    "behaviour": "learned policy + exploration",
+    "wait_car_plus_ped_s": 217.22,
+    "transitions": 49974
+   },
+   {
+    "round": 3,
+    "behaviour": "learned policy + exploration",
+    "wait_car_plus_ped_s": 208.89,
+    "transitions": 74628
+   },
+   {
+    "round": "final",
+    "behaviour": "learned policy, no exploration",
+    "wait_car_plus_ped_s": 231.39
+   },
+   {
+    "round": "reference",
+    "behaviour": "max-pressure alone (traffix)",
+    "wait_car_plus_ped_s": 221.86
+   }
+  ]
+ }
 }

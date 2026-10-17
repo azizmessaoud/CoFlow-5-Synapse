@@ -1,5 +1,5 @@
 {
- "ped_weight": 0.93,
- "switch_margin": 0.45,
- "platoon_weight": 0.55
+ "ped_weight": 0.5,
+ "switch_margin": 0.0,
+ "platoon_weight": 0.3
 }
