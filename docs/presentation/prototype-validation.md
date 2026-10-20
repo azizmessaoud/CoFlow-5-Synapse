@@ -126,7 +126,7 @@ Rules (enforced by `scripts/check_architecture.py`, run in CI):
 | **Pedestrian** | no long wait; no green during a crossing | requests a walk phase | gradient-boosting classifier: will this person wait too long? Beats the threshold rule. | people waiting, wait times, `request()` |
 | **Transit priority** | help late buses only | requests priority for a late bus | gradient-boosting regressor: bus ETA to the stop line | approaching buses, lateness, `request()` |
 | **Emergency priority** | green before the ambulance arrives | requests green with the predicted arrival time | gradient-boosting regressor: ambulance ETA. Rule fallback: distance ÷ speed. | emergency vehicles (type, distance, speed), `request()` |
-| **Sensor health** | stale data must not drive a light | publishes DATA_STALE; the master falls back | rule only: the trained model lost to the rule (F1 0.62 vs 0.98) | detector age, `publish()` |
+| **Sensor health** | stale data must not drive a light | publishes DATA_STALE; the master falls back | rule (no update for 10 s → stale). A trained classifier lost to the rule (F1 0.75 vs 0.98), so the rule must be used: delete `models/sensor_health.joblib` before the demo | detector age, `publish()` |
 
 Priority order in every master: **safety > emergency > supermaster directive > late bus > pedestrian > normal**.
 
@@ -311,6 +311,13 @@ Why not deep learning: little data, a one-second control loop, and every decisio
 2. **Fit** — each model on 75% of the rows; test on 25% against its rule.
 3. **Tune** — light parameters by random search on simulation (score = mean car wait + pedestrian wait).
 4. **RL** — 3 rounds of Fitted Q-Iteration: gamma 0.9, 12 refits, reward = own wait + 0.5 × neighbours' mean queue, 60 s starvation guard.
+
+Latest full training (commit `e141c7b`, Tunis map, Python 3.11.9, scikit-learn 1.9.1):
+- About 850,000 rows from 20 runs (10 training scenarios × 2 seeds).
+- **Tuning:** 8 random trials per light agent. None beat the default settings (max-pressure score 132.74; predictive 149.51), so the defaults stay.
+- **RL:** car + pedestrian wait 232.6 s → 217.2 s → 208.9 s over the 3 rounds (with exploration). In the fair final test (no exploration) RL waits **231.4 s** and max-pressure **221.9 s**. RL is about 4% worse, so **max-pressure stays the default**; RL stays an option (`traffix_rl`).
+
+LLMs: we call hosted models through an API (Claude, or `openai/gpt-oss-120b` / `gpt-oss-20b` on Groq). We do not train them. We use no embedding model: `search_log` uses keyword matching over the fixed reason codes, and every citation is checked. An open-weights model (for example Mistral 7B) with embedding search was in an early plan and was not built.
 5. **Test** — 12 scenarios with 2026 dates × controllers × seeds.
 
 Train on 2025, test on 2026: Ramadan moves by 11 days a year, so a model that memorised dates fails.
@@ -338,19 +345,19 @@ Error: lower is better. F1: higher is better.
 
 | Model | Model vs rule | Status |
 |---|---|---|
-| demand forecast | 0.023 vs 0.044 (Ramadan 0.026 vs 0.103) | used |
-| pedestrian | F1 0.72 vs 0.00 | used |
-| ambulance ETA | 87 s vs 118 s | used, few data |
-| bus ETA | 138 s vs 216 s | used |
-| bus lateness | 119 s vs 165 s | used |
-| rain speed | 0.21 vs 0.43 | used |
-| arrivals | 0.75 vs 0.79 | used, small gain |
-| travel time | 23.2 s vs 23.0 s | no gain |
-| sensor health | F1 0.62 vs 0.98 | removed; rule used |
-| incident | too few examples | old schematic model |
-| notification | copies our rules | used |
+| demand forecast (tested on 2026) | 0.023 vs 0.044 (Ramadan 0.026 vs 0.103) | used |
+| pedestrian | F1 0.443 vs 0.0 (precision 0.40, recall 0.50) | used, still weak |
+| ambulance ETA | 43.7 s vs 92.6 s (737 rows) | used |
+| bus ETA | 139.7 s vs 285.8 s | used |
+| bus lateness | 158.9 s vs 212.3 s (270 rows) | used, few data |
+| edge travel time | 0.53 vs 2.5 | used |
+| rain speed | 0.15 vs 0.38 | used |
+| arrivals | 0.69 vs 0.69 | no gain |
+| sensor health | F1 0.752 vs 0.978 | rule wins → use the rule |
+| incident | skipped: not enough labelled incidents | older model kept |
+| notification | training accuracy 1.0 | copies our own rules; proves nothing |
 
-7 of 11 models beat their rule.
+Source: `models/metrics.json`. 7 of 11 models beat their rule.
 
 ### 5.3 Controller results (Tunis map, seed 1)
 
@@ -377,12 +384,13 @@ Error: lower is better. F1: higher is better.
 
 - **Synthetic demand.** These are simulation results, not Tunis measurements.
 - **One seed.** No significance test yet.
-- **Old numbers.** The models and the results in 5.2–5.3 were measured before the last network changes (lanes, 50 km/h, TRANSTU lines). They must be measured again.
+- **Old controller numbers.** The models in 5.2 are from the latest training. The controller results in 5.3 come from an earlier run (1 seed, before the lane, speed and bus-line changes). They must be measured again with the new models.
 - **Lanes.** 18 of 21 junction roads have unverified lane counts (SUMO defaults).
 - **Bus data.** Community data, not an official feed. Headways (15 min) are assumed.
 - **Calendar factors** are our assumptions.
-- **Weak models.** Travel time equals its rule. Ambulance ETA has few rows. Incident is not retrained.
-- **Tuning and RL** parameters still come from the schematic network.
+- **Weak models.** Arrivals equals its rule. Pedestrian F1 is only 0.44. Bus lateness has 270 rows. Sensor health loses to its rule. Incident is not retrained (too few incidents).
+- **RL** is 4% worse than max-pressure; tuning found nothing better than the defaults.
+- **No embeddings / local LLM.** Retrieval is keyword-based; LLMs are hosted.
 
 ### 5.6 Difficulties encountered
 
@@ -407,7 +415,7 @@ Error: lower is better. F1: higher is better.
 
 | Priority | Task | Why | Closes |
 |---|---|---|---|
-| 1 | Retrain all models on the current network (`train.py`, with tuning and RL) | the network changed | O1, O6 |
+| 1 | Delete `models/sensor_health.joblib` (the rule wins) | the agent must use the better method | O6 |
 | 1 | Re-run results: 12 scenarios × 3 seeds, then paired t-tests (`analyze.py`) | one seed is not proof | O1, O2 |
 | 2 | Bus KPIs per line; check car wait is not worse | O4 has a model, not a KPI | O4 |
 | 2 | More incident runs; retrain the incident model | too few examples | O6 |
@@ -419,7 +427,7 @@ Error: lower is better. F1: higher is better.
 
 | Period | Work |
 |---|---|
-| Week 1 | retrain on the current network; full experiment run; t-tests |
+| Week 1 | remove the losing sensor-health model; full experiment run with the new models; t-tests |
 | Week 2 | bus KPIs; incident model; field survey |
 | Weeks 3–4 | real-data tools (`get_weather`, `get_bus_schedule`, `get_counts`, `get_accidents`) and their models |
 | Final | report, demo video, defence |
@@ -442,6 +450,9 @@ Rules for every new data source: the new tool only reads; a new model must beat 
 | What is a seed? | A number that fixes the random generator. The same seed gives the same traffic, so runs can be repeated and compared. |
 | How do agents communicate? | A message bus with 6 message kinds. Messages expire. Agents never call each other directly. |
 | How do you know the labels are right? | The simulator records what really happened later. No manual labels. |
+| Why is RL not the default? | In the fair test it waited 231.4 s against 221.9 s for max-pressure (4% worse). A model must beat what it replaces. |
+| Is the sensor health agent useless? | No. It protects max-pressure from frozen detectors and moves the master to actuated or fixed mode. Only its ML model is useless: the 10-second rule is better. |
+| Do you use RAG or embeddings? | No. The decision log uses fixed reason codes, so keyword search finds the entries, and every citation is checked. Embedding search is a possible next step. |
 
 ## Appendix B. Key files
 
