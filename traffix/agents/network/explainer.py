@@ -61,7 +61,9 @@ def select_entries(entries, question, limit=12):
     tls = {m.upper() for m in re.findall(r"\b([bfj]\d)\b", q)}
     times = [float(x) for x in re.findall(r"(\d+(?:\.\d+)?)\s*s\b", q)]
     codes = [c for k, cs in KEYWORDS.items() if k in q for c in cs]
-    wants_routine = any(w in q for w in ("phase", "switch", "pressure", "cycle"))
+    # a question about one junction and nothing more specific is about its light changes
+    wants_routine = (any(w in q for w in ("phase", "switch", "pressure", "cycle", "green"))
+                     or bool(tls and not codes and not vehicles))
 
     pool = entries
     if vehicles:
@@ -82,7 +84,7 @@ def select_entries(entries, question, limit=12):
         if vehicles:
             s += 6
         if e.get("tls") in tls:
-            s += 2
+            s += 4
         if any(c in e["reason"] for c in codes):
             s += 4
         if times and min(abs(e["t"] - t) for t in times) <= 60:

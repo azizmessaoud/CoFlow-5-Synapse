@@ -39,10 +39,12 @@ demand:
 
 # Scenario event locations. scenarios.yaml and training refer to them as "@name".
 places:
-  incident_edge: "577010716#1"      # Av. Habib Bourguiba eastbound, between J6 and J1
-  incident_edge_b: "10641416#1"     # Av. Habib Bourguiba westbound, between J1 and J6
-  incident_edge_c: "577010716#0"    # Av. Habib Bourguiba eastbound, just east of J6
-  training_incident_edge: "10641416#2"  # Av. Habib Bourguiba westbound, nearer J6
+  # incident edges must be junction approaches or exits with 2+ lanes: the incident agent only
+  # sees detector lanes, and the incident blocks lane 1
+  incident_edge: "577010717#1"      # Av. Habib Bourguiba, approach to J6 (3 lanes)
+  incident_edge_b: "100081107#1"    # Av. Habib Bourguiba, approach to J2 (3 lanes)
+  incident_edge_c: "10641416#0"     # Av. Habib Bourguiba, leaving J1 (3 lanes)
+  training_incident_edge: "-26242831#0"  # Av. de France, approach to J2 (3 lanes)
   sensor_fault_tls: J1              # Place du 14 Janvier 2011
   sensor_fault_tls_b: J4            # Av. Habib Thameur x Rue de Rome
   flood_edge: "26280306#2"          # Av. Habib Thameur, J5 towards J4

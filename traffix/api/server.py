@@ -26,7 +26,6 @@ which reads from the supermaster's live run; it never reaches the masters or SUM
 import json
 import os
 
-import pandas as pd
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -226,6 +225,9 @@ def copilot_decision(body: Decision):
 @app.get("/api/results")
 def results():
     """Experiment results produced by scripts/run_experiments.py + scripts/analyze.py."""
+    # imported here, after libsumo: pandas loads pyarrow, whose arrow.dll makes libsumo ~10x slower if it loads first
+    import pandas as pd
+
     def csv(name):
         p = config.path("results", name)
         try:

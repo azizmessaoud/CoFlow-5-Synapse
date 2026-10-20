@@ -43,13 +43,19 @@ class ReroutingAgent(Agent):
         tt = self.sensors.edge_travel_times()
         if self.model is not None:
             rain = self.sensors.weather.get("rain", 0.0)
+            by_edge = {}
+            for l in self.sensors.lanes:
+                by_edge.setdefault(l.rsplit("_", 1)[0], []).append(l)
+            edges, rows = [], []
             for edge in tt:
-                lanes = [l for l in self.sensors.lanes if l.rsplit("_", 1)[0] == edge]
-                if lanes:
-                    rs = [self.sensors.lane(l) for l in lanes]
-                    f = [sum(r.occupancy for r in rs) / len(rs), sum(r.halting for r in rs),
-                         min(r.speed for r in rs), self.sensors.edge_length[edge], rain]
-                    tt[edge] = max(1.0, float(self.model.predict([f])[0]))
+                if edge in by_edge:
+                    rs = [self.sensors.lane(l) for l in by_edge[edge]]
+                    edges.append(edge)
+                    rows.append([sum(r.occupancy for r in rs) / len(rs), sum(r.halting for r in rs),
+                                 min(r.speed for r in rs), self.sensors.edge_length[edge], rain])
+            if rows:                                    # one batched call: per-row predict costs ~10 ms each
+                for edge, y in zip(edges, self.model.predict(rows)):
+                    tt[edge] = max(1.0, float(y))
         for p in self.bus.published("FLOOD"):
             tt[p.subject] = 1e6
         return tt

@@ -39,6 +39,32 @@ def test_decisions_need_reason_codes():
         pass
 
 
+def test_explainer_finds_entries_for_a_junction_question():
+    from traffix.agents.network.explainer import select_entries
+    log = DecisionLog()
+    log.log(10, "master@J1", "switch", "MAX_PRESSURE_SWITCH", tls="J1")
+    log.log(20, "master@J1", "switch", "MAX_PRESSURE_SWITCH", tls="J1")
+    log.log(30, "master@J2", "switch", "MAX_PRESSURE_SWITCH", tls="J2")
+    for q in ("Why did the lights at J1 switch?", "Why did J1 turn green?", "J1"):
+        found, _ = select_entries(log.entries, q)
+        assert found and all(e["tls"] == "J1" for e in found), q
+    found, _ = select_entries(log.entries, "Why did the late buses get priority?")
+    assert not found
+
+
+def test_incident_places_are_visible_to_the_incident_agent():
+    import sumolib
+    from traffix.core import config
+    from traffix.simulation.network_model import load_models
+    net_file = config.network_files()[0]
+    net, models = sumolib.net.readNet(net_file), load_models(net_file)
+    seen = {l.rsplit("_", 1)[0] for m in models.values() for l in m.incoming_lanes + m.outgoing_lanes}
+    for name, edge in config.network()["places"].items():
+        if "incident_edge" in name:            # the incident blocks lane 1 of a detector road
+            assert edge in seen, f"{name} {edge} has no detector"
+            assert net.getEdge(edge).getLaneNumber() >= 2, f"{name} {edge} has no lane 1"
+
+
 def test_architecture():
     r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "check_architecture.py")])
     assert r.returncode == 0
