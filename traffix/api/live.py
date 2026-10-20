@@ -211,6 +211,8 @@ class LiveRun:
         out = []
         for e in route:
             n = self.edge_name[e]
+            if n == e:                                  # unnamed segment: its id means nothing to a driver
+                continue
             if not out or out[-1] != n:
                 out.append(n)
         return out

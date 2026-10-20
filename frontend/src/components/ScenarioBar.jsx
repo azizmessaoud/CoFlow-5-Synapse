@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api, useOnce } from "../api.js";
+import { LANGS, useLang } from "../i18n.js";
 
 export default function ScenarioBar({ live }) {
   const scenarios = useOnce("/scenarios") || [];
@@ -7,6 +8,7 @@ export default function ScenarioBar({ live }) {
   const [speed, setSpeed] = useState(4);
   const [controller, setController] = useState("traffix");
   const [failed, setFailed] = useState("");
+  const { lang, setLang } = useLang();
   useEffect(() => { if (live.scenario) setChoice(live.scenario); }, [live.scenario]);
   const start = () => {
     setFailed("");
@@ -45,6 +47,9 @@ export default function ScenarioBar({ live }) {
       {failed && <span className="pill bad">{failed}</span>}
       {status === "finished" && <span className="pill info">finished</span>}
       {status === "idle" && <span className="muted">No simulation running</span>}
+      <select value={lang} onChange={(e) => setLang(e.target.value)} aria-label="Language of alerts and answers">
+        {LANGS.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}
+      </select>
       {status === "offline" && <span className="pill bad">backend offline: run python scripts/run_live.py</span>}
     </div>
   );

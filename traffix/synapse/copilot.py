@@ -97,18 +97,19 @@ class Copilot:
         log = self.important(400)
         cite = lambda reason, **match: [e["id"] for e in log if e["reason"] == reason
                                         and all(e["details"].get(k) == v for k, v in match.items())][-3:]
-        sugg = []
+        sugg, road = [], self._narrator().edge              # street names in titles; citations match ids
         for st in s.get("stale", [])[:2]:
-            sugg.append({"title": phrase(COPILOT, "s_stale", lang, lane=st["subject"]),
+            sugg.append({"title": phrase(COPILOT, "s_stale", lang,
+                                         lane=f"{st['subject']} ({road(st['subject'].rsplit('_', 1)[0])})"),
                          "citations": cite("DATA_STALE", lane=st["subject"])})
         for inc in s.get("incidents", [])[:2]:
-            sugg.append({"title": phrase(COPILOT, "s_incident", lang, edge=inc["subject"],
+            sugg.append({"title": phrase(COPILOT, "s_incident", lang, edge=road(inc["subject"]),
                                          confidence=inc.get("confidence", 0)),
                          "citations": cite("INCIDENT_SUSPECTED", edge=inc["subject"])})
         jams = s.get("congestion", [])
         if len(jams) >= 2:
             worst = max(jams, key=lambda j: j.get("stopped_vehicles", 0))
-            sugg.append({"title": phrase(COPILOT, "s_jam", lang, n=len(jams), edge=worst["subject"]),
+            sugg.append({"title": phrase(COPILOT, "s_jam", lang, n=len(jams), edge=road(worst["subject"])),
                          "citations": cite("CONGESTION_DETECTED", edge=worst["subject"])})
         denied = [e for e in log if e["reason"] == "EMERGENCY_DENIED_EXIT_FULL"][-1:]
         if denied:
