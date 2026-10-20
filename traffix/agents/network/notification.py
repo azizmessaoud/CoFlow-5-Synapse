@@ -96,16 +96,20 @@ class NotificationAgent(Agent):
                 self.next_id += 1
         del self.bus.notifications[:-self.KEEP]
 
+    def road(self, edge):
+        """Street name for alert texts (people don't read SUMO edge ids); `where` keeps the ids."""
+        return self.sensors.edge_name.get(edge, edge)
+
     def step(self, now):
         to_node = self.sensors.edge_to_node
         for p in self.bus.published("INCIDENT"):
-            self.emit(now, "INCIDENT", ("INC", p.subject, p.t), edge=p.subject,
+            self.emit(now, "INCIDENT", ("INC", p.subject, p.t), edge=self.road(p.subject),
                       where={"edges": [p.subject], "junctions": [to_node.get(p.subject)]}, **p.details)
         for p in self.bus.published("CONGESTION"):
-            self.emit(now, "CONGESTION", ("JAM", p.subject, p.t), edge=p.subject,
+            self.emit(now, "CONGESTION", ("JAM", p.subject, p.t), edge=self.road(p.subject),
                       where={"edges": [p.subject], "junctions": [p.details.get("junction")]}, **p.details)
         for p in self.bus.published("FLOOD"):
-            self.emit(now, "FLOOD", ("FLOOD", p.subject), edge=p.subject,
+            self.emit(now, "FLOOD", ("FLOOD", p.subject), edge=self.road(p.subject),
                       where={"edges": [p.subject], "junctions": [to_node.get(p.subject)]})
         for p in self.bus.published("AMBULANCE_ROUTE"):
             for tls, eta in p.details["junctions"]:
@@ -123,13 +127,14 @@ class NotificationAgent(Agent):
                 self.emit(now, "RAIN", ("RAIN", p.details["intensity"]),
                           slow=1 - p.details["expected_speed_factor"])
         for p in self.bus.published("ROUTE_B"):
-            self.emit(now, "ROUTE_B", ("RB", p.subject, p.t), edge=p.subject,
+            self.emit(now, "ROUTE_B", ("RB", p.subject, p.t), edge=self.road(p.subject),
                       where={"edges": [p.subject]}, **p.details)
         for p in self.bus.published("TRANSIT_LATE"):
             self.emit(now, "TRANSIT_LATE", ("LATE", p.subject), vehicle=p.subject,
                       where={"line": p.details.get("line")}, **p.details)
         for p in self.bus.published("DATA_STALE"):
-            self.emit(now, "DATA_STALE", ("STALE", p.subject, p.t), lane=p.subject)
+            self.emit(now, "DATA_STALE", ("STALE", p.subject, p.t),
+                      lane=f"{p.subject} ({self.road(p.subject.rsplit('_', 1)[0])})")
         entries = self.log.entries[self.log_pos:]
         self.log_pos = len(self.log.entries)
         for e in entries:

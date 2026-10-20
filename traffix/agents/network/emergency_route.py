@@ -27,7 +27,7 @@ class EmergencyRouteAgent(Agent):
     def eta(self, distance, speed, halting):
         # the model only saw approaches within the detection radius: don't extrapolate
         if self.model is not None and distance <= self.cfg["emergency"]["detect_distance"]:
-            return float(self.model.predict([[distance, speed, halting]])[0])
+            return max(0.0, float(self.model.predict([[distance, speed, halting]])[0]))  # regressor can dip below 0
         return distance / max(speed, 8.0)
 
     def step(self, now):

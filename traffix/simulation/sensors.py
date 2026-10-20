@@ -7,6 +7,7 @@ last reading with its old timestamp. The weather feed plays the role of an
 external weather service; world.py fills it during rain scenarios.
 """
 from dataclasses import dataclass
+from html import unescape
 
 import sumolib
 
@@ -62,6 +63,8 @@ class SensorLayer:
                              if not e.getFunction()}
         self.edge_from_node = {e.getID(): e.getFromNode().getID() for e in net.getEdges()
                                if not e.getFunction()}
+        self.edge_name = {e.getID(): unescape(e.getName()) for e in net.getEdges()
+                          if not e.getFunction() and e.getName()}
 
     def freeze(self, lanes, until):
         for l in lanes:
