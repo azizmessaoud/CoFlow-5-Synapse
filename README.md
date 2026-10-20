@@ -708,7 +708,7 @@ These sources motivate the needs; they do not set the project's targets.
 ## 14. Known limitations
 
 - **Synthetic demand.** Car and pedestrian trips are generated from a calendar model; bus headways are assumed. Calendar values are project assumptions.
-- **Models need retraining after network changes.** The Tunis network was rebuilt without motorway ramp lanes (11 roads lost invented lanes). Run `scripts\train.py` before comparing controllers: one off-peak seed afterwards showed `traffix` waits above fixed-time (128 s vs 74 s) with the old models. Sensor health uses its rule (the retrained model scored F1 0.62 vs 0.98); incident detection still uses the schematic-network model.
+- **Retrain after network changes.** The models were retrained on the current Tunis network (`models/metrics.json`); the controller results were not re-measured yet. Sensor health uses its rule (the retrained model scored F1 0.752 vs 0.978, so it was deleted). Incident detection uses its rule (too few labelled incidents to train). `scripts\train.py` still saves `sensor_health.joblib` on every run: delete it after retraining.
 - **Unsignalised side streets** yield on the real grid, so car waits are higher than on the schematic network; `demand.base_vehicles_per_hour` is 2400 for this map.
 - **`libsumo` is blocked** by Windows application control on the development machine; TraCI is used.
 - **J0 evidence** is one matched seed with mixed Max-Pressure results; no winner is claimed.

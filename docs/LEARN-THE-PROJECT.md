@@ -165,7 +165,7 @@ All agents share the same base class. Each agent:
 
 #### 5. Sensor health agent (`sensor_health.py`)
 - **Job:** finds frozen detectors and publishes `DATA_STALE`. The master then drops to a safer mode.
-- **Model:** a classifier exists, but on the test data the **rule is better** (F1 0.98 vs 0.75). See the warning in Part 9.
+- **Model:** a classifier exists, but on the test data the **rule is better** (F1 0.98 vs 0.75). So the model file was deleted and the agent uses its rule (no update for 10 s → stale).
 
 ### 5.3 The city level: the Supermaster and 8 network agents
 
@@ -265,7 +265,7 @@ Almost all models are **HistGradientBoosting** (scikit-learn), the same family a
 | rain speed | slowdown in rain | 0.15 | 0.38 | model wins |
 | arrivals | cars in the next 30 s | 0.69 | 0.69 | equal |
 | sensor health | frozen detector | F1 0.752 | F1 0.978 | **rule wins** |
-| incident | blocked lane | — | — | not trained: too few real incidents |
+| incident | blocked lane | — | — | not trained: too few real incidents; the agent uses its rule |
 | notification | who sees an alert | 100% | — | copies our own rules; proves nothing |
 
 **7 of 11 models beat their rule.**

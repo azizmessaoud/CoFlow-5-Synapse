@@ -126,7 +126,7 @@ Rules (enforced by `scripts/check_architecture.py`, run in CI):
 | **Pedestrian** | no long wait; no green during a crossing | requests a walk phase | gradient-boosting classifier: will this person wait too long? Beats the threshold rule. | people waiting, wait times, `request()` |
 | **Transit priority** | help late buses only | requests priority for a late bus | gradient-boosting regressor: bus ETA to the stop line | approaching buses, lateness, `request()` |
 | **Emergency priority** | green before the ambulance arrives | requests green with the predicted arrival time | gradient-boosting regressor: ambulance ETA. Rule fallback: distance ÷ speed. | emergency vehicles (type, distance, speed), `request()` |
-| **Sensor health** | stale data must not drive a light | publishes DATA_STALE; the master falls back | rule (no update for 10 s → stale). A trained classifier lost to the rule (F1 0.75 vs 0.98), so the rule must be used: delete `models/sensor_health.joblib` before the demo | detector age, `publish()` |
+| **Sensor health** | stale data must not drive a light | publishes DATA_STALE; the master falls back | rule (no update for 10 s → stale). A trained classifier lost to the rule (F1 0.75 vs 0.98), so the model file was deleted and the rule is used | detector age, `publish()` |
 
 Priority order in every master: **safety > emergency > supermaster directive > late bus > pedestrian > normal**.
 
@@ -311,6 +311,7 @@ Why not deep learning: little data, a one-second control loop, and every decisio
 2. **Fit** — each model on 75% of the rows; test on 25% against its rule.
 3. **Tune** — light parameters by random search on simulation (score = mean car wait + pedestrian wait).
 4. **RL** — 3 rounds of Fitted Q-Iteration: gamma 0.9, 12 refits, reward = own wait + 0.5 × neighbours' mean queue, 60 s starvation guard.
+5. **Test** — 12 scenarios with 2026 dates × controllers × seeds.
 
 Latest full training (commit `e141c7b`, Tunis map, Python 3.11.9, scikit-learn 1.9.1):
 - About 850,000 rows from 20 runs (10 training scenarios × 2 seeds).
@@ -318,7 +319,6 @@ Latest full training (commit `e141c7b`, Tunis map, Python 3.11.9, scikit-learn 1
 - **RL:** car + pedestrian wait 232.6 s → 217.2 s → 208.9 s over the 3 rounds (with exploration). In the fair final test (no exploration) RL waits **231.4 s** and max-pressure **221.9 s**. RL is about 4% worse, so **max-pressure stays the default**; RL stays an option (`traffix_rl`).
 
 LLMs: we call hosted models through an API (Claude, or `openai/gpt-oss-120b` / `gpt-oss-20b` on Groq). We do not train them. We use no embedding model: `search_log` uses keyword matching over the fixed reason codes, and every citation is checked. An open-weights model (for example Mistral 7B) with embedding search was in an early plan and was not built.
-5. **Test** — 12 scenarios with 2026 dates × controllers × seeds.
 
 Train on 2025, test on 2026: Ramadan moves by 11 days a year, so a model that memorised dates fails.
 
@@ -353,8 +353,8 @@ Error: lower is better. F1: higher is better.
 | edge travel time | 0.53 vs 2.5 | used |
 | rain speed | 0.15 vs 0.38 | used |
 | arrivals | 0.69 vs 0.69 | no gain |
-| sensor health | F1 0.752 vs 0.978 | rule wins → use the rule |
-| incident | skipped: not enough labelled incidents | older model kept |
+| sensor health | F1 0.752 vs 0.978 | rule wins; model deleted, rule used |
+| incident | skipped: not enough labelled incidents | old model deleted; rule used |
 | notification | training accuracy 1.0 | copies our own rules; proves nothing |
 
 Source: `models/metrics.json`. 7 of 11 models beat their rule.
@@ -388,7 +388,7 @@ Source: `models/metrics.json`. 7 of 11 models beat their rule.
 - **Lanes.** 18 of 21 junction roads have unverified lane counts (SUMO defaults).
 - **Bus data.** Community data, not an official feed. Headways (15 min) are assumed.
 - **Calendar factors** are our assumptions.
-- **Weak models.** Arrivals equals its rule. Pedestrian F1 is only 0.44. Bus lateness has 270 rows. Sensor health loses to its rule. Incident is not retrained (too few incidents).
+- **Weak models.** Arrivals equals its rule. Pedestrian F1 is only 0.44. Bus lateness has 270 rows. Sensor health loses to its rule (model deleted). Incident has no model (too few incidents); both agents use their rules.
 - **RL** is 4% worse than max-pressure; tuning found nothing better than the defaults.
 - **No embeddings / local LLM.** Retrieval is keyword-based; LLMs are hosted.
 
@@ -415,7 +415,7 @@ Source: `models/metrics.json`. 7 of 11 models beat their rule.
 
 | Priority | Task | Why | Closes |
 |---|---|---|---|
-| 1 | Delete `models/sensor_health.joblib` (the rule wins) | the agent must use the better method | O6 |
+| 1 | Make `train.py` keep a model only when it beats its rule (today it always saves `sensor_health.joblib`) | a retrain must not bring back a losing model | O6 |
 | 1 | Re-run results: 12 scenarios × 3 seeds, then paired t-tests (`analyze.py`) | one seed is not proof | O1, O2 |
 | 2 | Bus KPIs per line; check car wait is not worse | O4 has a model, not a KPI | O4 |
 | 2 | More incident runs; retrain the incident model | too few examples | O6 |
@@ -427,7 +427,7 @@ Source: `models/metrics.json`. 7 of 11 models beat their rule.
 
 | Period | Work |
 |---|---|
-| Week 1 | remove the losing sensor-health model; full experiment run with the new models; t-tests |
+| Week 1 | keep-only-if-better check in `train.py`; full experiment run with the new models; t-tests |
 | Week 2 | bus KPIs; incident model; field survey |
 | Weeks 3–4 | real-data tools (`get_weather`, `get_bus_schedule`, `get_counts`, `get_accidents`) and their models |
 | Final | report, demo video, defence |
