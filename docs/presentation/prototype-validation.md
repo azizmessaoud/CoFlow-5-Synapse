@@ -208,6 +208,7 @@ How each part supports the main objective:
 - Trip planner with alternative routes.
 - Operator copilot with summary and approve/reject (recorded only).
 - Analyst page: decision log, "Ask why", and **Verify with CoFlow Synapse**.
+- Alerts, copilot and answers in English, French or Arabic (language select in the top bar).
 - Experiment runner: 7 controllers × 12 scenarios × seeds; analysis with charts and paired t-tests.
 
 ### 3.2 Use case: an ambulance crosses J1
@@ -239,10 +240,12 @@ Output:
 ### 3.3 Demo script
 
 ```powershell
-py -3.11 scripts\run_live.py --gui      # http://localhost:8000
+py -3.11 scripts\run_live.py      # http://localhost:8000 (add --gui to also open sumo-gui)
 ```
 
-1. Select scenario **emergency**. Press **Start**.
+Full scene plan with timings: [`demo-video-guide.md`](demo-video-guide.md).
+
+1. Select scenario **emergency** and **16× speed**. Press **Start**. The first emergency vehicle appears at about 21:45 sim time (about 90 s).
 2. Operator page: show the live map, the six masters, the copilot summary.
 3. Wait for an ambulance near J1. Point at the light change on the map (or in sumo-gui).
 4. Analyst page: find the `EMERGENCY_GRANTED` decision. Click **Verify with CoFlow Synapse**. Show the citation and the provenance hashes.
@@ -332,12 +335,12 @@ Command: `py -3.11 scripts\train.py` (30–60 min).
 
 | Test | What it checks | Result |
 |---|---|---|
-| Automated tests (`tests/traffix`, `tests/scripts`, `tests/api`, `tests/architecture`, `tests/properties`) | agents, Tunis network, TRANSTU lines, lanes, basemap, Synapse API, safety properties | 108 pass, 1 fails (a pinned Hypothesis version check in the cloud environment) |
+| Automated tests (`tests/traffix`, `tests/scripts`, `tests/api`, `tests/architecture`, `tests/properties`, Synapse contract) | agents, Tunis network, TRANSTU lines, lanes, basemap, Synapse API, safety properties, incident places visible to the agent | 115 pass |
 | Integration test on the real map | 6 masters, named lights, places, bus lines, bridge verify/abstain, a real 300 s SUMO run | pass |
 | Architecture check (`scripts/check_architecture.py`, in CI) | one light writer; Synapse cannot reach SUMO; agents do not see the calendar | pass |
 | Model vs rule | each model against its rule on held-out data | see 5.2 |
-| Controller comparison (`run_experiments.py`) | actuated vs traffix (rules) vs traffix (models) | see 5.3 |
-| Live end-to-end demo | 6 masters, ambulance preemption at J1, Synapse endpoints | pass |
+| Controller comparison (`run_experiments.py`) | fixed, actuated, traffix (rules), traffix (models); 3 scenarios × 3 seeds | see 5.3 |
+| Live stress test | all 12 scenarios run to the end in the web app; every page's API polled twice a second | 0 app errors; first time of every alert recorded ([`demo-video-guide.md`](demo-video-guide.md)) |
 
 ### 5.2 Models against their rules
 
@@ -354,27 +357,38 @@ Error: lower is better. F1: higher is better.
 | rain speed | 0.15 vs 0.38 | used |
 | arrivals | 0.69 vs 0.69 | no gain |
 | sensor health | F1 0.752 vs 0.978 | rule wins; model deleted, rule used |
-| incident | skipped: not enough labelled incidents | old model deleted; rule used |
+| incident | skipped: no labelled incidents (the training places had no detector; fixed, needs a retrain) | old model deleted; rule used (detects in ~50 s, 0 false alarms) |
 | notification | training accuracy 1.0 | copies our own rules; proves nothing |
 
 Source: `models/metrics.json`. 7 of 11 models beat their rule.
 
-### 5.3 Controller results (Tunis map, seed 1)
+### 5.3 Controller results (Tunis map, 3 seeds)
 
-| Scenario | Measure | SUMO actuated | traffix rules | traffix models |
-|---|---|---|---|---|
-| morning peak | mean car wait | 103.1 s | 72.9 s | 61.2 s (−41%) |
-| emergency | mean car wait | 131.7 s | 70.0 s | 52.6 s (−60%) |
-| emergency | emergency vehicle trip | 486.9 s | 303.3 s | 240.7 s |
-| morning / emergency | green during a crossing | 23 / 28 | 1 / 0 | 0 / 0 |
+Mean of seeds 1–3, current network and models (20 Oct 2026). Source: `results/results.csv`,
+`results/summary_by_persona.csv`, `results/significance.csv`. Lower is better. Best in **bold**.
+
+| Scenario | Measure | SUMO fixed | SUMO actuated | traffix rules | traffix models |
+|---|---|---|---|---|---|
+| morning peak | mean car wait | 122.6 s | 118.5 s | **101.8 s** | 105.9 s (−11% vs actuated) |
+| emergency | mean car wait | **62.2 s** | 65.9 s | 68.7 s | 78.8 s (+20%) |
+| incident | mean car wait | **69.1 s** | 96.1 s | 98.1 s | 73.5 s (−24%) |
+| morning peak | mean pedestrian wait | 140.2 s | 144.1 s | 128.1 s | **116.3 s** (−19%) |
+| emergency | mean pedestrian wait | 139.1 s | 152.2 s | 107.6 s | **98.3 s** (−35%) |
+| incident | mean pedestrian wait | 123.9 s | **111.1 s** | 118.9 s | 123.3 s (+11%) |
+| emergency | emergency vehicle trip | **197.0 s** | 213.2 s | 232.3 s | 240.0 s (+13%) |
+| all three | car green started while people were crossing (per run) | 239–281 | 331–405 | 16–19 | **17–19** (−95%) |
+| incident | lane blockage detected / delay / false alarms | — | — | 3 of 3 / 50 s / 0 | 3 of 3 / 51 s / 0 |
+
+Paired t-tests (traffix vs actuated, and models vs rules): none is significant at p < 0.05 with 3 seeds.
+The closest: pedestrian wait, morning peak, models vs rules −9% (p = 0.06).
 
 ### 5.4 Results against objectives
 
 | # | Result | Status |
 |---|---|---|
-| O1 | morning car wait 103 → 61 s | met (1 seed) |
-| O2 | emergency trip 487 → 241 s | met (1 seed) |
-| O3 | green during a crossing 28 → 0 | met |
+| O1 | car wait vs actuated: −11% morning, −24% incident, +20% emergency; not significant | partial |
+| O2 | emergency trip 240 s vs 213 s actuated and 197 s fixed: slower | not met |
+| O3 | car greens started during a crossing: about 18 per run vs 331–405 with actuated (−95%), not 0 | partial |
 | O4 | lateness model better than its rule; bus KPI per line not yet measured | partial |
 | O5 | every decision has a reason code; a false claim gives abstain | met |
 | O6 | 7 of 11 models beat their rule | partial |
@@ -383,12 +397,13 @@ Source: `models/metrics.json`. 7 of 11 models beat their rule.
 ### 5.5 Limitations
 
 - **Synthetic demand.** These are simulation results, not Tunis measurements.
-- **One seed.** No significance test yet.
-- **Old controller numbers.** The models in 5.2 are from the latest training. The controller results in 5.3 come from an earlier run (1 seed, before the lane, speed and bus-line changes). They must be measured again with the new models.
+- **Three seeds, three scenarios.** No difference is significant yet. Earlier one-seed numbers (−41% car wait, ambulance 487 → 241 s) were measured before the lane, speed and bus-line changes and are replaced by 5.3.
+- **Ambulances are slower with traffix** (240 s vs 213 s actuated). Not yet explained: the preparation horizon, the extra car wait in this scenario, or the routes may be the cause.
+- **Heavy scenario:** near saturation (after about 53 min, ~466 vehicles) the web app can freeze for up to 19 s.
 - **Lanes.** 18 of 21 junction roads have unverified lane counts (SUMO defaults).
 - **Bus data.** Community data, not an official feed. Headways (15 min) are assumed.
 - **Calendar factors** are our assumptions.
-- **Weak models.** Arrivals equals its rule. Pedestrian F1 is only 0.44. Bus lateness has 270 rows. Sensor health loses to its rule (model deleted). Incident has no model (too few incidents); both agents use their rules.
+- **Weak models.** Arrivals equals its rule. Pedestrian F1 is only 0.44. Bus lateness has 270 rows. Sensor health loses to its rule (model deleted). Incident has no model (no labelled incidents until the place fix); both agents use their rules.
 - **RL** is 4% worse than max-pressure; tuning found nothing better than the defaults.
 - **No embeddings / local LLM.** Retrieval is keyword-based; LLMs are hosted.
 
@@ -406,6 +421,11 @@ Source: `models/metrics.json`. 7 of 11 models beat their rule.
 | Ramp guessing added false lanes; 80–100 km/h on city roads | ramp guessing off; 50 km/h legal urban limit |
 | An unsupported claim that lanes matched imagery | removed; lanes tracked with evidence status |
 | Parallel experiment runs hung | `--workers 1` |
+| The live app ran at 4× instead of 16×: pandas loaded pyarrow's `arrow.dll` before SUMO's | pandas imported only where results are read (live run about 23×) |
+| Every incident place was a road without a detector, so no incident was ever detected (and none could be labelled for training) | places moved to junction approaches; a test keeps them visible |
+| Synapse abstained on "Why did J1 switch?" | a junction match is enough to select log entries |
+| Alerts showed SUMO ids ("Heavy traffic on 1501192411#3") and an ETA of −24 s | street names in alerts, copilot and trips; ETA clamped at 0 |
+| French and Arabic alerts existed but no control showed them | language select in the top bar |
 
 ---
 
@@ -416,9 +436,10 @@ Source: `models/metrics.json`. 7 of 11 models beat their rule.
 | Priority | Task | Why | Closes |
 |---|---|---|---|
 | 1 | Make `train.py` keep a model only when it beats its rule (today it always saves `sensor_health.joblib`) | a retrain must not bring back a losing model | O6 |
-| 1 | Re-run results: 12 scenarios × 3 seeds, then paired t-tests (`analyze.py`) | one seed is not proof | O1, O2 |
+| 1 | Find why ambulances are slower with traffix (preparation horizon, exit checks) and fix it | O2 is not met | O2 |
+| 1 | More seeds (10) and all 12 scenarios, then paired t-tests (`analyze.py`) | 3 seeds show no significant difference | O1, O2, O3 |
 | 2 | Bus KPIs per line; check car wait is not worse | O4 has a model, not a KPI | O4 |
-| 2 | More incident runs; retrain the incident model | too few examples | O6 |
+| 2 | Retrain now that incident places have detectors; keep the incident model only if it beats the rule | no incident model yet | O6 |
 | 2 | Field survey of the 18 unverified junction roads (`field-survey-sheet.html`) | real lane counts | realism |
 | 3 | Real data: official timetables, weather API, traffic counts | calibrate demand | realism |
 | 3 | Accident-history risk model + read-only `get_accidents(junction)` tool | new value for the copilot and incident agent | new |
@@ -427,7 +448,7 @@ Source: `models/metrics.json`. 7 of 11 models beat their rule.
 
 | Period | Work |
 |---|---|
-| Week 1 | keep-only-if-better check in `train.py`; full experiment run with the new models; t-tests |
+| Week 1 | ambulance trip time; keep-only-if-better check in `train.py`; 10 seeds × 12 scenarios; t-tests |
 | Week 2 | bus KPIs; incident model; field survey |
 | Weeks 3–4 | real-data tools (`get_weather`, `get_bus_schedule`, `get_counts`, `get_accidents`) and their models |
 | Final | report, demo video, defence |
@@ -453,6 +474,8 @@ Rules for every new data source: the new tool only reads; a new model must beat 
 | Why is RL not the default? | In the fair test it waited 231.4 s against 221.9 s for max-pressure (4% worse). A model must beat what it replaces. |
 | Is the sensor health agent useless? | No. It protects max-pressure from frozen detectors and moves the master to actuated or fixed mode. Only its ML model is useless: the 10-second rule is better. |
 | Do you use RAG or embeddings? | No. The decision log uses fixed reason codes, so keyword search finds the entries, and every citation is checked. Embedding search is a possible next step. |
+| Is traffix better than SUMO actuated? | For pedestrians, yes: about 95% fewer greens started during a crossing and lower pedestrian wait in two of three scenarios. For cars it is mixed (−11% and −24%, but +20% in the emergency scenario), and nothing is significant with 3 seeds. |
+| Your doc said −41% car wait and ambulance 487 → 241 s. Why did it change? | Those were one-seed runs before the lane and speed fixes. The fixes made the baselines faster. We re-ran with 3 seeds and report those numbers, including that ambulances are now slower with traffix. |
 
 ## Appendix B. Key files
 

@@ -81,7 +81,9 @@ Matches section 3 of the validation brief: a concrete use case, input → output
    [#id]. Open a log entry → **Verify with CoFlow Synapse**. Ask about a vehicle that does not exist:
    it abstains. Say: a false claim gives abstain.
 7. **Language (20 s).** Switch to FR, then عربي: alerts and copilot change language.
-8. **Results (30 s).** Open **Results** and show the comparison with SUMO fixed and actuated.
+8. **Results (30 s).** Open **Results** and show the comparison with SUMO fixed and actuated
+   (3 scenarios × 3 seeds). Say it honestly: pedestrians are much safer, cars mixed, ambulances
+   slower, nothing significant yet with 3 seeds.
 
 ## 5. Things to know while recording
 

@@ -265,7 +265,7 @@ Almost all models are **HistGradientBoosting** (scikit-learn), the same family a
 | rain speed | slowdown in rain | 0.15 | 0.38 | model wins |
 | arrivals | cars in the next 30 s | 0.69 | 0.69 | equal |
 | sensor health | frozen detector | F1 0.752 | F1 0.978 | **rule wins** |
-| incident | blocked lane | — | — | not trained: too few real incidents; the agent uses its rule |
+| incident | blocked lane | — | — | not trained: the training incidents were on roads without a detector (now fixed); the agent uses its rule |
 | notification | who sees an alert | 100% | — | copies our own rules; proves nothing |
 
 **7 of 11 models beat their rule.**
@@ -396,7 +396,8 @@ File: `traffix/orchestration/safety_rules.py`. Only the executor (`traffix/simul
 | Analyst | Tahani | decision log, "ask why", **Verify with CoFlow Synapse** |
 | Results | everyone | experiment charts |
 
-Run it: `py -3.11 scripts\run_live.py --gui` → http://localhost:8000.
+Run it: `py -3.11 scripts\run_live.py` → http://localhost:8000 (add `--gui` to also open sumo-gui).
+The select at the right of the top bar switches alerts, copilot and answers to French or Arabic.
 
 ---
 
@@ -431,14 +432,20 @@ Real sequence from our emergency run on the Tunis map:
 
 **Why this list?** Each step adds one thing, so we can measure what each part brings: the hierarchy, the supermaster, the models.
 
-Earlier results on the Tunis map (1 seed, before the last network changes, so they must be measured again):
+Results on the Tunis map (mean of 3 seeds, 20 Oct 2026, `results/results.csv`):
 
-| Scenario | Measure | Actuated | traffix rules | traffix |
-|---|---|---|---|---|
-| morning peak | mean car wait | 103 s | 73 s | 61 s (−41%) |
-| emergency | mean car wait | 132 s | 70 s | 53 s (−60%) |
-| emergency | emergency vehicle trip | 487 s | 303 s | 241 s |
-| both | green while someone crossed | 23 / 28 | 1 / 0 | 0 / 0 |
+| Scenario | Measure | Fixed | Actuated | traffix rules | traffix |
+|---|---|---|---|---|---|
+| morning peak | mean car wait | 123 s | 118 s | **102 s** | 106 s (−11%) |
+| emergency | mean car wait | **62 s** | 66 s | 69 s | 79 s (+20%) |
+| incident | mean car wait | **69 s** | 96 s | 98 s | 74 s (−24%) |
+| morning peak | mean pedestrian wait | 140 s | 144 s | 128 s | **116 s** (−19%) |
+| emergency | emergency vehicle trip | **197 s** | 213 s | 232 s | 240 s (+13%) |
+| all three | car green started while people crossed (per run) | 239–281 | 331–405 | 16–19 | 17–19 (−95%) |
+
+What to say: traffix protects pedestrians much better; for cars it is mixed; ambulances are slower
+than with SUMO's plans (to investigate); with 3 seeds no difference is significant yet. Older
+one-seed numbers (−41%, ambulance 487 → 241 s) came before the lane fixes: don't use them.
 
 `scripts/analyze.py` then makes tables, charts and paired t-tests (is the difference real, or luck?).
 
@@ -484,7 +491,8 @@ tests/          automated tests
 ## Part 16. Honest limits (say them before the professor asks)
 
 - **Synthetic traffic.** Real streets, generated traffic. The results come from simulation, not from Tunis measurements.
-- **One seed** so far for the controller results, and they predate the last network changes.
+- **Three seeds, three scenarios** for the controller results: no significant difference yet.
+- **Ambulances are slower** with traffix than with SUMO's plans (240 s vs 213 s). Not explained yet.
 - **Lanes:** 18 of 21 junction roads use default lane counts.
 - **Bus data** comes from community data, not an official feed. Headways (15 min) are assumed.
 - **Calendar factors** (how much Ramadan reduces traffic) are our own assumptions.
