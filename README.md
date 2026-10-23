@@ -162,6 +162,10 @@ this city-centre network.
 
 To use traffix3's original schematic network instead, set `TRAFFIX_NETWORK=tunis_centre`, then run
 `scripts\build_network.py` and `scripts\build_demand.py`.
+On that schematic network at 2,600 vehicles/h, the hierarchy cut morning-peak car waiting by 10%
+vs actuated signals (18.3 s vs 20.4 s, significant over 3 seeds); see section 7 of the
+[traffix3 README](https://github.com/aymenhamzik/traffix3#readme). Those results have not been
+re-run on the Tunis J1..J6 network.
 
 ### The hierarchy
 
