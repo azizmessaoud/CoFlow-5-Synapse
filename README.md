@@ -94,9 +94,10 @@ of the network (each traffic file records the network's fingerprint).
 
 ## 3. The live system: traffix hierarchy on Tunis J1..J6
 
-The team adopted the agent architecture of
-[aymenhamzik/traffix3](https://github.com/aymenhamzik/traffix3) and runs it on the real
-OpenStreetMap streets of Tunis centre-ville. Six junctions carry traffic lights (J1..J6); every
+The agent architecture comes from the team's own earlier repository,
+[aymenhamzik/traffix3](https://github.com/aymenhamzik/traffix3), which the same six students built
+together (it is hosted on teammate Mohamed Aymen Hamzaoui's account). This repository carries that
+code forward and runs it on the real OpenStreetMap streets of Tunis centre-ville. Six junctions carry traffic lights (J1..J6); every
 other junction yields. Node ids and light ids are both J1..J6.
 
 ### The six junctions
@@ -623,12 +624,13 @@ evidence bundle.
 
 **Status:** Accepted
 
-The traffix3 code lives here (`traffix/`, `config/`, `models/`, `frontend/`, scripts). The default
+The code from traffix3, the team's earlier repository, lives here (`traffix/`, `config/`, `models/`, `frontend/`, scripts). The default
 network is `tunis6j`, where only J1..J6 have lights, so each light has exactly one master.
 Network-specific facts live in `config/networks/<network>.yaml`. CoFlow's `SynapseService` is
 attached to the traffix decision log by `traffix/synapse/coflow_bridge.py`, read-only. Models in
 `models/` must be retrained whenever the network or demand changes. traffix3 has no licence file:
-add one, or get the author's written permission, before any public release.
+the team should add one there (it is hosted on Mohamed Aymen Hamzaoui's account) before any public
+release.
 
 ---
 
