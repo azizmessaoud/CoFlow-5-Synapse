@@ -1,0 +1,452 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{cite}
+
+\newcommand{\sys}{CoFlow-5 Synapse}
+
+\begin{document}
+
+\title{Single-Writer Multi-Agent Signal Control with a Read-Only Language Layer:\\
+A SUMO Case Study of Six Junctions in Tunis Centre-Ville}
+
+% TODO: add the other five team members and the supervisor.
+\author{\IEEEauthorblockN{Aziz Messaoud and the CoFlow-5 team}
+\IEEEauthorblockA{ESPRIT, Tunis, Tunisia\\
+aziz.messaoud@esprit.tn}}
+
+\maketitle
+
+\begin{abstract}
+We present \sys{}, a hierarchical multi-agent system that controls six signalised
+junctions of Tunis centre-ville in the SUMO microscopic simulator. The design rests on
+three rules: each traffic light has exactly one writer, a master agent that arbitrates
+proposals from five junction agents in a fixed priority order (safety, emergency,
+network directive, late bus, pedestrian, normal); control degrades from Max-Pressure to
+actuated to fixed-time when sensor data goes stale; and a language layer explains decisions
+from a structured decision log but has no code path to the simulator. Every explanation
+must cite log entries, and an answer whose citations do not exist in the log is turned
+into an abstention. On a network built from OpenStreetMap with synthetic demand, we compare
+the system with SUMO's fixed-time and actuated plans over three scenarios and three random
+seeds. The safety rules cut the number of vehicle greens started while pedestrians were
+still crossing from 331--405 per run (actuated) to 17--19, and mean pedestrian waiting fell
+in two of three scenarios. Vehicle waiting time was mixed ($-24\%$ to $+20\%$ against
+actuated), emergency vehicles were slower than with SUMO's plans, and no difference was
+statistically significant with three seeds. We report these results as preliminary and use
+recent guidance on stochastic benchmarking in SUMO to identify the weaknesses of our own
+evaluation protocol, chief among them single-seed parameter tuning and uncorrected multiple
+comparisons.
+\end{abstract}
+
+\begin{IEEEkeywords}
+traffic signal control, multi-agent systems, SUMO, Max-Pressure, large language models,
+explainability, reproducibility
+\end{IEEEkeywords}
+
+%=====================================================================
+\section{Introduction}
+%=====================================================================
+
+Most signalised junctions in Tunis centre-ville run fixed-time or locally actuated plans.
+Each controller sees only its own queues: it cannot see the road beyond the junction, an
+ambulance two junctions away, or a bus running late. Adaptive and learning-based
+controllers address part of this, but deploying them raises two practical questions that
+are as important as average delay. First, \emph{who is allowed to change a light?} When
+several agents (an emergency agent, a transit agent, a learned policy) can each act on the
+same signal, their commands can conflict. Second, \emph{why did the light change?} Operators
+and incident reviewers need an answer that can be checked, not a fluent guess.
+
+Large language models (LLMs) are increasingly coupled to traffic simulators to build
+scenarios and tune parameters from natural language~\cite{li2024chatsumo,jeong2025agentsumo,li2026decoupled}.
+In those systems the LLM acts on the simulation. We take the opposite position for signal
+control: the language layer may read everything the controllers recorded, but must never
+reach the simulator or the signal heads.
+
+This paper makes four contributions:
+\begin{enumerate}
+\item A hierarchical multi-agent architecture in which a single master per junction is the
+only writer of its light, junction agents only propose, and a supermaster coordinates the
+network through expiring directives (Section~\ref{sec:design}).
+\item A read-only language layer that answers questions from a decision log, cites the log
+entries it relies on, and abstains when citations fail a mechanical check
+(Section~\ref{sec:synapse}).
+\item A reproducible testbed of six real junctions in Tunis built from OpenStreetMap, with
+documented limits on lane evidence and demand (Section~\ref{sec:setup}).
+\item A preliminary evaluation against SUMO's fixed-time and actuated plans, reported with
+its negative results, and a critique of our own protocol against recent benchmarking
+guidance~\cite{riehl2026sumoitscontrol} (Sections~\ref{sec:results}--\ref{sec:discussion}).
+\end{enumerate}
+
+All results come from simulation with synthetic demand. SUMO emission outputs are proxies,
+not air-quality measurements, and simulated emergency trip times are not evidence of lives
+saved.
+
+%=====================================================================
+\section{Related Work}
+%=====================================================================
+
+\subsection{Multi-agent signal control in SUMO}
+Agent-based approaches to traffic and transportation are reviewed by Bazzan and
+Kl\"ugl~\cite{bazzan2014review}. Azevedo et al.~\cite{azevedo2016jade} coupled the JADE
+agent platform to SUMO through the TraSMAPI middleware, binding one agent to each SUMO
+traffic light while leaving vehicles as ordinary simulated entities. They contrast two
+organisations: one agent per light under a \emph{super-coordinator}, which synchronises
+well but has a single point of failure and concentrated computation, and \emph{distributed}
+coordination, which synchronises poorly but contains failures. They chose the latter and
+had each Q-learning agent combine its own reward with the distance-weighted rewards of its
+neighbours. Our design is a hybrid of the two organisations (Section~\ref{sec:design}).
+Two other findings of theirs inform our evaluation: a fixed plan with different timings by
+time of day beat plain Q-learning on queue waiting time, and waiting time and travel time
+ranked the controllers differently.
+
+\subsection{Max-Pressure and classical adaptive control}
+Max-Pressure originates in back-pressure scheduling for packet networks~\cite{tassiulas1990stability}
+and was introduced to signal control by Varaiya~\cite{varaiya2013maxpressure}, with a
+stability guarantee under bounded demand. Kouvelas et al.~\cite{kouvelas2014maxpressure}
+added cyclic phase order, fixed cycles and normalised pressure to limit spill-back.
+SCOOT~\cite{hunt1981scoot} and SCATS~\cite{lowrie1990scats} adapt cycle length, splits and
+offsets for groups of junctions. Riehl et al.~\cite{riehl2026sumoitscontrol} provide
+open TraCI implementations of fixed-order and flexible Max-Pressure and a
+SCOOT/SCATS-inspired group controller, and argue that SUMO studies too often rely on
+single runs and project-specific baselines. They recommend 10--20 replications per
+configuration, paired comparisons on identical seeds, variance-aware reporting and formal
+hypothesis tests, and show that parameter settings whose means differ by less than one
+standard deviation cannot be ranked from a single run~\cite{riehl2026sumoitscontrol,riehl2025reproducibility}.
+
+\subsection{Learning-based control}
+Reinforcement learning (RL) for signal control is commonly studied with multi-agent
+platforms over SUMO~\cite{bokade2024pytsc}. Our optional RL agent uses Fitted Q-Iteration
+with tree ensembles~\cite{ernst2005fqi} and, following~\cite{azevedo2016jade}, a reward that
+includes neighbouring junctions.
+
+\subsection{Language models and traffic simulation}
+TrafficGPT~\cite{zhang2024trafficgpt}, ChatSUMO~\cite{li2024chatsumo} and
+AgentSUMO~\cite{jeong2025agentsumo} connect LLMs to traffic tools so that non-experts can
+build and run scenarios. Li and Ke~\cite{li2026decoupled} split the SUMO workflow into
+Planner, Builder, Demand, Runner and Analyst agents with an orchestrator that keeps
+generated artifacts in a persistent store, so that later agents receive validated file
+references instead of relying on conversational memory. Their analyst feeds KPI feedback
+back to the planner in the style of Reflexion~\cite{shinn2023reflexion}; one repair round
+raised task success on harder tasks from 30\% to 50\%, a second added nothing, and on
+easy tasks extra reflection sometimes hurt. Their agents also modify the network and
+signal programmes. Our language layer shares the idea of a single validated source of
+truth but is deliberately barred from acting.
+
+%=====================================================================
+\section{System Design}\label{sec:design}
+%=====================================================================
+
+\subsection{Hierarchy}
+Table~\ref{tab:hierarchy} lists the agents. Each of the six junctions has one master and
+five junction agents. A supermaster runs eight network agents every 5\,s (incident
+detection, transit monitoring and emergency routing every 1\,s) and sends directives to the
+masters. Agents communicate over a publish/subscribe bus with six message kinds (request,
+proposal, directive, status, publication, notification); every message carries an expiry
+time, so a silent agent cannot leave a stale request in force.
+
+\begin{table}[t]
+\caption{Agents of the hierarchy. Only masters write lights, through the executor.}
+\label{tab:hierarchy}
+\centering
+\footnotesize
+\begin{tabular}{@{}p{1.6cm}p{6.4cm}@{}}
+\toprule
+Level & Agents and role \\
+\midrule
+Junction ($\times6$) & \textbf{Master}: arbitrates, sole writer of its light. \textbf{Traffic light}: proposes the next phase (Max-Pressure by default; predictive or RL optional). \textbf{Pedestrian}, \textbf{transit priority}, \textbf{emergency priority}: send requests. \textbf{Sensor health}: flags stale data. \\
+Network & \textbf{Supermaster}: runs network agents, sends directives, never writes a light. Agents: demand forecast, incident detection, rerouting, emergency route, corridor, transit monitor, weather, notification. \\
+Language & \textbf{Synapse}: explainer, operator copilot, alert writer, verification bridge. Read-only. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Single writer and arbitration}
+Junction agents never act on SUMO. They send proposals and requests to their master. Each
+simulated second the master resolves pending messages in a fixed order,
+\begin{multline}
+\text{safety} \succ \text{emergency} \succ \text{directive} \\
+\succ \text{late bus} \succ \text{pedestrian} \succ \text{normal},
+\end{multline}
+and passes at most one phase change to an executor that enforces the safety rules before
+writing the light: a minimum green of 5\,s, a 3\,s yellow (longer in rain), a pedestrian
+clearance hold of up to 30\,s computed at a design walking speed of 1.07\,m/s, and refusal
+of a green whose exit lane is more than 85\% full. Emergency and transit requests are
+refused, with a logged reason, when the exit is full, when an earlier emergency vehicle is
+being served, or when a bus is not late. A static check run in continuous integration
+verifies that only the executor writes lights, that only masters call it, and that
+junction agents cannot read scenario events or calendar assumptions.
+
+\subsection{Max-Pressure proposal}
+Let $\mathcal{L}(\phi)$ be the vehicle links given right of way by phase $\phi$, with
+incoming lane $i(l)$ and outgoing lane $o(l)$; let $\mathcal{C}(\phi)$ be the pedestrian
+crossings it serves and $\mathcal{E}(\phi)$ the incoming edges it releases. The traffic
+light agent computes
+\begin{equation}
+p(\phi) = \sum_{l\in\mathcal{L}(\phi)} \big(h_{i(l)} - h_{o(l)}\big)
+        + \sum_{e\in\mathcal{E}(\phi)} b_e
+        + w_{\text{ped}} \sum_{c\in\mathcal{C}(\phi)} n_c ,
+\label{eq:pressure}
+\end{equation}
+where $h$ is the number of halting vehicles on a lane, $b_e$ a corridor bias sent by the
+supermaster for a platoon heading to edge $e$, $n_c$ the number of pedestrians waiting at
+crossing $c$, and $w_{\text{ped}}=0.5$. The downstream count $h_{o(l)}$ is taken from the
+neighbouring master's status when it is at most 2\,s old, otherwise from local sensors.
+Once the current green $\phi_0$ has lasted the minimum green, the agent proposes
+$\phi^\star=\arg\max_\phi p(\phi)$ if $p(\phi^\star) > p(\phi_0)+m$, with switching margin
+$m=0$. This is the acyclic variant of Max-Pressure~\cite{varaiya2013maxpressure}. Unlike the
+flexible controller of~\cite{riehl2026sumoitscontrol} it subtracts downstream queues, but it
+currently has no maximum green time (Section~\ref{sec:discussion}).
+
+\subsection{Recovery ladder}
+The master selects its mode from data freshness (stale after 10\,s). With all data fresh it
+uses Max-Pressure; if downstream data is stale it falls back to actuated control (gap-out
+after 3\,s, max-out at 45\,s), which needs incoming lanes only; if incoming data is stale it
+runs a fixed cycle. Each change of mode is logged with a reason code. The ladder is our
+answer to the single point of failure that~\cite{azevedo2016jade} attributes to
+centralised coordination: if the supermaster or a neighbour goes silent, its directives
+expire and each junction keeps operating on local data.
+
+\subsection{Learned components behind a rule gate}
+Learned models supply estimates, not commands: pedestrian over-waiting, ambulance and bus
+arrival times, bus lateness, demand, travel times, rain slowdown and incident detection.
+All are scikit-learn~\cite{pedregosa2011sklearn} gradient-boosted trees trained on data
+recorded from simulations dated in 2025 and tested on scenarios dated in 2026, so that a
+model cannot memorise the date of Ramadan. Each model has a hand-written rule as fallback,
+and a model is used only if it beats its rule on held-out data. The optional RL traffic
+light agent uses Fitted Q-Iteration~\cite{ernst2005fqi} with $\gamma=0.9$, a reward of own
+waiting plus $0.5\times$ the neighbours' mean queue, and a 60\,s starvation guard.
+
+\subsection{Decision log}
+Every master and supermaster decision is appended to a log entry
+$(\textit{id}, t, \textit{agent}, \textit{event}, \textit{reason}, \textit{tls}, \textit{details})$.
+The reason must be one of a fixed table of codes, each with an official plain-language
+meaning (for example \texttt{EMERGENCY\_DENIED\_EXIT\_FULL}: ``the exit lane was full, so
+green would only move the queue''). Logging an unknown code raises an error, so every
+decision has a reason.
+
+%=====================================================================
+\section{The Read-Only Language Layer}\label{sec:synapse}
+%=====================================================================
+
+Synapse answers questions such as ``Why did J1 hold green at 08:14?'' from a finished or
+live decision log. The static architecture check forbids its modules from importing the
+simulation backend, sensors, executor or masters, and the operator copilot's
+``approve'' action is only recorded, never applied.
+
+\paragraph{Retrieval} Log entries are selected by junction, vehicle and keyword-to-reason-code
+matching (for example ``ambulance'' $\rightarrow$ \texttt{EMERGENCY*}, \texttt{RECOVER*}).
+No embeddings are used.
+
+\paragraph{Generation} With an API key, a hosted LLM receives only the selected entries and
+the meanings of their reason codes. It may call read-only tools (log search, live state,
+experiment results) for at most five rounds. It must cite each factual claim as
+\texttt{[\#id]} or reply \texttt{ABSTAIN}. Without a key, or if the API fails, a
+deterministic template builds the answer from the same entries. The control loop never
+waits for the LLM.
+
+\paragraph{Verification} Every cited id is checked against the log. An answer citing an
+entry that does not exist, or citing nothing, is rejected and returned as an abstention.
+A separate deterministic bridge answers \emph{verify} and \emph{audit} requests: a claim
+about a decision is accepted only if it matches the recorded time, action, reason code and
+agent, and the answer is labelled \emph{verified}, \emph{template} or \emph{abstain} with
+seven provenance fields. Alerts are rewritten into French and Arabic by an LLM, and a
+rewrite that changes any number is rejected.
+
+The decision log plays the role that the artifact store plays in~\cite{li2026decoupled}: a
+validated record that the language model reads instead of its own memory. The difference is
+the direction of authority. In~\cite{li2026decoupled} the LLM's outputs are executed after
+validation; here no LLM output is ever executed.
+
+%=====================================================================
+\section{Experimental Setup}\label{sec:setup}
+%=====================================================================
+
+\subsection{Network}
+The network covers Tunis centre-ville, built with \texttt{netconvert} from an OpenStreetMap
+extract dated 15 October 2026 (1{,}335 edges). Six junctions, J1--J6, were selected by a
+deterministic rule over the OSM graph (degree $\geq3$, then signal tags, roundabout,
+named, degree, major road, node id); they lie on Av.\ Habib Bourguiba, Av.\ Habib
+Thameur, Rue de Rome and neighbouring streets. Signals were set at the six nodes, and other
+junctions yield. Lane evidence is weak: only 3 of the 21 roads incident to the six
+junctions carry an OSM lane-count tag, so the other 18 use SUMO defaults. Roads without a
+speed tag use Tunisia's 50\,km/h urban limit. Bus geometry for 13 lines and 16 stops comes
+from community-maintained data attributed to the operator TRANSTU, with assumed headways.
+
+\subsection{Demand and scenarios}
+No open traffic counts exist for these junctions, so demand is synthetic: trips generated
+with SUMO's \texttt{randomTrips} from a calendar model at a base of 2{,}400 vehicles/h plus
+pedestrians and buses. Twelve scenarios (peaks, Ramadan, rain, incidents, emergencies,
+sensor faults) are defined; scenario events are hidden from the agents. This paper reports
+three of them: \emph{morning peak}, \emph{emergency} (ambulances crossing the network) and
+\emph{incident} (lane blockages). Each scenario was run with seeds 1--3 at a 1\,s step in
+SUMO 1.27.
+
+\subsection{Controllers and metrics}
+We compare four controllers on identical demand files per seed: SUMO's \emph{fixed}-time
+plans, SUMO's \emph{actuated} plans, \emph{traffix rules} (the full hierarchy with rule
+fallbacks only) and \emph{traffix models} (the full hierarchy with trained models and
+Max-Pressure lights). Metrics are mean vehicle waiting time, mean pedestrian waiting time,
+emergency vehicle trip time, and the number of vehicle greens started while pedestrians
+were still on a crossing. Differences are tested with paired $t$-tests over seeds.
+
+%=====================================================================
+\section{Results}\label{sec:results}
+%=====================================================================
+
+\begin{table*}[t]
+\caption{Controller results on the Tunis network (mean of seeds 1--3, lower is better, best
+in bold). Percentages compare traffix models with SUMO actuated. No difference is
+significant at $p<0.05$.}
+\label{tab:results}
+\centering
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Scenario & Measure & SUMO fixed & SUMO actuated & traffix rules & traffix models \\
+\midrule
+Morning peak & Mean vehicle wait (s) & 122.6 & 118.5 & \textbf{101.8} & 105.9 ($-11\%$) \\
+Emergency    & Mean vehicle wait (s) & \textbf{62.2} & 65.9 & 68.7 & 78.8 ($+20\%$) \\
+Incident     & Mean vehicle wait (s) & \textbf{69.1} & 96.1 & 98.1 & 73.5 ($-24\%$) \\
+\midrule
+Morning peak & Mean pedestrian wait (s) & 140.2 & 144.1 & 128.1 & \textbf{116.3} ($-19\%$) \\
+Emergency    & Mean pedestrian wait (s) & 139.1 & 152.2 & 107.6 & \textbf{98.3} ($-35\%$) \\
+Incident     & Mean pedestrian wait (s) & 123.9 & \textbf{111.1} & 118.9 & 123.3 ($+11\%$) \\
+\midrule
+Emergency    & Emergency vehicle trip (s) & \textbf{197.0} & 213.2 & 232.3 & 240.0 ($+13\%$) \\
+\midrule
+All three    & Greens started during a crossing (per run) & 239--281 & 331--405 & 16--19 & \textbf{17--19} \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Table~\ref{tab:results} gives the results.
+
+\paragraph{Pedestrian safety} The clearest effect is on greens started while pedestrians
+were still crossing: 331--405 per run with actuated plans and 239--281 with fixed plans,
+against 16--19 with either traffix variant, a reduction of about 95\%. Because the rule-only
+and model variants are equal here, the gain comes from the executor's clearance rule and not
+from learning. It is not zero, so the pedestrian-safety objective is only partly met.
+
+\paragraph{Waiting times} Pedestrian waiting fell against actuated in the morning peak
+($-19\%$) and emergency ($-35\%$) scenarios and rose in the incident scenario ($+11\%$).
+Vehicle waiting was mixed: lower in the morning peak ($-11\%$) and incident ($-24\%$)
+scenarios, higher in the emergency scenario ($+20\%$). In two of three scenarios the
+simplest baseline, fixed time, gave the lowest vehicle wait. With three seeds none of the
+paired $t$-tests between traffix and actuated, or between models and rules, was
+significant at $p<0.05$; the closest was pedestrian waiting in the morning peak, models
+against rules, $-9\%$ ($p=0.06$).
+
+\paragraph{Emergency vehicles} Emergency trips were slower with traffix (240.0\,s) than with
+actuated (213.2\,s) or fixed plans (197.0\,s), even though the emergency agent requests
+green ahead of the vehicle. We have not yet identified the cause; candidates are the
+preparation horizon, the exit-full refusal rule and the extra vehicle queues in this
+scenario. The emergency objective is not met.
+
+\paragraph{Learned components} Seven of eleven models beat their rule on held-out data, for
+example ambulance arrival time (mean error 43.7\,s against 92.6\,s for distance over speed)
+and demand forecasting during Ramadan (0.026 against 0.103). The arrival model only matched
+its rule, the pedestrian classifier is weak (F1 0.44), and the trained sensor-health
+classifier lost to its rule (F1 0.75 against 0.98) and was removed. Random search over the
+Max-Pressure parameters (8 trials) found nothing better than the defaults. After three
+rounds of Fitted Q-Iteration, the RL light waited 231.4\,s (vehicle plus pedestrian) in the
+final test against 221.9\,s for Max-Pressure, about 4\% worse, so Max-Pressure remains the
+default.
+
+\paragraph{Language layer} Every logged decision carries a reason code by construction, and in
+our tests a false claim submitted to the audit endpoint is answered with an abstention. We
+have not yet measured the explainer quantitatively (Section~\ref{sec:discussion}).
+
+%=====================================================================
+\section{Discussion and Threats to Validity}\label{sec:discussion}
+%=====================================================================
+
+We now examine our own protocol against the guidance of~\cite{riehl2026sumoitscontrol}, and
+our design against~\cite{azevedo2016jade} and~\cite{li2026decoupled}.
+
+\subsection{Evaluation protocol}
+\emph{Single-seed tuning.} The Max-Pressure parameters were tuned by scoring each candidate
+on one seed. Riehl et al.\ show that neighbouring parameter values can differ by less than
+their run-to-run standard deviation (12.48 against 13.04 with standard deviations of about
+2.3 over 20 runs, $p=0.46$), so a single run can rank them either way. Our conclusion that
+``no candidate beat the defaults'' may therefore reflect noise. Candidates should be scored
+by their mean over a fixed, documented set of seeds.
+
+\emph{Too few replications.} Three seeds leave a paired $t$-test with little power, so our
+``not significant'' results are weak evidence of no effect. The recommended range is 10--20
+replications per configuration.
+
+\emph{Multiple comparisons.} Our analysis script tests five controller pairs on three
+metrics in each scenario, up to 180 tests over all twelve scenarios. At $\alpha=0.05$, about
+nine would appear significant by chance even if no controller differed. A family-wise
+correction such as Holm's~\cite{holm1979} is needed, and where normality is doubtful the
+Wilcoxon signed-rank test~\cite{wilcoxon1945} should replace the $t$-test.
+
+\emph{Simulation settings.} We measure from the first second, without a warm-up period, and
+use a 1\,s step where 0.25\,s is recommended for urban scenes. Both may bias waiting times.
+
+\emph{Baselines.} SUMO's default fixed and actuated plans are weak references, and fixed
+time won two of our vehicle-wait comparisons. Following~\cite{azevedo2016jade}, a fixed plan
+with time-of-day timings is a stronger and fairer baseline for learned controllers;
+following~\cite{riehl2026sumoitscontrol}, an external Max-Pressure and a SCOOT/SCATS-style
+group controller would show whether our gains, where present, come from the architecture or
+from a weak baseline.
+
+\emph{No maximum green.} Our Max-Pressure mode has no maximum green time, whereas the
+flexible controller of~\cite{riehl2026sumoitscontrol} caps green at 50\,s and our own RL
+agent at 60\,s. A busy approach can therefore keep green while a quiet one starves.
+
+\emph{Fairness metrics.} Following~\cite{azevedo2016jade}, the standard deviation of trip and
+waiting times should be reported next to the means, since controllers can trade a lower
+average for more variable service.
+
+\subsection{Architecture}
+Azevedo et al.~\cite{azevedo2016jade} present centralised and distributed coordination as
+alternatives. Our hierarchy combines them: decisions remain local and single-writer, while
+the supermaster provides the network view through directives that expire. The
+\emph{junction-only} controller in our experiment suite (masters without a supermaster)
+measures what the coordinator adds; it was not part of the three-scenario run reported here.
+
+\subsection{Language layer}
+Li and Ke~\cite{li2026decoupled} found that a single repair round recovered many failed
+LLM runs while further rounds did not. Our explainer abstains at the first failed citation
+check; one retry with the error fed back is a cheap improvement. They also note that
+smaller models break output schemas unless the output is validated, which argues for a
+structured \texttt{\{answer, citations, abstained\}} output over citation extraction from
+free text. Finally, their evaluation (task success, tokens and time to first result across
+three difficulty levels) is a template for the benchmark Synapse lacks: a fixed set of
+questions over saved logs, scored on citation correctness, correct abstention, cost and
+latency, for both the LLM and the template engines.
+
+\subsection{External validity}
+Demand is synthetic, 18 of 21 junction roads have unverified lane counts, bus headways are
+assumed and calendar effects are our own assumptions. The results describe this simulated
+network only.
+
+%=====================================================================
+\section{Conclusion}
+%=====================================================================
+
+We built a six-junction multi-agent signal controller on a real street network in which
+one master writes each light, control degrades predictably when data fails, and a language
+layer explains decisions from a log it cannot change. The architecture rules are enforced
+mechanically, and every decision is logged with a reason. The clearest measured benefit is
+a 95\% reduction in greens started during pedestrian crossings, which comes from the safety
+rules rather than from learning. Effects on waiting times are mixed and not yet
+significant, and emergency vehicles were slower than with SUMO's own plans. Our next steps
+follow from the critique above: tune over several seeds, run 10--20 seeds over all twelve
+scenarios with corrected tests and a warm-up period, add a maximum green, compare against
+time-of-day and external adaptive baselines, find the cause of the emergency slowdown, and
+benchmark the language layer.
+
+\section*{Data and Code Availability}
+Code, network, scenario definitions and the scripts that produce every number in this
+paper are in the project repository: \texttt{scripts/run\_experiments.py} and
+\texttt{scripts/analyze.py} for Table~\ref{tab:results}, \texttt{models/metrics.json} for the
+model comparisons, and \texttt{scripts/check\_architecture.py} for the architecture rules.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
