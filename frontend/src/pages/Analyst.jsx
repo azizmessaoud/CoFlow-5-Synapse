@@ -14,7 +14,8 @@ export default function Analyst({ live }) {
   const { lang } = useLang();
   const hasEmergency = ["emergency", "combined"].includes(live.scenario);
   const examples = hasEmergency
-    ? ["Why did ambulance 0 get green?", "What happened with the fire truck 0?", "Was any emergency vehicle denied?"]
+    ? ["Why did the ambulance get green?", "Was any emergency vehicle denied?",
+       "How did traffic recover after the ambulance?"]
     : ["Why did the late buses get priority?", "What happened with the incident?", "Why was the walk signal delayed at J2?",
        "What did the rain change?"];
   useEffect(() => { setQuestion(examples[0]); setAnswer(null); }, [live.scenario]);

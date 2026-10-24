@@ -105,7 +105,7 @@ class SynapseService:
         policy_marker = "" if citation else " [policy support missing]"
         answer = (
             f"At {event.facts.get('simulation_time', 'the recorded time')}, "
-            f"A1 selected {event.facts.get('selected_action', 'an action')} "
+            f"the signal controller (A1) selected {event.facts.get('selected_action', 'an action')} "
             f"because {event.facts.get('reason_code', 'the recorded reason')}."
             f"{policy_marker}"
         )

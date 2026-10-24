@@ -76,10 +76,12 @@ Matches section 3 of the validation brief: a concrete use case, input → output
 4. **Rain and flood (1 min).** Start **rain**. ~50 s: rain alert. ~2 min: flood, the road turns dashed blue.
 5. **Bus (1 min).** In any running scenario open **Bus passenger**, choose a line and stop: next buses,
    late or regular. Open **Bus driver**: "late: priority requested" and the priority decisions.
-6. **Why did it do that? (1.5 min).** Open **Incident analyst**. Ask a question about something already
-   on screen (e.g. "Why did J1 switch?", or an ambulance that has appeared). Show the citations
-   [#id]. Open a log entry → **Verify with CoFlow Synapse**. Ask about a vehicle that does not exist:
-   it abstains. Say: a false claim gives abstain.
+6. **Why did it do that? (1.5 min).** Open **Incident analyst** during **emergency** or **combined**.
+   Click the example "Why did the ambulance get green?": the answer lists the decisions with
+   citations [#id]. Click "Was any emergency vehicle denied?": it says nothing was denied and shows
+   the grants. Ask "Why did J4 switch?": only J4's light changes. Open a log entry → **Verify with
+   CoFlow Synapse**. Ask "Why did ambulance 7 get green?": it abstains and lists the vehicles that
+   exist. Say: no citation, no answer.
 7. **Language (20 s).** Switch to FR, then عربي: alerts and copilot change language.
 8. **Results (30 s).** Open **Results** and show the comparison with SUMO fixed and actuated
    (3 scenarios × 3 seeds). Say it honestly: pedestrians are much safer, cars mixed, ambulances
@@ -88,7 +90,9 @@ Matches section 3 of the validation brief: a concrete use case, input → output
 ## 5. Things to know while recording
 
 - Street names come from OpenStreetMap; some are only in Arabic (e.g. شارع الحبيب بورقيبة).
-- The built-in example "Why did ambulance 0 get green?" abstains if ambulance 0 has not appeared yet.
-  It then lists the vehicles that exist; ask about one of those.
+- The example questions name no vehicle number, so they work in any run once an emergency vehicle
+  has appeared (~90 s at 16×). Before that, Synapse abstains and says no ambulance is in the log yet.
+- The **Results** page reads `results/`, which git ignores. On a computer that has not run the
+  experiments it shows "No results yet": copy `results/` from the computer that ran them.
 - Copilot **Approve** only records the decision in the log. Nothing is applied automatically (by design).
 - The demand is synthetic. Say "simulation", not "Tunis measurements".

@@ -10,6 +10,8 @@ export default function ScenarioBar({ live }) {
   const [failed, setFailed] = useState("");
   const { lang, setLang } = useLang();
   useEffect(() => { if (live.scenario) setChoice(live.scenario); }, [live.scenario]);
+  useEffect(() => { if (live.speed) setSpeed(live.speed); }, [live.speed]);
+  useEffect(() => { if (live.controller) setController(live.controller); }, [live.controller]);
   const start = () => {
     setFailed("");
     api(`/start?scenario=${choice}&speed=${speed}&controller=${controller}`, { method: "POST" })

@@ -348,11 +348,12 @@ class LiveRun:
                                "on_crossing": len(s.on_crossing.get(c, []))} for c in m.crossings]})
         pubs = lambda k: [{"subject": p.subject, "t": p.t, **p.details} for p in bus.published(k)]
         return {
-            "status": "running", "scenario": self.scenario, "controller": self.controller, "t": now,
+            "status": "running", "scenario": self.scenario, "controller": self.controller, "speed": self.speed, "t": now,
             "clock": self.system.ctx.clock(now).strftime("%Y-%m-%d %H:%M:%S"),
             "duration": self.meta["duration"], "junctions": junctions, "vehicles": vehicles, "people": people,
             "signals": signals,
-            "incidents": pubs("INCIDENT"), "floods": pubs("FLOOD"), "route_b": pubs("ROUTE_B"),
+            "incidents": [{**i, "street": self.edge_name.get(i["subject"], i["subject"])} for i in pubs("INCIDENT")],
+            "floods": pubs("FLOOD"), "route_b": pubs("ROUTE_B"),
             "congestion": pubs("CONGESTION"), "ambulances": pubs("AMBULANCE_ROUTE"),
             "edge_tt": {e: round(min(v, 1e5), 1) for e, v in self._tt.items()},
             "lines": self.lines,

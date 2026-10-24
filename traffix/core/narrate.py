@@ -21,6 +21,10 @@ def sec(x):
     return f"{x:.0f} s" if x < 90 else f"{x / 60:.1f}".rstrip("0").rstrip(".") + " min"
 
 
+def cars(n):
+    return f"{n} car" if n == 1 else f"{n if n is not None else '?'} cars"
+
+
 def cap(s):
     return s[:1].upper() + s[1:]
 
@@ -97,7 +101,7 @@ class Narrator:
                                                   f"so a green would only have pushed it into the queue.",
             "EMERGENCY_DENIED_OTHER_EMERGENCY": lambda: f"{J} served {self.vehicle(d.get('served'))} first, so {V} had to wait.",
             "RECOVERY_STARTED": lambda: f"{cap(V)} passed {J}; normal control resumed "
-                                        f"({d.get('queue_now', '?')} cars waiting, {d.get('queue_before', '?')} before the emergency).",
+                                        f"({cars(d.get('queue_now'))} waiting, {d.get('queue_before', '?')} before the emergency).",
             "RECOVERED": lambda: f"Traffic at {J} was back to normal {sec(d.get('recovery_s'))} after the emergency vehicle passed.",
             "RECOVERY_INCOMPLETE": lambda: f"Traffic at {J} had not recovered within 10 minutes of the emergency.",
             "TRANSIT_REQUEST_LATE_BUS": lambda: f"{cap(V)} was running late ({sec(gap)} since the previous bus, scheduled every "

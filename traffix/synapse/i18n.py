@@ -114,6 +114,9 @@ EXPLAIN = {
     "found": {"en": "I found {n} decisions{about}:", "fr": "J'ai trouvé {n} décisions{about} :",
               "ar": "وجدتُ {n} قرارًا{about}:"},
     "about": {"en": " about {who}", "fr": " concernant {who}", "ar": " بخصوص {who}"},
+    "none_denied": {"en": "Nothing on this topic was denied or deferred in the log so far.",
+                    "fr": "Rien sur ce sujet n'a été refusé ou reporté dans le journal pour l'instant.",
+                    "ar": "لم يُرفض أو يُؤجَّل أي طلب حول هذا الموضوع في السجل حتى الآن."},
     "note": {"en": "", "fr": "Sans clé API, les phrases restent en anglais.",
              "ar": "بدون مفتاح API تبقى الجمل بالإنجليزية."},
 }

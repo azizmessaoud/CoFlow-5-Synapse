@@ -52,6 +52,33 @@ def test_explainer_finds_entries_for_a_junction_question():
     assert not found
 
 
+def test_explainer_answers_the_demo_questions():
+    from traffix.agents.network.explainer import explain, select_entries
+    log = DecisionLog()
+    log.log(5, "master@J3", "abstain", "BUS_NO_REFERENCE", tls="J3", vehicle="bus_74_R_0")
+    log.log(10, "master@J3", "switch", "MAX_PRESSURE_SWITCH", tls="J3")
+    log.log(20, "supermaster", "directive", "EMERGENCY_PREPARE", tls="J5", vehicle="ambulance1", eta_s=30)
+    log.log(25, "master@J5", "grant", "EMERGENCY_GRANTED_SWITCH", tls="J5", vehicle="ambulance1")
+    log.log(50, "master@J3", "switch", "MAX_PRESSURE_SWITCH", tls="J3")
+
+    # a junction question lists its light changes, newest first in ranking, not a bus that merely passed
+    found, _ = select_entries(log.entries, "Why did J3 switch?")
+    assert [e["id"] for e in found] == [2, 5]
+    # "denied" narrows the emergency topic instead of matching bus entries, and says nothing was denied
+    out = explain(log.entries, "Was any emergency vehicle denied?", engine="template")
+    assert out["answer"].startswith("Nothing on this topic was denied")
+    assert set(out["citations"]) == {3, 4}
+    # generic vehicle questions work without knowing the vehicle's number
+    assert set(explain(log.entries, "Why did the ambulance get green?", engine="template")["citations"]) == {3, 4}
+    log.log(55, "master@J6", "grant", "EMERGENCY_GRANTED_SWITCH", tls="J6", vehicle="police0")
+    assert 6 not in explain(log.entries, "Why did the ambulance get green?", engine="template")["citations"]
+    assert explain(log.entries, "Why did the fire truck get green?", engine="template")["abstained"]
+    log.log(60, "master@J5", "deny", "EMERGENCY_DENIED_EXIT_FULL", tls="J5", vehicle="ambulance2",
+            exit_lane="x_0", exit_occupancy=0.9)
+    out = explain(log.entries, "Was any emergency vehicle denied?", engine="template")
+    assert 7 in out["citations"] and not out["answer"].startswith("Nothing")
+
+
 def test_incident_places_are_visible_to_the_incident_agent():
     import sumolib
     from traffix.core import config

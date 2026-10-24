@@ -8,6 +8,7 @@ classifier deciding which personas an event is relevant to. Its labels come
 from rules we wrote (no real users click on alerts), so it learns our
 assumptions back: useful for the pipeline, not evidence of user preference.
 """
+from ...core.narrate import Narrator
 from ...synapse.i18n import LANGS, alert_text
 from ..base import Agent
 
@@ -144,5 +145,7 @@ class NotificationAgent(Agent):
                 d.setdefault("eta_s", 0)
                 key = (ev, d.get("vehicle"), e.get("tls")) if d.get("vehicle") else ("LOG", e["id"])
                 line = d.get("vehicle", "")[4:].rsplit("_", 1)[0] if str(d.get("vehicle", "")).startswith("bus_") else None
+                if str(d.get("vehicle", "")).startswith(("ambulance", "police", "fire")):
+                    d["vehicle"] = Narrator().vehicle(d["vehicle"])   # "ambulance 1", not "ambulance1"
                 self.emit(now, ev, key, ref=e["id"], tls=e.get("tls"),
                           where={"junctions": [e.get("tls")], "line": line}, **d)

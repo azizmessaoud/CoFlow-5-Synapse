@@ -34,7 +34,7 @@ export default function Operator({ live }) {
             </tbody>
           </table>
           {live.incidents?.map((i) => (
-            <div key={i.subject} className="note warning">Lane blockage on {i.lane}: confidence {Math.round(i.confidence * 100)}%,
+            <div key={i.subject} className="note warning">Lane blockage on {i.street || i.lane}: confidence {Math.round(i.confidence * 100)}%,
               data {Math.round(i.freshness_s)}s old. Cause not determined.</div>
           ))}
         </div>

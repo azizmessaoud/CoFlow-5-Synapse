@@ -25,14 +25,41 @@ from ...synapse.i18n import EXPLAIN, LANG_NAMES, phrase
 
 KEYWORDS = {
     "ambulance": ["EMERGENCY", "RECOVER"], "emergency": ["EMERGENCY", "RECOVER"],
+    "police": ["EMERGENCY", "RECOVER"], "fire": ["EMERGENCY", "RECOVER"], "recover": ["RECOVER"],
     "bus": ["TRANSIT", "BUS"], "pedestrian": ["PED", "CLEARANCE"],
     "crossing": ["PED", "CLEARANCE"], "walk": ["PED", "CLEARANCE"],
     "incident": ["INCIDENT", "REROUTE"], "accident": ["INCIDENT", "REROUTE"],
+    "congestion": ["CONGESTION"], "traffic jam": ["CONGESTION"],
+    "rain": ["WEATHER"], "flood": ["WEATHER_FLOOD"], "weather": ["WEATHER"],
+    "corridor": ["CORRIDOR"], "platoon": ["CORRIDOR"],
     "sensor": ["DATA_", "MODE_"], "stale": ["DATA_", "MODE_"], "data": ["DATA_", "MODE_"],
-    "reroute": ["REROUTE"], "route": ["REROUTE"],
-    "denied": ["DENIED", "DEFERRED", "NOT_LATE", "NO_REFERENCE"],
-    "refused": ["DENIED", "DEFERRED", "NOT_LATE"], "why": [],
+    "reroute": ["REROUTE"], "route": ["REROUTE"], "why": [],
 }
+# words that narrow a topic ("was any ambulance denied?") rather than name one
+MODIFIERS = {
+    "denied": ["DENIED", "DEFERRED", "NOT_LATE", "NO_REFERENCE"],
+    "refused": ["DENIED", "DEFERRED", "NOT_LATE"],
+}
+SWITCHES = ("MAX_PRESSURE_SWITCH", "PREDICTIVE_SWITCH", "RL_POLICY_SWITCH", "CORRIDOR_PLATOON",
+            "ACTUATED_GAP_OUT", "ACTUATED_MAX_OUT", "FIXED_CYCLE")
+
+
+def _codes(q):
+    """(topic codes, modifier codes) named in a lower-case question."""
+    topic = [c for k, cs in KEYWORDS.items() if k in q for c in cs]
+    mods = [c for k, cs in MODIFIERS.items() if k in q for c in cs]
+    return topic, mods
+
+
+def nothing_denied(entries, question):
+    """True when the question asks whether a topic was denied and the log has
+    entries on that topic but no denial among them."""
+    topic, mods = _codes(question.lower())
+    if not (topic and mods):
+        return False
+    on_topic = [e for e in entries if any(c in e["reason"] for c in topic)]
+    return bool(on_topic) and not any(c in e["reason"] for e in on_topic for c in mods)
+
 
 SYSTEM_PROMPT = """You explain decisions of a simulated traffic-signal system to an incident-report reader.
 Rules:
@@ -60,19 +87,32 @@ def select_entries(entries, question, limit=12):
     vehicles = set(re.findall(r"(ambulance\d+|police\d+|fire\d+|bus_\w+|ped\d+|veh\d+)", q))
     tls = {m.upper() for m in re.findall(r"\b([bfj]\d)\b", q)}
     times = [float(x) for x in re.findall(r"(\d+(?:\.\d+)?)\s*s\b", q)]
-    codes = [c for k, cs in KEYWORDS.items() if k in q for c in cs]
+    topic, mods = _codes(q)
+    codes = topic + mods
     # a question about one junction and nothing more specific is about its light changes
     wants_routine = (any(w in q for w in ("phase", "switch", "pressure", "cycle", "green"))
                      or bool(tls and not codes and not vehicles))
 
     pool = entries
+    if wants_routine and tls and not codes and not vehicles:   # "why did J3 switch?": light changes only
+        pool = [e for e in entries if e["reason"] in SWITCHES or "GRANTED" in e["reason"]
+                or e["reason"].startswith("MODE_") or e["reason"] == "CLEARANCE_EXTENDED"]
+    if topic and mods:                 # "was any ambulance denied?": stay on the topic
+        pool = [e for e in entries if any(c in e["reason"] for c in topic)]
+    known = sorted({e["details"]["vehicle"] for e in entries
+                    if str(e["details"].get("vehicle", "")).startswith(("ambulance", "police", "fire"))})
+    hint = (f". Emergency vehicles in this run so far: {', '.join(known)}" if known else
+            ". This run has no emergency vehicles yet (only the emergency and combined scenarios have them)")
+    # "the ambulance" without a number: keep that kind of vehicle (and entries naming no vehicle)
+    kinds = tuple(k for w, k in (("ambulance", "ambulance"), ("police", "police"), ("fire", "fire")) if w in q)
+    if kinds and not vehicles:
+        if not any(v.startswith(kinds) for v in known):
+            return [], f"no {' or '.join(kinds)} appears in the log yet{hint}"
+        pool = [e for e in pool if not e["details"].get("vehicle")
+                or str(e["details"]["vehicle"]).startswith(kinds)]
     if vehicles:
         pool = [e for e in entries if any(v in json.dumps(e["details"]).lower() for v in vehicles)]
         if not pool:
-            known = sorted({e["details"]["vehicle"] for e in entries
-                            if str(e["details"].get("vehicle", "")).startswith(("ambulance", "police", "fire"))})
-            hint = (f". Emergency vehicles in this run so far: {', '.join(known)}" if known else
-                    ". This run has no emergency vehicles yet (only the emergency and combined scenarios have them)")
             return [], f"no log entry mentions {', '.join(sorted(vehicles))}{hint}"
         if tls and not any(e.get("tls") in tls for e in pool):
             seen = sorted({e.get("tls") for e in pool if e.get("tls")})
@@ -87,13 +127,18 @@ def select_entries(entries, question, limit=12):
             s += 4
         if any(c in e["reason"] for c in codes):
             s += 4
+        if topic and any(c in e["reason"] for c in mods):
+            s += 4
+        if wants_routine and e["reason"] in SWITCHES:
+            s += 2
         if times and min(abs(e["t"] - t) for t in times) <= 60:
             s += 2
         if e["reason"] in ROUTINE and not wants_routine:
             s -= 5
         return s
 
-    ranked = sorted(((score(e), e) for e in pool), key=lambda x: (-x[0], x[1]["id"]))
+    # most relevant first; among equals the most recent, which is what a live question is about
+    ranked = sorted(((score(e), e) for e in pool), key=lambda x: (-x[0], -x[1]["id"]))
     best = [e for sc, e in ranked if sc >= 4][:limit]
     if not best:
         return [], "no log entry matches this question"
@@ -116,8 +161,11 @@ def _template(question, selected, narrator, lang="en"):
     from collections import Counter
     who = Counter(narrator.vehicle(e["details"]["vehicle"]) for e in selected if e["details"].get("vehicle"))
     lines = []
+    if nothing_denied(selected, question):
+        lines.append(phrase(EXPLAIN, "none_denied", lang))
     if len(selected) > 1:
-        about = phrase(EXPLAIN, "about", lang, who=who.most_common(1)[0][0]) if len(who) == 1 else ""
+        about = (phrase(EXPLAIN, "about", lang, who=who.most_common(1)[0][0])
+                 if len(who) == 1 and sum(who.values()) == len(selected) else "")
         lines.append(phrase(EXPLAIN, "found", lang, n=len(selected), about=about))
     if lang != "en":
         lines.append(EXPLAIN["note"][lang])
